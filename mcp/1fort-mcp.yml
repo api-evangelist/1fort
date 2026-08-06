@@ -1,0 +1,118 @@
+generated: '2026-08-05'
+method: derived
+status: candidate
+source: openapi/1fort-openapi-original.yml
+
+published_server: null
+searched:
+  note: >-
+    No 1Fort-operated MCP server exists. This file is a CANDIDATE tool shape derived from the
+    published OpenAPI, not a server 1Fort runs. It carries NO `type: MCPServer` pointer in apis.yml
+    — wiring one would credit 1Fort with an agent surface it does not operate.
+  probes:
+  - url: https://api.1fort.com/mcp
+    status: 404
+  - url: https://1fort.ai/mcp
+    status: 405
+  - url: https://security.1fort.com/mcp
+    status: 404
+  - url: https://security.1fort.com/api/mcp
+    status: 403
+    note: >-
+      security.1fort.com serves /.well-known/oauth-protected-resource and
+      /.well-known/oauth-authorization-server, but the issuer and resource are
+      https://app.safebase.io/api/mcp — SafeBase's trust-center MCP service, reachable on 1Fort's
+      subdomain because SafeBase hosts the trust center. It is NOT the 1Fort API and exposes trust
+      documents, not insurance operations.
+  registries_checked:
+  - registry: npm
+    query: https://registry.npmjs.org/-/v1/search?text=1fort
+    result: 0 packages
+  - registry: PyPI
+    query: pypi.org/pypi/{1fort,onefort,fort-sdk}/json
+    result: 404 on all
+  registry_result: no first-party 1Fort MCP package or client library published anywhere
+
+server:
+  name: 1fort
+  transport: http
+  url: null
+
+candidate_tools:
+  note: >-
+    A recommended starter tool set, one tool per real operationId, chosen from the highest-value
+    broker flows rather than fanning out all 574 operations. Each tool's input schema IS the backing
+    operation's parameters + body in openapi/1fort-openapi-original.yml — nothing is invented.
+  tools:
+  - name: list_clients
+    description: List the broker's clients (businesses).
+    source_operation: openapi/1fort-openapi-original.yml#v2_broker_clients_list
+    consequence: read
+  - name: list_applications
+    description: List applications for a client.
+    source_operation: openapi/1fort-openapi-original.yml#v2_broker_applications_list
+    consequence: read
+  - name: create_application
+    description: Create an application for a client.
+    source_operation: openapi/1fort-openapi-original.yml#v2_broker_applications_create
+    consequence: write
+  - name: get_relevant_carriers
+    description: Get the carriers relevant to an application.
+    source_operation: openapi/1fort-openapi-original.yml#v2_broker_applications_get_relevant_carriers
+    consequence: read
+  - name: submit_application
+    description: Submit all eligible coverage applications of an application to market.
+    source_operation: openapi/1fort-openapi-original.yml#v2_broker_applications_submit
+    consequence: physical
+    human_in_the_loop: recommended
+  - name: list_quotes
+    description: List quotes returned for a client.
+    source_operation: openapi/1fort-openapi-original.yml#v2_broker_quotes_list
+    consequence: read
+  - name: get_quote
+    description: Retrieve one quote.
+    source_operation: openapi/1fort-openapi-original.yml#v2_broker_quotes_read
+    consequence: read
+  - name: list_quote_tasks
+    description: List outstanding tasks/subjectivities on a quote.
+    source_operation: openapi/1fort-openapi-original.yml#v2_broker_quotes_tasks_list
+    consequence: read
+  - name: generate_proposal_pdf
+    description: Generate the white-labeled proposal PDF for a quote.
+    source_operation: openapi/1fort-openapi-original.yml#v2_broker_quotes_proposal-pdf_list
+    consequence: read
+  - name: bind_quote
+    description: Bind a quote — commits the client to coverage and premium.
+    source_operation: openapi/1fort-openapi-original.yml#v2_broker_quotes_bind_create
+    consequence: physical
+    human_in_the_loop: required
+  - name: list_binders
+    description: List binders for a client.
+    source_operation: openapi/1fort-openapi-original.yml#v2_broker_binders_list
+    consequence: read
+  - name: list_billing_payments
+    description: List broker billing payments backed by insurance invoices.
+    source_operation: openapi/1fort-openapi-original.yml#v2_billing_payments_list
+    consequence: read
+  - name: renew_policy
+    description: Open a renewal application from an expiring quote policy.
+    source_operation: openapi/1fort-openapi-original.yml#v2_broker_quote-policies_renew_application
+    consequence: physical
+    human_in_the_loop: required
+  - name: find_business
+    description: Agent-runtime business resolution (requires X-Processing-Session).
+    source_operation: openapi/1fort-openapi-original.yml#v2_broker_agent_businesses_find_list
+    consequence: read
+  - name: fill_draft_quote
+    description: Agent-runtime draft-quote fill; read the draft first so re-runs stay idempotent.
+    source_operation: openapi/1fort-openapi-original.yml#v2_broker_agent_quotes_fill_create
+    consequence: write
+
+blockers_for_a_real_server:
+- No self-serve API credential issuance — no developer dashboard or key page was found, so an MCP
+  client has no anonymous path to a token.
+- No client idempotency key on any operation, which matters more for agent-driven writes than for
+  a human console.
+- No outbound webhooks, so an MCP server would have to poll for quote and bind status.
+
+see_also: agentic-access/1fort-agentic-access.yml

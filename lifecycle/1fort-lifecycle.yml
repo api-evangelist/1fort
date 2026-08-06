@@ -1,0 +1,120 @@
+generated: '2026-08-05'
+method: searched
+source: https://api.1fort.com/api-docs/?format=openapi
+docs: https://api.1fort.com/api-docs
+
+versioning:
+  scheme: uri-path
+  current: v2
+  legacy: v1
+  base_path: /apis/
+  policy_source: openapi info.description
+  policy: >-
+    "v2 endpoints live under /apis/v2/... and are the current surface. v1 endpoints remain
+    documented for compatibility. Endpoints marked deprecated are scheduled for removal;
+    prefer the documented replacement."
+  note: >-
+    Both generations are served concurrently from the same host and are documented in one
+    Swagger 2.0 document. There is no version request header and no date-pinned version train.
+
+deprecation:
+  policy_url: https://api.1fort.com/api-docs
+  policy_published: true
+  policy_location: openapi info.description
+  mechanism: 'swagger `deprecated: true` on the operation'
+  sunset_header: false
+  deprecation_header: false
+  sunset_dates_published: false
+  note: >-
+    1Fort marks retiring operations `deprecated: true` in the published Swagger document and
+    states in the API description that deprecated endpoints are scheduled for removal. No RFC 8594
+    Sunset/Deprecation response headers appear in the spec and no removal dates are published, so
+    consumers get a flag but not a timetable.
+
+deprecated_operations:
+  - operation: openapi/1fort-openapi-original.yml#ascend_invoice_download_list
+    method: GET
+    path: /ascend/invoice/{invoice_id}/download/
+  - operation: openapi/1fort-openapi-original.yml#ascend_invoice_download_create
+    method: POST
+    path: /ascend/invoice/{invoice_id}/download/
+  - operation: openapi/1fort-openapi-original.yml#ascend_invoice_receipt_list
+    method: GET
+    path: /ascend/invoice/{invoice_id}/receipt/
+  - operation: openapi/1fort-openapi-original.yml#ascend_invoice_receipt_create
+    method: POST
+    path: /ascend/invoice/{invoice_id}/receipt/
+  - operation: openapi/1fort-openapi-original.yml#ascend_payouts_list
+    method: GET
+    path: /ascend/payouts
+  - operation: openapi/1fort-openapi-original.yml#ascend_payouts_export_csv
+    method: GET
+    path: /ascend/payouts/csv
+  - operation: openapi/1fort-openapi-original.yml#ascend_payouts_filter_options
+    method: GET
+    path: /ascend/payouts/filter-options
+  - operation: openapi/1fort-openapi-original.yml#ascend_payouts_read
+    method: GET
+    path: /ascend/payouts/{id}
+  - operation: openapi/1fort-openapi-original.yml#ascend_payouts_dispatch_payable
+    method: POST
+    path: /ascend/payouts/{id}/dispatch
+  - operation: openapi/1fort-openapi-original.yml#ascend_webhook_invoice_webhook
+    method: POST
+    path: /ascend/webhook/invoice
+  - operation: openapi/1fort-openapi-original.yml#ascend_webhook_payout_webhook
+    method: POST
+    path: /ascend/webhook/payout
+  - operation: openapi/1fort-openapi-original.yml#v2_ascend_payments_list
+    method: GET
+    path: /v2/ascend/payments
+  - operation: openapi/1fort-openapi-original.yml#v2_ascend_payments_export_csv
+    method: GET
+    path: /v2/ascend/payments/csv
+  - operation: openapi/1fort-openapi-original.yml#v2_ascend_payments_filter_options
+    method: GET
+    path: /v2/ascend/payments/filter-options
+  - operation: openapi/1fort-openapi-original.yml#v2_ascend_payments_read
+    method: GET
+    path: /v2/ascend/payments/{id}
+  - operation: openapi/1fort-openapi-original.yml#v2_ascend_payments_update_billable
+    method: PATCH
+    path: /v2/ascend/payments/{id}/billables/{billable_id}
+  - operation: openapi/1fort-openapi-original.yml#v2_ascend_payments_update_due_date
+    method: PATCH
+    path: /v2/ascend/payments/{id}/due-date
+
+deprecated_operation_count: 17
+deprecation_theme: >-
+  Every deprecated operation is in the Ascend premium-finance / payables integration (v1 `/ascend/*`
+  and v2 `/v2/ascend/payments/*`), consistent with a billing-rails migration.
+
+status_page:
+  url: https://status.1fort.com/
+  platform: Atlassian Statuspage
+  title: 1Fort Status
+  http_status: 200
+  subscribable: true
+
+sla:
+  url: null
+  uptime_target: null
+  note: No public SLA or uptime commitment was found on 1fort.ai, the help center, or the status page.
+
+changelog:
+  url: null
+  note: >-
+    No dated public changelog or release-notes page was found (1fort.ai/changelog 404, no
+    changelog on the help center, and the Swagger document carries a single static version "v1"
+    in info.version despite the v1/v2 path split).
+
+x-evidence:
+  - url: https://api.1fort.com/api-docs/?format=openapi
+    status: 200
+    note: source of the versioning + deprecation policy text and the 17 deprecated operations
+  - url: https://status.1fort.com/
+    status: 200
+  - url: https://1fort.ai/changelog
+    status: 404
+  - url: https://1fort.ai/status
+    status: 404

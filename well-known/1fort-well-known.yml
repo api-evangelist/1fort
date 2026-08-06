@@ -1,0 +1,97 @@
+generated: '2026-08-05'
+method: searched
+source: live probes of /.well-known/* on every 1Fort host
+hosts_probed:
+  - https://1fort.ai
+  - https://api.1fort.com
+  - https://app.1fort.com
+  - https://auth.1fort.com
+  - https://security.1fort.com
+
+documents:
+  - host: https://api.1fort.com
+    path: /.well-known/security.txt
+    status: 200
+    content_type: text/plain; charset=utf-8
+    file: 1fort-security.txt
+    spec: RFC 9116
+    note: >-
+      Two fields only — Contact: mailto:security@1fort.com and Expires: 2026-01-31T12:00:00Z. The
+      Expires date has passed, so per RFC 9116 the file should be treated as stale until refreshed.
+      No Policy, Encryption, Canonical or Preferred-Languages field.
+  - host: https://app.1fort.com
+    path: /.well-known/security.txt
+    status: 200
+    content_type: text/plain; charset=utf-8
+    file: 1fort-security.txt
+    note: byte-identical to the api.1fort.com copy
+  - host: https://auth.1fort.com
+    path: /.well-known/security.txt
+    status: 200
+    content_type: text/plain; charset=utf-8
+    file: 1fort-security.txt
+    note: byte-identical to the api.1fort.com copy
+  - host: https://security.1fort.com
+    path: /.well-known/openid-configuration
+    status: 200
+    content_type: application/json
+    file: 1fort-openid-configuration.json
+    third_party: true
+    operator: SafeBase (Drata)
+    note: >-
+      NOT a 1Fort identity provider. Served by the SafeBase-hosted trust center on 1Fort's subdomain;
+      the issuer is https://app.safebase.io/api/mcp and the endpoints are SafeBase's. Recorded for
+      completeness, not credited to the 1Fort API.
+  - host: https://security.1fort.com
+    path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    file: 1fort-oauth-authorization-server.json
+    spec: RFC 8414
+    third_party: true
+    operator: SafeBase (Drata)
+  - host: https://security.1fort.com
+    path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: application/json
+    file: 1fort-oauth-protected-resource.json
+    spec: RFC 9728
+    third_party: true
+    operator: SafeBase (Drata)
+    note: resource = https://app.safebase.io/api/mcp
+  - host: https://1fort.ai
+    path: /llms.txt
+    status: 200
+    content_type: text/plain; charset=utf-8
+    file: ../llms/1fort-llms.txt
+    note: saved to llms/ rather than well-known/ (not a /.well-known path)
+
+misses:
+  - path: /.well-known/security.txt
+    hosts: [1fort.ai, security.1fort.com]
+    status: 404
+  - path: /.well-known/openid-configuration
+    hosts: [1fort.ai, api.1fort.com, app.1fort.com, auth.1fort.com]
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    hosts: [1fort.ai, api.1fort.com, app.1fort.com, auth.1fort.com]
+    status: 404
+  - path: /.well-known/api-catalog
+    hosts: [1fort.ai, api.1fort.com, app.1fort.com, auth.1fort.com, security.1fort.com]
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    hosts: [1fort.ai, api.1fort.com, app.1fort.com, auth.1fort.com, security.1fort.com]
+    status: 404
+  - path: /.well-known/agent-card.json
+    hosts: [1fort.ai, api.1fort.com, app.1fort.com, auth.1fort.com, security.1fort.com]
+    status: 404
+  - path: /.well-known/agent.json
+    hosts: [1fort.ai, api.1fort.com, app.1fort.com, auth.1fort.com, security.1fort.com]
+    status: 404
+
+soft_404_control:
+  url: https://1fort.ai/definitely-not-a-real-page-xyz123
+  status: 404
+  note: >-
+    Control path returns a real 404, so the misses above are genuine absences rather than an SPA
+    catch-all answering 200 for every path.

@@ -1,0 +1,139 @@
+generated: '2026-08-05'
+method: derived
+source: openapi/1fort-openapi-original.yml
+docs: https://api.1fort.com/api-docs
+note: >-
+  Cross-cutting request/response semantics for the 1Fort API, derived from the published Swagger 2.0
+  document (574 operations) plus the policy prose in its info.description. 1Fort publishes no separate
+  conventions or getting-started guide outside the ReDoc reference, so everything here is read off the
+  contract itself.
+
+media_types:
+  consumes: [application/json]
+  produces: [application/json]
+
+authentication:
+  style: bearer-jwt
+  header: Authorization
+  formats:
+    - "Bearer <token>"
+    - "JWT <token>"
+  alternative:
+    scheme: ApiKey
+    header: Authorization
+    format: "Api-Key <key>"
+  cookie: >-
+    The API description states tokens may also be presented as an HTTP-only cookie (used by the
+    app.1fort.com console).
+  refresh: openapi/1fort-openapi-original.yml#auth_token_refresh_create
+  public_operations: 41
+  public_operation_note: >-
+    41 operations declare `security: []` and are intentionally anonymous — OTP sign-in, Google and
+    Office 365 sign-in/sign-up, invite accept/validate, the checkout and storefront read surfaces,
+    and every inbound partner webhook receiver.
+  detail: authentication/1fort-authentication.yml
+
+multi_tenancy:
+  model: path-scoped tenant
+  pattern: "/apis/v2/broker/{business_pk}/..."
+  enforcement: >-
+    "Resources are scoped to a tenant. Nested routes carry the owning resource id in the path; a
+    token is only authorised for the businesses its user may access. Object-level permissions are
+    enforced per endpoint." (openapi info.description)
+  secondary_scope:
+    header: X-Processing-Session
+    required: true
+    used_on_operations: 23
+    description: "Processing session token (scopes access to broker)"
+
+pagination:
+  style: limit-offset
+  implementation: Django REST Framework LimitOffsetPagination
+  request_params:
+    - name: limit
+      in: query
+      description: Number of results to return per page.
+    - name: offset
+      in: query
+      description: The initial index from which to return the results.
+  response_fields: [count, next, previous, results]
+  cursor_pagination: false
+  note: No cursor/keyset pagination and no Link headers; `next`/`previous` are absolute URLs in the body.
+
+filtering_and_sorting:
+  search_param: search
+  ordering_param: ordering
+  common_filters: [status, insured, carrier, broker, coverage, type, business, coverage_type,
+    submission_type, payment_status, is_active, effective_date_min, effective_date_max]
+  export: >-
+    Several list surfaces expose a sibling `/csv` export operation (for example
+    v2_ascend_payments_export_csv) that mirrors the list filters.
+
+field_expansion:
+  supported: false
+  note: No expand/include/fields query parameters appear anywhere in the spec; related objects are
+    either inlined by the serializer or fetched by a second call.
+
+metadata:
+  user_defined_metadata: false
+  note: >-
+    No generic `metadata` map. Flexible per-tenant data is instead modelled as explicit flex-field
+    schemas (BinderFlexFields, BrokerQuoteV2FlexFields, BrokerQuotePolicyV2FlexFields).
+
+request_tracing:
+  request_id_field: request_id
+  location: response body, on the v2 ErrorResponse envelope
+  description: "Request ID for debugging."
+  request_id_header: null
+  note: >-
+    Tracing is body-level and only on the newer v2 error envelope; there is no documented
+    X-Request-Id request or response header.
+
+versioning:
+  scheme: uri-path
+  current: v2
+  legacy: v1
+  detail: lifecycle/1fort-lifecycle.yml
+
+idempotency:
+  client_idempotency_key: false
+  header: null
+  note: >-
+    1Fort documents NO client-supplied idempotency key. The word "idempotent" appears twice in the
+    spec, both times describing SERVER-SIDE re-run safety of two v2 agent-runtime operations
+    (v2 broker agent draft-quote read and the business-scoped coverage draft create, which "creates
+    the CoverageTerm and CoverageApplication only if the draft doesn't already have them"). That is
+    an implementation property of those two endpoints, not a retry contract a client can rely on,
+    and no `Idempotency-Key` parameter exists on any of the 574 operations. This artifact therefore
+    does NOT carry an `Idempotency` pointer.
+
+error_envelope:
+  format: vendor-json
+  rfc9457: false
+  v1_shape:
+    schemas: [GenericError, APIException, ValidationError]
+    example_shape: '{"detail": "..."} ; validation errors are field-keyed arrays of strings'
+  v2_shape:
+    schema: ErrorResponse
+    example_shape: '{"error": {"code": "UNAUTHORIZED", "message": "..."}, "request_id": "..."}'
+  detail: errors/1fort-problem-types.yml
+
+rate_limiting:
+  documented: partial
+  signalling_headers: null
+  note: >-
+    Four invite/OTP-adjacent operations document "Rate limit: 10 requests per minute" in prose in the
+    operation description. No RateLimit-* or X-RateLimit-* response headers, no 429 response is
+    declared anywhere in the spec, and no platform-wide quota is published.
+  detail: rate-limits/1fort-rate-limits.yml
+
+webhooks:
+  direction: inbound-only
+  detail: asyncapi/1fort-webhooks.yml
+
+cross_links:
+  authentication: authentication/1fort-authentication.yml
+  errors: errors/1fort-problem-types.yml
+  lifecycle: lifecycle/1fort-lifecycle.yml
+  rate_limits: rate-limits/1fort-rate-limits.yml
+  data_model: data-model/1fort-data-model.yml

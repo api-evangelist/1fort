@@ -1,0 +1,97 @@
+generated: '2026-08-05'
+method: searched
+source: openapi/1fort-openapi-original.yml
+docs: https://api.1fort.com/api-docs
+note: >-
+  Upgraded from the mechanical derive. The derive collapsed both declared schemes into one because
+  Swagger 2.0 models them identically (apiKey / header / Authorization); the spec actually declares
+  TWO distinct credential formats on the same header, plus a documented cookie alternative.
+
+summary:
+  types: [apiKey]
+  api_key_in: [header]
+  oauth2_flows: []
+  default_security: Bearer
+  public_operations: 41
+  total_operations: 574
+
+schemes:
+- name: Bearer
+  type: apiKey
+  in: header
+  parameter: Authorization
+  format: "Bearer <token>  |  JWT <token>"
+  credential: JWT access token
+  description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+  default: true
+  sources: [openapi/1fort-openapi-original.yml]
+- name: ApiKey
+  type: apiKey
+  in: header
+  parameter: Authorization
+  format: "Api-Key <key>"
+  credential: static API key
+  description: API key. Send as `Api-Key <key>`.
+  default: false
+  sources: [openapi/1fort-openapi-original.yml]
+
+cookie_alternative:
+  supported: true
+  attributes: HTTP-only
+  source: openapi info.description ("Tokens may also be presented as an HTTP-only cookie")
+  note: used by the app.1fort.com console; not a documented server-to-server option.
+
+token_lifecycle:
+  refresh_operation: openapi/1fort-openapi-original.yml#auth_token_refresh_create
+  refresh_path: POST /auth/token/refresh
+  issue_paths:
+  - POST /otp  (one-time-password sign-in, public)
+  - POST /auth/google/signin  |  POST /auth/google/signup
+  - GET|POST /auth/office365/signin  |  GET|POST /auth/office365/signup
+  - POST /v2/storefront-auth  (public storefront session)
+  expiry_documented: false
+  rotation_documented: false
+  self_serve_key_issuance: false
+  key_management_docs: null
+  note: >-
+    No documented way to mint or rotate an Api-Key without contacting 1Fort; there is no developer
+    dashboard, key page or self-serve API credential flow on the public surface.
+
+authorization:
+  model: multi-tenant, object-level
+  tenant_scope: path-embedded owning resource id (e.g. /apis/v2/broker/{business_pk}/applications)
+  secondary_scope:
+    header: X-Processing-Session
+    description: Processing session token (scopes access to broker)
+    required_on_operations: 23
+  statement: >-
+    "Resources are scoped to a tenant... a token is only authorised for the businesses its user may
+    access. Object-level permissions are enforced per endpoint." (openapi info.description)
+  scopes: none
+  scopes_note: >-
+    1Fort declares no oauth2 security scheme and no scope vocabulary, so there is no scopes/ artifact
+    for this provider. Authorization is entirely server-side object permissions.
+
+identity_federation:
+  consumed: [Google Workspace / Google Sign-In, Microsoft Office 365 / Entra ID]
+  provided: none
+  mfa: >-
+    1fort.ai/security states MFA uses phishing-resistant hardware via the Web Authentication API
+    (WebAuthn). No WebAuthn/passkey endpoints appear in the public API contract.
+
+unauthenticated_surface:
+  count: 41
+  categories:
+  - OTP and social sign-in / sign-up
+  - invite accept + validate (rate-limited 10/min)
+  - checkout invoices, sessions, PDF/receipt/proposal reads
+  - storefront and storefront-agency reads, storefront auth
+  - inbound partner webhook receivers (Stripe, Stripe Connect, Ascend, Herald, Gmail, Office 365)
+  - Google Workspace / Office 365 OAuth permission listings
+
+x-evidence:
+- url: https://api.1fort.com/api-docs/?format=openapi
+  status: 200
+- url: https://api.1fort.com/
+  status: 401
+  note: unauthenticated request to the API root is rejected, confirming the auth wall

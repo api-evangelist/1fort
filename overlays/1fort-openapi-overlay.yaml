@@ -1,0 +1,77 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the 1Fort API
+  version: 1.0.0
+extends: openapi/1fort-openapi-original.yml
+x-generated: '2026-08-05'
+x-method: generated
+x-source: >-
+  Derived from the harvested Swagger 2.0 document (https://api.1fort.com/api-docs/?format=openapi,
+  926KB, 451 paths / 574 operations) plus the artifacts in this repo. The harvested spec is never
+  mutated; these are our annotations only.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-profile: https://apis.io/provider/1fort
+      x-apievangelist-harvested: '2026-08-05'
+      x-apievangelist-spec-source: https://api.1fort.com/api-docs/?format=openapi
+      x-apievangelist-spec-version: swagger-2.0
+      x-apievangelist-discovery-note: >-
+        The spec is NOT at any conventional path. /openapi.json, /openapi.yaml, /swagger.json,
+        /v1/openapi.json and /redoc all return 404 on api.1fort.com. The document is served by
+        drf-yasg from the ReDoc UI route with a query parameter — /api-docs/?format=openapi — which
+        is why an automated crawler will report this provider as having no machine-readable contract.
+      x-apievangelist-artifacts:
+        authentication: authentication/1fort-authentication.yml
+        conventions: conventions/1fort-conventions.yml
+        errors: errors/1fort-problem-types.yml
+        lifecycle: lifecycle/1fort-lifecycle.yml
+        rate_limits: rate-limits/1fort-rate-limits.yml
+        data_model: data-model/1fort-data-model.yml
+        webhooks: asyncapi/1fort-webhooks.yml
+        conformance: conformance/1fort-conformance.yml
+        agentic_access: agentic-access/1fort-agentic-access.yml
+        skills: skills/_index.yml
+
+  - target: $.info
+    update:
+      x-apievangelist-contract-observations:
+        operations: 574
+        paths: 451
+        definitions: 198
+        tags: 89
+        operation_ids_unique: false
+        duplicate_operation_ids: 16
+        duplicate_operation_id_note: >-
+          558 unique operationIds across 574 operations. Sixteen ids are reused on more than one
+          path (a drf-yasg artefact where the same ViewSet is routed twice, e.g. broker-scoped and
+          business-scoped mounts). Code generators that key on operationId will collide.
+        operations_without_operation_id: 0
+        public_operations: 41
+        deprecated_operations: 17
+        operations_with_response_examples: 25
+        response_examples_total: 61
+        examples_note: >-
+          25 of 574 operations (4.4%) carry a response example, and 60 of the 61 examples are on
+          ERROR responses (23 on 401, 18 on 403, 17 on 404, 2 on 400) — all on the v2 broker-agent
+          surface. Exactly one success example exists in the entire document. There are no request
+          body examples anywhere, so a code generator or an agent has no sample payload for any
+          write operation.
+        declared_429_responses: 0
+        problem_json_responses: 0
+
+  - target: $.securityDefinitions
+    update:
+      x-apievangelist-note: >-
+        Both schemes are apiKey-in-header on the same `Authorization` header and differ only by
+        credential prefix — `Bearer`/`JWT` for the access token, `Api-Key` for the static key.
+        Swagger 2.0 cannot express that difference, so tooling sees two identical schemes. The
+        prefixes are documented only in the scheme descriptions.
+
+  - target: $.paths['/invite/validate'].post
+    update:
+      x-apievangelist-rate-limit:
+        limit_count: 10
+        interval: minute
+        source: operation description prose
+        note: One of only four operations in the API with any published limit.

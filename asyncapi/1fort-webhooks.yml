@@ -1,0 +1,101 @@
+generated: '2026-08-05'
+method: derived
+source: openapi/1fort-openapi-original.yml
+docs: https://api.1fort.com/api-docs
+
+spec_type: Webhooks
+asyncapi_published: false
+asyncapi_probe:
+  - url: https://api.1fort.com/asyncapi.yaml
+    status: 404
+  - url: https://api.1fort.com/asyncapi.json
+    status: 404
+
+direction: inbound-only
+honesty_note: >-
+  READ THIS BEFORE SCORING. 1Fort's event surface is INBOUND ONLY. Every webhook endpoint below is a
+  receiver 1Fort exposes so a partner platform (Stripe, Ascend, Herald, Google Pub/Sub, Microsoft
+  Graph) can push events INTO 1Fort. There is no outbound webhook subscription API — nothing in the
+  574-operation spec lets a 1Fort customer register an endpoint, choose event types, rotate a signing
+  secret, or replay a delivery, and no event catalogue is published. A broker integrating with 1Fort
+  cannot currently receive push notifications; they must poll. This artifact records the surface that
+  genuinely exists rather than implying a customer-facing event product that does not.
+
+outbound:
+  subscription_api: false
+  event_catalog_published: false
+  signature_scheme_documented: false
+  delivery_retry_documented: false
+  replay_documented: false
+
+inbound_receivers:
+  - path: /checkout/webhook
+    method: POST
+    operationId: checkout_webhook_create
+    partner: Stripe
+    purpose: Handle incoming Stripe webhook events for the checkout/invoice payment flow.
+    auth: public (security [])
+    signature_verification_documented: false
+  - path: /stripe/wbhk
+    method: POST
+    operationId: stripe_wbhk_create
+    partner: Stripe
+    purpose: Stripe platform account webhook receiver.
+    auth: public (security [])
+    signature_verification_documented: false
+  - path: /stripe/cnct-wbhk
+    method: POST
+    operationId: stripe_cnct-wbhk_create
+    partner: Stripe Connect
+    purpose: Stripe Connect (connected account) webhook receiver.
+    auth: public (security [])
+    signature_verification_documented: false
+  - path: /v2/herald/webhook
+    method: POST
+    operationId: v2_herald_webhook_create
+    partner: Herald
+    purpose: Receiver for Herald carrier-connectivity events (quote/application status from carriers).
+    auth: public (security [])
+    signature_verification_documented: false
+  - path: /v2/broker/gmail/webhook
+    method: POST
+    operationId: v2_broker_gmail_webhook_create
+    partner: Google Cloud Pub/Sub (Gmail push)
+    purpose: >-
+      Process incoming Gmail push notification from Pub/Sub for the Email AI Agent. Documented
+      payload is the Pub/Sub envelope {message:{data (base64 JSON), messageId, publishTime}, subscription}.
+    auth: public (security [])
+    signature_verification_documented: false
+  - path: /v2/broker/office365/webhook
+    method: POST
+    operationId: v2_broker_office365_webhook_create
+    partner: Microsoft Graph (Office 365 change notifications)
+    purpose: >-
+      Process incoming Office 365 push notification or subscription validation request. Handles the
+      Graph validation handshake (?validationToken=) and the {value:[{subscriptionId, changeType, ...}]}
+      notification payload.
+    auth: public (security [])
+    signature_verification_documented: false
+  - path: /ascend/webhook/invoice
+    method: POST
+    operationId: ascend_webhook_invoice_webhook
+    partner: Ascend
+    purpose: >-
+      Invoice lifecycle events from the Ascend premium-finance rails. An INVOICE_UPDATE_RESTRICTIONS
+      map in the operation description constrains which updates are permitted per event type and
+      current invoice status.
+    auth: public (security [])
+    deprecated: true
+  - path: /ascend/webhook/payout
+    method: POST
+    operationId: ascend_webhook_payout_webhook
+    partner: Ascend
+    purpose: Payout lifecycle events from Ascend.
+    auth: public (security [])
+    deprecated: true
+
+coverage:
+  inbound_receivers: 8
+  deprecated_receivers: 2
+  distinct_partners: 6
+  outbound_events: 0

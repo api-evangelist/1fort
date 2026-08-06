@@ -1,0 +1,7242 @@
+generated: '2026-08-05'
+method: generated
+source: openapi/1fort-openapi-original.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 574
+  by_action_class:
+    connected: 333
+    acting: 241
+  by_consequence:
+    read: 333
+    write: 220
+    physical: 19
+    safety-critical: 2
+  human_in_the_loop_required: 2
+operations:
+- path: /ai-customization-types
+  method: get
+  operationId: ai-customization-types_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ai-customization-types/{id}
+  method: get
+  operationId: ai-customization-types_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics
+  method: get
+  operationId: analytics_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/broker
+  method: get
+  operationId: analytics_broker_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/reports
+  method: get
+  operationId: analytics_reports_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /applications
+  method: get
+  operationId: applications_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /applications/count
+  method: get
+  operationId: applications_count
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /applications/{application_pk}/quotes
+  method: get
+  operationId: applications_quotes_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /applications/{application_pk}/quotes/{id}
+  method: get
+  operationId: applications_quotes_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /applications/{id}
+  method: get
+  operationId: applications_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /applications/{id}/submit
+  method: post
+  operationId: applications_submit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /ascend/invoice/{invoice_id}/download/
+  method: get
+  operationId: ascend_invoice_download_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ascend/invoice/{invoice_id}/download/
+  method: post
+  operationId: ascend_invoice_download_create
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /ascend/invoice/{invoice_id}/receipt/
+  method: get
+  operationId: ascend_invoice_receipt_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ascend/invoice/{invoice_id}/receipt/
+  method: post
+  operationId: ascend_invoice_receipt_create
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /ascend/payouts
+  method: get
+  operationId: ascend_payouts_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ascend/payouts/csv
+  method: get
+  operationId: ascend_payouts_export_csv
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ascend/payouts/filter-options
+  method: get
+  operationId: ascend_payouts_filter_options
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ascend/payouts/{id}
+  method: get
+  operationId: ascend_payouts_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ascend/payouts/{id}/dispatch
+  method: post
+  operationId: ascend_payouts_dispatch_payable
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /ascend/webhook/invoice
+  method: post
+  operationId: ascend_webhook_invoice_webhook
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /ascend/webhook/payout
+  method: post
+  operationId: ascend_webhook_payout_webhook
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /auth/google/signin
+  method: post
+  operationId: auth_google_signin_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /auth/google/signup
+  method: post
+  operationId: auth_google_signup_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /auth/logout
+  method: post
+  operationId: auth_logout_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /auth/office365/signin
+  method: get
+  operationId: auth_office365_signin_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /auth/office365/signin
+  method: post
+  operationId: auth_office365_signin_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /auth/office365/signup
+  method: get
+  operationId: auth_office365_signup_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /auth/office365/signup
+  method: post
+  operationId: auth_office365_signup_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /auth/token/refresh
+  method: post
+  operationId: auth_token_refresh_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker
+  method: get
+  operationId: broker_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker
+  method: post
+  operationId: broker_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/accept-invite
+  method: post
+  operationId: broker_accept-invite_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/ai-customizations
+  method: get
+  operationId: broker_ai-customizations_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/ai-customizations
+  method: post
+  operationId: broker_ai-customizations_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/ai-customizations/{id}
+  method: get
+  operationId: broker_ai-customizations_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/ai-customizations/{id}
+  method: put
+  operationId: broker_ai-customizations_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/ai-customizations/{id}
+  method: patch
+  operationId: broker_ai-customizations_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/ai-customizations/{id}
+  method: delete
+  operationId: broker_ai-customizations_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/clients
+  method: get
+  operationId: broker_clients_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/clients
+  method: post
+  operationId: broker_clients_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/clients/{client_pk}/admin-users
+  method: get
+  operationId: broker_clients_admin-users_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/clients/{client_pk}/agents
+  method: get
+  operationId: broker_clients_agents_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/clients/{client_pk}/applications
+  method: get
+  operationId: broker_clients_applications_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/clients/{client_pk}/applications
+  method: post
+  operationId: broker_clients_applications_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/clients/{client_pk}/applications/{id}
+  method: get
+  operationId: broker_clients_applications_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/clients/{client_pk}/applications/{id}
+  method: put
+  operationId: broker_clients_applications_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/clients/{client_pk}/applications/{id}
+  method: patch
+  operationId: broker_clients_applications_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/clients/{client_pk}/applications/{id}
+  method: delete
+  operationId: broker_clients_applications_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/clients/{client_pk}/applications/{id}/quotes
+  method: get
+  operationId: broker_clients_applications_get_quotes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/clients/{client_pk}/applications/{id}/report
+  method: get
+  operationId: broker_clients_applications_get_report
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/clients/{client_pk}/invites
+  method: get
+  operationId: broker_clients_invites_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/clients/{client_pk}/invites
+  method: post
+  operationId: broker_clients_invites_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/clients/{client_pk}/invites/cancel-invite
+  method: post
+  operationId: broker_clients_invites_cancel_invite
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/clients/{client_pk}/invites/resend-invite
+  method: post
+  operationId: broker_clients_invites_resend_invite
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/clients/{client_pk}/quotes
+  method: get
+  operationId: broker_clients_quotes_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/clients/{client_pk}/quotes/{id}
+  method: get
+  operationId: broker_clients_quotes_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/clients/{client_pk}/quotes/{id}/bind
+  method: post
+  operationId: broker_clients_quotes_request_to_bind
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/clients/{client_pk}/quotes/{id}/download-pdf
+  method: get
+  operationId: broker_clients_quotes_download_pdf
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/clients/{client_pk}/quotes/{id}/download-quote-file/{file_pk}
+  method: get
+  operationId: broker_clients_quotes_download_quote_file
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/clients/{client_pk}/quotes/{id}/invoices
+  method: get
+  operationId: broker_clients_quotes_invoice
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/clients/{client_pk}/users
+  method: get
+  operationId: broker_clients_users_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/clients/{id}
+  method: get
+  operationId: broker_clients_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/clients/{id}
+  method: patch
+  operationId: broker_clients_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/clients/{id}
+  method: delete
+  operationId: broker_clients_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/clients/{id}/agents
+  method: post
+  operationId: broker_clients_add_agents
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/clients/{id}/invite-remind
+  method: get
+  operationId: broker_clients_client_invite_remind
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/clients/{id}/pre-filled-forms
+  method: post
+  operationId: broker_clients_add_prefilled_forms
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/domain-authentications
+  method: get
+  operationId: broker_domain-authentications_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/domain-authentications/verify
+  method: post
+  operationId: broker_domain-authentications_verify
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/files
+  method: get
+  operationId: broker_files_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/groups
+  method: get
+  operationId: broker_groups_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/groups
+  method: post
+  operationId: broker_groups_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/groups/{group_pk}/members
+  method: get
+  operationId: broker_groups_members_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/groups/{group_pk}/members
+  method: post
+  operationId: broker_groups_members_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/groups/{group_pk}/members/{id}
+  method: delete
+  operationId: broker_groups_members_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/groups/{id}
+  method: get
+  operationId: broker_groups_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/groups/{id}
+  method: put
+  operationId: broker_groups_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/groups/{id}
+  method: patch
+  operationId: broker_groups_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/groups/{id}
+  method: delete
+  operationId: broker_groups_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/invites
+  method: get
+  operationId: broker_invites_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/invites
+  method: post
+  operationId: broker_invites_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/invites/{id}
+  method: put
+  operationId: broker_invites_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/invites/{id}
+  method: patch
+  operationId: broker_invites_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/invites/{id}
+  method: delete
+  operationId: broker_invites_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/notification-emails
+  method: get
+  operationId: broker_notification-emails_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/received-notification-emails
+  method: get
+  operationId: broker_received-notification-emails_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/received-notification-emails/{id}/mark-as-read
+  method: post
+  operationId: broker_received-notification-emails_mark_as_read
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/take-rates
+  method: get
+  operationId: broker_take-rates_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/take-rates/{id}
+  method: get
+  operationId: broker_take-rates_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/take-rates/{id}
+  method: put
+  operationId: broker_take-rates_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/take-rates/{id}
+  method: patch
+  operationId: broker_take-rates_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/user-ai-customizations
+  method: get
+  operationId: broker_user-ai-customizations_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/user-ai-customizations
+  method: post
+  operationId: broker_user-ai-customizations_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/user-ai-customizations/{id}
+  method: get
+  operationId: broker_user-ai-customizations_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/user-ai-customizations/{id}
+  method: put
+  operationId: broker_user-ai-customizations_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/user-ai-customizations/{id}
+  method: patch
+  operationId: broker_user-ai-customizations_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/user-ai-customizations/{id}
+  method: delete
+  operationId: broker_user-ai-customizations_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/users
+  method: get
+  operationId: broker_users_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/users/me/notification-preferences
+  method: get
+  operationId: broker_users_me_notification-preferences_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/users/me/notification-preferences
+  method: patch
+  operationId: broker_users_me_notification-preferences_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/users/me/proposal-preferences
+  method: get
+  operationId: broker_users_me_proposal-preferences_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/users/me/proposal-preferences
+  method: patch
+  operationId: broker_users_me_proposal-preferences_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/users/{id}
+  method: get
+  operationId: broker_users_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{broker_pk}/users/{id}
+  method: put
+  operationId: broker_users_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{broker_pk}/users/{id}
+  method: delete
+  operationId: broker_users_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{id}
+  method: get
+  operationId: broker_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{id}
+  method: patch
+  operationId: broker_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{id}/email_preferences
+  method: get
+  operationId: broker_email_preferences_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{id}/email_preferences
+  method: patch
+  operationId: broker_email_preferences_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /broker/{id}/proposal-preferences
+  method: get
+  operationId: broker_proposal-preferences_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /broker/{id}/proposal-preferences
+  method: patch
+  operationId: broker_proposal-preferences_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /business
+  method: get
+  operationId: business_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /business-broker-users
+  method: get
+  operationId: business-broker-users_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /business-employee-type-permission
+  method: get
+  operationId: business-employee-type-permission_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /business-employee-type-permission
+  method: post
+  operationId: business-employee-type-permission_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /business-employee-type-permission/{id}
+  method: get
+  operationId: business-employee-type-permission_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /business-employee-type-permission/{id}
+  method: patch
+  operationId: business-employee-type-permission_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /business-employee-type-permission/{id}
+  method: delete
+  operationId: business-employee-type-permission_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /business-group
+  method: get
+  operationId: business-group_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /business-group
+  method: post
+  operationId: business-group_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /business-group/{id}
+  method: get
+  operationId: business-group_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /business-group/{id}
+  method: patch
+  operationId: business-group_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /business-group/{id}
+  method: delete
+  operationId: business-group_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /business-group/{id}/add-users
+  method: post
+  operationId: business-group_add_users
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /business-group/{id}/get-users
+  method: get
+  operationId: business-group_get_users
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /business-group/{id}/remove-users
+  method: post
+  operationId: business-group_remove_users
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /business-user
+  method: get
+  operationId: business-user_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /business-user/my-businesses
+  method: get
+  operationId: business-user_my-businesses_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /business-user/{id}
+  method: get
+  operationId: business-user_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /business-user/{id}
+  method: patch
+  operationId: business-user_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /business-user/{id}/access-role
+  method: post
+  operationId: business-user_set_access_role
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /business-user/{id}/groups
+  method: post
+  operationId: business-user_set_user_groups
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /business-user/{id}/send-invitation-reminder
+  method: get
+  operationId: business-user_send_invitation_reminder
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /business/my-agents
+  method: get
+  operationId: business_business_agents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /business/my-broker
+  method: get
+  operationId: business_business_broker
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /business/notify-broker
+  method: get
+  operationId: business_notify_business_broker
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /carriers
+  method: get
+  operationId: carriers_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /carriers-wholesalers
+  method: get
+  operationId: carriers-wholesalers_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /carriers/direct
+  method: get
+  operationId: carriers_direct_products
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /checkout/invoices
+  method: get
+  operationId: checkout_invoices_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /checkout/invoices/payment-intent
+  method: post
+  operationId: checkout_invoices_create_payment_intent
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /checkout/invoices/search
+  method: post
+  operationId: checkout_invoices_search
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /checkout/invoices/{id}/pdf
+  method: get
+  operationId: checkout_invoices_pdf
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /checkout/invoices/{id}/proposal
+  method: get
+  operationId: checkout_invoices_proposal
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /checkout/invoices/{id}/receipt
+  method: get
+  operationId: checkout_invoices_receipt
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /checkout/sessions
+  method: get
+  operationId: checkout_sessions_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /checkout/sessions/{id}
+  method: get
+  operationId: checkout_sessions_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /checkout/sessions/{id}/stripe-amount
+  method: post
+  operationId: checkout_sessions_stripe_amount
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /checkout/sessions/{id}/stripe-receipt
+  method: get
+  operationId: checkout_sessions_stripe_receipt
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /checkout/webhook
+  method: post
+  operationId: checkout_webhook_create
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /clients/{client_pk}/quote-change-requests/
+  method: post
+  operationId: clients_quote-change-requests_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /custom-access-role
+  method: get
+  operationId: custom-access-role_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /custom-access-role
+  method: post
+  operationId: custom-access-role_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /custom-access-role/permissions
+  method: get
+  operationId: custom-access-role_get_all_permissions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /custom-access-role/{id}
+  method: get
+  operationId: custom-access-role_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /custom-access-role/{id}
+  method: patch
+  operationId: custom-access-role_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /custom-access-role/{id}
+  method: delete
+  operationId: custom-access-role_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /default-access-role
+  method: get
+  operationId: default-access-role_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /financial-risk
+  method: post
+  operationId: financial-risk_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /google_workspace/broker/oauth/permissions
+  method: get
+  operationId: google_workspace_broker_oauth_permissions_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /invite
+  method: get
+  operationId: invite_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /invite
+  method: post
+  operationId: invite_create
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /invite/accept/email
+  method: post
+  operationId: invite_accept_accept_business_user
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /invite/accept/google
+  method: post
+  operationId: invite_accept_accept_business_user_google
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /invite/accept/office-365
+  method: post
+  operationId: invite_accept_accept_business_user_office_365
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /invite/validate
+  method: post
+  operationId: invite_validate_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /invite/{id}
+  method: delete
+  operationId: invite_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /legal-documents
+  method: get
+  operationId: legal-documents_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /legal-documents/{document_type}
+  method: get
+  operationId: legal-documents_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /legal-documents/{document_type}/sign
+  method: post
+  operationId: legal-documents_sign
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /office365/broker/individual/permissions
+  method: get
+  operationId: office365_broker_individual_permissions_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /office365/broker/permissions
+  method: get
+  operationId: office365_broker_permissions_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /otp
+  method: post
+  operationId: otp_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /quotes
+  method: get
+  operationId: quotes_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /quotes/{id}
+  method: get
+  operationId: quotes_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /quotes/{id}/download-pdf
+  method: get
+  operationId: quotes_download_pdf
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rewards
+  method: get
+  operationId: rewards_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rewards/leaderboard
+  method: get
+  operationId: rewards_leaderboard
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /risks
+  method: get
+  operationId: risks_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /risks/assessment_status
+  method: get
+  operationId: risks_assessment_status
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /risks/chat
+  method: get
+  operationId: risks_chat_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /risks/chat
+  method: post
+  operationId: risks_chat_create
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /risks/overview
+  method: get
+  operationId: risks_overview_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /risks/{id}
+  method: get
+  operationId: risks_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /risks/{id}
+  method: put
+  operationId: risks_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /risks/{id}
+  method: patch
+  operationId: risks_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /sanity_check_ai
+  method: post
+  operationId: sanity_check_ai_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /sanity_check_ai/match
+  method: get
+  operationId: sanity_check_ai_match
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /sanity_check_ai/{id}
+  method: get
+  operationId: sanity_check_ai_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /sanity_check_ai/{id}
+  method: put
+  operationId: sanity_check_ai_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /sanity_check_ai/{id}
+  method: patch
+  operationId: sanity_check_ai_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /stripe/cnct-wbhk
+  method: post
+  operationId: stripe_cnct-wbhk_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /stripe/connect
+  method: get
+  operationId: stripe_connect_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /stripe/connect/account
+  method: post
+  operationId: stripe_connect_create_account
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /stripe/connect/account-session
+  method: post
+  operationId: stripe_connect_account_session
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /stripe/connect/dashboard-link
+  method: post
+  operationId: stripe_connect_dashboard_link
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /stripe/connect/onboarding-link
+  method: post
+  operationId: stripe_connect_onboarding_link
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /stripe/connect/transfers
+  method: get
+  operationId: stripe_connect_transfers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /stripe/wbhk
+  method: post
+  operationId: stripe_wbhk_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /suggestion_ai
+  method: post
+  operationId: suggestion_ai_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /suggestion_ai/classify
+  method: post
+  operationId: suggestion_ai_classify
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /suggestion_ai/{id}
+  method: get
+  operationId: suggestion_ai_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /user
+  method: get
+  operationId: user_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /user/{username}
+  method: put
+  operationId: user_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /user/{username}
+  method: patch
+  operationId: user_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/applications
+  method: get
+  operationId: v2_applications_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/applications/{application_pk}/coverages
+  method: get
+  operationId: v2_applications_coverages_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/applications/{application_pk}/supplementary-documents
+  method: get
+  operationId: v2_applications_supplementary-documents_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/applications/{application_pk}/supplementary-documents
+  method: post
+  operationId: v2_applications_supplementary-documents_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/applications/{application_pk}/supplementary-documents/{id}
+  method: get
+  operationId: v2_applications_supplementary-documents_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/applications/{application_pk}/supplementary-documents/{id}
+  method: delete
+  operationId: v2_applications_supplementary-documents_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/applications/{application_pk}/supplementary-documents/{id}/download
+  method: get
+  operationId: v2_applications_supplementary-documents_download
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/applications/{id}
+  method: get
+  operationId: v2_applications_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/applications/{id}/collect-signature
+  method: post
+  operationId: v2_applications_collect_signature_for_application
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/applications/{id}/download-1fort-application-pdf
+  method: get
+  operationId: v2_applications_download_1fort_application_pdf
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/applications/{id}/download-insurance-proposal-pdf
+  method: get
+  operationId: v2_applications_download_insurance_proposal_pdf
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/applications/{id}/get-signature
+  method: get
+  operationId: v2_applications_get_signature_for_application
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/applications/{id}/pre-filled-forms
+  method: post
+  operationId: v2_applications_add_prefilled_forms
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/applications/{id}/pre-filled-forms/{sessions_pk}
+  method: get
+  operationId: v2_applications_get_prefilled_forms
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/applications/{id}/quote-data
+  method: get
+  operationId: v2_applications_get_quote_data
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/applications/{id}/submit
+  method: post
+  operationId: v2_applications_submit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/ascend/payments
+  method: get
+  operationId: v2_ascend_payments_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/ascend/payments/csv
+  method: get
+  operationId: v2_ascend_payments_export_csv
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/ascend/payments/filter-options
+  method: get
+  operationId: v2_ascend_payments_filter_options
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/ascend/payments/{id}
+  method: get
+  operationId: v2_ascend_payments_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/ascend/payments/{id}/billables/{billable_id}
+  method: patch
+  operationId: v2_ascend_payments_update_billable
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/ascend/payments/{id}/due-date
+  method: patch
+  operationId: v2_ascend_payments_update_due_date
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/billing/payments
+  method: get
+  operationId: v2_billing_payments_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/billing/payments/csv
+  method: get
+  operationId: v2_billing_payments_export_csv
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/billing/payments/filter-options
+  method: get
+  operationId: v2_billing_payments_filter_options
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/billing/payments/stats
+  method: get
+  operationId: v2_billing_payments_stats
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/billing/payments/{id}
+  method: get
+  operationId: v2_billing_payments_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/billing/payments/{id}
+  method: patch
+  operationId: v2_billing_payments_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/billing/payments/{id}/stripe-receipt
+  method: get
+  operationId: v2_billing_payments_stripe_receipt
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/billing/refunds
+  method: get
+  operationId: v2_billing_refunds_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/billing/refunds/{id}
+  method: get
+  operationId: v2_billing_refunds_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/businesses
+  method: post
+  operationId: v2_broker_agent_businesses_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/businesses/find
+  method: get
+  operationId: v2_broker_agent_businesses_find_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/businesses/search
+  method: get
+  operationId: agent_search_businesses
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/businesses/{business_id}/update
+  method: post
+  operationId: v2_broker_agent_businesses_update_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/businesses/{id}
+  method: get
+  operationId: agent_get_business
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/carriers/match
+  method: post
+  operationId: v2_broker_agent_carriers_match_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/carriers/match/schema
+  method: get
+  operationId: v2_broker_agent_carriers_match_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/carriers/search
+  method: post
+  operationId: agent_search_carriers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/carriers/search/schema
+  method: get
+  operationId: v2_broker_agent_carriers_search_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/coverage-types/match
+  method: post
+  operationId: v2_broker_agent_coverage-types_match_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/coverage-types/match/schema
+  method: get
+  operationId: v2_broker_agent_coverage-types_match_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/coverage-types/search
+  method: post
+  operationId: agent_search_coverage_types
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/coverage-types/search/schema
+  method: get
+  operationId: v2_broker_agent_coverage-types_search_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/emails/{email_pk}/attachments/{id}
+  method: get
+  operationId: agent_get_attachment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/emails/{email_pk}/attachments/{id}/content
+  method: get
+  operationId: agent_get_attachment_content
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/emails/{email_pk}/attachments/{id}/metadata
+  method: put
+  operationId: agent_update_attachment_metadata
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/emails/{email_pk}/attachments/{id}/metadata
+  method: patch
+  operationId: agent_update_attachment_metadata
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/emails/{email_pk}/attachments/{id}/metadata/schema
+  method: get
+  operationId: v2_broker_agent_emails_attachments_metadata_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/emails/{id}
+  method: get
+  operationId: agent_get_email
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/emails/{id}
+  method: patch
+  operationId: agent_update_email
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/emails/{id}/content
+  method: get
+  operationId: agent_get_email_content
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/emails/{id}/schema
+  method: get
+  operationId: v2_broker_agent_emails_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/markets/transactions
+  method: post
+  operationId: agent_create_market_transaction
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/markets/upsert
+  method: post
+  operationId: agent_upsert_market
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles
+  method: get
+  operationId: agent_get_profile
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles
+  method: post
+  operationId: agent_create_profile_v2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles
+  method: put
+  operationId: agent_update_profile_v2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/schema
+  method: get
+  operationId: v2_broker_agent_profiles_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/search
+  method: post
+  operationId: agent_search_profiles
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/search/schema
+  method: get
+  operationId: v2_broker_agent_profiles_search_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{id}
+  method: get
+  operationId: agent_get_profile
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{id}
+  method: post
+  operationId: agent_create_profile_v2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{id}
+  method: put
+  operationId: agent_update_profile_v2
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{id}/business-candidates
+  method: get
+  operationId: agent_get_business_candidates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{id}/create-business
+  method: post
+  operationId: agent_create_business_from_profile
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{id}/create-business/schema
+  method: get
+  operationId: v2_broker_agent_profiles_create-business_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{id}/link-business
+  method: post
+  operationId: agent_link_profile_to_business
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{id}/link-business/schema
+  method: get
+  operationId: v2_broker_agent_profiles_link-business_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{id}/link-email
+  method: post
+  operationId: agent_link_profile_to_email
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{id}/link-email/schema
+  method: get
+  operationId: v2_broker_agent_profiles_link-email_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{id}/schema
+  method: get
+  operationId: v2_broker_agent_profiles_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/binders
+  method: get
+  operationId: v2_broker_agent_profiles_binders_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/binders
+  method: post
+  operationId: v2_broker_agent_profiles_binders_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/binders/schema
+  method: get
+  operationId: v2_broker_agent_profiles_binders_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/binders/search
+  method: post
+  operationId: v2_broker_agent_profiles_binders_search
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/binders/search/schema
+  method: get
+  operationId: v2_broker_agent_profiles_binders_search_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/binders/{id}
+  method: get
+  operationId: v2_broker_agent_profiles_binders_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/binders/{id}
+  method: patch
+  operationId: v2_broker_agent_profiles_binders_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/cois
+  method: get
+  operationId: v2_broker_agent_profiles_cois_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/cois
+  method: post
+  operationId: v2_broker_agent_profiles_cois_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/cois/schema
+  method: get
+  operationId: v2_broker_agent_profiles_cois_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/cois/search
+  method: post
+  operationId: v2_broker_agent_profiles_cois_search
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/cois/search/schema
+  method: get
+  operationId: v2_broker_agent_profiles_cois_search_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/cois/{id}
+  method: get
+  operationId: v2_broker_agent_profiles_cois_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/cois/{id}
+  method: patch
+  operationId: v2_broker_agent_profiles_cois_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/coverage-applications
+  method: get
+  operationId: v2_broker_agent_profiles_coverage-applications_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/coverage-applications
+  method: post
+  operationId: v2_broker_agent_profiles_coverage-applications_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/coverage-applications/schema
+  method: get
+  operationId: v2_broker_agent_profiles_coverage-applications_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/coverage-applications/search
+  method: post
+  operationId: v2_broker_agent_profiles_coverage-applications_search
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/coverage-applications/search/schema
+  method: get
+  operationId: v2_broker_agent_profiles_coverage-applications_search_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/coverage-applications/{id}
+  method: get
+  operationId: v2_broker_agent_profiles_coverage-applications_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/coverage-applications/{id}
+  method: patch
+  operationId: v2_broker_agent_profiles_coverage-applications_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/entities/search
+  method: post
+  operationId: agent_search_entities
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/entities/search/schema
+  method: get
+  operationId: v2_broker_agent_profiles_entities_search_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/invoices
+  method: get
+  operationId: v2_broker_agent_profiles_invoices_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/invoices
+  method: post
+  operationId: v2_broker_agent_profiles_invoices_create
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/invoices/schema
+  method: get
+  operationId: v2_broker_agent_profiles_invoices_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/invoices/{id}
+  method: get
+  operationId: v2_broker_agent_profiles_invoices_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/invoices/{id}
+  method: patch
+  operationId: v2_broker_agent_profiles_invoices_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/invoices/{id}/send-email
+  method: post
+  operationId: v2_broker_agent_profiles_invoices_send_email
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/invoices/{id}/send-email/schema
+  method: get
+  operationId: v2_broker_agent_profiles_invoices_send-email_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/policies
+  method: get
+  operationId: v2_broker_agent_profiles_policies_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/policies
+  method: post
+  operationId: v2_broker_agent_profiles_policies_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/policies/schema
+  method: get
+  operationId: v2_broker_agent_profiles_policies_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/policies/search
+  method: post
+  operationId: v2_broker_agent_profiles_policies_search
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/policies/search/schema
+  method: get
+  operationId: v2_broker_agent_profiles_policies_search_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/policies/{id}
+  method: get
+  operationId: v2_broker_agent_profiles_policies_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/policies/{id}
+  method: patch
+  operationId: v2_broker_agent_profiles_policies_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/quotes
+  method: get
+  operationId: v2_broker_agent_profiles_quotes_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/quotes
+  method: post
+  operationId: v2_broker_agent_profiles_quotes_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/quotes/schema
+  method: get
+  operationId: v2_broker_agent_profiles_quotes_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/quotes/search
+  method: post
+  operationId: v2_broker_agent_profiles_quotes_search
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/quotes/search/schema
+  method: get
+  operationId: v2_broker_agent_profiles_quotes_search_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/quotes/{id}
+  method: get
+  operationId: v2_broker_agent_profiles_quotes_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/profiles/{profile_pk}/quotes/{id}
+  method: patch
+  operationId: v2_broker_agent_profiles_quotes_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/quotes/{id}/send-proposal
+  method: post
+  operationId: v2_broker_agent_profiles_quotes_send_proposal
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/profiles/{profile_pk}/quotes/{id}/send-proposal/schema
+  method: get
+  operationId: v2_broker_agent_profiles_quotes_send-proposal_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/quotes/{quote_id}
+  method: get
+  operationId: v2_broker_agent_quotes_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/quotes/{quote_id}/fill
+  method: post
+  operationId: v2_broker_agent_quotes_fill_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/sessions/{session_pk}/files
+  method: get
+  operationId: v2_broker_agent_sessions_files_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/sessions/{session_pk}/files/{file_pk}/content
+  method: get
+  operationId: v2_broker_agent_sessions_files_content_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/wholesalers/match
+  method: post
+  operationId: v2_broker_agent_wholesalers_match_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/wholesalers/match/schema
+  method: get
+  operationId: v2_broker_agent_wholesalers_match_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/agent/wholesalers/search
+  method: post
+  operationId: agent_search_wholesalers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/agent/wholesalers/search/schema
+  method: get
+  operationId: v2_broker_agent_wholesalers_search_schema_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/applications
+  method: get
+  operationId: v2_broker_applications_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/applications/{id}
+  method: get
+  operationId: v2_broker_applications_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/clients
+  method: get
+  operationId: v2_broker_clients_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/clients/{id}
+  method: get
+  operationId: v2_broker_clients_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/clients/{id}/archive
+  method: post
+  operationId: v2_broker_clients_archive
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/clients/{id}/toggle_favorite
+  method: post
+  operationId: v2_broker_clients_toggle_favorite
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/clients/{id}/unarchive
+  method: post
+  operationId: v2_broker_clients_unarchive
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/coverage-types
+  method: get
+  operationId: v2_broker_coverage-types_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/coverage-types/{id}
+  method: get
+  operationId: v2_broker_coverage-types_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/coverages
+  method: get
+  operationId: v2_broker_coverages_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/coverages/{id}
+  method: get
+  operationId: v2_broker_coverages_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/email-templates/manual-application-multi-coverage-template
+  method: get
+  operationId: v2_broker_email-templates_manual-application-multi-coverage-template_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/gmail/webhook
+  method: post
+  operationId: v2_broker_gmail_webhook_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/insurance-coverage-types
+  method: get
+  operationId: v2_broker_insurance-coverage-types_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/insurance-coverage-types/{id}
+  method: get
+  operationId: v2_broker_insurance-coverage-types_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/integrations/ams
+  method: get
+  operationId: v2_broker_integrations_ams_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/integrations/ams
+  method: post
+  operationId: v2_broker_integrations_ams_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/integrations/ams/{id}
+  method: get
+  operationId: v2_broker_integrations_ams_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/integrations/ams/{id}
+  method: put
+  operationId: v2_broker_integrations_ams_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/integrations/ams/{id}
+  method: patch
+  operationId: v2_broker_integrations_ams_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/integrations/ams/{id}
+  method: delete
+  operationId: v2_broker_integrations_ams_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/integrations/google/dwd
+  method: get
+  operationId: v2_broker_integrations_google_dwd_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/integrations/google/dwd/connect
+  method: post
+  operationId: v2_broker_integrations_google_dwd_connect
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/integrations/google/dwd/{id}
+  method: get
+  operationId: v2_broker_integrations_google_dwd_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/integrations/google/dwd/{id}
+  method: put
+  operationId: v2_broker_integrations_google_dwd_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/integrations/google/dwd/{id}
+  method: patch
+  operationId: v2_broker_integrations_google_dwd_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/integrations/google/dwd/{id}/verify
+  method: post
+  operationId: v2_broker_integrations_google_dwd_verify
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/integrations/google/oauth
+  method: get
+  operationId: v2_broker_integrations_google_oauth_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/integrations/google/oauth/connect
+  method: get
+  operationId: v2_broker_integrations_google_oauth_connect
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/integrations/google/oauth/{id}
+  method: get
+  operationId: v2_broker_integrations_google_oauth_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/integrations/google/oauth/{id}/reconnect
+  method: get
+  operationId: v2_broker_integrations_google_oauth_reconnect
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/integrations/office365
+  method: get
+  operationId: v2_broker_integrations_office365_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/integrations/office365/connect
+  method: get
+  operationId: v2_broker_integrations_office365_connect
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/integrations/office365/individual
+  method: get
+  operationId: v2_broker_integrations_office365_individual_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/integrations/office365/individual/connect
+  method: post
+  operationId: v2_broker_integrations_office365_individual_connect
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/integrations/office365/individual/{id}
+  method: get
+  operationId: v2_broker_integrations_office365_individual_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/integrations/office365/individual/{id}
+  method: delete
+  operationId: v2_broker_integrations_office365_individual_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/integrations/office365/{id}
+  method: get
+  operationId: v2_broker_integrations_office365_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/integrations/office365/{id}/reconnect
+  method: get
+  operationId: v2_broker_integrations_office365_reconnect
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/markets
+  method: get
+  operationId: v2_broker_markets_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/markets
+  method: post
+  operationId: v2_broker_markets_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/markets/available-markets
+  method: get
+  operationId: v2_broker_markets_available_markets
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/markets/broker-submit
+  method: post
+  operationId: v2_broker_markets_broker_submit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/markets/{id}
+  method: get
+  operationId: v2_broker_markets_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/markets/{id}
+  method: put
+  operationId: v2_broker_markets_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/markets/{id}
+  method: patch
+  operationId: v2_broker_markets_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/markets/{id}
+  method: delete
+  operationId: v2_broker_markets_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/markets/{id}/documents/{document_id}/download
+  method: get
+  operationId: v2_broker_markets_documents_download_document
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/office365/webhook
+  method: post
+  operationId: v2_broker_office365_webhook_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/producers
+  method: get
+  operationId: v2_broker_producers_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/producers
+  method: post
+  operationId: v2_broker_producers_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/producers/{id}
+  method: get
+  operationId: v2_broker_producers_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/producers/{id}
+  method: put
+  operationId: v2_broker_producers_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/producers/{id}
+  method: patch
+  operationId: v2_broker_producers_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/producers/{id}
+  method: delete
+  operationId: v2_broker_producers_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/quote-policies
+  method: get
+  operationId: v2_broker_quote-policies_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/quote-policies/csv
+  method: get
+  operationId: v2_broker_quote-policies_export_csv
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/quote-policies/{id}
+  method: get
+  operationId: v2_broker_quote-policies_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/quote-policies/{id}/documents/{document_pk}
+  method: get
+  operationId: v2_broker_quote-policies_get_document
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/quotes
+  method: get
+  operationId: v2_broker_quotes_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/quotes/filter-options
+  method: get
+  operationId: v2_broker_quotes_filter_options
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/quotes/{id}
+  method: get
+  operationId: v2_broker_quotes_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/quotes/{id}
+  method: patch
+  operationId: v2_broker_quotes_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/quotes/{quote_id}/proposal-content/
+  method: get
+  operationId: v2_broker_quotes_proposal-content_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/quotes/{quote_id}/proposal-content/
+  method: put
+  operationId: v2_broker_quotes_proposal-content_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/quotes/{quote_id}/proposal-pdf/
+  method: get
+  operationId: v2_broker_quotes_proposal-pdf_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/storefront
+  method: get
+  operationId: v2_broker_storefront_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/tasks
+  method: get
+  operationId: v2_broker_tasks_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/tasks
+  method: post
+  operationId: v2_broker_tasks_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/tasks/count
+  method: get
+  operationId: v2_broker_tasks_count
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/tasks/{id}
+  method: get
+  operationId: v2_broker_tasks_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/team-users
+  method: get
+  operationId: v2_broker_team-users_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/users
+  method: get
+  operationId: v2_broker_users_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/users/{id}
+  method: get
+  operationId: v2_broker_users_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_id}/attachments
+  method: get
+  operationId: v2_broker_attachments_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_id}/attachments/{id}
+  method: get
+  operationId: v2_broker_attachments_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_id}/attachments/{id}/download
+  method: get
+  operationId: v2_broker_attachments_download
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_id}/emails
+  method: get
+  operationId: v2_broker_emails_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_id}/emails/{id}
+  method: get
+  operationId: v2_broker_emails_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/application/{application_pk}/visible-tasks
+  method: get
+  operationId: v2_broker_application_visible-tasks_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/application/{application_pk}/visible-tasks/{id}
+  method: get
+  operationId: v2_broker_application_visible-tasks_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/applications
+  method: get
+  operationId: v2_broker_applications_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/applications
+  method: post
+  operationId: v2_broker_applications_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/applications/{application_pk}/coverages
+  method: get
+  operationId: v2_broker_applications_coverages_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/applications/{application_pk}/indications
+  method: get
+  operationId: v2_broker_applications_indications_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/applications/{application_pk}/indications
+  method: post
+  operationId: v2_broker_applications_indications_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/applications/{application_pk}/supplementary-documents
+  method: get
+  operationId: v2_broker_applications_supplementary-documents_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/applications/{application_pk}/supplementary-documents
+  method: post
+  operationId: v2_broker_applications_supplementary-documents_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/applications/{application_pk}/supplementary-documents/{id}
+  method: get
+  operationId: v2_broker_applications_supplementary-documents_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/applications/{application_pk}/supplementary-documents/{id}
+  method: delete
+  operationId: v2_broker_applications_supplementary-documents_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/applications/{application_pk}/supplementary-documents/{id}/download
+  method: get
+  operationId: v2_broker_applications_supplementary-documents_download
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/applications/{id}
+  method: get
+  operationId: v2_broker_applications_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/applications/{id}
+  method: put
+  operationId: v2_broker_applications_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/applications/{id}
+  method: patch
+  operationId: v2_broker_applications_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/applications/{id}
+  method: delete
+  operationId: v2_broker_applications_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/applications/{id}/approve
+  method: post
+  operationId: v2_broker_applications_approve
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/applications/{id}/copy
+  method: post
+  operationId: v2_broker_applications_copy_application
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/applications/{id}/generate-questions
+  method: post
+  operationId: v2_broker_applications_generate_questions
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/applications/{id}/pre-filled-forms
+  method: post
+  operationId: v2_broker_applications_add_prefilled_forms
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/applications/{id}/pre-filled-forms/{sessions_pk}
+  method: get
+  operationId: v2_broker_applications_get_prefilled_forms
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/applications/{id}/relevant-carriers
+  method: get
+  operationId: v2_broker_applications_get_relevant_carriers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/applications/{id}/start
+  method: post
+  operationId: v2_broker_applications_start_application
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/applications/{id}/submit
+  method: post
+  operationId: v2_broker_applications_submit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/binders
+  method: get
+  operationId: v2_broker_binders_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/binders/{id}
+  method: get
+  operationId: v2_broker_binders_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/binders/{id}/documents/{document_pk}
+  method: get
+  operationId: v2_broker_binders_get_document
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/cios
+  method: get
+  operationId: v2_broker_cios_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/cios/{id}
+  method: get
+  operationId: v2_broker_cios_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/cios/{id}/documents/{document_pk}
+  method: get
+  operationId: v2_broker_cios_get_document
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/coverage-terms
+  method: get
+  operationId: v2_broker_coverage-terms_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/coverage-terms
+  method: post
+  operationId: v2_broker_coverage-terms_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/coverage-terms/{id}
+  method: get
+  operationId: v2_broker_coverage-terms_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/coverages
+  method: get
+  operationId: v2_broker_coverages_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/coverages/{coverage_application_pk}/analyze-quotes
+  method: get
+  operationId: v2_broker_coverages_analyze-quotes_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/coverages/{coverage_application_pk}/analyze-quotes/{id}
+  method: get
+  operationId: v2_broker_coverages_analyze-quotes_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/coverages/{coverage_application_pk}/chat
+  method: get
+  operationId: v2_broker_coverages_chat_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/coverages/{coverage_application_pk}/chat
+  method: post
+  operationId: v2_broker_coverages_chat_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/coverages/{coverage_application_pk}/chat/uploaded-files
+  method: get
+  operationId: v2_broker_coverages_chat_uploaded_files
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/coverages/{coverage_application_pk}/quotes
+  method: get
+  operationId: v2_broker_coverages_quotes_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/coverages/{coverage_application_pk}/quotes/create
+  method: post
+  operationId: v2_broker_coverages_quotes_create_quote
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/coverages/{coverage_application_pk}/quotes/overview
+  method: get
+  operationId: v2_broker_coverages_quotes_get_overview
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/coverages/{coverage_application_pk}/quotes/{id}
+  method: get
+  operationId: v2_broker_coverages_quotes_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/coverages/{coverage_application_pk}/quotes/{id}/files/{file_pk}
+  method: get
+  operationId: v2_broker_coverages_quotes_get_file
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/coverages/{coverage_application_pk}/quotes/{id}/surplus-files/{file_pk}
+  method: get
+  operationId: v2_broker_coverages_quotes_get_surplus_file
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/coverages/{id}
+  method: get
+  operationId: v2_broker_coverages_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/coverages/{id}
+  method: put
+  operationId: v2_broker_coverages_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/coverages/{id}
+  method: patch
+  operationId: v2_broker_coverages_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/coverages/{id}/accord-forms/{accord_form_pk}/acroform-pdf
+  method: get
+  operationId: v2_broker_coverages_accord-forms_accord_form_acroform_pdf
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/coverages/{id}/accord-forms/{accord_form_pk}/mapping-file
+  method: get
+  operationId: v2_broker_coverages_accord-forms_accord_form_mapping_file
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/coverages/{id}/answer-with-ai
+  method: post
+  operationId: v2_broker_coverages_answer_with_ai
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/coverages/{id}/answer-with-ai/{task_id}
+  method: get
+  operationId: v2_broker_coverages_answer_with_ai_result
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/coverages/{id}/approve
+  method: post
+  operationId: v2_broker_coverages_approve
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/coverages/{id}/submit
+  method: post
+  operationId: v2_broker_coverages_submit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/coverages/{id}/supplemental-application-pdf
+  method: get
+  operationId: v2_broker_coverages_supplemental_application_pdf
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/indications
+  method: get
+  operationId: v2_broker_indications_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/indications/create
+  method: post
+  operationId: v2_broker_indications_create_quote
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/indications/overview
+  method: get
+  operationId: v2_broker_indications_get_overview
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/indications/{id}
+  method: get
+  operationId: v2_broker_indications_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/indications/{id}/files/{file_pk}
+  method: get
+  operationId: v2_broker_indications_get_file
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/indications/{id}/surplus-files/{file_pk}
+  method: get
+  operationId: v2_broker_indications_get_surplus_file
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/insurance-invoices/{insurance_invoice_pk}/premium-finance-plans/
+  method: get
+  operationId: v2_broker_insurance-invoices_premium-finance-plans_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/insurance-invoices/{insurance_invoice_pk}/premium-finance-plans/
+  method: post
+  operationId: v2_broker_insurance-invoices_premium-finance-plans_create
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/policy-chat
+  method: get
+  operationId: v2_broker_policy-chat_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/policy-chat
+  method: post
+  operationId: v2_broker_policy-chat_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/policy-chat/uploaded-files
+  method: get
+  operationId: v2_broker_policy-chat_uploaded_files
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/premium-finance-plans/{id}/
+  method: get
+  operationId: v2_broker_premium-finance-plans_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/premium-finance-plans/{id}/cancel/
+  method: post
+  operationId: v2_broker_premium-finance-plans_cancel
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/quote-policies
+  method: get
+  operationId: v2_broker_quote-policies_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quote-policies/{id}
+  method: get
+  operationId: v2_broker_quote-policies_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quote-policies/{id}/documents/{document_pk}
+  method: get
+  operationId: v2_broker_quote-policies_get_document
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quote-policies/{id}/renew
+  method: post
+  operationId: v2_broker_quote-policies_renew_application
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/quote-policies/{quote_policy_pk}/chat
+  method: get
+  operationId: v2_broker_quote-policies_chat_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quote-policies/{quote_policy_pk}/chat
+  method: post
+  operationId: v2_broker_quote-policies_chat_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/quote-policies/{quote_policy_pk}/chat/uploaded-files
+  method: get
+  operationId: v2_broker_quote-policies_chat_uploaded_files
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quote-policies/{quote_policy_pk}/policy-check-chat
+  method: get
+  operationId: v2_broker_quote-policies_policy-check-chat_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quote-policies/{quote_policy_pk}/policy-check-chat
+  method: post
+  operationId: v2_broker_quote-policies_policy-check-chat_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/quote-policies/{quote_policy_pk}/policy-check-chat/uploaded-files
+  method: get
+  operationId: v2_broker_quote-policies_policy-check-chat_uploaded_files
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quote-policies/{quote_policy_pk}/policy-check/check
+  method: post
+  operationId: v2_broker_quote-policies_policy-check_check
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/quote-policies/{quote_policy_pk}/policy-check/refresh
+  method: post
+  operationId: v2_broker_quote-policies_policy-check_refresh
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/quote-policies/{quote_policy_pk}/policy-check/status
+  method: get
+  operationId: v2_broker_quote-policies_policy-check_status
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quotes
+  method: get
+  operationId: v2_broker_quotes_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quotes/create
+  method: post
+  operationId: v2_broker_quotes_create_quote
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/quotes/overview
+  method: get
+  operationId: v2_broker_quotes_get_overview
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quotes/{id}
+  method: get
+  operationId: v2_broker_quotes_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quotes/{id}/files/{file_pk}
+  method: get
+  operationId: v2_broker_quotes_get_file
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quotes/{id}/surplus-files/{file_pk}
+  method: get
+  operationId: v2_broker_quotes_get_surplus_file
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quotes/{quote_pk}/bind
+  method: get
+  operationId: v2_broker_quotes_bind_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quotes/{quote_pk}/bind
+  method: post
+  operationId: v2_broker_quotes_bind_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/quotes/{quote_pk}/bind/{id}
+  method: get
+  operationId: v2_broker_quotes_bind_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quotes/{quote_pk}/chat
+  method: get
+  operationId: v2_broker_quotes_chat_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quotes/{quote_pk}/chat
+  method: post
+  operationId: v2_broker_quotes_chat_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/quotes/{quote_pk}/chat/uploaded-files
+  method: get
+  operationId: v2_broker_quotes_chat_uploaded_files
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quotes/{quote_pk}/tasks
+  method: get
+  operationId: v2_broker_quotes_tasks_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quotes/{quote_pk}/tasks
+  method: post
+  operationId: v2_broker_quotes_tasks_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/quotes/{quote_pk}/tasks/notify-insured-requests
+  method: post
+  operationId: v2_broker_quotes_tasks_notify_insured_requests
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/broker/{business_pk}/quotes/{quote_pk}/tasks/{id}
+  method: get
+  operationId: v2_broker_quotes_tasks_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quotes/{quote_pk}/visible-tasks
+  method: get
+  operationId: v2_broker_quotes_visible-tasks_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/quotes/{quote_pk}/visible-tasks/{id}
+  method: get
+  operationId: v2_broker_quotes_visible-tasks_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/tasks
+  method: get
+  operationId: v2_broker_tasks_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/broker/{business_pk}/tasks/{id}
+  method: get
+  operationId: v2_broker_tasks_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/checkout/{id}
+  method: get
+  operationId: v2_checkout_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/coverage-types
+  method: get
+  operationId: v2_coverage-types_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/coverage-types/{id}
+  method: get
+  operationId: v2_coverage-types_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/coverages
+  method: get
+  operationId: v2_coverages_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/coverages/{id}
+  method: get
+  operationId: v2_coverages_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/coverages/{id}
+  method: put
+  operationId: v2_coverages_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/coverages/{id}
+  method: patch
+  operationId: v2_coverages_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/coverages/{id}/collect-signatures
+  method: post
+  operationId: v2_coverages_collect_signatures
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/coverages/{id}/submit
+  method: post
+  operationId: v2_coverages_submit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/herald/webhook
+  method: post
+  operationId: v2_herald_webhook_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/industry-classifications
+  method: get
+  operationId: v2_industry-classifications_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/industry-classifications/herald/{herald_id}
+  method: get
+  operationId: v2_industry-classifications_get_by_herald_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/industry-classifications/{id}
+  method: get
+  operationId: v2_industry-classifications_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/markets/submit
+  method: post
+  operationId: v2_markets_submit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/quotes/{quote_pk}/tasks
+  method: get
+  operationId: v2_quotes_tasks_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/quotes/{quote_pk}/tasks
+  method: post
+  operationId: v2_quotes_tasks_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/quotes/{quote_pk}/tasks/{id}
+  method: get
+  operationId: v2_quotes_tasks_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/quotes/{quote_pk}/visible-tasks
+  method: get
+  operationId: v2_quotes_visible-tasks_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/quotes/{quote_pk}/visible-tasks/{id}
+  method: get
+  operationId: v2_quotes_visible-tasks_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/storefront-agencies/{agency_slug}/brokers/{slug}
+  method: get
+  operationId: v2_storefront-agencies_brokers_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/storefront-agencies/{slug}
+  method: get
+  operationId: v2_storefront-agencies_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/storefront-applications
+  method: post
+  operationId: v2_storefront-applications_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-applications/{id}
+  method: get
+  operationId: v2_storefront-applications_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/storefront-applications/{id}
+  method: put
+  operationId: v2_storefront-applications_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-applications/{id}
+  method: patch
+  operationId: v2_storefront-applications_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-applications/{id}/parameters
+  method: patch
+  operationId: v2_storefront-applications_parameters
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-applications/{id}/pre-filled-forms
+  method: post
+  operationId: v2_storefront-applications_add_prefilled_forms
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-applications/{id}/pre-filled-forms/{sessions_pk}
+  method: get
+  operationId: v2_storefront-applications_get_prefilled_forms
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/storefront-applications/{id}/submit
+  method: post
+  operationId: v2_storefront-applications_submit
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-applications/{storefront_application_pk}/chat
+  method: post
+  operationId: v2_storefront-applications_chat_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-applications/{storefront_application_pk}/sanity-check-ai
+  method: post
+  operationId: v2_storefront-applications_sanity-check-ai_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-applications/{storefront_application_pk}/sanity-check-ai/match
+  method: get
+  operationId: v2_storefront-applications_sanity-check-ai_match
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/storefront-applications/{storefront_application_pk}/sanity-check-ai/{id}
+  method: get
+  operationId: v2_storefront-applications_sanity-check-ai_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/storefront-applications/{storefront_application_pk}/sanity-check-ai/{id}
+  method: put
+  operationId: v2_storefront-applications_sanity-check-ai_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-applications/{storefront_application_pk}/sanity-check-ai/{id}
+  method: patch
+  operationId: v2_storefront-applications_sanity-check-ai_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-applications/{storefront_application_pk}/supplementary-documents
+  method: get
+  operationId: v2_storefront-applications_supplementary-documents_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/storefront-applications/{storefront_application_pk}/supplementary-documents
+  method: post
+  operationId: v2_storefront-applications_supplementary-documents_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-applications/{storefront_application_pk}/supplementary-documents/{id}
+  method: get
+  operationId: v2_storefront-applications_supplementary-documents_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/storefront-applications/{storefront_application_pk}/supplementary-documents/{id}
+  method: delete
+  operationId: v2_storefront-applications_supplementary-documents_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-applications/{storefront_application_pk}/supplementary-documents/{id}/download
+  method: get
+  operationId: v2_storefront-applications_supplementary-documents_download
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/storefront-applications/{storefront_application_pk}/supplementary-questions
+  method: post
+  operationId: v2_storefront-applications_supplementary-questions_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-applications/{storefront_application_pk}/supplementary-questions/{id}
+  method: get
+  operationId: v2_storefront-applications_supplementary-questions_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/storefront-applications/{storefront_application_pk}/supplementary-questions/{id}
+  method: put
+  operationId: v2_storefront-applications_supplementary-questions_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-applications/{storefront_application_pk}/supplementary-questions/{id}
+  method: patch
+  operationId: v2_storefront-applications_supplementary-questions_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-auth
+  method: post
+  operationId: v2_storefront-auth_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-coverage-chat
+  method: post
+  operationId: v2_storefront-coverage-chat_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-coverage-types
+  method: get
+  operationId: v2_storefront-coverage-types_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/storefront-coverage-types/{id}
+  method: get
+  operationId: v2_storefront-coverage-types_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/storefront-sessions
+  method: post
+  operationId: v2_storefront-sessions_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-sessions/{id}/get_value
+  method: post
+  operationId: v2_storefront-sessions_get_value
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefront-sessions/{id}/is_valid
+  method: get
+  operationId: v2_storefront-sessions_is_valid
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/storefront-sessions/{id}/revoke
+  method: post
+  operationId: v2_storefront-sessions_revoke
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v2/storefront-sessions/{id}/set_value
+  method: post
+  operationId: v2_storefront-sessions_set_value
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefronts/{url_slug}
+  method: get
+  operationId: v2_storefronts_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/storefronts/{url_slug}/coverage-recommendations
+  method: post
+  operationId: v2_storefronts_coverage_recommendations
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/storefronts/{url_slug}/coverage-types
+  method: get
+  operationId: v2_storefronts_coverage_types
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/treasury/activity
+  method: get
+  operationId: v2_treasury_activity_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/treasury/balances
+  method: get
+  operationId: v2_treasury_balances_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/treasury/transactions
+  method: get
+  operationId: v2_treasury_transactions_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/treasury/transactions/{id}
+  method: get
+  operationId: v2_treasury_transactions_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/treasury/transactions/{id}/receipt
+  method: get
+  operationId: v2_treasury_transactions_receipt
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wholesalers
+  method: get
+  operationId: wholesalers_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none

@@ -1,0 +1,144 @@
+generated: '2026-08-05'
+method: derived
+source: openapi/1fort-openapi-original.yml
+format: vendor-json
+note: '1Fort does not publish RFC 9457 application/problem+json. Errors are JSON objects declared in the Swagger
+  definitions: GenericError/APIException/ValidationError (DRF-style {detail} / field-keyed validation maps) on the
+  v1 surface, and a nested ErrorResponse {error:{code,message}} envelope on the newer v2 agent endpoints. Both shapes
+  are in production concurrently.'
+envelopes:
+- schema: GenericError
+  used_on: 403 (most v1/v2 endpoints)
+  shape:
+    name: GenericError
+    properties:
+    - detail
+    required: &id002
+    - detail
+- schema: APIException
+  used_on: 404 (object missing or permission-masked)
+  shape:
+    name: APIException
+    properties:
+    - detail
+    required: &id003
+    - detail
+- schema: ValidationError
+  used_on: 400 (invalid input)
+  shape:
+    name: ValidationError
+    properties:
+    - non_field_errors
+    required: []
+- schema: ErrorResponse
+  used_on: 401/409 on v2 broker agent endpoints
+  shape:
+    name: ErrorResponse
+    properties:
+    - error
+    - request_id
+    - timestamp
+    required: &id001
+    - error
+problems:
+- status: 400
+  title: Invalid input.
+  occurrences: 162
+  schemas:
+  - name: ValidationError
+    properties:
+    - non_field_errors
+    required: []
+  - name: ErrorResponse
+    properties:
+    - error
+    - request_id
+    - timestamp
+    required: *id001
+  source_operations:
+  - openapi/1fort-openapi-original.yml#applications_submit
+  - openapi/1fort-openapi-original.yml#ascend_payouts_dispatch_payable
+  - openapi/1fort-openapi-original.yml#auth_google_signin_create
+- status: 401
+  title: Unauthorized - Invalid or missing API key or session token
+  occurrences: 23
+  schemas:
+  - name: ErrorResponse
+    properties:
+    - error
+    - request_id
+    - timestamp
+    required: *id001
+  source_operations:
+  - openapi/1fort-openapi-original.yml#agent_search_businesses
+  - openapi/1fort-openapi-original.yml#agent_get_business
+  - openapi/1fort-openapi-original.yml#agent_get_attachment
+- status: 403
+  title: Authentication credentials were invalid, absent or insufficient.
+  occurrences: 524
+  schemas:
+  - name: GenericError
+    properties:
+    - detail
+    required: *id002
+  - name: APIException
+    properties:
+    - detail
+    required: *id003
+  - name: ErrorResponse
+    properties:
+    - error
+    - request_id
+    - timestamp
+    required: *id001
+  source_operations:
+  - openapi/1fort-openapi-original.yml#ai-customization-types_list
+  - openapi/1fort-openapi-original.yml#ai-customization-types_read
+  - openapi/1fort-openapi-original.yml#analytics_list
+- status: 404
+  title: Object does not exist or caller has insufficient permissions to access it.
+  occurrences: 306
+  schemas:
+  - name: APIException
+    properties:
+    - detail
+    required: *id003
+  - name: ErrorResponse
+    properties:
+    - error
+    - request_id
+    - timestamp
+    required: *id001
+  source_operations:
+  - openapi/1fort-openapi-original.yml#ai-customization-types_read
+  - openapi/1fort-openapi-original.yml#applications_quotes_read
+  - openapi/1fort-openapi-original.yml#applications_read
+- status: 409
+  title: Conflict - Email already in terminal state
+  occurrences: 3
+  schemas:
+  - name: ErrorResponse
+    properties:
+    - error
+    - request_id
+    - timestamp
+    required: *id001
+  source_operations:
+  - openapi/1fort-openapi-original.yml#agent_update_email
+  - openapi/1fort-openapi-original.yml#agent_create_business_from_profile
+  - openapi/1fort-openapi-original.yml#agent_link_profile_to_business
+- status: 500
+  title: Internal server error.
+  occurrences: 574
+  schemas: []
+  source_operations:
+  - openapi/1fort-openapi-original.yml#ai-customization-types_list
+  - openapi/1fort-openapi-original.yml#ai-customization-types_read
+  - openapi/1fort-openapi-original.yml#analytics_list
+observed_codes:
+  '400': 162
+  '401': 23
+  '403': 524
+  '404': 306
+  '409': 3
+  '500': 574

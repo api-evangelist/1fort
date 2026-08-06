@@ -1,0 +1,67 @@
+generated: '2026-08-05'
+method: searched
+probe: true
+source: https://security.1fort.com/
+url: https://security.1fort.com/
+platform: SafeBase (Drata)
+public_security_page: https://1fort.ai/security
+
+certifications:
+- SOC 2 Type II
+- HIPAA
+- CCPA
+
+certification_detail:
+- name: SOC 2 Type II
+  status: attested
+  report: request-gated on the trust center
+- name: HIPAA
+  status: claimed
+- name: CCPA
+  status: claimed
+
+documents:
+- name: SOC 2 Report
+  access: request
+- name: Pentest Report
+  access: request
+- name: Network Diagram
+  access: request
+- name: Cyber Insurance documentation
+  access: request
+access_gate: >-
+  Documents require an access request through the SafeBase portal ("We can provide completed
+  questionnaires upon request"). No NDA terms or subprocessor list are published anonymously.
+
+control_families:
+  product_security: [Audit logging, Data security, Multi-factor authentication]
+  data_security: [Access monitoring, Data backups, Encryption at rest]
+  application_security: [Credential management, Secure development training, SDLC]
+  access_control: [Data access, Logging, Password security]
+  infrastructure: [Status monitoring, Amazon Web Services, BC/DR]
+  network_security: [Data loss prevention, DNSSEC, Firewall]
+  endpoint_security: [Disk encryption]
+  corporate_security: [Asset management, Email protection, Employee training]
+
+stated_practices:
+  encryption: at rest and in transit using "known strong protocols and ciphers"
+  mfa: phishing-resistant hardware via WebAuthn
+  architecture: Zero Trust, remote-first, cloud-native on AWS
+  ddos: mitigation at application and network layers
+  testing: internal and third-party red team testing
+third_party_rating: SecurityScorecard grade A (displayed on the trust center)
+
+discrepancy:
+  claim: The trust center lists DNSSEC under network security controls.
+  observed: >-
+    Live DNS probe (security/1fort-domain-security.yml) found no DNSKEY on either 1fort.ai or
+    1fort.com — DNSSEC is not enabled on the public domains — and neither domain publishes a CAA
+    record. The DNSSEC control may apply to internal corporate DNS rather than the public zones.
+
+evidence:
+- source: https://security.1fort.com/
+  status: 200
+  keywords: [soc 2, hipaa, ccpa, pentest report, trust center]
+- source: https://1fort.ai/security
+  status: 200
+  keywords: [soc 2 type ii, ccpa, hipaa, webauthn, aws]

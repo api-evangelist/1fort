@@ -1,0 +1,40 @@
+generated: '2026-08-05'
+method: generated
+source: openapi/1fort-openapi-original.yml
+note: >-
+  Packaged agent operating instructions for the four marquee flows of the 1Fort API. Every step is
+  grounded in an operationId verified to exist in the published Swagger 2.0 document (574 operations);
+  none were invented. 1Fort publishes no AGENTS.md or provider-authored skills — probed 1fort.ai,
+  api.1fort.com and help.1fort.com.
+
+skills:
+- file: 1fort-submit-application-for-quotes.md
+  name: Submit a commercial insurance application for quotes
+  api: openapi/1fort-openapi-original.yml
+  operations: [v2_broker_clients_list, v2_broker_applications_create,
+    v2_broker_applications_start_application, v2_broker_applications_generate_questions,
+    v2_broker_applications_add_prefilled_forms, v2_broker_applications_coverages_list,
+    v2_broker_coverages_answer_with_ai, v2_broker_coverages_answer_with_ai_result,
+    v2_broker_applications_get_relevant_carriers, v2_broker_coverages_submit,
+    v2_broker_applications_submit, v2_broker_applications_approve]
+- file: 1fort-quote-to-bind-and-proposal.md
+  name: Compare quotes, build the proposal, and bind
+  api: openapi/1fort-openapi-original.yml
+  operations: [v2_broker_quotes_list, v2_broker_quotes_read, v2_broker_quotes_tasks_list,
+    v2_broker_quotes_tasks_create, v2_broker_quotes_proposal-content_list,
+    v2_broker_quotes_proposal-content_update, v2_broker_quotes_proposal-pdf_list,
+    v2_applications_download_insurance_proposal_pdf, v2_broker_quotes_bind_create,
+    v2_broker_quotes_bind_read, v2_broker_binders_list, v2_broker_binders_read]
+- file: 1fort-agent-runtime-autofill.md
+  name: Drive the 1Fort agent runtime to resolve a business and autofill a draft quote
+  api: openapi/1fort-openapi-original.yml
+  operations: [v2_broker_agent_businesses_find_list, v2_broker_agent_businesses_create,
+    v2_broker_agent_businesses_update_create, v2_broker_agent_sessions_files_list,
+    v2_broker_agent_sessions_files_content_list, v2_broker_agent_quotes_read,
+    v2_broker_agent_quotes_fill_create]
+- file: 1fort-billing-and-renewal.md
+  name: Reconcile billing and renew a policy
+  api: openapi/1fort-openapi-original.yml
+  operations: [v2_billing_payments_stats, v2_billing_payments_list, v2_billing_payments_read,
+    v2_billing_payments_stripe_receipt, v2_billing_refunds_list, v2_broker_quote-policies_list,
+    v2_broker_quote-policies_read, v2_broker_quote-policies_renew_application]

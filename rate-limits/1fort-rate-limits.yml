@@ -1,0 +1,46 @@
+generated: '2026-08-05'
+method: derived
+source: openapi/1fort-openapi-original.yml
+docs: https://api.1fort.com/api-docs
+note: >-
+  1Fort publishes no rate-limit page. The only quotas stated anywhere on the public surface are four
+  prose "**Rate limit:** 10 requests per minute" lines inside operation descriptions in the Swagger
+  document, all on the invite/validate flow. No 429 response is declared on any of the 574 operations
+  and no RateLimit-* / X-RateLimit-* / Retry-After headers appear in the spec, so a client has no
+  machine-readable way to observe remaining quota.
+
+signalling:
+  headers: []
+  status_429_declared: false
+  retry_after: false
+
+limits:
+  - operation: openapi/1fort-openapi-original.yml#invite_accept_accept_business_user
+    method: POST
+    path: /invite/accept/email
+    limit_count: 10
+    limit_interval: minute
+    source: operation description
+  - operation: openapi/1fort-openapi-original.yml#invite_accept_accept_business_user_google
+    method: POST
+    path: /invite/accept/google
+    limit_count: 10
+    limit_interval: minute
+    source: operation description
+  - operation: openapi/1fort-openapi-original.yml#invite_accept_accept_business_user_office_365
+    method: POST
+    path: /invite/accept/office-365
+    limit_count: 10
+    limit_interval: minute
+    source: operation description
+  - operation: openapi/1fort-openapi-original.yml#invite_validate_create
+    method: POST
+    path: /invite/validate
+    limit_count: 10
+    limit_interval: minute
+    source: operation description
+
+plan_limits: null
+gap: >-
+  Documented for 4 of 574 operations (0.7%). The remaining 570 operations, including every quoting,
+  binding and payment operation, have no published limit.
