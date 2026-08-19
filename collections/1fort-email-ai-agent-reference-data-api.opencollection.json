@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Email AI Agent - Reference Data API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Email AI Agent - Reference Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Carriers (OpenSearch)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/carriers/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nExecute an OpenSearch query against the carrier index.\n\nThis is faster than /match as it bypasses embeddings. The agent constructs\nthe query directly using OpenSearch Query DSL.\n\n**Example - Fuzzy name search**:\n```json\n{\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\"match\": {\"name\": {\"query\": \"Liberty Mutual\", \"fuzziness\": \"AUTO\"}}}\n      ],\n      \"filter\": [\n        {\"term\": {\"is_active\": true}}\n      ]\n    }\n  },\n  \"size\": 10\n}\n```\n\n**Example - Exact state filter**:\n```json\n{\n  \"query"
+        },
+        {
+          "info": {
+            "name": "Search Coverage Types (OpenSearch)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/coverage-types/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nExecute an OpenSearch query against the coverage type (ProductLine) index.\n\n**Example - Name search**:\n```json\n{\n  \"query\": {\n    \"bool\": {\n      \"must\": [{\"match\": {\"display_name\": {\"query\": \"Cyber\", \"fuzziness\": \"AUTO\"}}}],\n      \"filter\": [{\"term\": {\"is_active\": true}}]\n    }\n  },\n  \"size\": 10\n}\n```\n\n**Example - Exact code match**:\n```json\n{\n  \"query\": {\n    \"term\": {\"code\": \"CYBER\"}\n  }\n}\n```\n\n**Index Fields**:\n- `display_name` (text, boosted): Display name (e.g., \"Cyber Liability\")\n- `code"
+        },
+        {
+          "info": {
+            "name": "Search Wholesalers/MGAs (OpenSearch)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/wholesalers/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nExecute an OpenSearch query against the wholesaler index.\n\nThis endpoint searches both wholesalers AND MGAs (same model).\nThe agent determines from context whether to use the ID as wholesaler_id or mga_id.\n\n**Example - Name search**:\n```json\n{\n  \"query\": {\n    \"bool\": {\n      \"must\": [{\"match\": {\"name\": {\"query\": \"CRC Insurance\", \"fuzziness\": \"AUTO\"}}}],\n      \"filter\": [{\"term\": {\"is_active\": true}}]\n    }\n  },\n  \"size\": 10\n}\n```\n\n**Index Fields**:\n- `name` (text, boosted): Wholesaler/MGA name"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

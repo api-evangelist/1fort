@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation broker (v2): applications API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "broker (v2): applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Paginated ViewSet for retrieving applications for the broker.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/applications",
+            "params": [
+              {
+                "name": "insured",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by insured name.\n\nExamples:\n- `?insured=Acme Inc.` - Matches applications with 'Acme Inc.' in insured name\n- `?insured=Acme Inc.,Acme Corp.` - Matches applications with 'Acme Inc.' or 'Acme Corp.' in insured name"
+              },
+              {
+                "name": "insured_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by insured (business) ID. Integer.\n\nExample:\n- `?insured_id=427` - Matches applications for insured 427"
+              },
+              {
+                "name": "coverage_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by coverage type code.\n\nExamples:\n- `?coverage_type=CYBER` - Matches applications with a CYBER coverage\n- `?coverage_type=CYBER,GENERAL_LIABILITY` - Matches applications with CYBER or GENERAL_LIABILITY coverages"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by status.\n\nExamples:\n- `?status=in_progress` - Matches in-progress applications\n- `?status=in_progress,submitted` - Matches in-progress or submitted applications"
+              },
+              {
+                "name": "agent",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by assigned team member.\n\nExamples:\n- `?agent=123` - Matches applications where agent id 123 is assigned\n- `?agent=123,456` - Matches applications where agent id 123 or 456 is assigned"
+              },
+              {
+                "name": "submission_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by submission type. Supports comma-separated values.\n\nAvailable values:\n- `NEW` - New business submissions\n- `RENEWAL` - Renewal submissions\n- `OTHER` - Other submission types\n\nExamples:\n- `?submission_type=NEW` - Matches new business submissions\n- `?submission_type=NEW,RENEWAL` - Matches new or renewal submissions"
+              },
+              {
+                "name": "effective_date_min",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by minimum effective date (inclusive). Use ISO 8601 date format.\n\nExamples:\n- `?effective_date_min=2024-01-01` - Matches applications with effective date on or after January 1, 2024"
+              },
+              {
+                "name": "effective_date_max",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by maximum effective date (inclusive). Use ISO 8601 date format.\n\nExamples:\n- `?effective_date_max=2024-12-31` - Matches applications with effective date on or before December 31, 2024"
+              },
+              {
+                "name": "exclude_source",
+                "value": "",
+                "type": "query",
+                "description": "exclude_source"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Each row represents one Application with aggregated counts and markets\nrolled up across its child CoverageApplications.\n\nSupports Filtering By:\n- insured\n- insured_id\n- coverage_type\n- agent\n- status\n- submission_type\n- effective_date_min\n- effective_date_max\n\nSupports Searching By:\n- insured"
+        },
+        {
+          "info": {
+            "name": "Paginated ViewSet for retrieving applications for the broker.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ]
+          },
+          "docs": "Each row represents one Application with aggregated counts and markets\nrolled up across its child CoverageApplications.\n\nSupports Filtering By:\n- insured\n- insured_id\n- coverage_type\n- agent\n- status\n- submission_type\n- effective_date_min\n- effective_date_max\n\nSupports Searching By:\n- insured"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

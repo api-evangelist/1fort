@@ -1,0 +1,309 @@
+openapi: 3.2.0
+info:
+  title: 1Fort API Documentation Markets - Business API
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: Markets - Business
+  x-displayName: Business
+  description: '**Access:** requires a JWT access token.'
+paths:
+  /v2/markets/submit:
+    parameters: []
+    post:
+      operationId: v2_markets_submit
+      summary: Submit Application to Markets (Business)
+      description: '
+
+        Submit an insurance application to markets as a business user.
+
+
+        This endpoint allows business users to submit their coverage applications
+
+        directly to available markets. Business submissions require:
+
+        1. A valid digital signature on the application
+
+        2. All required application fields to be completed
+
+        3. Authorization to submit on behalf of the business
+
+
+        The submission will trigger the business_completed_application signal
+
+        for downstream processing.
+
+        '
+      responses:
+        '200':
+          description: Submission successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  submissions:
+                    type: array
+                    items:
+                      type: object
+        '400':
+          description: Missing signature or invalid data
+        '403':
+          description: Not authorized to submit this application
+        '404':
+          description: Coverage application not found
+        '500':
+          description: Internal server error.
+      tags:
+      - Markets - Business
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - coverage_application_id
+              type: object
+              properties:
+                coverage_application_id:
+                  description: UUID of the coverage application to submit
+                  type: string
+                  format: uuid
+                market_ids:
+                  description: Optional list of specific market UUIDs to submit to
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+        required: true
+components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

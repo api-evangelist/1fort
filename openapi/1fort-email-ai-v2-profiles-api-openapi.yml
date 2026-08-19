@@ -1,0 +1,1389 @@
+openapi: 3.2.0
+info:
+  title: '1Fort API Documentation email_ai (v2): profiles API'
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: 'email_ai (v2): profiles'
+  x-displayName: Profiles
+  description: '**Access:** requires a JWT access token.'
+paths:
+  /v2/broker/agent/profiles/schema:
+    parameters: []
+    get:
+      operationId: v2_broker_agent_profiles_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/search/schema:
+    parameters: []
+    get:
+      operationId: v2_broker_agent_profiles_search_schema_list
+      description: Return OpenSearch query schema.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{id}/create-business/schema:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_create-business_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{id}/link-business/schema:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_link-business_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{id}/link-email/schema:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_link-email_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{id}/schema:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{profile_pk}/binders:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_binders_list
+      description: List entities with optional filters.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Binders
+    post:
+      operationId: v2_broker_agent_profiles_binders_create
+      description: Create a new binder.
+      responses:
+        '201':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: Create Binder
+  /v2/broker/agent/profiles/{profile_pk}/binders/schema:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_binders_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{profile_pk}/binders/search:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: v2_broker_agent_profiles_binders_search
+      description: Search entities with POST body filters.
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: Search
+  /v2/broker/agent/profiles/{profile_pk}/binders/search/schema:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_binders_search_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{profile_pk}/binders/{id}:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_binders_read
+      description: Get a single entity by ID.
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: Retrieve Binder
+    patch:
+      operationId: v2_broker_agent_profiles_binders_partial_update
+      summary: Update an existing binder.
+      description: 'A structured `coverage_term` replaces the binder''s term wholesale;
+
+        `status` round-trips through the legacy vocabulary via normalize_status.'
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+  /v2/broker/agent/profiles/{profile_pk}/cois:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_cois_list
+      description: List entities with optional filters.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List COIs
+    post:
+      operationId: v2_broker_agent_profiles_cois_create
+      description: Create a new certificate of insurance.
+      responses:
+        '201':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: Create COI
+  /v2/broker/agent/profiles/{profile_pk}/cois/schema:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_cois_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{profile_pk}/cois/search:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: v2_broker_agent_profiles_cois_search
+      description: Search entities with POST body filters.
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: Search
+  /v2/broker/agent/profiles/{profile_pk}/cois/search/schema:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_cois_search_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{profile_pk}/cois/{id}:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_cois_read
+      description: Get a single entity by ID.
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: Retrieve COI
+    patch:
+      operationId: v2_broker_agent_profiles_cois_partial_update
+      description: Update an existing entity.
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: Update COI
+  /v2/broker/agent/profiles/{profile_pk}/coverage-applications:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_coverage-applications_list
+      description: List entities with optional filters.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Coverage applications
+    post:
+      operationId: v2_broker_agent_profiles_coverage-applications_create
+      summary: Create a new CoverageApplication with auto-created parent Application.
+      description: Creates both Application and CoverageApplication as a unified entity.
+      responses:
+        '201':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+  /v2/broker/agent/profiles/{profile_pk}/coverage-applications/schema:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_coverage-applications_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{profile_pk}/coverage-applications/search:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: v2_broker_agent_profiles_coverage-applications_search
+      description: Search entities with POST body filters.
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: Search
+  /v2/broker/agent/profiles/{profile_pk}/coverage-applications/search/schema:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_coverage-applications_search_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{profile_pk}/coverage-applications/{id}:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_coverage-applications_read
+      description: Get a single entity by ID.
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: Retrieve Coverage application
+    patch:
+      operationId: v2_broker_agent_profiles_coverage-applications_partial_update
+      description: Update an existing entity.
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: Update Coverage application
+  /v2/broker/agent/profiles/{profile_pk}/entities/search/schema:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_entities_search_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{profile_pk}/invoices:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_invoices_list
+      description: List entities with optional filters.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Invoices
+    post:
+      operationId: v2_broker_agent_profiles_invoices_create
+      summary: Create an insurance invoice with auto-checkout.
+      description: 'If ``herald_quote_id`` is provided, the invoice is built from the
+
+        quote (program/agency fees + CT-derived line items) via
+
+        ``InsuranceInvoiceService.create_from_quote``. Set
+
+        ``auto_calculate_taxes`` to run InsCipher first so tax fees flow
+
+        into the invoice. Without ``herald_quote_id``, a standalone invoice
+
+        is created from the supplied line items.'
+      responses:
+        '201':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+  /v2/broker/agent/profiles/{profile_pk}/invoices/schema:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_invoices_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{profile_pk}/invoices/{id}:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_invoices_read
+      description: Get a single entity by ID.
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: Retrieve Invoice
+    patch:
+      operationId: v2_broker_agent_profiles_invoices_partial_update
+      summary: Update an existing invoice, optionally replacing line items.
+      description: 'Wrapped in @transaction.atomic so that if checkout regeneration
+
+        fails, the invoice/line-item changes are rolled back — preventing
+
+        a stale CheckoutInvoice from pointing to updated totals.'
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+  /v2/broker/agent/profiles/{profile_pk}/invoices/{id}/send-email:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: v2_broker_agent_profiles_invoices_send_email
+      summary: Queue an invoice email send.
+      description: 'Returns 202; the actual delivery is dispatched asynchronously (see
+
+        ``AgentActionService`` on the server side for how queueing and
+
+        delivery are coordinated).'
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+  /v2/broker/agent/profiles/{profile_pk}/invoices/{id}/send-email/schema:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_invoices_send-email_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{profile_pk}/policies:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_policies_list
+      description: List entities with optional filters.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Policies
+    post:
+      operationId: v2_broker_agent_profiles_policies_create
+      description: Create a new policy.
+      responses:
+        '201':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: Create Policy
+  /v2/broker/agent/profiles/{profile_pk}/policies/schema:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_policies_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{profile_pk}/policies/search:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: v2_broker_agent_profiles_policies_search
+      description: Search entities with POST body filters.
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: Search
+  /v2/broker/agent/profiles/{profile_pk}/policies/search/schema:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_policies_search_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{profile_pk}/policies/{id}:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_policies_read
+      description: Get a single entity by ID.
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: Retrieve Policy
+    patch:
+      operationId: v2_broker_agent_profiles_policies_partial_update
+      summary: Update an existing policy.
+      description: 'A structured `coverage_term` replaces the policy''s term wholesale and
+
+        supersedes the flat limit/carrier scalars. Otherwise coverage scalars
+
+        (limit, carrier_id) route to the CoverageTerm; date_issued maps to
+
+        issue_date; the rest are plain columns.'
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+  /v2/broker/agent/profiles/{profile_pk}/quotes:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_quotes_list
+      description: List entities with optional filters.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Quotes
+    post:
+      operationId: v2_broker_agent_profiles_quotes_create
+      summary: Create a new quote with optional structured coverage_term or legacy flat fields.
+      description: 'Post-creation steps (outside atomic block):
+
+        1. Upload attachments (async)
+
+
+        Invoice generation is no longer auto-triggered. The agent must
+
+        create invoices explicitly via POST /profiles/{id}/invoices with
+
+        herald_quote_id set.'
+      responses:
+        '201':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+  /v2/broker/agent/profiles/{profile_pk}/quotes/schema:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_quotes_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{profile_pk}/quotes/search:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: v2_broker_agent_profiles_quotes_search
+      description: Search entities with POST body filters.
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: Search
+  /v2/broker/agent/profiles/{profile_pk}/quotes/search/schema:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_quotes_search_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+  /v2/broker/agent/profiles/{profile_pk}/quotes/{id}:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_quotes_read
+      description: Get a single entity by ID.
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: Retrieve Quote
+    patch:
+      operationId: v2_broker_agent_profiles_quotes_partial_update
+      description: Update an existing entity.
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: Update Quote
+  /v2/broker/agent/profiles/{profile_pk}/quotes/{id}/send-proposal:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: v2_broker_agent_profiles_quotes_send_proposal
+      summary: Queue a proposal email send.
+      description: 'Returns 202; the actual delivery is dispatched asynchronously (see
+
+        ``AgentActionService`` on the server side for how queueing and
+
+        delivery are coordinated).'
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+  /v2/broker/agent/profiles/{profile_pk}/quotes/{id}/send-proposal/schema:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_agent_profiles_quotes_send-proposal_schema_list
+      description: Return the schema for this endpoint.
+      responses:
+        '200':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - 'email_ai (v2): profiles'
+      summary: List Schema
+components:
+  schemas:
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

@@ -1,0 +1,744 @@
+openapi: 3.2.0
+info:
+  title: 1Fort API Documentation Checkout API
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: checkout
+  x-displayName: Checkout
+  description: 'Checkout and payment session endpoints.
+
+
+    **Access:** public; no authentication required.'
+paths:
+  /checkout/invoices:
+    parameters: []
+    get:
+      operationId: checkout_invoices_list
+      summary: Get invoices by IDs for checkout display.
+      description: "Query params:\n    ids: Comma-separated list of invoice UUIDs and/or short ids"
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - checkout
+      security: []
+  /checkout/invoices/payment-intent:
+    parameters: []
+    post:
+      operationId: checkout_invoices_create_payment_intent
+      summary: Create a Stripe PaymentIntent for the given invoices.
+      description: "Request body:\n    invoice_ids: List of invoice UUIDs\n    amounts: Optional list of amounts (in cents) per invoice"
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - checkout
+      security: []
+  /checkout/invoices/search:
+    parameters: []
+    post:
+      operationId: checkout_invoices_search
+      description: 'Storefront Pay Bill: find payable checkout invoices for an active storefront.'
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - checkout
+      security: []
+      summary: Search
+  /checkout/invoices/{id}/pdf:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: checkout_invoices_pdf
+      description: 'Generate and download the invoice PDF for a CheckoutInvoice, or return JSON
+
+        context when ?return_json=true (for debugging).'
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - checkout
+      security: []
+      summary: Pdf
+  /checkout/invoices/{id}/proposal:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: checkout_invoices_proposal
+      summary: 'Generate and stream the insurance proposal PDF for the quote that
+
+        backs this CheckoutInvoice.'
+      description: 'Public counterpart to the broker-authenticated proposal endpoint:
+
+        always regenerates via ``ProposalPDFService`` (executive format) so
+
+        the customer sees the same document brokers download — no reliance
+
+        on a stored ``quote_summary`` file. Returns 404 when the checkout
+
+        invoice has no underlying quote (e.g. carrier-only invoices), so
+
+        the terms-of-use link is only ever rendered when the response is
+
+        guaranteed to be a real PDF.
+
+
+        Throttled via ``CheckoutInvoicePdfThrottle`` because PDF generation
+
+        spawns a node subprocess.'
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - checkout
+      security: []
+  /checkout/invoices/{id}/receipt:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: checkout_invoices_receipt
+      description: 'Generate and download the receipt PDF for a paid CheckoutInvoice, or
+
+        return JSON context when ?return_json=true (for debugging).
+
+
+        Same pdf-generator pipeline as the invoice endpoint (``receipt``
+
+        template). Returns 409 while the invoice is not yet marked paid —
+
+        right after a Stripe payment the webhook may still be in flight, so
+
+        the frontend treats 409 as "try again in a moment".'
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - checkout
+      security: []
+      summary: Receipt
+  /checkout/sessions:
+    parameters: []
+    get:
+      operationId: checkout_sessions_list
+      description: ViewSet for checkout session read operations.
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CheckoutSession'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - checkout
+      security: []
+      summary: List Sessions
+  /checkout/sessions/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this checkout session.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: checkout_sessions_read
+      description: Get a checkout session by ID.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutSession'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - checkout
+      security: []
+      summary: Retrieve Session
+  /checkout/sessions/{id}/stripe-amount:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this checkout session.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    post:
+      operationId: checkout_sessions_stripe_amount
+      description: Set PaymentIntent amount to subtotal or subtotal + processing fee (card/ACH).
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutSession'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - checkout
+      security: []
+      summary: Stripe amount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutSession'
+        required: true
+  /checkout/sessions/{id}/stripe-receipt:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this checkout session.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: checkout_sessions_stripe_receipt
+      summary: On-demand Stripe receipt details for the session's completed payment.
+      description: 'GET /checkout/sessions/{id}/stripe-receipt
+
+
+        Returns receipt_url (Stripe-hosted page) plus the charge fields needed
+
+        to render the receipt in-app. Nothing is stored locally — details are
+
+        fetched from Stripe per request. 404 while no payment has completed
+
+        (or the charge has no receipt yet), so the success page can offer the
+
+        receipt as soon as it exists.'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutSession'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - checkout
+      security: []
+  /checkout/webhook:
+    parameters: []
+    post:
+      operationId: checkout_webhook_create
+      description: Handle incoming Stripe webhook events.
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - checkout
+      security: []
+      summary: Create Webhook
+components:
+  schemas:
+    CheckoutSession:
+      required:
+      - total_amount_cents
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          title: Status
+          type: string
+          enum:
+          - pending
+          - processing
+          - complete
+          - failed
+          - expired
+        stripe_payment_intent_id:
+          title: Stripe payment intent id
+          description: Stripe PaymentIntent ID
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        total_amount_cents:
+          title: Total amount cents
+          description: Total session amount in cents
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        payment_method_types:
+          title: Payment method types
+          description: 'Enabled payment methods: ["card", "us_bank_account"]'
+          type: object
+        applied_checkout_processing_fee_percent:
+          title: Applied checkout processing fee percent
+          description: Card processing fee percent for this checkout session (matches Stripe PaymentIntent surcharge when paying by card). Blank means legacy.
+          type:
+          - string
+          - 'null'
+          format: decimal
+        applied_ach_wire_processing_fee_percent:
+          title: Applied ach wire processing fee percent
+          description: 'ACH/wire processing fee percent for this checkout session. Blank means legacy: derive from broker.'
+          type:
+          - string
+          - 'null'
+          format: decimal
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        completed_at:
+          title: Completed at
+          description: When payment completed
+          type:
+          - string
+          - 'null'
+          format: date-time
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

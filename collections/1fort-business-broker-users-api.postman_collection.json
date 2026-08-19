@@ -1,0 +1,284 @@
+{
+  "item": [
+    {
+      "id": "323c70bf-037c-49fc-8259-243dcfc1debf",
+      "name": "business-broker-users",
+      "description": {
+        "content": "**Access:** requires a JWT access token.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0209ae29-3d4e-4586-a604-812f1633fc25",
+          "name": "Get Business Broker Users",
+          "request": {
+            "name": "Get Business Broker Users",
+            "description": {
+              "content": "\nGet the list of all the broker users in the logged in user's business.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "business-broker-users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7884f769-b48e-42e5-a0bd-5cfbdf44b92b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "business-broker-users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1334,\n  \"results\": [\n    {\n      \"first_name\": \"string\",\n      \"last_name\": \"s\",\n      \"pk\": 4371,\n      \"user_defined_role\": null,\n      \"type\": \"SALES\",\n      \"created_at\": \"1997-01-13T04:26:10.244Z\",\n      \"email\": \"strin\",\n      \"role\": \"Member\",\n      \"status\": \"string\",\n      \"producer_id\": null,\n      \"phone_number\": \"string\",\n      \"primary_workflow_activities\": [\n        \"string\",\n        \"string\"\n      ],\n      \"is_current_user\": false,\n      \"is_storefront_default\": \"string\",\n      \"storefront_id\": \"0b43d20d-aa3d-030c-bbf0-0fcabf11b7d6\",\n      \"storefront_url_slug\": \"string\",\n      \"slug\": \"WR_u\",\n      \"review_submissions_before_submitting\": false,\n      \"auto_submit_renewal_applications\": true,\n      \"renewal_submission_lead_days\": 54,\n      \"renewal_due_date_days\": 17\n    },\n    {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"pk\": 4711,\n      \"user_defined_role\": \"string\",\n      \"type\": \"SERVICE\",\n      \"created_at\": \"2021-10-18T17:00:48.138Z\",\n      \"email\": \"string\",\n      \"role\": \"Member\",\n      \"status\": \"string\",\n      \"producer_id\": null,\n      \"phone_number\": \"string\",\n      \"primary_workflow_activities\": [\n        \"string\",\n        \"string\"\n      ],\n      \"is_current_user\": false,\n      \"is_storefront_default\": \"string\",\n      \"storefront_id\": null,\n      \"storefront_url_slug\": \"string\",\n      \"slug\": \"zJh\",\n      \"review_submissions_before_submitting\": false,\n      \"auto_submit_renewal_applications\": false,\n      \"renewal_submission_lead_days\": 152,\n      \"renewal_due_date_days\": 16\n    }\n  ],\n  \"next\": null,\n  \"previous\": \"http://dwgxRRfHPzFHGOoDYJOJSpL.ughii4FSLzPXkpTCTtQH5J6De4w\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36171f49-f5bf-48d5-bd2f-491e3e0c965a",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "business-broker-users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8770aeb-31bd-42c4-a540-9361373001c1",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "business-broker-users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.1fort.com/apis/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6c86ba86-2210-4dc0-9454-1d7e7b5730eb",
+    "name": "1Fort API Documentation Business Broker Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# 1Fort API\n\nREST API for the 1Fort insurance platform. This document is the authoritative\nmap of the API surface; endpoints are grouped in the sidebar by **app** and\n**version**, and large apps are split into per-resource sub-groups.\n\n## Authentication\n\nAlmost every endpoint requires a **JWT access token**. Send it in the\n`Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may\nalso be presented as an HTTP-only cookie. Endpoints documented with no security\nrequirement are intentionally public (for example sign-in, OTP and storefront\nendpoints).\n\n## Multi-tenancy\n\nResources are scoped to a tenant. Nested routes carry the owning resource id in\nthe path (for example `/v2/broker/{business_pk}/applications`); a token is only\nauthorised for the businesses its user may access. Object-level permissions are\nenforced per endpoint.\n\n## Versioning\n\n`v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`\nendpoints remain documented for compatibility. Endpoints marked **deprecated**\nare scheduled for removal; prefer the documented replacement.\n",
+      "type": "text/plain"
+    }
+  }
+}

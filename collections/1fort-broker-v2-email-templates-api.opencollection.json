@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation broker (v2): email-templates API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "broker (v2): email-templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SendGrid content and message data for the combined multi-coverage\nmanual application underwriter email.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/email-templates/manual-application-multi-coverage-template"
+          },
+          "docs": "Returns the template's latest active version (HTML and subject template)\ntogether with the same ``message_data`` and ``subject`` the combined\nunderwriter email is built from, so the frontend can render the exact\nemail locally.\n\nQuery params:\n- ``application_id``: application UUID (required). The message data is\n  built directly from the application's coverage applications (ordered\n  by creation), so it works before any quotes exist.\n\nThe AI fields (``narrative``, ``description_of_operations``) a"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

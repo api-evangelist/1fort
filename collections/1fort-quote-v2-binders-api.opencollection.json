@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation quote (v2): binders API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "quote (v2): binders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Binders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/binders",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List Binders"
+        },
+        {
+          "info": {
+            "name": "Retrieve Binder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/binders/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Binder."
+              }
+            ]
+          },
+          "docs": "Retrieve Binder"
+        },
+        {
+          "info": {
+            "name": "Get document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/binders/:id/documents/:document_pk",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Binder."
+              },
+              {
+                "name": "document_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get document"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

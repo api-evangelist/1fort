@@ -1,0 +1,216 @@
+{
+  "item": [
+    {
+      "id": "066e036e-970e-447a-acad-115bcf4739ed",
+      "name": "broker (v2): email-templates",
+      "description": {
+        "content": "**Access:** requires a JWT access token.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fec9ca5b-fb64-47b1-b2a9-57e3d086cd35",
+          "name": "SendGrid content and message data for the combined multi-coverage\nmanual application underwriter email.",
+          "request": {
+            "name": "SendGrid content and message data for the combined multi-coverage\nmanual application underwriter email.",
+            "description": {
+              "content": "Returns the template's latest active version (HTML and subject template)\ntogether with the same ``message_data`` and ``subject`` the combined\nunderwriter email is built from, so the frontend can render the exact\nemail locally.\n\nQuery params:\n- ``application_id``: application UUID (required). The message data is\n  built directly from the application's coverage applications (ordered\n  by creation), so it works before any quotes exist.\n\nThe AI fields (``narrative``, ``description_of_operations``) are\ngenerated the same way the send flow does, so responses take a few\nseconds; either key is omitted when generation fails.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "email-templates",
+                "manual-application-multi-coverage-template"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3fad06d9-8530-4d53-817f-9da6da66bd9d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "email-templates",
+                    "manual-application-multi-coverage-template"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "509ae680-a0a5-4005-aa3b-b6d55a9101a9",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "email-templates",
+                    "manual-application-multi-coverage-template"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f15e0c2-8851-4ffb-be14-a6749c805cb3",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "email-templates",
+                    "manual-application-multi-coverage-template"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.1fort.com/apis/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7c0107b3-4e3c-4517-9d36-f2b235a87cb0",
+    "name": "1Fort API Documentation broker (v2): email-templates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# 1Fort API\n\nREST API for the 1Fort insurance platform. This document is the authoritative\nmap of the API surface; endpoints are grouped in the sidebar by **app** and\n**version**, and large apps are split into per-resource sub-groups.\n\n## Authentication\n\nAlmost every endpoint requires a **JWT access token**. Send it in the\n`Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may\nalso be presented as an HTTP-only cookie. Endpoints documented with no security\nrequirement are intentionally public (for example sign-in, OTP and storefront\nendpoints).\n\n## Multi-tenancy\n\nResources are scoped to a tenant. Nested routes carry the owning resource id in\nthe path (for example `/v2/broker/{business_pk}/applications`); a token is only\nauthorised for the businesses its user may access. Object-level permissions are\nenforced per endpoint.\n\n## Versioning\n\n`v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`\nendpoints remain documented for compatibility. Endpoints marked **deprecated**\nare scheduled for removal; prefer the documented replacement.\n",
+      "type": "text/plain"
+    }
+  }
+}

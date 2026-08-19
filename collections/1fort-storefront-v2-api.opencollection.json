@@ -1,0 +1,1015 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation storefront (v2) storefront (v2) API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "storefront (v2)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Public broker user card resolved by agency identifier + broker user ``slug``.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/storefront-agencies/:agency_slug/brokers/:slug",
+            "params": [
+              {
+                "name": "agency_slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "``AllowAny`` (API key optional). Response includes contact fields (``email``,\n``phone_number``) for intentional “contact your agent” storefront UI; the\nresource is not listable without both agency context and user slug.\n\nScoped to non-test agencies. Throttled like other public storefront metadata\n(``StoreFrontAgencyPublicThrottle``)."
+        },
+        {
+          "info": {
+            "name": "Retrieve Storefront agency",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/storefront-agencies/:slug",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "URL-safe identifier derived from domain_name (second-level label). Populated automatically when empty."
+              }
+            ]
+          },
+          "docs": "Resolve a broker agency by URL slug (used with agency subdomains on the storefront host)."
+        },
+        {
+          "info": {
+            "name": "Create Storefront application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new StoreFront."
+        },
+        {
+          "info": {
+            "name": "Retrieve Storefront application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a StoreFront."
+        },
+        {
+          "info": {
+            "name": "Update Storefront application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update Storefront application"
+        },
+        {
+          "info": {
+            "name": "Update Storefront application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a StoreFront Application."
+        },
+        {
+          "info": {
+            "name": "Parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:id/parameters",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update the parameters of a StoreFront Application."
+        },
+        {
+          "info": {
+            "name": "Add prefilled forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:id/pre-filled-forms",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add prefilled forms"
+        },
+        {
+          "info": {
+            "name": "Get prefilled forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:id/pre-filled-forms/:sessions_pk",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "sessions_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get prefilled forms"
+        },
+        {
+          "info": {
+            "name": "Submit a StoreFront Application.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:id/submit",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "The service fans out over every CoverageApplication under the parent\nApplication; successful covapps are marked SUBMITTED, failed covapps\nstay DRAFT and are returned under `failed_coverage_applications` so\nthe client can surface a retry affordance."
+        },
+        {
+          "info": {
+            "name": "Create Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:storefront_application_pk/chat",
+            "params": [
+              {
+                "name": "storefront_application_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "POST /v2/storefront-applications/{id}/chat - send message, get response."
+        },
+        {
+          "info": {
+            "name": "Create a new sanity check request for the storefront application.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:storefront_application_pk/sanity-check-ai",
+            "params": [
+              {
+                "name": "storefront_application_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns existing sanity check if one already exists with matching context hash."
+        },
+        {
+          "info": {
+            "name": "GET /storefront-applications/{storefront_app_id}/sanity-check-ai/match",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:storefront_application_pk/sanity-check-ai/match",
+            "params": [
+              {
+                "name": "storefront_application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns SanityCheckAI rows for the storefront's coverage application\nonly if their stored context_hash equals the recomputed context hash."
+        },
+        {
+          "info": {
+            "name": "ViewSet for AI sanity check on storefront applications.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:storefront_application_pk/sanity-check-ai/:id",
+            "params": [
+              {
+                "name": "storefront_application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this sanity check ai request."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Uses API key authentication (StoreFrontPermission) instead of broker auth.\nResolves coverage_application from the storefront_application_pk URL parameter."
+        },
+        {
+          "info": {
+            "name": "ViewSet for AI sanity check on storefront applications.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:storefront_application_pk/sanity-check-ai/:id",
+            "params": [
+              {
+                "name": "storefront_application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this sanity check ai request."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Uses API key authentication (StoreFrontPermission) instead of broker auth.\nResolves coverage_application from the storefront_application_pk URL parameter."
+        },
+        {
+          "info": {
+            "name": "Update Sanity check AI",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:storefront_application_pk/sanity-check-ai/:id",
+            "params": [
+              {
+                "name": "storefront_application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this sanity check ai request."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update hidden_fields on the sanity check request."
+        },
+        {
+          "info": {
+            "name": "List Supplementary documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:storefront_application_pk/supplementary-documents",
+            "params": [
+              {
+                "name": "storefront_application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "ViewSet for managing supplementary documents for storefront applications."
+        },
+        {
+          "info": {
+            "name": "Create Supplementary document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:storefront_application_pk/supplementary-documents",
+            "params": [
+              {
+                "name": "storefront_application_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "ViewSet for managing supplementary documents for storefront applications."
+        },
+        {
+          "info": {
+            "name": "Retrieve Supplementary document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:storefront_application_pk/supplementary-documents/:id",
+            "params": [
+              {
+                "name": "storefront_application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this application supplementary document."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "ViewSet for managing supplementary documents for storefront applications."
+        },
+        {
+          "info": {
+            "name": "Delete Supplementary document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:storefront_application_pk/supplementary-documents/:id",
+            "params": [
+              {
+                "name": "storefront_application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this application supplementary document."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "ViewSet for managing supplementary documents for storefront applications."
+        },
+        {
+          "info": {
+            "name": "Download",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:storefront_application_pk/supplementary-documents/:id/download",
+            "params": [
+              {
+                "name": "storefront_application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this application supplementary document."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "ViewSet for managing supplementary documents for storefront applications."
+        },
+        {
+          "info": {
+            "name": "Trigger supplementary questions generation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:storefront_application_pk/supplementary-questions",
+            "params": [
+              {
+                "name": "storefront_application_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns an existing non-failed request if one already exists with the same\ncontext hash, otherwise creates a new one and starts processing."
+        },
+        {
+          "info": {
+            "name": "ViewSet for generating supplementary questions for storefront applications via Claude AI.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:storefront_application_pk/supplementary-questions/:id",
+            "params": [
+              {
+                "name": "storefront_application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this supplementary questions request."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Uses StoreFrontPermission (API key auth). Resolves coverage_application from\nthe storefront_application_pk URL parameter."
+        },
+        {
+          "info": {
+            "name": "ViewSet for generating supplementary questions for storefront applications via Claude AI.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:storefront_application_pk/supplementary-questions/:id",
+            "params": [
+              {
+                "name": "storefront_application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this supplementary questions request."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Uses StoreFrontPermission (API key auth). Resolves coverage_application from\nthe storefront_application_pk URL parameter."
+        },
+        {
+          "info": {
+            "name": "Update Supplementary question",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/v2/storefront-applications/:storefront_application_pk/supplementary-questions/:id",
+            "params": [
+              {
+                "name": "storefront_application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this supplementary questions request."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Save user answers to the supplementary questions request (PATCH)."
+        },
+        {
+          "info": {
+            "name": "Exchange a storefront sharable-link token for JWT credentials.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/storefront-auth"
+          },
+          "docs": "Single-use: provisions the applicant's User + BusinessUser on first use;\nonce a BusinessUser exists for the email + business, responds 409 so the\nfrontend routes the applicant through the normal sign-in flow."
+        },
+        {
+          "info": {
+            "name": "Create Storefront coverage chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/storefront-coverage-chat",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "POST /v2/storefront-coverage-chat - general coverage questions."
+        },
+        {
+          "info": {
+            "name": "ViewSet for retrieving coverage types available for storefronts.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/storefront-coverage-types",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns active canonical product lines (those with no `canonical_product_line`\nalias set) that have at least one active carrier product. Aliased rows are\nhidden from callers so the storefront surfaces the new taxonomy only.\nRequires API key authentication only."
+        },
+        {
+          "info": {
+            "name": "ViewSet for retrieving coverage types available for storefronts.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/storefront-coverage-types/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this product line."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns active canonical product lines (those with no `canonical_product_line`\nalias set) that have at least one active carrier product. Aliased rows are\nhidden from callers so the storefront surfaces the new taxonomy only.\nRequires API key authentication only."
+        },
+        {
+          "info": {
+            "name": "Create Storefront session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/storefront-sessions",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Expects a broker StoreFront id in the request data. That is used to create a session."
+        },
+        {
+          "info": {
+            "name": "Get value",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/storefront-sessions/:id/get_value",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get value"
+        },
+        {
+          "info": {
+            "name": "Is valid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/storefront-sessions/:id/is_valid",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Is valid"
+        },
+        {
+          "info": {
+            "name": "Revoke",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/storefront-sessions/:id/revoke",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Revoke"
+        },
+        {
+          "info": {
+            "name": "Set value",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/storefront-sessions/:id/set_value",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Set value"
+        },
+        {
+          "info": {
+            "name": "Retrieve a storefront by URL slug.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/storefronts/:url_slug",
+            "params": [
+              {
+                "name": "url_slug",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "If the slug is an old slug that has been changed, returns the storefront\ndata with an additional `redirect_to_slug` field. The frontend should use\nthis to update the browser URL via router.replace()."
+        },
+        {
+          "info": {
+            "name": "Return coverage recommendations for the storefront's broker.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/storefronts/:url_slug/coverage-recommendations",
+            "params": [
+              {
+                "name": "url_slug",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Accepts a JSON body with context about the prospective business:\n  - brokerSlug (str, optional) — if provided, must match the URL slug; 400 on mismatch\n  - industryClassification (str)\n  - address (object: line1, line2, city, state, postal_code, country_code)\n  - domain (str)\n\nUses Claude Sonnet via OpenRouter to pick the top 3 coverages from the\nbroker's available product lines and return customer-facing explanations.\nReturns 502 if the LLM call fails."
+        },
+        {
+          "info": {
+            "name": "Get the coverage types for the broker who owns the storefront.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/storefronts/:url_slug/coverage-types",
+            "params": [
+              {
+                "name": "url_slug",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "If the slug is an old slug that has been changed, includes `redirect_to_slug`\nin the response for frontend to update the URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

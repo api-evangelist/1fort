@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Email AI Agent - Markets API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Email AI Agent - Markets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Log Market Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/markets/transactions",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nRecord a single agent-driven `markets/upsert` attempt (success or failure).\n\n- On success, `market_id` is required and `error_code`/`error_message` must be omitted.\n- On failure, `error_code` and `error_message` are required and `market_id` must be omitted.\n\nBoth `email_id` and `market_id` (when present) must belong to the session broker.\n\n**Authentication**: Requires API Key + Session Token\n"
+        },
+        {
+          "info": {
+            "name": "Upsert Market",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/markets/upsert",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nCreate or update a broker market for the session broker matched by `(carrier, wholesaler, product_lines)`.\n\nAt least one of `carrier` or `wholesaler` must be provided. `product_lines` must be non-empty.\n\nIf no existing market for the session broker matches the key exactly, a new one is created\nand `201 Created` is returned. If exactly one match is found, it is updated and `200 OK` is\nreturned with the same `id`.\n\nIf multiple rows match the key (data anomaly), `400 Bad Request` is returned — use"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

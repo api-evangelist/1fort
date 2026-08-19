@@ -1,0 +1,1427 @@
+{
+  "item": [
+    {
+      "id": "f3b1c13d-58ba-4152-9fdf-d480fa3a36cb",
+      "name": "insurance (v2)",
+      "description": {
+        "content": "**Access:** requires a JWT access token.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cddb6f61-8a2b-4eba-b3b6-f561d2f9903b",
+          "name": "List Insurance coverage types",
+          "request": {
+            "name": "List Insurance coverage types",
+            "description": {
+              "content": "List and retrieve CoverageType (reference data).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "insurance-coverage-types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eec8ccc1-0687-4672-a08e-58dd2fd7f8b5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "insurance-coverage-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 4772,\n  \"results\": [\n    {\n      \"name\": \"string\",\n      \"code\": \"string\",\n      \"id\": \"08b709e3-e031-9ca1-8305-a0d53e09c2af\",\n      \"is_active\": false,\n      \"description\": \"string\",\n      \"logo\": null\n    },\n    {\n      \"name\": \"string\",\n      \"code\": \"string\",\n      \"id\": \"c910358d-dc77-90c7-7de2-62f1d96547c3\",\n      \"is_active\": false,\n      \"description\": \"string\",\n      \"logo\": null\n    }\n  ],\n  \"next\": \"https://LnLu.nrhoK\",\n  \"previous\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77897e04-7a61-4b22-8830-57b5484d834e",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "insurance-coverage-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a75c86f-b819-454b-9800-636885587ed3",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "insurance-coverage-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf790365-8138-4b3a-aa4b-2e9a08b927a4",
+          "name": "Retrieve Insurance coverage type",
+          "request": {
+            "name": "Retrieve Insurance coverage type",
+            "description": {
+              "content": "List and retrieve CoverageType (reference data).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "insurance-coverage-types",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Coverage Type."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0c7078a2-f5d4-4a8b-a09e-609103b2f24d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "insurance-coverage-types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Coverage Type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"code\": \"string\",\n  \"id\": \"49ae3c03-830d-ca4a-2ce0-7f358a70d44f\",\n  \"is_active\": true,\n  \"description\": \"string\",\n  \"logo\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a53dae46-2406-4c9d-be5d-23244eea6603",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "insurance-coverage-types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Coverage Type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5445b482-4ed8-4d1a-b30e-189fb24a4009",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "insurance-coverage-types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Coverage Type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eefd7574-92f3-42ab-98f0-2245b3924005",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "insurance-coverage-types",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Coverage Type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88b70c13-c292-4e3f-971d-dfd8b77ec0af",
+          "name": "Read + Create coverage terms.",
+          "request": {
+            "name": "Read + Create coverage terms.",
+            "description": {
+              "content": "- GET  /coverage-terms/           — list for this business\n- GET  /coverage-terms/{id}/      — single with full nested tree\n- POST /coverage-terms/           — create with nested lines/limits/deductibles/fees",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                ":business_pk",
+                "coverage-terms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "business_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f14d171b-210b-4876-8629-2e7ca27e1006",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "coverage-terms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 8208,\n  \"results\": [\n    {\n      \"id\": \"fb815cba-5b62-beba-02b1-cc6bc0ab6b21\",\n      \"reference_number\": \"string\",\n      \"source\": \"string\",\n      \"coverages\": [\n        {\n          \"name\": \"string\",\n          \"id\": \"b33a3e0b-30fb-e9e5-8cab-d611962a3936\",\n          \"coverage_type\": {\n            \"name\": \"string\",\n            \"code\": \"string\",\n            \"id\": \"923c22f5-4cf8-f08a-c53f-969f413eadc4\",\n            \"is_active\": true,\n            \"description\": \"string\",\n            \"logo\": null\n          },\n          \"policy_type\": \"admitted\",\n          \"carrier\": {\n            \"name\": \"string\",\n            \"id\": \"f07aade0-5c51-ae58-f4e0-d0e2273d4961\",\n            \"logo\": null,\n            \"am_best_rating\": null,\n            \"domains\": null\n          },\n          \"carrier_am_best_rating\": \"string\",\n          \"underwriter_name\": \"string\",\n          \"underwriter_email\": \"OJoyzFDuVug2Hi@XPVjflqr.yoz\",\n          \"wholesaler\": {\n            \"name\": \"string\",\n            \"id\": \"a040e2e3-4f75-96f4-30e0-a5563ba678a3\",\n            \"logo\": \"https://WVgnh.tjjbX3EmVAQMmA1yLWWlTpNX3yZpMKT65W7JPY-DIdQNEfto4R\",\n            \"is_active\": true,\n            \"is_owned_by_1fort\": true,\n            \"domains\": null\n          },\n          \"mga\": {\n            \"name\": \"string\",\n            \"id\": \"d813af3d-3945-94a8-b4b6-ad4d2b95ea83\",\n            \"logo\": \"http://cbYLQBOlMznyTIIrFFUnNQNqmfkcmar.rczoojU8qdH-DDubgTJS+9iXwhCltdjPv9nz-PO+e\",\n            \"is_active\": true,\n            \"is_owned_by_1fort\": false,\n            \"domains\": null\n          },\n          \"premium\": null,\n          \"minimum_earned_premium\": null,\n          \"participation_percentage\": null,\n          \"commission_rate\": \"string\",\n          \"is_excess\": true,\n          \"waiting_period_hours\": \"string\",\n          \"limits\": [\n            {\n              \"limit_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"limit_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"deductibles\": [\n            {\n              \"deductible_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_percentage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"percentage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"min_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"max_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"deductible_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_percentage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"percentage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"min_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"max_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"fees\": [\n            {\n              \"fee_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"coverage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"fee_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"coverage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"name\": \"string\",\n          \"id\": \"eef313cc-8ef7-4540-28ea-207e65eef122\",\n          \"coverage_type\": {\n            \"name\": \"string\",\n            \"code\": \"strin\",\n            \"id\": \"d4a4d443-c41d-b7cc-59bd-f41c0c601135\",\n            \"is_active\": false,\n            \"description\": \"string\",\n            \"logo\": null\n          },\n          \"policy_type\": \"surplus_lines\",\n          \"carrier\": {\n            \"name\": \"string\",\n            \"id\": \"8b17b7c3-ee27-2535-ae01-adafd0f00441\",\n            \"logo\": \"https://jEPggcAcBazCmpmtvI.gugtuwY81ql3ZCzYIVzVko2RTxi6,x1GPNMWB,FMnhLO.4EOrk\",\n            \"am_best_rating\": null,\n            \"domains\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          \"carrier_am_best_rating\": \"string\",\n          \"underwriter_name\": \"string\",\n          \"underwriter_email\": \"3klPf@OQQzcdgvqOyJUimjAwjkinLCXzX.vd\",\n          \"wholesaler\": {\n            \"name\": \"string\",\n            \"id\": \"ef818794-4b4d-5a87-8b33-9f76ac0f7525\",\n            \"logo\": null,\n            \"is_active\": true,\n            \"is_owned_by_1fort\": false,\n            \"domains\": null\n          },\n          \"mga\": {\n            \"name\": \"string\",\n            \"id\": \"55e3beb0-8d96-eb26-bc03-45fbd19ac46a\",\n            \"logo\": \"http://smjaOZmhd.trldrldU9QkdcTaBdqwx7gHL9-fynIRPrHpxC5PwHjBvqQ,kzxQN9OKag05Tn4.wtNS9R6lK3si\",\n            \"is_active\": false,\n            \"is_owned_by_1fort\": false,\n            \"domains\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          \"premium\": \"string\",\n          \"minimum_earned_premium\": null,\n          \"participation_percentage\": null,\n          \"commission_rate\": null,\n          \"is_excess\": false,\n          \"waiting_period_hours\": \"string\",\n          \"limits\": [\n            {\n              \"limit_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"limit_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"deductibles\": [\n            {\n              \"deductible_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_percentage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"percentage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"min_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"max_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"deductible_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_percentage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"percentage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"min_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"max_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"fees\": [\n            {\n              \"fee_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"coverage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"fee_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"coverage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"fees\": [\n        {\n          \"fee_type\": \"discount\",\n          \"amount\": \"string\",\n          \"id\": \"f0bafa98-411d-962a-bcb7-74dd1039e747\",\n          \"description\": \"string\",\n          \"coverage\": \"3a34d454-d3af-cc3c-8ad8-9bd447eea1ff\"\n        },\n        {\n          \"fee_type\": \"surcharge\",\n          \"amount\": \"string\",\n          \"id\": \"fd5d12a0-09f2-4ff8-9b0f-bb25123140fb\",\n          \"description\": \"string\",\n          \"coverage\": \"9c2cf870-8d86-188a-3e9d-2d440e02695c\"\n        }\n      ],\n      \"forms\": [\n        {\n          \"form_name\": \"string\",\n          \"id\": \"cbaa239b-34ed-531d-3e6e-f95994c96c01\",\n          \"form_number\": \"string\",\n          \"edition_date\": \"string\",\n          \"category\": \"schedule\",\n          \"description\": \"string\",\n          \"order\": 1366,\n          \"coverage\": null\n        },\n        {\n          \"form_name\": \"string\",\n          \"id\": \"88a7564c-b3b1-072d-a9e0-6334e22f88a4\",\n          \"form_number\": \"string\",\n          \"edition_date\": \"string\",\n          \"category\": \"endorsement\",\n          \"description\": \"string\",\n          \"order\": 4299,\n          \"coverage\": \"60543e26-a5c5-2f02-6186-e0df10430cde\"\n        }\n      ],\n      \"exclusions\": [\n        {\n          \"name\": \"string\",\n          \"id\": \"9d811d3c-4147-9fe2-a6b5-4ba98483311e\",\n          \"description\": \"string\",\n          \"coverage\": \"e0766601-ab4c-a7cd-e2ca-41600bddce0d\",\n          \"source_form\": \"de30d1d3-266e-bb63-5ee9-d6bb39744af0\"\n        },\n        {\n          \"name\": \"string\",\n          \"id\": \"32f0b270-27e4-97f9-d112-a97867b829f6\",\n          \"description\": \"string\",\n          \"coverage\": \"6dffb7e4-c184-937e-214c-f4418beac56f\",\n          \"source_form\": null\n        }\n      ],\n      \"sub_limits\": [\n        {\n          \"sub_limit_amount\": \"string\",\n          \"id\": \"66cba1ab-ea38-0b85-d89b-42ed90d7a8f3\",\n          \"limit_type\": \"other\",\n          \"retention_amount\": \"string\",\n          \"description\": \"string\",\n          \"limit\": \"053161cc-2051-cec2-a6c2-064fafcad3de\"\n        },\n        {\n          \"sub_limit_amount\": \"string\",\n          \"id\": \"ff785fc6-9429-d61c-c126-1e1dd223558f\",\n          \"limit_type\": \"other\",\n          \"retention_amount\": \"string\",\n          \"description\": \"string\",\n          \"limit\": null\n        }\n      ],\n      \"created_at\": \"1986-10-25T17:02:46.421Z\"\n    },\n    {\n      \"id\": \"109bab2e-5513-3f1f-4bd4-57e57cc2ea19\",\n      \"reference_number\": \"string\",\n      \"source\": \"string\",\n      \"coverages\": [\n        {\n          \"name\": \"string\",\n          \"id\": \"36152b59-d771-a4c2-ffb3-9c0d043a0217\",\n          \"coverage_type\": {\n            \"name\": \"string\",\n            \"code\": \"string\",\n            \"id\": \"eab9267d-087d-98c1-0eae-ebd1f42af88d\",\n            \"is_active\": false,\n            \"description\": \"string\",\n            \"logo\": \"https://AqCaSeamxfolbjHhLWJuqN.udck+cBKJ0xN\"\n          },\n          \"policy_type\": \"admitted\",\n          \"carrier\": {\n            \"name\": \"string\",\n            \"id\": \"36f0b1fc-99b1-7012-219f-8ef6e0fc8969\",\n            \"logo\": \"http://JouyQkraPFlQITVWSnUpqn.ddxA71ZbgtGeytlRWPNMUaOGqsKRcCH\",\n            \"am_best_rating\": \"string\",\n            \"domains\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          \"carrier_am_best_rating\": \"string\",\n          \"underwriter_name\": \"string\",\n          \"underwriter_email\": \"ZS4G3Vw6Ty5Z@lM.cts\",\n          \"wholesaler\": {\n            \"name\": \"string\",\n            \"id\": \"e7e1ca2f-6189-45a0-af8d-1d3d100da4ec\",\n            \"logo\": null,\n            \"is_active\": true,\n            \"is_owned_by_1fort\": false,\n            \"domains\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          \"mga\": {\n            \"name\": \"string\",\n            \"id\": \"29084784-c991-dafc-59b1-68aae8ac123c\",\n            \"logo\": \"http://qYTvIbvAPVlzUUOPQoDxwByrsohAittxq.wjbUauXHMBdKJMyueDMukIYNliBf9Tt\",\n            \"is_active\": false,\n            \"is_owned_by_1fort\": false,\n            \"domains\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          \"premium\": \"string\",\n          \"minimum_earned_premium\": null,\n          \"participation_percentage\": \"string\",\n          \"commission_rate\": null,\n          \"is_excess\": true,\n          \"waiting_period_hours\": null,\n          \"limits\": [\n            {\n              \"limit_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"limit_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"deductibles\": [\n            {\n              \"deductible_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_percentage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"percentage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"min_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"max_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"deductible_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_percentage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"percentage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"min_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"max_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"fees\": [\n            {\n              \"fee_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"coverage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"fee_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"coverage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"name\": \"string\",\n          \"id\": \"8f6a2022-f144-b02c-7f8b-ebaaefa5fcd3\",\n          \"coverage_type\": {\n            \"name\": \"string\",\n            \"code\": \"string\",\n            \"id\": \"fb95803c-8546-361e-389c-f57c4aba038b\",\n            \"is_active\": true,\n            \"description\": \"string\",\n            \"logo\": null\n          },\n          \"policy_type\": \"admitted\",\n          \"carrier\": {\n            \"name\": \"string\",\n            \"id\": \"0d3ebae6-c7b7-76a8-e8d8-0408237c76b4\",\n            \"logo\": null,\n            \"am_best_rating\": null,\n            \"domains\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          \"carrier_am_best_rating\": \"string\",\n          \"underwriter_name\": \"string\",\n          \"underwriter_email\": \"nGJX7hCa@YkJvnVwjoTPPwEHto.uzm\",\n          \"wholesaler\": {\n            \"name\": \"string\",\n            \"id\": \"e7a62612-5d54-218c-43d2-5e89a73a5bc0\",\n            \"logo\": null,\n            \"is_active\": true,\n            \"is_owned_by_1fort\": true,\n            \"domains\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          \"mga\": {\n            \"name\": \"string\",\n            \"id\": \"b5700267-4ec6-46bb-e291-9755abd46bc2\",\n            \"logo\": null,\n            \"is_active\": true,\n            \"is_owned_by_1fort\": true,\n            \"domains\": null\n          },\n          \"premium\": \"string\",\n          \"minimum_earned_premium\": \"string\",\n          \"participation_percentage\": \"string\",\n          \"commission_rate\": \"string\",\n          \"is_excess\": true,\n          \"waiting_period_hours\": \"string\",\n          \"limits\": [\n            {\n              \"limit_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"limit_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"deductibles\": [\n            {\n              \"deductible_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_percentage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"percentage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"min_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"max_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"deductible_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"is_percentage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"percentage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"min_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"max_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"fees\": [\n            {\n              \"fee_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"coverage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"fee_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"coverage\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"fees\": [\n        {\n          \"fee_type\": \"platform_fee\",\n          \"amount\": \"string\",\n          \"id\": \"2b147bff-7644-e421-6468-77c15f82e946\",\n          \"description\": \"string\",\n          \"coverage\": \"fe164c31-6293-9a79-ec52-13312316e2e1\"\n        },\n        {\n          \"fee_type\": \"surcharge\",\n          \"amount\": \"string\",\n          \"id\": \"e182957d-176c-a9fa-06b3-db6046876fe6\",\n          \"description\": \"string\",\n          \"coverage\": null\n        }\n      ],\n      \"forms\": [\n        {\n          \"form_name\": \"string\",\n          \"id\": \"aa13e5d5-ea17-86d5-5d10-9b916b40b233\",\n          \"form_number\": \"string\",\n          \"edition_date\": \"string\",\n          \"category\": \"regulatory\",\n          \"description\": \"string\",\n          \"order\": 428,\n          \"coverage\": null\n        },\n        {\n          \"form_name\": \"string\",\n          \"id\": \"22c1c228-6de5-f7c1-ff17-f1fd3201404d\",\n          \"form_number\": \"string\",\n          \"edition_date\": \"string\",\n          \"category\": \"condition\",\n          \"description\": \"string\",\n          \"order\": 5356,\n          \"coverage\": \"91cae862-ad2c-dc8c-a63a-334f60983bdf\"\n        }\n      ],\n      \"exclusions\": [\n        {\n          \"name\": \"string\",\n          \"id\": \"a04d24c0-5138-82d2-3b31-e161b6a610be\",\n          \"description\": \"string\",\n          \"coverage\": null,\n          \"source_form\": null\n        },\n        {\n          \"name\": \"string\",\n          \"id\": \"ec047052-d1bd-8621-12a1-a441ec4900e6\",\n          \"description\": \"string\",\n          \"coverage\": \"a99d3191-7c03-962f-c3c4-bba8c753fd3a\",\n          \"source_form\": \"a99986b9-cb06-0810-faaf-43cad7f58f36\"\n        }\n      ],\n      \"sub_limits\": [\n        {\n          \"sub_limit_amount\": \"string\",\n          \"id\": \"a51487b8-c282-4c0c-e777-f9713b0a7c5f\",\n          \"limit_type\": \"sub_limit\",\n          \"retention_amount\": null,\n          \"description\": \"string\",\n          \"limit\": \"8d683f64-e0e4-2929-067d-76607fe362c7\"\n        },\n        {\n          \"sub_limit_amount\": \"string\",\n          \"id\": \"3e3bf32a-39fa-6908-0287-4be355ee8a38\",\n          \"limit_type\": \"inner_limit\",\n          \"retention_amount\": null,\n          \"description\": \"string\",\n          \"limit\": \"62d22a3f-78b2-cbca-ef2d-fb88a85657c5\"\n        }\n      ],\n      \"created_at\": \"1970-08-28T05:04:25.657Z\"\n    }\n  ],\n  \"next\": \"https://VSdbIZbXqXMkfa.whW3a2Jx3kBewrZ95dxm313c3FJTuZYRkIz6sprJAtEXlXgFWOIpgTn.a1x7t5\",\n  \"previous\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4423386-5c8f-421c-a3da-d2edd51ef58a",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "coverage-terms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "052dbdd3-5fcb-43db-a99b-e59c5a3fd9d0",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "coverage-terms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e8882f7-bb55-4a7d-8a06-fc1f46616ed1",
+          "name": "Read + Create coverage terms.",
+          "request": {
+            "name": "Read + Create coverage terms.",
+            "description": {
+              "content": "- GET  /coverage-terms/           — list for this business\n- GET  /coverage-terms/{id}/      — single with full nested tree\n- POST /coverage-terms/           — create with nested lines/limits/deductibles/fees",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                ":business_pk",
+                "coverage-terms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "business_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reference_number\": \"<string>\",\n  \"business\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\",\n  \"source\": \"<string>\",\n  \"coverages\": [\n    {\n      \"name\": \"<string>\",\n      \"carrier_id\": \"<string,null-uuid>\",\n      \"coverage_type_id\": \"<string,null-uuid>\",\n      \"policy_type\": \"<string>\",\n      \"carrier_am_best_rating\": \"<string>\",\n      \"underwriter_name\": \"<string>\",\n      \"underwriter_email\": \"<email>\",\n      \"wholesaler_id\": \"<string,null-uuid>\",\n      \"mga_id\": \"<string,null-uuid>\",\n      \"premium\": \"<string,null-decimal>\",\n      \"minimum_earned_premium\": \"<string,null-decimal>\",\n      \"participation_percentage\": \"<string,null-decimal>\",\n      \"commission_rate\": \"<string,null-decimal>\",\n      \"is_excess\": \"<boolean>\",\n      \"waiting_period_hours\": \"<string,null-decimal>\",\n      \"limits\": [\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"deductibles\": [\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        },\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"carrier_id\": \"<string,null-uuid>\",\n      \"coverage_type_id\": \"<string,null-uuid>\",\n      \"policy_type\": \"<string>\",\n      \"carrier_am_best_rating\": \"<string>\",\n      \"underwriter_name\": \"<string>\",\n      \"underwriter_email\": \"<email>\",\n      \"wholesaler_id\": \"<string,null-uuid>\",\n      \"mga_id\": \"<string,null-uuid>\",\n      \"premium\": \"<string,null-decimal>\",\n      \"minimum_earned_premium\": \"<string,null-decimal>\",\n      \"participation_percentage\": \"<string,null-decimal>\",\n      \"commission_rate\": \"<string,null-decimal>\",\n      \"is_excess\": \"<boolean>\",\n      \"waiting_period_hours\": \"<string,null-decimal>\",\n      \"limits\": [\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"deductibles\": [\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        },\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        }\n      ]\n    }\n  ],\n  \"fees\": [\n    {\n      \"fee_type\": \"<string>\",\n      \"amount\": \"<decimal>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"fee_type\": \"<string>\",\n      \"amount\": \"<decimal>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"sub_limits\": [\n    {\n      \"sub_limit_amount\": \"<decimal>\",\n      \"limit_type\": \"<string>\",\n      \"retention_amount\": \"<string,null-decimal>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"sub_limit_amount\": \"<decimal>\",\n      \"limit_type\": \"<string>\",\n      \"retention_amount\": \"<string,null-decimal>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a52e2e23-2b89-4582-b118-af0ed6b913bf",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "coverage-terms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reference_number\": \"<string>\",\n  \"business\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\",\n  \"source\": \"<string>\",\n  \"coverages\": [\n    {\n      \"name\": \"<string>\",\n      \"carrier_id\": \"<string,null-uuid>\",\n      \"coverage_type_id\": \"<string,null-uuid>\",\n      \"policy_type\": \"<string>\",\n      \"carrier_am_best_rating\": \"<string>\",\n      \"underwriter_name\": \"<string>\",\n      \"underwriter_email\": \"<email>\",\n      \"wholesaler_id\": \"<string,null-uuid>\",\n      \"mga_id\": \"<string,null-uuid>\",\n      \"premium\": \"<string,null-decimal>\",\n      \"minimum_earned_premium\": \"<string,null-decimal>\",\n      \"participation_percentage\": \"<string,null-decimal>\",\n      \"commission_rate\": \"<string,null-decimal>\",\n      \"is_excess\": \"<boolean>\",\n      \"waiting_period_hours\": \"<string,null-decimal>\",\n      \"limits\": [\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"deductibles\": [\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        },\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"carrier_id\": \"<string,null-uuid>\",\n      \"coverage_type_id\": \"<string,null-uuid>\",\n      \"policy_type\": \"<string>\",\n      \"carrier_am_best_rating\": \"<string>\",\n      \"underwriter_name\": \"<string>\",\n      \"underwriter_email\": \"<email>\",\n      \"wholesaler_id\": \"<string,null-uuid>\",\n      \"mga_id\": \"<string,null-uuid>\",\n      \"premium\": \"<string,null-decimal>\",\n      \"minimum_earned_premium\": \"<string,null-decimal>\",\n      \"participation_percentage\": \"<string,null-decimal>\",\n      \"commission_rate\": \"<string,null-decimal>\",\n      \"is_excess\": \"<boolean>\",\n      \"waiting_period_hours\": \"<string,null-decimal>\",\n      \"limits\": [\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"deductibles\": [\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        },\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        }\n      ]\n    }\n  ],\n  \"fees\": [\n    {\n      \"fee_type\": \"<string>\",\n      \"amount\": \"<decimal>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"fee_type\": \"<string>\",\n      \"amount\": \"<decimal>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"sub_limits\": [\n    {\n      \"sub_limit_amount\": \"<decimal>\",\n      \"limit_type\": \"<string>\",\n      \"retention_amount\": \"<string,null-decimal>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"sub_limit_amount\": \"<decimal>\",\n      \"limit_type\": \"<string>\",\n      \"retention_amount\": \"<string,null-decimal>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reference_number\": \"<string>\",\n  \"business\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\",\n  \"source\": \"<string>\",\n  \"coverages\": [\n    {\n      \"name\": \"<string>\",\n      \"carrier_id\": \"<string,null-uuid>\",\n      \"coverage_type_id\": \"<string,null-uuid>\",\n      \"policy_type\": \"<string>\",\n      \"carrier_am_best_rating\": \"<string>\",\n      \"underwriter_name\": \"<string>\",\n      \"underwriter_email\": \"<email>\",\n      \"wholesaler_id\": \"<string,null-uuid>\",\n      \"mga_id\": \"<string,null-uuid>\",\n      \"premium\": \"<string,null-decimal>\",\n      \"minimum_earned_premium\": \"<string,null-decimal>\",\n      \"participation_percentage\": \"<string,null-decimal>\",\n      \"commission_rate\": \"<string,null-decimal>\",\n      \"is_excess\": \"<boolean>\",\n      \"waiting_period_hours\": \"<string,null-decimal>\",\n      \"limits\": [\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"deductibles\": [\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        },\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"carrier_id\": \"<string,null-uuid>\",\n      \"coverage_type_id\": \"<string,null-uuid>\",\n      \"policy_type\": \"<string>\",\n      \"carrier_am_best_rating\": \"<string>\",\n      \"underwriter_name\": \"<string>\",\n      \"underwriter_email\": \"<email>\",\n      \"wholesaler_id\": \"<string,null-uuid>\",\n      \"mga_id\": \"<string,null-uuid>\",\n      \"premium\": \"<string,null-decimal>\",\n      \"minimum_earned_premium\": \"<string,null-decimal>\",\n      \"participation_percentage\": \"<string,null-decimal>\",\n      \"commission_rate\": \"<string,null-decimal>\",\n      \"is_excess\": \"<boolean>\",\n      \"waiting_period_hours\": \"<string,null-decimal>\",\n      \"limits\": [\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"deductibles\": [\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        },\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        }\n      ]\n    }\n  ],\n  \"fees\": [\n    {\n      \"fee_type\": \"<string>\",\n      \"amount\": \"<decimal>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"fee_type\": \"<string>\",\n      \"amount\": \"<decimal>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"sub_limits\": [\n    {\n      \"sub_limit_amount\": \"<decimal>\",\n      \"limit_type\": \"<string>\",\n      \"retention_amount\": \"<string,null-decimal>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"sub_limit_amount\": \"<decimal>\",\n      \"limit_type\": \"<string>\",\n      \"retention_amount\": \"<string,null-decimal>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0f9011f-e17b-4af3-b573-43948bfb7afa",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "coverage-terms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reference_number\": \"<string>\",\n  \"business\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\",\n  \"source\": \"<string>\",\n  \"coverages\": [\n    {\n      \"name\": \"<string>\",\n      \"carrier_id\": \"<string,null-uuid>\",\n      \"coverage_type_id\": \"<string,null-uuid>\",\n      \"policy_type\": \"<string>\",\n      \"carrier_am_best_rating\": \"<string>\",\n      \"underwriter_name\": \"<string>\",\n      \"underwriter_email\": \"<email>\",\n      \"wholesaler_id\": \"<string,null-uuid>\",\n      \"mga_id\": \"<string,null-uuid>\",\n      \"premium\": \"<string,null-decimal>\",\n      \"minimum_earned_premium\": \"<string,null-decimal>\",\n      \"participation_percentage\": \"<string,null-decimal>\",\n      \"commission_rate\": \"<string,null-decimal>\",\n      \"is_excess\": \"<boolean>\",\n      \"waiting_period_hours\": \"<string,null-decimal>\",\n      \"limits\": [\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"deductibles\": [\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        },\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"carrier_id\": \"<string,null-uuid>\",\n      \"coverage_type_id\": \"<string,null-uuid>\",\n      \"policy_type\": \"<string>\",\n      \"carrier_am_best_rating\": \"<string>\",\n      \"underwriter_name\": \"<string>\",\n      \"underwriter_email\": \"<email>\",\n      \"wholesaler_id\": \"<string,null-uuid>\",\n      \"mga_id\": \"<string,null-uuid>\",\n      \"premium\": \"<string,null-decimal>\",\n      \"minimum_earned_premium\": \"<string,null-decimal>\",\n      \"participation_percentage\": \"<string,null-decimal>\",\n      \"commission_rate\": \"<string,null-decimal>\",\n      \"is_excess\": \"<boolean>\",\n      \"waiting_period_hours\": \"<string,null-decimal>\",\n      \"limits\": [\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"deductibles\": [\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        },\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        }\n      ]\n    }\n  ],\n  \"fees\": [\n    {\n      \"fee_type\": \"<string>\",\n      \"amount\": \"<decimal>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"fee_type\": \"<string>\",\n      \"amount\": \"<decimal>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"sub_limits\": [\n    {\n      \"sub_limit_amount\": \"<decimal>\",\n      \"limit_type\": \"<string>\",\n      \"retention_amount\": \"<string,null-decimal>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"sub_limit_amount\": \"<decimal>\",\n      \"limit_type\": \"<string>\",\n      \"retention_amount\": \"<string,null-decimal>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"non_field_errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "722005b0-7df5-4bef-b4a4-c1bb928d1a91",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "coverage-terms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reference_number\": \"<string>\",\n  \"business\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\",\n  \"source\": \"<string>\",\n  \"coverages\": [\n    {\n      \"name\": \"<string>\",\n      \"carrier_id\": \"<string,null-uuid>\",\n      \"coverage_type_id\": \"<string,null-uuid>\",\n      \"policy_type\": \"<string>\",\n      \"carrier_am_best_rating\": \"<string>\",\n      \"underwriter_name\": \"<string>\",\n      \"underwriter_email\": \"<email>\",\n      \"wholesaler_id\": \"<string,null-uuid>\",\n      \"mga_id\": \"<string,null-uuid>\",\n      \"premium\": \"<string,null-decimal>\",\n      \"minimum_earned_premium\": \"<string,null-decimal>\",\n      \"participation_percentage\": \"<string,null-decimal>\",\n      \"commission_rate\": \"<string,null-decimal>\",\n      \"is_excess\": \"<boolean>\",\n      \"waiting_period_hours\": \"<string,null-decimal>\",\n      \"limits\": [\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"deductibles\": [\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        },\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"carrier_id\": \"<string,null-uuid>\",\n      \"coverage_type_id\": \"<string,null-uuid>\",\n      \"policy_type\": \"<string>\",\n      \"carrier_am_best_rating\": \"<string>\",\n      \"underwriter_name\": \"<string>\",\n      \"underwriter_email\": \"<email>\",\n      \"wholesaler_id\": \"<string,null-uuid>\",\n      \"mga_id\": \"<string,null-uuid>\",\n      \"premium\": \"<string,null-decimal>\",\n      \"minimum_earned_premium\": \"<string,null-decimal>\",\n      \"participation_percentage\": \"<string,null-decimal>\",\n      \"commission_rate\": \"<string,null-decimal>\",\n      \"is_excess\": \"<boolean>\",\n      \"waiting_period_hours\": \"<string,null-decimal>\",\n      \"limits\": [\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"deductibles\": [\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        },\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        }\n      ]\n    }\n  ],\n  \"fees\": [\n    {\n      \"fee_type\": \"<string>\",\n      \"amount\": \"<decimal>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"fee_type\": \"<string>\",\n      \"amount\": \"<decimal>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"sub_limits\": [\n    {\n      \"sub_limit_amount\": \"<decimal>\",\n      \"limit_type\": \"<string>\",\n      \"retention_amount\": \"<string,null-decimal>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"sub_limit_amount\": \"<decimal>\",\n      \"limit_type\": \"<string>\",\n      \"retention_amount\": \"<string,null-decimal>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8705a59f-e6b5-488a-94ea-dc0374f11cfe",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "coverage-terms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reference_number\": \"<string>\",\n  \"business\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\",\n  \"source\": \"<string>\",\n  \"coverages\": [\n    {\n      \"name\": \"<string>\",\n      \"carrier_id\": \"<string,null-uuid>\",\n      \"coverage_type_id\": \"<string,null-uuid>\",\n      \"policy_type\": \"<string>\",\n      \"carrier_am_best_rating\": \"<string>\",\n      \"underwriter_name\": \"<string>\",\n      \"underwriter_email\": \"<email>\",\n      \"wholesaler_id\": \"<string,null-uuid>\",\n      \"mga_id\": \"<string,null-uuid>\",\n      \"premium\": \"<string,null-decimal>\",\n      \"minimum_earned_premium\": \"<string,null-decimal>\",\n      \"participation_percentage\": \"<string,null-decimal>\",\n      \"commission_rate\": \"<string,null-decimal>\",\n      \"is_excess\": \"<boolean>\",\n      \"waiting_period_hours\": \"<string,null-decimal>\",\n      \"limits\": [\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"deductibles\": [\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        },\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"carrier_id\": \"<string,null-uuid>\",\n      \"coverage_type_id\": \"<string,null-uuid>\",\n      \"policy_type\": \"<string>\",\n      \"carrier_am_best_rating\": \"<string>\",\n      \"underwriter_name\": \"<string>\",\n      \"underwriter_email\": \"<email>\",\n      \"wholesaler_id\": \"<string,null-uuid>\",\n      \"mga_id\": \"<string,null-uuid>\",\n      \"premium\": \"<string,null-decimal>\",\n      \"minimum_earned_premium\": \"<string,null-decimal>\",\n      \"participation_percentage\": \"<string,null-decimal>\",\n      \"commission_rate\": \"<string,null-decimal>\",\n      \"is_excess\": \"<boolean>\",\n      \"waiting_period_hours\": \"<string,null-decimal>\",\n      \"limits\": [\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"limit_type\": \"<string>\",\n          \"amount\": \"<decimal>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"deductibles\": [\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        },\n        {\n          \"deductible_type\": \"<string>\",\n          \"amount\": \"<string,null-decimal>\",\n          \"description\": \"<string>\",\n          \"is_percentage\": \"<boolean>\",\n          \"percentage\": \"<string,null-decimal>\",\n          \"min_amount\": \"<string,null-decimal>\",\n          \"max_amount\": \"<string,null-decimal>\"\n        }\n      ]\n    }\n  ],\n  \"fees\": [\n    {\n      \"fee_type\": \"<string>\",\n      \"amount\": \"<decimal>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"fee_type\": \"<string>\",\n      \"amount\": \"<decimal>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"sub_limits\": [\n    {\n      \"sub_limit_amount\": \"<decimal>\",\n      \"limit_type\": \"<string>\",\n      \"retention_amount\": \"<string,null-decimal>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"sub_limit_amount\": \"<decimal>\",\n      \"limit_type\": \"<string>\",\n      \"retention_amount\": \"<string,null-decimal>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a776923-ac7f-4b84-b03f-cac5053ac8ff",
+          "name": "Read + Create coverage terms.",
+          "request": {
+            "name": "Read + Create coverage terms.",
+            "description": {
+              "content": "- GET  /coverage-terms/           — list for this business\n- GET  /coverage-terms/{id}/      — single with full nested tree\n- POST /coverage-terms/           — create with nested lines/limits/deductibles/fees",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                ":business_pk",
+                "coverage-terms",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "business_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Coverage Term."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2317a4e8-aa5b-4c73-b50a-f9f4858ba369",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "coverage-terms",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Coverage Term."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"0d88aa00-ea7f-1ed8-4ee9-63976c0f86aa\",\n  \"reference_number\": \"string\",\n  \"source\": \"string\",\n  \"coverages\": [\n    {\n      \"name\": \"string\",\n      \"id\": \"3ee3e5dc-d55e-2a87-8cc3-29e04009c85f\",\n      \"coverage_type\": {\n        \"name\": \"string\",\n        \"code\": \"string\",\n        \"id\": \"b2863891-fd33-007e-b3d7-68f8f44a53bf\",\n        \"is_active\": true,\n        \"description\": \"string\",\n        \"logo\": \"https://RZrxxkqKFTXAC.zrQ2gbeuN.,o9\"\n      },\n      \"policy_type\": \"admitted\",\n      \"carrier\": {\n        \"name\": \"string\",\n        \"id\": \"f529e969-c060-2219-d75b-27f40cb7d9f5\",\n        \"logo\": null,\n        \"am_best_rating\": \"string\",\n        \"domains\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"carrier_am_best_rating\": \"string\",\n      \"underwriter_name\": \"string\",\n      \"underwriter_email\": \"Cs980PIbjfIgA@uONXrPWmkFeHUbAIelEjBPZiEGkaG.ojs\",\n      \"wholesaler\": {\n        \"name\": \"string\",\n        \"id\": \"e28ae39b-ffd3-e10f-25c6-44b783aafc05\",\n        \"logo\": \"https://yIEFaFmhMPEzLRrmRDclphMZ.aeyzWvAF40D0Uh7PwafQ4lvYn-v.eRjWtcGaFFlnTqLcf\",\n        \"is_active\": true,\n        \"is_owned_by_1fort\": false,\n        \"domains\": null\n      },\n      \"mga\": {\n        \"name\": \"string\",\n        \"id\": \"06f3bf57-9124-fc3e-d83e-0a40c7eb473a\",\n        \"logo\": null,\n        \"is_active\": true,\n        \"is_owned_by_1fort\": false,\n        \"domains\": null\n      },\n      \"premium\": \"string\",\n      \"minimum_earned_premium\": \"string\",\n      \"participation_percentage\": null,\n      \"commission_rate\": \"string\",\n      \"is_excess\": false,\n      \"waiting_period_hours\": null,\n      \"limits\": [\n        {\n          \"limit_type\": \"products_completed_ops\",\n          \"amount\": \"string\",\n          \"id\": \"a06e6ba9-6f4e-a42b-c39f-d371d4a36c59\",\n          \"description\": \"string\"\n        },\n        {\n          \"limit_type\": \"products_completed_ops\",\n          \"amount\": \"string\",\n          \"id\": \"57223ded-dfb2-c1c5-9490-445c117b62b8\",\n          \"description\": \"string\"\n        }\n      ],\n      \"deductibles\": [\n        {\n          \"deductible_type\": \"per_claim\",\n          \"id\": \"350a84e9-5e17-0d7c-82b0-336f79658f28\",\n          \"amount\": null,\n          \"description\": \"string\",\n          \"is_percentage\": true,\n          \"percentage\": \"string\",\n          \"min_amount\": \"string\",\n          \"max_amount\": null\n        },\n        {\n          \"deductible_type\": \"aggregate\",\n          \"id\": \"98fae449-2598-bf80-ea25-50ec1d0e37c4\",\n          \"amount\": \"string\",\n          \"description\": \"string\",\n          \"is_percentage\": true,\n          \"percentage\": null,\n          \"min_amount\": null,\n          \"max_amount\": null\n        }\n      ],\n      \"fees\": [\n        {\n          \"fee_type\": \"platform_fee\",\n          \"amount\": \"string\",\n          \"id\": \"e933fdd9-bb9f-f502-8142-faaa51a61424\",\n          \"description\": \"string\",\n          \"coverage\": null\n        },\n        {\n          \"fee_type\": \"stamping_fee\",\n          \"amount\": \"string\",\n          \"id\": \"077f7076-71fd-9270-ee4a-2b912bf275e8\",\n          \"description\": \"string\",\n          \"coverage\": \"cc195b1a-2715-402e-f255-18a2fc892bfc\"\n        }\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"id\": \"b42a9a58-0716-3cb8-3968-9ee40c47a6b0\",\n      \"coverage_type\": {\n        \"name\": \"string\",\n        \"code\": \"str\",\n        \"id\": \"21ce7662-3b8a-3a13-93ed-07ac9b99a649\",\n        \"is_active\": true,\n        \"description\": \"string\",\n        \"logo\": null\n      },\n      \"policy_type\": \"surplus_lines\",\n      \"carrier\": {\n        \"name\": \"string\",\n        \"id\": \"c2cd7c86-9c0e-203e-a8f7-55b084cec387\",\n        \"logo\": null,\n        \"am_best_rating\": null,\n        \"domains\": [\n          \"string\",\n          \"st\"\n        ]\n      },\n      \"carrier_am_best_rating\": \"string\",\n      \"underwriter_name\": \"string\",\n      \"underwriter_email\": \"yZkk4uJW2I@bPQlTzDbnbvDWUNck.qqq\",\n      \"wholesaler\": {\n        \"name\": \"string\",\n        \"id\": \"4412cd36-72b1-7616-d305-5755a2fe46b9\",\n        \"logo\": \"http://bZ.ooewGQd2ZLXyI1NhyQCOqrTIy1,evUt\",\n        \"is_active\": true,\n        \"is_owned_by_1fort\": true,\n        \"domains\": null\n      },\n      \"mga\": {\n        \"name\": \"string\",\n        \"id\": \"5bffb2b8-15d3-b71a-28ec-27ac644d8a30\",\n        \"logo\": null,\n        \"is_active\": true,\n        \"is_owned_by_1fort\": false,\n        \"domains\": null\n      },\n      \"premium\": null,\n      \"minimum_earned_premium\": null,\n      \"participation_percentage\": \"string\",\n      \"commission_rate\": null,\n      \"is_excess\": true,\n      \"waiting_period_hours\": \"string\",\n      \"limits\": [\n        {\n          \"limit_type\": \"products_completed_ops\",\n          \"amount\": \"string\",\n          \"id\": \"f9f8c884-40c4-e806-ad4b-a199aff896b2\",\n          \"description\": \"string\"\n        },\n        {\n          \"limit_type\": \"per_person\",\n          \"amount\": \"string\",\n          \"id\": \"3c4ddc02-5017-9d88-ca0d-940c9a6fd885\",\n          \"description\": \"string\"\n        }\n      ],\n      \"deductibles\": [\n        {\n          \"deductible_type\": \"waiting_period\",\n          \"id\": \"623117d2-5739-66f3-f292-739e3e8ee26e\",\n          \"amount\": null,\n          \"description\": \"string\",\n          \"is_percentage\": false,\n          \"percentage\": null,\n          \"min_amount\": \"string\",\n          \"max_amount\": null\n        },\n        {\n          \"deductible_type\": \"aggregate\",\n          \"id\": \"0f0dbec5-9740-c50b-245e-539b3b506fd1\",\n          \"amount\": \"string\",\n          \"description\": \"string\",\n          \"is_percentage\": true,\n          \"percentage\": null,\n          \"min_amount\": \"string\",\n          \"max_amount\": null\n        }\n      ],\n      \"fees\": [\n        {\n          \"fee_type\": \"municipal_fee\",\n          \"amount\": \"string\",\n          \"id\": \"de813da3-2456-0dda-0ce4-086fd3d59b75\",\n          \"description\": \"string\",\n          \"coverage\": null\n        },\n        {\n          \"fee_type\": \"discount\",\n          \"amount\": \"string\",\n          \"id\": \"dfb5559a-9c5b-22cf-ddff-8b7d0dc8199a\",\n          \"description\": \"string\",\n          \"coverage\": null\n        }\n      ]\n    }\n  ],\n  \"fees\": [\n    {\n      \"fee_type\": \"stamping_fee\",\n      \"amount\": \"string\",\n      \"id\": \"279e9644-8373-deec-6247-6ff645f1629e\",\n      \"description\": \"string\",\n      \"coverage\": null\n    },\n    {\n      \"fee_type\": \"agency_fee\",\n      \"amount\": \"string\",\n      \"id\": \"f7843826-31cc-41fd-3968-b7d02ae1d9cb\",\n      \"description\": \"string\",\n      \"coverage\": null\n    }\n  ],\n  \"forms\": [\n    {\n      \"form_name\": \"string\",\n      \"id\": \"ef99e650-d63f-a624-de46-cd88f2bdb952\",\n      \"form_number\": \"string\",\n      \"edition_date\": \"string\",\n      \"category\": \"regulatory\",\n      \"description\": \"string\",\n      \"order\": 11548,\n      \"coverage\": \"8e32c422-1b1c-c519-970d-c4248e205f11\"\n    },\n    {\n      \"form_name\": \"string\",\n      \"id\": \"82a458ce-6d90-2f4a-2f1d-f4180e295f5b\",\n      \"form_number\": \"string\",\n      \"edition_date\": \"string\",\n      \"category\": \"schedule\",\n      \"description\": \"string\",\n      \"order\": 32463,\n      \"coverage\": \"ffa320d8-feef-e50b-3e5c-a1b4d528a041\"\n    }\n  ],\n  \"exclusions\": [\n    {\n      \"name\": \"string\",\n      \"id\": \"d2d749e8-2997-cb63-0dde-280ef8dbffaf\",\n      \"description\": \"string\",\n      \"coverage\": \"fda40ec6-66b2-98c9-c71d-f7e13b8c094e\",\n      \"source_form\": null\n    },\n    {\n      \"name\": \"string\",\n      \"id\": \"9644640d-07d8-6fc7-bc3f-95389e483b96\",\n      \"description\": \"string\",\n      \"coverage\": null,\n      \"source_form\": null\n    }\n  ],\n  \"sub_limits\": [\n    {\n      \"sub_limit_amount\": \"string\",\n      \"id\": \"fcaa2c8d-c10e-5dbc-b8e3-61439c29761a\",\n      \"limit_type\": \"other\",\n      \"retention_amount\": \"string\",\n      \"description\": \"string\",\n      \"limit\": null\n    },\n    {\n      \"sub_limit_amount\": \"string\",\n      \"id\": \"a597eb2b-5e75-4e79-3ae4-b2a284e096b8\",\n      \"limit_type\": \"inner_limit\",\n      \"retention_amount\": null,\n      \"description\": \"string\",\n      \"limit\": null\n    }\n  ],\n  \"created_at\": \"2016-06-21T17:41:17.635Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "712c9f18-b411-4ded-8d1c-e9c3586e1e17",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "coverage-terms",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Coverage Term."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba04758f-d991-4c02-a6c6-787599751f0f",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "coverage-terms",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Coverage Term."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9e8f7a1-ccfc-4c22-803b-a60cb104b103",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "coverage-terms",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Coverage Term."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.1fort.com/apis/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4a65cfcb-7697-48d2-9d0d-252069a51763",
+    "name": "1Fort API Documentation insurance (v2) insurance (v2) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# 1Fort API\n\nREST API for the 1Fort insurance platform. This document is the authoritative\nmap of the API surface; endpoints are grouped in the sidebar by **app** and\n**version**, and large apps are split into per-resource sub-groups.\n\n## Authentication\n\nAlmost every endpoint requires a **JWT access token**. Send it in the\n`Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may\nalso be presented as an HTTP-only cookie. Endpoints documented with no security\nrequirement are intentionally public (for example sign-in, OTP and storefront\nendpoints).\n\n## Multi-tenancy\n\nResources are scoped to a tenant. Nested routes carry the owning resource id in\nthe path (for example `/v2/broker/{business_pk}/applications`); a token is only\nauthorised for the businesses its user may access. Object-level permissions are\nenforced per endpoint.\n\n## Versioning\n\n`v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`\nendpoints remain documented for compatibility. Endpoints marked **deprecated**\nare scheduled for removal; prefer the documented replacement.\n",
+      "type": "text/plain"
+    }
+  }
+}

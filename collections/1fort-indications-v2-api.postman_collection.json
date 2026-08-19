@@ -1,0 +1,1943 @@
+{
+  "item": [
+    {
+      "id": "402a44ed-c3e8-4444-8b85-c11e42989c5b",
+      "name": "indications (v2)",
+      "description": {
+        "content": "**Access:** requires a JWT access token.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "079ee798-0563-4036-b372-5b853664a680",
+          "name": "List and filter indications based on coverage type and limit.",
+          "request": {
+            "name": "List and filter indications based on coverage type and limit.",
+            "description": {
+              "content": "This view extends the base quote list view to add filtering capabilities\nwhile maintaining the pending quote refresh functionality.\n\nQuery Parameters:\n    coverage_type (str): Filter by coverage type code (e.g., 'CYB', 'GL')\n    aggregate_limit (int): Filter by aggregate limit value\n    sub_coverage (str, optional): Filter by sub-coverage type for ML products",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                ":business_pk",
+                "indications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "business_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb2d031b-ab99-42f5-b465-74e74f1580b1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 3887,\n  \"results\": [\n    {\n      \"id\": \"914aa2d4-9d73-c245-eb6a-75f84204bb30\",\n      \"short_id\": \"string\",\n      \"status\": \"string\",\n      \"carrier\": {\n        \"name\": \"string\",\n        \"id\": \"b0f067e0-fcf3-ce3b-d45d-9e459d715468\",\n        \"logo\": null,\n        \"am_best_rating\": null,\n        \"domains\": null\n      },\n      \"product\": {\n        \"code\": \"string\",\n        \"product_line\": \"string\",\n        \"is_active\": true,\n        \"policy_type\": \"ADMITTED\",\n        \"name\": \"string\",\n        \"am_best_rating\": \"string\",\n        \"eta_hours\": -1971541190\n      },\n      \"mga\": {\n        \"name\": \"string\",\n        \"id\": \"c1ec9290-bd7b-4c06-ac8d-589bedf8e467\",\n        \"logo\": \"https://UdPeuFs.pffNL8Apgh8yibKA5VhkZpQJ7ImcfaJVAYOIUxfn-mkyeHZqs,p4.FbUTxu-K3GiFdm\",\n        \"is_active\": true,\n        \"is_owned_by_1fort\": true,\n        \"domains\": null\n      },\n      \"premium_before_taxes_and_fees\": \"string\",\n      \"premium_with_taxes_and_fees\": null,\n      \"bind_status\": null,\n      \"quote_number\": \"string\",\n      \"admitted\": null,\n      \"am_best_rating\": \"string\",\n      \"status_details\": {},\n      \"market_status_reason\": null,\n      \"files\": \"string\",\n      \"price_details\": [\n        {\n          \"amount\": null,\n          \"type\": null,\n          \"text\": null\n        },\n        {\n          \"amount\": null,\n          \"type\": \"string\",\n          \"text\": \"string\"\n        }\n      ],\n      \"fees\": \"string\",\n      \"aggregate_limit\": 8739,\n      \"aggregate_retention\": 382,\n      \"waiting_period\": 3166,\n      \"effective_date\": \"2013-08-11\",\n      \"expiration_date\": \"2016-05-08\",\n      \"has_bind_requests\": \"string\",\n      \"version\": \"string\",\n      \"method\": \"string\",\n      \"application_submitted_at\": \"string\",\n      \"is_wholesale\": true,\n      \"is_1fort_wholesale\": false,\n      \"wholesaler\": {\n        \"name\": \"string\",\n        \"id\": \"9c54f576-ffbb-4aa6-3e9d-365dbd81d8e2\",\n        \"logo\": \"https://TvHztAxEh.mvovLlkTZIngU,MUpyeB7ZOCNniWU7EiGKt.Q4G7iOXUZD\",\n        \"is_active\": true,\n        \"is_owned_by_1fort\": false,\n        \"domains\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"coverage_type_display_name\": \"string\",\n      \"coverage_type_image_slug\": \"string\",\n      \"coverage_application\": \"8434e56e-5e43-db10-a9b6-589ebe4f34ea\",\n      \"application\": \"222d3b6c-3e52-ea25-270f-88cdabd1e83e\",\n      \"payment_url\": \"string\",\n      \"payment\": \"string\",\n      \"broker_commission_rate\": \"string\",\n      \"insured_address\": \"string\",\n      \"excess_quotes\": \"string\",\n      \"is_excess\": \"string\",\n      \"type\": \"incumbent\",\n      \"type_display\": \"string\",\n      \"quote_validity_date\": null,\n      \"issuance_date\": null,\n      \"coverage_term_id\": \"string\",\n      \"coverages\": \"string\",\n      \"coverage_types\": \"string\",\n      \"insurance_invoice_ids\": \"string\",\n      \"follow_up_notifications\": false,\n      \"open_tasks\": \"string\",\n      \"analysis\": \"string\"\n    },\n    {\n      \"id\": \"b2ae6fec-3e48-bbb4-647a-03aa0b3627e5\",\n      \"short_id\": \"string\",\n      \"status\": \"string\",\n      \"carrier\": {\n        \"name\": \"string\",\n        \"id\": \"77d2f3fe-cb6a-d4e4-b570-cb289dc876bd\",\n        \"logo\": \"https://Fy.xpspJHPFHZZ-ksXTU3W1OXarxSJVU2WB2PnZ0fa,q-LaiHvLYCOL\",\n        \"am_best_rating\": null,\n        \"domains\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"product\": {\n        \"code\": null,\n        \"product_line\": null,\n        \"is_active\": false,\n        \"policy_type\": \"SURPLUS_LINES\",\n        \"name\": \"string\",\n        \"am_best_rating\": \"string\",\n        \"eta_hours\": null\n      },\n      \"mga\": {\n        \"name\": \"string\",\n        \"id\": \"a5f035a5-0243-4239-58e5-18889c61a45a\",\n        \"logo\": \"https://pXDbVQJLiEzj.jfhgUzHMm,WlVePVkof5d4+p2UQpFn0yUfHCOF5u.ZgIylZql\",\n        \"is_active\": true,\n        \"is_owned_by_1fort\": false,\n        \"domains\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"premium_before_taxes_and_fees\": null,\n      \"premium_with_taxes_and_fees\": \"string\",\n      \"bind_status\": null,\n      \"quote_number\": \"string\",\n      \"admitted\": null,\n      \"am_best_rating\": \"string\",\n      \"status_details\": null,\n      \"market_status_reason\": \"string\",\n      \"files\": \"string\",\n      \"price_details\": [\n        {\n          \"amount\": null,\n          \"type\": null,\n          \"text\": null\n        },\n        {\n          \"amount\": \"string\",\n          \"type\": null,\n          \"text\": \"string\"\n        }\n      ],\n      \"fees\": \"string\",\n      \"aggregate_limit\": 7090,\n      \"aggregate_retention\": 7828,\n      \"waiting_period\": 9467,\n      \"effective_date\": \"2003-10-10\",\n      \"expiration_date\": \"1958-03-09\",\n      \"has_bind_requests\": \"string\",\n      \"version\": \"string\",\n      \"method\": \"string\",\n      \"application_submitted_at\": \"string\",\n      \"is_wholesale\": true,\n      \"is_1fort_wholesale\": true,\n      \"wholesaler\": {\n        \"name\": \"string\",\n        \"id\": \"17687898-ae5c-a839-7576-6738e99d241a\",\n        \"logo\": \"https://DYWWbTbmV.feuprlop9\",\n        \"is_active\": false,\n        \"is_owned_by_1fort\": false,\n        \"domains\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"coverage_type_display_name\": \"string\",\n      \"coverage_type_image_slug\": \"string\",\n      \"coverage_application\": \"228ba83e-8239-72ef-fb33-04dd19448487\",\n      \"application\": \"b27b1a44-d535-d120-395e-d69b49cf4bf5\",\n      \"payment_url\": \"string\",\n      \"payment\": \"string\",\n      \"broker_commission_rate\": \"string\",\n      \"insured_address\": \"string\",\n      \"excess_quotes\": \"string\",\n      \"is_excess\": \"string\",\n      \"type\": \"competitor\",\n      \"type_display\": \"string\",\n      \"quote_validity_date\": \"1978-08-16\",\n      \"issuance_date\": null,\n      \"coverage_term_id\": \"string\",\n      \"coverages\": \"string\",\n      \"coverage_types\": \"string\",\n      \"insurance_invoice_ids\": \"string\",\n      \"follow_up_notifications\": false,\n      \"open_tasks\": \"string\",\n      \"analysis\": \"string\"\n    }\n  ],\n  \"next\": \"https://yOLAQQgxyBzncwbWOWOe.jnrtBW0Isn8DCSqCSg1Z3g8CHeW.l\",\n  \"previous\": \"http://lbgkKNzouaDDurdaUdF.rjubxphJazg.zHYO8F,TJri2utikw4uTvNj-,0QZp2NXuuS0U\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a92865e3-b2a4-4337-8946-fe6c23c75f67",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec6d0167-3d68-46bd-aec8-eb2b8b8cf343",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dba3cbbc-0582-4265-ac9d-1d298b9da3b5",
+          "name": "Create Broker Quote",
+          "request": {
+            "name": "Create Broker Quote",
+            "description": {
+              "content": "Create a new quote for a coverage application. This allows brokers to add quotes from carriers that they have obtained outside of the Herald system (e.g., expiring quotes, competitor quotes).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                ":business_pk",
+                "indications",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "business_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"carrier\": \"<uuid>\",\n  \"admitted\": \"<boolean>\",\n  \"premium\": \"<decimal>\",\n  \"limit\": \"<integer>\",\n  \"retention\": \"<integer>\",\n  \"wholesaler\": \"<string,null-uuid>\",\n  \"quote_files\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"policy_specimen_files\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"quote_number\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"expiration_date\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0542ff99-eb13-4946-8fd2-095aaf40a0b8",
+              "name": "Quote created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"carrier\": \"<uuid>\",\n  \"admitted\": \"<boolean>\",\n  \"premium\": \"<decimal>\",\n  \"limit\": \"<integer>\",\n  \"retention\": \"<integer>\",\n  \"wholesaler\": \"<string,null-uuid>\",\n  \"quote_files\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"policy_specimen_files\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"quote_number\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"expiration_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "281e7336-e72b-4ed8-b9b0-c7f5fb852454",
+              "name": "Invalid input data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"carrier\": \"<uuid>\",\n  \"admitted\": \"<boolean>\",\n  \"premium\": \"<decimal>\",\n  \"limit\": \"<integer>\",\n  \"retention\": \"<integer>\",\n  \"wholesaler\": \"<string,null-uuid>\",\n  \"quote_files\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"policy_specimen_files\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"quote_number\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"expiration_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6f9d1600-3ae4-4944-8671-0c24d7840142",
+              "name": "Permission denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"carrier\": \"<uuid>\",\n  \"admitted\": \"<boolean>\",\n  \"premium\": \"<decimal>\",\n  \"limit\": \"<integer>\",\n  \"retention\": \"<integer>\",\n  \"wholesaler\": \"<string,null-uuid>\",\n  \"quote_files\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"policy_specimen_files\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"quote_number\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"expiration_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b5641039-33d6-494a-86b6-1a0501578d4b",
+              "name": "Coverage application not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"carrier\": \"<uuid>\",\n  \"admitted\": \"<boolean>\",\n  \"premium\": \"<decimal>\",\n  \"limit\": \"<integer>\",\n  \"retention\": \"<integer>\",\n  \"wholesaler\": \"<string,null-uuid>\",\n  \"quote_files\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"policy_specimen_files\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"quote_number\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"expiration_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "775d68f5-2c11-4be2-a5b7-c9b900864a88",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"carrier\": \"<uuid>\",\n  \"admitted\": \"<boolean>\",\n  \"premium\": \"<decimal>\",\n  \"limit\": \"<integer>\",\n  \"retention\": \"<integer>\",\n  \"wholesaler\": \"<string,null-uuid>\",\n  \"quote_files\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"policy_specimen_files\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"quote_number\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"expiration_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92166e7a-06cc-4761-b562-49551205ed7c",
+          "name": "Get overview",
+          "request": {
+            "name": "Get overview",
+            "description": {
+              "content": "API endpoint that allows indications to be viewed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                ":business_pk",
+                "indications",
+                "overview"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "business_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d22b1365-a51a-4bc3-ac18-520c6a4d5eaa",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 4145,\n  \"results\": [\n    {\n      \"id\": \"62d45d9a-6d44-86bb-948b-c59b7e78976c\",\n      \"short_id\": \"string\",\n      \"status\": \"string\",\n      \"carrier\": {\n        \"name\": \"string\",\n        \"id\": \"aab4f86e-d902-aee0-f70a-fbd6d50771de\",\n        \"logo\": \"http://cVFZPXWsrzYIQYsGlHXAMgFRNkYn.qsnGn4NOlln9gFlOTlKhwni0edGqQaqBV\",\n        \"am_best_rating\": null,\n        \"domains\": null\n      },\n      \"product\": {\n        \"code\": \"string\",\n        \"product_line\": null,\n        \"is_active\": false,\n        \"policy_type\": \"SURPLUS_LINES\",\n        \"name\": \"string\",\n        \"am_best_rating\": null,\n        \"eta_hours\": 486488305\n      },\n      \"mga\": {\n        \"name\": \"string\",\n        \"id\": \"6e6d0cf3-5b7c-818c-4890-8e60dc98f8d0\",\n        \"logo\": \"https://BVqtDpVIs.jbjRsfL-9TmDrw62dNru0HUrmn9QkuSaNYCcDBfgMQjGaCrer\",\n        \"is_active\": true,\n        \"is_owned_by_1fort\": false,\n        \"domains\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"premium_before_taxes_and_fees\": null,\n      \"premium_with_taxes_and_fees\": \"string\",\n      \"bind_status\": \"string\",\n      \"quote_number\": \"string\",\n      \"admitted\": true,\n      \"am_best_rating\": \"string\",\n      \"status_details\": null,\n      \"market_status_reason\": \"string\",\n      \"files\": \"string\",\n      \"price_details\": [\n        {\n          \"amount\": \"string\",\n          \"type\": null,\n          \"text\": \"string\"\n        },\n        {\n          \"amount\": \"string\",\n          \"type\": null,\n          \"text\": null\n        }\n      ],\n      \"fees\": \"string\",\n      \"aggregate_limit\": 9433,\n      \"aggregate_retention\": 1387,\n      \"waiting_period\": 8684,\n      \"effective_date\": \"1964-09-26\",\n      \"expiration_date\": \"1985-02-28\",\n      \"has_bind_requests\": \"string\",\n      \"version\": \"string\",\n      \"method\": \"string\",\n      \"application_submitted_at\": \"string\",\n      \"is_wholesale\": false,\n      \"is_1fort_wholesale\": true,\n      \"wholesaler\": {\n        \"name\": \"string\",\n        \"id\": \"1c449feb-c0b4-04bd-b018-2e33aef5019c\",\n        \"logo\": \"https://YOcfRdiOdLgJlCEkEFxcPiMBOtGwb.qbWwyAYDFaVXhylo,SvfJY+A0C8GGEUmm4vSBCM9wqgijn8k4cLf\",\n        \"is_active\": false,\n        \"is_owned_by_1fort\": false,\n        \"domains\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"coverage_type_display_name\": \"string\",\n      \"coverage_type_image_slug\": \"string\",\n      \"coverage_application\": \"1aaf2066-5c1b-93f7-2bec-f1521e9fb2e1\",\n      \"application\": \"0096177a-48ae-ece8-f6f0-e66b738f036d\",\n      \"payment_url\": \"string\",\n      \"payment\": \"string\",\n      \"broker_commission_rate\": \"string\",\n      \"insured_address\": \"string\",\n      \"excess_quotes\": \"string\",\n      \"is_excess\": \"string\",\n      \"type\": \"competitor\",\n      \"type_display\": \"string\",\n      \"quote_validity_date\": \"1981-03-06\",\n      \"issuance_date\": \"1999-06-03\",\n      \"coverage_term_id\": \"string\",\n      \"coverages\": \"string\",\n      \"coverage_types\": \"string\",\n      \"insurance_invoice_ids\": \"string\",\n      \"follow_up_notifications\": true,\n      \"open_tasks\": \"string\",\n      \"analysis\": \"string\"\n    },\n    {\n      \"id\": \"dc58d452-ed74-3bbe-ebc0-77ad8eb5eb71\",\n      \"short_id\": \"string\",\n      \"status\": \"string\",\n      \"carrier\": {\n        \"name\": \"string\",\n        \"id\": \"66f6b97c-456a-2a26-4b11-e2dc29ee29a1\",\n        \"logo\": \"http://rtBuJcKBvkBiPyMuUU.hbsuQBseHLdDCLMXj,y9Wlzh2Ic2CLelgsraqwu\",\n        \"am_best_rating\": \"string\",\n        \"domains\": null\n      },\n      \"product\": {\n        \"code\": null,\n        \"product_line\": \"string\",\n        \"is_active\": false,\n        \"policy_type\": \"ADMITTED\",\n        \"name\": null,\n        \"am_best_rating\": \"string\",\n        \"eta_hours\": null\n      },\n      \"mga\": {\n        \"name\": \"string\",\n        \"id\": \"2016b733-1a30-3af9-eaf6-aff2ae92573a\",\n        \"logo\": \"https://w.bwVOQYwRpz-Q4vqQPbL9UTbxlI\",\n        \"is_active\": false,\n        \"is_owned_by_1fort\": true,\n        \"domains\": null\n      },\n      \"premium_before_taxes_and_fees\": \"string\",\n      \"premium_with_taxes_and_fees\": \"string\",\n      \"bind_status\": \"string\",\n      \"quote_number\": null,\n      \"admitted\": null,\n      \"am_best_rating\": \"string\",\n      \"status_details\": null,\n      \"market_status_reason\": \"string\",\n      \"files\": \"string\",\n      \"price_details\": [\n        {\n          \"amount\": null,\n          \"type\": \"string\",\n          \"text\": null\n        },\n        {\n          \"amount\": null,\n          \"type\": null,\n          \"text\": \"string\"\n        }\n      ],\n      \"fees\": \"string\",\n      \"aggregate_limit\": 1551,\n      \"aggregate_retention\": 5367,\n      \"waiting_period\": 7669,\n      \"effective_date\": \"1985-07-31\",\n      \"expiration_date\": \"1992-09-04\",\n      \"has_bind_requests\": \"string\",\n      \"version\": \"string\",\n      \"method\": \"string\",\n      \"application_submitted_at\": \"string\",\n      \"is_wholesale\": false,\n      \"is_1fort_wholesale\": true,\n      \"wholesaler\": {\n        \"name\": \"string\",\n        \"id\": \"032a975a-b9fd-b348-3e9d-85f926503948\",\n        \"logo\": \"http://uNrFRiepxMrR.dhwN56zR2SGKkobD9OXJjrMwlawk\",\n        \"is_active\": false,\n        \"is_owned_by_1fort\": false,\n        \"domains\": null\n      },\n      \"coverage_type_display_name\": \"string\",\n      \"coverage_type_image_slug\": \"string\",\n      \"coverage_application\": \"11876377-eb23-fa9c-88e6-3b3a003ee095\",\n      \"application\": \"be0640b2-74ef-46b3-5409-ac423ebbf7ef\",\n      \"payment_url\": \"string\",\n      \"payment\": \"string\",\n      \"broker_commission_rate\": \"string\",\n      \"insured_address\": \"string\",\n      \"excess_quotes\": \"string\",\n      \"is_excess\": \"string\",\n      \"type\": \"other\",\n      \"type_display\": \"string\",\n      \"quote_validity_date\": \"1991-11-24\",\n      \"issuance_date\": \"1998-02-28\",\n      \"coverage_term_id\": \"string\",\n      \"coverages\": \"string\",\n      \"coverage_types\": \"string\",\n      \"insurance_invoice_ids\": \"string\",\n      \"follow_up_notifications\": false,\n      \"open_tasks\": \"string\",\n      \"analysis\": \"string\"\n    }\n  ],\n  \"next\": null,\n  \"previous\": \"http://MyW.haaPHBVo2X1wO.ZYleAODO6Qrq..nHBxeV+BTwGXn2m3WctSrfsMKrHp,LMmEROy69X7Q\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4ea4c8d-dc3b-45d8-89a9-870b2dc5686a",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b89ef432-3557-425c-991e-9a9244baa79a",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "056170e3-3262-4f16-9d2e-c520e76b560f",
+          "name": "Retrieve Indication",
+          "request": {
+            "name": "Retrieve Indication",
+            "description": {
+              "content": "API endpoint that allows indications to be viewed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                ":business_pk",
+                "indications",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "business_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "642f9ade-d422-48d6-b0e6-078e7ab3cab9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"436c616c-2cc1-5746-ea37-fafd1d25fc65\",\n  \"short_id\": null,\n  \"status\": \"string\",\n  \"carrier\": {\n    \"name\": \"string\",\n    \"id\": \"8293b489-f561-3fb8-f1de-96f066e4aa7a\",\n    \"logo\": \"http://ojhDSwxtVLAnVNNNB.zlxNPPDZXKoZAPjkZhsXer5J-5ROjY9tDWc9.T,HM7JkXQpDxyciv\",\n    \"am_best_rating\": \"string\",\n    \"domains\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"product\": {\n    \"code\": null,\n    \"product_line\": null,\n    \"is_active\": false,\n    \"policy_type\": \"ADMITTED\",\n    \"name\": \"string\",\n    \"am_best_rating\": \"string\",\n    \"eta_hours\": null\n  },\n  \"mga\": {\n    \"name\": \"string\",\n    \"id\": \"e0fd2df1-574b-b561-9424-a574d5e499d2\",\n    \"logo\": null,\n    \"is_active\": false,\n    \"is_owned_by_1fort\": true,\n    \"domains\": null\n  },\n  \"premium_before_taxes_and_fees\": null,\n  \"premium_with_taxes_and_fees\": \"string\",\n  \"bind_status\": null,\n  \"quote_number\": null,\n  \"admitted\": true,\n  \"am_best_rating\": \"string\",\n  \"status_details\": {},\n  \"market_status_reason\": null,\n  \"files\": \"string\",\n  \"price_details\": [\n    {\n      \"amount\": null,\n      \"type\": \"string\",\n      \"text\": \"string\"\n    },\n    {\n      \"amount\": \"string\",\n      \"type\": null,\n      \"text\": \"string\"\n    }\n  ],\n  \"fees\": \"string\",\n  \"aggregate_limit\": 7195,\n  \"aggregate_retention\": 884,\n  \"waiting_period\": 9542,\n  \"effective_date\": \"2017-12-28\",\n  \"expiration_date\": \"1971-09-25\",\n  \"has_bind_requests\": \"string\",\n  \"version\": \"string\",\n  \"method\": \"string\",\n  \"application_submitted_at\": \"string\",\n  \"is_wholesale\": false,\n  \"is_1fort_wholesale\": false,\n  \"wholesaler\": {\n    \"name\": \"string\",\n    \"id\": \"b334ed3b-1052-636e-db87-51eeba3d5f91\",\n    \"logo\": null,\n    \"is_active\": false,\n    \"is_owned_by_1fort\": true,\n    \"domains\": null\n  },\n  \"coverage_type_display_name\": \"string\",\n  \"coverage_type_image_slug\": \"string\",\n  \"coverage_application\": \"91fe3e5a-dfdc-e49e-d7db-5230865170fc\",\n  \"application\": \"5ebd27c3-f0ae-ee84-0dbb-bf05e6268cef\",\n  \"payment_url\": \"string\",\n  \"payment\": \"string\",\n  \"broker_commission_rate\": \"string\",\n  \"insured_address\": \"string\",\n  \"excess_quotes\": \"string\",\n  \"is_excess\": \"string\",\n  \"type\": \"incumbent\",\n  \"type_display\": \"string\",\n  \"quote_validity_date\": \"1960-01-31\",\n  \"issuance_date\": \"1970-06-13\",\n  \"coverage_term_id\": \"string\",\n  \"coverages\": \"string\",\n  \"coverage_types\": \"string\",\n  \"insurance_invoice_ids\": \"string\",\n  \"follow_up_notifications\": false,\n  \"open_tasks\": \"string\",\n  \"analysis\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec42fef8-611c-405d-a4e0-6457437f8a1a",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fddfbe6-e0ca-45a2-a942-24e9181e0191",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73019cbe-4e17-4718-9209-d6ace3a17c6a",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e6d76c9-fc48-4bf7-bfb5-81d0580ebb7f",
+          "name": "Get file",
+          "request": {
+            "name": "Get file",
+            "description": {
+              "content": "API endpoint that allows indications to be viewed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                ":business_pk",
+                "indications",
+                ":id",
+                "files",
+                ":file_pk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "business_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "file_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1f47d157-a3fe-469f-aeba-48335656a5a0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    ":id",
+                    "files",
+                    ":file_pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"436c616c-2cc1-5746-ea37-fafd1d25fc65\",\n  \"short_id\": null,\n  \"status\": \"string\",\n  \"carrier\": {\n    \"name\": \"string\",\n    \"id\": \"8293b489-f561-3fb8-f1de-96f066e4aa7a\",\n    \"logo\": \"http://ojhDSwxtVLAnVNNNB.zlxNPPDZXKoZAPjkZhsXer5J-5ROjY9tDWc9.T,HM7JkXQpDxyciv\",\n    \"am_best_rating\": \"string\",\n    \"domains\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"product\": {\n    \"code\": null,\n    \"product_line\": null,\n    \"is_active\": false,\n    \"policy_type\": \"ADMITTED\",\n    \"name\": \"string\",\n    \"am_best_rating\": \"string\",\n    \"eta_hours\": null\n  },\n  \"mga\": {\n    \"name\": \"string\",\n    \"id\": \"e0fd2df1-574b-b561-9424-a574d5e499d2\",\n    \"logo\": null,\n    \"is_active\": false,\n    \"is_owned_by_1fort\": true,\n    \"domains\": null\n  },\n  \"premium_before_taxes_and_fees\": null,\n  \"premium_with_taxes_and_fees\": \"string\",\n  \"bind_status\": null,\n  \"quote_number\": null,\n  \"admitted\": true,\n  \"am_best_rating\": \"string\",\n  \"status_details\": {},\n  \"market_status_reason\": null,\n  \"files\": \"string\",\n  \"price_details\": [\n    {\n      \"amount\": null,\n      \"type\": \"string\",\n      \"text\": \"string\"\n    },\n    {\n      \"amount\": \"string\",\n      \"type\": null,\n      \"text\": \"string\"\n    }\n  ],\n  \"fees\": \"string\",\n  \"aggregate_limit\": 7195,\n  \"aggregate_retention\": 884,\n  \"waiting_period\": 9542,\n  \"effective_date\": \"2017-12-28\",\n  \"expiration_date\": \"1971-09-25\",\n  \"has_bind_requests\": \"string\",\n  \"version\": \"string\",\n  \"method\": \"string\",\n  \"application_submitted_at\": \"string\",\n  \"is_wholesale\": false,\n  \"is_1fort_wholesale\": false,\n  \"wholesaler\": {\n    \"name\": \"string\",\n    \"id\": \"b334ed3b-1052-636e-db87-51eeba3d5f91\",\n    \"logo\": null,\n    \"is_active\": false,\n    \"is_owned_by_1fort\": true,\n    \"domains\": null\n  },\n  \"coverage_type_display_name\": \"string\",\n  \"coverage_type_image_slug\": \"string\",\n  \"coverage_application\": \"91fe3e5a-dfdc-e49e-d7db-5230865170fc\",\n  \"application\": \"5ebd27c3-f0ae-ee84-0dbb-bf05e6268cef\",\n  \"payment_url\": \"string\",\n  \"payment\": \"string\",\n  \"broker_commission_rate\": \"string\",\n  \"insured_address\": \"string\",\n  \"excess_quotes\": \"string\",\n  \"is_excess\": \"string\",\n  \"type\": \"incumbent\",\n  \"type_display\": \"string\",\n  \"quote_validity_date\": \"1960-01-31\",\n  \"issuance_date\": \"1970-06-13\",\n  \"coverage_term_id\": \"string\",\n  \"coverages\": \"string\",\n  \"coverage_types\": \"string\",\n  \"insurance_invoice_ids\": \"string\",\n  \"follow_up_notifications\": false,\n  \"open_tasks\": \"string\",\n  \"analysis\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f581a67b-dca9-48df-a522-9a5178166a0e",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    ":id",
+                    "files",
+                    ":file_pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2c3237d-83fe-4fd2-b809-7d1c55e70463",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    ":id",
+                    "files",
+                    ":file_pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb712bce-539a-4a43-9ca2-e86d9b58755d",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    ":id",
+                    "files",
+                    ":file_pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65736c1a-3dcb-493f-8e77-a77f16d21aaa",
+          "name": "Get surplus file",
+          "request": {
+            "name": "Get surplus file",
+            "description": {
+              "content": "API endpoint that allows indications to be viewed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                ":business_pk",
+                "indications",
+                ":id",
+                "surplus-files",
+                ":file_pk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "business_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "file_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7d706f39-bd24-4016-8426-f6a15379f954",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    ":id",
+                    "surplus-files",
+                    ":file_pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"436c616c-2cc1-5746-ea37-fafd1d25fc65\",\n  \"short_id\": null,\n  \"status\": \"string\",\n  \"carrier\": {\n    \"name\": \"string\",\n    \"id\": \"8293b489-f561-3fb8-f1de-96f066e4aa7a\",\n    \"logo\": \"http://ojhDSwxtVLAnVNNNB.zlxNPPDZXKoZAPjkZhsXer5J-5ROjY9tDWc9.T,HM7JkXQpDxyciv\",\n    \"am_best_rating\": \"string\",\n    \"domains\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"product\": {\n    \"code\": null,\n    \"product_line\": null,\n    \"is_active\": false,\n    \"policy_type\": \"ADMITTED\",\n    \"name\": \"string\",\n    \"am_best_rating\": \"string\",\n    \"eta_hours\": null\n  },\n  \"mga\": {\n    \"name\": \"string\",\n    \"id\": \"e0fd2df1-574b-b561-9424-a574d5e499d2\",\n    \"logo\": null,\n    \"is_active\": false,\n    \"is_owned_by_1fort\": true,\n    \"domains\": null\n  },\n  \"premium_before_taxes_and_fees\": null,\n  \"premium_with_taxes_and_fees\": \"string\",\n  \"bind_status\": null,\n  \"quote_number\": null,\n  \"admitted\": true,\n  \"am_best_rating\": \"string\",\n  \"status_details\": {},\n  \"market_status_reason\": null,\n  \"files\": \"string\",\n  \"price_details\": [\n    {\n      \"amount\": null,\n      \"type\": \"string\",\n      \"text\": \"string\"\n    },\n    {\n      \"amount\": \"string\",\n      \"type\": null,\n      \"text\": \"string\"\n    }\n  ],\n  \"fees\": \"string\",\n  \"aggregate_limit\": 7195,\n  \"aggregate_retention\": 884,\n  \"waiting_period\": 9542,\n  \"effective_date\": \"2017-12-28\",\n  \"expiration_date\": \"1971-09-25\",\n  \"has_bind_requests\": \"string\",\n  \"version\": \"string\",\n  \"method\": \"string\",\n  \"application_submitted_at\": \"string\",\n  \"is_wholesale\": false,\n  \"is_1fort_wholesale\": false,\n  \"wholesaler\": {\n    \"name\": \"string\",\n    \"id\": \"b334ed3b-1052-636e-db87-51eeba3d5f91\",\n    \"logo\": null,\n    \"is_active\": false,\n    \"is_owned_by_1fort\": true,\n    \"domains\": null\n  },\n  \"coverage_type_display_name\": \"string\",\n  \"coverage_type_image_slug\": \"string\",\n  \"coverage_application\": \"91fe3e5a-dfdc-e49e-d7db-5230865170fc\",\n  \"application\": \"5ebd27c3-f0ae-ee84-0dbb-bf05e6268cef\",\n  \"payment_url\": \"string\",\n  \"payment\": \"string\",\n  \"broker_commission_rate\": \"string\",\n  \"insured_address\": \"string\",\n  \"excess_quotes\": \"string\",\n  \"is_excess\": \"string\",\n  \"type\": \"incumbent\",\n  \"type_display\": \"string\",\n  \"quote_validity_date\": \"1960-01-31\",\n  \"issuance_date\": \"1970-06-13\",\n  \"coverage_term_id\": \"string\",\n  \"coverages\": \"string\",\n  \"coverage_types\": \"string\",\n  \"insurance_invoice_ids\": \"string\",\n  \"follow_up_notifications\": false,\n  \"open_tasks\": \"string\",\n  \"analysis\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ff55c87-bc3f-4442-941b-f5b8697d1566",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    ":id",
+                    "surplus-files",
+                    ":file_pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b17606f-25aa-49da-89dc-6adf9c561598",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    ":id",
+                    "surplus-files",
+                    ":file_pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30dda4f1-59f7-4a17-ad87-5a9db2865de1",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "indications",
+                    ":id",
+                    "surplus-files",
+                    ":file_pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.1fort.com/apis/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cd1c3f14-f573-4a1c-a4f0-863719243244",
+    "name": "1Fort API Documentation indications (v2) indications (v2) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# 1Fort API\n\nREST API for the 1Fort insurance platform. This document is the authoritative\nmap of the API surface; endpoints are grouped in the sidebar by **app** and\n**version**, and large apps are split into per-resource sub-groups.\n\n## Authentication\n\nAlmost every endpoint requires a **JWT access token**. Send it in the\n`Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may\nalso be presented as an HTTP-only cookie. Endpoints documented with no security\nrequirement are intentionally public (for example sign-in, OTP and storefront\nendpoints).\n\n## Multi-tenancy\n\nResources are scoped to a tenant. Nested routes carry the owning resource id in\nthe path (for example `/v2/broker/{business_pk}/applications`); a token is only\nauthorised for the businesses its user may access. Object-level permissions are\nenforced per endpoint.\n\n## Versioning\n\n`v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`\nendpoints remain documented for compatibility. Endpoints marked **deprecated**\nare scheduled for removal; prefer the documented replacement.\n",
+      "type": "text/plain"
+    }
+  }
+}

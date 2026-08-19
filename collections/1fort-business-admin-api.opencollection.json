@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Business Admin API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "business_admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Business Admin users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients/:client_pk/admin-users",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "client_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "\nList all business admin users.\nThis endpoint lists all the business admin's users.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

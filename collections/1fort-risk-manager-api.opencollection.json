@@ -1,0 +1,231 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Risk Manager API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "risk_manager",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Calculate financial risk winnability (Broker and Business Users)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/financial-risk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Calculate the winnability percentage and estimated premium for a specific coverage type and business client using AI analysis of risk parameters, policies, and quotes. Broker users must pass business_id. Business users derive the business from their account and cannot force refresh."
+        },
+        {
+          "info": {
+            "name": "List risks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/risks",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of risks for the authenticated user's business."
+        },
+        {
+          "info": {
+            "name": "Get risk assessment status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/risks/assessment_status",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Retrieve the status of the latest risk assessment for the user's business."
+        },
+        {
+          "info": {
+            "name": "List chat messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/risks/chat",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of chat messages for the current business user."
+        },
+        {
+          "info": {
+            "name": "Send a chat message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/risks/chat",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a new message to the risk manager chat and get a response."
+        },
+        {
+          "info": {
+            "name": "Get risk overview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/risks/overview"
+          },
+          "docs": "Retrieve an overview of risks categorized by type, including completion scores and risk counts."
+        },
+        {
+          "info": {
+            "name": "Retrieve risk",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/risks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this risk."
+              }
+            ]
+          },
+          "docs": "Get details of a specific risk."
+        },
+        {
+          "info": {
+            "name": "Update risk",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/risks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this risk."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a specific risk, including its status."
+        },
+        {
+          "info": {
+            "name": "Update Risk",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/risks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this risk."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Risk"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

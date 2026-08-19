@@ -1,0 +1,579 @@
+openapi: 3.2.0
+info:
+  title: 1Fort API Documentation Email AI Agent - Markets API
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: Email AI Agent - Markets
+  x-displayName: Markets
+  description: '**Access:** requires a JWT access token.'
+paths:
+  /v2/broker/agent/markets/transactions:
+    parameters: []
+    post:
+      operationId: agent_create_market_transaction
+      summary: Log Market Transaction
+      description: '
+
+        Record a single agent-driven `markets/upsert` attempt (success or failure).
+
+
+        - On success, `market_id` is required and `error_code`/`error_message` must be omitted.
+
+        - On failure, `error_code` and `error_message` are required and `market_id` must be omitted.
+
+
+        Both `email_id` and `market_id` (when present) must belong to the session broker.
+
+
+        **Authentication**: Requires API Key + Session Token
+
+        '
+      parameters:
+      - name: X-Processing-Session
+        in: header
+        description: Processing session token (scopes access to broker)
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Transaction logged
+        '400':
+          description: Validation error
+        '401':
+          description: Unauthorized - Invalid or missing API key or session token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: UNAUTHORIZED
+                  message: Invalid or missing authentication credentials
+        '403':
+          description: Forbidden - Resource belongs to unauthorized broker
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: FORBIDDEN
+                  message: Access denied - resource outside session scope
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - Email AI Agent - Markets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarketTransaction'
+        required: true
+  /v2/broker/agent/markets/upsert:
+    parameters: []
+    post:
+      operationId: agent_upsert_market
+      summary: Upsert Market
+      description: '
+
+        Create or update a broker market for the session broker matched by `(carrier, wholesaler, product_lines)`.
+
+
+        At least one of `carrier` or `wholesaler` must be provided. `product_lines` must be non-empty.
+
+
+        If no existing market for the session broker matches the key exactly, a new one is created
+
+        and `201 Created` is returned. If exactly one match is found, it is updated and `200 OK` is
+
+        returned with the same `id`.
+
+
+        If multiple rows match the key (data anomaly), `400 Bad Request` is returned — use
+
+        `PATCH /markets/{id}` to resolve.
+
+
+        **Authentication**: Requires API Key + Session Token
+
+        '
+      parameters:
+      - name: X-Processing-Session
+        in: header
+        description: Processing session token (scopes access to broker)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Market updated
+        '201':
+          description: Market created
+        '400':
+          description: Validation error or ambiguous match
+        '401':
+          description: Unauthorized - Invalid or missing API key or session token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: UNAUTHORIZED
+                  message: Invalid or missing authentication credentials
+        '403':
+          description: Forbidden - Resource belongs to unauthorized broker
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: FORBIDDEN
+                  message: Access denied - resource outside session scope
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - Email AI Agent - Markets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarketAgentUpsert'
+        required: true
+components:
+  schemas:
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    MarketTransaction:
+      required:
+      - email_id
+      - status
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        email_id:
+          title: Email id
+          type: string
+          format: uuid
+        status:
+          title: Status
+          type: string
+          enum:
+          - success
+          - failed
+        market_id:
+          title: Market id
+          type:
+          - string
+          - 'null'
+          format: uuid
+        request_payload:
+          title: Request payload
+          type: string
+        response_payload:
+          title: Response payload
+          type: string
+        error_code:
+          title: Error code
+          type: string
+          maxLength: 64
+        error_message:
+          title: Error message
+          type: string
+        attempted_at:
+          title: Attempted at
+          type: string
+          format: date-time
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+    MarketAgentUpsert:
+      required:
+      - product_lines
+      type: object
+      properties:
+        carrier:
+          title: Carrier
+          type:
+          - string
+          - 'null'
+          format: uuid
+        wholesaler:
+          title: Wholesaler
+          type:
+          - string
+          - 'null'
+          format: uuid
+        product_lines:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        sub_product_lines:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        herald_products:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        submission_method:
+          title: Submission method
+          type: string
+          enum:
+          - herald
+          - manual
+          - portal
+        agency_code:
+          title: Agency code
+          type:
+          - string
+          - 'null'
+        am_best_rating:
+          title: Am best rating
+          type: string
+        commission_percentage:
+          title: Commission percentage
+          type:
+          - string
+          - 'null'
+          format: decimal
+        renewal_commission_percentage:
+          title: Renewal commission percentage
+          type:
+          - string
+          - 'null'
+          format: decimal
+        filing_type:
+          title: Filing type
+          type: string
+          enum:
+          - admitted
+          - surplus
+          - admitted_and_surplus
+        billing_type:
+          title: Billing type
+          type: string
+          enum:
+          - AGENCY_BILL
+          - DIRECT_BILL
+        eta_hours:
+          title: Eta hours
+          type:
+          - integer
+          - 'null'
+        underwriter_emails:
+          title: Underwriter emails
+          type: string
+        remittance_emails:
+          title: Remittance emails
+          type: string
+        bank_routing_number:
+          title: Bank routing number
+          type:
+          - string
+          - 'null'
+          maxLength: 9
+        bank_account_number:
+          title: Bank account number
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        is_active:
+          title: Is active
+          type: boolean
+        special_notes:
+          title: Special notes
+          type: string
+        restrictions:
+          title: Restrictions
+          type: string
+        source:
+          title: Source
+          type: string
+          enum:
+          - manual
+          - auto_added
+    ErrorResponse:
+      required:
+      - error
+      type: object
+      properties:
+        error:
+          title: Error
+          description: Error details with code and message.
+          type: object
+          additionalProperties:
+            type: string
+            minLength: 1
+        request_id:
+          title: Request id
+          description: Request ID for debugging.
+          type: string
+          minLength: 1
+        timestamp:
+          title: Timestamp
+          description: When the error occurred.
+          type: string
+          format: date-time
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

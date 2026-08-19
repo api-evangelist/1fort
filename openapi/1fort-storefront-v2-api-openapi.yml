@@ -1,0 +1,2197 @@
+openapi: 3.2.0
+info:
+  title: 1Fort API Documentation storefront (v2) storefront (v2) API
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: storefront (v2)
+  x-displayName: Storefront (v2)
+  description: 'Insured-facing storefront endpoints. Access is scoped by storefront identity (public links, API key, or storefront permission) rather than a user JWT.
+
+
+    **Access:** mixed; some endpoints are public, others require an API key (per endpoint).'
+paths:
+  /v2/storefront-agencies/{agency_slug}/brokers/{slug}:
+    parameters:
+    - name: agency_slug
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: slug
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_storefront-agencies_brokers_read
+      summary: Public broker user card resolved by agency identifier + broker user ``slug``.
+      description: '``AllowAny`` (API key optional). Response includes contact fields (``email``,
+
+        ``phone_number``) for intentional “contact your agent” storefront UI; the
+
+        resource is not listable without both agency context and user slug.
+
+
+        Scoped to non-test agencies. Throttled like other public storefront metadata
+
+        (``StoreFrontAgencyPublicThrottle``).'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreFrontBrokerUserCard'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security: []
+  /v2/storefront-agencies/{slug}:
+    parameters:
+    - name: slug
+      in: path
+      description: URL-safe identifier derived from domain_name (second-level label). Populated automatically when empty.
+      required: true
+      schema:
+        type: string
+        format: slug
+        pattern: ^[-a-zA-Z0-9_]+$
+    get:
+      operationId: v2_storefront-agencies_read
+      description: Resolve a broker agency by URL slug (used with agency subdomains on the storefront host).
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreFrontAgencyPublic'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security: []
+      summary: Retrieve Storefront agency
+  /v2/storefront-applications:
+    parameters: []
+    post:
+      operationId: v2_storefront-applications_create
+      description: Create a new StoreFront.
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Create Storefront application
+  /v2/storefront-applications/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_storefront-applications_read
+      description: Retrieve a StoreFront.
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Retrieve Storefront application
+    put:
+      operationId: v2_storefront-applications_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Update Storefront application
+    patch:
+      operationId: v2_storefront-applications_partial_update
+      description: Update a StoreFront Application.
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Update Storefront application
+  /v2/storefront-applications/{id}/parameters:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    patch:
+      operationId: v2_storefront-applications_parameters
+      description: Update the parameters of a StoreFront Application.
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Parameters
+  /v2/storefront-applications/{id}/pre-filled-forms:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: v2_storefront-applications_add_prefilled_forms
+      description: ''
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Add prefilled forms
+  /v2/storefront-applications/{id}/pre-filled-forms/{sessions_pk}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: sessions_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_storefront-applications_get_prefilled_forms
+      description: ''
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Get prefilled forms
+  /v2/storefront-applications/{id}/submit:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: v2_storefront-applications_submit
+      summary: Submit a StoreFront Application.
+      description: 'The service fans out over every CoverageApplication under the parent
+
+        Application; successful covapps are marked SUBMITTED, failed covapps
+
+        stay DRAFT and are returned under `failed_coverage_applications` so
+
+        the client can surface a retry affordance.'
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+  /v2/storefront-applications/{storefront_application_pk}/chat:
+    parameters:
+    - name: storefront_application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: v2_storefront-applications_chat_create
+      description: POST /v2/storefront-applications/{id}/chat - send message, get response.
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Create Chat
+  /v2/storefront-applications/{storefront_application_pk}/sanity-check-ai:
+    parameters:
+    - name: storefront_application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: v2_storefront-applications_sanity-check-ai_create
+      summary: Create a new sanity check request for the storefront application.
+      description: Returns existing sanity check if one already exists with matching context hash.
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SanityCheckRequest'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SanityCheckRequest'
+        required: true
+  /v2/storefront-applications/{storefront_application_pk}/sanity-check-ai/match:
+    parameters:
+    - name: storefront_application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_storefront-applications_sanity-check-ai_match
+      summary: GET /storefront-applications/{storefront_app_id}/sanity-check-ai/match
+      description: 'Returns SanityCheckAI rows for the storefront''s coverage application
+
+        only if their stored context_hash equals the recomputed context hash.'
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SanityCheckRequest'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+  /v2/storefront-applications/{storefront_application_pk}/sanity-check-ai/{id}:
+    parameters:
+    - name: storefront_application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: A UUID string identifying this sanity check ai request.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: v2_storefront-applications_sanity-check-ai_read
+      summary: ViewSet for AI sanity check on storefront applications.
+      description: 'Uses API key authentication (StoreFrontPermission) instead of broker auth.
+
+        Resolves coverage_application from the storefront_application_pk URL parameter.'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SanityCheckRequest'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+    put:
+      operationId: v2_storefront-applications_sanity-check-ai_update
+      summary: ViewSet for AI sanity check on storefront applications.
+      description: 'Uses API key authentication (StoreFrontPermission) instead of broker auth.
+
+        Resolves coverage_application from the storefront_application_pk URL parameter.'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SanityCheckRequest'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SanityCheckRequest'
+        required: true
+    patch:
+      operationId: v2_storefront-applications_sanity-check-ai_partial_update
+      description: Update hidden_fields on the sanity check request.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SanityCheckUpdate'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Update Sanity check AI
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SanityCheckUpdate'
+        required: true
+  /v2/storefront-applications/{storefront_application_pk}/supplementary-documents:
+    parameters:
+    - name: storefront_application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_storefront-applications_supplementary-documents_list
+      description: ViewSet for managing supplementary documents for storefront applications.
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StoreFrontApplicationSupplementaryDocument'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: List Supplementary documents
+    post:
+      operationId: v2_storefront-applications_supplementary-documents_create
+      description: ViewSet for managing supplementary documents for storefront applications.
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreFrontApplicationSupplementaryDocument'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Create Supplementary document
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreFrontApplicationSupplementaryDocument'
+        required: true
+  /v2/storefront-applications/{storefront_application_pk}/supplementary-documents/{id}:
+    parameters:
+    - name: storefront_application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: A UUID string identifying this application supplementary document.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: v2_storefront-applications_supplementary-documents_read
+      description: ViewSet for managing supplementary documents for storefront applications.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreFrontApplicationSupplementaryDocument'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Retrieve Supplementary document
+    delete:
+      operationId: v2_storefront-applications_supplementary-documents_delete
+      description: ViewSet for managing supplementary documents for storefront applications.
+      responses:
+        '204':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Delete Supplementary document
+  /v2/storefront-applications/{storefront_application_pk}/supplementary-documents/{id}/download:
+    parameters:
+    - name: storefront_application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: A UUID string identifying this application supplementary document.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: v2_storefront-applications_supplementary-documents_download
+      description: ViewSet for managing supplementary documents for storefront applications.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreFrontApplicationSupplementaryDocument'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Download
+  /v2/storefront-applications/{storefront_application_pk}/supplementary-questions:
+    parameters:
+    - name: storefront_application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: v2_storefront-applications_supplementary-questions_create
+      summary: Trigger supplementary questions generation.
+      description: 'Returns an existing non-failed request if one already exists with the same
+
+        context hash, otherwise creates a new one and starts processing.'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplementaryQuestionsRequest'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupplementaryQuestionsRequest'
+        required: true
+  /v2/storefront-applications/{storefront_application_pk}/supplementary-questions/{id}:
+    parameters:
+    - name: storefront_application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: A UUID string identifying this supplementary questions request.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: v2_storefront-applications_supplementary-questions_read
+      summary: ViewSet for generating supplementary questions for storefront applications via Claude AI.
+      description: 'Uses StoreFrontPermission (API key auth). Resolves coverage_application from
+
+        the storefront_application_pk URL parameter.'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplementaryQuestionsRequest'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+    put:
+      operationId: v2_storefront-applications_supplementary-questions_update
+      summary: ViewSet for generating supplementary questions for storefront applications via Claude AI.
+      description: 'Uses StoreFrontPermission (API key auth). Resolves coverage_application from
+
+        the storefront_application_pk URL parameter.'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplementaryQuestionsRequest'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupplementaryQuestionsRequest'
+        required: true
+    patch:
+      operationId: v2_storefront-applications_supplementary-questions_partial_update
+      description: Save user answers to the supplementary questions request (PATCH).
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplementaryQuestionsUpdate'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Update Supplementary question
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupplementaryQuestionsUpdate'
+        required: true
+  /v2/storefront-auth:
+    parameters: []
+    post:
+      operationId: v2_storefront-auth_create
+      summary: Exchange a storefront sharable-link token for JWT credentials.
+      description: 'Single-use: provisions the applicant''s User + BusinessUser on first use;
+
+        once a BusinessUser exists for the email + business, responds 409 so the
+
+        frontend routes the applicant through the normal sign-in flow.'
+      responses:
+        '201':
+          description: ''
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security: []
+  /v2/storefront-coverage-chat:
+    parameters: []
+    post:
+      operationId: v2_storefront-coverage-chat_create
+      description: POST /v2/storefront-coverage-chat - general coverage questions.
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Create Storefront coverage chat
+  /v2/storefront-coverage-types:
+    parameters: []
+    get:
+      operationId: v2_storefront-coverage-types_list
+      summary: ViewSet for retrieving coverage types available for storefronts.
+      description: 'Returns active canonical product lines (those with no `canonical_product_line`
+
+        alias set) that have at least one active carrier product. Aliased rows are
+
+        hidden from callers so the storefront surfaces the new taxonomy only.
+
+        Requires API key authentication only.'
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ProductLine'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+  /v2/storefront-coverage-types/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this product line.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: v2_storefront-coverage-types_read
+      summary: ViewSet for retrieving coverage types available for storefronts.
+      description: 'Returns active canonical product lines (those with no `canonical_product_line`
+
+        alias set) that have at least one active carrier product. Aliased rows are
+
+        hidden from callers so the storefront surfaces the new taxonomy only.
+
+        Requires API key authentication only.'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductLine'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+  /v2/storefront-sessions:
+    parameters: []
+    post:
+      operationId: v2_storefront-sessions_create
+      description: Expects a broker StoreFront id in the request data. That is used to create a session.
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Create Storefront session
+  /v2/storefront-sessions/{id}/get_value:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: v2_storefront-sessions_get_value
+      description: ''
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Get value
+  /v2/storefront-sessions/{id}/is_valid:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_storefront-sessions_is_valid
+      description: ''
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Is valid
+  /v2/storefront-sessions/{id}/revoke:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: v2_storefront-sessions_revoke
+      description: ''
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Revoke
+  /v2/storefront-sessions/{id}/set_value:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: v2_storefront-sessions_set_value
+      description: ''
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security:
+      - ApiKey: []
+      summary: Set value
+  /v2/storefronts/{url_slug}:
+    parameters:
+    - name: url_slug
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_storefronts_read
+      summary: Retrieve a storefront by URL slug.
+      description: 'If the slug is an old slug that has been changed, returns the storefront
+
+        data with an additional `redirect_to_slug` field. The frontend should use
+
+        this to update the browser URL via router.replace().'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreFrontPublic'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security: []
+  /v2/storefronts/{url_slug}/coverage-recommendations:
+    parameters:
+    - name: url_slug
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: v2_storefronts_coverage_recommendations
+      summary: Return coverage recommendations for the storefront's broker.
+      description: "Accepts a JSON body with context about the prospective business:\n  - brokerSlug (str, optional) — if provided, must match the URL slug; 400 on mismatch\n  - industryClassification (str)\n  - address (object: line1, line2, city, state, postal_code, country_code)\n  - domain (str)\n\nUses Claude Sonnet via OpenRouter to pick the top 3 coverages from the\nbroker's available product lines and return customer-facing explanations.\nReturns 502 if the LLM call fails."
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreFrontPublic'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreFrontPublic'
+        required: true
+  /v2/storefronts/{url_slug}/coverage-types:
+    parameters:
+    - name: url_slug
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_storefronts_coverage_types
+      summary: Get the coverage types for the broker who owns the storefront.
+      description: 'If the slug is an old slug that has been changed, includes `redirect_to_slug`
+
+        in the response for frontend to update the URL.'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreFrontPublic'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - storefront (v2)
+      security: []
+components:
+  schemas:
+    StoreFrontBrokerUserCard:
+      type: object
+      properties:
+        slug:
+          title: Slug
+          description: URL-safe identifier per agency from the user's name (e.g. ernesto-freyre). Populated automatically when empty.
+          type:
+          - string
+          - 'null'
+          format: slug
+          pattern: ^[-a-zA-Z0-9_]+$
+          maxLength: 255
+        first_name:
+          title: First name
+          type: string
+          readOnly: true
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        phone_number:
+          title: Phone number
+          type: string
+          readOnly: true
+        type:
+          title: Type
+          description: Specifies the insurance-related role type of the user within the agency.
+          type:
+          - string
+          - 'null'
+          enum:
+          - LEADERSHIP
+          - SALES
+          - SERVICE
+          - MARKETS
+          - OPERATIONS
+        storefront_url_slug:
+          title: Storefront url slug
+          type: string
+          readOnly: true
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    CanonicalProductLineRef:
+      required:
+      - code
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        code:
+          title: Code
+          type: string
+          maxLength: 150
+          minLength: 1
+        display_name:
+          title: Display name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+    SupplementaryQuestionsUpdate:
+      type: object
+      properties:
+        user_answers:
+          title: User Answers
+          description: User-provided answers to supplementary questions keyed by question id
+          type: object
+    SupplementaryQuestionsRequest:
+      required:
+      - coverage_application
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          title: Status
+          type: string
+          enum:
+          - pending
+          - in_progress
+          - completed
+          - failed
+        ai_context:
+          title: AI Context
+          description: The context for the AI to use to generate supplementary questions
+          type:
+          - object
+          - 'null'
+        context_hash:
+          title: Context Hash
+          description: The sha256 hash of the ai_context
+          type: string
+          maxLength: 64
+          minLength: 1
+        ai_response:
+          title: AI Response
+          description: 'List of supplementary questions from the AI: [{id, question, reason, input_type, options}]'
+          type:
+          - object
+          - 'null'
+        user_answers:
+          title: User Answers
+          description: User-provided answers to supplementary questions keyed by question id
+          type: object
+        start_time:
+          title: Start Time
+          description: The UTC time the supplementary questions request started
+          type:
+          - string
+          - 'null'
+          format: date-time
+        end_time:
+          title: End Time
+          description: The UTC time the supplementary questions request ended
+          type:
+          - string
+          - 'null'
+          format: date-time
+        error:
+          title: Error
+          type:
+          - string
+          - 'null'
+        coverage_application:
+          title: Coverage Application
+          description: The coverage application to generate supplementary questions for
+          type: string
+          format: uuid
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    SubProductLine:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        display_name:
+          title: Display name
+          description: Name used on the Frontend.
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+    ProductLine:
+      required:
+      - code
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        code:
+          title: Code
+          type: string
+          maxLength: 150
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        name:
+          title: Name
+          type: string
+          readOnly: true
+        is_core:
+          title: Is core
+          type: boolean
+          readOnly: true
+        sub_product_lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubProductLine'
+          readOnly: true
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        category:
+          title: Category
+          type:
+          - string
+          - 'null'
+          enum:
+          - Property
+          - Casualty
+          - Both
+          - Property only
+        canonical_product_line:
+          $ref: '#/components/schemas/CanonicalProductLineRef'
+    SanityCheckRequest:
+      required:
+      - coverage_application
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        coverage_application:
+          title: Coverage application
+          type: string
+          format: uuid
+        ai_response:
+          title: Ai response
+          type: string
+          readOnly: true
+        status:
+          title: Status
+          type: string
+          enum:
+          - pending
+          - in_progress
+          - completed
+          - failed
+        ai_context:
+          title: AI Context
+          description: The context for the AI to use to generate the sanity check
+          type:
+          - object
+          - 'null'
+        context_hash:
+          title: Context Hash
+          description: The sha256 hash of the ai_context
+          type: string
+          maxLength: 64
+          minLength: 1
+        hidden_fields:
+          title: Hidden Fields
+          description: Dismissed or no longer relevant fields that should be removed from the ai_response.
+          type: object
+        start_time:
+          title: Start Time
+          description: The UTC time the sanity check started
+          type:
+          - string
+          - 'null'
+          format: date-time
+        end_time:
+          title: End Time
+          description: The UTC time the sanity check ended
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rejected_by_user:
+          title: Rejected by User
+          description: Whether the sanity check was rejected by the user
+          type: boolean
+        error:
+          title: Error
+          type:
+          - string
+          - 'null'
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    SanityCheckUpdate:
+      type: object
+      properties:
+        hidden_fields:
+          title: Hidden Fields
+          description: Dismissed or no longer relevant fields that should be removed from the ai_response.
+          type: object
+    StoreFrontAgencyPublic:
+      required:
+      - name
+      - domain_name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        dba:
+          title: Dba
+          description: Doing Business As (DBA) name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        domain_name:
+          title: Domain name
+          type: string
+          maxLength: 500
+          minLength: 1
+        slug:
+          title: Slug
+          description: URL-safe identifier derived from domain_name (second-level label). Populated automatically when empty.
+          type:
+          - string
+          - 'null'
+          format: slug
+          pattern: ^[-a-zA-Z0-9_]+$
+          maxLength: 255
+        phone_number:
+          title: Phone number
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        default_broker_url_slug:
+          title: Default broker url slug
+          type: string
+          readOnly: true
+        default_broker_user_slug:
+          title: Default broker user slug
+          type: string
+          readOnly: true
+        default_broker_user_card:
+          title: Default broker user card
+          type: string
+          readOnly: true
+    StoreFrontPublic:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        broker_user:
+          $ref: '#/components/schemas/StoreFrontBrokerUserPublic'
+        url_slug:
+          title: Url slug
+          type: string
+          readOnly: true
+          minLength: 1
+        broker:
+          $ref: '#/components/schemas/StoreFrontBroker'
+        broker_group:
+          title: Broker group
+          type: string
+          readOnly: true
+    StoreFrontApplicationSupplementaryDocument:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        question_elabel_id:
+          title: Question elabel id
+          description: Links this document to a specific file_upload question by elabel_id
+          type:
+          - string
+          - 'null'
+          maxLength: 100
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+        download_url:
+          title: Download url
+          type: string
+          readOnly: true
+    StoreFrontBroker:
+      required:
+      - name
+      - domain_name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        dba:
+          title: Dba
+          description: Doing Business As (DBA) name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        domain_name:
+          title: Domain name
+          type: string
+          maxLength: 500
+          minLength: 1
+        phone_number:
+          title: Phone number
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+    StoreFrontBrokerUserPublic:
+      type: object
+      properties:
+        slug:
+          title: Slug
+          description: URL-safe identifier per agency from the user's name (e.g. ernesto-freyre). Populated automatically when empty.
+          type:
+          - string
+          - 'null'
+          format: slug
+          pattern: ^[-a-zA-Z0-9_]+$
+          maxLength: 255
+        first_name:
+          title: First name
+          type: string
+          readOnly: true
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        phone_number:
+          title: Phone number
+          type: string
+          readOnly: true
+        type:
+          title: Type
+          description: Specifies the insurance-related role type of the user within the agency.
+          type:
+          - string
+          - 'null'
+          enum:
+          - LEADERSHIP
+          - SALES
+          - SERVICE
+          - MARKETS
+          - OPERATIONS
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

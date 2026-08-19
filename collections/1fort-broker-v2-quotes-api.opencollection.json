@@ -1,0 +1,262 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation broker (v2): quotes API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "broker (v2): quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Paginated ViewSet for retrieving quotes for the broker.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/quotes",
+            "params": [
+              {
+                "name": "insured",
+                "value": "",
+                "type": "query",
+                "description": "Filter quotes by insured name.\n\nExamples:\n- `?insured=Acme Inc.` - Matches quotes with 'Acme Inc.' in insured name\n- `?insured=Acme Inc., Acme Corp.` - Matches quotes with 'Acme Inc.' or 'Acme Corp.' in insured name"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter quotes by effective status. Supports comma-separated values.\n\n**Important:** For 'active' and 'expired' filters, this considers the `quote_validity_date` to determine the effective status, not just the database status field.\n\n**Status Behavior:**\n- `active` - Matches quotes with database status 'active' AND validity date in the future (or null)\n- `expired` - Matches quotes with:\n  - Database status 'expired', OR\n  - In-progress statuses (active, pending, referred, referral, awaiting_payment) with past validity date\n  - **Note:** Terminal statuses (declined, rejected, unsupported, unresponsive, archived) and bound statuses (bound, bind_requested) remain in their final state regardless of validity date\n- Other statuses (pending, declined, etc.) - Matches database status directly\n\n**Available statuses:**\n- `active`, `pending`, `referred`, `referral`, `declined`, `rejected`, `unsupported`, `unresponsive`, `expired`, `bind_requested`, `awaiting_payment`, `bound`, `archived`\n\n**Examples:**\n- `?status=active` - Active quotes that haven't expired by date\n- `?status=expired` - Quotes that are expired (by status or date)\n- `?status=active,pending` - Active or pending quotes\n- `?status=declined` - Declined quotes (remains declined regardless of validity date)"
+              },
+              {
+                "name": "payment_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter quotes by unified billing status (Ascend program and/or native checkout). Supports comma-separated values.\n\nSpecial value:\n- `pending` - No Ascend program / no program status, and no active native checkout invoice (or program row with blank status and no draft/open/partial/paid checkout)\n\nStandard values:\n- `created`, `ready_for_checkout`, `elected`, `checked_out`, `purchased`, `archived` — for native checkout, `created` maps to checkout draft; `ready_for_checkout` to open/partially paid; `purchased` to paid; `elected`/`checked_out`/`archived` remain Ascend program only.\n\nExamples:\n- `?payment_status=purchased` - Matches quotes with purchased Ascend program or paid native checkout\n- `?payment_status=ready_for_checkout` - Ascend ready_for_checkout or native checkout open/partially paid\n- `?payment_status=purchased,checked_out` - Matches either status\n- `?payment_status=pending,purchased` - Pending (no billing activity) OR purchased"
+              },
+              {
+                "name": "coverage_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter quotes by coverage type.\n\nExamples:\n- `?coverage_type=CYBER` - Matches quotes with 'CYBER' in coverage type\n- `?coverage_type=CYBER, GENERAL_LIABILITY` - Matches quotes with 'CYBER' or 'GENERAL_LIABILITY' in coverage type"
+              },
+              {
+                "name": "carrier",
+                "value": "",
+                "type": "query",
+                "description": "Filter quotes by carrier (market) UUID. Matches the quote's carrier, the product's carrier, or a carrier on any coverage under the quote's coverage term. Supports comma-separated values for multiple carriers. Non-UUID tokens are ignored; if no valid UUIDs remain after parsing, the result set is empty.\n\nExamples:\n- `?carrier=<uuid>` - Quotes for that carrier\n- `?carrier=<uuid1>,<uuid2>` - Quotes for either carrier"
+              },
+              {
+                "name": "wholesaler",
+                "value": "",
+                "type": "query",
+                "description": "wholesaler"
+              },
+              {
+                "name": "has_tasks",
+                "value": "",
+                "type": "query",
+                "description": "Filter quotes by whether they have tasks.\n\nExamples:\n- `?has_tasks=true` - Matches quotes with tasks\n- `?has_tasks=false` - Matches quotes without tasks"
+              },
+              {
+                "name": "broker",
+                "value": "",
+                "type": "query",
+                "description": "Filter quotes by broker agent ID (BrokerUser). Supports comma-separated values to filter by multiple agents.\n\nExamples:\n- `?broker=20` - Matches quotes where agent with ID 20 is assigned\n- `?broker=20,21,22` - Matches quotes where agents with IDs 20, 21, or 22 are assigned"
+              },
+              {
+                "name": "effective_date_min",
+                "value": "",
+                "type": "query",
+                "description": "Filter quotes by minimum effective date (inclusive). Use ISO 8601 date format.\n\nExamples:\n- `?effective_date_min=2024-01-01` - Matches quotes with effective date on or after January 1, 2024\n- `?effective_date_min=2024-01-01&effective_date_max=2024-12-31` - Matches quotes with effective date in 2024"
+              },
+              {
+                "name": "effective_date_max",
+                "value": "",
+                "type": "query",
+                "description": "Filter quotes by maximum effective date (inclusive). Use ISO 8601 date format.\n\nExamples:\n- `?effective_date_max=2024-12-31` - Matches quotes with effective date on or before December 31, 2024\n- `?effective_date_min=2024-01-01&effective_date_max=2024-12-31` - Matches quotes with effective date in 2024"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Sort quotes by specified field. Use a minus sign (-) prefix for descending order.\n\n**Available fields:**\n- `created_at` - Sort by creation date (default: newest first)\n- `effective_date` - Sort by policy effective date\n\n**Examples:**\n- `?ordering=-created_at` - Sort by newest first (default)\n- `?ordering=created_at` - Sort by oldest first\n- `?ordering=-effective_date` - Sort by newest effective date first\n- `?ordering=effective_date` - Sort by oldest effective date first"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Supports Filtering By:\n- insured\n- has_tasks\n- status\n- payment_status\n- coverage_type\n- carrier (carrier UUID; comma-separated for multiple)\n- wholesaler (wholesaler UUID; comma-separated for multiple)\n- broker (Agent ID)\n- effective_date_min (minimum effective date, inclusive)\n- effective_date_max (maximum effective date, inclusive)\n\nSupports Searching By:\n- insured\n\nSupports Sorting By:\n- created_at\n- effective_date\n\nAdditional actions:\n- GET ``filter-options``: returns the distinct carriers "
+        },
+        {
+          "info": {
+            "name": "Return distinct markets (carriers and wholesalers) for the broker's quotes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/quotes/filter-options",
+            "params": [
+              {
+                "name": "insured",
+                "value": "",
+                "type": "query",
+                "description": "insured"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              },
+              {
+                "name": "payment_status",
+                "value": "",
+                "type": "query",
+                "description": "payment_status"
+              },
+              {
+                "name": "coverage_type",
+                "value": "",
+                "type": "query",
+                "description": "coverage_type"
+              },
+              {
+                "name": "carrier",
+                "value": "",
+                "type": "query",
+                "description": "carrier"
+              },
+              {
+                "name": "wholesaler",
+                "value": "",
+                "type": "query",
+                "description": "wholesaler"
+              },
+              {
+                "name": "has_tasks",
+                "value": "",
+                "type": "query",
+                "description": "has_tasks"
+              },
+              {
+                "name": "broker",
+                "value": "",
+                "type": "query",
+                "description": "broker"
+              },
+              {
+                "name": "effective_date_min",
+                "value": "",
+                "type": "query",
+                "description": "effective_date_min"
+              },
+              {
+                "name": "effective_date_max",
+                "value": "",
+                "type": "query",
+                "description": "effective_date_max"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Used to populate the Markets filter on the broker /quotes page without\nloading the full global carrier/wholesaler catalogues. Honors the same\nrole-based scoping as the list endpoint (members only see quotes for\nbusinesses they're assigned to)."
+        },
+        {
+          "info": {
+            "name": "Paginated ViewSet for retrieving quotes for the broker.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/quotes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Quote (Coverage Term)."
+              }
+            ]
+          },
+          "docs": "Supports Filtering By:\n- insured\n- has_tasks\n- status\n- payment_status\n- coverage_type\n- carrier (carrier UUID; comma-separated for multiple)\n- wholesaler (wholesaler UUID; comma-separated for multiple)\n- broker (Agent ID)\n- effective_date_min (minimum effective date, inclusive)\n- effective_date_max (maximum effective date, inclusive)\n\nSupports Searching By:\n- insured\n\nSupports Sorting By:\n- created_at\n- effective_date\n\nAdditional actions:\n- GET ``filter-options``: returns the distinct carriers "
+        },
+        {
+          "info": {
+            "name": "Update Quote Follow-Up Notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/v2/broker/quotes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Quote (Coverage Term)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Toggle follow-up reminder emails to underwriters for this quote. Only follow_up_notifications is writable; all other quote fields are read-only and ignored if included."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

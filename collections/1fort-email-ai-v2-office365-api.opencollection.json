@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation email_ai (v2): office365 API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "email_ai (v2): office365",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Process incoming Office 365 push notification or validation request.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/office365/webhook"
+          },
+          "docs": "Validation request format (during subscription setup):\nGET with query param: ?validationToken=abc123xyz\n\nNotification payload format:\n{\n    \"value\": [{\n        \"subscriptionId\": \"...\",\n        \"changeType\": \"created\",\n        \"clientState\": \"secretClientValue\",\n        \"resource\": \"Users/{userId}/Messages/{messageId}\",\n        \"resourceData\": {\n            \"@odata.type\": \"#Microsoft.Graph.Message\",\n            \"@odata.id\": \"Users/{userId}/Messages/{messageId}\",\n            \"id\": \"{messageId}\"\n  "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

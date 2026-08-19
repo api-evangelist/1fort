@@ -1,0 +1,490 @@
+openapi: 3.2.0
+info:
+  title: 1Fort API Documentation Email AI Agent - Entities API
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: Email AI Agent - Entities
+  x-displayName: Entities
+  description: '**Access:** requires a JWT access token.'
+paths:
+  /v2/broker/agent/profiles/{profile_pk}/entities/search:
+    parameters:
+    - name: profile_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: agent_search_entities
+      summary: Search All Entities
+      description: '
+
+        Search across all entity types for a profile''s linked business.
+
+
+        **Requires**: Profile must be linked to a business.
+
+
+        **Filters**: Django ORM-style filters supported:
+
+        - Exact match: `{"status": "ACTIVE"}`
+
+        - In list: `{"status__in": ["ACTIVE", "PENDING"]}`
+
+        - Date range: `{"effective_date__gte": "2025-01-01", "effective_date__lte": "2025-12-31"}`
+
+        - Greater/less than: `{"premium__gt": 10000}`
+
+        - Case-insensitive: `{"quote_number__iexact": "Q123"}`
+
+        - Contains: `{"policy_number__icontains": "POL"}`
+
+
+        **Entity Types**: coverage_applications, quotes, policies, invoices, binders, cois
+
+
+        **Authentication**: Requires API Key + Session Token
+
+        '
+      parameters:
+      - name: X-Processing-Session
+        in: header
+        description: Processing session token (scopes access to broker)
+        required: true
+        schema:
+          type: string
+      - name: profile_pk
+        in: path
+        description: Profile ID (opensearch_profile_id)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySearchResponse'
+        '400':
+          description: Profile not linked to business
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: PROFILE_NOT_LINKED
+                message: Profile must be linked to a business.
+        '401':
+          description: Unauthorized - Invalid or missing API key or session token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: UNAUTHORIZED
+                  message: Invalid or missing authentication credentials
+        '404':
+          description: Not Found - Resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: NOT_FOUND
+                  message: Resource not found
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - Email AI Agent - Entities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntitySearchRequest'
+        required: true
+components:
+  schemas:
+    EntitySearchRequest:
+      type: object
+      properties:
+        filters:
+          title: Filters
+          description: 'Django ORM-style filters. Example: {"effective_date__gte": "2025-01-01", "status": "ACTIVE"}'
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          default: {}
+        entity_types:
+          description: Entity types to search. Defaults to all types.
+          type: array
+          items:
+            type: string
+            enum:
+            - binders
+            - policies
+            - coverage_applications
+            - invoices
+            - quotes
+            - cois
+        limit:
+          title: Limit
+          description: 'Maximum results per entity type (default: 20, max: 100).'
+          type: integer
+          default: 20
+          maximum: 100
+          minimum: 1
+        offset:
+          title: Offset
+          description: 'Offset for pagination (max: 1000).'
+          type: integer
+          default: 0
+          maximum: 1000
+          minimum: 0
+        order_by:
+          description: 'Fields to order by. Example: ["-effective_date", "status"].'
+          type: array
+          items:
+            type: string
+            minLength: 1
+    EntitySearchResponse:
+      required:
+      - profile_id
+      - business_id
+      - business_name
+      - coverage_applications
+      - quotes
+      - policies
+      - invoices
+      - binders
+      - cois
+      type: object
+      properties:
+        profile_id:
+          title: Profile id
+          type: string
+          minLength: 1
+        business_id:
+          title: Business id
+          type: integer
+        business_name:
+          title: Business name
+          type: string
+          minLength: 1
+        coverage_applications:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        quotes:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        policies:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        invoices:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        binders:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        cois:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+    ErrorResponse:
+      required:
+      - error
+      type: object
+      properties:
+        error:
+          title: Error
+          description: Error details with code and message.
+          type: object
+          additionalProperties:
+            type: string
+            minLength: 1
+        request_id:
+          title: Request id
+          description: Request ID for debugging.
+          type: string
+          minLength: 1
+        timestamp:
+          title: Timestamp
+          description: When the error occurred.
+          type: string
+          format: date-time
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

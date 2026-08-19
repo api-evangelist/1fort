@@ -1,0 +1,1335 @@
+openapi: 3.2.0
+info:
+  title: '1Fort API Documentation quote: applications API'
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: 'quote: applications'
+  x-displayName: Applications
+  description: '**Access:** requires a JWT access token.'
+paths:
+  /applications/{application_pk}/quotes:
+    parameters:
+    - name: application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: applications_quotes_list
+      summary: List Quotes by Application
+      description: List all quotes for a specific application of the business associated with the logged-in user.
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/QuoteReadOnly'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'quote: applications'
+  /applications/{application_pk}/quotes/{id}:
+    parameters:
+    - name: application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: A UUID string identifying this quote.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: applications_quotes_read
+      summary: Retrieve Quote by Application
+      description: Retrieve a quote for a specific application of the business associated with the logged-in user.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteReadOnly'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'quote: applications'
+components:
+  schemas:
+    Carrier:
+      required:
+      - name
+      - products
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        am_best_rating:
+          title: Am best rating
+          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarrierProduct'
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    QuoteReadOnly:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        business:
+          $ref: '#/components/schemas/BusinessList'
+        broker:
+          $ref: '#/components/schemas/BrokerAgency'
+        application:
+          $ref: '#/components/schemas/ApplicationList'
+        carrier:
+          $ref: '#/components/schemas/Carrier'
+        mga:
+          $ref: '#/components/schemas/Wholesaler'
+        download_pdf:
+          title: Download pdf
+          type: string
+          readOnly: true
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteFile'
+          readOnly: true
+        has_bind_request:
+          title: Has bind request
+          type: string
+          readOnly: true
+        version:
+          title: Version
+          type: string
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        status:
+          title: Status
+          type: string
+          enum:
+          - draft
+          - issued
+          - declined
+          - expired
+          - selected_for_binding
+          - awaiting_payment
+          - bound
+          - cancelled
+        quote_type:
+          title: Quote type
+          type: string
+          enum:
+          - excess
+          - ADMITTED
+          - SURPLUS_LINES
+          - ADMITTED_AND_SURPLUS_LINES
+        quote_number:
+          title: Quote number
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        policy_number:
+          title: Policy number
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        limit:
+          title: Limit
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        retention:
+          title: Retention
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        premium:
+          title: Premium
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        policy_term_months:
+          title: Policy term months
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        issue_date:
+          title: Issue date
+          type:
+          - string
+          - 'null'
+          format: date
+        minimum_days_to_cancel:
+          title: Minimum days to cancel
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        additional_notes:
+          title: Additional notes
+          type:
+          - string
+          - 'null'
+        type:
+          title: Type
+          type:
+          - string
+          - 'null'
+          enum:
+          - BUSINESS_OWNERS_POLICY
+          - WORKERS_COMPENSATION
+          - GENERAL_LIABILITY
+          - MISCELLANEOUS_PROFESSIONAL_LIABILITY
+          - CYBER
+          - PROFESSIONAL_LIABILITY
+          - TECHNOLOGY_ERRORS_AND_OMISSIONS
+          - DIRECTORS_AND_OFFICERS
+          - EMPLOYMENT_PRACTICES_LIABILITY
+          - FIDUCIARY_LIABILITY
+          - KIDNAP_AND_RANSOM
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    BusinessList:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        industry:
+          title: Industry
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        number_of_employees:
+          title: Number of employees
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        active:
+          title: Active
+          type: boolean
+        domain_name:
+          title: Domain name
+          type:
+          - string
+          - 'null'
+          maxLength: 500
+        subsidiaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessSubsidiary'
+          readOnly: true
+        revenue:
+          title: Revenue
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+    UserForBrokerAgency:
+      type: object
+      properties:
+        first_name:
+          title: First name
+          type: string
+          maxLength: 255
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          maxLength: 255
+          minLength: 1
+        user_defined_role:
+          title: User defined role
+          type: string
+          maxLength: 255
+          minLength: 1
+    AgencySubscription:
+      type: object
+      properties:
+        name:
+          title: Name
+          description: Display name for the plan (e.g. "Pro plan").
+          type: string
+          readOnly: true
+          minLength: 1
+        price:
+          title: Price
+          description: Plan price in dollars for the selected billing frequency.
+          type: string
+          format: decimal
+          readOnly: true
+        billing_frequency:
+          title: Billing frequency
+          description: How often the plan is billed.
+          type: string
+          enum:
+          - MONTHLY
+          - QUARTERLY
+          - ANNUALLY
+          readOnly: true
+        billing_frequency_display:
+          title: Billing frequency display
+          type: string
+          readOnly: true
+          minLength: 1
+        payment_status:
+          title: Payment status
+          description: Whether the agency has paid for the current billing period.
+          type: string
+          enum:
+          - PAID
+          - UNPAID
+          readOnly: true
+        payment_status_display:
+          title: Payment status display
+          type: string
+          readOnly: true
+          minLength: 1
+        manage_plan_url:
+          title: Manage plan url
+          description: External URL for the Manage plan button in broker settings.
+          type: string
+          format: uri
+          readOnly: true
+          minLength: 1
+    QuoteFile:
+      required:
+      - quote
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        download_file:
+          title: Download file
+          type: string
+          readOnly: true
+        file:
+          title: File
+          type: string
+          readOnly: true
+          format: uri
+        quote:
+          title: Quote
+          type: string
+          format: uuid
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        file_type:
+          title: File type
+          type: string
+          enum:
+          - quote
+          - binder
+          - invoice
+          - unspecified
+    ApplicationList:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        is_active:
+          title: Is active
+          type: boolean
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        effective_date:
+          title: Effective date
+          type:
+          - string
+          - 'null'
+          format: date
+        due_date:
+          title: Due date
+          type:
+          - string
+          - 'null'
+          format: date
+        policy_type:
+          title: Policy type
+          type: string
+          enum:
+          - ADMITTED
+          - SURPLUS_LINES
+          - ADMITTED_AND_SURPLUS_LINES
+        year:
+          title: Year
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        prefilled_application:
+          title: Prefilled application
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        additional_documents:
+          title: Additional documents
+          type:
+          - string
+          - 'null'
+        status:
+          title: Status
+          type: string
+          enum:
+          - draft
+          - in_progress
+          - needs_review
+          - submitted
+          - archived
+        email_type:
+          title: Email type
+          type: string
+          enum:
+          - default
+          - conversation
+        submission_type:
+          title: Submission type
+          type: string
+          enum:
+          - NEW
+          - RENEWAL
+          - OTHER
+        form_override:
+          title: Form override
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        submitted_by_business_at:
+          title: Submitted by business at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        brokerage_wants_place_directly:
+          title: Brokerage wants place directly
+          type: boolean
+        brokerage_wants_wholesale_with_1fort:
+          title: Brokerage wants wholesale with 1fort
+          type: boolean
+        can_1fort_approach_any_market_wholesale:
+          title: Can 1fort approach any market wholesale
+          type: boolean
+        quote_version:
+          title: Quote version
+          type: string
+          enum:
+          - MANUAL
+          - API
+        copy_src:
+          title: Copy src
+          description: Source action that triggered application copy (e.g., 'new_limit')
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        source:
+          title: Source
+          description: Where the application submission originated
+          type:
+          - string
+          - 'null'
+          enum:
+          - storefront
+          - broker_in_portal
+          - email_ai
+          - renewal
+        business:
+          title: Business
+          type:
+          - integer
+          - 'null'
+        brokerage_direct_placement_carriers:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        carriers_1fort_should_not_approach:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        coverage_types:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+    BusinessSubsidiary:
+      required:
+      - name
+      - business
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        ownership:
+          title: Ownership
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        business:
+          title: Business
+          type: integer
+    CarrierProduct:
+      type: object
+      properties:
+        code:
+          title: Code
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        product_line:
+          title: Product line
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        is_active:
+          title: Is active
+          type: boolean
+        policy_type:
+          title: Policy type
+          type: string
+          enum:
+          - ADMITTED
+          - SURPLUS_LINES
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        am_best_rating:
+          title: Am best rating
+          description: Carrier AM Best Rating.
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        eta_hours:
+          title: Eta hours
+          description: Estimated turnaround time in hours for this carrier product.
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: -2147483648
+    BrokerAgency:
+      required:
+      - name
+      - domain_name
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/UserForBrokerAgency'
+        broker_group:
+          title: Broker group
+          type: string
+          readOnly: true
+        agency_fee_type:
+          title: Agency fee type
+          type:
+          - string
+          - 'null'
+          enum:
+          - fixed
+          - minimum_commission
+          - percentage
+        subscription_plan_display:
+          title: Subscription plan display
+          type: string
+          readOnly: true
+          minLength: 1
+        subscription:
+          $ref: '#/components/schemas/AgencySubscription'
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        domain_name:
+          title: Domain name
+          type: string
+          maxLength: 500
+          minLength: 1
+        slug:
+          title: Slug
+          description: URL-safe identifier derived from domain_name (second-level label). Populated automatically when empty.
+          type:
+          - string
+          - 'null'
+          format: slug
+          pattern: ^[-a-zA-Z0-9_]+$
+          maxLength: 255
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        phone_number:
+          title: Phone number
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        plan:
+          title: Plan
+          type: string
+          enum:
+          - WHOLESALE
+          - SAAS
+          readOnly: true
+        subscription_plan:
+          title: Subscription plan
+          type: string
+          enum:
+          - ESSENTIALS
+          - PREMIUM
+          - ENTERPRISE
+          readOnly: true
+        is_test_account:
+          title: Is test account
+          type: boolean
+          readOnly: true
+        can_download_readiness_reports:
+          title: Can download readiness reports
+          type: boolean
+          readOnly: true
+        agency_id:
+          title: Agency id
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        full_address:
+          title: Full address
+          type:
+          - string
+          - 'null'
+        program_fee_cap:
+          title: Program fee cap
+          description: The maximum amount of program fee that the 1Fort can charge to the customer.
+          type:
+          - string
+          - 'null'
+          format: decimal
+          readOnly: true
+        program_fee_rate:
+          title: Program fee rate
+          description: Program fee rate (%) for quotes where 1Fort helped with submission (e.g., Herald, Manual).
+          type: string
+          format: decimal
+          readOnly: true
+        program_fee_rate_no_submission:
+          title: Program fee rate no submission
+          description: Program fee rate (%) for quotes where 1Fort did not help with submission (e.g., Email AI).
+          type: string
+          format: decimal
+        checkout_processing_fee_percent:
+          title: Checkout processing fee percent
+          description: Checkout card processing fee (%) — percent of subtotal only (no fixed fee; capped at 3%). Leave blank for default 3%. ACH/wire use a separate 1% + $0.30 default when this field is blank.
+          type:
+          - string
+          - 'null'
+          format: decimal
+        stripe_connect_payouts_enabled:
+          title: Stripe connect payouts enabled
+          description: When enabled, successful checkout payments allocate Stripe Connect transfers to the broker and carrier Express accounts.
+          type: boolean
+        disclaimer:
+          title: Disclaimer
+          type:
+          - string
+          - 'null'
+        support_email:
+          title: Support email
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 255
+        accounting_email:
+          description: List of accounting email addresses for this agency
+          type:
+          - array
+          - 'null'
+          items:
+            title: Accounting email
+            type: string
+            format: email
+            maxLength: 254
+            minLength: 1
+        marketing_placements_email:
+          description: List of marketing/placements email addresses for this agency
+          type:
+          - array
+          - 'null'
+          items:
+            title: Marketing placements email
+            type: string
+            format: email
+            maxLength: 254
+            minLength: 1
+        total_commercial_premium:
+          title: Total commercial premium
+          description: Total commercial premium for this agency
+          type:
+          - string
+          - 'null'
+          format: decimal
+        agency_fee:
+          title: Agency fee
+          description: Agency fee in dollars (used when agency_fee_type is null or fixed)
+          type: string
+          format: decimal
+        agency_fee_percentage:
+          title: Agency fee percentage
+          description: Agency fee as percentage (0-100), used when agency_fee_type is minimum_commission or percentage
+          type:
+          - string
+          - 'null'
+          format: decimal
+        disable_all_broker_emails:
+          title: Disable all broker emails
+          description: When enabled, disables all automated emails to brokers within this agency
+          type: boolean
+        auto_submit_renewal_applications:
+          title: Auto submit renewal applications
+          description: 'Opt-in: when on, renewal applications for this agency''s policies are created automatically ahead of policy expiration and renewal notification emails are sent'
+          type: boolean
+        disable_all_insured_emails:
+          title: Disable all insured emails
+          description: When enabled, disables all automated emails to insured/business users in this agency's businesses
+          type: boolean
+        disable_submission_follow_up_emails:
+          title: Disable submission follow up emails
+          description: When enabled, disables submission follow-up reminder emails for quotes in this agency
+          type: boolean
+        auto_create_sendgrid_domain_auth:
+          title: Auto create sendgrid domain auth
+          description: Automatically create SendGrid domain authentication records when this agency is created
+          type: boolean
+        sendgrid_domain_id:
+          title: Sendgrid domain id
+          description: SendGrid domain authentication ID returned when domain is registered
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        dba:
+          title: Dba
+          description: Doing Business As (DBA) name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        ein:
+          title: Ein
+          description: Employer Identification Number (EIN)
+          type:
+          - string
+          - 'null'
+          maxLength: 10
+        company_type:
+          title: Company type
+          description: Legal structure of the company
+          type:
+          - string
+          - 'null'
+          enum:
+          - SOLE_PROPRIETORSHIP
+          - GENERAL_PARTNERSHIP
+          - LIMITED_PARTNERSHIP
+          - LIMITED_LIABILITY_PARTNERSHIP
+          - LIMITED_LIABILITY_COMPANY
+          - C_CORPORATION
+          - S_CORPORATION
+        agency_type:
+          title: Agency type
+          description: Type of broker agency - Retailer or Wholesaler
+          type: string
+          enum:
+          - RETAILER
+          - WHOLESALER
+        bank_owner_type:
+          title: Bank owner type
+          description: Bank account owner type (Company or Individual)
+          type:
+          - string
+          - 'null'
+          enum:
+          - COMPANY
+          - INDIVIDUAL
+        bank_account_holder_name:
+          title: Bank account holder name
+          description: Name on the bank account
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        bank_account_number:
+          title: Bank account number
+          description: Bank account number
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        bank_routing_number:
+          title: Bank routing number
+          description: Bank routing number (9 digits)
+          type:
+          - string
+          - 'null'
+          maxLength: 9
+        trust_bank_owner_type:
+          title: Trust bank owner type
+          description: Trust bank account owner type (Company or Individual)
+          type:
+          - string
+          - 'null'
+          enum:
+          - COMPANY
+          - INDIVIDUAL
+        trust_bank_account_holder_name:
+          title: Trust bank account holder name
+          description: Name on the trust bank account
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        trust_bank_routing_number:
+          title: Trust bank routing number
+          description: Trust bank routing number (9 digits)
+          type:
+          - string
+          - 'null'
+          maxLength: 9
+        trust_bank_account_number:
+          title: Trust bank account number
+          description: Trust bank account number
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        carrier_payables_enabled:
+          title: Carrier payables enabled
+          description: Enable or disable carrier payables for this agency
+          type: boolean
+        payment_schedule:
+          title: Payment schedule
+          description: Payable schedule for the billing company
+          type: string
+          enum:
+          - as_available
+          - monthly_1st
+          - monthly_15th
+          - monthly_last_day
+        one_time_payment_account:
+          title: One time payment account
+          description: Account where one-time payment funds are transferred
+          type:
+          - string
+          - 'null'
+          enum:
+          - operational
+          - trust
+        require_refund_approval_via_check:
+          title: Require refund approval via check
+          description: Require approval for all refunds issued via check
+          type: boolean
+        require_refund_approval_over_amount_cents:
+          title: Require refund approval over amount cents
+          description: Require approval for all refunds over this amount (in cents). When set, e.g. 500000 = $5,000.
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        market_access_enabled:
+          title: Market access enabled
+          description: Enable Market Access feature for this agency. When enabled, brokers can access 1Fort wholesale markets.
+          type: boolean
+        use_accord_forms:
+          title: Use accord forms
+          description: When enabled for non-core coverage applications, use ACORD form tables to generate questions instead of LLM.
+          type: boolean
+        broker_email:
+          title: Broker email
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        broker_password:
+          title: Broker password
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        default_storefront_broker_user:
+          title: Default storefront broker user
+          description: Broker user whose storefront is used for agency subdomain root and generic pay-bill when no broker-user slug is in the URL.
+          type:
+          - integer
+          - 'null'
+    Wholesaler:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        is_active:
+          title: Is active
+          type: boolean
+        is_owned_by_1fort:
+          title: Is owned by 1fort
+          description: Indicates if this wholesaler is owned by 1Fort
+          type: boolean
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

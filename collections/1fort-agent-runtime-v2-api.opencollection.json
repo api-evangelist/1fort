@@ -1,0 +1,143 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation agent_runtime (v2) agent_runtime (v2) API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "agent_runtime (v2)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "POST /v2/broker/agent/businesses",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/businesses"
+          },
+          "docs": "Create a business for the session's broker directly from extracted document\ndata, with no EmailInsured profile. Address/contacts are written as\nParameterValue via the shared writer (same as the email business creator)."
+        },
+        {
+          "info": {
+            "name": "GET /v2/broker/agent/businesses/find",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/businesses/find"
+          },
+          "docs": "Broker-scoped business search (NOT profile search), backed by the broker's\nOpenSearch index. The quote runtime uses this to find an existing business\nbefore creating one. Query params (all optional, pass what you have):\n`q`/`name`/`domain_name`/`address` fuzzy-match the name and full address;\n`state` and `postal_code` boost exact matches (postal is the strongest\nsame-business signal); `limit` caps results (default 20, max 100). Returns\n`{count, results: [{id, name, domain_name, addresses}]}` ran"
+        },
+        {
+          "info": {
+            "name": "POST /v2/broker/agent/businesses/{business_id}/update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/businesses/:business_id/update",
+            "params": [
+              {
+                "name": "business_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates an existing business with details from source documents. Real model\ncolumns are written directly; address and contacts go to ParameterValue via\nthe shared writer. Never creates a business."
+        },
+        {
+          "info": {
+            "name": "GET /v2/broker/agent/quotes/{quote_id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/quotes/:quote_id",
+            "params": [
+              {
+                "name": "quote_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Broker-scoped read of a draft quote (NOT profile-scoped). The runtime uses\nthis to inspect what the draft already has before filling, so re-runs stay\nidempotent. Reads through the CoverageTermQuote proxy for the same flat\nfields the profile retrieve returns."
+        },
+        {
+          "info": {
+            "name": "POST /v2/broker/agent/quotes/{quote_id}/fill",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/quotes/:quote_id/fill",
+            "params": [
+              {
+                "name": "quote_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fills an existing draft quote in place from agent-extracted data, scoped to a\nbusiness (no profile). Body: business_id + nested coverage_term + header\nfields. Creates the CoverageTerm and CoverageApplication only if the draft\ndoesn't already have them (idempotent re-runs)."
+        },
+        {
+          "info": {
+            "name": "List Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/sessions/:session_pk/files",
+            "params": [
+              {
+                "name": "session_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GET /v2/broker/agent/sessions/{session_pk}/files"
+        },
+        {
+          "info": {
+            "name": "List Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/sessions/:session_pk/files/:file_pk/content",
+            "params": [
+              {
+                "name": "session_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GET /v2/broker/agent/sessions/{session_pk}/files/{file_pk}/content"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

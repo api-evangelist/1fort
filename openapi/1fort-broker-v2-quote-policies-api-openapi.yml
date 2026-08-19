@@ -1,0 +1,912 @@
+openapi: 3.2.0
+info:
+  title: '1Fort API Documentation broker (v2): quote-policies API'
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: 'broker (v2): quote-policies'
+  x-displayName: Quote policies
+  description: '**Access:** requires a JWT access token.'
+paths:
+  /v2/broker/quote-policies:
+    parameters: []
+    get:
+      operationId: v2_broker_quote-policies_list
+      summary: Paginated ViewSet for retrieving quote policies for the broker.
+      description: 'Supports Filtering By:
+
+        - insured (business name)
+
+        - coverage (product line code: BOP, CYB, GL, etc.)
+
+        - primary_agent (user id)
+
+        - owner (alias for primary_agent, user id)
+
+        - team_member (broker user id, any assigned agent - primary or not)
+
+        - market (market id)
+
+        - carrier (carrier id)
+
+        - payment_status
+
+        - status
+
+        - effective_date_min (minimum effective date, inclusive)
+
+        - effective_date_max (maximum effective date, inclusive)
+
+        - expires_in (number of days from today, filters policies expiring within that range)
+
+
+        Supports Searching By:
+
+        - insured (business name)
+
+        - policy_number
+
+
+        Expandable Fields:
+
+        - coverage_application
+
+        - herald_quote
+
+        - documents'
+      parameters:
+      - name: insured
+        in: query
+        description: 'Filter policies by insured name. Supports comma-separated values.
+
+
+          Examples:
+
+          - `?insured=Acme Inc.` - Matches policies with ''Acme Inc.'' in insured name
+
+          - `?insured=Acme Inc.,Acme Corp.` - Matches policies with ''Acme Inc.'' or ''Acme Corp.'' in insured name'
+        required: false
+        schema:
+          type: string
+      - name: coverage
+        in: query
+        description: 'Filter policies by coverage type code. Supports comma-separated values.
+
+
+          Available codes:
+
+          - `BOP` - Business Owners Policy
+
+          - `WC` - Workers Compensation
+
+          - `GL` - General Liability
+
+          - `ML` - Management Liability
+
+          - `MPL` - Miscellaneous Professional Liability
+
+          - `CYB` - Cyber
+
+          - `PL` - Professional Liability
+
+          - `TEO` - Technology Errors & Omissions
+
+          - `PROP` - Property
+
+          - `AUTO` - Auto
+
+          - `UMB` - Umbrella
+
+          - `FLOOD` - Flood
+
+
+          Examples:
+
+          - `?coverage=CYB` - Matches Cyber policies
+
+          - `?coverage=CYB,GL` - Matches Cyber or General Liability policies'
+        required: false
+        schema:
+          type: string
+      - name: primary_agent
+        in: query
+        description: 'Filter policies by primary agent(s). Supports comma-separated values to filter by multiple agents. Searches by user id.
+
+
+          Examples:
+
+          - `?primary_agent=123` - Matches primary agents with user id 123
+
+          - `?primary_agent=123,456` - Matches primary agents with user id 123 or 456'
+        required: false
+        schema:
+          type: string
+      - name: owner
+        in: query
+        description: 'Filter policies by owner (alias for primary_agent). Supports comma-separated values to filter by multiple owners. Searches by user id.
+
+
+          Examples:
+
+          - `?owner=123` - Matches owners with user id 123
+
+          - `?owner=123,456` - Matches owners with user id 123 or 456'
+        required: false
+        schema:
+          type: string
+      - name: payment_status
+        in: query
+        description: 'Filter policies by payment status. Supports comma-separated values.
+
+
+          Examples:
+
+          - `?payment_status=done` - Matches policies with ''done'' payment status
+
+          - `?payment_status=todo,done` - Matches policies with ''todo'' or ''done'' payment status'
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: 'Filter policies by status. Supports comma-separated values.
+
+
+          Examples:
+
+          - `?status=ISSUED` - Matches policies with ''ISSUED'' status
+
+          - `?status=ISSUED,ACTIVE` - Matches policies with ''ISSUED'' or ''ACTIVE'' status'
+        required: false
+        schema:
+          type: string
+      - name: market
+        in: query
+        description: 'Filter policies by market ID. Supports comma-separated values to filter by multiple markets.
+
+
+          Examples:
+
+          - `?market=550e8400-e29b-41d4-a716-446655440000` - Matches policies from specific market
+
+          - `?market=market-id-1,market-id-2` - Matches policies from multiple markets'
+        required: false
+        schema:
+          type: string
+      - name: carrier
+        in: query
+        description: 'Filter policies by carrier ID. Supports comma-separated values to filter by multiple carriers.
+
+
+          Examples:
+
+          - `?carrier=1` - Matches policies from carrier with ID 1
+
+          - `?carrier=1,2,3` - Matches policies from carriers with IDs 1, 2, or 3'
+        required: false
+        schema:
+          type: string
+      - name: effective_date_min
+        in: query
+        description: 'Filter policies by minimum effective date (inclusive). Use ISO 8601 date format.
+
+
+          Examples:
+
+          - `?effective_date_min=2024-01-01` - Matches policies with effective date on or after January 1, 2024
+
+          - `?effective_date_min=2024-01-01&effective_date_max=2024-12-31` - Matches policies with effective date in 2024'
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: effective_date_max
+        in: query
+        description: 'Filter policies by maximum effective date (inclusive). Use ISO 8601 date format.
+
+
+          Examples:
+
+          - `?effective_date_max=2024-12-31` - Matches policies with effective date on or before December 31, 2024
+
+          - `?effective_date_min=2024-01-01&effective_date_max=2024-12-31` - Matches policies with effective date in 2024'
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: team_member
+        in: query
+        description: team_member
+        required: false
+        schema:
+          type: string
+      - name: broker
+        in: query
+        description: broker
+        required: false
+        schema:
+          type: string
+      - name: expires_in
+        in: query
+        description: expires_in
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: 'Order policies by specified fields. Use ''-'' prefix for descending order.
+
+
+          Available fields:
+
+          - `created_at` - Creation date
+
+          - `effective_date` - Policy effective date
+
+
+          Examples:
+
+          - `?ordering=created_at` - Order by creation date (oldest first)
+
+          - `?ordering=-created_at` - Order by creation date (newest first, default)
+
+          - `?ordering=effective_date` - Order by effective date (oldest first)
+
+          - `?ordering=-effective_date` - Order by effective date (newest first)'
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BrokerQuotePolicyV2FlexFields'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'broker (v2): quote-policies'
+  /v2/broker/quote-policies/csv:
+    parameters: []
+    get:
+      operationId: v2_broker_quote-policies_export_csv
+      description: 'Export quote policies to CSV format.
+
+        Returns all filtered policies without pagination, up to a maximum limit.'
+      parameters:
+      - name: insured
+        in: query
+        description: insured
+        required: false
+        schema:
+          type: string
+      - name: coverage
+        in: query
+        description: coverage
+        required: false
+        schema:
+          type: string
+      - name: primary_agent
+        in: query
+        description: primary_agent
+        required: false
+        schema:
+          type: string
+      - name: owner
+        in: query
+        description: owner
+        required: false
+        schema:
+          type: string
+      - name: payment_status
+        in: query
+        description: payment_status
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: status
+        required: false
+        schema:
+          type: string
+      - name: market
+        in: query
+        description: market
+        required: false
+        schema:
+          type: string
+      - name: carrier
+        in: query
+        description: carrier
+        required: false
+        schema:
+          type: string
+      - name: effective_date_min
+        in: query
+        description: effective_date_min
+        required: false
+        schema:
+          type: string
+      - name: effective_date_max
+        in: query
+        description: effective_date_max
+        required: false
+        schema:
+          type: string
+      - name: team_member
+        in: query
+        description: team_member
+        required: false
+        schema:
+          type: string
+      - name: broker
+        in: query
+        description: broker
+        required: false
+        schema:
+          type: string
+      - name: expires_in
+        in: query
+        description: expires_in
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            '*/*':
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BrokerQuotePolicyV2FlexFields'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'broker (v2): quote-policies'
+      summary: Export csv
+  /v2/broker/quote-policies/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this Policy.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: v2_broker_quote-policies_read
+      summary: Paginated ViewSet for retrieving quote policies for the broker.
+      description: 'Supports Filtering By:
+
+        - insured (business name)
+
+        - coverage (product line code: BOP, CYB, GL, etc.)
+
+        - primary_agent (user id)
+
+        - owner (alias for primary_agent, user id)
+
+        - team_member (broker user id, any assigned agent - primary or not)
+
+        - market (market id)
+
+        - carrier (carrier id)
+
+        - payment_status
+
+        - status
+
+        - effective_date_min (minimum effective date, inclusive)
+
+        - effective_date_max (maximum effective date, inclusive)
+
+        - expires_in (number of days from today, filters policies expiring within that range)
+
+
+        Supports Searching By:
+
+        - insured (business name)
+
+        - policy_number
+
+
+        Expandable Fields:
+
+        - coverage_application
+
+        - herald_quote
+
+        - documents'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerQuotePolicyV2FlexFields'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'broker (v2): quote-policies'
+  /v2/broker/quote-policies/{id}/documents/{document_pk}:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this Policy.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    - name: document_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_quote-policies_get_document
+      description: Get a document for a quote policy.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerQuotePolicyV2FlexFields'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'broker (v2): quote-policies'
+      summary: Get document
+components:
+  schemas:
+    BrokerQuotePolicyV2FlexFields:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        insured:
+          title: Insured
+          type: string
+          readOnly: true
+        carrier:
+          title: Carrier
+          type: string
+          readOnly: true
+        coverage_type:
+          title: Coverage type
+          type: string
+          readOnly: true
+          minLength: 1
+        limit:
+          title: Limit
+          type: integer
+          readOnly: true
+        coverage_application:
+          title: Coverage application
+          description: Bridge FK — links to the legacy coverage application that produced this policy; renewals still run on it.
+          type:
+          - string
+          - 'null'
+          format: uuid
+        herald_quote:
+          title: Herald quote
+          type: string
+          format: uuid
+          readOnly: true
+        primary_agent:
+          title: Primary agent
+          type: string
+          readOnly: true
+        all_agents:
+          title: All agents
+          type: string
+          readOnly: true
+        status:
+          title: Status
+          type: string
+          readOnly: true
+          minLength: 1
+        policy_number:
+          title: Policy number
+          type: string
+          maxLength: 255
+        payment_status:
+          title: Payment status
+          type: string
+          readOnly: true
+        effective_date:
+          title: Effective date
+          type:
+          - string
+          - 'null'
+          format: date
+        expiration_date:
+          title: Expiration date
+          type:
+          - string
+          - 'null'
+          format: date
+        documents:
+          title: Documents
+          type: string
+          readOnly: true
+        source:
+          title: Source
+          type: string
+          readOnly: true
+        source_display:
+          title: Source display
+          type: string
+          readOnly: true
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

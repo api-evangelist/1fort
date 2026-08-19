@@ -1,0 +1,1652 @@
+openapi: 3.2.0
+info:
+  title: 1Fort API Documentation Email AI Agent - Profiles API
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: Email AI Agent - Profiles
+  x-displayName: Profiles
+  description: '**Access:** requires a JWT access token.'
+paths:
+  /v2/broker/agent/profiles:
+    parameters: []
+    get:
+      operationId: agent_get_profile
+      summary: Get Profile
+      description: '
+
+        Retrieve detailed information for a single profile.
+
+
+        **Authentication**: Requires API Key + Session Token
+
+
+        **Scoping**: Profile must belong to the session''s broker.
+
+        '
+      parameters:
+      - name: X-Processing-Session
+        in: header
+        description: Processing session token (scopes access to broker)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentProfileDetail'
+        '401':
+          description: Unauthorized - Invalid or missing API key or session token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: UNAUTHORIZED
+                  message: Invalid or missing authentication credentials
+        '403':
+          description: Forbidden - Resource belongs to unauthorized broker
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: FORBIDDEN
+                  message: Access denied - resource outside session scope
+        '404':
+          description: Not Found - Resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: NOT_FOUND
+                  message: Resource not found
+        '500':
+          description: Internal server error.
+      tags:
+      - Email AI Agent - Profiles
+    post:
+      operationId: agent_create_profile_v2
+      summary: Create Profile
+      description: '
+
+        Create a new insured profile.
+
+
+        Returns the opensearch_profile_id which should be used for subsequent updates.
+
+
+        **Authentication**: Requires API Key + Session Token
+
+        '
+      parameters:
+      - name: X-Processing-Session
+        in: header
+        description: Processing session token (scopes access to broker)
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentProfileUpsertResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key or session token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: UNAUTHORIZED
+                  message: Invalid or missing authentication credentials
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - Email AI Agent - Profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentProfileUpsert'
+        required: true
+    put:
+      operationId: agent_update_profile_v2
+      summary: Update Profile (Full Replace)
+      description: '
+
+        Replace an existing profile with new data.
+
+
+        Uses PUT semantics - the entire profile is replaced with the provided data.
+
+        Use the opensearch_profile_id from search results or creation response.
+
+
+        **Authentication**: Requires API Key + Session Token
+
+        '
+      parameters:
+      - name: X-Processing-Session
+        in: header
+        description: Processing session token (scopes access to broker)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentProfileUpsertResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key or session token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: UNAUTHORIZED
+                  message: Invalid or missing authentication credentials
+        '404':
+          description: Not Found - Resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: NOT_FOUND
+                  message: Resource not found
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - Email AI Agent - Profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentProfileUpsert'
+        required: true
+  /v2/broker/agent/profiles/search:
+    parameters: []
+    post:
+      operationId: agent_search_profiles
+      summary: Search Profiles (OpenSearch)
+      description: "\nExecute an OpenSearch query against the broker's profile index.\n\nThe request body should be a valid OpenSearch query DSL. The query is executed\nagainst the broker-specific index (`insureds-{broker_id}`), ensuring tenant isolation.\n\n**Example Query - Full-text search**:\n```json\n{\n  \"query\": {\n    \"multi_match\": {\n      \"query\": \"acme\",\n      \"fields\": [\"insured\", \"domains\", \"emails\"],\n      \"fuzziness\": \"AUTO\"\n    }\n  },\n  \"size\": 20\n}\n```\n\n**Example Query - Exact domain match**:\n```json\n{\n  \"query\": {\n    \"term\": {\n      \"domains\": \"acme.com\"\n    }\n  }\n}\n```\n\n**Example Query - Complex bool query**:\n```json\n{\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\"match\": {\"insured\": \"acme\"}}\n      ],\n      \"filter\": [\n        {\"exists\": {\"field\": \"ein\"}}\n      ]\n    }\n  },\n  \"size\": 50,\n  \"sort\": [{\"insured.keyword\": \"asc\"}]\n}\n```\n\n**Index Fields**:\n- `profile_id`: Unique profile identifier\n- `insured`: Company/insured name\n- `domains`: Array of domain names\n- `emails`: Array of email addresses\n- `phone_numbers`: Array of phone numbers\n- `addresses`: Array of address objects\n- `people`: Array of contact people\n- `ein`: EIN/FEIN tax identifier\n- `industry_classification`: Industry category\n- `employee_count`: Number of employees\n- `annual_revenue`: Annual revenue\n- `broker_account_id`: Broker ID (automatically filtered)\n\n**Limits**:\n- Maximum `size`: 100 results\n- Maximum `from`: 1000\n\n**Authentication**: Requires API Key + Session Token\n"
+      parameters:
+      - name: X-Processing-Session
+        in: header
+        description: Processing session token (scopes access to broker)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OpenSearch response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  took:
+                    description: Time in milliseconds
+                    type: integer
+                  hits:
+                    type: object
+                    properties:
+                      total:
+                        type: object
+                        properties:
+                          value:
+                            type: integer
+                          relation:
+                            type: string
+                      hits:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            _id:
+                              type: string
+                            _score:
+                              type: number
+                            _source:
+                              type: object
+        '400':
+          description: Invalid query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key or session token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: UNAUTHORIZED
+                  message: Invalid or missing authentication credentials
+        '403':
+          description: Forbidden - Resource belongs to unauthorized broker
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: FORBIDDEN
+                  message: Access denied - resource outside session scope
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - Email AI Agent - Profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: OpenSearch query DSL
+              type: object
+              example:
+                query:
+                  multi_match:
+                    query: acme corporation
+                    fields:
+                    - insured
+                    - domains
+                    fuzziness: AUTO
+                size: 20
+        required: true
+  /v2/broker/agent/profiles/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: agent_get_profile
+      summary: Get Profile
+      description: '
+
+        Retrieve detailed information for a single profile.
+
+
+        **Authentication**: Requires API Key + Session Token
+
+
+        **Scoping**: Profile must belong to the session''s broker.
+
+        '
+      parameters:
+      - name: X-Processing-Session
+        in: header
+        description: Processing session token (scopes access to broker)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentProfileDetail'
+        '401':
+          description: Unauthorized - Invalid or missing API key or session token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: UNAUTHORIZED
+                  message: Invalid or missing authentication credentials
+        '403':
+          description: Forbidden - Resource belongs to unauthorized broker
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: FORBIDDEN
+                  message: Access denied - resource outside session scope
+        '404':
+          description: Not Found - Resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: NOT_FOUND
+                  message: Resource not found
+        '500':
+          description: Internal server error.
+      tags:
+      - Email AI Agent - Profiles
+    post:
+      operationId: agent_create_profile_v2
+      summary: Create Profile
+      description: '
+
+        Create a new insured profile.
+
+
+        Returns the opensearch_profile_id which should be used for subsequent updates.
+
+
+        **Authentication**: Requires API Key + Session Token
+
+        '
+      parameters:
+      - name: X-Processing-Session
+        in: header
+        description: Processing session token (scopes access to broker)
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentProfileUpsertResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key or session token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: UNAUTHORIZED
+                  message: Invalid or missing authentication credentials
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - Email AI Agent - Profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentProfileUpsert'
+        required: true
+    put:
+      operationId: agent_update_profile_v2
+      summary: Update Profile (Full Replace)
+      description: '
+
+        Replace an existing profile with new data.
+
+
+        Uses PUT semantics - the entire profile is replaced with the provided data.
+
+        Use the opensearch_profile_id from search results or creation response.
+
+
+        **Authentication**: Requires API Key + Session Token
+
+        '
+      parameters:
+      - name: X-Processing-Session
+        in: header
+        description: Processing session token (scopes access to broker)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentProfileUpsertResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key or session token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: UNAUTHORIZED
+                  message: Invalid or missing authentication credentials
+        '404':
+          description: Not Found - Resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: NOT_FOUND
+                  message: Resource not found
+        '403':
+          description: Permission denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - Email AI Agent - Profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentProfileUpsert'
+        required: true
+  /v2/broker/agent/profiles/{id}/business-candidates:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this Email Insured Profile.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: agent_get_business_candidates
+      summary: Get Business Candidates
+      description: '
+
+        Get scored business candidates for a profile, ranked best-first.
+
+
+        Each candidate carries a `score` in [0, 1], the `match_reasons` that
+
+        contributed (e.g. `domain_match`, `name_exact`, `name_normalized`,
+
+        `business_user_email`, `parameter_value`, `fuzzy_search`) and any `conflicts`
+
+        that should give pause before linking (e.g. `archived_business`,
+
+        `generic_domain_only`). Candidate generation combines deterministic Postgres
+
+        signals (recency-safe) with fuzzy OpenSearch recall for typos/variants.
+
+
+        The agent uses this to decide whether to:
+
+        - Link to an existing business (prefer the highest-scoring, conflict-free match)
+
+        - Create a new business (if no match or the candidates are weak/ambiguous)
+
+
+        **Authentication**: Requires API Key + Session Token
+
+
+        **Scoping**: Profile must belong to the session''s broker.
+
+        '
+      parameters:
+      - name: X-Processing-Session
+        in: header
+        description: Processing session token (scopes access to broker)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentBusinessCandidatesResponse'
+        '401':
+          description: Unauthorized - Invalid or missing API key or session token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: UNAUTHORIZED
+                  message: Invalid or missing authentication credentials
+        '403':
+          description: Forbidden - Resource belongs to unauthorized broker
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: FORBIDDEN
+                  message: Access denied - resource outside session scope
+        '404':
+          description: Not Found - Resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: NOT_FOUND
+                  message: Resource not found
+        '500':
+          description: Internal server error.
+      tags:
+      - Email AI Agent - Profiles
+  /v2/broker/agent/profiles/{id}/create-business:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this Email Insured Profile.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    post:
+      operationId: agent_create_business_from_profile
+      summary: Create Business from Profile
+      description: '
+
+        Create a new business entity from the profile''s data and link them.
+
+
+        **Request Body** (optional overrides):
+
+        - `name`: Override business name (defaults to profile''s insured name)
+
+        - `domain_name`: Override domain (defaults to first domain in profile)
+
+        - `assign_agent_from_email`: Assign business to agent from source email''s user (default: true)
+
+        - `confirmed_duplicate_reviewed`: Confirm you reviewed a prior 409''s candidates and none is the same company
+
+        - `duplicate_review_reason`: Why the closest candidate is a different company (required with the confirmation)
+
+
+        **Duplicate gate**: If existing businesses match this profile, the request is
+
+        refused with 409 `duplicate_candidates` carrying the scored candidate list.
+
+        Link the matching candidate via link-business, or retry with
+
+        `confirmed_duplicate_reviewed=true` plus a `duplicate_review_reason` if none
+
+        is the same company.
+
+
+        **Authentication**: Requires API Key + Session Token
+
+
+        **Scoping**: Profile must belong to the session''s broker.
+
+        '
+      parameters:
+      - name: X-Processing-Session
+        in: header
+        description: Processing session token (scopes access to broker)
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentProfileCreateBusinessResponse'
+        '400':
+          description: Profile missing required data
+        '401':
+          description: Unauthorized - Invalid or missing API key or session token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: UNAUTHORIZED
+                  message: Invalid or missing authentication credentials
+        '403':
+          description: Forbidden - Resource belongs to unauthorized broker
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: FORBIDDEN
+                  message: Access denied - resource outside session scope
+        '404':
+          description: Not Found - Resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: NOT_FOUND
+                  message: Resource not found
+        '409':
+          description: Profile already linked to a business, or duplicate candidates must be reviewed before creating
+        '500':
+          description: Internal server error.
+      tags:
+      - Email AI Agent - Profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentProfileCreateBusiness'
+        required: true
+  /v2/broker/agent/profiles/{id}/link-business:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this Email Insured Profile.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    post:
+      operationId: agent_link_profile_to_business
+      summary: Link Profile to Business
+      description: '
+
+        Link a profile to an existing business.
+
+
+        **Request Body**:
+
+        - `business_id` (required): Business ID to link to
+
+
+        **Validation**:
+
+        - Business must belong to same broker
+
+        - Returns error if profile is already linked to a different business
+
+
+        **Authentication**: Requires API Key + Session Token
+
+
+        **Scoping**: Profile and business must belong to the session''s broker.
+
+        '
+      parameters:
+      - name: X-Processing-Session
+        in: header
+        description: Processing session token (scopes access to broker)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentProfileLinkBusinessResponse'
+        '400':
+          description: Validation error
+        '401':
+          description: Unauthorized - Invalid or missing API key or session token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: UNAUTHORIZED
+                  message: Invalid or missing authentication credentials
+        '403':
+          description: Forbidden - Resource belongs to unauthorized broker
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: FORBIDDEN
+                  message: Access denied - resource outside session scope
+        '404':
+          description: Not Found - Resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: NOT_FOUND
+                  message: Resource not found
+        '409':
+          description: Profile already linked to different business
+        '500':
+          description: Internal server error.
+      tags:
+      - Email AI Agent - Profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentProfileLinkBusiness'
+        required: true
+  /v2/broker/agent/profiles/{id}/link-email:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this Email Insured Profile.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    post:
+      operationId: agent_link_profile_to_email
+      summary: Link Profile to Email
+      description: '
+
+        Link a profile to additional emails and/or attachments.
+
+
+        **Request Body**:
+
+        - `email_id`: Email ID to link
+
+        - `attachment_ids`: List of attachment IDs to link
+
+
+        At least one of email_id or attachment_ids must be provided.
+
+
+        **Authentication**: Requires API Key + Session Token
+
+
+        **Scoping**: Profile, email, and attachments must belong to the session''s broker.
+
+        '
+      parameters:
+      - name: X-Processing-Session
+        in: header
+        description: Processing session token (scopes access to broker)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentProfileLinkEmailResponse'
+        '400':
+          description: Validation error
+        '401':
+          description: Unauthorized - Invalid or missing API key or session token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: UNAUTHORIZED
+                  message: Invalid or missing authentication credentials
+        '403':
+          description: Forbidden - Resource belongs to unauthorized broker
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: FORBIDDEN
+                  message: Access denied - resource outside session scope
+        '404':
+          description: Not Found - Resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: NOT_FOUND
+                  message: Resource not found
+        '500':
+          description: Internal server error.
+      tags:
+      - Email AI Agent - Profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentProfileLinkEmail'
+        required: true
+components:
+  schemas:
+    AgentProfileUpsertResponse:
+      type: object
+      properties:
+        id:
+          title: Id
+          description: Profile ID (opensearch_profile_id).
+          type: string
+          readOnly: true
+          minLength: 1
+        insured:
+          title: Insured
+          type: string
+          readOnly: true
+          minLength: 1
+        created:
+          title: Created
+          description: True if new profile was created, False if existing was updated.
+          type: boolean
+          readOnly: true
+        business:
+          $ref: '#/components/schemas/AgentProfileBusiness'
+    AgentProfileBusiness:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          readOnly: true
+          minLength: 1
+        domain_name:
+          title: Domain name
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    AgentAddress:
+      type: object
+      properties:
+        street:
+          title: Street
+          type: string
+        city:
+          title: City
+          type: string
+        state:
+          title: State
+          type: string
+        zip:
+          title: Zip
+          type: string
+        postal_code:
+          title: Postal code
+          type: string
+        country:
+          title: Country
+          type: string
+        full_address:
+          title: Full address
+          type: string
+    ErrorResponse:
+      required:
+      - error
+      type: object
+      properties:
+        error:
+          title: Error
+          description: Error details with code and message.
+          type: object
+          additionalProperties:
+            type: string
+            minLength: 1
+        request_id:
+          title: Request id
+          description: Request ID for debugging.
+          type: string
+          minLength: 1
+        timestamp:
+          title: Timestamp
+          description: When the error occurred.
+          type: string
+          format: date-time
+    AgentSourceDocument:
+      required:
+      - document_type
+      - document_id
+      type: object
+      properties:
+        document_type:
+          title: Document type
+          description: Whether source is email body or attachment.
+          type: string
+          enum:
+          - email_body
+          - attachment
+        document_id:
+          title: Document id
+          description: UUID of the source email or attachment.
+          type: string
+          format: uuid
+        email_id:
+          title: Email id
+          description: UUID of the parent email (for attachments).
+          type:
+          - string
+          - 'null'
+          format: uuid
+    AgentProfileCreateBusinessResponse:
+      type: object
+      properties:
+        business_id:
+          title: Business id
+          type: string
+          format: uuid
+          readOnly: true
+        business_name:
+          title: Business name
+          type: string
+          readOnly: true
+          minLength: 1
+        created:
+          title: Created
+          type: boolean
+          readOnly: true
+        profile_linked:
+          title: Profile linked
+          type: boolean
+          readOnly: true
+        agent_assigned:
+          title: Agent assigned
+          type: boolean
+          readOnly: true
+        agent_id:
+          title: Agent id
+          type:
+          - string
+          - 'null'
+          format: uuid
+          readOnly: true
+    AgentProfileDetail:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          readOnly: true
+          minLength: 1
+        insured:
+          title: Insured
+          type: string
+          readOnly: true
+          minLength: 1
+        domains:
+          title: Domains
+          type: object
+          readOnly: true
+        emails:
+          title: Emails
+          type: object
+          readOnly: true
+        phone_numbers:
+          title: Phone numbers
+          type: object
+          readOnly: true
+        addresses:
+          title: Addresses
+          type: object
+          readOnly: true
+        people:
+          title: People
+          type: object
+          readOnly: true
+        business:
+          $ref: '#/components/schemas/AgentProfileBusiness'
+        linked_emails:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentProfileLinkedEmail'
+          readOnly: true
+        linked_attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentProfileLinkedAttachment'
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+    AgentProfileLinkBusiness:
+      required:
+      - business_id
+      type: object
+      properties:
+        business_id:
+          title: Business id
+          description: Business ID to link to.
+          type: string
+          format: uuid
+    AgentProfileLinkEmailResponse:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        linked_emails_count:
+          title: Linked emails count
+          type: integer
+          readOnly: true
+        linked_attachments_count:
+          title: Linked attachments count
+          type: integer
+          readOnly: true
+        newly_linked:
+          title: Newly linked
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          readOnly: true
+    AgentProfileLinkBusinessResponse:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        business_id:
+          title: Business id
+          type: string
+          format: uuid
+          readOnly: true
+        business_name:
+          title: Business name
+          type: string
+          readOnly: true
+          minLength: 1
+        linked:
+          title: Linked
+          type: boolean
+          readOnly: true
+    AgentBusinessCandidatesResponse:
+      type: object
+      properties:
+        profile_id:
+          title: Profile id
+          type: string
+          format: uuid
+          readOnly: true
+        profile_name:
+          title: Profile name
+          type: string
+          readOnly: true
+          minLength: 1
+        candidates:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentBusinessCandidate'
+          readOnly: true
+        has_candidates:
+          title: Has candidates
+          type: boolean
+          readOnly: true
+    AgentPerson:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          minLength: 1
+        role:
+          title: Role
+          type: string
+        email:
+          title: Email
+          type: string
+          format: email
+        phone:
+          title: Phone
+          type: string
+    AgentProfileLinkedEmail:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        subject:
+          title: Subject
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        received_at:
+          title: Received at
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+    AgentProfileUpsert:
+      required:
+      - insured
+      type: object
+      properties:
+        insured:
+          title: Insured
+          description: Company/insured name.
+          type: string
+          minLength: 1
+        dbas:
+          description: Alternative business names (DBA).
+          type: array
+          items:
+            type: string
+            minLength: 1
+          default: []
+        domains:
+          description: Company domain names.
+          type: array
+          items:
+            type: string
+            minLength: 1
+          default: []
+        emails:
+          description: Contact email addresses.
+          type: array
+          items:
+            type: string
+            format: email
+            minLength: 1
+          default: []
+        phone_numbers:
+          description: Contact phone numbers.
+          type: array
+          items:
+            type: string
+            minLength: 1
+          default: []
+        addresses:
+          description: Business addresses.
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentAddress'
+          default: []
+        people:
+          description: Contact people.
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentPerson'
+          default: []
+        ein:
+          title: Ein
+          description: EIN number.
+          type: string
+        fein:
+          title: Fein
+          description: Federal EIN number.
+          type: string
+        industry_classification:
+          title: Industry classification
+          description: Industry classification.
+          type: string
+        employee_count:
+          title: Employee count
+          description: Number of employees.
+          type:
+          - integer
+          - 'null'
+        annual_revenue:
+          title: Annual revenue
+          description: Annual revenue in USD.
+          type:
+          - integer
+          - 'null'
+        insurance_context:
+          title: Insurance context
+          description: Insurance context type.
+          type: string
+          enum:
+          - COMMERCIAL_INSURANCE
+          - PERSONAL_INSURANCE
+          default: COMMERCIAL_INSURANCE
+        source_documents:
+          description: Documents this profile was extracted from.
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentSourceDocument'
+          default: []
+    AgentProfileCreateBusiness:
+      type: object
+      properties:
+        name:
+          title: Name
+          description: Override business name (defaults to profile's insured name).
+          type: string
+          minLength: 1
+        domain_name:
+          title: Domain name
+          description: Override domain (defaults to first domain in profile).
+          type: string
+          minLength: 1
+        assign_agent_from_email:
+          title: Assign agent from email
+          description: Assign business to agent from source email's user.
+          type: boolean
+          default: true
+        confirmed_duplicate_reviewed:
+          title: Confirmed duplicate reviewed
+          description: Set true only after reviewing every candidate from a 409 duplicate_candidates response and concluding none is the same company. Requires duplicate_review_reason.
+          type: boolean
+          default: false
+        duplicate_review_reason:
+          title: Duplicate review reason
+          description: Why the closest candidate is a different company (recorded for audit). Required with confirmed_duplicate_reviewed.
+          type: string
+          minLength: 1
+    AgentProfileLinkEmail:
+      type: object
+      properties:
+        email_id:
+          title: Email id
+          description: Email ID to link.
+          type:
+          - string
+          - 'null'
+          format: uuid
+        attachment_ids:
+          description: List of attachment IDs to link.
+          type: array
+          items:
+            type: string
+            format: uuid
+          default: []
+    AgentBusinessCandidate:
+      type: object
+      properties:
+        business_id:
+          title: Business id
+          type: string
+          format: uuid
+          readOnly: true
+        business_name:
+          title: Business name
+          type: string
+          readOnly: true
+          minLength: 1
+        domain_name:
+          title: Domain name
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        score:
+          title: Score
+          description: Confidence score in [0, 1] aggregated across matched signals; candidates are returned ranked best-first.
+          type: number
+          readOnly: true
+        match_reasons:
+          description: 'Signals that matched: domain_match, name_exact, business_user_email, parameter_value, fuzzy_search.'
+          type: array
+          items:
+            type: string
+            minLength: 1
+          readOnly: true
+        conflicts:
+          description: 'Reasons to pause before linking: archived_business, generic_domain_only.'
+          type: array
+          items:
+            type: string
+            minLength: 1
+          readOnly: true
+        match_details:
+          title: Match details
+          description: 'Details about what matched: matched_name, matched_emails, matched_domain, matched_normalized_domain, matched_parameters, fuzzy_score.'
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          readOnly: true
+    AgentProfileLinkedAttachment:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        email_id:
+          title: Email id
+          type: string
+          format: uuid
+          readOnly: true
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

@@ -1,0 +1,376 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation market (v2) market (v2) API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "market (v2)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Markets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/markets",
+            "params": [
+              {
+                "name": "product_line_code",
+                "value": "",
+                "type": "query",
+                "description": "product_line_code"
+              },
+              {
+                "name": "sub_product_line_name",
+                "value": "",
+                "type": "query",
+                "description": "sub_product_line_name"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "carrier_id"
+              },
+              {
+                "name": "wholesaler_id",
+                "value": "",
+                "type": "query",
+                "description": "wholesaler_id"
+              },
+              {
+                "name": "submission_type",
+                "value": "",
+                "type": "query",
+                "description": "submission_type"
+              },
+              {
+                "name": "market_type",
+                "value": "",
+                "type": "query",
+                "description": "market_type"
+              },
+              {
+                "name": "admitted",
+                "value": "",
+                "type": "query",
+                "description": "admitted"
+              },
+              {
+                "name": "verification",
+                "value": "",
+                "type": "query",
+                "description": "verification"
+              },
+              {
+                "name": "billing",
+                "value": "",
+                "type": "query",
+                "description": "billing"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "group_id"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "ViewSet for Market CRUD operations."
+        },
+        {
+          "info": {
+            "name": "Create Market",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/markets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ViewSet for Market CRUD operations."
+        },
+        {
+          "info": {
+            "name": "Retrieve Market",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/markets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this market."
+              }
+            ]
+          },
+          "docs": "ViewSet for Market CRUD operations."
+        },
+        {
+          "info": {
+            "name": "Update Market",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/v2/broker/markets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this market."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ViewSet for Market CRUD operations."
+        },
+        {
+          "info": {
+            "name": "Update Market",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/v2/broker/markets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this market."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ViewSet for Market CRUD operations."
+        },
+        {
+          "info": {
+            "name": "Delete Market",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.1fort.com/apis/v2/broker/markets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this market."
+              }
+            ]
+          },
+          "docs": "ViewSet for Market CRUD operations."
+        },
+        {
+          "info": {
+            "name": "Download document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/markets/:id/documents/:document_id/download",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this market."
+              },
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Download an uploaded appetite or restrictions document for a market."
+        },
+        {
+          "info": {
+            "name": "ViewSet for MarketProducer CRUD operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/producers",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Brokers can manage their own producers."
+        },
+        {
+          "info": {
+            "name": "ViewSet for MarketProducer CRUD operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/producers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Brokers can manage their own producers."
+        },
+        {
+          "info": {
+            "name": "ViewSet for MarketProducer CRUD operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/producers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Market Producer."
+              }
+            ]
+          },
+          "docs": "Brokers can manage their own producers."
+        },
+        {
+          "info": {
+            "name": "ViewSet for MarketProducer CRUD operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/v2/broker/producers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Market Producer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Brokers can manage their own producers."
+        },
+        {
+          "info": {
+            "name": "ViewSet for MarketProducer CRUD operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/v2/broker/producers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Market Producer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Brokers can manage their own producers."
+        },
+        {
+          "info": {
+            "name": "ViewSet for MarketProducer CRUD operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.1fort.com/apis/v2/broker/producers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Market Producer."
+              }
+            ]
+          },
+          "docs": "Brokers can manage their own producers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

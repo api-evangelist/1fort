@@ -2,13 +2,11 @@ generated: '2026-08-05'
 method: derived
 status: candidate
 source: openapi/1fort-openapi-original.yml
-
 published_server: null
 searched:
-  note: >-
-    No 1Fort-operated MCP server exists. This file is a CANDIDATE tool shape derived from the
-    published OpenAPI, not a server 1Fort runs. It carries NO `type: MCPServer` pointer in apis.yml
-    — wiring one would credit 1Fort with an agent surface it does not operate.
+  note: 'No 1Fort-operated MCP server exists. This file is a CANDIDATE tool shape derived from the published
+    OpenAPI, not a server 1Fort runs. It carries NO `type: MCPServer` pointer in apis.yml — wiring one
+    would credit 1Fort with an agent surface it does not operate.'
   probes:
   - url: https://api.1fort.com/mcp
     status: 404
@@ -18,12 +16,10 @@ searched:
     status: 404
   - url: https://security.1fort.com/api/mcp
     status: 403
-    note: >-
-      security.1fort.com serves /.well-known/oauth-protected-resource and
-      /.well-known/oauth-authorization-server, but the issuer and resource are
-      https://app.safebase.io/api/mcp — SafeBase's trust-center MCP service, reachable on 1Fort's
-      subdomain because SafeBase hosts the trust center. It is NOT the 1Fort API and exposes trust
-      documents, not insurance operations.
+    note: security.1fort.com serves /.well-known/oauth-protected-resource and /.well-known/oauth-authorization-server,
+      but the issuer and resource are https://app.safebase.io/api/mcp — SafeBase's trust-center MCP service,
+      reachable on 1Fort's subdomain because SafeBase hosts the trust center. It is NOT the 1Fort API
+      and exposes trust documents, not insurance operations.
   registries_checked:
   - registry: npm
     query: https://registry.npmjs.org/-/v1/search?text=1fort
@@ -32,17 +28,14 @@ searched:
     query: pypi.org/pypi/{1fort,onefort,fort-sdk}/json
     result: 404 on all
   registry_result: no first-party 1Fort MCP package or client library published anywhere
-
 server:
   name: 1fort
   transport: http
   url: null
-
 candidate_tools:
-  note: >-
-    A recommended starter tool set, one tool per real operationId, chosen from the highest-value
-    broker flows rather than fanning out all 574 operations. Each tool's input schema IS the backing
-    operation's parameters + body in openapi/1fort-openapi-original.yml — nothing is invented.
+  note: A recommended starter tool set, one tool per real operationId, chosen from the highest-value broker
+    flows rather than fanning out all 574 operations. Each tool's input schema IS the backing operation's
+    parameters + body in openapi/1fort-openapi-original.yml — nothing is invented.
   tools:
   - name: list_clients
     description: List the broker's clients (businesses).
@@ -107,12 +100,15 @@ candidate_tools:
     description: Agent-runtime draft-quote fill; read the draft first so re-runs stay idempotent.
     source_operation: openapi/1fort-openapi-original.yml#v2_broker_agent_quotes_fill_create
     consequence: write
-
 blockers_for_a_real_server:
-- No self-serve API credential issuance — no developer dashboard or key page was found, so an MCP
-  client has no anonymous path to a token.
-- No client idempotency key on any operation, which matters more for agent-driven writes than for
-  a human console.
+- No self-serve API credential issuance — no developer dashboard or key page was found, so an MCP client
+  has no anonymous path to a token.
+- No client idempotency key on any operation, which matters more for agent-driven writes than for a human
+  console.
 - No outbound webhooks, so an MCP server would have to poll for quote and bind status.
-
 see_also: agentic-access/1fort-agentic-access.yml
+deployment:
+  mode: none
+  verified: derived
+  checked: '2026-08-12'
+  source: catalog MCP census

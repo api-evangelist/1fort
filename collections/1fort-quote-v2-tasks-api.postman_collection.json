@@ -1,0 +1,2025 @@
+{
+  "item": [
+    {
+      "id": "bf6f359a-80d9-41d9-bdf3-8e7c83f248b1",
+      "name": "quote (v2): tasks",
+      "description": {
+        "content": "**Access:** requires a JWT access token.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fc9a48a0-e3cb-40d1-84ac-867b5f17d92e",
+          "name": "List All Tasks for Broker Agency Across All Businesses and Quotes",
+          "request": {
+            "name": "List All Tasks for Broker Agency Across All Businesses and Quotes",
+            "description": {
+              "content": "List all quote tasks for the broker agency of the logged-in user (from the latest task groups).\n\nExpandable fields via expand query parameter (comma separated):\n- quote: Full quote details (omits tasks to prevent recursion)\n- business: Business details\n- broker: Broker agency details\n- group: Task group details (omits tasks to prevent recursion)\n- completed_by: Broker user who completed the task\n\nFilters available:\n- status: Filter by task status (todo, done, dismissed, n/a)\n- type: Filter by task type (signature, subjectivities, clarifications)\n- business: Filter by business ID\n\nExample: ?expand=quote,business,completed_by&type=signature",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "status"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "type"
+                },
+                {
+                  "disabled": false,
+                  "key": "business",
+                  "value": "<string>",
+                  "description": "business"
+                },
+                {
+                  "disabled": false,
+                  "key": "broker",
+                  "value": "<string>",
+                  "description": "broker"
+                },
+                {
+                  "disabled": false,
+                  "key": "coverage",
+                  "value": "<string>",
+                  "description": "coverage"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier",
+                  "value": "<string>",
+                  "description": "carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "insured",
+                  "value": "<string>",
+                  "description": "insured"
+                },
+                {
+                  "disabled": false,
+                  "key": "assigned_to_email",
+                  "value": "<string>",
+                  "description": "assigned_to_email"
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c89506f5-809a-480b-a814-4c28ee2f1ba5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigned_to_email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1065,\n  \"results\": [\n    {\n      \"title\": \"string\",\n      \"group\": \"7ee39fb8-eb5f-3673-f0f0-0fe9bb698faf\",\n      \"quote\": \"ae7669ba-c78d-04bc-8859-dc38d3d86336\",\n      \"business\": 8593,\n      \"broker\": 9145,\n      \"id\": \"e4fd1485-911a-44a8-e53f-a796acc90978\",\n      \"documents\": [\n        {\n          \"id\": \"97e72dca-fb46-a87d-64aa-2f4cdfbd5518\",\n          \"name\": null,\n          \"document\": \"https://nutaFxdpbNMhzOmDmdWbYwqxicyoIzqb.nuwxZnub3Lr4Vex7oK0Ro,JDygMQBVD.AKghz9vAWhaI9RK1w4vhjqDIIJnaf5OHwtAn-9judhj6\"\n        },\n        {\n          \"id\": \"df58cd9b-ab9c-1d4c-9b27-0e02f3056720\",\n          \"name\": null,\n          \"document\": null\n        }\n      ],\n      \"status_display\": \"string\",\n      \"type_display\": \"string\",\n      \"program_url\": \"string\",\n      \"invoice_url\": \"string\",\n      \"quote_ids\": [\n        \"9580ce79-9a45-4810-e023-17bcc2572029\",\n        \"061dcb5a-02bb-ba37-d9fa-01eaf9b0100a\"\n      ],\n      \"created_at\": \"1964-08-06T14:32:25.692Z\",\n      \"description\": null,\n      \"status\": \"n/a\",\n      \"type\": \"subjectivities\",\n      \"due_date\": null,\n      \"completed_date\": \"1961-08-08\",\n      \"resolution_comment\": null,\n      \"visible_to_business\": false,\n      \"expired\": false,\n      \"completed_by\": null\n    },\n    {\n      \"title\": \"string\",\n      \"group\": \"bce60a93-57c8-ffcf-afc1-1c87cc172aa3\",\n      \"quote\": \"0df0742e-17e6-1cbb-ef2b-b3d0cafac367\",\n      \"business\": 420,\n      \"broker\": 8113,\n      \"id\": \"02e92c76-41c5-27ab-96e6-c78aa530538b\",\n      \"documents\": [\n        {\n          \"id\": \"cb302c33-de37-f415-ea4b-f15a9977817e\",\n          \"name\": \"string\",\n          \"document\": \"http://gVOGFRHHskRHBb.mtoN-HORhNwdPHd1QEbZq4Vk-cWnwhRFdXNzvsDZpp6rVPnG6HUl\"\n        },\n        {\n          \"id\": \"abc09bb5-3c6a-8fb9-471b-2e4c16817337\",\n          \"name\": null,\n          \"document\": null\n        }\n      ],\n      \"status_display\": \"string\",\n      \"type_display\": \"string\",\n      \"program_url\": \"string\",\n      \"invoice_url\": \"string\",\n      \"quote_ids\": [\n        \"7ae079b0-cd46-02a6-8aee-d7cbf9e0a3d2\",\n        \"4cbc3e8d-9e2a-8cd6-e0be-642ae828b89c\"\n      ],\n      \"created_at\": \"1969-12-24T12:04:45.798Z\",\n      \"description\": null,\n      \"status\": \"dismissed\",\n      \"type\": \"clarifications\",\n      \"due_date\": \"2000-04-27\",\n      \"completed_date\": null,\n      \"resolution_comment\": \"string\",\n      \"visible_to_business\": true,\n      \"expired\": false,\n      \"completed_by\": null\n    }\n  ],\n  \"next\": null,\n  \"previous\": \"http://iYXogjGnVpfubJ.czU\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf578d9b-8e92-4f34-b355-94ea62ccf4a0",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigned_to_email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1266900-6d65-4a1a-8eb8-ed65dc914511",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigned_to_email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a4a2ab9-87b5-4530-87ea-8a9541e1345a",
+          "name": "Resolve QuoteTasks",
+          "request": {
+            "name": "Resolve QuoteTasks",
+            "description": {
+              "content": "Resolve one or multiple tasks with comments and/or documents",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tasks\": [\n    {\n      \"id\": \"<uuid>\",\n      \"status\": \"<string>\",\n      \"resolution_comment\": \"<string>\",\n      \"quote_ids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"document_files\": [\n        \"<uri>\",\n        \"<uri>\"\n      ],\n      \"document_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"status\": \"<string>\",\n      \"resolution_comment\": \"<string>\",\n      \"quote_ids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"document_files\": [\n        \"<uri>\",\n        \"<uri>\"\n      ],\n      \"document_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "835f05a0-1cb1-4dd5-9497-5d3f593d8bbc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tasks\": [\n    {\n      \"id\": \"<uuid>\",\n      \"status\": \"<string>\",\n      \"resolution_comment\": \"<string>\",\n      \"quote_ids\": [\n        \"<uuid>\"\n      ],\n      \"document_files\": [\n        \"<uri>\",\n        \"<uri>\"\n      ],\n      \"document_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"status\": \"<string>\",\n      \"resolution_comment\": \"<string>\",\n      \"quote_ids\": [\n        \"<uuid>\"\n      ],\n      \"document_files\": [\n        \"<uri>\",\n        \"<uri>\"\n      ],\n      \"document_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"title\": \"string\",\n    \"group\": \"37fd263f-ce41-9c55-b812-286ce245fe75\",\n    \"quote\": \"5c3d4681-8cc2-0b6a-b7b4-10d9c2145d0d\",\n    \"business\": 4641,\n    \"broker\": 6463,\n    \"id\": \"cb928dfc-0af5-df82-b6a2-059de49082d3\",\n    \"documents\": [\n      {\n        \"id\": \"894e05c3-46cf-4811-204c-2be7cd1e50f5\",\n        \"name\": null,\n        \"document\": null\n      },\n      {\n        \"id\": \"737ac8f8-791f-823d-4524-7b29e2483e3c\",\n        \"name\": \"string\",\n        \"document\": null\n      }\n    ],\n    \"status_display\": \"string\",\n    \"type_display\": \"string\",\n    \"program_url\": \"string\",\n    \"invoice_url\": \"string\",\n    \"quote_ids\": [\n      \"d5ed1335-2365-d89d-70b2-9d8e13ef2f4a\",\n      \"0f6d2b0f-8f47-0bab-aedb-7f2231fe002c\"\n    ],\n    \"created_at\": \"1965-07-12T02:50:35.862Z\",\n    \"description\": \"string\",\n    \"status\": \"todo\",\n    \"type\": \"payment\",\n    \"due_date\": \"2009-10-12\",\n    \"completed_date\": null,\n    \"resolution_comment\": \"string\",\n    \"visible_to_business\": false,\n    \"expired\": true,\n    \"completed_by\": 6749\n  },\n  {\n    \"title\": \"string\",\n    \"group\": \"3a6e68b2-4006-d2ce-3984-f317654b7852\",\n    \"quote\": \"4d45ef66-6a68-4031-41ac-1d12c571ae2d\",\n    \"business\": 9347,\n    \"broker\": 7775,\n    \"id\": \"8a9b5b99-d345-b2cb-43ab-048cd8ae50f6\",\n    \"documents\": [\n      {\n        \"id\": \"8e04dd42-2b59-5994-31a9-2fe38297812f\",\n        \"name\": null,\n        \"document\": null\n      },\n      {\n        \"id\": \"c662e0c5-af09-65ac-1b39-5f7347695c40\",\n        \"name\": \"string\",\n        \"document\": null\n      }\n    ],\n    \"status_display\": \"string\",\n    \"type_display\": \"string\",\n    \"program_url\": \"string\",\n    \"invoice_url\": \"string\",\n    \"quote_ids\": [\n      \"a9300cab-ecd8-44c0-32a7-5e6ed2d95f2b\",\n      \"1ed41677-1f54-234c-77da-782a89ea3984\"\n    ],\n    \"created_at\": \"2007-03-30T07:01:00.099Z\",\n    \"description\": null,\n    \"status\": \"dismissed\",\n    \"type\": \"clarifications\",\n    \"due_date\": null,\n    \"completed_date\": null,\n    \"resolution_comment\": null,\n    \"visible_to_business\": true,\n    \"expired\": false,\n    \"completed_by\": null\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ef30558-94af-4a27-be31-9fa99f768dfc",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tasks\": [\n    {\n      \"id\": \"<uuid>\",\n      \"status\": \"<string>\",\n      \"resolution_comment\": \"<string>\",\n      \"quote_ids\": [\n        \"<uuid>\"\n      ],\n      \"document_files\": [\n        \"<uri>\",\n        \"<uri>\"\n      ],\n      \"document_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"status\": \"<string>\",\n      \"resolution_comment\": \"<string>\",\n      \"quote_ids\": [\n        \"<uuid>\"\n      ],\n      \"document_files\": [\n        \"<uri>\",\n        \"<uri>\"\n      ],\n      \"document_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"non_field_errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5484146b-0ae0-4215-8257-345e170ec4be",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tasks\": [\n    {\n      \"id\": \"<uuid>\",\n      \"status\": \"<string>\",\n      \"resolution_comment\": \"<string>\",\n      \"quote_ids\": [\n        \"<uuid>\"\n      ],\n      \"document_files\": [\n        \"<uri>\",\n        \"<uri>\"\n      ],\n      \"document_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"status\": \"<string>\",\n      \"resolution_comment\": \"<string>\",\n      \"quote_ids\": [\n        \"<uuid>\"\n      ],\n      \"document_files\": [\n        \"<uri>\",\n        \"<uri>\"\n      ],\n      \"document_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb319206-0c2c-401d-84a4-62c2e8aadc47",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tasks\": [\n    {\n      \"id\": \"<uuid>\",\n      \"status\": \"<string>\",\n      \"resolution_comment\": \"<string>\",\n      \"quote_ids\": [\n        \"<uuid>\"\n      ],\n      \"document_files\": [\n        \"<uri>\",\n        \"<uri>\"\n      ],\n      \"document_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"status\": \"<string>\",\n      \"resolution_comment\": \"<string>\",\n      \"quote_ids\": [\n        \"<uuid>\"\n      ],\n      \"document_files\": [\n        \"<uri>\",\n        \"<uri>\"\n      ],\n      \"document_names\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "374bccab-498e-400d-83ce-15ed359ab16d",
+          "name": "ViewSet for managing quote tasks for the broker agency.",
+          "request": {
+            "name": "ViewSet for managing quote tasks for the broker agency.",
+            "description": {
+              "content": "Only returns tasks from the most recently created task group for each quote.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "tasks",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "status"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "type"
+                },
+                {
+                  "disabled": false,
+                  "key": "business",
+                  "value": "<string>",
+                  "description": "business"
+                },
+                {
+                  "disabled": false,
+                  "key": "broker",
+                  "value": "<string>",
+                  "description": "broker"
+                },
+                {
+                  "disabled": false,
+                  "key": "coverage",
+                  "value": "<string>",
+                  "description": "coverage"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier",
+                  "value": "<string>",
+                  "description": "carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "insured",
+                  "value": "<string>",
+                  "description": "insured"
+                },
+                {
+                  "disabled": false,
+                  "key": "assigned_to_email",
+                  "value": "<string>",
+                  "description": "assigned_to_email"
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a4ff053c-239b-44a4-aba6-1db872f2d430",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "tasks",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigned_to_email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 9419,\n  \"results\": [\n    {\n      \"title\": \"string\",\n      \"group\": \"ec80b0bd-653d-6b53-05d8-14fa875270f0\",\n      \"quote\": \"b7dbffc1-861b-2db8-0b67-e79c92951538\",\n      \"business\": 3587,\n      \"broker\": 4465,\n      \"id\": \"b522339e-bf46-150d-4c12-6800da5d8228\",\n      \"documents\": [\n        {\n          \"id\": \"57370da8-0e16-99d2-75be-ebd8551ea090\",\n          \"name\": null,\n          \"document\": \"http://n.blxXgcd8VoHI8\"\n        },\n        {\n          \"id\": \"14556bde-4690-3c63-95a1-f4cec30a4786\",\n          \"name\": null,\n          \"document\": null\n        }\n      ],\n      \"status_display\": \"string\",\n      \"type_display\": \"string\",\n      \"program_url\": \"string\",\n      \"invoice_url\": \"string\",\n      \"quote_ids\": [\n        \"47728087-c92a-505e-e67b-32531f4720e0\",\n        \"1f1d9b80-17c5-b0d5-6d22-6e1d5ce62316\"\n      ],\n      \"created_at\": \"1991-04-24T18:44:22.952Z\",\n      \"description\": \"string\",\n      \"status\": \"dismissed\",\n      \"type\": \"clarifications\",\n      \"due_date\": null,\n      \"completed_date\": null,\n      \"resolution_comment\": null,\n      \"visible_to_business\": true,\n      \"expired\": false,\n      \"completed_by\": 4868\n    },\n    {\n      \"title\": \"string\",\n      \"group\": \"80e97f4c-5167-7c51-68d0-448fa8ef8566\",\n      \"quote\": \"4eefa33f-800f-b40a-500d-e3b197435384\",\n      \"business\": 3445,\n      \"broker\": 9177,\n      \"id\": \"0b3ed591-2a18-0f9b-7a19-e358a8d036c2\",\n      \"documents\": [\n        {\n          \"id\": \"79135554-8a36-b8fd-e0d8-f207a8ec359d\",\n          \"name\": \"string\",\n          \"document\": null\n        },\n        {\n          \"id\": \"1a27acdc-e2ce-7cf4-94bb-8fb02f0543d8\",\n          \"name\": \"string\",\n          \"document\": null\n        }\n      ],\n      \"status_display\": \"string\",\n      \"type_display\": \"string\",\n      \"program_url\": \"string\",\n      \"invoice_url\": \"string\",\n      \"quote_ids\": [\n        \"dfce2659-1f26-7a47-eb5a-fb5587f6bfc3\",\n        \"68e2d3b3-9b8d-b119-1f8e-d00e5960610a\"\n      ],\n      \"created_at\": \"1966-08-03T19:39:55.172Z\",\n      \"description\": \"string\",\n      \"status\": \"todo\",\n      \"type\": \"payment\",\n      \"due_date\": \"2004-03-30\",\n      \"completed_date\": null,\n      \"resolution_comment\": null,\n      \"visible_to_business\": true,\n      \"expired\": true,\n      \"completed_by\": null\n    }\n  ],\n  \"next\": null,\n  \"previous\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61493bb9-6cda-4796-b69a-a23b422e4ef2",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "tasks",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigned_to_email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52efcb3a-a6f0-4f6d-a389-626444ee3364",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "tasks",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigned_to_email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "113121ea-ab13-47da-865d-e18c443470e1",
+          "name": "ViewSet for managing quote tasks for the broker agency.",
+          "request": {
+            "name": "ViewSet for managing quote tasks for the broker agency.",
+            "description": {
+              "content": "Only returns tasks from the most recently created task group for each quote.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "tasks",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f0d08c0-5713-4e94-8fe5-1585d6f84c65",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"group\": \"bda4040d-df34-f0d6-5666-2479a5b221ef\",\n  \"quote\": \"68b12251-29db-30c4-0ea2-4011b41500af\",\n  \"business\": 7384,\n  \"broker\": 228,\n  \"id\": \"4a03ccde-374d-15c7-ff11-090de8b7dfbe\",\n  \"documents\": [\n    {\n      \"id\": \"3d858636-c2b7-a183-1dbe-f0a20dca9f23\",\n      \"name\": \"string\",\n      \"document\": \"http://oRy.ppoPuaLreFHD,l2grCSrE2ebaVWOG-MWa0EsYfeKygCmoI31z42\"\n    },\n    {\n      \"id\": \"6a1d21ef-a82a-8a9a-9725-fe14c0d43b93\",\n      \"name\": \"string\",\n      \"document\": \"https://ITFWKHJpAofOQrkpZxyIlKWyLjbqgRvOk.urTVhsi-5H.Nmoc8SLStzhcJ,7HF2.AdmUsJH0qssWP\"\n    }\n  ],\n  \"status_display\": \"string\",\n  \"type_display\": \"string\",\n  \"program_url\": \"string\",\n  \"invoice_url\": \"string\",\n  \"quote_ids\": [\n    \"13c70d0d-6112-73c7-9dd5-86362a417427\",\n    \"c59c3b91-1cc6-5d9a-59fc-9f2f357e61a9\"\n  ],\n  \"created_at\": \"1999-04-25T02:36:21.155Z\",\n  \"description\": null,\n  \"status\": \"todo\",\n  \"type\": \"subjectivities\",\n  \"due_date\": \"1959-08-29\",\n  \"completed_date\": \"1998-07-09\",\n  \"resolution_comment\": \"string\",\n  \"visible_to_business\": true,\n  \"expired\": false,\n  \"completed_by\": 2570\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81f0d9e2-9333-4e4b-8c5e-534e2c413db7",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60ad1e9b-43e0-4bd1-b3b6-624a82a9db12",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0c572ec-6313-4ec6-aac2-36dd628f9963",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb6aae0c-4582-4a6a-9332-09c48d009bf8",
+          "name": "List All Tasks for a Business Across All Quotes",
+          "request": {
+            "name": "List All Tasks for a Business Across All Quotes",
+            "description": {
+              "content": "List all quote tasks for a specific business (from the latest task groups).\n\nExpandable fields via expand query parameter (comma separated):\n- quote: Full quote details (omits tasks to prevent recursion)\n- business: Business details\n- broker: Broker agency details\n- group: Task group details (omits tasks to prevent recursion)\n- completed_by: Broker user who completed the task\n\nFilters available:\n- status: Filter by task status (todo, done, dismissed, n/a)\n- type: Filter by task type (signature, subjectivities, clarifications)\n- business: Filter by business ID\n\nExample: ?expand=quote,business,completed_by&type=signature",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                ":business_pk",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "status"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "type"
+                },
+                {
+                  "disabled": false,
+                  "key": "business",
+                  "value": "<string>",
+                  "description": "business"
+                },
+                {
+                  "disabled": false,
+                  "key": "broker",
+                  "value": "<string>",
+                  "description": "broker"
+                },
+                {
+                  "disabled": false,
+                  "key": "coverage",
+                  "value": "<string>",
+                  "description": "coverage"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier",
+                  "value": "<string>",
+                  "description": "carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "insured",
+                  "value": "<string>",
+                  "description": "insured"
+                },
+                {
+                  "disabled": false,
+                  "key": "assigned_to_email",
+                  "value": "<string>",
+                  "description": "assigned_to_email"
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "business_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ce22f43f-17f4-44c8-8308-e2c69a549f86",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigned_to_email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 9419,\n  \"results\": [\n    {\n      \"title\": \"string\",\n      \"group\": \"ec80b0bd-653d-6b53-05d8-14fa875270f0\",\n      \"quote\": \"b7dbffc1-861b-2db8-0b67-e79c92951538\",\n      \"business\": 3587,\n      \"broker\": 4465,\n      \"id\": \"b522339e-bf46-150d-4c12-6800da5d8228\",\n      \"documents\": [\n        {\n          \"id\": \"57370da8-0e16-99d2-75be-ebd8551ea090\",\n          \"name\": null,\n          \"document\": \"http://n.blxXgcd8VoHI8\"\n        },\n        {\n          \"id\": \"14556bde-4690-3c63-95a1-f4cec30a4786\",\n          \"name\": null,\n          \"document\": null\n        }\n      ],\n      \"status_display\": \"string\",\n      \"type_display\": \"string\",\n      \"program_url\": \"string\",\n      \"invoice_url\": \"string\",\n      \"quote_ids\": [\n        \"47728087-c92a-505e-e67b-32531f4720e0\",\n        \"1f1d9b80-17c5-b0d5-6d22-6e1d5ce62316\"\n      ],\n      \"created_at\": \"1991-04-24T18:44:22.952Z\",\n      \"description\": \"string\",\n      \"status\": \"dismissed\",\n      \"type\": \"clarifications\",\n      \"due_date\": null,\n      \"completed_date\": null,\n      \"resolution_comment\": null,\n      \"visible_to_business\": true,\n      \"expired\": false,\n      \"completed_by\": 4868\n    },\n    {\n      \"title\": \"string\",\n      \"group\": \"80e97f4c-5167-7c51-68d0-448fa8ef8566\",\n      \"quote\": \"4eefa33f-800f-b40a-500d-e3b197435384\",\n      \"business\": 3445,\n      \"broker\": 9177,\n      \"id\": \"0b3ed591-2a18-0f9b-7a19-e358a8d036c2\",\n      \"documents\": [\n        {\n          \"id\": \"79135554-8a36-b8fd-e0d8-f207a8ec359d\",\n          \"name\": \"string\",\n          \"document\": null\n        },\n        {\n          \"id\": \"1a27acdc-e2ce-7cf4-94bb-8fb02f0543d8\",\n          \"name\": \"string\",\n          \"document\": null\n        }\n      ],\n      \"status_display\": \"string\",\n      \"type_display\": \"string\",\n      \"program_url\": \"string\",\n      \"invoice_url\": \"string\",\n      \"quote_ids\": [\n        \"dfce2659-1f26-7a47-eb5a-fb5587f6bfc3\",\n        \"68e2d3b3-9b8d-b119-1f8e-d00e5960610a\"\n      ],\n      \"created_at\": \"1966-08-03T19:39:55.172Z\",\n      \"description\": \"string\",\n      \"status\": \"todo\",\n      \"type\": \"payment\",\n      \"due_date\": \"2004-03-30\",\n      \"completed_date\": null,\n      \"resolution_comment\": null,\n      \"visible_to_business\": true,\n      \"expired\": true,\n      \"completed_by\": null\n    }\n  ],\n  \"next\": null,\n  \"previous\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6cd34507-986f-4025-906e-7a04bf340145",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigned_to_email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17979193-dc7e-4387-8647-464dcbce0fbf",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "business",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigned_to_email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7be5023-10d2-40e2-b124-3e1d841d1b7d",
+          "name": "ViewSet for managing quote tasks for a specific business.",
+          "request": {
+            "name": "ViewSet for managing quote tasks for a specific business.",
+            "description": {
+              "content": "Only returns tasks from the most recently created task group for each quote.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                ":business_pk",
+                "tasks",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "business_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e0429e6b-b2fd-4785-85d8-3aca585a6052",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"string\",\n  \"group\": \"bda4040d-df34-f0d6-5666-2479a5b221ef\",\n  \"quote\": \"68b12251-29db-30c4-0ea2-4011b41500af\",\n  \"business\": 7384,\n  \"broker\": 228,\n  \"id\": \"4a03ccde-374d-15c7-ff11-090de8b7dfbe\",\n  \"documents\": [\n    {\n      \"id\": \"3d858636-c2b7-a183-1dbe-f0a20dca9f23\",\n      \"name\": \"string\",\n      \"document\": \"http://oRy.ppoPuaLreFHD,l2grCSrE2ebaVWOG-MWa0EsYfeKygCmoI31z42\"\n    },\n    {\n      \"id\": \"6a1d21ef-a82a-8a9a-9725-fe14c0d43b93\",\n      \"name\": \"string\",\n      \"document\": \"https://ITFWKHJpAofOQrkpZxyIlKWyLjbqgRvOk.urTVhsi-5H.Nmoc8SLStzhcJ,7HF2.AdmUsJH0qssWP\"\n    }\n  ],\n  \"status_display\": \"string\",\n  \"type_display\": \"string\",\n  \"program_url\": \"string\",\n  \"invoice_url\": \"string\",\n  \"quote_ids\": [\n    \"13c70d0d-6112-73c7-9dd5-86362a417427\",\n    \"c59c3b91-1cc6-5d9a-59fc-9f2f357e61a9\"\n  ],\n  \"created_at\": \"1999-04-25T02:36:21.155Z\",\n  \"description\": null,\n  \"status\": \"todo\",\n  \"type\": \"subjectivities\",\n  \"due_date\": \"1959-08-29\",\n  \"completed_date\": \"1998-07-09\",\n  \"resolution_comment\": \"string\",\n  \"visible_to_business\": true,\n  \"expired\": false,\n  \"completed_by\": 2570\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b3810f3-4f77-462b-ad64-665ec712771c",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77e0afb4-e725-4e47-a667-7699cc1f1480",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7dc1913-e770-419b-834e-e70ceff8e7fa",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.1fort.com/apis/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8ea67fbe-e762-41a2-be74-d49067eca549",
+    "name": "1Fort API Documentation quote (v2): tasks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# 1Fort API\n\nREST API for the 1Fort insurance platform. This document is the authoritative\nmap of the API surface; endpoints are grouped in the sidebar by **app** and\n**version**, and large apps are split into per-resource sub-groups.\n\n## Authentication\n\nAlmost every endpoint requires a **JWT access token**. Send it in the\n`Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may\nalso be presented as an HTTP-only cookie. Endpoints documented with no security\nrequirement are intentionally public (for example sign-in, OTP and storefront\nendpoints).\n\n## Multi-tenancy\n\nResources are scoped to a tenant. Nested routes carry the owning resource id in\nthe path (for example `/v2/broker/{business_pk}/applications`); a token is only\nauthorised for the businesses its user may access. Object-level permissions are\nenforced per endpoint.\n\n## Versioning\n\n`v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`\nendpoints remain documented for compatibility. Endpoints marked **deprecated**\nare scheduled for removal; prefer the documented replacement.\n",
+      "type": "text/plain"
+    }
+  }
+}

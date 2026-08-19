@@ -1,0 +1,1101 @@
+openapi: 3.2.0
+info:
+  title: 1Fort API Documentation billing (v2) billing (v2) API
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: billing (v2)
+  x-displayName: Billing (v2)
+  description: 'Billing and payments. Replaces the deprecated Ascend payment endpoints.
+
+
+    **Access:** requires a JWT access token.'
+paths:
+  /v2/billing/payments:
+    parameters: []
+    get:
+      operationId: v2_billing_payments_list
+      summary: Broker billing/payments list backed by insurance invoices.
+      description: 'Payment collection status and checkout URLs are derived from linked
+
+        CheckoutInvoice rows (pay-in-full and premium-finance segments).'
+      parameters:
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BrokerPaymentList'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - billing (v2)
+  /v2/billing/payments/csv:
+    parameters: []
+    get:
+      operationId: v2_billing_payments_export_csv
+      summary: Broker billing/payments list backed by insurance invoices.
+      description: 'Payment collection status and checkout URLs are derived from linked
+
+        CheckoutInvoice rows (pay-in-full and premium-finance segments).'
+      parameters:
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            '*/*':
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BrokerPaymentList'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - billing (v2)
+  /v2/billing/payments/filter-options:
+    parameters: []
+    get:
+      operationId: v2_billing_payments_filter_options
+      summary: Broker billing/payments list backed by insurance invoices.
+      description: 'Payment collection status and checkout URLs are derived from linked
+
+        CheckoutInvoice rows (pay-in-full and premium-finance segments).'
+      parameters:
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BrokerPaymentList'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - billing (v2)
+  /v2/billing/payments/stats:
+    parameters: []
+    get:
+      operationId: v2_billing_payments_stats
+      summary: 'Billing dashboard stat cards (payments at risk, invoices/policies
+
+        needing action, premium sold).'
+      description: GET /apis/v2/billing/payments/stats
+      parameters:
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BrokerPaymentList'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - billing (v2)
+  /v2/billing/payments/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_billing_payments_read
+      summary: Broker billing/payments list backed by insurance invoices.
+      description: 'Payment collection status and checkout URLs are derived from linked
+
+        CheckoutInvoice rows (pay-in-full and premium-finance segments).'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerPaymentDetail'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - billing (v2)
+    patch:
+      operationId: v2_billing_payments_partial_update
+      description: 'Edit payment details (market, commission, min earned premium, agency
+
+        fee, direct vs agency bill) on the underlying insurance invoice.
+
+
+        PATCH /apis/v2/billing/payments/{id}'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerPaymentList'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - billing (v2)
+      summary: Update Payment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrokerPaymentList'
+        required: true
+  /v2/billing/payments/{id}/stripe-receipt:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_billing_payments_stripe_receipt
+      description: 'On-demand Stripe receipt details for a checkout payment on this
+
+        billing payment (receipt_url plus fields to render it in-app).
+
+
+        GET /apis/v2/billing/payments/{id}/stripe-receipt[?payment_id=<uuid>]
+
+
+        ``payment_id`` selects a specific CheckoutPayment (as listed in the
+
+        detail response''s ``payments``); defaults to the latest completed one.
+
+        Nothing is stored locally — details come from Stripe per request.'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerPaymentList'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - billing (v2)
+      summary: Stripe receipt
+  /v2/billing/refunds:
+    parameters: []
+    get:
+      operationId: v2_billing_refunds_list
+      summary: Refunded checkout payments of the broker's insurance invoices.
+      description: 'GET /apis/v2/billing/refunds
+
+
+        Backs the billing "Refunds" tab: payments with at least one Stripe
+
+        refund, with the refunded amount and current status.'
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BrokerRefund'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - billing (v2)
+  /v2/billing/refunds/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_billing_refunds_read
+      summary: Refunded checkout payments of the broker's insurance invoices.
+      description: 'GET /apis/v2/billing/refunds
+
+
+        Backs the billing "Refunds" tab: payments with at least one Stripe
+
+        refund, with the refunded amount and current status.'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerRefund'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - billing (v2)
+components:
+  schemas:
+    BrokerPaymentDetail:
+      required:
+      - insurance_invoice_number
+      - insurance_invoice_status
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        insured:
+          title: Insured
+          type: string
+          readOnly: true
+        payment_status:
+          title: Payment status
+          type: string
+          readOnly: true
+        quote_status:
+          title: Quote status
+          type: string
+          readOnly: true
+        quote:
+          title: Quote
+          type: string
+          readOnly: true
+        total:
+          title: Total
+          type: string
+          readOnly: true
+        due_date:
+          title: Due date
+          type: string
+          readOnly: true
+        broker:
+          title: Broker
+          type: string
+          readOnly: true
+        producer:
+          title: Producer
+          type: string
+          readOnly: true
+        all_agents:
+          title: All agents
+          type: string
+          readOnly: true
+        primary_agent:
+          title: Primary agent
+          type: string
+          readOnly: true
+        carrier:
+          title: Carrier
+          type: string
+          readOnly: true
+        coverage_type:
+          title: Coverage type
+          type: string
+          readOnly: true
+        actions:
+          title: Actions
+          type: string
+          readOnly: true
+        connect_payout_status:
+          title: Connect payout status
+          type: string
+          readOnly: true
+        insurance_invoice_number:
+          title: Insurance invoice number
+          type: string
+          minLength: 1
+        insurance_invoice_status:
+          title: Insurance invoice status
+          type: string
+          minLength: 1
+        business:
+          title: Business
+          type: string
+          readOnly: true
+        insurance_line_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/InsuranceLineItem'
+          readOnly: true
+        billing_type:
+          title: Billing type
+          type: string
+          readOnly: true
+          minLength: 1
+        min_earned_rate:
+          title: Min earned rate
+          type: string
+          format: decimal
+          readOnly: true
+        commission_rate:
+          title: Commission rate
+          type: string
+          readOnly: true
+        agency_fee:
+          title: Agency fee
+          type: string
+          readOnly: true
+        checkout_invoices:
+          title: Checkout invoices
+          type: string
+          readOnly: true
+        checkout_url:
+          title: Checkout url
+          type: string
+          readOnly: true
+        payments:
+          title: Payments
+          type: string
+          readOnly: true
+        premium_finance_installments:
+          title: Premium finance installments
+          type: string
+          readOnly: true
+        reconciliation:
+          title: Reconciliation
+          type: string
+          readOnly: true
+        payment_distribution:
+          title: Payment distribution
+          type: string
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+    InsuranceLineItem:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        line_item_type:
+          title: Line item type
+          type: string
+          enum:
+          - premium
+          - agency_fee
+          - broker_fee
+          - policy_fee
+          - surplus_lines_tax
+          - stamping_fee
+          - state_tax
+          - municipal_fee
+          - inspection_fee
+          - platform_fee
+          - surcharge
+          - discount
+          - credit
+          - other
+        description:
+          title: Description
+          description: Display text from the invoice PDF
+          type: string
+          maxLength: 255
+        amount:
+          title: Amount
+          description: Line item amount
+          type:
+          - string
+          - 'null'
+          format: decimal
+        commission_rate:
+          title: Commission rate
+          description: Broker commission percentage for this line
+          type:
+          - string
+          - 'null'
+          format: decimal
+        commission_amount:
+          title: Commission amount
+          description: Broker commission dollar amount for this line
+          type:
+          - string
+          - 'null'
+          format: decimal
+        policy_number:
+          title: Policy number
+          description: Raw extracted policy number — for multi-policy invoices
+          type: string
+          maxLength: 100
+        effective_date:
+          title: Effective date
+          description: Coverage period for this line item
+          type:
+          - string
+          - 'null'
+          format: date
+        expiration_date:
+          title: Expiration date
+          type:
+          - string
+          - 'null'
+          format: date
+        carrier:
+          title: Carrier
+          type: string
+          readOnly: true
+        coverage_type:
+          title: Coverage type
+          type: string
+          readOnly: true
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    BrokerPaymentList:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        insured:
+          title: Insured
+          type: string
+          readOnly: true
+        payment_status:
+          title: Payment status
+          type: string
+          readOnly: true
+        quote_status:
+          title: Quote status
+          type: string
+          readOnly: true
+        quote:
+          title: Quote
+          type: string
+          readOnly: true
+        total:
+          title: Total
+          type: string
+          readOnly: true
+        due_date:
+          title: Due date
+          type: string
+          readOnly: true
+        broker:
+          title: Broker
+          type: string
+          readOnly: true
+        producer:
+          title: Producer
+          type: string
+          readOnly: true
+        all_agents:
+          title: All agents
+          type: string
+          readOnly: true
+        primary_agent:
+          title: Primary agent
+          type: string
+          readOnly: true
+        carrier:
+          title: Carrier
+          type: string
+          readOnly: true
+        coverage_type:
+          title: Coverage type
+          type: string
+          readOnly: true
+        actions:
+          title: Actions
+          type: string
+          readOnly: true
+        connect_payout_status:
+          title: Connect payout status
+          type: string
+          readOnly: true
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    BrokerRefund:
+      required:
+      - amount_cents
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          title: Status
+          type: string
+          enum:
+          - pending
+          - succeeded
+          - failed
+          - refunded
+          - partially_refunded
+        amount_cents:
+          title: Amount cents
+          description: Payment amount in cents
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        amount_refunded_cents:
+          title: Amount refunded cents
+          description: Amount refunded in cents
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        payment_method_type:
+          title: Payment method type
+          type:
+          - string
+          - 'null'
+          enum:
+          - card
+          - us_bank_account
+        payment_method_details:
+          title: Payment method details
+          description: Card last4, bank name, etc.
+          type: object
+        paid_at:
+          title: Paid at
+          description: Payment timestamp
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

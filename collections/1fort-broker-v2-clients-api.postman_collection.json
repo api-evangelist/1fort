@@ -1,0 +1,1733 @@
+{
+  "item": [
+    {
+      "id": "9c5ec798-e224-4f00-93dc-030e2d4028b5",
+      "name": "broker (v2): clients",
+      "description": {
+        "content": "**Access:** requires a JWT access token.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4cd7971b-5ba0-419a-89eb-6dd0d80c7594",
+          "name": "List Clients",
+          "request": {
+            "name": "List Clients",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "clients"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "primary_agent",
+                  "value": "<string>",
+                  "description": "Filter businesses by assigned team member(s). Matches any broker user assigned to the account, not only the primary agent. Supports comma-separated values to filter by multiple team members. Searches across first name, last name, email, and ID (if numeric value provided).\n\nExamples:\n- `?primary_agent=john` - Matches assigned team members with 'john' in first/last name\n- `?primary_agent=john.doe@example.com` - Matches an assigned team member's email\n- `?primary_agent=123` - Matches an assigned team member's ID or name containing '123'\n- `?primary_agent=123,456` - Matches assigned team members with ID 123 or 456\n- `?primary_agent=john,jane` - Matches assigned team members with 'john' or 'jane' in name"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_favorite",
+                  "value": "<boolean>",
+                  "description": "Filter businesses by favorite status.\n\nExamples:\n- `?is_favorite=true` - Show only favorited businesses\n- `?is_favorite=false` - Show only non-favorited businesses"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Order businesses by specified fields. Use '-' prefix for descending order.\n\nAvailable fields:\n- `name` - Business name\n- `created_at` - Creation date\n- `updated_at` - Last updated date\n- `number_of_active_applications` - Count of active applications\n- `number_of_active_quotes` - Count of active quotes\n- `primary_agent_first_name` - Primary agent's first name\n- `primary_agent_last_name` - Primary agent's last name\n- `number_of_policies` - Count of policies\n- `number_of_todo_tasks` - Count of tasks in TODO status\n- `latest_quote_effective_date` - Effective date of latest quote\n\nExamples:\n- `?ordering=name` - Order by business name (A-Z)\n- `?ordering=-primary_agent_last_name` - Order by primary agent's last name (Z-A)\n- `?ordering=number_of_active_quotes` - Order by number of active quotes (ascending)\n\nNote: Businesses without primary agents or with empty name fields will be sorted first in ascending order and last in descending order."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "archived",
+                  "value": "<string>",
+                  "description": "Filter businesses by archived status.\n\nExamples:\n- `?archived=false` (default) - Show only active (non-archived) businesses\n- `?archived=true` - Show only archived businesses\n- `?archived=all` - Show all businesses (both active and archived)"
+                },
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>",
+                  "description": "Include related fields in the response.\n\nAvailable fields:\n- `broker_users` - Include detailed information about business agents\n- `broker` - Include broker agency details\n- `industry_classification` - Include industry classification details\n\nExample: `?expand=broker_users,broker`"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cef22832-dee1-4c89-a962-0b877ab22396",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "primary_agent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_favorite",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "archived",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1413,\n  \"results\": [\n    {\n      \"name\": \"string\",\n      \"broker_users\": [\n        \"121d053e-fa26-9384-3f9b-18263baba03c\",\n        \"b1b838fe-ebe2-ae8b-ea7b-2b3227aff506\"\n      ],\n      \"id\": 424,\n      \"domain_name\": \"string\",\n      \"industry\": \"string\",\n      \"number_of_employees\": 1243230383,\n      \"active\": false,\n      \"description\": null,\n      \"revenue\": 6062931958379872000,\n      \"state_of_incorporation\": \"string\",\n      \"country_of_incorporation\": null,\n      \"year_founded\": null,\n      \"naics_code\": null,\n      \"ein\": null,\n      \"is_franchise\": false,\n      \"premium_plan\": null,\n      \"broker\": 5345,\n      \"industry_classification\": \"a9273f0a-4e1d-7581-aba8-1515e6d0b9fd\",\n      \"number_of_active_applications\": 4097,\n      \"number_of_active_quotes\": 9755,\n      \"latest_quote_effective_date\": \"2013-07-07\",\n      \"number_of_policies\": 8574,\n      \"number_of_todo_tasks\": 4858,\n      \"is_favorite\": true,\n      \"archived_at\": \"1952-04-14T14:04:26.826Z\",\n      \"created_at\": \"1947-12-15T23:31:25.585Z\",\n      \"updated_at\": \"1966-10-10T14:39:03.239Z\"\n    },\n    {\n      \"name\": \"string\",\n      \"broker_users\": [\n        \"a609487c-3aa9-114c-e17b-c033552029ac\",\n        \"390730ca-e7b3-2258-3459-68a3dfd79572\"\n      ],\n      \"id\": 5609,\n      \"domain_name\": \"string\",\n      \"industry\": \"string\",\n      \"number_of_employees\": 314367565,\n      \"active\": true,\n      \"description\": \"string\",\n      \"revenue\": null,\n      \"state_of_incorporation\": null,\n      \"country_of_incorporation\": \"string\",\n      \"year_founded\": 1285835528,\n      \"naics_code\": \"string\",\n      \"ein\": null,\n      \"is_franchise\": false,\n      \"premium_plan\": null,\n      \"broker\": null,\n      \"industry_classification\": null,\n      \"number_of_active_applications\": 8911,\n      \"number_of_active_quotes\": 8669,\n      \"latest_quote_effective_date\": \"1958-04-13\",\n      \"number_of_policies\": 1552,\n      \"number_of_todo_tasks\": 9744,\n      \"is_favorite\": true,\n      \"archived_at\": null,\n      \"created_at\": \"2021-06-18T07:19:51.026Z\",\n      \"updated_at\": \"1967-07-07T19:53:50.575Z\"\n    }\n  ],\n  \"next\": \"http://azPZQZiMGZFIDatvkANCdnsYK.nwmvsTX+rLNL99y.M1oTowr1H9WRWweswIDQTKXt7maX\",\n  \"previous\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "676b40dd-fd92-4680-8858-118b3ba7f5e1",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "primary_agent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_favorite",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "archived",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "daf4f97b-d5c3-4af8-a9da-146382d89d26",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "primary_agent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_favorite",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "archived",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3733b6f4-af93-4d86-a6d7-a1949fa947fd",
+          "name": "Retrieve Client",
+          "request": {
+            "name": "Retrieve Client",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "clients",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) A unique integer value identifying this business."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb079ecc-186c-446d-9b93-f4841483ee71",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"broker_users\": [\n    \"8eeea314-6154-5724-20ff-198d06dbe446\",\n    \"b34fd1ed-6ea4-2f57-667c-6e690c8ca0b9\"\n  ],\n  \"id\": 976,\n  \"domain_name\": \"string\",\n  \"industry\": \"string\",\n  \"number_of_employees\": null,\n  \"active\": true,\n  \"description\": null,\n  \"revenue\": null,\n  \"state_of_incorporation\": null,\n  \"country_of_incorporation\": \"string\",\n  \"year_founded\": 896565592,\n  \"naics_code\": \"string\",\n  \"ein\": null,\n  \"is_franchise\": null,\n  \"premium_plan\": true,\n  \"broker\": 4832,\n  \"industry_classification\": \"b8cfaebf-5de6-0f34-05cd-1df852da2cdd\",\n  \"number_of_active_applications\": 6106,\n  \"number_of_active_quotes\": 1121,\n  \"latest_quote_effective_date\": \"2002-08-17\",\n  \"number_of_policies\": 8787,\n  \"number_of_todo_tasks\": 9657,\n  \"is_favorite\": false,\n  \"archived_at\": null,\n  \"created_at\": \"2003-04-21T02:22:26.129Z\",\n  \"updated_at\": \"1960-09-08T05:53:38.141Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcd8b295-7a23-4ad2-bad0-e4f72fae6c0d",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70861e7e-0e46-41f4-b916-d09d14209614",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3cc4bb64-448e-4268-a609-236aab2162ed",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3fb9568f-309a-4482-ace1-6a48c2056b97",
+          "name": "Archive Business",
+          "request": {
+            "name": "Archive Business",
+            "description": {
+              "content": "Archive a business (insured).\n\nA business can only be archived if it has no active applications, quotes, or policies.\nArchiving also archives all of the business's applications, coverage applications, quotes, and policies.\nOnce archived, the business will not appear in the default list view.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "clients",
+                ":id",
+                "archive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) A unique integer value identifying this business."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fdff97fb-26ae-4966-9993-4e086daaefb3",
+              "name": "Business archived successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9132fa70-c04e-4c1e-bf27-d688aa28d6d1",
+              "name": "Cannot archive business",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0f17bd4-0af8-4ee7-a0ba-e824272f0c17",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ddbc70a-e387-47e4-809e-e9c3e1d7872c",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1706f4b-a10b-47af-be0b-1173c5129b04",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22c24dad-071f-4139-9c37-7ae77674d902",
+          "name": "Toggle Favorite Status",
+          "request": {
+            "name": "Toggle Favorite Status",
+            "description": {
+              "content": "Toggle the favorite status of a business for the current broker user.\n\nIf the business is not currently favorited, it will be added to favorites.\nIf the business is currently favorited, it will be removed from favorites.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "clients",
+                ":id",
+                "toggle_favorite"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) A unique integer value identifying this business."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4687bb95-cc72-473e-b7a2-b96ece0a8740",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id",
+                    "toggle_favorite"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\"\n  ],\n  \"id\": 2367,\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"number_of_active_applications\": 1504,\n  \"number_of_active_quotes\": 9692,\n  \"latest_quote_effective_date\": \"1971-02-01\",\n  \"number_of_policies\": 6019,\n  \"number_of_todo_tasks\": 9361,\n  \"is_favorite\": true,\n  \"archived_at\": \"<string,null-date-time>\",\n  \"created_at\": \"1970-01-16T15:55:56.722Z\",\n  \"updated_at\": \"2023-08-01T02:27:16.061Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5ae50fa-72fa-4c11-a3f9-aa11e20ef2e4",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id",
+                    "toggle_favorite"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"non_field_errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_1\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17b14b38-7e3b-4ad0-9ca8-26dabf7323b0",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id",
+                    "toggle_favorite"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59655dd8-86c7-4525-8dec-456048cf8bed",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id",
+                    "toggle_favorite"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cab7ef70-4026-41bb-a999-43c22c3f43f9",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id",
+                    "toggle_favorite"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84857495-844d-43e1-93d3-c417d56dff24",
+          "name": "Unarchive Business",
+          "request": {
+            "name": "Unarchive Business",
+            "description": {
+              "content": "Unarchive a business (insured).\n\nRestores an archived business to active status so it will appear in the default list view.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "clients",
+                ":id",
+                "unarchive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) A unique integer value identifying this business."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "918c3c23-f353-468d-af2d-256b6f2df807",
+              "name": "Business unarchived successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id",
+                    "unarchive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b2f7708-8a4a-4760-9c0e-c7f68b80f71b",
+              "name": "Cannot unarchive business",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id",
+                    "unarchive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6fe99817-c70b-4f25-be21-9240371ac2bd",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id",
+                    "unarchive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4887964e-7c58-4c3d-980b-30de8d0f7cc6",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id",
+                    "unarchive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfb0e084-f26b-4b2d-9b85-1f476e5a5f54",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "clients",
+                    ":id",
+                    "unarchive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"broker_users\": [\n    \"<uuid>\"\n  ],\n  \"domain_name\": \"<string,null>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"broker\": \"<integer,null>\",\n  \"industry_classification\": \"<string,null-uuid>\",\n  \"archived_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.1fort.com/apis/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3eda8ac8-8ef9-4554-99ab-06ea21f52b35",
+    "name": "1Fort API Documentation broker (v2): clients API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# 1Fort API\n\nREST API for the 1Fort insurance platform. This document is the authoritative\nmap of the API surface; endpoints are grouped in the sidebar by **app** and\n**version**, and large apps are split into per-resource sub-groups.\n\n## Authentication\n\nAlmost every endpoint requires a **JWT access token**. Send it in the\n`Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may\nalso be presented as an HTTP-only cookie. Endpoints documented with no security\nrequirement are intentionally public (for example sign-in, OTP and storefront\nendpoints).\n\n## Multi-tenancy\n\nResources are scoped to a tenant. Nested routes carry the owning resource id in\nthe path (for example `/v2/broker/{business_pk}/applications`); a token is only\nauthorised for the businesses its user may access. Object-level permissions are\nenforced per endpoint.\n\n## Versioning\n\n`v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`\nendpoints remain documented for compatibility. Endpoints marked **deprecated**\nare scheduled for removal; prefer the documented replacement.\n",
+      "type": "text/plain"
+    }
+  }
+}

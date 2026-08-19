@@ -1,0 +1,272 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation google_workspace (v2) google_workspace (v2) API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "google_workspace (v2)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List DWD",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/integrations/google/dwd",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "ViewSet for Broker Google DWD integrations using Service Account Domain-Wide Delegation."
+        },
+        {
+          "info": {
+            "name": "Set up Google DWD integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/integrations/google/dwd/connect",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nSet up a Domain-Wide Delegation integration for a broker agency.\nThis endpoint requires specifying the domain for which the integration should be set up.\nReturns setup instructions and a pending integration record.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve DWD",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/integrations/google/dwd/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "ViewSet for Broker Google DWD integrations using Service Account Domain-Wide Delegation."
+        },
+        {
+          "info": {
+            "name": "Update Google DWD integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/v2/broker/integrations/google/dwd/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nUpdate a Google DWD integration. Currently only supports updating the super_admin_email.\nThe integration must be in PENDING_SETUP or CONNECTED status.\n"
+        },
+        {
+          "info": {
+            "name": "Update DWD",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/v2/broker/integrations/google/dwd/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Handle PATCH requests - delegate to update method."
+        },
+        {
+          "info": {
+            "name": "Verify Google DWD integration setup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/integrations/google/dwd/:id/verify",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nVerify that the Google Workspace Admin has properly configured Domain-Wide Delegation\nin their Admin Console by attempting a test API call.\nIf the integration is already CONNECTED, returns success without re-verifying.\nStatus changes to CONNECTED if verification is successful.\n"
+        },
+        {
+          "info": {
+            "name": "List OAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/integrations/google/oauth",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "ViewSet for Broker Google OAuth integrations."
+        },
+        {
+          "info": {
+            "name": "Start Google OAuth integration for broker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/integrations/google/oauth/connect",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "\nStart the Google OAuth integration process for a broker agency.\nThis will return a URL that the user should be redirected to for consent.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve OAuth",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/integrations/google/oauth/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "ViewSet for Broker Google OAuth integrations."
+        },
+        {
+          "info": {
+            "name": "Reconnect Google OAuth integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/integrations/google/oauth/:id/reconnect",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "\nReconnect a Google OAuth integration. This will return a URL that the user should redirect to.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

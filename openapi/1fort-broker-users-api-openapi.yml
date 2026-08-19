@@ -1,0 +1,582 @@
+openapi: 3.2.0
+info:
+  title: '1Fort API Documentation broker: users API'
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: 'broker: users'
+  x-displayName: Users
+  description: '**Access:** requires a JWT access token.'
+paths:
+  /broker/{broker_pk}/users/me/notification-preferences:
+    parameters:
+    - name: broker_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: broker_users_me_notification-preferences_read
+      description: Get or update notification preferences for the current broker user.
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BrokerUserNotificationPreference'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'broker: users'
+      summary: Retrieve Notification preference
+    patch:
+      operationId: broker_users_me_notification-preferences_partial_update
+      description: Get or update notification preferences for the current broker user.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerUserNotificationPreference'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'broker: users'
+      summary: Update Notification preference
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrokerUserNotificationPreference'
+        required: true
+  /broker/{broker_pk}/users/me/proposal-preferences:
+    parameters:
+    - name: broker_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: broker_users_me_proposal-preferences_read
+      description: Get or update proposal download defaults for the current broker user.
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BrokerUserProposalPreference'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'broker: users'
+      summary: Retrieve Proposal preference
+    patch:
+      operationId: broker_users_me_proposal-preferences_partial_update
+      description: Get or update proposal download defaults for the current broker user.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerUserProposalPreference'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'broker: users'
+      summary: Update Proposal preference
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrokerUserProposalPreference'
+        required: true
+components:
+  schemas:
+    BrokerUserNotificationPreference:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        client_has_issues:
+          title: Client has issues
+          type: boolean
+        team_grew:
+          title: Team grew
+          type: boolean
+        digest:
+          title: Digest
+          description: Receive the weekly digest email (SendGrid template d-b32552724a98437db5098b6104dc11cd)
+          type: boolean
+        email_ai_proposal_notifications:
+          title: Email ai proposal notifications
+          description: Receive proposal emails sent when a quote is processed by email ai
+          type: boolean
+        email_ai_binder_notifications:
+          title: Email ai binder notifications
+          description: Receive proposal emails sent when a binder is processed by email ai
+          type: boolean
+        email_ai_invoice_notifications:
+          title: Email ai invoice notifications
+          description: Receive invoice emails when an invoice is processed by email ai
+          type: boolean
+        renewal_notifications:
+          title: Renewal notifications
+          type: boolean
+        follow_up_notifications:
+          title: Follow up notifications
+          description: This will disable us sending email follow-ups to the underwriter
+          type: boolean
+        new_quote_notifications:
+          title: New quote notifications
+          description: Receive an email when a new quote is ready (SendGrid template d-0f5a9016957349398f634a5808f9cddf)
+          type: boolean
+        new_binder_notifications:
+          title: New binder notifications
+          description: Receive an email when a new binder is received (SendGrid template d-8327ebb4401b4310986b3d82e8d6000a)
+          type: boolean
+        new_policy_notifications:
+          title: New policy notifications
+          description: Receive an email when policy information is available (SendGrid template d-e3ac724ace5f4c3092e11e6ef9812280)
+          type: boolean
+        insured_completed_application_notifications:
+          title: Insured completed application notifications
+          description: Receive an email when an insured submits an application (SendGrid template d-3c6ebd156c704e86b21b1e9dc339e8e3)
+          type: boolean
+        task_completed_notifications:
+          title: Task completed notifications
+          description: Receive an email when a task is completed (SendGrid template d-46595dc378de446082907232b5ae8030)
+          type: boolean
+        insured_started_application_notifications:
+          title: Insured started application notifications
+          description: Receive an email when an insured starts a storefront application (SendGrid template d-be322fb1f5ae4751a6257a717fe54de7)
+          type: boolean
+        end_of_month_submission_notifications:
+          title: End of month submission notifications
+          description: Receive the send-us-your-end-of-month-submissions email (SendGrid template d-d00ecbd81c4545c8a58b9897a8142812)
+          type: boolean
+        unbound_quote_help_notifications:
+          title: Unbound quote help notifications
+          description: Receive an email when an insured pays for a quote that is not bound yet (SendGrid template d-ce0aaf9d66a44e1aa767058eefe6aa87)
+          type: boolean
+        unsubscribe_from_all:
+          title: Unsubscribe from all
+          type: boolean
+        preferences:
+          title: Preferences
+          type: string
+          readOnly: true
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    BrokerUserProposalPreference:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        include_recommended_coverages:
+          title: Include recommended coverages
+          description: Default for 'Include other recommended coverages'.
+          type: boolean
+        include_coverage_analysis:
+          title: Include coverage analysis
+          description: Default for 'Include coverage analysis'.
+          type: boolean
+        include_original_quote_doc:
+          title: Include original quote doc
+          description: Default for 'Include original quote doc'.
+          type: boolean
+        include_payment_link:
+          title: Include payment link
+          description: Default for 'Include payment link'.
+          type: boolean
+        include_quote_comparison:
+          title: Include quote comparison
+          description: Default for 'Include quote comparison'.
+          type: boolean
+        preferences:
+          title: Preferences
+          type: string
+          readOnly: true
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

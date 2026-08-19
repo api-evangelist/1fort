@@ -1,0 +1,330 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation quote (v2): tasks API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "quote (v2): tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Tasks for Broker Agency Across All Businesses and Quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/tasks",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "type"
+              },
+              {
+                "name": "business",
+                "value": "",
+                "type": "query",
+                "description": "business"
+              },
+              {
+                "name": "broker",
+                "value": "",
+                "type": "query",
+                "description": "broker"
+              },
+              {
+                "name": "coverage",
+                "value": "",
+                "type": "query",
+                "description": "coverage"
+              },
+              {
+                "name": "carrier",
+                "value": "",
+                "type": "query",
+                "description": "carrier"
+              },
+              {
+                "name": "insured",
+                "value": "",
+                "type": "query",
+                "description": "insured"
+              },
+              {
+                "name": "assigned_to_email",
+                "value": "",
+                "type": "query",
+                "description": "assigned_to_email"
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List all quote tasks for the broker agency of the logged-in user (from the latest task groups).\n\nExpandable fields via expand query parameter (comma separated):\n- quote: Full quote details (omits tasks to prevent recursion)\n- business: Business details\n- broker: Broker agency details\n- group: Task group details (omits tasks to prevent recursion)\n- completed_by: Broker user who completed the task\n\nFilters available:\n- status: Filter by task status (todo, done, dismissed, n/a)\n- type: Filter by ta"
+        },
+        {
+          "info": {
+            "name": "Resolve QuoteTasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/tasks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resolve one or multiple tasks with comments and/or documents"
+        },
+        {
+          "info": {
+            "name": "ViewSet for managing quote tasks for the broker agency.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/tasks/count",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "type"
+              },
+              {
+                "name": "business",
+                "value": "",
+                "type": "query",
+                "description": "business"
+              },
+              {
+                "name": "broker",
+                "value": "",
+                "type": "query",
+                "description": "broker"
+              },
+              {
+                "name": "coverage",
+                "value": "",
+                "type": "query",
+                "description": "coverage"
+              },
+              {
+                "name": "carrier",
+                "value": "",
+                "type": "query",
+                "description": "carrier"
+              },
+              {
+                "name": "insured",
+                "value": "",
+                "type": "query",
+                "description": "insured"
+              },
+              {
+                "name": "assigned_to_email",
+                "value": "",
+                "type": "query",
+                "description": "assigned_to_email"
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Only returns tasks from the most recently created task group for each quote."
+        },
+        {
+          "info": {
+            "name": "ViewSet for managing quote tasks for the broker agency.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/tasks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Only returns tasks from the most recently created task group for each quote."
+        },
+        {
+          "info": {
+            "name": "List All Tasks for a Business Across All Quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/tasks",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "type"
+              },
+              {
+                "name": "business",
+                "value": "",
+                "type": "query",
+                "description": "business"
+              },
+              {
+                "name": "broker",
+                "value": "",
+                "type": "query",
+                "description": "broker"
+              },
+              {
+                "name": "coverage",
+                "value": "",
+                "type": "query",
+                "description": "coverage"
+              },
+              {
+                "name": "carrier",
+                "value": "",
+                "type": "query",
+                "description": "carrier"
+              },
+              {
+                "name": "insured",
+                "value": "",
+                "type": "query",
+                "description": "insured"
+              },
+              {
+                "name": "assigned_to_email",
+                "value": "",
+                "type": "query",
+                "description": "assigned_to_email"
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List all quote tasks for a specific business (from the latest task groups).\n\nExpandable fields via expand query parameter (comma separated):\n- quote: Full quote details (omits tasks to prevent recursion)\n- business: Business details\n- broker: Broker agency details\n- group: Task group details (omits tasks to prevent recursion)\n- completed_by: Broker user who completed the task\n\nFilters available:\n- status: Filter by task status (todo, done, dismissed, n/a)\n- type: Filter by task type (signature, "
+        },
+        {
+          "info": {
+            "name": "ViewSet for managing quote tasks for a specific business.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/tasks/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Only returns tasks from the most recently created task group for each quote."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

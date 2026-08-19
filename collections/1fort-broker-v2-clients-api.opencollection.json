@@ -1,0 +1,175 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation broker (v2): clients API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "broker (v2): clients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Clients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/clients",
+            "params": [
+              {
+                "name": "primary_agent",
+                "value": "",
+                "type": "query",
+                "description": "Filter businesses by assigned team member(s). Matches any broker user assigned to the account, not only the primary agent. Supports comma-separated values to filter by multiple team members. Searches across first name, last name, email, and ID (if numeric value provided).\n\nExamples:\n- `?primary_agent=john` - Matches assigned team members with 'john' in first/last name\n- `?primary_agent=john.doe@example.com` - Matches an assigned team member's email\n- `?primary_agent=123` - Matches an assigned team member's ID or name containing '123'\n- `?primary_agent=123,456` - Matches assigned team members with ID 123 or 456\n- `?primary_agent=john,jane` - Matches assigned team members with 'john' or 'jane' in name"
+              },
+              {
+                "name": "is_favorite",
+                "value": "",
+                "type": "query",
+                "description": "Filter businesses by favorite status.\n\nExamples:\n- `?is_favorite=true` - Show only favorited businesses\n- `?is_favorite=false` - Show only non-favorited businesses"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Order businesses by specified fields. Use '-' prefix for descending order.\n\nAvailable fields:\n- `name` - Business name\n- `created_at` - Creation date\n- `updated_at` - Last updated date\n- `number_of_active_applications` - Count of active applications\n- `number_of_active_quotes` - Count of active quotes\n- `primary_agent_first_name` - Primary agent's first name\n- `primary_agent_last_name` - Primary agent's last name\n- `number_of_policies` - Count of policies\n- `number_of_todo_tasks` - Count of tasks in TODO status\n- `latest_quote_effective_date` - Effective date of latest quote\n\nExamples:\n- `?ordering=name` - Order by business name (A-Z)\n- `?ordering=-primary_agent_last_name` - Order by primary agent's last name (Z-A)\n- `?ordering=number_of_active_quotes` - Order by number of active quotes (ascending)\n\nNote: Businesses without primary agents or with empty name fields will be sorted first in ascending order and last in descending order."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "archived",
+                "value": "",
+                "type": "query",
+                "description": "Filter businesses by archived status.\n\nExamples:\n- `?archived=false` (default) - Show only active (non-archived) businesses\n- `?archived=true` - Show only archived businesses\n- `?archived=all` - Show all businesses (both active and archived)"
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query",
+                "description": "Include related fields in the response.\n\nAvailable fields:\n- `broker_users` - Include detailed information about business agents\n- `broker` - Include broker agency details\n- `industry_classification` - Include industry classification details\n\nExample: `?expand=broker_users,broker`"
+              }
+            ]
+          },
+          "docs": "List Clients"
+        },
+        {
+          "info": {
+            "name": "Retrieve Client",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/clients/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business."
+              }
+            ]
+          },
+          "docs": "Retrieve Client"
+        },
+        {
+          "info": {
+            "name": "Archive Business",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/clients/:id/archive",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Archive a business (insured).\n\nA business can only be archived if it has no active applications, quotes, or policies.\nArchiving also archives all of the business's applications, coverage applications, quotes, and policies.\nOnce archived, the business will not appear in the default list view."
+        },
+        {
+          "info": {
+            "name": "Toggle Favorite Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/clients/:id/toggle_favorite",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Toggle the favorite status of a business for the current broker user.\n\nIf the business is not currently favorited, it will be added to favorites.\nIf the business is currently favorited, it will be removed from favorites."
+        },
+        {
+          "info": {
+            "name": "Unarchive Business",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/clients/:id/unarchive",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unarchive a business (insured).\n\nRestores an archived business to active status so it will appear in the default list view."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

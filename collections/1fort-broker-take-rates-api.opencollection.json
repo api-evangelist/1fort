@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation broker: take-rates API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "broker: take-rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Take rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/take-rates",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              }
+            ]
+          },
+          "docs": "ViewSet for listing and updating broker take rates (12 logical rows per agency).\nURL pk is always the template ID; lookup is by (agency, template).\nList returns template data merged with any custom TakeRate; PATCH creates/updates TakeRate."
+        },
+        {
+          "info": {
+            "name": "Retrieve Take rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/take-rates/:id",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "ViewSet for listing and updating broker take rates (12 logical rows per agency).\nURL pk is always the template ID; lookup is by (agency, template).\nList returns template data merged with any custom TakeRate; PATCH creates/updates TakeRate."
+        },
+        {
+          "info": {
+            "name": "Update Take rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/take-rates/:id",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ViewSet for listing and updating broker take rates (12 logical rows per agency).\nURL pk is always the template ID; lookup is by (agency, template).\nList returns template data merged with any custom TakeRate; PATCH creates/updates TakeRate."
+        },
+        {
+          "info": {
+            "name": "Update Take rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/take-rates/:id",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ViewSet for listing and updating broker take rates (12 logical rows per agency).\nURL pk is always the template ID; lookup is by (agency, template).\nList returns template data merged with any custom TakeRate; PATCH creates/updates TakeRate."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

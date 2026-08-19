@@ -1,0 +1,276 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation application: clients API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "application: clients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients/:client_pk/applications",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "client_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Filter out applications that are in draft state and application without herald applications if it's API application"
+        },
+        {
+          "info": {
+            "name": "Create Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients/:client_pk/applications",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "client_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Application"
+        },
+        {
+          "info": {
+            "name": "Retrieve Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients/:client_pk/applications/:id",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "client_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ]
+          },
+          "docs": "Retrieve Application"
+        },
+        {
+          "info": {
+            "name": "Update Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients/:client_pk/applications/:id",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "client_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Application"
+        },
+        {
+          "info": {
+            "name": "Update Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients/:client_pk/applications/:id",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "client_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Application"
+        },
+        {
+          "info": {
+            "name": "Delete Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients/:client_pk/applications/:id",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "client_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ]
+          },
+          "docs": "Delete Application"
+        },
+        {
+          "info": {
+            "name": "Get quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients/:client_pk/applications/:id/quotes",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "client_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ]
+          },
+          "docs": "Get quotes"
+        },
+        {
+          "info": {
+            "name": "Get report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients/:client_pk/applications/:id/report",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "client_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ]
+          },
+          "docs": "Get report"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Broker Settings API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "broker_settings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List domain authentication records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/domain-authentications",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "\nList all domain authentication records for a broker agency.\nReturns DNS configuration records for email domain authentication.\nNote: All modifications should be done through Django admin.\n"
+        },
+        {
+          "info": {
+            "name": "Verify Domain Authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/domain-authentications/verify",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nTrigger DNS verification for the broker agency's domain.\nCalls SendGrid's validate endpoint and updates record statuses.\n\nReturns:\n- success: Whether the API call succeeded\n- all_valid: Whether all DNS records are properly configured\n- records: Updated list of domain authentication records\n- error: Error message if any\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

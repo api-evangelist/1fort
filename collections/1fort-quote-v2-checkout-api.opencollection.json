@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation quote (v2): checkout API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "quote (v2): checkout",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ViewSet for allowing business users to checkout a quote.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/checkout/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this quote."
+              }
+            ]
+          },
+          "docs": "Supports both short_id (8 chars) and UUID lookups for backward compatibility."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Legal API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "legal",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Legal documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/legal-documents",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Read-only API for platform legal documents with per-user signing."
+        },
+        {
+          "info": {
+            "name": "Retrieve Legal document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/legal-documents/:document_type",
+            "params": [
+              {
+                "name": "document_type",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Read-only API for platform legal documents with per-user signing."
+        },
+        {
+          "info": {
+            "name": "Sign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/legal-documents/:document_type/sign",
+            "params": [
+              {
+                "name": "document_type",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Read-only API for platform legal documents with per-user signing."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

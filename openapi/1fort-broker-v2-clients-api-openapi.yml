@@ -1,0 +1,790 @@
+openapi: 3.2.0
+info:
+  title: '1Fort API Documentation broker (v2): clients API'
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: 'broker (v2): clients'
+  x-displayName: Clients
+  description: '**Access:** requires a JWT access token.'
+paths:
+  /v2/broker/clients:
+    parameters: []
+    get:
+      operationId: v2_broker_clients_list
+      description: ''
+      parameters:
+      - name: primary_agent
+        in: query
+        description: 'Filter businesses by assigned team member(s). Matches any broker user assigned to the account, not only the primary agent. Supports comma-separated values to filter by multiple team members. Searches across first name, last name, email, and ID (if numeric value provided).
+
+
+          Examples:
+
+          - `?primary_agent=john` - Matches assigned team members with ''john'' in first/last name
+
+          - `?primary_agent=john.doe@example.com` - Matches an assigned team member''s email
+
+          - `?primary_agent=123` - Matches an assigned team member''s ID or name containing ''123''
+
+          - `?primary_agent=123,456` - Matches assigned team members with ID 123 or 456
+
+          - `?primary_agent=john,jane` - Matches assigned team members with ''john'' or ''jane'' in name'
+        required: false
+        schema:
+          type: string
+      - name: is_favorite
+        in: query
+        description: 'Filter businesses by favorite status.
+
+
+          Examples:
+
+          - `?is_favorite=true` - Show only favorited businesses
+
+          - `?is_favorite=false` - Show only non-favorited businesses'
+        required: false
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: 'Order businesses by specified fields. Use ''-'' prefix for descending order.
+
+
+          Available fields:
+
+          - `name` - Business name
+
+          - `created_at` - Creation date
+
+          - `updated_at` - Last updated date
+
+          - `number_of_active_applications` - Count of active applications
+
+          - `number_of_active_quotes` - Count of active quotes
+
+          - `primary_agent_first_name` - Primary agent''s first name
+
+          - `primary_agent_last_name` - Primary agent''s last name
+
+          - `number_of_policies` - Count of policies
+
+          - `number_of_todo_tasks` - Count of tasks in TODO status
+
+          - `latest_quote_effective_date` - Effective date of latest quote
+
+
+          Examples:
+
+          - `?ordering=name` - Order by business name (A-Z)
+
+          - `?ordering=-primary_agent_last_name` - Order by primary agent''s last name (Z-A)
+
+          - `?ordering=number_of_active_quotes` - Order by number of active quotes (ascending)
+
+
+          Note: Businesses without primary agents or with empty name fields will be sorted first in ascending order and last in descending order.'
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      - name: archived
+        in: query
+        description: 'Filter businesses by archived status.
+
+
+          Examples:
+
+          - `?archived=false` (default) - Show only active (non-archived) businesses
+
+          - `?archived=true` - Show only archived businesses
+
+          - `?archived=all` - Show all businesses (both active and archived)'
+        required: false
+        schema:
+          type: string
+      - name: expand
+        in: query
+        description: 'Include related fields in the response.
+
+
+          Available fields:
+
+          - `broker_users` - Include detailed information about business agents
+
+          - `broker` - Include broker agency details
+
+          - `industry_classification` - Include industry classification details
+
+
+          Example: `?expand=broker_users,broker`'
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BrokerBusinessV2'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'broker (v2): clients'
+      summary: List Clients
+  /v2/broker/clients/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this business.
+      required: true
+      schema:
+        type: integer
+    get:
+      operationId: v2_broker_clients_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerBusinessV2'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'broker (v2): clients'
+      summary: Retrieve Client
+  /v2/broker/clients/{id}/archive:
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this business.
+      required: true
+      schema:
+        type: integer
+    post:
+      operationId: v2_broker_clients_archive
+      summary: Archive Business
+      description: 'Archive a business (insured).
+
+
+        A business can only be archived if it has no active applications, quotes, or policies.
+
+        Archiving also archives all of the business''s applications, coverage applications, quotes, and policies.
+
+        Once archived, the business will not appear in the default list view.'
+      responses:
+        '200':
+          description: Business archived successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Cannot archive business
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'broker (v2): clients'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrokerBusinessV2'
+        required: true
+  /v2/broker/clients/{id}/toggle_favorite:
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this business.
+      required: true
+      schema:
+        type: integer
+    post:
+      operationId: v2_broker_clients_toggle_favorite
+      summary: Toggle Favorite Status
+      description: 'Toggle the favorite status of a business for the current broker user.
+
+
+        If the business is not currently favorited, it will be added to favorites.
+
+        If the business is currently favorited, it will be removed from favorites.'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerBusinessV2'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'broker (v2): clients'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrokerBusinessV2'
+        required: true
+  /v2/broker/clients/{id}/unarchive:
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this business.
+      required: true
+      schema:
+        type: integer
+    post:
+      operationId: v2_broker_clients_unarchive
+      summary: Unarchive Business
+      description: 'Unarchive a business (insured).
+
+
+        Restores an archived business to active status so it will appear in the default list view.'
+      responses:
+        '200':
+          description: Business unarchived successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Cannot unarchive business
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'broker (v2): clients'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrokerBusinessV2'
+        required: true
+components:
+  schemas:
+    BrokerBusinessV2:
+      required:
+      - name
+      - broker_users
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        domain_name:
+          title: Domain name
+          type:
+          - string
+          - 'null'
+          maxLength: 500
+        industry:
+          title: Industry
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        number_of_employees:
+          title: Number of employees
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        active:
+          title: Active
+          type: boolean
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        revenue:
+          title: Revenue
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        state_of_incorporation:
+          title: State of incorporation
+          type:
+          - string
+          - 'null'
+          maxLength: 2
+        country_of_incorporation:
+          title: Country of incorporation
+          type:
+          - string
+          - 'null'
+          maxLength: 2
+        year_founded:
+          title: Year founded
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        naics_code:
+          title: Naics code
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        ein:
+          title: Ein
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        is_franchise:
+          title: Is franchise
+          type:
+          - boolean
+          - 'null'
+        premium_plan:
+          title: Premium plan
+          type:
+          - boolean
+          - 'null'
+        broker:
+          title: Broker
+          type:
+          - integer
+          - 'null'
+        industry_classification:
+          title: Industry classification
+          type:
+          - string
+          - 'null'
+          format: uuid
+        broker_users:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        number_of_active_applications:
+          title: Number of active applications
+          type: integer
+          readOnly: true
+        number_of_active_quotes:
+          title: Number of active quotes
+          type: integer
+          readOnly: true
+        latest_quote_effective_date:
+          title: Latest quote effective date
+          type: string
+          format: date
+          readOnly: true
+        number_of_policies:
+          title: Number of policies
+          type: integer
+          readOnly: true
+        number_of_todo_tasks:
+          title: Number of todo tasks
+          type: integer
+          readOnly: true
+        is_favorite:
+          title: Is favorite
+          type: boolean
+          readOnly: true
+        archived_at:
+          title: Archived at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

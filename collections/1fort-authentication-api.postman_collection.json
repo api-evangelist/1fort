@@ -1,0 +1,245 @@
+{
+  "item": [
+    {
+      "id": "e2983731-b89c-4575-af6e-b0f0d216a1d7",
+      "name": "Authentication",
+      "description": {
+        "content": "One-time-password (OTP) authentication.\n\n**Access:** public; no authentication required.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fef5be69-3278-43a5-88ac-43796621175b",
+          "name": "Request or Verify Email OTP",
+          "request": {
+            "name": "Request or Verify Email OTP",
+            "description": {
+              "content": "\nHandles both requesting an OTP and verifying it for login/signup.\n\n**Step 1: Request OTP**\n- Provide `email` and `action` ('signup' or 'login').\n- Sends an OTP to the email if validation passes.\n- Returns: `{\"message\": \"OTP sent...\"}`\n\n**Step 2: Verify OTP & Authenticate**\n- Provide `email` and `code` received via email.\n- Optionally provide `auth_type`: 'session' (default) or 'jwt'.\n- Optionally provide `first_name`, `last_name`, `user_role` if signing up.\n- Verifies the code. If valid, creates user (if signup) and authenticates.\n- Returns (Session Auth): `{\"user\": {...}, \"created\": bool, \"auth_type\": \"session\"}` -> Browser receives `sessionid` and `csrftoken` cookies.\n- Returns (JWT Auth, if enabled): `{\"user\": {...}, \"created\": bool, \"auth_type\": \"jwt\", \"access\": \"...\", \"refresh\": \"...\"}`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "otp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<email>\",\n  \"code\": \"<string>\",\n  \"user\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"title\": \"<string,null>\"\n  },\n  \"action\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"auth_type\": \"jwt\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c1e181d1-61a3-4a8c-a3fc-2059ad73db8a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "otp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"code\": \"<string>\",\n  \"user\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"title\": \"<string,null>\"\n  },\n  \"action\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"auth_type\": \"jwt\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"email\": \"<email>\",\n  \"code\": \"<string>\",\n  \"refresh\": \"string\",\n  \"access\": \"string\",\n  \"created\": true,\n  \"user\": {\n    \"id\": 4917,\n    \"email\": \"Us4m@vjKyGtABrsphTwaGnWPtXaUzMbO.ho\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"title\": \"<string,null>\",\n    \"role\": \"User\"\n  },\n  \"action\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"auth_type\": \"jwt\",\n  \"access_expires_in_seconds\": 9717\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2c8df8d-cb0e-4ec8-a479-d8b623f24ec0",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "otp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"code\": \"<string>\",\n  \"user\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"title\": \"<string,null>\"\n  },\n  \"action\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"auth_type\": \"jwt\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"non_field_errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3be05577-a624-4272-868f-20e6f6e2d614",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "otp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"code\": \"<string>\",\n  \"user\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"title\": \"<string,null>\"\n  },\n  \"action\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"auth_type\": \"jwt\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.1fort.com/apis/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3ec29a54-1beb-494c-9fd0-f51e463f65fe",
+    "name": "1Fort API Documentation Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# 1Fort API\n\nREST API for the 1Fort insurance platform. This document is the authoritative\nmap of the API surface; endpoints are grouped in the sidebar by **app** and\n**version**, and large apps are split into per-resource sub-groups.\n\n## Authentication\n\nAlmost every endpoint requires a **JWT access token**. Send it in the\n`Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may\nalso be presented as an HTTP-only cookie. Endpoints documented with no security\nrequirement are intentionally public (for example sign-in, OTP and storefront\nendpoints).\n\n## Multi-tenancy\n\nResources are scoped to a tenant. Nested routes carry the owning resource id in\nthe path (for example `/v2/broker/{business_pk}/applications`); a token is only\nauthorised for the businesses its user may access. Object-level permissions are\nenforced per endpoint.\n\n## Versioning\n\n`v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`\nendpoints remain documented for compatibility. Endpoints marked **deprecated**\nare scheduled for removal; prefer the documented replacement.\n",
+      "type": "text/plain"
+    }
+  }
+}

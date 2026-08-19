@@ -1,0 +1,488 @@
+openapi: 3.2.0
+info:
+  title: 1Fort API Documentation Markets API
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: Markets
+  x-displayName: Markets
+  description: '**Access:** requires a JWT access token.'
+paths:
+  /v2/broker/markets/available-markets:
+    parameters: []
+    get:
+      operationId: v2_broker_markets_available_markets
+      summary: Get Available Markets
+      description: '
+
+        Retrieve markets available for submission with advanced filtering options.
+
+
+        This endpoint returns markets that match the specified criteria. When a
+
+        coverage_application_id is provided, it returns markets specifically available
+
+        for that application. Without it, returns all markets accessible to the broker.
+
+
+        **Filtering Options:**
+
+        - Product Line: Filter by product line code(s); comma-separated codes use OR logic
+
+        - Carrier: Filter by insurance carrier
+
+        - Wholesaler: Filter by wholesaler organization
+
+        - Submission Type: Filter by Herald API or Manual submission
+
+
+        Multiple filters can be combined for precise market selection.
+
+        '
+      parameters:
+      - name: product_line_code
+        in: query
+        description: Filter by product line code(s), case-insensitive. Comma-separated values match markets that include any of the listed product lines (OR), e.g. CYBER,GL,PROP.
+        schema:
+          type: string
+      - name: sub_product_line_name
+        in: query
+        description: Filter by sub product line name(s). Supports comma-separated list (e.g., 'D&O', 'EP', or 'D&O,EP' for ML)
+        schema:
+          type: string
+      - name: carrier_id
+        in: query
+        description: Filter by carrier UUID
+        schema:
+          type: string
+          format: uuid
+      - name: wholesaler_id
+        in: query
+        description: Filter by wholesaler UUID
+        schema:
+          type: string
+          format: uuid
+      - name: submission_type
+        in: query
+        description: 'Filter by Market.submission_method: portal (in-portal), manual (email), herald (API).'
+        schema:
+          type: string
+          enum:
+          - portal
+          - manual
+          - herald
+      - name: market_type
+        in: query
+        description: 'Distribution channel: ``broker`` = carrier only (no wholesaler/MGA); ``platform`` = wholesaler and/or MGA present.'
+        schema:
+          type: string
+          enum:
+          - platform
+          - broker
+      - name: admitted
+        in: query
+        description: Filter by admitted status (true for admitted, false for non-admitted/surplus lines). Only applicable for Herald markets.
+        schema:
+          type: boolean
+      - name: verification
+        in: query
+        description: verification
+        required: false
+        schema:
+          type: string
+          enum:
+          - verified
+          - pending
+          - needs_verification
+          - failed
+      - name: billing
+        in: query
+        description: billing
+        required: false
+        schema:
+          type: string
+          enum:
+          - AGENCY_BILL
+          - DIRECT_BILL
+      - name: group_id
+        in: query
+        description: group_id
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      - name: coverage_application_id
+        in: query
+        description: Optional. A single coverage-application UUID or a comma-separated list of UUIDs. When provided, the response switches to the grouped-per-id shape (see response schema). When omitted, the broker-wide flat shape is returned.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Available markets. Returns the flat shape when coverage_application_id is omitted; returns the grouped-per-id shape when one or more ids are provided.
+          content:
+            application/json:
+              schema:
+                type: object
+                oneOf:
+                - title: FlatMarketsResponse
+                  description: Returned when coverage_application_id is not provided.
+                  type: object
+                  properties:
+                    markets:
+                      description: List of available markets for the broker.
+                      type: array
+                      items:
+                        type: object
+                    count:
+                      description: Total number of markets returned.
+                      type: integer
+                    market_access_enabled:
+                      description: Whether the broker's agency has market access enabled.
+                      type: boolean
+                - title: GroupedMarketsResponse
+                  description: Returned when one or more coverage_application_id values are provided. `results` is keyed by coverage application id.
+                  type: object
+                  properties:
+                    results:
+                      description: Markets grouped per coverage application id.
+                      type: object
+                      additionalProperties:
+                        type: object
+                        properties:
+                          markets:
+                            type: array
+                            items:
+                              type: object
+                          count:
+                            type: integer
+                    market_access_enabled:
+                      description: Whether the broker's agency has market access enabled.
+                      type: boolean
+        '400':
+          description: Invalid filter parameters
+        '403':
+          description: Not authorized to access this application
+        '404':
+          description: Coverage application not found
+        '500':
+          description: Internal server error.
+      tags:
+      - Markets
+  /v2/broker/markets/broker-submit:
+    parameters: []
+    post:
+      operationId: v2_broker_markets_broker_submit
+      summary: Submit Application to Markets (Broker)
+      description: '
+
+        Submit an insurance application to one or more markets as a broker.
+
+
+        This endpoint allows brokers to submit coverage applications to available markets.
+
+        The submission process will:
+
+        1. Validate the application is ready for submission
+
+        2. Create submission records for each selected market
+
+        3. Trigger quote generation for Herald-enabled markets
+
+        4. Update application status to ''Submitted''
+
+
+        If no market_ids are provided, the system will automatically select all
+
+        available markets for the coverage application.
+
+        '
+      responses:
+        '200':
+          description: Submission successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  submissions:
+                    type: array
+                    items:
+                      type: object
+        '400':
+          description: Application already submitted or invalid data
+        '403':
+          description: Not authorized to submit this application
+        '404':
+          description: Coverage application not found
+        '500':
+          description: Internal server error.
+      tags:
+      - Markets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - coverage_application_id
+              type: object
+              properties:
+                coverage_application_id:
+                  description: UUID of the coverage application to submit
+                  type: string
+                  format: uuid
+                market_ids:
+                  description: Optional list of specific market UUIDs to submit to. If not provided, submits to all available markets.
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+        required: true
+components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

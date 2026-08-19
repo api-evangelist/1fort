@@ -1,0 +1,1566 @@
+{
+  "item": [
+    {
+      "id": "bb0cb9e4-42a1-481c-bc0d-fd03c23b962c",
+      "name": "broker (v2): quote-policies",
+      "description": {
+        "content": "**Access:** requires a JWT access token.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a6aa1869-17bd-4cf5-93f1-12fb716313ee",
+          "name": "Paginated ViewSet for retrieving quote policies for the broker.",
+          "request": {
+            "name": "Paginated ViewSet for retrieving quote policies for the broker.",
+            "description": {
+              "content": "Supports Filtering By:\n- insured (business name)\n- coverage (product line code: BOP, CYB, GL, etc.)\n- primary_agent (user id)\n- owner (alias for primary_agent, user id)\n- team_member (broker user id, any assigned agent - primary or not)\n- market (market id)\n- carrier (carrier id)\n- payment_status\n- status\n- effective_date_min (minimum effective date, inclusive)\n- effective_date_max (maximum effective date, inclusive)\n- expires_in (number of days from today, filters policies expiring within that range)\n\nSupports Searching By:\n- insured (business name)\n- policy_number\n\nExpandable Fields:\n- coverage_application\n- herald_quote\n- documents",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "quote-policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "insured",
+                  "value": "<string>",
+                  "description": "Filter policies by insured name. Supports comma-separated values.\n\nExamples:\n- `?insured=Acme Inc.` - Matches policies with 'Acme Inc.' in insured name\n- `?insured=Acme Inc.,Acme Corp.` - Matches policies with 'Acme Inc.' or 'Acme Corp.' in insured name"
+                },
+                {
+                  "disabled": false,
+                  "key": "coverage",
+                  "value": "<string>",
+                  "description": "Filter policies by coverage type code. Supports comma-separated values.\n\nAvailable codes:\n- `BOP` - Business Owners Policy\n- `WC` - Workers Compensation\n- `GL` - General Liability\n- `ML` - Management Liability\n- `MPL` - Miscellaneous Professional Liability\n- `CYB` - Cyber\n- `PL` - Professional Liability\n- `TEO` - Technology Errors & Omissions\n- `PROP` - Property\n- `AUTO` - Auto\n- `UMB` - Umbrella\n- `FLOOD` - Flood\n\nExamples:\n- `?coverage=CYB` - Matches Cyber policies\n- `?coverage=CYB,GL` - Matches Cyber or General Liability policies"
+                },
+                {
+                  "disabled": false,
+                  "key": "primary_agent",
+                  "value": "<string>",
+                  "description": "Filter policies by primary agent(s). Supports comma-separated values to filter by multiple agents. Searches by user id.\n\nExamples:\n- `?primary_agent=123` - Matches primary agents with user id 123\n- `?primary_agent=123,456` - Matches primary agents with user id 123 or 456"
+                },
+                {
+                  "disabled": false,
+                  "key": "owner",
+                  "value": "<string>",
+                  "description": "Filter policies by owner (alias for primary_agent). Supports comma-separated values to filter by multiple owners. Searches by user id.\n\nExamples:\n- `?owner=123` - Matches owners with user id 123\n- `?owner=123,456` - Matches owners with user id 123 or 456"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_status",
+                  "value": "<string>",
+                  "description": "Filter policies by payment status. Supports comma-separated values.\n\nExamples:\n- `?payment_status=done` - Matches policies with 'done' payment status\n- `?payment_status=todo,done` - Matches policies with 'todo' or 'done' payment status"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter policies by status. Supports comma-separated values.\n\nExamples:\n- `?status=ISSUED` - Matches policies with 'ISSUED' status\n- `?status=ISSUED,ACTIVE` - Matches policies with 'ISSUED' or 'ACTIVE' status"
+                },
+                {
+                  "disabled": false,
+                  "key": "market",
+                  "value": "<string>",
+                  "description": "Filter policies by market ID. Supports comma-separated values to filter by multiple markets.\n\nExamples:\n- `?market=550e8400-e29b-41d4-a716-446655440000` - Matches policies from specific market\n- `?market=market-id-1,market-id-2` - Matches policies from multiple markets"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier",
+                  "value": "<string>",
+                  "description": "Filter policies by carrier ID. Supports comma-separated values to filter by multiple carriers.\n\nExamples:\n- `?carrier=1` - Matches policies from carrier with ID 1\n- `?carrier=1,2,3` - Matches policies from carriers with IDs 1, 2, or 3"
+                },
+                {
+                  "disabled": false,
+                  "key": "effective_date_min",
+                  "value": "<date>",
+                  "description": "Filter policies by minimum effective date (inclusive). Use ISO 8601 date format.\n\nExamples:\n- `?effective_date_min=2024-01-01` - Matches policies with effective date on or after January 1, 2024\n- `?effective_date_min=2024-01-01&effective_date_max=2024-12-31` - Matches policies with effective date in 2024"
+                },
+                {
+                  "disabled": false,
+                  "key": "effective_date_max",
+                  "value": "<date>",
+                  "description": "Filter policies by maximum effective date (inclusive). Use ISO 8601 date format.\n\nExamples:\n- `?effective_date_max=2024-12-31` - Matches policies with effective date on or before December 31, 2024\n- `?effective_date_min=2024-01-01&effective_date_max=2024-12-31` - Matches policies with effective date in 2024"
+                },
+                {
+                  "disabled": false,
+                  "key": "team_member",
+                  "value": "<string>",
+                  "description": "team_member"
+                },
+                {
+                  "disabled": false,
+                  "key": "broker",
+                  "value": "<string>",
+                  "description": "broker"
+                },
+                {
+                  "disabled": false,
+                  "key": "expires_in",
+                  "value": "<string>",
+                  "description": "expires_in"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Order policies by specified fields. Use '-' prefix for descending order.\n\nAvailable fields:\n- `created_at` - Creation date\n- `effective_date` - Policy effective date\n\nExamples:\n- `?ordering=created_at` - Order by creation date (oldest first)\n- `?ordering=-created_at` - Order by creation date (newest first, default)\n- `?ordering=effective_date` - Order by effective date (oldest first)\n- `?ordering=-effective_date` - Order by effective date (newest first)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b776e97c-6522-43a5-8da9-3e1601928af0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quote-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primary_agent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "owner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "market",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_min",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "effective_date_max",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "team_member",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expires_in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 3481,\n  \"results\": [\n    {\n      \"id\": \"ac76e808-2990-965c-fcf3-e5778831709a\",\n      \"created_at\": \"1978-06-01T05:03:25.076Z\",\n      \"insured\": \"string\",\n      \"carrier\": \"string\",\n      \"coverage_type\": \"string\",\n      \"limit\": 8373,\n      \"coverage_application\": null,\n      \"herald_quote\": \"be5c137f-ae2f-1922-718e-c49510166dc3\",\n      \"primary_agent\": \"string\",\n      \"all_agents\": \"string\",\n      \"status\": \"string\",\n      \"policy_number\": \"string\",\n      \"payment_status\": \"string\",\n      \"effective_date\": \"1991-08-05\",\n      \"expiration_date\": \"1979-07-18\",\n      \"documents\": \"string\",\n      \"source\": \"string\",\n      \"source_display\": \"string\"\n    },\n    {\n      \"id\": \"c3a14d70-ad9b-8037-18aa-4ebe9889c2da\",\n      \"created_at\": \"1955-03-26T12:33:41.734Z\",\n      \"insured\": \"string\",\n      \"carrier\": \"string\",\n      \"coverage_type\": \"string\",\n      \"limit\": 3342,\n      \"coverage_application\": null,\n      \"herald_quote\": \"1ffcc6e5-b008-2b70-bfc9-8ae17b34e49f\",\n      \"primary_agent\": \"string\",\n      \"all_agents\": \"string\",\n      \"status\": \"string\",\n      \"policy_number\": \"string\",\n      \"payment_status\": \"string\",\n      \"effective_date\": null,\n      \"expiration_date\": \"1966-10-02\",\n      \"documents\": \"string\",\n      \"source\": \"string\",\n      \"source_display\": \"string\"\n    }\n  ],\n  \"next\": null,\n  \"previous\": \"https://HpaIOmNlV.jmgQcYmXGWq.YRvxnoI\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6a6c994-fb34-4cfd-9e1e-1110eef46d4a",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quote-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primary_agent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "owner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "market",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_min",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "effective_date_max",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "team_member",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expires_in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a400fa29-c04a-4db2-aafe-81dc3a48f483",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quote-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primary_agent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "owner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "market",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_min",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "effective_date_max",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "team_member",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expires_in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb9c9b79-8dd5-4f26-9ad6-a6e0ed809383",
+          "name": "Export csv",
+          "request": {
+            "name": "Export csv",
+            "description": {
+              "content": "Export quote policies to CSV format.\nReturns all filtered policies without pagination, up to a maximum limit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "quote-policies",
+                "csv"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "insured",
+                  "value": "<string>",
+                  "description": "insured"
+                },
+                {
+                  "disabled": false,
+                  "key": "coverage",
+                  "value": "<string>",
+                  "description": "coverage"
+                },
+                {
+                  "disabled": false,
+                  "key": "primary_agent",
+                  "value": "<string>",
+                  "description": "primary_agent"
+                },
+                {
+                  "disabled": false,
+                  "key": "owner",
+                  "value": "<string>",
+                  "description": "owner"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_status",
+                  "value": "<string>",
+                  "description": "payment_status"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "status"
+                },
+                {
+                  "disabled": false,
+                  "key": "market",
+                  "value": "<string>",
+                  "description": "market"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier",
+                  "value": "<string>",
+                  "description": "carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "effective_date_min",
+                  "value": "<string>",
+                  "description": "effective_date_min"
+                },
+                {
+                  "disabled": false,
+                  "key": "effective_date_max",
+                  "value": "<string>",
+                  "description": "effective_date_max"
+                },
+                {
+                  "disabled": false,
+                  "key": "team_member",
+                  "value": "<string>",
+                  "description": "team_member"
+                },
+                {
+                  "disabled": false,
+                  "key": "broker",
+                  "value": "<string>",
+                  "description": "broker"
+                },
+                {
+                  "disabled": false,
+                  "key": "expires_in",
+                  "value": "<string>",
+                  "description": "expires_in"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f17505a3-12c7-41df-a478-4dc673f87e7d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quote-policies",
+                    "csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primary_agent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "owner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "market",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_max",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "team_member",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expires_in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"count\": 3481,\n  \"results\": [\n    {\n      \"id\": \"ac76e808-2990-965c-fcf3-e5778831709a\",\n      \"created_at\": \"1978-06-01T05:03:25.076Z\",\n      \"insured\": \"string\",\n      \"carrier\": \"string\",\n      \"coverage_type\": \"string\",\n      \"limit\": 8373,\n      \"coverage_application\": null,\n      \"herald_quote\": \"be5c137f-ae2f-1922-718e-c49510166dc3\",\n      \"primary_agent\": \"string\",\n      \"all_agents\": \"string\",\n      \"status\": \"string\",\n      \"policy_number\": \"string\",\n      \"payment_status\": \"string\",\n      \"effective_date\": \"1991-08-05\",\n      \"expiration_date\": \"1979-07-18\",\n      \"documents\": \"string\",\n      \"source\": \"string\",\n      \"source_display\": \"string\"\n    },\n    {\n      \"id\": \"c3a14d70-ad9b-8037-18aa-4ebe9889c2da\",\n      \"created_at\": \"1955-03-26T12:33:41.734Z\",\n      \"insured\": \"string\",\n      \"carrier\": \"string\",\n      \"coverage_type\": \"string\",\n      \"limit\": 3342,\n      \"coverage_application\": null,\n      \"herald_quote\": \"1ffcc6e5-b008-2b70-bfc9-8ae17b34e49f\",\n      \"primary_agent\": \"string\",\n      \"all_agents\": \"string\",\n      \"status\": \"string\",\n      \"policy_number\": \"string\",\n      \"payment_status\": \"string\",\n      \"effective_date\": null,\n      \"expiration_date\": \"1966-10-02\",\n      \"documents\": \"string\",\n      \"source\": \"string\",\n      \"source_display\": \"string\"\n    }\n  ],\n  \"next\": null,\n  \"previous\": \"https://HpaIOmNlV.jmgQcYmXGWq.YRvxnoI\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49ad023e-79ca-4c64-955f-38c0225205e5",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quote-policies",
+                    "csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primary_agent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "owner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "market",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_max",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "team_member",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expires_in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5553a5d-30d9-4a4b-9f89-a503c46fcc06",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quote-policies",
+                    "csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primary_agent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "owner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "market",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_max",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "team_member",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expires_in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4301d17-842b-43d2-bf4b-5b4a53ce4422",
+          "name": "Paginated ViewSet for retrieving quote policies for the broker.",
+          "request": {
+            "name": "Paginated ViewSet for retrieving quote policies for the broker.",
+            "description": {
+              "content": "Supports Filtering By:\n- insured (business name)\n- coverage (product line code: BOP, CYB, GL, etc.)\n- primary_agent (user id)\n- owner (alias for primary_agent, user id)\n- team_member (broker user id, any assigned agent - primary or not)\n- market (market id)\n- carrier (carrier id)\n- payment_status\n- status\n- effective_date_min (minimum effective date, inclusive)\n- effective_date_max (maximum effective date, inclusive)\n- expires_in (number of days from today, filters policies expiring within that range)\n\nSupports Searching By:\n- insured (business name)\n- policy_number\n\nExpandable Fields:\n- coverage_application\n- herald_quote\n- documents",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "quote-policies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Policy."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c05ec27c-4665-4ff2-b63d-9a9fb1dd9cec",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quote-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"85a04bf8-bbe3-3290-3bf4-35b92421b944\",\n  \"created_at\": \"2007-02-12T23:53:14.748Z\",\n  \"insured\": \"string\",\n  \"carrier\": \"string\",\n  \"coverage_type\": \"string\",\n  \"limit\": 8754,\n  \"coverage_application\": null,\n  \"herald_quote\": \"d7820579-7b5e-0b49-8d45-14569a6c76ca\",\n  \"primary_agent\": \"string\",\n  \"all_agents\": \"string\",\n  \"status\": \"string\",\n  \"policy_number\": \"string\",\n  \"payment_status\": \"string\",\n  \"effective_date\": null,\n  \"expiration_date\": \"2025-01-24\",\n  \"documents\": \"string\",\n  \"source\": \"string\",\n  \"source_display\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86147414-168b-4e54-88eb-8d1f096af42f",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quote-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe187d19-059f-448c-aca0-9cc77985c03a",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quote-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c97555c-97e0-48f4-8d90-ea4a7073fcb4",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quote-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0da74c76-bb78-4d50-abb3-0a67f56c3a86",
+          "name": "Get document",
+          "request": {
+            "name": "Get document",
+            "description": {
+              "content": "Get a document for a quote policy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "quote-policies",
+                ":id",
+                "documents",
+                ":document_pk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Policy."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "document_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3e9a9c0-c355-4cf1-aebe-dee4b851b056",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quote-policies",
+                    ":id",
+                    "documents",
+                    ":document_pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"85a04bf8-bbe3-3290-3bf4-35b92421b944\",\n  \"created_at\": \"2007-02-12T23:53:14.748Z\",\n  \"insured\": \"string\",\n  \"carrier\": \"string\",\n  \"coverage_type\": \"string\",\n  \"limit\": 8754,\n  \"coverage_application\": null,\n  \"herald_quote\": \"d7820579-7b5e-0b49-8d45-14569a6c76ca\",\n  \"primary_agent\": \"string\",\n  \"all_agents\": \"string\",\n  \"status\": \"string\",\n  \"policy_number\": \"string\",\n  \"payment_status\": \"string\",\n  \"effective_date\": null,\n  \"expiration_date\": \"2025-01-24\",\n  \"documents\": \"string\",\n  \"source\": \"string\",\n  \"source_display\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "015d76e6-4df7-45a6-bca8-c7e75e69a784",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quote-policies",
+                    ":id",
+                    "documents",
+                    ":document_pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a49afdc8-2191-43f6-a2db-b6a0f2d7e3dd",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quote-policies",
+                    ":id",
+                    "documents",
+                    ":document_pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce2c7376-2c72-476b-bcc0-f95bc5083bdc",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quote-policies",
+                    ":id",
+                    "documents",
+                    ":document_pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.1fort.com/apis/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "847ad457-8400-4954-9cf2-7b051c445ce4",
+    "name": "1Fort API Documentation broker (v2): quote-policies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# 1Fort API\n\nREST API for the 1Fort insurance platform. This document is the authoritative\nmap of the API surface; endpoints are grouped in the sidebar by **app** and\n**version**, and large apps are split into per-resource sub-groups.\n\n## Authentication\n\nAlmost every endpoint requires a **JWT access token**. Send it in the\n`Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may\nalso be presented as an HTTP-only cookie. Endpoints documented with no security\nrequirement are intentionally public (for example sign-in, OTP and storefront\nendpoints).\n\n## Multi-tenancy\n\nResources are scoped to a tenant. Nested routes carry the owning resource id in\nthe path (for example `/v2/broker/{business_pk}/applications`); a token is only\nauthorised for the businesses its user may access. Object-level permissions are\nenforced per endpoint.\n\n## Versioning\n\n`v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`\nendpoints remain documented for compatibility. Endpoints marked **deprecated**\nare scheduled for removal; prefer the documented replacement.\n",
+      "type": "text/plain"
+    }
+  }
+}

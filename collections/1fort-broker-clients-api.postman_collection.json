@@ -1,0 +1,1792 @@
+{
+  "item": [
+    {
+      "id": "238465c6-cf0b-4b89-96b6-255eee714dac",
+      "name": "broker: clients",
+      "description": {
+        "content": "**Access:** requires a JWT access token.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3627064d-7253-4db9-b30b-24ed69be6b74",
+          "name": "List Agents",
+          "request": {
+            "name": "List Agents",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "broker",
+                ":broker_pk",
+                "clients",
+                ":client_pk",
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "broker_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2154c557-b43e-473d-a921-0a504441225d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 4826,\n  \"results\": [\n    {\n      \"id\": 8271,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"phone_number\": \"string\",\n      \"email\": \"string\",\n      \"type\": \"string\",\n      \"is_primary\": false\n    },\n    {\n      \"id\": 4107,\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"phone_number\": \"string\",\n      \"email\": \"string\",\n      \"type\": \"string\",\n      \"is_primary\": false\n    }\n  ],\n  \"next\": \"https://bGVYzPMwejlJi.vhGYkJKghxe,yFQxA\",\n  \"previous\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf76922f-0463-4f7d-b9c7-9d1a870cb814",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dee077a8-a87d-4241-8de8-6a3e87305033",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5f7fadf-dd17-4f9e-a850-3ed9e011ff2b",
+          "name": "List Users",
+          "request": {
+            "name": "List Users",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "broker",
+                ":broker_pk",
+                "clients",
+                ":client_pk",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "broker_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "588c9194-bdda-413e-bbc3-fa8d60d0298e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 4295,\n  \"results\": [\n    {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"id\": 5789,\n      \"email\": \"dOMOOaRk@ED.ib\",\n      \"access_role\": \"string\",\n      \"groups\": \"string\",\n      \"start_date\": \"1952-09-05\",\n      \"end_date\": \"1982-10-03\",\n      \"employee_type\": \"employee\",\n      \"is_active\": true,\n      \"status\": \"string\",\n      \"last_active\": \"2001-05-25T17:57:17.929Z\",\n      \"invite_status\": \"string\",\n      \"completed_onboarding_at\": null,\n      \"profile_image\": null,\n      \"is_administrator\": true,\n      \"position\": null,\n      \"company_role\": null,\n      \"created_at\": \"1980-03-23T00:27:34.575Z\",\n      \"updated_at\": \"1961-01-25T20:04:38.476Z\",\n      \"preference_skip_warning_when_failing_a_control\": false,\n      \"manager\": null\n    },\n    {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"id\": 5195,\n      \"email\": \"Ui-APTK0KD@REijHshbKIWUQJabFYIVVBBqsqa.pxx\",\n      \"access_role\": \"string\",\n      \"groups\": \"string\",\n      \"start_date\": \"1970-09-20\",\n      \"end_date\": \"2024-01-20\",\n      \"employee_type\": \"it_security\",\n      \"is_active\": true,\n      \"status\": \"string\",\n      \"last_active\": \"1964-01-26T21:38:40.790Z\",\n      \"invite_status\": \"string\",\n      \"completed_onboarding_at\": null,\n      \"profile_image\": null,\n      \"is_administrator\": false,\n      \"position\": null,\n      \"company_role\": null,\n      \"created_at\": \"1985-05-03T15:55:40.397Z\",\n      \"updated_at\": \"2019-03-18T18:17:13.661Z\",\n      \"preference_skip_warning_when_failing_a_control\": false,\n      \"manager\": 8238\n    }\n  ],\n  \"next\": \"https://JOJIX.olrAg.0SmRawh\",\n  \"previous\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "766a64dd-1558-4a3a-99a2-350feefebe20",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "898302af-4e0c-44a0-beeb-0bc47e82fdf2",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0e6488f5-7201-40eb-8da9-c243b58eb22f",
+          "name": "Add agents",
+          "request": {
+            "name": "Add agents",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "broker",
+                ":broker_pk",
+                "clients",
+                ":id",
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "broker_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) A unique integer value identifying this business."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"industry_classification\": \"<uuid>\",\n  \"applicant_name\": \"<string,null>\",\n  \"applicant_email\": \"<string,null-email>\",\n  \"applicant_phone\": \"<string,null>\",\n  \"legal_entity\": \"<string,null>\",\n  \"address_line_1\": \"<string,null>\",\n  \"address_line_2\": \"<string,null>\",\n  \"city\": \"<string,null>\",\n  \"state_code\": \"<string,null>\",\n  \"country_code\": \"<string,null>\",\n  \"zip_code\": \"<string,null>\",\n  \"domain_name\": \"<string,null>\",\n  \"has_no_domain_name\": \"<boolean>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"is_test_account\": \"<boolean>\",\n  \"has_notified_clients_of_breach\": \"<boolean,null>\",\n  \"has_notified_clients_of_breach_description\": \"<string,null>\",\n  \"has_been_investigated_for_privacy_violations\": \"<boolean,null>\",\n  \"has_been_investigated_for_privacy_violations_description\": \"<string,null>\",\n  \"has_been_hacked_description\": \"<string,null>\",\n  \"active_carriers\": \"<array,null>\",\n  \"ownership_type\": \"<string,null>\",\n  \"phone_number\": \"<string,null>\",\n  \"security_contact_title\": \"<string,null>\",\n  \"security_email\": \"<string,null-email>\",\n  \"security_phone_number\": \"<string,null>\",\n  \"name_of_security_contact\": \"<string,null>\",\n  \"security_designation\": \"<string,null>\",\n  \"number_of_it_personnel\": \"<integer,null>\",\n  \"number_of_dedicated_security_personnel\": \"<integer,null>\",\n  \"help_center_url\": \"<string,null-uri>\",\n  \"carrier_page_url\": \"<string,null-uri>\",\n  \"company_updates_url\": \"<string,null-uri>\",\n  \"terms_of_service_url\": \"<string,null-uri>\",\n  \"privacy_policy_url\": \"<string,null-uri>\",\n  \"security_commitments_url\": \"<string,null-uri>\",\n  \"has_been_hacked\": \"<boolean,null>\",\n  \"income_coverage_limit\": \"<integer,null>\",\n  \"deductible\": \"<integer,null>\",\n  \"retention\": \"<integer,null>\",\n  \"has_subsidiaries\": \"<boolean,null>\",\n  \"no_of_subsidiary\": \"<integer,null>\",\n  \"net_revenue\": \"<integer,null>\",\n  \"gross_profit\": \"<integer,null>\",\n  \"last_year_revenue\": \"<integer,null>\",\n  \"last_two_year_revenue\": \"<integer,null>\",\n  \"have_cyber_claim\": \"<boolean,null>\",\n  \"cyber_claim_lost\": \"<integer,null>\",\n  \"cyber_claim_description\": \"<string,null>\",\n  \"potential_claim\": \"<boolean,null>\",\n  \"potential_claim_description\": \"<string,null>\",\n  \"received_complaint\": \"<boolean,null>\",\n  \"received_complaint_description\": \"<string,null>\",\n  \"owner_id\": \"<string,null>\",\n  \"archived_at\": \"<string,null-date-time>\",\n  \"broker_sharing_setting\": \"<string,null>\",\n  \"carrier_sharing_setting\": \"<string,null>\",\n  \"store_pii\": \"<boolean,null>\",\n  \"social_security_numbers\": \"<string,null>\",\n  \"consumer_financial_information\": \"<string,null>\",\n  \"payment_card_information\": \"<string,null>\",\n  \"protected_health_information\": \"<string,null>\",\n  \"biometric_information\": \"<string,null>\",\n  \"social_security_numbers_on_paper_records\": \"<string,null>\",\n  \"consumer_financial_information_on_paper_records\": \"<string,null>\",\n  \"payment_card_information_on_paper_records\": \"<string,null>\",\n  \"protected_health_information_on_paper_records\": \"<string,null>\",\n  \"biometric_information_on_paper_records\": \"<string,null>\",\n  \"social_security_numbers_electronic_records\": \"<string,null>\",\n  \"consumer_financial_information_electronic_records\": \"<string,null>\",\n  \"payment_card_information_electronic_records\": \"<string,null>\",\n  \"protected_health_information_electronic_records\": \"<string,null>\",\n  \"biometric_information_electronic_records\": \"<string,null>\",\n  \"is_pci_dss_compliant\": \"<boolean,null>\",\n  \"has_reviewed_sensitive_data_policy\": \"<boolean,null>\",\n  \"has_received_cyber_extortion_threat\": \"<boolean,null>\",\n  \"has_experienced_cyber_attack_network_outage_wire_transfer_fraud\": \"<boolean,null>\",\n  \"has_unscheduled_network_outage\": \"<boolean,null>\",\n  \"unscheduled_network_outage_description\": \"<string,null>\",\n  \"has_experienced_wire_transfer_fraud\": \"<boolean,null>\",\n  \"wire_transfer_fraud_description\": \"<string,null>\",\n  \"has_experienced_cyber_attack\": \"<boolean,null>\",\n  \"cyber_attack_description\": \"<string,null>\",\n  \"service_provider_outage_past_3_years\": \"<boolean,null>\",\n  \"business_interruption_due_to_outage\": \"<boolean,null>\",\n  \"it_budget\": \"<integer,null>\",\n  \"network_security_management\": \"<string,null>\",\n  \"security_provider_name\": \"<string,null>\",\n  \"security_contact_person_name\": \"<string,null>\",\n  \"security_contact_person_email\": \"<string,null-email>\",\n  \"has_revenue_outside_domicile\": \"<boolean,null>\",\n  \"revenue_outside_domicile_percentage\": \"<integer,null>\",\n  \"has_recent_merger_acquisition\": \"<boolean,null>\",\n  \"merger_acquisition_details\": \"<string,null>\",\n  \"process_stores_or_handles_credit_card_transactions\": \"<boolean,null>\",\n  \"business_email\": \"<string,null-email>\",\n  \"business_password\": \"<string,null>\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"smtp_tls_status\": \"<string>\",\n  \"cyber_risk_areas_for_improvement\": \"<string,null>\",\n  \"cyber_risk_areas_of_strength\": \"<string,null>\",\n  \"COI_vendor_tracking\": \"<string,null>\",\n  \"employee_benefits_management_software\": \"<string,null>\",\n  \"governance_risk_compliance_software\": \"<string,null>\",\n  \"security_monitoring\": \"<string,null>\",\n  \"privacy_frameworks\": \"<string,null>\",\n  \"NIST_tool\": \"<string,null>\",\n  \"GDPR_tool\": \"<string,null>\",\n  \"HIPAA_tool\": \"<string,null>\",\n  \"CMMC_tool\": \"<string,null>\",\n  \"ISO_27001_tool\": \"<string,null>\",\n  \"CCPA_tool\": \"<string,null>\",\n  \"FedRAMP_tool\": \"<string,null>\",\n  \"industries_company_participates_in\": \"<object,null>\",\n  \"percentage_of_written_agreements_standard_vs_manuscript\": \"<string,null>\",\n  \"is_there_limitation_of_liability_clause_utilized\": \"<boolean,null>\",\n  \"is_there_hold_harmless_clause_utilized\": \"<boolean,null>\",\n  \"is_there_indemnification_clause_utilized\": \"<boolean,null>\",\n  \"is_there_exclusion_of_consequential_damages_clause_utilized\": \"<boolean,null>\",\n  \"is_there_mandatory_or_binding_arbitration_clause_utilized\": \"<boolean,null>\",\n  \"is_there_other_clause_utilized\": \"<boolean,null>\",\n  \"is_there_directors_and_officers_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_epl_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_fiduciary_liability_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_cyber_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_tech_errors_and_omissions_coverage_in_place\": \"<boolean,null>\",\n  \"resource_owner\": \"<integer,null>\",\n  \"designated_ciso\": \"<integer,null>\",\n  \"designated_privacy_officer\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "75ee417b-3268-489b-b946-ccd9bf9bc7e0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":id",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"industry_classification\": \"<uuid>\",\n  \"applicant_name\": \"<string,null>\",\n  \"applicant_email\": \"<string,null-email>\",\n  \"applicant_phone\": \"<string,null>\",\n  \"legal_entity\": \"<string,null>\",\n  \"address_line_1\": \"<string,null>\",\n  \"address_line_2\": \"<string,null>\",\n  \"city\": \"<string,null>\",\n  \"state_code\": \"<string,null>\",\n  \"country_code\": \"<string,null>\",\n  \"zip_code\": \"<string,null>\",\n  \"domain_name\": \"<string,null>\",\n  \"has_no_domain_name\": \"<boolean>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"is_test_account\": \"<boolean>\",\n  \"has_notified_clients_of_breach\": \"<boolean,null>\",\n  \"has_notified_clients_of_breach_description\": \"<string,null>\",\n  \"has_been_investigated_for_privacy_violations\": \"<boolean,null>\",\n  \"has_been_investigated_for_privacy_violations_description\": \"<string,null>\",\n  \"has_been_hacked_description\": \"<string,null>\",\n  \"active_carriers\": \"<array,null>\",\n  \"ownership_type\": \"<string,null>\",\n  \"phone_number\": \"<string,null>\",\n  \"security_contact_title\": \"<string,null>\",\n  \"security_email\": \"<string,null-email>\",\n  \"security_phone_number\": \"<string,null>\",\n  \"name_of_security_contact\": \"<string,null>\",\n  \"security_designation\": \"<string,null>\",\n  \"number_of_it_personnel\": \"<integer,null>\",\n  \"number_of_dedicated_security_personnel\": \"<integer,null>\",\n  \"help_center_url\": \"<string,null-uri>\",\n  \"carrier_page_url\": \"<string,null-uri>\",\n  \"company_updates_url\": \"<string,null-uri>\",\n  \"terms_of_service_url\": \"<string,null-uri>\",\n  \"privacy_policy_url\": \"<string,null-uri>\",\n  \"security_commitments_url\": \"<string,null-uri>\",\n  \"has_been_hacked\": \"<boolean,null>\",\n  \"income_coverage_limit\": \"<integer,null>\",\n  \"deductible\": \"<integer,null>\",\n  \"retention\": \"<integer,null>\",\n  \"has_subsidiaries\": \"<boolean,null>\",\n  \"no_of_subsidiary\": \"<integer,null>\",\n  \"net_revenue\": \"<integer,null>\",\n  \"gross_profit\": \"<integer,null>\",\n  \"last_year_revenue\": \"<integer,null>\",\n  \"last_two_year_revenue\": \"<integer,null>\",\n  \"have_cyber_claim\": \"<boolean,null>\",\n  \"cyber_claim_lost\": \"<integer,null>\",\n  \"cyber_claim_description\": \"<string,null>\",\n  \"potential_claim\": \"<boolean,null>\",\n  \"potential_claim_description\": \"<string,null>\",\n  \"received_complaint\": \"<boolean,null>\",\n  \"received_complaint_description\": \"<string,null>\",\n  \"owner_id\": \"<string,null>\",\n  \"archived_at\": \"<string,null-date-time>\",\n  \"broker_sharing_setting\": \"<string,null>\",\n  \"carrier_sharing_setting\": \"<string,null>\",\n  \"store_pii\": \"<boolean,null>\",\n  \"social_security_numbers\": \"<string,null>\",\n  \"consumer_financial_information\": \"<string,null>\",\n  \"payment_card_information\": \"<string,null>\",\n  \"protected_health_information\": \"<string,null>\",\n  \"biometric_information\": \"<string,null>\",\n  \"social_security_numbers_on_paper_records\": \"<string,null>\",\n  \"consumer_financial_information_on_paper_records\": \"<string,null>\",\n  \"payment_card_information_on_paper_records\": \"<string,null>\",\n  \"protected_health_information_on_paper_records\": \"<string,null>\",\n  \"biometric_information_on_paper_records\": \"<string,null>\",\n  \"social_security_numbers_electronic_records\": \"<string,null>\",\n  \"consumer_financial_information_electronic_records\": \"<string,null>\",\n  \"payment_card_information_electronic_records\": \"<string,null>\",\n  \"protected_health_information_electronic_records\": \"<string,null>\",\n  \"biometric_information_electronic_records\": \"<string,null>\",\n  \"is_pci_dss_compliant\": \"<boolean,null>\",\n  \"has_reviewed_sensitive_data_policy\": \"<boolean,null>\",\n  \"has_received_cyber_extortion_threat\": \"<boolean,null>\",\n  \"has_experienced_cyber_attack_network_outage_wire_transfer_fraud\": \"<boolean,null>\",\n  \"has_unscheduled_network_outage\": \"<boolean,null>\",\n  \"unscheduled_network_outage_description\": \"<string,null>\",\n  \"has_experienced_wire_transfer_fraud\": \"<boolean,null>\",\n  \"wire_transfer_fraud_description\": \"<string,null>\",\n  \"has_experienced_cyber_attack\": \"<boolean,null>\",\n  \"cyber_attack_description\": \"<string,null>\",\n  \"service_provider_outage_past_3_years\": \"<boolean,null>\",\n  \"business_interruption_due_to_outage\": \"<boolean,null>\",\n  \"it_budget\": \"<integer,null>\",\n  \"network_security_management\": \"<string,null>\",\n  \"security_provider_name\": \"<string,null>\",\n  \"security_contact_person_name\": \"<string,null>\",\n  \"security_contact_person_email\": \"<string,null-email>\",\n  \"has_revenue_outside_domicile\": \"<boolean,null>\",\n  \"revenue_outside_domicile_percentage\": \"<integer,null>\",\n  \"has_recent_merger_acquisition\": \"<boolean,null>\",\n  \"merger_acquisition_details\": \"<string,null>\",\n  \"process_stores_or_handles_credit_card_transactions\": \"<boolean,null>\",\n  \"business_email\": \"<string,null-email>\",\n  \"business_password\": \"<string,null>\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"smtp_tls_status\": \"<string>\",\n  \"cyber_risk_areas_for_improvement\": \"<string,null>\",\n  \"cyber_risk_areas_of_strength\": \"<string,null>\",\n  \"COI_vendor_tracking\": \"<string,null>\",\n  \"employee_benefits_management_software\": \"<string,null>\",\n  \"governance_risk_compliance_software\": \"<string,null>\",\n  \"security_monitoring\": \"<string,null>\",\n  \"privacy_frameworks\": \"<string,null>\",\n  \"NIST_tool\": \"<string,null>\",\n  \"GDPR_tool\": \"<string,null>\",\n  \"HIPAA_tool\": \"<string,null>\",\n  \"CMMC_tool\": \"<string,null>\",\n  \"ISO_27001_tool\": \"<string,null>\",\n  \"CCPA_tool\": \"<string,null>\",\n  \"FedRAMP_tool\": \"<string,null>\",\n  \"industries_company_participates_in\": \"<object,null>\",\n  \"percentage_of_written_agreements_standard_vs_manuscript\": \"<string,null>\",\n  \"is_there_limitation_of_liability_clause_utilized\": \"<boolean,null>\",\n  \"is_there_hold_harmless_clause_utilized\": \"<boolean,null>\",\n  \"is_there_indemnification_clause_utilized\": \"<boolean,null>\",\n  \"is_there_exclusion_of_consequential_damages_clause_utilized\": \"<boolean,null>\",\n  \"is_there_mandatory_or_binding_arbitration_clause_utilized\": \"<boolean,null>\",\n  \"is_there_other_clause_utilized\": \"<boolean,null>\",\n  \"is_there_directors_and_officers_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_epl_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_fiduciary_liability_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_cyber_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_tech_errors_and_omissions_coverage_in_place\": \"<boolean,null>\",\n  \"resource_owner\": \"<integer,null>\",\n  \"designated_ciso\": \"<integer,null>\",\n  \"designated_privacy_officer\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"<string>\",\n  \"id\": 1674,\n  \"industry_classification\": \"<uuid>\",\n  \"subsidiaries\": [\n    {\n      \"name\": \"string\",\n      \"business\": 2192,\n      \"id\": 5854,\n      \"description\": null,\n      \"ownership\": 678171793\n    },\n    {\n      \"name\": \"string\",\n      \"business\": 1239,\n      \"id\": 6704,\n      \"description\": null,\n      \"ownership\": null\n    }\n  ],\n  \"broker_team\": \"string\",\n  \"prefilled_forms\": [\n    {\n      \"business\": 8401,\n      \"id\": \"bfa1233b-5ca2-e3f7-7fc2-a609be3afcc2\",\n      \"created_at\": \"1974-05-06T08:48:21.939Z\",\n      \"document_content\": null,\n      \"form\": \"http://xyzuBlhX.lyjfsbvnorc5HDPTRBzCiqLp\",\n      \"application\": \"527ea378-3432-cf61-473a-e5de43912cf0\",\n      \"created_by\": null\n    },\n    {\n      \"business\": 4754,\n      \"id\": \"916126ff-b8c1-7520-0289-bd6637601b53\",\n      \"created_at\": \"2018-01-19T22:30:14.651Z\",\n      \"document_content\": \"string\",\n      \"form\": \"http://QAftigesAOGSqQtQlbnDPOHKwHtoPRE.tkuHCBMgVKZ2cdg+kM,ChALe2ukc+V3XJ-8aIi9ACIjSaVrwi\",\n      \"application\": null,\n      \"created_by\": 1410\n    }\n  ],\n  \"applicant_name\": \"<string,null>\",\n  \"applicant_email\": \"<string,null-email>\",\n  \"applicant_phone\": \"<string,null>\",\n  \"legal_entity\": \"<string,null>\",\n  \"address_line_1\": \"<string,null>\",\n  \"address_line_2\": \"<string,null>\",\n  \"city\": \"<string,null>\",\n  \"state_code\": \"<string,null>\",\n  \"country_code\": \"<string,null>\",\n  \"zip_code\": \"<string,null>\",\n  \"domain_name\": \"<string,null>\",\n  \"has_no_domain_name\": \"<boolean>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"is_test_account\": \"<boolean>\",\n  \"has_notified_clients_of_breach\": \"<boolean,null>\",\n  \"has_notified_clients_of_breach_description\": \"<string,null>\",\n  \"has_been_investigated_for_privacy_violations\": \"<boolean,null>\",\n  \"has_been_investigated_for_privacy_violations_description\": \"<string,null>\",\n  \"has_been_hacked_description\": \"<string,null>\",\n  \"active_carriers\": \"<array,null>\",\n  \"ownership_type\": \"<string,null>\",\n  \"phone_number\": \"<string,null>\",\n  \"security_contact_title\": \"<string,null>\",\n  \"security_email\": \"<string,null-email>\",\n  \"security_phone_number\": \"<string,null>\",\n  \"name_of_security_contact\": \"<string,null>\",\n  \"security_designation\": \"<string,null>\",\n  \"number_of_it_personnel\": \"<integer,null>\",\n  \"number_of_dedicated_security_personnel\": \"<integer,null>\",\n  \"help_center_url\": \"<string,null-uri>\",\n  \"carrier_page_url\": \"<string,null-uri>\",\n  \"company_updates_url\": \"<string,null-uri>\",\n  \"terms_of_service_url\": \"<string,null-uri>\",\n  \"privacy_policy_url\": \"<string,null-uri>\",\n  \"security_commitments_url\": \"<string,null-uri>\",\n  \"has_been_hacked\": \"<boolean,null>\",\n  \"income_coverage_limit\": \"<integer,null>\",\n  \"deductible\": \"<integer,null>\",\n  \"retention\": \"<integer,null>\",\n  \"has_subsidiaries\": \"<boolean,null>\",\n  \"no_of_subsidiary\": \"<integer,null>\",\n  \"net_revenue\": \"<integer,null>\",\n  \"gross_profit\": \"<integer,null>\",\n  \"last_year_revenue\": \"<integer,null>\",\n  \"last_two_year_revenue\": \"<integer,null>\",\n  \"have_cyber_claim\": \"<boolean,null>\",\n  \"cyber_claim_lost\": \"<integer,null>\",\n  \"cyber_claim_description\": \"<string,null>\",\n  \"potential_claim\": \"<boolean,null>\",\n  \"potential_claim_description\": \"<string,null>\",\n  \"received_complaint\": \"<boolean,null>\",\n  \"received_complaint_description\": \"<string,null>\",\n  \"owner_id\": \"<string,null>\",\n  \"archived_at\": \"<string,null-date-time>\",\n  \"broker_sharing_setting\": \"<string,null>\",\n  \"carrier_sharing_setting\": \"<string,null>\",\n  \"store_pii\": \"<boolean,null>\",\n  \"social_security_numbers\": \"<string,null>\",\n  \"consumer_financial_information\": \"<string,null>\",\n  \"payment_card_information\": \"<string,null>\",\n  \"protected_health_information\": \"<string,null>\",\n  \"biometric_information\": \"<string,null>\",\n  \"social_security_numbers_on_paper_records\": \"<string,null>\",\n  \"consumer_financial_information_on_paper_records\": \"<string,null>\",\n  \"payment_card_information_on_paper_records\": \"<string,null>\",\n  \"protected_health_information_on_paper_records\": \"<string,null>\",\n  \"biometric_information_on_paper_records\": \"<string,null>\",\n  \"social_security_numbers_electronic_records\": \"<string,null>\",\n  \"consumer_financial_information_electronic_records\": \"<string,null>\",\n  \"payment_card_information_electronic_records\": \"<string,null>\",\n  \"protected_health_information_electronic_records\": \"<string,null>\",\n  \"biometric_information_electronic_records\": \"<string,null>\",\n  \"is_pci_dss_compliant\": \"<boolean,null>\",\n  \"has_reviewed_sensitive_data_policy\": \"<boolean,null>\",\n  \"has_received_cyber_extortion_threat\": \"<boolean,null>\",\n  \"has_experienced_cyber_attack_network_outage_wire_transfer_fraud\": \"<boolean,null>\",\n  \"has_unscheduled_network_outage\": \"<boolean,null>\",\n  \"unscheduled_network_outage_description\": \"<string,null>\",\n  \"has_experienced_wire_transfer_fraud\": \"<boolean,null>\",\n  \"wire_transfer_fraud_description\": \"<string,null>\",\n  \"has_experienced_cyber_attack\": \"<boolean,null>\",\n  \"cyber_attack_description\": \"<string,null>\",\n  \"service_provider_outage_past_3_years\": \"<boolean,null>\",\n  \"business_interruption_due_to_outage\": \"<boolean,null>\",\n  \"it_budget\": \"<integer,null>\",\n  \"network_security_management\": \"<string,null>\",\n  \"security_provider_name\": \"<string,null>\",\n  \"security_contact_person_name\": \"<string,null>\",\n  \"security_contact_person_email\": \"<string,null-email>\",\n  \"has_revenue_outside_domicile\": \"<boolean,null>\",\n  \"revenue_outside_domicile_percentage\": \"<integer,null>\",\n  \"has_recent_merger_acquisition\": \"<boolean,null>\",\n  \"merger_acquisition_details\": \"<string,null>\",\n  \"process_stores_or_handles_credit_card_transactions\": \"<boolean,null>\",\n  \"business_email\": \"<string,null-email>\",\n  \"business_password\": \"<string,null>\",\n  \"created_at\": \"2001-05-19T14:46:06.222Z\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"smtp_tls_status\": \"<string>\",\n  \"cyber_risk_areas_for_improvement\": \"<string,null>\",\n  \"cyber_risk_areas_of_strength\": \"<string,null>\",\n  \"COI_vendor_tracking\": \"<string,null>\",\n  \"employee_benefits_management_software\": \"<string,null>\",\n  \"governance_risk_compliance_software\": \"<string,null>\",\n  \"security_monitoring\": \"<string,null>\",\n  \"privacy_frameworks\": \"<string,null>\",\n  \"NIST_tool\": \"<string,null>\",\n  \"GDPR_tool\": \"<string,null>\",\n  \"HIPAA_tool\": \"<string,null>\",\n  \"CMMC_tool\": \"<string,null>\",\n  \"ISO_27001_tool\": \"<string,null>\",\n  \"CCPA_tool\": \"<string,null>\",\n  \"FedRAMP_tool\": \"<string,null>\",\n  \"industries_company_participates_in\": \"<object,null>\",\n  \"percentage_of_written_agreements_standard_vs_manuscript\": \"<string,null>\",\n  \"is_there_limitation_of_liability_clause_utilized\": \"<boolean,null>\",\n  \"is_there_hold_harmless_clause_utilized\": \"<boolean,null>\",\n  \"is_there_indemnification_clause_utilized\": \"<boolean,null>\",\n  \"is_there_exclusion_of_consequential_damages_clause_utilized\": \"<boolean,null>\",\n  \"is_there_mandatory_or_binding_arbitration_clause_utilized\": \"<boolean,null>\",\n  \"is_there_other_clause_utilized\": \"<boolean,null>\",\n  \"is_there_directors_and_officers_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_epl_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_fiduciary_liability_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_cyber_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_tech_errors_and_omissions_coverage_in_place\": \"<boolean,null>\",\n  \"resource_owner\": \"<integer,null>\",\n  \"designated_ciso\": \"<integer,null>\",\n  \"designated_privacy_officer\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6af31bf4-f176-42a0-ac3e-23084239919d",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":id",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"industry_classification\": \"<uuid>\",\n  \"applicant_name\": \"<string,null>\",\n  \"applicant_email\": \"<string,null-email>\",\n  \"applicant_phone\": \"<string,null>\",\n  \"legal_entity\": \"<string,null>\",\n  \"address_line_1\": \"<string,null>\",\n  \"address_line_2\": \"<string,null>\",\n  \"city\": \"<string,null>\",\n  \"state_code\": \"<string,null>\",\n  \"country_code\": \"<string,null>\",\n  \"zip_code\": \"<string,null>\",\n  \"domain_name\": \"<string,null>\",\n  \"has_no_domain_name\": \"<boolean>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"is_test_account\": \"<boolean>\",\n  \"has_notified_clients_of_breach\": \"<boolean,null>\",\n  \"has_notified_clients_of_breach_description\": \"<string,null>\",\n  \"has_been_investigated_for_privacy_violations\": \"<boolean,null>\",\n  \"has_been_investigated_for_privacy_violations_description\": \"<string,null>\",\n  \"has_been_hacked_description\": \"<string,null>\",\n  \"active_carriers\": \"<array,null>\",\n  \"ownership_type\": \"<string,null>\",\n  \"phone_number\": \"<string,null>\",\n  \"security_contact_title\": \"<string,null>\",\n  \"security_email\": \"<string,null-email>\",\n  \"security_phone_number\": \"<string,null>\",\n  \"name_of_security_contact\": \"<string,null>\",\n  \"security_designation\": \"<string,null>\",\n  \"number_of_it_personnel\": \"<integer,null>\",\n  \"number_of_dedicated_security_personnel\": \"<integer,null>\",\n  \"help_center_url\": \"<string,null-uri>\",\n  \"carrier_page_url\": \"<string,null-uri>\",\n  \"company_updates_url\": \"<string,null-uri>\",\n  \"terms_of_service_url\": \"<string,null-uri>\",\n  \"privacy_policy_url\": \"<string,null-uri>\",\n  \"security_commitments_url\": \"<string,null-uri>\",\n  \"has_been_hacked\": \"<boolean,null>\",\n  \"income_coverage_limit\": \"<integer,null>\",\n  \"deductible\": \"<integer,null>\",\n  \"retention\": \"<integer,null>\",\n  \"has_subsidiaries\": \"<boolean,null>\",\n  \"no_of_subsidiary\": \"<integer,null>\",\n  \"net_revenue\": \"<integer,null>\",\n  \"gross_profit\": \"<integer,null>\",\n  \"last_year_revenue\": \"<integer,null>\",\n  \"last_two_year_revenue\": \"<integer,null>\",\n  \"have_cyber_claim\": \"<boolean,null>\",\n  \"cyber_claim_lost\": \"<integer,null>\",\n  \"cyber_claim_description\": \"<string,null>\",\n  \"potential_claim\": \"<boolean,null>\",\n  \"potential_claim_description\": \"<string,null>\",\n  \"received_complaint\": \"<boolean,null>\",\n  \"received_complaint_description\": \"<string,null>\",\n  \"owner_id\": \"<string,null>\",\n  \"archived_at\": \"<string,null-date-time>\",\n  \"broker_sharing_setting\": \"<string,null>\",\n  \"carrier_sharing_setting\": \"<string,null>\",\n  \"store_pii\": \"<boolean,null>\",\n  \"social_security_numbers\": \"<string,null>\",\n  \"consumer_financial_information\": \"<string,null>\",\n  \"payment_card_information\": \"<string,null>\",\n  \"protected_health_information\": \"<string,null>\",\n  \"biometric_information\": \"<string,null>\",\n  \"social_security_numbers_on_paper_records\": \"<string,null>\",\n  \"consumer_financial_information_on_paper_records\": \"<string,null>\",\n  \"payment_card_information_on_paper_records\": \"<string,null>\",\n  \"protected_health_information_on_paper_records\": \"<string,null>\",\n  \"biometric_information_on_paper_records\": \"<string,null>\",\n  \"social_security_numbers_electronic_records\": \"<string,null>\",\n  \"consumer_financial_information_electronic_records\": \"<string,null>\",\n  \"payment_card_information_electronic_records\": \"<string,null>\",\n  \"protected_health_information_electronic_records\": \"<string,null>\",\n  \"biometric_information_electronic_records\": \"<string,null>\",\n  \"is_pci_dss_compliant\": \"<boolean,null>\",\n  \"has_reviewed_sensitive_data_policy\": \"<boolean,null>\",\n  \"has_received_cyber_extortion_threat\": \"<boolean,null>\",\n  \"has_experienced_cyber_attack_network_outage_wire_transfer_fraud\": \"<boolean,null>\",\n  \"has_unscheduled_network_outage\": \"<boolean,null>\",\n  \"unscheduled_network_outage_description\": \"<string,null>\",\n  \"has_experienced_wire_transfer_fraud\": \"<boolean,null>\",\n  \"wire_transfer_fraud_description\": \"<string,null>\",\n  \"has_experienced_cyber_attack\": \"<boolean,null>\",\n  \"cyber_attack_description\": \"<string,null>\",\n  \"service_provider_outage_past_3_years\": \"<boolean,null>\",\n  \"business_interruption_due_to_outage\": \"<boolean,null>\",\n  \"it_budget\": \"<integer,null>\",\n  \"network_security_management\": \"<string,null>\",\n  \"security_provider_name\": \"<string,null>\",\n  \"security_contact_person_name\": \"<string,null>\",\n  \"security_contact_person_email\": \"<string,null-email>\",\n  \"has_revenue_outside_domicile\": \"<boolean,null>\",\n  \"revenue_outside_domicile_percentage\": \"<integer,null>\",\n  \"has_recent_merger_acquisition\": \"<boolean,null>\",\n  \"merger_acquisition_details\": \"<string,null>\",\n  \"process_stores_or_handles_credit_card_transactions\": \"<boolean,null>\",\n  \"business_email\": \"<string,null-email>\",\n  \"business_password\": \"<string,null>\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"smtp_tls_status\": \"<string>\",\n  \"cyber_risk_areas_for_improvement\": \"<string,null>\",\n  \"cyber_risk_areas_of_strength\": \"<string,null>\",\n  \"COI_vendor_tracking\": \"<string,null>\",\n  \"employee_benefits_management_software\": \"<string,null>\",\n  \"governance_risk_compliance_software\": \"<string,null>\",\n  \"security_monitoring\": \"<string,null>\",\n  \"privacy_frameworks\": \"<string,null>\",\n  \"NIST_tool\": \"<string,null>\",\n  \"GDPR_tool\": \"<string,null>\",\n  \"HIPAA_tool\": \"<string,null>\",\n  \"CMMC_tool\": \"<string,null>\",\n  \"ISO_27001_tool\": \"<string,null>\",\n  \"CCPA_tool\": \"<string,null>\",\n  \"FedRAMP_tool\": \"<string,null>\",\n  \"industries_company_participates_in\": \"<object,null>\",\n  \"percentage_of_written_agreements_standard_vs_manuscript\": \"<string,null>\",\n  \"is_there_limitation_of_liability_clause_utilized\": \"<boolean,null>\",\n  \"is_there_hold_harmless_clause_utilized\": \"<boolean,null>\",\n  \"is_there_indemnification_clause_utilized\": \"<boolean,null>\",\n  \"is_there_exclusion_of_consequential_damages_clause_utilized\": \"<boolean,null>\",\n  \"is_there_mandatory_or_binding_arbitration_clause_utilized\": \"<boolean,null>\",\n  \"is_there_other_clause_utilized\": \"<boolean,null>\",\n  \"is_there_directors_and_officers_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_epl_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_fiduciary_liability_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_cyber_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_tech_errors_and_omissions_coverage_in_place\": \"<boolean,null>\",\n  \"resource_owner\": \"<integer,null>\",\n  \"designated_ciso\": \"<integer,null>\",\n  \"designated_privacy_officer\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"non_field_errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "104bcc99-4c95-4864-915c-7e0dc4ff534f",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":id",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"industry_classification\": \"<uuid>\",\n  \"applicant_name\": \"<string,null>\",\n  \"applicant_email\": \"<string,null-email>\",\n  \"applicant_phone\": \"<string,null>\",\n  \"legal_entity\": \"<string,null>\",\n  \"address_line_1\": \"<string,null>\",\n  \"address_line_2\": \"<string,null>\",\n  \"city\": \"<string,null>\",\n  \"state_code\": \"<string,null>\",\n  \"country_code\": \"<string,null>\",\n  \"zip_code\": \"<string,null>\",\n  \"domain_name\": \"<string,null>\",\n  \"has_no_domain_name\": \"<boolean>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"is_test_account\": \"<boolean>\",\n  \"has_notified_clients_of_breach\": \"<boolean,null>\",\n  \"has_notified_clients_of_breach_description\": \"<string,null>\",\n  \"has_been_investigated_for_privacy_violations\": \"<boolean,null>\",\n  \"has_been_investigated_for_privacy_violations_description\": \"<string,null>\",\n  \"has_been_hacked_description\": \"<string,null>\",\n  \"active_carriers\": \"<array,null>\",\n  \"ownership_type\": \"<string,null>\",\n  \"phone_number\": \"<string,null>\",\n  \"security_contact_title\": \"<string,null>\",\n  \"security_email\": \"<string,null-email>\",\n  \"security_phone_number\": \"<string,null>\",\n  \"name_of_security_contact\": \"<string,null>\",\n  \"security_designation\": \"<string,null>\",\n  \"number_of_it_personnel\": \"<integer,null>\",\n  \"number_of_dedicated_security_personnel\": \"<integer,null>\",\n  \"help_center_url\": \"<string,null-uri>\",\n  \"carrier_page_url\": \"<string,null-uri>\",\n  \"company_updates_url\": \"<string,null-uri>\",\n  \"terms_of_service_url\": \"<string,null-uri>\",\n  \"privacy_policy_url\": \"<string,null-uri>\",\n  \"security_commitments_url\": \"<string,null-uri>\",\n  \"has_been_hacked\": \"<boolean,null>\",\n  \"income_coverage_limit\": \"<integer,null>\",\n  \"deductible\": \"<integer,null>\",\n  \"retention\": \"<integer,null>\",\n  \"has_subsidiaries\": \"<boolean,null>\",\n  \"no_of_subsidiary\": \"<integer,null>\",\n  \"net_revenue\": \"<integer,null>\",\n  \"gross_profit\": \"<integer,null>\",\n  \"last_year_revenue\": \"<integer,null>\",\n  \"last_two_year_revenue\": \"<integer,null>\",\n  \"have_cyber_claim\": \"<boolean,null>\",\n  \"cyber_claim_lost\": \"<integer,null>\",\n  \"cyber_claim_description\": \"<string,null>\",\n  \"potential_claim\": \"<boolean,null>\",\n  \"potential_claim_description\": \"<string,null>\",\n  \"received_complaint\": \"<boolean,null>\",\n  \"received_complaint_description\": \"<string,null>\",\n  \"owner_id\": \"<string,null>\",\n  \"archived_at\": \"<string,null-date-time>\",\n  \"broker_sharing_setting\": \"<string,null>\",\n  \"carrier_sharing_setting\": \"<string,null>\",\n  \"store_pii\": \"<boolean,null>\",\n  \"social_security_numbers\": \"<string,null>\",\n  \"consumer_financial_information\": \"<string,null>\",\n  \"payment_card_information\": \"<string,null>\",\n  \"protected_health_information\": \"<string,null>\",\n  \"biometric_information\": \"<string,null>\",\n  \"social_security_numbers_on_paper_records\": \"<string,null>\",\n  \"consumer_financial_information_on_paper_records\": \"<string,null>\",\n  \"payment_card_information_on_paper_records\": \"<string,null>\",\n  \"protected_health_information_on_paper_records\": \"<string,null>\",\n  \"biometric_information_on_paper_records\": \"<string,null>\",\n  \"social_security_numbers_electronic_records\": \"<string,null>\",\n  \"consumer_financial_information_electronic_records\": \"<string,null>\",\n  \"payment_card_information_electronic_records\": \"<string,null>\",\n  \"protected_health_information_electronic_records\": \"<string,null>\",\n  \"biometric_information_electronic_records\": \"<string,null>\",\n  \"is_pci_dss_compliant\": \"<boolean,null>\",\n  \"has_reviewed_sensitive_data_policy\": \"<boolean,null>\",\n  \"has_received_cyber_extortion_threat\": \"<boolean,null>\",\n  \"has_experienced_cyber_attack_network_outage_wire_transfer_fraud\": \"<boolean,null>\",\n  \"has_unscheduled_network_outage\": \"<boolean,null>\",\n  \"unscheduled_network_outage_description\": \"<string,null>\",\n  \"has_experienced_wire_transfer_fraud\": \"<boolean,null>\",\n  \"wire_transfer_fraud_description\": \"<string,null>\",\n  \"has_experienced_cyber_attack\": \"<boolean,null>\",\n  \"cyber_attack_description\": \"<string,null>\",\n  \"service_provider_outage_past_3_years\": \"<boolean,null>\",\n  \"business_interruption_due_to_outage\": \"<boolean,null>\",\n  \"it_budget\": \"<integer,null>\",\n  \"network_security_management\": \"<string,null>\",\n  \"security_provider_name\": \"<string,null>\",\n  \"security_contact_person_name\": \"<string,null>\",\n  \"security_contact_person_email\": \"<string,null-email>\",\n  \"has_revenue_outside_domicile\": \"<boolean,null>\",\n  \"revenue_outside_domicile_percentage\": \"<integer,null>\",\n  \"has_recent_merger_acquisition\": \"<boolean,null>\",\n  \"merger_acquisition_details\": \"<string,null>\",\n  \"process_stores_or_handles_credit_card_transactions\": \"<boolean,null>\",\n  \"business_email\": \"<string,null-email>\",\n  \"business_password\": \"<string,null>\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"smtp_tls_status\": \"<string>\",\n  \"cyber_risk_areas_for_improvement\": \"<string,null>\",\n  \"cyber_risk_areas_of_strength\": \"<string,null>\",\n  \"COI_vendor_tracking\": \"<string,null>\",\n  \"employee_benefits_management_software\": \"<string,null>\",\n  \"governance_risk_compliance_software\": \"<string,null>\",\n  \"security_monitoring\": \"<string,null>\",\n  \"privacy_frameworks\": \"<string,null>\",\n  \"NIST_tool\": \"<string,null>\",\n  \"GDPR_tool\": \"<string,null>\",\n  \"HIPAA_tool\": \"<string,null>\",\n  \"CMMC_tool\": \"<string,null>\",\n  \"ISO_27001_tool\": \"<string,null>\",\n  \"CCPA_tool\": \"<string,null>\",\n  \"FedRAMP_tool\": \"<string,null>\",\n  \"industries_company_participates_in\": \"<object,null>\",\n  \"percentage_of_written_agreements_standard_vs_manuscript\": \"<string,null>\",\n  \"is_there_limitation_of_liability_clause_utilized\": \"<boolean,null>\",\n  \"is_there_hold_harmless_clause_utilized\": \"<boolean,null>\",\n  \"is_there_indemnification_clause_utilized\": \"<boolean,null>\",\n  \"is_there_exclusion_of_consequential_damages_clause_utilized\": \"<boolean,null>\",\n  \"is_there_mandatory_or_binding_arbitration_clause_utilized\": \"<boolean,null>\",\n  \"is_there_other_clause_utilized\": \"<boolean,null>\",\n  \"is_there_directors_and_officers_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_epl_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_fiduciary_liability_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_cyber_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_tech_errors_and_omissions_coverage_in_place\": \"<boolean,null>\",\n  \"resource_owner\": \"<integer,null>\",\n  \"designated_ciso\": \"<integer,null>\",\n  \"designated_privacy_officer\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ac430d9-06f8-4ddc-ba93-27f199e57459",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":id",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"industry_classification\": \"<uuid>\",\n  \"applicant_name\": \"<string,null>\",\n  \"applicant_email\": \"<string,null-email>\",\n  \"applicant_phone\": \"<string,null>\",\n  \"legal_entity\": \"<string,null>\",\n  \"address_line_1\": \"<string,null>\",\n  \"address_line_2\": \"<string,null>\",\n  \"city\": \"<string,null>\",\n  \"state_code\": \"<string,null>\",\n  \"country_code\": \"<string,null>\",\n  \"zip_code\": \"<string,null>\",\n  \"domain_name\": \"<string,null>\",\n  \"has_no_domain_name\": \"<boolean>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"is_test_account\": \"<boolean>\",\n  \"has_notified_clients_of_breach\": \"<boolean,null>\",\n  \"has_notified_clients_of_breach_description\": \"<string,null>\",\n  \"has_been_investigated_for_privacy_violations\": \"<boolean,null>\",\n  \"has_been_investigated_for_privacy_violations_description\": \"<string,null>\",\n  \"has_been_hacked_description\": \"<string,null>\",\n  \"active_carriers\": \"<array,null>\",\n  \"ownership_type\": \"<string,null>\",\n  \"phone_number\": \"<string,null>\",\n  \"security_contact_title\": \"<string,null>\",\n  \"security_email\": \"<string,null-email>\",\n  \"security_phone_number\": \"<string,null>\",\n  \"name_of_security_contact\": \"<string,null>\",\n  \"security_designation\": \"<string,null>\",\n  \"number_of_it_personnel\": \"<integer,null>\",\n  \"number_of_dedicated_security_personnel\": \"<integer,null>\",\n  \"help_center_url\": \"<string,null-uri>\",\n  \"carrier_page_url\": \"<string,null-uri>\",\n  \"company_updates_url\": \"<string,null-uri>\",\n  \"terms_of_service_url\": \"<string,null-uri>\",\n  \"privacy_policy_url\": \"<string,null-uri>\",\n  \"security_commitments_url\": \"<string,null-uri>\",\n  \"has_been_hacked\": \"<boolean,null>\",\n  \"income_coverage_limit\": \"<integer,null>\",\n  \"deductible\": \"<integer,null>\",\n  \"retention\": \"<integer,null>\",\n  \"has_subsidiaries\": \"<boolean,null>\",\n  \"no_of_subsidiary\": \"<integer,null>\",\n  \"net_revenue\": \"<integer,null>\",\n  \"gross_profit\": \"<integer,null>\",\n  \"last_year_revenue\": \"<integer,null>\",\n  \"last_two_year_revenue\": \"<integer,null>\",\n  \"have_cyber_claim\": \"<boolean,null>\",\n  \"cyber_claim_lost\": \"<integer,null>\",\n  \"cyber_claim_description\": \"<string,null>\",\n  \"potential_claim\": \"<boolean,null>\",\n  \"potential_claim_description\": \"<string,null>\",\n  \"received_complaint\": \"<boolean,null>\",\n  \"received_complaint_description\": \"<string,null>\",\n  \"owner_id\": \"<string,null>\",\n  \"archived_at\": \"<string,null-date-time>\",\n  \"broker_sharing_setting\": \"<string,null>\",\n  \"carrier_sharing_setting\": \"<string,null>\",\n  \"store_pii\": \"<boolean,null>\",\n  \"social_security_numbers\": \"<string,null>\",\n  \"consumer_financial_information\": \"<string,null>\",\n  \"payment_card_information\": \"<string,null>\",\n  \"protected_health_information\": \"<string,null>\",\n  \"biometric_information\": \"<string,null>\",\n  \"social_security_numbers_on_paper_records\": \"<string,null>\",\n  \"consumer_financial_information_on_paper_records\": \"<string,null>\",\n  \"payment_card_information_on_paper_records\": \"<string,null>\",\n  \"protected_health_information_on_paper_records\": \"<string,null>\",\n  \"biometric_information_on_paper_records\": \"<string,null>\",\n  \"social_security_numbers_electronic_records\": \"<string,null>\",\n  \"consumer_financial_information_electronic_records\": \"<string,null>\",\n  \"payment_card_information_electronic_records\": \"<string,null>\",\n  \"protected_health_information_electronic_records\": \"<string,null>\",\n  \"biometric_information_electronic_records\": \"<string,null>\",\n  \"is_pci_dss_compliant\": \"<boolean,null>\",\n  \"has_reviewed_sensitive_data_policy\": \"<boolean,null>\",\n  \"has_received_cyber_extortion_threat\": \"<boolean,null>\",\n  \"has_experienced_cyber_attack_network_outage_wire_transfer_fraud\": \"<boolean,null>\",\n  \"has_unscheduled_network_outage\": \"<boolean,null>\",\n  \"unscheduled_network_outage_description\": \"<string,null>\",\n  \"has_experienced_wire_transfer_fraud\": \"<boolean,null>\",\n  \"wire_transfer_fraud_description\": \"<string,null>\",\n  \"has_experienced_cyber_attack\": \"<boolean,null>\",\n  \"cyber_attack_description\": \"<string,null>\",\n  \"service_provider_outage_past_3_years\": \"<boolean,null>\",\n  \"business_interruption_due_to_outage\": \"<boolean,null>\",\n  \"it_budget\": \"<integer,null>\",\n  \"network_security_management\": \"<string,null>\",\n  \"security_provider_name\": \"<string,null>\",\n  \"security_contact_person_name\": \"<string,null>\",\n  \"security_contact_person_email\": \"<string,null-email>\",\n  \"has_revenue_outside_domicile\": \"<boolean,null>\",\n  \"revenue_outside_domicile_percentage\": \"<integer,null>\",\n  \"has_recent_merger_acquisition\": \"<boolean,null>\",\n  \"merger_acquisition_details\": \"<string,null>\",\n  \"process_stores_or_handles_credit_card_transactions\": \"<boolean,null>\",\n  \"business_email\": \"<string,null-email>\",\n  \"business_password\": \"<string,null>\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"smtp_tls_status\": \"<string>\",\n  \"cyber_risk_areas_for_improvement\": \"<string,null>\",\n  \"cyber_risk_areas_of_strength\": \"<string,null>\",\n  \"COI_vendor_tracking\": \"<string,null>\",\n  \"employee_benefits_management_software\": \"<string,null>\",\n  \"governance_risk_compliance_software\": \"<string,null>\",\n  \"security_monitoring\": \"<string,null>\",\n  \"privacy_frameworks\": \"<string,null>\",\n  \"NIST_tool\": \"<string,null>\",\n  \"GDPR_tool\": \"<string,null>\",\n  \"HIPAA_tool\": \"<string,null>\",\n  \"CMMC_tool\": \"<string,null>\",\n  \"ISO_27001_tool\": \"<string,null>\",\n  \"CCPA_tool\": \"<string,null>\",\n  \"FedRAMP_tool\": \"<string,null>\",\n  \"industries_company_participates_in\": \"<object,null>\",\n  \"percentage_of_written_agreements_standard_vs_manuscript\": \"<string,null>\",\n  \"is_there_limitation_of_liability_clause_utilized\": \"<boolean,null>\",\n  \"is_there_hold_harmless_clause_utilized\": \"<boolean,null>\",\n  \"is_there_indemnification_clause_utilized\": \"<boolean,null>\",\n  \"is_there_exclusion_of_consequential_damages_clause_utilized\": \"<boolean,null>\",\n  \"is_there_mandatory_or_binding_arbitration_clause_utilized\": \"<boolean,null>\",\n  \"is_there_other_clause_utilized\": \"<boolean,null>\",\n  \"is_there_directors_and_officers_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_epl_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_fiduciary_liability_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_cyber_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_tech_errors_and_omissions_coverage_in_place\": \"<boolean,null>\",\n  \"resource_owner\": \"<integer,null>\",\n  \"designated_ciso\": \"<integer,null>\",\n  \"designated_privacy_officer\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebf1fe6a-07cd-47e5-8136-c79eed0f4a8d",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":id",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"industry_classification\": \"<uuid>\",\n  \"applicant_name\": \"<string,null>\",\n  \"applicant_email\": \"<string,null-email>\",\n  \"applicant_phone\": \"<string,null>\",\n  \"legal_entity\": \"<string,null>\",\n  \"address_line_1\": \"<string,null>\",\n  \"address_line_2\": \"<string,null>\",\n  \"city\": \"<string,null>\",\n  \"state_code\": \"<string,null>\",\n  \"country_code\": \"<string,null>\",\n  \"zip_code\": \"<string,null>\",\n  \"domain_name\": \"<string,null>\",\n  \"has_no_domain_name\": \"<boolean>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"is_test_account\": \"<boolean>\",\n  \"has_notified_clients_of_breach\": \"<boolean,null>\",\n  \"has_notified_clients_of_breach_description\": \"<string,null>\",\n  \"has_been_investigated_for_privacy_violations\": \"<boolean,null>\",\n  \"has_been_investigated_for_privacy_violations_description\": \"<string,null>\",\n  \"has_been_hacked_description\": \"<string,null>\",\n  \"active_carriers\": \"<array,null>\",\n  \"ownership_type\": \"<string,null>\",\n  \"phone_number\": \"<string,null>\",\n  \"security_contact_title\": \"<string,null>\",\n  \"security_email\": \"<string,null-email>\",\n  \"security_phone_number\": \"<string,null>\",\n  \"name_of_security_contact\": \"<string,null>\",\n  \"security_designation\": \"<string,null>\",\n  \"number_of_it_personnel\": \"<integer,null>\",\n  \"number_of_dedicated_security_personnel\": \"<integer,null>\",\n  \"help_center_url\": \"<string,null-uri>\",\n  \"carrier_page_url\": \"<string,null-uri>\",\n  \"company_updates_url\": \"<string,null-uri>\",\n  \"terms_of_service_url\": \"<string,null-uri>\",\n  \"privacy_policy_url\": \"<string,null-uri>\",\n  \"security_commitments_url\": \"<string,null-uri>\",\n  \"has_been_hacked\": \"<boolean,null>\",\n  \"income_coverage_limit\": \"<integer,null>\",\n  \"deductible\": \"<integer,null>\",\n  \"retention\": \"<integer,null>\",\n  \"has_subsidiaries\": \"<boolean,null>\",\n  \"no_of_subsidiary\": \"<integer,null>\",\n  \"net_revenue\": \"<integer,null>\",\n  \"gross_profit\": \"<integer,null>\",\n  \"last_year_revenue\": \"<integer,null>\",\n  \"last_two_year_revenue\": \"<integer,null>\",\n  \"have_cyber_claim\": \"<boolean,null>\",\n  \"cyber_claim_lost\": \"<integer,null>\",\n  \"cyber_claim_description\": \"<string,null>\",\n  \"potential_claim\": \"<boolean,null>\",\n  \"potential_claim_description\": \"<string,null>\",\n  \"received_complaint\": \"<boolean,null>\",\n  \"received_complaint_description\": \"<string,null>\",\n  \"owner_id\": \"<string,null>\",\n  \"archived_at\": \"<string,null-date-time>\",\n  \"broker_sharing_setting\": \"<string,null>\",\n  \"carrier_sharing_setting\": \"<string,null>\",\n  \"store_pii\": \"<boolean,null>\",\n  \"social_security_numbers\": \"<string,null>\",\n  \"consumer_financial_information\": \"<string,null>\",\n  \"payment_card_information\": \"<string,null>\",\n  \"protected_health_information\": \"<string,null>\",\n  \"biometric_information\": \"<string,null>\",\n  \"social_security_numbers_on_paper_records\": \"<string,null>\",\n  \"consumer_financial_information_on_paper_records\": \"<string,null>\",\n  \"payment_card_information_on_paper_records\": \"<string,null>\",\n  \"protected_health_information_on_paper_records\": \"<string,null>\",\n  \"biometric_information_on_paper_records\": \"<string,null>\",\n  \"social_security_numbers_electronic_records\": \"<string,null>\",\n  \"consumer_financial_information_electronic_records\": \"<string,null>\",\n  \"payment_card_information_electronic_records\": \"<string,null>\",\n  \"protected_health_information_electronic_records\": \"<string,null>\",\n  \"biometric_information_electronic_records\": \"<string,null>\",\n  \"is_pci_dss_compliant\": \"<boolean,null>\",\n  \"has_reviewed_sensitive_data_policy\": \"<boolean,null>\",\n  \"has_received_cyber_extortion_threat\": \"<boolean,null>\",\n  \"has_experienced_cyber_attack_network_outage_wire_transfer_fraud\": \"<boolean,null>\",\n  \"has_unscheduled_network_outage\": \"<boolean,null>\",\n  \"unscheduled_network_outage_description\": \"<string,null>\",\n  \"has_experienced_wire_transfer_fraud\": \"<boolean,null>\",\n  \"wire_transfer_fraud_description\": \"<string,null>\",\n  \"has_experienced_cyber_attack\": \"<boolean,null>\",\n  \"cyber_attack_description\": \"<string,null>\",\n  \"service_provider_outage_past_3_years\": \"<boolean,null>\",\n  \"business_interruption_due_to_outage\": \"<boolean,null>\",\n  \"it_budget\": \"<integer,null>\",\n  \"network_security_management\": \"<string,null>\",\n  \"security_provider_name\": \"<string,null>\",\n  \"security_contact_person_name\": \"<string,null>\",\n  \"security_contact_person_email\": \"<string,null-email>\",\n  \"has_revenue_outside_domicile\": \"<boolean,null>\",\n  \"revenue_outside_domicile_percentage\": \"<integer,null>\",\n  \"has_recent_merger_acquisition\": \"<boolean,null>\",\n  \"merger_acquisition_details\": \"<string,null>\",\n  \"process_stores_or_handles_credit_card_transactions\": \"<boolean,null>\",\n  \"business_email\": \"<string,null-email>\",\n  \"business_password\": \"<string,null>\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"smtp_tls_status\": \"<string>\",\n  \"cyber_risk_areas_for_improvement\": \"<string,null>\",\n  \"cyber_risk_areas_of_strength\": \"<string,null>\",\n  \"COI_vendor_tracking\": \"<string,null>\",\n  \"employee_benefits_management_software\": \"<string,null>\",\n  \"governance_risk_compliance_software\": \"<string,null>\",\n  \"security_monitoring\": \"<string,null>\",\n  \"privacy_frameworks\": \"<string,null>\",\n  \"NIST_tool\": \"<string,null>\",\n  \"GDPR_tool\": \"<string,null>\",\n  \"HIPAA_tool\": \"<string,null>\",\n  \"CMMC_tool\": \"<string,null>\",\n  \"ISO_27001_tool\": \"<string,null>\",\n  \"CCPA_tool\": \"<string,null>\",\n  \"FedRAMP_tool\": \"<string,null>\",\n  \"industries_company_participates_in\": \"<object,null>\",\n  \"percentage_of_written_agreements_standard_vs_manuscript\": \"<string,null>\",\n  \"is_there_limitation_of_liability_clause_utilized\": \"<boolean,null>\",\n  \"is_there_hold_harmless_clause_utilized\": \"<boolean,null>\",\n  \"is_there_indemnification_clause_utilized\": \"<boolean,null>\",\n  \"is_there_exclusion_of_consequential_damages_clause_utilized\": \"<boolean,null>\",\n  \"is_there_mandatory_or_binding_arbitration_clause_utilized\": \"<boolean,null>\",\n  \"is_there_other_clause_utilized\": \"<boolean,null>\",\n  \"is_there_directors_and_officers_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_epl_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_fiduciary_liability_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_cyber_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_tech_errors_and_omissions_coverage_in_place\": \"<boolean,null>\",\n  \"resource_owner\": \"<integer,null>\",\n  \"designated_ciso\": \"<integer,null>\",\n  \"designated_privacy_officer\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ae59a59-870e-4962-9bcd-d40f9fcdd12b",
+          "name": "Client invite remind",
+          "request": {
+            "name": "Client invite remind",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "broker",
+                ":broker_pk",
+                "clients",
+                ":id",
+                "invite-remind"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "broker_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) A unique integer value identifying this business."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c78d68b1-d76e-4874-82a3-db12f256b991",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":id",
+                    "invite-remind"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"<string>\",\n  \"id\": 3590,\n  \"industry_classification\": \"<uuid>\",\n  \"subsidiaries\": [\n    {\n      \"name\": \"string\",\n      \"business\": 2569,\n      \"id\": 3428,\n      \"description\": null,\n      \"ownership\": 236382\n    },\n    {\n      \"name\": \"string\",\n      \"business\": 7896,\n      \"id\": 5329,\n      \"description\": \"string\",\n      \"ownership\": 1333494244\n    }\n  ],\n  \"broker_team\": \"string\",\n  \"prefilled_forms\": [\n    {\n      \"business\": 2262,\n      \"id\": \"54148557-f3c9-d5b1-6298-a90763861194\",\n      \"created_at\": \"2005-06-02T19:09:42.785Z\",\n      \"document_content\": \"string\",\n      \"form\": \"https://vRtj.ugUFZRBHL1WeD6RBxfg-eVkl5yTo+FuoTH4OGH.2zJPgo\",\n      \"application\": \"eb0f2995-e33a-ab7b-b07d-9e92b385adba\",\n      \"created_by\": null\n    },\n    {\n      \"business\": 4412,\n      \"id\": \"2942753d-bb34-e8c6-2303-2aa8d4b158ad\",\n      \"created_at\": \"1963-09-18T10:41:21.761Z\",\n      \"document_content\": null,\n      \"form\": \"https://ZSThriGUoDWp.ylqbMVctx6OxQcWV3Gv6PZkekDGiY3tVG.BwqF61AafVdtC6Cn0bUEEaJyL0,9iW7ecpNay6kLz\",\n      \"application\": \"ca99f780-6555-96d3-55b2-ad6b5b5b5ea4\",\n      \"created_by\": null\n    }\n  ],\n  \"applicant_name\": \"<string,null>\",\n  \"applicant_email\": \"<string,null-email>\",\n  \"applicant_phone\": \"<string,null>\",\n  \"legal_entity\": \"<string,null>\",\n  \"address_line_1\": \"<string,null>\",\n  \"address_line_2\": \"<string,null>\",\n  \"city\": \"<string,null>\",\n  \"state_code\": \"<string,null>\",\n  \"country_code\": \"<string,null>\",\n  \"zip_code\": \"<string,null>\",\n  \"domain_name\": \"<string,null>\",\n  \"has_no_domain_name\": \"<boolean>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"is_test_account\": \"<boolean>\",\n  \"has_notified_clients_of_breach\": \"<boolean,null>\",\n  \"has_notified_clients_of_breach_description\": \"<string,null>\",\n  \"has_been_investigated_for_privacy_violations\": \"<boolean,null>\",\n  \"has_been_investigated_for_privacy_violations_description\": \"<string,null>\",\n  \"has_been_hacked_description\": \"<string,null>\",\n  \"active_carriers\": \"<array,null>\",\n  \"ownership_type\": \"<string,null>\",\n  \"phone_number\": \"<string,null>\",\n  \"security_contact_title\": \"<string,null>\",\n  \"security_email\": \"<string,null-email>\",\n  \"security_phone_number\": \"<string,null>\",\n  \"name_of_security_contact\": \"<string,null>\",\n  \"security_designation\": \"<string,null>\",\n  \"number_of_it_personnel\": \"<integer,null>\",\n  \"number_of_dedicated_security_personnel\": \"<integer,null>\",\n  \"help_center_url\": \"<string,null-uri>\",\n  \"carrier_page_url\": \"<string,null-uri>\",\n  \"company_updates_url\": \"<string,null-uri>\",\n  \"terms_of_service_url\": \"<string,null-uri>\",\n  \"privacy_policy_url\": \"<string,null-uri>\",\n  \"security_commitments_url\": \"<string,null-uri>\",\n  \"has_been_hacked\": \"<boolean,null>\",\n  \"income_coverage_limit\": \"<integer,null>\",\n  \"deductible\": \"<integer,null>\",\n  \"retention\": \"<integer,null>\",\n  \"has_subsidiaries\": \"<boolean,null>\",\n  \"no_of_subsidiary\": \"<integer,null>\",\n  \"net_revenue\": \"<integer,null>\",\n  \"gross_profit\": \"<integer,null>\",\n  \"last_year_revenue\": \"<integer,null>\",\n  \"last_two_year_revenue\": \"<integer,null>\",\n  \"have_cyber_claim\": \"<boolean,null>\",\n  \"cyber_claim_lost\": \"<integer,null>\",\n  \"cyber_claim_description\": \"<string,null>\",\n  \"potential_claim\": \"<boolean,null>\",\n  \"potential_claim_description\": \"<string,null>\",\n  \"received_complaint\": \"<boolean,null>\",\n  \"received_complaint_description\": \"<string,null>\",\n  \"owner_id\": \"<string,null>\",\n  \"archived_at\": \"<string,null-date-time>\",\n  \"broker_sharing_setting\": \"<string,null>\",\n  \"carrier_sharing_setting\": \"<string,null>\",\n  \"store_pii\": \"<boolean,null>\",\n  \"social_security_numbers\": \"<string,null>\",\n  \"consumer_financial_information\": \"<string,null>\",\n  \"payment_card_information\": \"<string,null>\",\n  \"protected_health_information\": \"<string,null>\",\n  \"biometric_information\": \"<string,null>\",\n  \"social_security_numbers_on_paper_records\": \"<string,null>\",\n  \"consumer_financial_information_on_paper_records\": \"<string,null>\",\n  \"payment_card_information_on_paper_records\": \"<string,null>\",\n  \"protected_health_information_on_paper_records\": \"<string,null>\",\n  \"biometric_information_on_paper_records\": \"<string,null>\",\n  \"social_security_numbers_electronic_records\": \"<string,null>\",\n  \"consumer_financial_information_electronic_records\": \"<string,null>\",\n  \"payment_card_information_electronic_records\": \"<string,null>\",\n  \"protected_health_information_electronic_records\": \"<string,null>\",\n  \"biometric_information_electronic_records\": \"<string,null>\",\n  \"is_pci_dss_compliant\": \"<boolean,null>\",\n  \"has_reviewed_sensitive_data_policy\": \"<boolean,null>\",\n  \"has_received_cyber_extortion_threat\": \"<boolean,null>\",\n  \"has_experienced_cyber_attack_network_outage_wire_transfer_fraud\": \"<boolean,null>\",\n  \"has_unscheduled_network_outage\": \"<boolean,null>\",\n  \"unscheduled_network_outage_description\": \"<string,null>\",\n  \"has_experienced_wire_transfer_fraud\": \"<boolean,null>\",\n  \"wire_transfer_fraud_description\": \"<string,null>\",\n  \"has_experienced_cyber_attack\": \"<boolean,null>\",\n  \"cyber_attack_description\": \"<string,null>\",\n  \"service_provider_outage_past_3_years\": \"<boolean,null>\",\n  \"business_interruption_due_to_outage\": \"<boolean,null>\",\n  \"it_budget\": \"<integer,null>\",\n  \"network_security_management\": \"<string,null>\",\n  \"security_provider_name\": \"<string,null>\",\n  \"security_contact_person_name\": \"<string,null>\",\n  \"security_contact_person_email\": \"<string,null-email>\",\n  \"has_revenue_outside_domicile\": \"<boolean,null>\",\n  \"revenue_outside_domicile_percentage\": \"<integer,null>\",\n  \"has_recent_merger_acquisition\": \"<boolean,null>\",\n  \"merger_acquisition_details\": \"<string,null>\",\n  \"process_stores_or_handles_credit_card_transactions\": \"<boolean,null>\",\n  \"business_email\": \"<string,null-email>\",\n  \"business_password\": \"<string,null>\",\n  \"created_at\": \"1979-11-16T21:59:23.407Z\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"smtp_tls_status\": \"<string>\",\n  \"cyber_risk_areas_for_improvement\": \"<string,null>\",\n  \"cyber_risk_areas_of_strength\": \"<string,null>\",\n  \"COI_vendor_tracking\": \"<string,null>\",\n  \"employee_benefits_management_software\": \"<string,null>\",\n  \"governance_risk_compliance_software\": \"<string,null>\",\n  \"security_monitoring\": \"<string,null>\",\n  \"privacy_frameworks\": \"<string,null>\",\n  \"NIST_tool\": \"<string,null>\",\n  \"GDPR_tool\": \"<string,null>\",\n  \"HIPAA_tool\": \"<string,null>\",\n  \"CMMC_tool\": \"<string,null>\",\n  \"ISO_27001_tool\": \"<string,null>\",\n  \"CCPA_tool\": \"<string,null>\",\n  \"FedRAMP_tool\": \"<string,null>\",\n  \"industries_company_participates_in\": \"<object,null>\",\n  \"percentage_of_written_agreements_standard_vs_manuscript\": \"<string,null>\",\n  \"is_there_limitation_of_liability_clause_utilized\": \"<boolean,null>\",\n  \"is_there_hold_harmless_clause_utilized\": \"<boolean,null>\",\n  \"is_there_indemnification_clause_utilized\": \"<boolean,null>\",\n  \"is_there_exclusion_of_consequential_damages_clause_utilized\": \"<boolean,null>\",\n  \"is_there_mandatory_or_binding_arbitration_clause_utilized\": \"<boolean,null>\",\n  \"is_there_other_clause_utilized\": \"<boolean,null>\",\n  \"is_there_directors_and_officers_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_epl_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_fiduciary_liability_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_cyber_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_tech_errors_and_omissions_coverage_in_place\": \"<boolean,null>\",\n  \"resource_owner\": \"<integer,null>\",\n  \"designated_ciso\": \"<integer,null>\",\n  \"designated_privacy_officer\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d6dcba1-322b-4583-ad54-ac8b20c2092f",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":id",
+                    "invite-remind"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f29e524-1ac8-435e-895a-035f0541f274",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":id",
+                    "invite-remind"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aaf10f66-b049-46b9-828b-605c1d8e48cf",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":id",
+                    "invite-remind"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88140a71-f0d6-4b25-99e2-180415b21c38",
+          "name": "Add prefilled forms",
+          "request": {
+            "name": "Add prefilled forms",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "broker",
+                ":broker_pk",
+                "clients",
+                ":id",
+                "pre-filled-forms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "broker_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) A unique integer value identifying this business."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"industry_classification\": \"<uuid>\",\n  \"applicant_name\": \"<string,null>\",\n  \"applicant_email\": \"<string,null-email>\",\n  \"applicant_phone\": \"<string,null>\",\n  \"legal_entity\": \"<string,null>\",\n  \"address_line_1\": \"<string,null>\",\n  \"address_line_2\": \"<string,null>\",\n  \"city\": \"<string,null>\",\n  \"state_code\": \"<string,null>\",\n  \"country_code\": \"<string,null>\",\n  \"zip_code\": \"<string,null>\",\n  \"domain_name\": \"<string,null>\",\n  \"has_no_domain_name\": \"<boolean>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"is_test_account\": \"<boolean>\",\n  \"has_notified_clients_of_breach\": \"<boolean,null>\",\n  \"has_notified_clients_of_breach_description\": \"<string,null>\",\n  \"has_been_investigated_for_privacy_violations\": \"<boolean,null>\",\n  \"has_been_investigated_for_privacy_violations_description\": \"<string,null>\",\n  \"has_been_hacked_description\": \"<string,null>\",\n  \"active_carriers\": \"<array,null>\",\n  \"ownership_type\": \"<string,null>\",\n  \"phone_number\": \"<string,null>\",\n  \"security_contact_title\": \"<string,null>\",\n  \"security_email\": \"<string,null-email>\",\n  \"security_phone_number\": \"<string,null>\",\n  \"name_of_security_contact\": \"<string,null>\",\n  \"security_designation\": \"<string,null>\",\n  \"number_of_it_personnel\": \"<integer,null>\",\n  \"number_of_dedicated_security_personnel\": \"<integer,null>\",\n  \"help_center_url\": \"<string,null-uri>\",\n  \"carrier_page_url\": \"<string,null-uri>\",\n  \"company_updates_url\": \"<string,null-uri>\",\n  \"terms_of_service_url\": \"<string,null-uri>\",\n  \"privacy_policy_url\": \"<string,null-uri>\",\n  \"security_commitments_url\": \"<string,null-uri>\",\n  \"has_been_hacked\": \"<boolean,null>\",\n  \"income_coverage_limit\": \"<integer,null>\",\n  \"deductible\": \"<integer,null>\",\n  \"retention\": \"<integer,null>\",\n  \"has_subsidiaries\": \"<boolean,null>\",\n  \"no_of_subsidiary\": \"<integer,null>\",\n  \"net_revenue\": \"<integer,null>\",\n  \"gross_profit\": \"<integer,null>\",\n  \"last_year_revenue\": \"<integer,null>\",\n  \"last_two_year_revenue\": \"<integer,null>\",\n  \"have_cyber_claim\": \"<boolean,null>\",\n  \"cyber_claim_lost\": \"<integer,null>\",\n  \"cyber_claim_description\": \"<string,null>\",\n  \"potential_claim\": \"<boolean,null>\",\n  \"potential_claim_description\": \"<string,null>\",\n  \"received_complaint\": \"<boolean,null>\",\n  \"received_complaint_description\": \"<string,null>\",\n  \"owner_id\": \"<string,null>\",\n  \"archived_at\": \"<string,null-date-time>\",\n  \"broker_sharing_setting\": \"<string,null>\",\n  \"carrier_sharing_setting\": \"<string,null>\",\n  \"store_pii\": \"<boolean,null>\",\n  \"social_security_numbers\": \"<string,null>\",\n  \"consumer_financial_information\": \"<string,null>\",\n  \"payment_card_information\": \"<string,null>\",\n  \"protected_health_information\": \"<string,null>\",\n  \"biometric_information\": \"<string,null>\",\n  \"social_security_numbers_on_paper_records\": \"<string,null>\",\n  \"consumer_financial_information_on_paper_records\": \"<string,null>\",\n  \"payment_card_information_on_paper_records\": \"<string,null>\",\n  \"protected_health_information_on_paper_records\": \"<string,null>\",\n  \"biometric_information_on_paper_records\": \"<string,null>\",\n  \"social_security_numbers_electronic_records\": \"<string,null>\",\n  \"consumer_financial_information_electronic_records\": \"<string,null>\",\n  \"payment_card_information_electronic_records\": \"<string,null>\",\n  \"protected_health_information_electronic_records\": \"<string,null>\",\n  \"biometric_information_electronic_records\": \"<string,null>\",\n  \"is_pci_dss_compliant\": \"<boolean,null>\",\n  \"has_reviewed_sensitive_data_policy\": \"<boolean,null>\",\n  \"has_received_cyber_extortion_threat\": \"<boolean,null>\",\n  \"has_experienced_cyber_attack_network_outage_wire_transfer_fraud\": \"<boolean,null>\",\n  \"has_unscheduled_network_outage\": \"<boolean,null>\",\n  \"unscheduled_network_outage_description\": \"<string,null>\",\n  \"has_experienced_wire_transfer_fraud\": \"<boolean,null>\",\n  \"wire_transfer_fraud_description\": \"<string,null>\",\n  \"has_experienced_cyber_attack\": \"<boolean,null>\",\n  \"cyber_attack_description\": \"<string,null>\",\n  \"service_provider_outage_past_3_years\": \"<boolean,null>\",\n  \"business_interruption_due_to_outage\": \"<boolean,null>\",\n  \"it_budget\": \"<integer,null>\",\n  \"network_security_management\": \"<string,null>\",\n  \"security_provider_name\": \"<string,null>\",\n  \"security_contact_person_name\": \"<string,null>\",\n  \"security_contact_person_email\": \"<string,null-email>\",\n  \"has_revenue_outside_domicile\": \"<boolean,null>\",\n  \"revenue_outside_domicile_percentage\": \"<integer,null>\",\n  \"has_recent_merger_acquisition\": \"<boolean,null>\",\n  \"merger_acquisition_details\": \"<string,null>\",\n  \"process_stores_or_handles_credit_card_transactions\": \"<boolean,null>\",\n  \"business_email\": \"<string,null-email>\",\n  \"business_password\": \"<string,null>\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"smtp_tls_status\": \"<string>\",\n  \"cyber_risk_areas_for_improvement\": \"<string,null>\",\n  \"cyber_risk_areas_of_strength\": \"<string,null>\",\n  \"COI_vendor_tracking\": \"<string,null>\",\n  \"employee_benefits_management_software\": \"<string,null>\",\n  \"governance_risk_compliance_software\": \"<string,null>\",\n  \"security_monitoring\": \"<string,null>\",\n  \"privacy_frameworks\": \"<string,null>\",\n  \"NIST_tool\": \"<string,null>\",\n  \"GDPR_tool\": \"<string,null>\",\n  \"HIPAA_tool\": \"<string,null>\",\n  \"CMMC_tool\": \"<string,null>\",\n  \"ISO_27001_tool\": \"<string,null>\",\n  \"CCPA_tool\": \"<string,null>\",\n  \"FedRAMP_tool\": \"<string,null>\",\n  \"industries_company_participates_in\": \"<object,null>\",\n  \"percentage_of_written_agreements_standard_vs_manuscript\": \"<string,null>\",\n  \"is_there_limitation_of_liability_clause_utilized\": \"<boolean,null>\",\n  \"is_there_hold_harmless_clause_utilized\": \"<boolean,null>\",\n  \"is_there_indemnification_clause_utilized\": \"<boolean,null>\",\n  \"is_there_exclusion_of_consequential_damages_clause_utilized\": \"<boolean,null>\",\n  \"is_there_mandatory_or_binding_arbitration_clause_utilized\": \"<boolean,null>\",\n  \"is_there_other_clause_utilized\": \"<boolean,null>\",\n  \"is_there_directors_and_officers_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_epl_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_fiduciary_liability_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_cyber_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_tech_errors_and_omissions_coverage_in_place\": \"<boolean,null>\",\n  \"resource_owner\": \"<integer,null>\",\n  \"designated_ciso\": \"<integer,null>\",\n  \"designated_privacy_officer\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2226ba63-1e1d-4e98-9b15-13824ff38d7b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":id",
+                    "pre-filled-forms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"industry_classification\": \"<uuid>\",\n  \"applicant_name\": \"<string,null>\",\n  \"applicant_email\": \"<string,null-email>\",\n  \"applicant_phone\": \"<string,null>\",\n  \"legal_entity\": \"<string,null>\",\n  \"address_line_1\": \"<string,null>\",\n  \"address_line_2\": \"<string,null>\",\n  \"city\": \"<string,null>\",\n  \"state_code\": \"<string,null>\",\n  \"country_code\": \"<string,null>\",\n  \"zip_code\": \"<string,null>\",\n  \"domain_name\": \"<string,null>\",\n  \"has_no_domain_name\": \"<boolean>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"is_test_account\": \"<boolean>\",\n  \"has_notified_clients_of_breach\": \"<boolean,null>\",\n  \"has_notified_clients_of_breach_description\": \"<string,null>\",\n  \"has_been_investigated_for_privacy_violations\": \"<boolean,null>\",\n  \"has_been_investigated_for_privacy_violations_description\": \"<string,null>\",\n  \"has_been_hacked_description\": \"<string,null>\",\n  \"active_carriers\": \"<array,null>\",\n  \"ownership_type\": \"<string,null>\",\n  \"phone_number\": \"<string,null>\",\n  \"security_contact_title\": \"<string,null>\",\n  \"security_email\": \"<string,null-email>\",\n  \"security_phone_number\": \"<string,null>\",\n  \"name_of_security_contact\": \"<string,null>\",\n  \"security_designation\": \"<string,null>\",\n  \"number_of_it_personnel\": \"<integer,null>\",\n  \"number_of_dedicated_security_personnel\": \"<integer,null>\",\n  \"help_center_url\": \"<string,null-uri>\",\n  \"carrier_page_url\": \"<string,null-uri>\",\n  \"company_updates_url\": \"<string,null-uri>\",\n  \"terms_of_service_url\": \"<string,null-uri>\",\n  \"privacy_policy_url\": \"<string,null-uri>\",\n  \"security_commitments_url\": \"<string,null-uri>\",\n  \"has_been_hacked\": \"<boolean,null>\",\n  \"income_coverage_limit\": \"<integer,null>\",\n  \"deductible\": \"<integer,null>\",\n  \"retention\": \"<integer,null>\",\n  \"has_subsidiaries\": \"<boolean,null>\",\n  \"no_of_subsidiary\": \"<integer,null>\",\n  \"net_revenue\": \"<integer,null>\",\n  \"gross_profit\": \"<integer,null>\",\n  \"last_year_revenue\": \"<integer,null>\",\n  \"last_two_year_revenue\": \"<integer,null>\",\n  \"have_cyber_claim\": \"<boolean,null>\",\n  \"cyber_claim_lost\": \"<integer,null>\",\n  \"cyber_claim_description\": \"<string,null>\",\n  \"potential_claim\": \"<boolean,null>\",\n  \"potential_claim_description\": \"<string,null>\",\n  \"received_complaint\": \"<boolean,null>\",\n  \"received_complaint_description\": \"<string,null>\",\n  \"owner_id\": \"<string,null>\",\n  \"archived_at\": \"<string,null-date-time>\",\n  \"broker_sharing_setting\": \"<string,null>\",\n  \"carrier_sharing_setting\": \"<string,null>\",\n  \"store_pii\": \"<boolean,null>\",\n  \"social_security_numbers\": \"<string,null>\",\n  \"consumer_financial_information\": \"<string,null>\",\n  \"payment_card_information\": \"<string,null>\",\n  \"protected_health_information\": \"<string,null>\",\n  \"biometric_information\": \"<string,null>\",\n  \"social_security_numbers_on_paper_records\": \"<string,null>\",\n  \"consumer_financial_information_on_paper_records\": \"<string,null>\",\n  \"payment_card_information_on_paper_records\": \"<string,null>\",\n  \"protected_health_information_on_paper_records\": \"<string,null>\",\n  \"biometric_information_on_paper_records\": \"<string,null>\",\n  \"social_security_numbers_electronic_records\": \"<string,null>\",\n  \"consumer_financial_information_electronic_records\": \"<string,null>\",\n  \"payment_card_information_electronic_records\": \"<string,null>\",\n  \"protected_health_information_electronic_records\": \"<string,null>\",\n  \"biometric_information_electronic_records\": \"<string,null>\",\n  \"is_pci_dss_compliant\": \"<boolean,null>\",\n  \"has_reviewed_sensitive_data_policy\": \"<boolean,null>\",\n  \"has_received_cyber_extortion_threat\": \"<boolean,null>\",\n  \"has_experienced_cyber_attack_network_outage_wire_transfer_fraud\": \"<boolean,null>\",\n  \"has_unscheduled_network_outage\": \"<boolean,null>\",\n  \"unscheduled_network_outage_description\": \"<string,null>\",\n  \"has_experienced_wire_transfer_fraud\": \"<boolean,null>\",\n  \"wire_transfer_fraud_description\": \"<string,null>\",\n  \"has_experienced_cyber_attack\": \"<boolean,null>\",\n  \"cyber_attack_description\": \"<string,null>\",\n  \"service_provider_outage_past_3_years\": \"<boolean,null>\",\n  \"business_interruption_due_to_outage\": \"<boolean,null>\",\n  \"it_budget\": \"<integer,null>\",\n  \"network_security_management\": \"<string,null>\",\n  \"security_provider_name\": \"<string,null>\",\n  \"security_contact_person_name\": \"<string,null>\",\n  \"security_contact_person_email\": \"<string,null-email>\",\n  \"has_revenue_outside_domicile\": \"<boolean,null>\",\n  \"revenue_outside_domicile_percentage\": \"<integer,null>\",\n  \"has_recent_merger_acquisition\": \"<boolean,null>\",\n  \"merger_acquisition_details\": \"<string,null>\",\n  \"process_stores_or_handles_credit_card_transactions\": \"<boolean,null>\",\n  \"business_email\": \"<string,null-email>\",\n  \"business_password\": \"<string,null>\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"smtp_tls_status\": \"<string>\",\n  \"cyber_risk_areas_for_improvement\": \"<string,null>\",\n  \"cyber_risk_areas_of_strength\": \"<string,null>\",\n  \"COI_vendor_tracking\": \"<string,null>\",\n  \"employee_benefits_management_software\": \"<string,null>\",\n  \"governance_risk_compliance_software\": \"<string,null>\",\n  \"security_monitoring\": \"<string,null>\",\n  \"privacy_frameworks\": \"<string,null>\",\n  \"NIST_tool\": \"<string,null>\",\n  \"GDPR_tool\": \"<string,null>\",\n  \"HIPAA_tool\": \"<string,null>\",\n  \"CMMC_tool\": \"<string,null>\",\n  \"ISO_27001_tool\": \"<string,null>\",\n  \"CCPA_tool\": \"<string,null>\",\n  \"FedRAMP_tool\": \"<string,null>\",\n  \"industries_company_participates_in\": \"<object,null>\",\n  \"percentage_of_written_agreements_standard_vs_manuscript\": \"<string,null>\",\n  \"is_there_limitation_of_liability_clause_utilized\": \"<boolean,null>\",\n  \"is_there_hold_harmless_clause_utilized\": \"<boolean,null>\",\n  \"is_there_indemnification_clause_utilized\": \"<boolean,null>\",\n  \"is_there_exclusion_of_consequential_damages_clause_utilized\": \"<boolean,null>\",\n  \"is_there_mandatory_or_binding_arbitration_clause_utilized\": \"<boolean,null>\",\n  \"is_there_other_clause_utilized\": \"<boolean,null>\",\n  \"is_there_directors_and_officers_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_epl_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_fiduciary_liability_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_cyber_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_tech_errors_and_omissions_coverage_in_place\": \"<boolean,null>\",\n  \"resource_owner\": \"<integer,null>\",\n  \"designated_ciso\": \"<integer,null>\",\n  \"designated_privacy_officer\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"<string>\",\n  \"id\": 3590,\n  \"industry_classification\": \"<uuid>\",\n  \"subsidiaries\": [\n    {\n      \"name\": \"string\",\n      \"business\": 2569,\n      \"id\": 3428,\n      \"description\": null,\n      \"ownership\": 236382\n    },\n    {\n      \"name\": \"string\",\n      \"business\": 7896,\n      \"id\": 5329,\n      \"description\": \"string\",\n      \"ownership\": 1333494244\n    }\n  ],\n  \"broker_team\": \"string\",\n  \"prefilled_forms\": [\n    {\n      \"business\": 2262,\n      \"id\": \"54148557-f3c9-d5b1-6298-a90763861194\",\n      \"created_at\": \"2005-06-02T19:09:42.785Z\",\n      \"document_content\": \"string\",\n      \"form\": \"https://vRtj.ugUFZRBHL1WeD6RBxfg-eVkl5yTo+FuoTH4OGH.2zJPgo\",\n      \"application\": \"eb0f2995-e33a-ab7b-b07d-9e92b385adba\",\n      \"created_by\": null\n    },\n    {\n      \"business\": 4412,\n      \"id\": \"2942753d-bb34-e8c6-2303-2aa8d4b158ad\",\n      \"created_at\": \"1963-09-18T10:41:21.761Z\",\n      \"document_content\": null,\n      \"form\": \"https://ZSThriGUoDWp.ylqbMVctx6OxQcWV3Gv6PZkekDGiY3tVG.BwqF61AafVdtC6Cn0bUEEaJyL0,9iW7ecpNay6kLz\",\n      \"application\": \"ca99f780-6555-96d3-55b2-ad6b5b5b5ea4\",\n      \"created_by\": null\n    }\n  ],\n  \"applicant_name\": \"<string,null>\",\n  \"applicant_email\": \"<string,null-email>\",\n  \"applicant_phone\": \"<string,null>\",\n  \"legal_entity\": \"<string,null>\",\n  \"address_line_1\": \"<string,null>\",\n  \"address_line_2\": \"<string,null>\",\n  \"city\": \"<string,null>\",\n  \"state_code\": \"<string,null>\",\n  \"country_code\": \"<string,null>\",\n  \"zip_code\": \"<string,null>\",\n  \"domain_name\": \"<string,null>\",\n  \"has_no_domain_name\": \"<boolean>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"is_test_account\": \"<boolean>\",\n  \"has_notified_clients_of_breach\": \"<boolean,null>\",\n  \"has_notified_clients_of_breach_description\": \"<string,null>\",\n  \"has_been_investigated_for_privacy_violations\": \"<boolean,null>\",\n  \"has_been_investigated_for_privacy_violations_description\": \"<string,null>\",\n  \"has_been_hacked_description\": \"<string,null>\",\n  \"active_carriers\": \"<array,null>\",\n  \"ownership_type\": \"<string,null>\",\n  \"phone_number\": \"<string,null>\",\n  \"security_contact_title\": \"<string,null>\",\n  \"security_email\": \"<string,null-email>\",\n  \"security_phone_number\": \"<string,null>\",\n  \"name_of_security_contact\": \"<string,null>\",\n  \"security_designation\": \"<string,null>\",\n  \"number_of_it_personnel\": \"<integer,null>\",\n  \"number_of_dedicated_security_personnel\": \"<integer,null>\",\n  \"help_center_url\": \"<string,null-uri>\",\n  \"carrier_page_url\": \"<string,null-uri>\",\n  \"company_updates_url\": \"<string,null-uri>\",\n  \"terms_of_service_url\": \"<string,null-uri>\",\n  \"privacy_policy_url\": \"<string,null-uri>\",\n  \"security_commitments_url\": \"<string,null-uri>\",\n  \"has_been_hacked\": \"<boolean,null>\",\n  \"income_coverage_limit\": \"<integer,null>\",\n  \"deductible\": \"<integer,null>\",\n  \"retention\": \"<integer,null>\",\n  \"has_subsidiaries\": \"<boolean,null>\",\n  \"no_of_subsidiary\": \"<integer,null>\",\n  \"net_revenue\": \"<integer,null>\",\n  \"gross_profit\": \"<integer,null>\",\n  \"last_year_revenue\": \"<integer,null>\",\n  \"last_two_year_revenue\": \"<integer,null>\",\n  \"have_cyber_claim\": \"<boolean,null>\",\n  \"cyber_claim_lost\": \"<integer,null>\",\n  \"cyber_claim_description\": \"<string,null>\",\n  \"potential_claim\": \"<boolean,null>\",\n  \"potential_claim_description\": \"<string,null>\",\n  \"received_complaint\": \"<boolean,null>\",\n  \"received_complaint_description\": \"<string,null>\",\n  \"owner_id\": \"<string,null>\",\n  \"archived_at\": \"<string,null-date-time>\",\n  \"broker_sharing_setting\": \"<string,null>\",\n  \"carrier_sharing_setting\": \"<string,null>\",\n  \"store_pii\": \"<boolean,null>\",\n  \"social_security_numbers\": \"<string,null>\",\n  \"consumer_financial_information\": \"<string,null>\",\n  \"payment_card_information\": \"<string,null>\",\n  \"protected_health_information\": \"<string,null>\",\n  \"biometric_information\": \"<string,null>\",\n  \"social_security_numbers_on_paper_records\": \"<string,null>\",\n  \"consumer_financial_information_on_paper_records\": \"<string,null>\",\n  \"payment_card_information_on_paper_records\": \"<string,null>\",\n  \"protected_health_information_on_paper_records\": \"<string,null>\",\n  \"biometric_information_on_paper_records\": \"<string,null>\",\n  \"social_security_numbers_electronic_records\": \"<string,null>\",\n  \"consumer_financial_information_electronic_records\": \"<string,null>\",\n  \"payment_card_information_electronic_records\": \"<string,null>\",\n  \"protected_health_information_electronic_records\": \"<string,null>\",\n  \"biometric_information_electronic_records\": \"<string,null>\",\n  \"is_pci_dss_compliant\": \"<boolean,null>\",\n  \"has_reviewed_sensitive_data_policy\": \"<boolean,null>\",\n  \"has_received_cyber_extortion_threat\": \"<boolean,null>\",\n  \"has_experienced_cyber_attack_network_outage_wire_transfer_fraud\": \"<boolean,null>\",\n  \"has_unscheduled_network_outage\": \"<boolean,null>\",\n  \"unscheduled_network_outage_description\": \"<string,null>\",\n  \"has_experienced_wire_transfer_fraud\": \"<boolean,null>\",\n  \"wire_transfer_fraud_description\": \"<string,null>\",\n  \"has_experienced_cyber_attack\": \"<boolean,null>\",\n  \"cyber_attack_description\": \"<string,null>\",\n  \"service_provider_outage_past_3_years\": \"<boolean,null>\",\n  \"business_interruption_due_to_outage\": \"<boolean,null>\",\n  \"it_budget\": \"<integer,null>\",\n  \"network_security_management\": \"<string,null>\",\n  \"security_provider_name\": \"<string,null>\",\n  \"security_contact_person_name\": \"<string,null>\",\n  \"security_contact_person_email\": \"<string,null-email>\",\n  \"has_revenue_outside_domicile\": \"<boolean,null>\",\n  \"revenue_outside_domicile_percentage\": \"<integer,null>\",\n  \"has_recent_merger_acquisition\": \"<boolean,null>\",\n  \"merger_acquisition_details\": \"<string,null>\",\n  \"process_stores_or_handles_credit_card_transactions\": \"<boolean,null>\",\n  \"business_email\": \"<string,null-email>\",\n  \"business_password\": \"<string,null>\",\n  \"created_at\": \"1979-11-16T21:59:23.407Z\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"smtp_tls_status\": \"<string>\",\n  \"cyber_risk_areas_for_improvement\": \"<string,null>\",\n  \"cyber_risk_areas_of_strength\": \"<string,null>\",\n  \"COI_vendor_tracking\": \"<string,null>\",\n  \"employee_benefits_management_software\": \"<string,null>\",\n  \"governance_risk_compliance_software\": \"<string,null>\",\n  \"security_monitoring\": \"<string,null>\",\n  \"privacy_frameworks\": \"<string,null>\",\n  \"NIST_tool\": \"<string,null>\",\n  \"GDPR_tool\": \"<string,null>\",\n  \"HIPAA_tool\": \"<string,null>\",\n  \"CMMC_tool\": \"<string,null>\",\n  \"ISO_27001_tool\": \"<string,null>\",\n  \"CCPA_tool\": \"<string,null>\",\n  \"FedRAMP_tool\": \"<string,null>\",\n  \"industries_company_participates_in\": \"<object,null>\",\n  \"percentage_of_written_agreements_standard_vs_manuscript\": \"<string,null>\",\n  \"is_there_limitation_of_liability_clause_utilized\": \"<boolean,null>\",\n  \"is_there_hold_harmless_clause_utilized\": \"<boolean,null>\",\n  \"is_there_indemnification_clause_utilized\": \"<boolean,null>\",\n  \"is_there_exclusion_of_consequential_damages_clause_utilized\": \"<boolean,null>\",\n  \"is_there_mandatory_or_binding_arbitration_clause_utilized\": \"<boolean,null>\",\n  \"is_there_other_clause_utilized\": \"<boolean,null>\",\n  \"is_there_directors_and_officers_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_epl_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_fiduciary_liability_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_cyber_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_tech_errors_and_omissions_coverage_in_place\": \"<boolean,null>\",\n  \"resource_owner\": \"<integer,null>\",\n  \"designated_ciso\": \"<integer,null>\",\n  \"designated_privacy_officer\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3ff33d7-3360-4951-9c08-b668f05e9dce",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":id",
+                    "pre-filled-forms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"industry_classification\": \"<uuid>\",\n  \"applicant_name\": \"<string,null>\",\n  \"applicant_email\": \"<string,null-email>\",\n  \"applicant_phone\": \"<string,null>\",\n  \"legal_entity\": \"<string,null>\",\n  \"address_line_1\": \"<string,null>\",\n  \"address_line_2\": \"<string,null>\",\n  \"city\": \"<string,null>\",\n  \"state_code\": \"<string,null>\",\n  \"country_code\": \"<string,null>\",\n  \"zip_code\": \"<string,null>\",\n  \"domain_name\": \"<string,null>\",\n  \"has_no_domain_name\": \"<boolean>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"is_test_account\": \"<boolean>\",\n  \"has_notified_clients_of_breach\": \"<boolean,null>\",\n  \"has_notified_clients_of_breach_description\": \"<string,null>\",\n  \"has_been_investigated_for_privacy_violations\": \"<boolean,null>\",\n  \"has_been_investigated_for_privacy_violations_description\": \"<string,null>\",\n  \"has_been_hacked_description\": \"<string,null>\",\n  \"active_carriers\": \"<array,null>\",\n  \"ownership_type\": \"<string,null>\",\n  \"phone_number\": \"<string,null>\",\n  \"security_contact_title\": \"<string,null>\",\n  \"security_email\": \"<string,null-email>\",\n  \"security_phone_number\": \"<string,null>\",\n  \"name_of_security_contact\": \"<string,null>\",\n  \"security_designation\": \"<string,null>\",\n  \"number_of_it_personnel\": \"<integer,null>\",\n  \"number_of_dedicated_security_personnel\": \"<integer,null>\",\n  \"help_center_url\": \"<string,null-uri>\",\n  \"carrier_page_url\": \"<string,null-uri>\",\n  \"company_updates_url\": \"<string,null-uri>\",\n  \"terms_of_service_url\": \"<string,null-uri>\",\n  \"privacy_policy_url\": \"<string,null-uri>\",\n  \"security_commitments_url\": \"<string,null-uri>\",\n  \"has_been_hacked\": \"<boolean,null>\",\n  \"income_coverage_limit\": \"<integer,null>\",\n  \"deductible\": \"<integer,null>\",\n  \"retention\": \"<integer,null>\",\n  \"has_subsidiaries\": \"<boolean,null>\",\n  \"no_of_subsidiary\": \"<integer,null>\",\n  \"net_revenue\": \"<integer,null>\",\n  \"gross_profit\": \"<integer,null>\",\n  \"last_year_revenue\": \"<integer,null>\",\n  \"last_two_year_revenue\": \"<integer,null>\",\n  \"have_cyber_claim\": \"<boolean,null>\",\n  \"cyber_claim_lost\": \"<integer,null>\",\n  \"cyber_claim_description\": \"<string,null>\",\n  \"potential_claim\": \"<boolean,null>\",\n  \"potential_claim_description\": \"<string,null>\",\n  \"received_complaint\": \"<boolean,null>\",\n  \"received_complaint_description\": \"<string,null>\",\n  \"owner_id\": \"<string,null>\",\n  \"archived_at\": \"<string,null-date-time>\",\n  \"broker_sharing_setting\": \"<string,null>\",\n  \"carrier_sharing_setting\": \"<string,null>\",\n  \"store_pii\": \"<boolean,null>\",\n  \"social_security_numbers\": \"<string,null>\",\n  \"consumer_financial_information\": \"<string,null>\",\n  \"payment_card_information\": \"<string,null>\",\n  \"protected_health_information\": \"<string,null>\",\n  \"biometric_information\": \"<string,null>\",\n  \"social_security_numbers_on_paper_records\": \"<string,null>\",\n  \"consumer_financial_information_on_paper_records\": \"<string,null>\",\n  \"payment_card_information_on_paper_records\": \"<string,null>\",\n  \"protected_health_information_on_paper_records\": \"<string,null>\",\n  \"biometric_information_on_paper_records\": \"<string,null>\",\n  \"social_security_numbers_electronic_records\": \"<string,null>\",\n  \"consumer_financial_information_electronic_records\": \"<string,null>\",\n  \"payment_card_information_electronic_records\": \"<string,null>\",\n  \"protected_health_information_electronic_records\": \"<string,null>\",\n  \"biometric_information_electronic_records\": \"<string,null>\",\n  \"is_pci_dss_compliant\": \"<boolean,null>\",\n  \"has_reviewed_sensitive_data_policy\": \"<boolean,null>\",\n  \"has_received_cyber_extortion_threat\": \"<boolean,null>\",\n  \"has_experienced_cyber_attack_network_outage_wire_transfer_fraud\": \"<boolean,null>\",\n  \"has_unscheduled_network_outage\": \"<boolean,null>\",\n  \"unscheduled_network_outage_description\": \"<string,null>\",\n  \"has_experienced_wire_transfer_fraud\": \"<boolean,null>\",\n  \"wire_transfer_fraud_description\": \"<string,null>\",\n  \"has_experienced_cyber_attack\": \"<boolean,null>\",\n  \"cyber_attack_description\": \"<string,null>\",\n  \"service_provider_outage_past_3_years\": \"<boolean,null>\",\n  \"business_interruption_due_to_outage\": \"<boolean,null>\",\n  \"it_budget\": \"<integer,null>\",\n  \"network_security_management\": \"<string,null>\",\n  \"security_provider_name\": \"<string,null>\",\n  \"security_contact_person_name\": \"<string,null>\",\n  \"security_contact_person_email\": \"<string,null-email>\",\n  \"has_revenue_outside_domicile\": \"<boolean,null>\",\n  \"revenue_outside_domicile_percentage\": \"<integer,null>\",\n  \"has_recent_merger_acquisition\": \"<boolean,null>\",\n  \"merger_acquisition_details\": \"<string,null>\",\n  \"process_stores_or_handles_credit_card_transactions\": \"<boolean,null>\",\n  \"business_email\": \"<string,null-email>\",\n  \"business_password\": \"<string,null>\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"smtp_tls_status\": \"<string>\",\n  \"cyber_risk_areas_for_improvement\": \"<string,null>\",\n  \"cyber_risk_areas_of_strength\": \"<string,null>\",\n  \"COI_vendor_tracking\": \"<string,null>\",\n  \"employee_benefits_management_software\": \"<string,null>\",\n  \"governance_risk_compliance_software\": \"<string,null>\",\n  \"security_monitoring\": \"<string,null>\",\n  \"privacy_frameworks\": \"<string,null>\",\n  \"NIST_tool\": \"<string,null>\",\n  \"GDPR_tool\": \"<string,null>\",\n  \"HIPAA_tool\": \"<string,null>\",\n  \"CMMC_tool\": \"<string,null>\",\n  \"ISO_27001_tool\": \"<string,null>\",\n  \"CCPA_tool\": \"<string,null>\",\n  \"FedRAMP_tool\": \"<string,null>\",\n  \"industries_company_participates_in\": \"<object,null>\",\n  \"percentage_of_written_agreements_standard_vs_manuscript\": \"<string,null>\",\n  \"is_there_limitation_of_liability_clause_utilized\": \"<boolean,null>\",\n  \"is_there_hold_harmless_clause_utilized\": \"<boolean,null>\",\n  \"is_there_indemnification_clause_utilized\": \"<boolean,null>\",\n  \"is_there_exclusion_of_consequential_damages_clause_utilized\": \"<boolean,null>\",\n  \"is_there_mandatory_or_binding_arbitration_clause_utilized\": \"<boolean,null>\",\n  \"is_there_other_clause_utilized\": \"<boolean,null>\",\n  \"is_there_directors_and_officers_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_epl_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_fiduciary_liability_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_cyber_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_tech_errors_and_omissions_coverage_in_place\": \"<boolean,null>\",\n  \"resource_owner\": \"<integer,null>\",\n  \"designated_ciso\": \"<integer,null>\",\n  \"designated_privacy_officer\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"non_field_errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f7bf7ef-ac3c-4131-acbb-023c1e05ab38",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":id",
+                    "pre-filled-forms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"industry_classification\": \"<uuid>\",\n  \"applicant_name\": \"<string,null>\",\n  \"applicant_email\": \"<string,null-email>\",\n  \"applicant_phone\": \"<string,null>\",\n  \"legal_entity\": \"<string,null>\",\n  \"address_line_1\": \"<string,null>\",\n  \"address_line_2\": \"<string,null>\",\n  \"city\": \"<string,null>\",\n  \"state_code\": \"<string,null>\",\n  \"country_code\": \"<string,null>\",\n  \"zip_code\": \"<string,null>\",\n  \"domain_name\": \"<string,null>\",\n  \"has_no_domain_name\": \"<boolean>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"is_test_account\": \"<boolean>\",\n  \"has_notified_clients_of_breach\": \"<boolean,null>\",\n  \"has_notified_clients_of_breach_description\": \"<string,null>\",\n  \"has_been_investigated_for_privacy_violations\": \"<boolean,null>\",\n  \"has_been_investigated_for_privacy_violations_description\": \"<string,null>\",\n  \"has_been_hacked_description\": \"<string,null>\",\n  \"active_carriers\": \"<array,null>\",\n  \"ownership_type\": \"<string,null>\",\n  \"phone_number\": \"<string,null>\",\n  \"security_contact_title\": \"<string,null>\",\n  \"security_email\": \"<string,null-email>\",\n  \"security_phone_number\": \"<string,null>\",\n  \"name_of_security_contact\": \"<string,null>\",\n  \"security_designation\": \"<string,null>\",\n  \"number_of_it_personnel\": \"<integer,null>\",\n  \"number_of_dedicated_security_personnel\": \"<integer,null>\",\n  \"help_center_url\": \"<string,null-uri>\",\n  \"carrier_page_url\": \"<string,null-uri>\",\n  \"company_updates_url\": \"<string,null-uri>\",\n  \"terms_of_service_url\": \"<string,null-uri>\",\n  \"privacy_policy_url\": \"<string,null-uri>\",\n  \"security_commitments_url\": \"<string,null-uri>\",\n  \"has_been_hacked\": \"<boolean,null>\",\n  \"income_coverage_limit\": \"<integer,null>\",\n  \"deductible\": \"<integer,null>\",\n  \"retention\": \"<integer,null>\",\n  \"has_subsidiaries\": \"<boolean,null>\",\n  \"no_of_subsidiary\": \"<integer,null>\",\n  \"net_revenue\": \"<integer,null>\",\n  \"gross_profit\": \"<integer,null>\",\n  \"last_year_revenue\": \"<integer,null>\",\n  \"last_two_year_revenue\": \"<integer,null>\",\n  \"have_cyber_claim\": \"<boolean,null>\",\n  \"cyber_claim_lost\": \"<integer,null>\",\n  \"cyber_claim_description\": \"<string,null>\",\n  \"potential_claim\": \"<boolean,null>\",\n  \"potential_claim_description\": \"<string,null>\",\n  \"received_complaint\": \"<boolean,null>\",\n  \"received_complaint_description\": \"<string,null>\",\n  \"owner_id\": \"<string,null>\",\n  \"archived_at\": \"<string,null-date-time>\",\n  \"broker_sharing_setting\": \"<string,null>\",\n  \"carrier_sharing_setting\": \"<string,null>\",\n  \"store_pii\": \"<boolean,null>\",\n  \"social_security_numbers\": \"<string,null>\",\n  \"consumer_financial_information\": \"<string,null>\",\n  \"payment_card_information\": \"<string,null>\",\n  \"protected_health_information\": \"<string,null>\",\n  \"biometric_information\": \"<string,null>\",\n  \"social_security_numbers_on_paper_records\": \"<string,null>\",\n  \"consumer_financial_information_on_paper_records\": \"<string,null>\",\n  \"payment_card_information_on_paper_records\": \"<string,null>\",\n  \"protected_health_information_on_paper_records\": \"<string,null>\",\n  \"biometric_information_on_paper_records\": \"<string,null>\",\n  \"social_security_numbers_electronic_records\": \"<string,null>\",\n  \"consumer_financial_information_electronic_records\": \"<string,null>\",\n  \"payment_card_information_electronic_records\": \"<string,null>\",\n  \"protected_health_information_electronic_records\": \"<string,null>\",\n  \"biometric_information_electronic_records\": \"<string,null>\",\n  \"is_pci_dss_compliant\": \"<boolean,null>\",\n  \"has_reviewed_sensitive_data_policy\": \"<boolean,null>\",\n  \"has_received_cyber_extortion_threat\": \"<boolean,null>\",\n  \"has_experienced_cyber_attack_network_outage_wire_transfer_fraud\": \"<boolean,null>\",\n  \"has_unscheduled_network_outage\": \"<boolean,null>\",\n  \"unscheduled_network_outage_description\": \"<string,null>\",\n  \"has_experienced_wire_transfer_fraud\": \"<boolean,null>\",\n  \"wire_transfer_fraud_description\": \"<string,null>\",\n  \"has_experienced_cyber_attack\": \"<boolean,null>\",\n  \"cyber_attack_description\": \"<string,null>\",\n  \"service_provider_outage_past_3_years\": \"<boolean,null>\",\n  \"business_interruption_due_to_outage\": \"<boolean,null>\",\n  \"it_budget\": \"<integer,null>\",\n  \"network_security_management\": \"<string,null>\",\n  \"security_provider_name\": \"<string,null>\",\n  \"security_contact_person_name\": \"<string,null>\",\n  \"security_contact_person_email\": \"<string,null-email>\",\n  \"has_revenue_outside_domicile\": \"<boolean,null>\",\n  \"revenue_outside_domicile_percentage\": \"<integer,null>\",\n  \"has_recent_merger_acquisition\": \"<boolean,null>\",\n  \"merger_acquisition_details\": \"<string,null>\",\n  \"process_stores_or_handles_credit_card_transactions\": \"<boolean,null>\",\n  \"business_email\": \"<string,null-email>\",\n  \"business_password\": \"<string,null>\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"smtp_tls_status\": \"<string>\",\n  \"cyber_risk_areas_for_improvement\": \"<string,null>\",\n  \"cyber_risk_areas_of_strength\": \"<string,null>\",\n  \"COI_vendor_tracking\": \"<string,null>\",\n  \"employee_benefits_management_software\": \"<string,null>\",\n  \"governance_risk_compliance_software\": \"<string,null>\",\n  \"security_monitoring\": \"<string,null>\",\n  \"privacy_frameworks\": \"<string,null>\",\n  \"NIST_tool\": \"<string,null>\",\n  \"GDPR_tool\": \"<string,null>\",\n  \"HIPAA_tool\": \"<string,null>\",\n  \"CMMC_tool\": \"<string,null>\",\n  \"ISO_27001_tool\": \"<string,null>\",\n  \"CCPA_tool\": \"<string,null>\",\n  \"FedRAMP_tool\": \"<string,null>\",\n  \"industries_company_participates_in\": \"<object,null>\",\n  \"percentage_of_written_agreements_standard_vs_manuscript\": \"<string,null>\",\n  \"is_there_limitation_of_liability_clause_utilized\": \"<boolean,null>\",\n  \"is_there_hold_harmless_clause_utilized\": \"<boolean,null>\",\n  \"is_there_indemnification_clause_utilized\": \"<boolean,null>\",\n  \"is_there_exclusion_of_consequential_damages_clause_utilized\": \"<boolean,null>\",\n  \"is_there_mandatory_or_binding_arbitration_clause_utilized\": \"<boolean,null>\",\n  \"is_there_other_clause_utilized\": \"<boolean,null>\",\n  \"is_there_directors_and_officers_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_epl_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_fiduciary_liability_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_cyber_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_tech_errors_and_omissions_coverage_in_place\": \"<boolean,null>\",\n  \"resource_owner\": \"<integer,null>\",\n  \"designated_ciso\": \"<integer,null>\",\n  \"designated_privacy_officer\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36136296-745b-4473-bb75-77e2e15a1ee0",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":id",
+                    "pre-filled-forms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"industry_classification\": \"<uuid>\",\n  \"applicant_name\": \"<string,null>\",\n  \"applicant_email\": \"<string,null-email>\",\n  \"applicant_phone\": \"<string,null>\",\n  \"legal_entity\": \"<string,null>\",\n  \"address_line_1\": \"<string,null>\",\n  \"address_line_2\": \"<string,null>\",\n  \"city\": \"<string,null>\",\n  \"state_code\": \"<string,null>\",\n  \"country_code\": \"<string,null>\",\n  \"zip_code\": \"<string,null>\",\n  \"domain_name\": \"<string,null>\",\n  \"has_no_domain_name\": \"<boolean>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"is_test_account\": \"<boolean>\",\n  \"has_notified_clients_of_breach\": \"<boolean,null>\",\n  \"has_notified_clients_of_breach_description\": \"<string,null>\",\n  \"has_been_investigated_for_privacy_violations\": \"<boolean,null>\",\n  \"has_been_investigated_for_privacy_violations_description\": \"<string,null>\",\n  \"has_been_hacked_description\": \"<string,null>\",\n  \"active_carriers\": \"<array,null>\",\n  \"ownership_type\": \"<string,null>\",\n  \"phone_number\": \"<string,null>\",\n  \"security_contact_title\": \"<string,null>\",\n  \"security_email\": \"<string,null-email>\",\n  \"security_phone_number\": \"<string,null>\",\n  \"name_of_security_contact\": \"<string,null>\",\n  \"security_designation\": \"<string,null>\",\n  \"number_of_it_personnel\": \"<integer,null>\",\n  \"number_of_dedicated_security_personnel\": \"<integer,null>\",\n  \"help_center_url\": \"<string,null-uri>\",\n  \"carrier_page_url\": \"<string,null-uri>\",\n  \"company_updates_url\": \"<string,null-uri>\",\n  \"terms_of_service_url\": \"<string,null-uri>\",\n  \"privacy_policy_url\": \"<string,null-uri>\",\n  \"security_commitments_url\": \"<string,null-uri>\",\n  \"has_been_hacked\": \"<boolean,null>\",\n  \"income_coverage_limit\": \"<integer,null>\",\n  \"deductible\": \"<integer,null>\",\n  \"retention\": \"<integer,null>\",\n  \"has_subsidiaries\": \"<boolean,null>\",\n  \"no_of_subsidiary\": \"<integer,null>\",\n  \"net_revenue\": \"<integer,null>\",\n  \"gross_profit\": \"<integer,null>\",\n  \"last_year_revenue\": \"<integer,null>\",\n  \"last_two_year_revenue\": \"<integer,null>\",\n  \"have_cyber_claim\": \"<boolean,null>\",\n  \"cyber_claim_lost\": \"<integer,null>\",\n  \"cyber_claim_description\": \"<string,null>\",\n  \"potential_claim\": \"<boolean,null>\",\n  \"potential_claim_description\": \"<string,null>\",\n  \"received_complaint\": \"<boolean,null>\",\n  \"received_complaint_description\": \"<string,null>\",\n  \"owner_id\": \"<string,null>\",\n  \"archived_at\": \"<string,null-date-time>\",\n  \"broker_sharing_setting\": \"<string,null>\",\n  \"carrier_sharing_setting\": \"<string,null>\",\n  \"store_pii\": \"<boolean,null>\",\n  \"social_security_numbers\": \"<string,null>\",\n  \"consumer_financial_information\": \"<string,null>\",\n  \"payment_card_information\": \"<string,null>\",\n  \"protected_health_information\": \"<string,null>\",\n  \"biometric_information\": \"<string,null>\",\n  \"social_security_numbers_on_paper_records\": \"<string,null>\",\n  \"consumer_financial_information_on_paper_records\": \"<string,null>\",\n  \"payment_card_information_on_paper_records\": \"<string,null>\",\n  \"protected_health_information_on_paper_records\": \"<string,null>\",\n  \"biometric_information_on_paper_records\": \"<string,null>\",\n  \"social_security_numbers_electronic_records\": \"<string,null>\",\n  \"consumer_financial_information_electronic_records\": \"<string,null>\",\n  \"payment_card_information_electronic_records\": \"<string,null>\",\n  \"protected_health_information_electronic_records\": \"<string,null>\",\n  \"biometric_information_electronic_records\": \"<string,null>\",\n  \"is_pci_dss_compliant\": \"<boolean,null>\",\n  \"has_reviewed_sensitive_data_policy\": \"<boolean,null>\",\n  \"has_received_cyber_extortion_threat\": \"<boolean,null>\",\n  \"has_experienced_cyber_attack_network_outage_wire_transfer_fraud\": \"<boolean,null>\",\n  \"has_unscheduled_network_outage\": \"<boolean,null>\",\n  \"unscheduled_network_outage_description\": \"<string,null>\",\n  \"has_experienced_wire_transfer_fraud\": \"<boolean,null>\",\n  \"wire_transfer_fraud_description\": \"<string,null>\",\n  \"has_experienced_cyber_attack\": \"<boolean,null>\",\n  \"cyber_attack_description\": \"<string,null>\",\n  \"service_provider_outage_past_3_years\": \"<boolean,null>\",\n  \"business_interruption_due_to_outage\": \"<boolean,null>\",\n  \"it_budget\": \"<integer,null>\",\n  \"network_security_management\": \"<string,null>\",\n  \"security_provider_name\": \"<string,null>\",\n  \"security_contact_person_name\": \"<string,null>\",\n  \"security_contact_person_email\": \"<string,null-email>\",\n  \"has_revenue_outside_domicile\": \"<boolean,null>\",\n  \"revenue_outside_domicile_percentage\": \"<integer,null>\",\n  \"has_recent_merger_acquisition\": \"<boolean,null>\",\n  \"merger_acquisition_details\": \"<string,null>\",\n  \"process_stores_or_handles_credit_card_transactions\": \"<boolean,null>\",\n  \"business_email\": \"<string,null-email>\",\n  \"business_password\": \"<string,null>\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"smtp_tls_status\": \"<string>\",\n  \"cyber_risk_areas_for_improvement\": \"<string,null>\",\n  \"cyber_risk_areas_of_strength\": \"<string,null>\",\n  \"COI_vendor_tracking\": \"<string,null>\",\n  \"employee_benefits_management_software\": \"<string,null>\",\n  \"governance_risk_compliance_software\": \"<string,null>\",\n  \"security_monitoring\": \"<string,null>\",\n  \"privacy_frameworks\": \"<string,null>\",\n  \"NIST_tool\": \"<string,null>\",\n  \"GDPR_tool\": \"<string,null>\",\n  \"HIPAA_tool\": \"<string,null>\",\n  \"CMMC_tool\": \"<string,null>\",\n  \"ISO_27001_tool\": \"<string,null>\",\n  \"CCPA_tool\": \"<string,null>\",\n  \"FedRAMP_tool\": \"<string,null>\",\n  \"industries_company_participates_in\": \"<object,null>\",\n  \"percentage_of_written_agreements_standard_vs_manuscript\": \"<string,null>\",\n  \"is_there_limitation_of_liability_clause_utilized\": \"<boolean,null>\",\n  \"is_there_hold_harmless_clause_utilized\": \"<boolean,null>\",\n  \"is_there_indemnification_clause_utilized\": \"<boolean,null>\",\n  \"is_there_exclusion_of_consequential_damages_clause_utilized\": \"<boolean,null>\",\n  \"is_there_mandatory_or_binding_arbitration_clause_utilized\": \"<boolean,null>\",\n  \"is_there_other_clause_utilized\": \"<boolean,null>\",\n  \"is_there_directors_and_officers_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_epl_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_fiduciary_liability_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_cyber_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_tech_errors_and_omissions_coverage_in_place\": \"<boolean,null>\",\n  \"resource_owner\": \"<integer,null>\",\n  \"designated_ciso\": \"<integer,null>\",\n  \"designated_privacy_officer\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85d5ae34-c964-4a31-8304-a441af5cbba0",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":id",
+                    "pre-filled-forms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) A unique integer value identifying this business."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"industry_classification\": \"<uuid>\",\n  \"applicant_name\": \"<string,null>\",\n  \"applicant_email\": \"<string,null-email>\",\n  \"applicant_phone\": \"<string,null>\",\n  \"legal_entity\": \"<string,null>\",\n  \"address_line_1\": \"<string,null>\",\n  \"address_line_2\": \"<string,null>\",\n  \"city\": \"<string,null>\",\n  \"state_code\": \"<string,null>\",\n  \"country_code\": \"<string,null>\",\n  \"zip_code\": \"<string,null>\",\n  \"domain_name\": \"<string,null>\",\n  \"has_no_domain_name\": \"<boolean>\",\n  \"industry\": \"<string,null>\",\n  \"number_of_employees\": \"<integer,null>\",\n  \"active\": \"<boolean>\",\n  \"description\": \"<string,null>\",\n  \"revenue\": \"<integer,null>\",\n  \"state_of_incorporation\": \"<string,null>\",\n  \"country_of_incorporation\": \"<string,null>\",\n  \"year_founded\": \"<integer,null>\",\n  \"naics_code\": \"<string,null>\",\n  \"ein\": \"<string,null>\",\n  \"is_franchise\": \"<boolean,null>\",\n  \"premium_plan\": \"<boolean,null>\",\n  \"is_test_account\": \"<boolean>\",\n  \"has_notified_clients_of_breach\": \"<boolean,null>\",\n  \"has_notified_clients_of_breach_description\": \"<string,null>\",\n  \"has_been_investigated_for_privacy_violations\": \"<boolean,null>\",\n  \"has_been_investigated_for_privacy_violations_description\": \"<string,null>\",\n  \"has_been_hacked_description\": \"<string,null>\",\n  \"active_carriers\": \"<array,null>\",\n  \"ownership_type\": \"<string,null>\",\n  \"phone_number\": \"<string,null>\",\n  \"security_contact_title\": \"<string,null>\",\n  \"security_email\": \"<string,null-email>\",\n  \"security_phone_number\": \"<string,null>\",\n  \"name_of_security_contact\": \"<string,null>\",\n  \"security_designation\": \"<string,null>\",\n  \"number_of_it_personnel\": \"<integer,null>\",\n  \"number_of_dedicated_security_personnel\": \"<integer,null>\",\n  \"help_center_url\": \"<string,null-uri>\",\n  \"carrier_page_url\": \"<string,null-uri>\",\n  \"company_updates_url\": \"<string,null-uri>\",\n  \"terms_of_service_url\": \"<string,null-uri>\",\n  \"privacy_policy_url\": \"<string,null-uri>\",\n  \"security_commitments_url\": \"<string,null-uri>\",\n  \"has_been_hacked\": \"<boolean,null>\",\n  \"income_coverage_limit\": \"<integer,null>\",\n  \"deductible\": \"<integer,null>\",\n  \"retention\": \"<integer,null>\",\n  \"has_subsidiaries\": \"<boolean,null>\",\n  \"no_of_subsidiary\": \"<integer,null>\",\n  \"net_revenue\": \"<integer,null>\",\n  \"gross_profit\": \"<integer,null>\",\n  \"last_year_revenue\": \"<integer,null>\",\n  \"last_two_year_revenue\": \"<integer,null>\",\n  \"have_cyber_claim\": \"<boolean,null>\",\n  \"cyber_claim_lost\": \"<integer,null>\",\n  \"cyber_claim_description\": \"<string,null>\",\n  \"potential_claim\": \"<boolean,null>\",\n  \"potential_claim_description\": \"<string,null>\",\n  \"received_complaint\": \"<boolean,null>\",\n  \"received_complaint_description\": \"<string,null>\",\n  \"owner_id\": \"<string,null>\",\n  \"archived_at\": \"<string,null-date-time>\",\n  \"broker_sharing_setting\": \"<string,null>\",\n  \"carrier_sharing_setting\": \"<string,null>\",\n  \"store_pii\": \"<boolean,null>\",\n  \"social_security_numbers\": \"<string,null>\",\n  \"consumer_financial_information\": \"<string,null>\",\n  \"payment_card_information\": \"<string,null>\",\n  \"protected_health_information\": \"<string,null>\",\n  \"biometric_information\": \"<string,null>\",\n  \"social_security_numbers_on_paper_records\": \"<string,null>\",\n  \"consumer_financial_information_on_paper_records\": \"<string,null>\",\n  \"payment_card_information_on_paper_records\": \"<string,null>\",\n  \"protected_health_information_on_paper_records\": \"<string,null>\",\n  \"biometric_information_on_paper_records\": \"<string,null>\",\n  \"social_security_numbers_electronic_records\": \"<string,null>\",\n  \"consumer_financial_information_electronic_records\": \"<string,null>\",\n  \"payment_card_information_electronic_records\": \"<string,null>\",\n  \"protected_health_information_electronic_records\": \"<string,null>\",\n  \"biometric_information_electronic_records\": \"<string,null>\",\n  \"is_pci_dss_compliant\": \"<boolean,null>\",\n  \"has_reviewed_sensitive_data_policy\": \"<boolean,null>\",\n  \"has_received_cyber_extortion_threat\": \"<boolean,null>\",\n  \"has_experienced_cyber_attack_network_outage_wire_transfer_fraud\": \"<boolean,null>\",\n  \"has_unscheduled_network_outage\": \"<boolean,null>\",\n  \"unscheduled_network_outage_description\": \"<string,null>\",\n  \"has_experienced_wire_transfer_fraud\": \"<boolean,null>\",\n  \"wire_transfer_fraud_description\": \"<string,null>\",\n  \"has_experienced_cyber_attack\": \"<boolean,null>\",\n  \"cyber_attack_description\": \"<string,null>\",\n  \"service_provider_outage_past_3_years\": \"<boolean,null>\",\n  \"business_interruption_due_to_outage\": \"<boolean,null>\",\n  \"it_budget\": \"<integer,null>\",\n  \"network_security_management\": \"<string,null>\",\n  \"security_provider_name\": \"<string,null>\",\n  \"security_contact_person_name\": \"<string,null>\",\n  \"security_contact_person_email\": \"<string,null-email>\",\n  \"has_revenue_outside_domicile\": \"<boolean,null>\",\n  \"revenue_outside_domicile_percentage\": \"<integer,null>\",\n  \"has_recent_merger_acquisition\": \"<boolean,null>\",\n  \"merger_acquisition_details\": \"<string,null>\",\n  \"process_stores_or_handles_credit_card_transactions\": \"<boolean,null>\",\n  \"business_email\": \"<string,null-email>\",\n  \"business_password\": \"<string,null>\",\n  \"deleted_at\": \"<string,null-date-time>\",\n  \"smtp_tls_status\": \"<string>\",\n  \"cyber_risk_areas_for_improvement\": \"<string,null>\",\n  \"cyber_risk_areas_of_strength\": \"<string,null>\",\n  \"COI_vendor_tracking\": \"<string,null>\",\n  \"employee_benefits_management_software\": \"<string,null>\",\n  \"governance_risk_compliance_software\": \"<string,null>\",\n  \"security_monitoring\": \"<string,null>\",\n  \"privacy_frameworks\": \"<string,null>\",\n  \"NIST_tool\": \"<string,null>\",\n  \"GDPR_tool\": \"<string,null>\",\n  \"HIPAA_tool\": \"<string,null>\",\n  \"CMMC_tool\": \"<string,null>\",\n  \"ISO_27001_tool\": \"<string,null>\",\n  \"CCPA_tool\": \"<string,null>\",\n  \"FedRAMP_tool\": \"<string,null>\",\n  \"industries_company_participates_in\": \"<object,null>\",\n  \"percentage_of_written_agreements_standard_vs_manuscript\": \"<string,null>\",\n  \"is_there_limitation_of_liability_clause_utilized\": \"<boolean,null>\",\n  \"is_there_hold_harmless_clause_utilized\": \"<boolean,null>\",\n  \"is_there_indemnification_clause_utilized\": \"<boolean,null>\",\n  \"is_there_exclusion_of_consequential_damages_clause_utilized\": \"<boolean,null>\",\n  \"is_there_mandatory_or_binding_arbitration_clause_utilized\": \"<boolean,null>\",\n  \"is_there_other_clause_utilized\": \"<boolean,null>\",\n  \"is_there_directors_and_officers_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_epl_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_fiduciary_liability_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_cyber_coverage_in_place\": \"<boolean,null>\",\n  \"is_there_tech_errors_and_omissions_coverage_in_place\": \"<boolean,null>\",\n  \"resource_owner\": \"<integer,null>\",\n  \"designated_ciso\": \"<integer,null>\",\n  \"designated_privacy_officer\": \"<integer,null>\",\n  \"broker\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.1fort.com/apis/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bee73470-0166-44d4-aa63-9b0f72f1b794",
+    "name": "1Fort API Documentation broker: clients API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# 1Fort API\n\nREST API for the 1Fort insurance platform. This document is the authoritative\nmap of the API surface; endpoints are grouped in the sidebar by **app** and\n**version**, and large apps are split into per-resource sub-groups.\n\n## Authentication\n\nAlmost every endpoint requires a **JWT access token**. Send it in the\n`Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may\nalso be presented as an HTTP-only cookie. Endpoints documented with no security\nrequirement are intentionally public (for example sign-in, OTP and storefront\nendpoints).\n\n## Multi-tenancy\n\nResources are scoped to a tenant. Nested routes carry the owning resource id in\nthe path (for example `/v2/broker/{business_pk}/applications`); a token is only\nauthorised for the businesses its user may access. Object-level permissions are\nenforced per endpoint.\n\n## Versioning\n\n`v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`\nendpoints remain documented for compatibility. Endpoints marked **deprecated**\nare scheduled for removal; prefer the documented replacement.\n",
+      "type": "text/plain"
+    }
+  }
+}

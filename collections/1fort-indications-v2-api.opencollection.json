@@ -1,0 +1,214 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation indications (v2) indications (v2) API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "indications (v2)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List and filter indications based on coverage type and limit.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/indications",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "This view extends the base quote list view to add filtering capabilities\nwhile maintaining the pending quote refresh functionality.\n\nQuery Parameters:\n    coverage_type (str): Filter by coverage type code (e.g., 'CYB', 'GL')\n    aggregate_limit (int): Filter by aggregate limit value\n    sub_coverage (str, optional): Filter by sub-coverage type for ML products"
+        },
+        {
+          "info": {
+            "name": "Create Broker Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/indications/create",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new quote for a coverage application. This allows brokers to add quotes from carriers that they have obtained outside of the Herald system (e.g., expiring quotes, competitor quotes)."
+        },
+        {
+          "info": {
+            "name": "Get overview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/indications/overview",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "API endpoint that allows indications to be viewed."
+        },
+        {
+          "info": {
+            "name": "Retrieve Indication",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/indications/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Quote (Coverage Term)."
+              }
+            ]
+          },
+          "docs": "API endpoint that allows indications to be viewed."
+        },
+        {
+          "info": {
+            "name": "Get file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/indications/:id/files/:file_pk",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Quote (Coverage Term)."
+              },
+              {
+                "name": "file_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "API endpoint that allows indications to be viewed."
+        },
+        {
+          "info": {
+            "name": "Get surplus file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/indications/:id/surplus-files/:file_pk",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Quote (Coverage Term)."
+              },
+              {
+                "name": "file_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "API endpoint that allows indications to be viewed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

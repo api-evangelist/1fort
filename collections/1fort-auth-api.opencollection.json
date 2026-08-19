@@ -1,0 +1,150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Auth API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sign in with Google",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/auth/google/signin",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exchange a Google OAuth ID token for a 1Fort JWT session."
+        },
+        {
+          "info": {
+            "name": "Sign up with Google",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/auth/google/signup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a 1Fort account from a Google OAuth ID token and return a JWT session."
+        },
+        {
+          "info": {
+            "name": "Create Logout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/auth/logout"
+          },
+          "docs": "Logs the user out. Always attempts to log out from the Django session.\nOptionally accepts a JWT refresh token in the request body {'refresh': '...'}\nto blacklist it if provided."
+        },
+        {
+          "info": {
+            "name": "Sign in with Office365 (authorization code)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/auth/office365/signin",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Office365 OAuth authorization code to exchange for a token."
+              }
+            ]
+          },
+          "docs": "Exchange an Office365 authorization code for a 1Fort JWT session."
+        },
+        {
+          "info": {
+            "name": "Sign in with Office365 (access token)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/auth/office365/signin",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exchange an Office365 access token for a 1Fort JWT session."
+        },
+        {
+          "info": {
+            "name": "Sign up with Office365 (authorization code)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/auth/office365/signup",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Office365 OAuth authorization code to exchange for a token."
+              }
+            ]
+          },
+          "docs": "Create a 1Fort account from an Office365 authorization code and return a JWT session."
+        },
+        {
+          "info": {
+            "name": "Sign up with Office365 (access token)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/auth/office365/signup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a 1Fort account from an Office365 access token and return a JWT session."
+        },
+        {
+          "info": {
+            "name": "Create Refresh",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/auth/token/refresh",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Takes a refresh type JSON web token and returns an access type JSON web\ntoken if the refresh token is valid."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

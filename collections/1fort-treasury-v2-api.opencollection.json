@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation treasury (v2) treasury (v2) API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "treasury (v2)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Unified money-movement feed for the broker's Transactions tab.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/treasury/activity"
+          },
+          "docs": "GET /apis/v2/treasury/activity?type=&limit=&offset=\n\nMerges three sources into one date-ordered list:\n\n* Treasury FA transactions (except payout rows — see below), which carry\n  regulatory receipts (``has_receipt``, fetched via\n  ``/treasury/transactions/{id}/receipt``);\n* payouts of the payments balance (from StripePayout, so payouts to the\n  broker's own external bank are included; the payout rows mirrored in\n  the FA ledger are excluded to avoid listing the same payout twice);\n* Connect trans"
+        },
+        {
+          "info": {
+            "name": "Balances of the broker's Treasury financial accounts.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/treasury/balances"
+          },
+          "docs": "GET /apis/v2/treasury/balances\n\nServed from the local FA snapshots, which every money-movement webhook\nrefreshes — no Stripe round trip per request. ``updated_at`` tells the\nclient how fresh each snapshot is."
+        },
+        {
+          "info": {
+            "name": "Money movements of the broker's Treasury financial accounts.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/treasury/transactions",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Connected accounts have no Stripe dashboard, so brokers retrieve the\nhosted regulatory receipt of regulated transactions here (Stripe money\ntransmission license requirement). Receipt URLs are fetched from Stripe\nper request — never stored — since they rotate and expire after 60 days."
+        },
+        {
+          "info": {
+            "name": "Money movements of the broker's Treasury financial accounts.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/treasury/transactions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Connected accounts have no Stripe dashboard, so brokers retrieve the\nhosted regulatory receipt of regulated transactions here (Stripe money\ntransmission license requirement). Receipt URLs are fetched from Stripe\nper request — never stored — since they rotate and expire after 60 days."
+        },
+        {
+          "info": {
+            "name": "On-demand regulatory receipt for a Treasury transaction.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/treasury/transactions/:id/receipt",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GET /apis/v2/treasury/transactions/{id}/receipt\n\nReturns the Stripe-hosted regulatory receipt URL plus display fields;\n404 when Stripe exposes no receipt (the transaction isn't regulated)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation email_ai (v2): gmail API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "email_ai (v2): gmail",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Process incoming Gmail push notification from Pub/Sub.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/gmail/webhook"
+          },
+          "docs": "Expected payload format:\n{\n    \"message\": {\n        \"data\": \"base64-encoded-json\",\n        \"messageId\": \"unique-message-id\",\n        \"publishTime\": \"2024-01-01T00:00:00.000Z\"\n    },\n    \"subscription\": \"projects/{project}/subscriptions/{subscription}\"\n}\n\nDecoded data format:\n{\n    \"emailAddress\": \"user@example.com\",\n    \"historyId\": \"1234567890\"\n}"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

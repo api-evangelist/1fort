@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Email AI Agent - Entities API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Email AI Agent - Entities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search All Entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/profiles/:profile_pk/entities/search",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profile_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nSearch across all entity types for a profile's linked business.\n\n**Requires**: Profile must be linked to a business.\n\n**Filters**: Django ORM-style filters supported:\n- Exact match: `{\"status\": \"ACTIVE\"}`\n- In list: `{\"status__in\": [\"ACTIVE\", \"PENDING\"]}`\n- Date range: `{\"effective_date__gte\": \"2025-01-01\", \"effective_date__lte\": \"2025-12-31\"}`\n- Greater/less than: `{\"premium__gt\": 10000}`\n- Case-insensitive: `{\"quote_number__iexact\": \"Q123\"}`\n- Contains: `{\"policy_number__icontains\": \"POL\"}`\n\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,222 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Checkout API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "checkout",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get invoices by IDs for checkout display.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/checkout/invoices"
+          },
+          "docs": "Query params:\n    ids: Comma-separated list of invoice UUIDs and/or short ids"
+        },
+        {
+          "info": {
+            "name": "Create a Stripe PaymentIntent for the given invoices.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/checkout/invoices/payment-intent"
+          },
+          "docs": "Request body:\n    invoice_ids: List of invoice UUIDs\n    amounts: Optional list of amounts (in cents) per invoice"
+        },
+        {
+          "info": {
+            "name": "Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/checkout/invoices/search"
+          },
+          "docs": "Storefront Pay Bill: find payable checkout invoices for an active storefront."
+        },
+        {
+          "info": {
+            "name": "Pdf",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/checkout/invoices/:id/pdf",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Generate and download the invoice PDF for a CheckoutInvoice, or return JSON\ncontext when ?return_json=true (for debugging)."
+        },
+        {
+          "info": {
+            "name": "Generate and stream the insurance proposal PDF for the quote that\nbacks this CheckoutInvoice.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/checkout/invoices/:id/proposal",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Public counterpart to the broker-authenticated proposal endpoint:\nalways regenerates via ``ProposalPDFService`` (executive format) so\nthe customer sees the same document brokers download — no reliance\non a stored ``quote_summary`` file. Returns 404 when the checkout\ninvoice has no underlying quote (e.g. carrier-only invoices), so\nthe terms-of-use link is only ever rendered when the response is\nguaranteed to be a real PDF.\n\nThrottled via ``CheckoutInvoicePdfThrottle`` because PDF generation\nspawn"
+        },
+        {
+          "info": {
+            "name": "Receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/checkout/invoices/:id/receipt",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Generate and download the receipt PDF for a paid CheckoutInvoice, or\nreturn JSON context when ?return_json=true (for debugging).\n\nSame pdf-generator pipeline as the invoice endpoint (``receipt``\ntemplate). Returns 409 while the invoice is not yet marked paid —\nright after a Stripe payment the webhook may still be in flight, so\nthe frontend treats 409 as \"try again in a moment\"."
+        },
+        {
+          "info": {
+            "name": "List Sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/checkout/sessions",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "ViewSet for checkout session read operations."
+        },
+        {
+          "info": {
+            "name": "Retrieve Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/checkout/sessions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this checkout session."
+              }
+            ]
+          },
+          "docs": "Get a checkout session by ID."
+        },
+        {
+          "info": {
+            "name": "Stripe amount",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/checkout/sessions/:id/stripe-amount",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this checkout session."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set PaymentIntent amount to subtotal or subtotal + processing fee (card/ACH)."
+        },
+        {
+          "info": {
+            "name": "On-demand Stripe receipt details for the session's completed payment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/checkout/sessions/:id/stripe-receipt",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this checkout session."
+              }
+            ]
+          },
+          "docs": "GET /checkout/sessions/{id}/stripe-receipt\n\nReturns receipt_url (Stripe-hosted page) plus the charge fields needed\nto render the receipt in-app. Nothing is stored locally — details are\nfetched from Stripe per request. 404 while no payment has completed\n(or the charge has no receipt yet), so the success page can offer the\nreceipt as soon as it exists."
+        },
+        {
+          "info": {
+            "name": "Create Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/checkout/webhook"
+          },
+          "docs": "Handle incoming Stripe webhook events."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1831 @@
+{
+  "item": [
+    {
+      "id": "9924d024-9671-4bff-9344-ec7b235f578b",
+      "name": "ascend (v2)",
+      "description": {
+        "content": "**Deprecated.** Legacy Ascend billing/payments; use the Billing (v2) endpoints instead.\n\n**Access:** requires a JWT access token.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d88ee7f5-e5c0-4de9-86b1-8dcf85800226",
+          "name": "Return a list of payments with summary data and applied filters.",
+          "request": {
+            "name": "Return a list of payments with summary data and applied filters.",
+            "description": {
+              "content": ".. deprecated::\n    Prefer ``GET /apis/v2/billing/payments`` (insurance invoice backed).\n    This Ascend program list remains for legacy transition only.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "ascend",
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e730f5ee-e4a4-415a-aca1-fe2f647c2fef",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 3549,\n  \"results\": [\n    {\n      \"id\": \"cf53f8e7-3078-232b-78cc-199eb0de974c\",\n      \"insured\": \"string\",\n      \"payment_status\": \"string\",\n      \"quote_status\": \"string\",\n      \"quote\": \"string\",\n      \"total\": \"string\",\n      \"due_date\": \"string\",\n      \"broker\": \"string\",\n      \"producer\": \"string\",\n      \"all_agents\": \"string\",\n      \"carrier\": \"string\",\n      \"coverage_type\": \"string\",\n      \"actions\": \"string\"\n    },\n    {\n      \"id\": \"645d92e7-9565-cbd8-89c8-b9f258a44856\",\n      \"insured\": \"string\",\n      \"payment_status\": \"string\",\n      \"quote_status\": \"string\",\n      \"quote\": \"string\",\n      \"total\": \"string\",\n      \"due_date\": \"string\",\n      \"broker\": \"string\",\n      \"producer\": \"string\",\n      \"all_agents\": \"string\",\n      \"carrier\": \"string\",\n      \"coverage_type\": \"string\",\n      \"actions\": \"string\"\n    }\n  ],\n  \"next\": \"http://TYDZxQROQGvXSDfglEFGCtZLRqHFrHob.pzoK0tuiG8Tlb0MD38Sz\",\n  \"previous\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "156c7286-3a34-4851-a5a1-4ad747ffeb97",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a0c5465-0f00-412c-8dcf-e7be4048f816",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91bcd147-b3e3-4923-8f78-beeb42eb7fae",
+          "name": "Export csv",
+          "request": {
+            "name": "Export csv",
+            "description": {
+              "content": "Export payments to CSV format.\nReturns all filtered payments without pagination (same filters as the list view).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "ascend",
+                "payments",
+                "csv"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b9591ff2-ee7f-4728-9bc3-fd1a15d6b5bf",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    "csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"count\": 3549,\n  \"results\": [\n    {\n      \"id\": \"cf53f8e7-3078-232b-78cc-199eb0de974c\",\n      \"insured\": \"string\",\n      \"payment_status\": \"string\",\n      \"quote_status\": \"string\",\n      \"quote\": \"string\",\n      \"total\": \"string\",\n      \"due_date\": \"string\",\n      \"broker\": \"string\",\n      \"producer\": \"string\",\n      \"all_agents\": \"string\",\n      \"carrier\": \"string\",\n      \"coverage_type\": \"string\",\n      \"actions\": \"string\"\n    },\n    {\n      \"id\": \"645d92e7-9565-cbd8-89c8-b9f258a44856\",\n      \"insured\": \"string\",\n      \"payment_status\": \"string\",\n      \"quote_status\": \"string\",\n      \"quote\": \"string\",\n      \"total\": \"string\",\n      \"due_date\": \"string\",\n      \"broker\": \"string\",\n      \"producer\": \"string\",\n      \"all_agents\": \"string\",\n      \"carrier\": \"string\",\n      \"coverage_type\": \"string\",\n      \"actions\": \"string\"\n    }\n  ],\n  \"next\": \"http://TYDZxQROQGvXSDfglEFGCtZLRqHFrHob.pzoK0tuiG8Tlb0MD38Sz\",\n  \"previous\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9991a813-d29b-4245-a41f-4c023550135e",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    "csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5da06ab-867c-43fd-90f8-95050751bbfb",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    "csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b462218f-3b1b-4a3e-9f61-c5a73909d0e3",
+          "name": "Filter options",
+          "request": {
+            "name": "Filter options",
+            "description": {
+              "content": "Get available filter options for frontend dropdowns.\nReturns unique values for each filterable field.\nRestricted to broker users and maintainer users via OrPermissions.\n\nAdmin and maintainer users see agency-wide filter options, while member users see only options for data they can access.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "ascend",
+                "payments",
+                "filter-options"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42d91e71-c884-47f4-bcde-ca3ae3fde359",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    "filter-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 3549,\n  \"results\": [\n    {\n      \"id\": \"cf53f8e7-3078-232b-78cc-199eb0de974c\",\n      \"insured\": \"string\",\n      \"payment_status\": \"string\",\n      \"quote_status\": \"string\",\n      \"quote\": \"string\",\n      \"total\": \"string\",\n      \"due_date\": \"string\",\n      \"broker\": \"string\",\n      \"producer\": \"string\",\n      \"all_agents\": \"string\",\n      \"carrier\": \"string\",\n      \"coverage_type\": \"string\",\n      \"actions\": \"string\"\n    },\n    {\n      \"id\": \"645d92e7-9565-cbd8-89c8-b9f258a44856\",\n      \"insured\": \"string\",\n      \"payment_status\": \"string\",\n      \"quote_status\": \"string\",\n      \"quote\": \"string\",\n      \"total\": \"string\",\n      \"due_date\": \"string\",\n      \"broker\": \"string\",\n      \"producer\": \"string\",\n      \"all_agents\": \"string\",\n      \"carrier\": \"string\",\n      \"coverage_type\": \"string\",\n      \"actions\": \"string\"\n    }\n  ],\n  \"next\": \"http://TYDZxQROQGvXSDfglEFGCtZLRqHFrHob.pzoK0tuiG8Tlb0MD38Sz\",\n  \"previous\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22027157-1004-4f40-9f83-20bd6bf61a1d",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    "filter-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1eeb8279-6df2-4dbe-9fa9-08316155be3b",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    "filter-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07b24205-6ed1-4232-a0ee-72f94a810120",
+          "name": "Retrieve Payment",
+          "request": {
+            "name": "Retrieve Payment",
+            "description": {
+              "content": "ViewSet for retrieving payment data from Ascend.\nProvides payment information including premium amounts, due dates,\nbroker information, and carrier details.\n\nSupports filtering by:\n- insured: Filter by insured ID (dropdown selection)\n- quote_status: Filter by quote status (exact match)\n- payment_status: Filter by program status (exact match)\n- primary_agent: Filter by primary agent (team member) BrokerUser ID - supports multi-select with comma-separated BrokerUser IDs (e.g., \"123,456,789\")\n- status: Filter by program status (exact match) - alias for payment_status\n- carrier: Filter by carrier ID or identifier (partial match)\n- coverage: Filter by coverage type ID or identifier (partial match)\n\nSupports general search across:\n- insured_name, broker_name, producer_name, carrier_name, coverage_type_name\nUse ?search=term to search across multiple name fields simultaneously",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "ascend",
+                "payments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8021a110-80df-48c8-a350-05e86f7d1f31",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"bb9f59fa-3d75-46e0-b551-7c8fa768857e\",\n  \"ascend_id\": null,\n  \"insured\": \"string\",\n  \"business\": \"string\",\n  \"payment_status\": \"string\",\n  \"quote_status\": \"string\",\n  \"quote\": \"string\",\n  \"total\": \"string\",\n  \"premium\": \"string\",\n  \"due_date\": \"string\",\n  \"broker\": \"string\",\n  \"producer\": \"string\",\n  \"all_agents\": \"string\",\n  \"account_manager\": \"string\",\n  \"carrier\": \"string\",\n  \"coverage_type\": \"string\",\n  \"actions\": \"string\",\n  \"invoices\": [\n    {\n      \"id\": \"4f97a614-df24-8524-742f-3f51b554a2ef\",\n      \"ascend_id\": null,\n      \"status\": \"processing_payment\",\n      \"status_display\": \"string\",\n      \"due_date\": \"1980-02-15\",\n      \"invoice_number\": null,\n      \"issued_at\": null,\n      \"total_amount\": \"string\",\n      \"paid_at\": null,\n      \"invoice_url\": null,\n      \"checkout_url\": \"http://moWgndnB.szsiPrjznnyCHY5oX.Jl6w\",\n      \"payment_method\": {},\n      \"payer_name\": \"string\",\n      \"memo\": null,\n      \"invoice_items\": {},\n      \"agent_invoice_docs\": {},\n      \"download_url\": \"string\",\n      \"receipt_url\": \"string\",\n      \"days_until_due\": \"string\",\n      \"is_overdue\": \"string\"\n    },\n    {\n      \"id\": \"ec8ad714-3db2-de97-054a-6596a7085174\",\n      \"ascend_id\": \"string\",\n      \"status\": \"overdue\",\n      \"status_display\": \"string\",\n      \"due_date\": null,\n      \"invoice_number\": \"string\",\n      \"issued_at\": \"1947-09-10T03:37:02.624Z\",\n      \"total_amount\": \"string\",\n      \"paid_at\": \"1973-11-06T12:29:02.445Z\",\n      \"invoice_url\": null,\n      \"checkout_url\": null,\n      \"payment_method\": null,\n      \"payer_name\": null,\n      \"memo\": \"string\",\n      \"invoice_items\": {},\n      \"agent_invoice_docs\": {},\n      \"download_url\": \"string\",\n      \"receipt_url\": \"string\",\n      \"days_until_due\": \"string\",\n      \"is_overdue\": \"string\"\n    }\n  ],\n  \"loans\": [\n    {\n      \"id\": \"ecc02849-c2e5-5143-06ca-99f600a96703\",\n      \"ascend_id\": null,\n      \"status\": \"pending_cancel\",\n      \"status_display\": \"string\",\n      \"allowed_late_days\": null,\n      \"amount_financed\": \"string\",\n      \"apr\": null,\n      \"downpayment\": \"string\",\n      \"late_charge\": \"string\",\n      \"number_of_payments\": 966514272,\n      \"term_payment\": \"string\",\n      \"is_active\": true,\n      \"completed_disclosure_url\": null,\n      \"ascend_created_at\": null,\n      \"ascend_updated_at\": null\n    },\n    {\n      \"id\": \"b0ccf701-45b3-0865-2198-7a003e8e091d\",\n      \"ascend_id\": \"string\",\n      \"status\": \"pending_bind\",\n      \"status_display\": \"string\",\n      \"allowed_late_days\": null,\n      \"amount_financed\": \"string\",\n      \"apr\": null,\n      \"downpayment\": \"string\",\n      \"late_charge\": \"string\",\n      \"number_of_payments\": 823483302,\n      \"term_payment\": \"string\",\n      \"is_active\": true,\n      \"completed_disclosure_url\": null,\n      \"ascend_created_at\": \"1971-03-04T22:53:44.289Z\",\n      \"ascend_updated_at\": \"2008-04-01T21:06:10.891Z\"\n    }\n  ],\n  \"billables\": [\n    {\n      \"billable_identifier\": \"string\",\n      \"effective_date\": \"2017-07-08\",\n      \"expiration_date\": \"1984-05-04\",\n      \"id\": \"c3781683-7214-73f3-9043-21e3d228a6d8\",\n      \"ascend_id\": \"string\",\n      \"billable_type\": \"endorsement\",\n      \"policy_number\": null,\n      \"premium\": \"string\",\n      \"agency_fees\": \"string\",\n      \"broker_fee\": \"string\",\n      \"policy_fee\": \"string\",\n      \"other_fees\": \"string\",\n      \"taxes_and_fees\": \"string\",\n      \"surplus_lines_tax\": \"string\",\n      \"total_fees\": \"string\",\n      \"description\": \"string\",\n      \"min_earned_rate\": null,\n      \"carrier_detail\": \"string\",\n      \"coverage_type_detail\": \"string\",\n      \"wholesaler_detail\": \"string\",\n      \"quote_detail\": \"string\"\n    },\n    {\n      \"billable_identifier\": \"string\",\n      \"effective_date\": \"1966-08-03\",\n      \"expiration_date\": \"1991-02-11\",\n      \"id\": \"878fcf07-4cdb-4cc7-86d4-b5c3e19835bd\",\n      \"ascend_id\": \"string\",\n      \"billable_type\": \"endorsement\",\n      \"policy_number\": null,\n      \"premium\": \"string\",\n      \"agency_fees\": \"string\",\n      \"broker_fee\": \"string\",\n      \"policy_fee\": \"string\",\n      \"other_fees\": \"string\",\n      \"taxes_and_fees\": \"string\",\n      \"surplus_lines_tax\": \"string\",\n      \"total_fees\": \"string\",\n      \"description\": \"string\",\n      \"min_earned_rate\": null,\n      \"carrier_detail\": \"string\",\n      \"coverage_type_detail\": \"string\",\n      \"wholesaler_detail\": \"string\",\n      \"quote_detail\": \"string\"\n    }\n  ],\n  \"payout_info\": \"string\",\n  \"payment_methods\": \"string\",\n  \"payment_options\": \"string\",\n  \"timeline\": \"string\",\n  \"urls\": \"string\",\n  \"organization_info\": \"string\",\n  \"metadata\": {},\n  \"source\": \"string\",\n  \"selected_payment_option_type\": null,\n  \"created_at\": \"1958-01-20T21:14:51.180Z\",\n  \"updated_at\": \"1955-09-19T13:34:53.449Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d9d40fc-998b-4ebd-9e53-81f702da5650",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95ac57f9-ccbb-40af-a98a-ee71c07edc1b",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9b3f2e1-1a2e-4366-8f99-1debba0e9101",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44f3db10-8743-4358-b892-aa9171af7c8c",
+          "name": "Update billable",
+          "request": {
+            "name": "Update billable",
+            "description": {
+              "content": "Update a billable (policy) for this payment. Only allowed when not purchased.\nPATCHes the billable in Ascend and syncs the local DB from the response.\nPATCH /apis/v2/ascend/payments/{id}/billables/{billable_id}",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "ascend",
+                "payments",
+                ":id",
+                "billables",
+                ":billable_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "billable_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fcfa34ea-f5ad-425d-981d-4e91540994ec",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    ":id",
+                    "billables",
+                    ":billable_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "billable_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"f4aad858-5599-58d8-a46a-04263b464760\",\n  \"insured\": \"string\",\n  \"payment_status\": \"string\",\n  \"quote_status\": \"string\",\n  \"quote\": \"string\",\n  \"total\": \"string\",\n  \"due_date\": \"string\",\n  \"broker\": \"string\",\n  \"producer\": \"string\",\n  \"all_agents\": \"string\",\n  \"carrier\": \"string\",\n  \"coverage_type\": \"string\",\n  \"actions\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f92b410-d48c-4e08-ae9d-bcf9b9db96f9",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    ":id",
+                    "billables",
+                    ":billable_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "billable_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"non_field_errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8cca3008-df03-4070-9e4e-b2351535f064",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    ":id",
+                    "billables",
+                    ":billable_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "billable_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfc1474f-013f-49f3-992b-f0b1ecc61e9b",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    ":id",
+                    "billables",
+                    ":billable_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "billable_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38ddf29b-b053-40e6-aa18-0a6a7564fc83",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    ":id",
+                    "billables",
+                    ":billable_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "billable_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "090626cd-5c3d-4700-8ce4-15873142ed5c",
+          "name": "Update program due date.",
+          "request": {
+            "name": "Update program due date.",
+            "description": {
+              "content": "Saves the due_date to the local database immediately for instant UI feedback,\nthen schedules an async task to sync the change to Ascend.\n\nPATCH /apis/v2/ascend/payments/{id}/due-date",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "ascend",
+                "payments",
+                ":id",
+                "due-date"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dfe85152-fc8b-415c-8dc2-a8078f88dbc5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    ":id",
+                    "due-date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"f4aad858-5599-58d8-a46a-04263b464760\",\n  \"insured\": \"string\",\n  \"payment_status\": \"string\",\n  \"quote_status\": \"string\",\n  \"quote\": \"string\",\n  \"total\": \"string\",\n  \"due_date\": \"string\",\n  \"broker\": \"string\",\n  \"producer\": \"string\",\n  \"all_agents\": \"string\",\n  \"carrier\": \"string\",\n  \"coverage_type\": \"string\",\n  \"actions\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b07f4e1-54f7-4974-a3ae-6a1afd696a26",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    ":id",
+                    "due-date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"non_field_errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5af2fd6-b448-45bb-b13d-1677b5d926af",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    ":id",
+                    "due-date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cec4b6e-051e-4897-b6f1-fcfe500ebbf1",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    ":id",
+                    "due-date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71d598f2-7acd-42a8-a93e-75950bc142b1",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ascend",
+                    "payments",
+                    ":id",
+                    "due-date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.1fort.com/apis/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cf439cd5-8096-4479-b30b-1034c546a193",
+    "name": "1Fort API Documentation ascend (v2) ascend (v2) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# 1Fort API\n\nREST API for the 1Fort insurance platform. This document is the authoritative\nmap of the API surface; endpoints are grouped in the sidebar by **app** and\n**version**, and large apps are split into per-resource sub-groups.\n\n## Authentication\n\nAlmost every endpoint requires a **JWT access token**. Send it in the\n`Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may\nalso be presented as an HTTP-only cookie. Endpoints documented with no security\nrequirement are intentionally public (for example sign-in, OTP and storefront\nendpoints).\n\n## Multi-tenancy\n\nResources are scoped to a tenant. Nested routes carry the owning resource id in\nthe path (for example `/v2/broker/{business_pk}/applications`); a token is only\nauthorised for the businesses its user may access. Object-level permissions are\nenforced per endpoint.\n\n## Versioning\n\n`v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`\nendpoints remain documented for compatibility. Endpoints marked **deprecated**\nare scheduled for removal; prefer the documented replacement.\n",
+      "type": "text/plain"
+    }
+  }
+}

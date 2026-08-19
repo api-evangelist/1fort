@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Markets - Business API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Markets - Business",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit Application to Markets (Business)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/markets/submit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nSubmit an insurance application to markets as a business user.\n\nThis endpoint allows business users to submit their coverage applications\ndirectly to available markets. Business submissions require:\n1. A valid digital signature on the application\n2. All required application fields to be completed\n3. Authorization to submit on behalf of the business\n\nThe submission will trigger the business_completed_application signal\nfor downstream processing.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

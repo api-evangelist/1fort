@@ -1,0 +1,600 @@
+openapi: 3.2.0
+info:
+  title: '1Fort API Documentation quote (v2): application API'
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: 'quote (v2): application'
+  x-displayName: Application
+  description: '**Access:** requires a JWT access token.'
+paths:
+  /v2/broker/{business_pk}/application/{application_pk}/visible-tasks:
+    parameters:
+    - name: business_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_application_visible-tasks_list
+      summary: List Visible Tasks for a Business and Quote/Application
+      description: 'List all visible quote tasks for a specific business and quote/application (from the latest task groups).
+
+
+        Only returns tasks with visible_to_business=True.
+
+
+        This endpoint can be accessed with either a quote_pk or application_pk parameter.
+
+
+        Expandable fields via expand query parameter (comma separated):
+
+        - quote: Full quote details (omits tasks to prevent recursion)
+
+        - business: Business details
+
+        - broker: Broker agency details
+
+        - group: Task group details (omits tasks to prevent recursion)
+
+        - completed_by: Broker user who completed the task
+
+
+        Filters available:
+
+        - status: Filter by task status (todo, done, dismissed, n/a)
+
+        - type: Filter by task type (signature, subjectivities, clarifications)
+
+        Example: ?expand=quote,business,completed_by&type=signature'
+      parameters:
+      - name: status
+        in: query
+        description: status
+        required: false
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: type
+        required: false
+        schema:
+          type: string
+      - name: business
+        in: query
+        description: business
+        required: false
+        schema:
+          type: string
+      - name: broker
+        in: query
+        description: broker
+        required: false
+        schema:
+          type: string
+      - name: coverage
+        in: query
+        description: coverage
+        required: false
+        schema:
+          type: string
+      - name: carrier
+        in: query
+        description: carrier
+        required: false
+        schema:
+          type: string
+      - name: insured
+        in: query
+        description: insured
+        required: false
+        schema:
+          type: string
+      - name: assigned_to_email
+        in: query
+        description: assigned_to_email
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/QuoteTaskFlexFields'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'quote (v2): application'
+  /v2/broker/{business_pk}/application/{application_pk}/visible-tasks/{id}:
+    parameters:
+    - name: business_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_application_visible-tasks_read
+      summary: ViewSet for retrieving quote tasks that are visible to businesses.
+      description: 'Only returns tasks with visible_to_business=True from the most recently created task group.
+
+        This endpoint can be accessed by both broker users and business users.
+
+
+        It supports filtering by either quote_id or application_id.'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteTaskFlexFields'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'quote (v2): application'
+components:
+  schemas:
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    QuoteTaskFlexFields:
+      required:
+      - title
+      - group
+      - quote
+      - business
+      - broker
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteTaskDocument'
+          readOnly: true
+        status_display:
+          title: Status display
+          type: string
+          readOnly: true
+          minLength: 1
+        type_display:
+          title: Type display
+          type: string
+          readOnly: true
+          minLength: 1
+        program_url:
+          title: Program url
+          type: string
+          readOnly: true
+        invoice_url:
+          title: Invoice url
+          type: string
+          readOnly: true
+        quote_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        title:
+          title: Title
+          type: string
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        status:
+          title: Status
+          type: string
+          enum:
+          - todo
+          - done
+          - dismissed
+          - n/a
+        type:
+          title: Type
+          type:
+          - string
+          - 'null'
+          enum:
+          - signature
+          - subjectivities
+          - clarifications
+          - payment
+        due_date:
+          title: Due date
+          type:
+          - string
+          - 'null'
+          format: date
+        completed_date:
+          title: Completed date
+          type:
+          - string
+          - 'null'
+          format: date
+        resolution_comment:
+          title: Resolution comment
+          type:
+          - string
+          - 'null'
+        visible_to_business:
+          title: Visible to business
+          description: Flag to indicate if this task is visible to the business
+          type: boolean
+        expired:
+          title: Expired
+          description: Flag to indicate if this task has expired
+          type: boolean
+        group:
+          title: Group
+          type: string
+          format: uuid
+        quote:
+          title: Quote
+          type: string
+          format: uuid
+        business:
+          title: Business
+          type: integer
+        broker:
+          title: Broker
+          type: integer
+        completed_by:
+          title: Completed by
+          type:
+          - integer
+          - 'null'
+    QuoteTaskDocument:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        document:
+          title: Document
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

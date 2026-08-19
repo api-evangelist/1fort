@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Broker Google API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "broker-google",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Handle Google OAuth callback for broker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/google_workspace/broker/oauth/permissions",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "State"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Authorization code"
+              }
+            ]
+          },
+          "docs": "\nThis endpoint handles the Google OAuth callback for integrations.\nIt exchanges the authorization code for tokens and completes the integration setup.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

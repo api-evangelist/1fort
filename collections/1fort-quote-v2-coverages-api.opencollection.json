@@ -1,0 +1,244 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation quote (v2): coverages API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "quote (v2): coverages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverages/:coverage_application_pk/quotes",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coverage_application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List Quotes"
+        },
+        {
+          "info": {
+            "name": "Create Broker Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverages/:coverage_application_pk/quotes/create",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coverage_application_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new quote for a coverage application. This allows brokers to add quotes from carriers that they have obtained outside of the Herald system (e.g., expiring quotes, competitor quotes)."
+        },
+        {
+          "info": {
+            "name": "Get overview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverages/:coverage_application_pk/quotes/overview",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coverage_application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Get overview"
+        },
+        {
+          "info": {
+            "name": "Retrieve Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverages/:coverage_application_pk/quotes/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coverage_application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Quote (Coverage Term)."
+              }
+            ]
+          },
+          "docs": "Retrieve Quote"
+        },
+        {
+          "info": {
+            "name": "Get file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverages/:coverage_application_pk/quotes/:id/files/:file_pk",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coverage_application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Quote (Coverage Term)."
+              },
+              {
+                "name": "file_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get file"
+        },
+        {
+          "info": {
+            "name": "Get surplus file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverages/:coverage_application_pk/quotes/:id/surplus-files/:file_pk",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "coverage_application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Quote (Coverage Term)."
+              },
+              {
+                "name": "file_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get surplus file"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

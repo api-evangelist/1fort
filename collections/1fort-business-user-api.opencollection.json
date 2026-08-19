@@ -1,0 +1,634 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Business User API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "business-user",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Employee Type Permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/business-employee-type-permission",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "\nGet the list of permissions for an employee type. If an employee type is not returned in the response, it means that it has no permissions.\n\n**Permissions:** ADMIN, SUPER_ADMIN\n"
+        },
+        {
+          "info": {
+            "name": "Create Employee Type Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/business-employee-type-permission",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nCreate an employee type permission.\n\n**Permissions:** SUPER_ADMIN, ADMIN\n"
+        },
+        {
+          "info": {
+            "name": "Get Employee Type Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/business-employee-type-permission/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business employee type permission."
+              }
+            ]
+          },
+          "docs": "\nGet an employee type permission.\n\n**Permissions:** SUPER_ADMIN, ADMIN\n"
+        },
+        {
+          "info": {
+            "name": "Update Employee Type Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/business-employee-type-permission/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business employee type permission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nUpdate an employee type permission.\n\n**Permissions:** SUPER_ADMIN, ADMIN\n"
+        },
+        {
+          "info": {
+            "name": "Delete Employee Type Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.1fort.com/apis/business-employee-type-permission/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business employee type permission."
+              }
+            ]
+          },
+          "docs": "\nDelete an employee type permission.\n\n**Permissions:** SUPER_ADMIN, ADMIN\n"
+        },
+        {
+          "info": {
+            "name": "Get Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/business-group",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "\nGet the business user groups.\n\n**Permissions:** `can_manage_user_groups`\n"
+        },
+        {
+          "info": {
+            "name": "Create Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/business-group",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nCreate a group.\n\n**Permissions:** `can_manage_user_groups`\n"
+        },
+        {
+          "info": {
+            "name": "Get Group Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/business-group/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business group."
+              }
+            ]
+          },
+          "docs": "\nGet details of a group.\n\n**Permissions:** ADMIN, SUPER_ADMIN\n"
+        },
+        {
+          "info": {
+            "name": "Update Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/business-group/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nUpdate a group.\n\n**Permissions:** ADMIN, SUPER_ADMIN\n"
+        },
+        {
+          "info": {
+            "name": "Delete Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.1fort.com/apis/business-group/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business group."
+              }
+            ]
+          },
+          "docs": "\nDelete a group.\n\n**Permissions:** ADMIN, SUPER_ADMIN\n"
+        },
+        {
+          "info": {
+            "name": "Add Users to Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/business-group/:id/add-users",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nAdd users to a group.\n\n**Permissions:** `can_manage_user_groups`\n"
+        },
+        {
+          "info": {
+            "name": "Get Group Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/business-group/:id/get-users",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business group."
+              }
+            ]
+          },
+          "docs": "\nGet the list of users in a group.\n\n**Permissions:** ADMIN, SUPER_ADMIN\n"
+        },
+        {
+          "info": {
+            "name": "Remove Users from Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/business-group/:id/remove-users",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nRemove users from a group.\n\n**Permissions:** `can_manage_user_groups`\n"
+        },
+        {
+          "info": {
+            "name": "Get Business Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/business-user",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "user__status",
+                "value": "",
+                "type": "query",
+                "description": "user__status"
+              },
+              {
+                "name": "employee_type",
+                "value": "",
+                "type": "query",
+                "description": "employee_type"
+              },
+              {
+                "name": "is_administrator",
+                "value": "",
+                "type": "query",
+                "description": "is_administrator"
+              },
+              {
+                "name": "role",
+                "value": "",
+                "type": "query",
+                "description": "role"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "\nGet the list of all the users in the logged in user's business.\n\n**Permissions:** ADMIN, SUPER_ADMIN\n"
+        },
+        {
+          "info": {
+            "name": "List my businesses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/business-user/my-businesses"
+          },
+          "docs": "\nReturn every business the authenticated user is a member of, along with\ntheir role in each. Powers the client portal business switcher for users\nwho belong to more than one business.\n"
+        },
+        {
+          "info": {
+            "name": "Get Business User Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/business-user/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business user."
+              }
+            ]
+          },
+          "docs": "\nGet details of a user.\n\n`/me` endpoint can be used to get details of the logged in user, where the `id` is `me`.\nFor `/me` endpoint, the `can_manage_users` permission is not required. Logged in users can get details of themselves.\n\n**Permissions:** ADMIN, SUPER_ADMIN, or me\n"
+        },
+        {
+          "info": {
+            "name": "Get Business User Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/business-user/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nGet details of a user.\n\n`/me` endpoint can be used to update details of the logged in user, where the `id` is `me`.\nFor `/me` endpoint, the `can_manage_users` permission is not required. Logged in users can update basic details of themselves.\n\n**Permissions:** ADMIN, SUPER_ADMIN, or me\n"
+        },
+        {
+          "info": {
+            "name": "Add access role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/business-user/:id/access-role",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nSet access role for users. The {id} of the users is required in the request body.\n"
+        },
+        {
+          "info": {
+            "name": "Set user groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/business-user/:id/groups",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nUpdate the groups of a user.\n\n**Permissions:** `can_manage_user_groups`\n"
+        },
+        {
+          "info": {
+            "name": "Send invitation reminder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/business-user/:id/send-invitation-reminder",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business user."
+              }
+            ]
+          },
+          "docs": "\nSend an invitation reminder to a user.\n\n**Permissions:** SUPER_ADMIN, ADMIN\n"
+        },
+        {
+          "info": {
+            "name": "Get Custom Access Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/custom-access-role",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "\nGet all the Custom Access Roles for the Business.\n\n**Permissions:** `can_manage_access_roles`\n"
+        },
+        {
+          "info": {
+            "name": "Create Custom Access Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/custom-access-role",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nCreate a Custom Access Role for the Business.\nYou can get the list of all the permissions from the `GET /custom-access-roles/permissions` endpoint.\n\n**Permissions:** `can_manage_access_roles`\n"
+        },
+        {
+          "info": {
+            "name": "Get all allowed permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/custom-access-role/permissions",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "\nGet all the allowed permissions for the Custom Access Roles.\n\n**Permissions:** `can_manage_access_roles`\n"
+        },
+        {
+          "info": {
+            "name": "Get Custom Access Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/custom-access-role/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business access role."
+              }
+            ]
+          },
+          "docs": "\nGet a Custom Access Role for the Business.\n\n**Permissions:** `can_manage_access_roles`\n"
+        },
+        {
+          "info": {
+            "name": "Update Custom Access Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/custom-access-role/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business access role."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nUpdate a Custom Access Role for the Business.\n\nYou can get the list of all the permissions from the `GET /custom-access-roles/permissions` endpoint.\n\n**Permissions:** `can_manage_access_roles`\n"
+        },
+        {
+          "info": {
+            "name": "Delete Custom Access Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.1fort.com/apis/custom-access-role/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business access role."
+              }
+            ]
+          },
+          "docs": "\nDelete a Custom Access Role for the Business.\n\n**Permissions:** `can_manage_access_roles`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

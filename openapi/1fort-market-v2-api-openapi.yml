@@ -1,0 +1,1812 @@
+openapi: 3.2.0
+info:
+  title: 1Fort API Documentation market (v2) market (v2) API
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: market (v2)
+  x-displayName: Market (v2)
+  description: '**Access:** requires a JWT access token.'
+paths:
+  /v2/broker/markets:
+    parameters: []
+    get:
+      operationId: v2_broker_markets_list
+      description: ViewSet for Market CRUD operations.
+      parameters:
+      - name: product_line_code
+        in: query
+        description: product_line_code
+        required: false
+        schema:
+          type: string
+      - name: sub_product_line_name
+        in: query
+        description: sub_product_line_name
+        required: false
+        schema:
+          type: string
+      - name: carrier_id
+        in: query
+        description: carrier_id
+        required: false
+        schema:
+          type: string
+      - name: wholesaler_id
+        in: query
+        description: wholesaler_id
+        required: false
+        schema:
+          type: string
+      - name: submission_type
+        in: query
+        description: submission_type
+        required: false
+        schema:
+          type: string
+          enum:
+          - herald
+          - manual
+          - portal
+      - name: market_type
+        in: query
+        description: market_type
+        required: false
+        schema:
+          type: string
+      - name: admitted
+        in: query
+        description: admitted
+        required: false
+        schema:
+          type: string
+      - name: verification
+        in: query
+        description: verification
+        required: false
+        schema:
+          type: string
+          enum:
+          - verified
+          - pending
+          - needs_verification
+          - failed
+      - name: billing
+        in: query
+        description: billing
+        required: false
+        schema:
+          type: string
+          enum:
+          - AGENCY_BILL
+          - DIRECT_BILL
+      - name: group_id
+        in: query
+        description: group_id
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MarketList'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - market (v2)
+      summary: List Markets
+    post:
+      operationId: v2_broker_markets_create
+      description: ViewSet for Market CRUD operations.
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketCreate'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - market (v2)
+      summary: Create Market
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarketCreate'
+        required: true
+  /v2/broker/markets/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this market.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: v2_broker_markets_read
+      description: ViewSet for Market CRUD operations.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketDetail'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - market (v2)
+      summary: Retrieve Market
+    put:
+      operationId: v2_broker_markets_update
+      description: ViewSet for Market CRUD operations.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketDetail'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - market (v2)
+      summary: Update Market
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarketDetail'
+        required: true
+    patch:
+      operationId: v2_broker_markets_partial_update
+      description: ViewSet for Market CRUD operations.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketDetail'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - market (v2)
+      summary: Update Market
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarketDetail'
+        required: true
+    delete:
+      operationId: v2_broker_markets_delete
+      description: ViewSet for Market CRUD operations.
+      responses:
+        '204':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - market (v2)
+      summary: Delete Market
+  /v2/broker/markets/{id}/documents/{document_id}/download:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this market.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    - name: document_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_markets_documents_download_document
+      description: Download an uploaded appetite or restrictions document for a market.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketDetail'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - market (v2)
+      summary: Download document
+  /v2/broker/producers:
+    parameters: []
+    get:
+      operationId: v2_broker_producers_list
+      summary: ViewSet for MarketProducer CRUD operations.
+      description: Brokers can manage their own producers.
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MarketProducer'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - market (v2)
+    post:
+      operationId: v2_broker_producers_create
+      summary: ViewSet for MarketProducer CRUD operations.
+      description: Brokers can manage their own producers.
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketProducer'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - market (v2)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarketProducer'
+        required: true
+  /v2/broker/producers/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this Market Producer.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: v2_broker_producers_read
+      summary: ViewSet for MarketProducer CRUD operations.
+      description: Brokers can manage their own producers.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketProducer'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - market (v2)
+    put:
+      operationId: v2_broker_producers_update
+      summary: ViewSet for MarketProducer CRUD operations.
+      description: Brokers can manage their own producers.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketProducer'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - market (v2)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarketProducer'
+        required: true
+    patch:
+      operationId: v2_broker_producers_partial_update
+      summary: ViewSet for MarketProducer CRUD operations.
+      description: Brokers can manage their own producers.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketProducer'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - market (v2)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarketProducer'
+        required: true
+    delete:
+      operationId: v2_broker_producers_delete
+      summary: ViewSet for MarketProducer CRUD operations.
+      description: Brokers can manage their own producers.
+      responses:
+        '204':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - market (v2)
+components:
+  schemas:
+    MarketProducer:
+      required:
+      - email
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          description: Producer display name
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          description: Primary contact email for this producer
+          type: string
+          format: email
+          maxLength: 254
+          minLength: 1
+        provider:
+          title: Provider
+          description: Email service provider
+          type: string
+          enum:
+          - google
+          - office365
+        password:
+          title: Password
+          description: Password for email service (write-only)
+          type: string
+        hasPassword:
+          title: Haspassword
+          description: Indicates if a password is stored
+          type: string
+          readOnly: true
+        emailAutoForwarding:
+          title: Emailautoforwarding
+          type: boolean
+          default: false
+        emailStatus:
+          title: Emailstatus
+          type: string
+          readOnly: true
+          minLength: 1
+        autoForwardingStatus:
+          title: Autoforwardingstatus
+          type: string
+          readOnly: true
+          minLength: 1
+        broker:
+          title: Broker
+          description: Broker agency associated with this producer (if applicable)
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        broker_name:
+          title: Broker name
+          description: Name of the broker agency
+          type: string
+          readOnly: true
+          minLength: 1
+        user:
+          title: User
+          description: Associated user account if this producer can login to 1Fort
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        hasUserAccount:
+          title: Hasuseraccount
+          description: Indicates if this producer has a login account
+          type: string
+          readOnly: true
+        userEmail:
+          title: Useremail
+          description: User email if account exists
+          type: string
+          readOnly: true
+        createUserAccount:
+          title: Createuseraccount
+          description: Whether to create a user account for this producer to login
+          type: boolean
+          default: false
+        firstName:
+          title: Firstname
+          description: AI Employee first name
+          type:
+          - string
+          - 'null'
+        phoneNumber:
+          title: Phonenumber
+          description: AI Employee phone number for market portals
+          type:
+          - string
+          - 'null'
+        userFirstName:
+          title: Userfirstname
+          description: User account first name (required if createUserAccount=true)
+          type: string
+        userLastName:
+          title: Userlastname
+          description: User account last name (required if createUserAccount=true)
+          type: string
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    MarketDetail:
+      required:
+      - type
+      - product_lines
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        type:
+          title: Type
+          description: Whether this market is platform-owned or broker-owned
+          type: string
+          enum:
+          - PLATFORM
+          - BROKER
+        carrier:
+          title: Carrier
+          description: The carrier for this market
+          type:
+          - string
+          - 'null'
+          format: uuid
+        wholesaler:
+          title: Wholesaler
+          description: The wholesaler for this market (if applicable)
+          type:
+          - string
+          - 'null'
+          format: uuid
+        broker:
+          title: Broker
+          description: Only set when type=BROKER
+          type:
+          - integer
+          - 'null'
+        groups:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        group_names:
+          title: Group names
+          type: string
+          readOnly: true
+        producer:
+          title: Producer
+          description: The producer identity for this market
+          type:
+          - string
+          - 'null'
+          format: uuid
+        mga:
+          title: Mga
+          description: The MGA for this market (if applicable)
+          type:
+          - string
+          - 'null'
+          format: uuid
+        product_lines:
+          description: Product lines supported by this market
+          type: array
+          items:
+            description: Product lines supported by this market
+            type: string
+            format: uuid
+          uniqueItems: true
+        sub_product_lines:
+          description: Sub-product lines supported by this market (e.g., D&O, EP for ML)
+          type: array
+          items:
+            description: Sub-product lines supported by this market (e.g., D&O, EP for ML)
+            type: string
+            format: uuid
+          uniqueItems: true
+        herald_products:
+          description: Herald products available for this market
+          type: array
+          items:
+            description: Herald products available for this market
+            type: string
+            format: uuid
+          uniqueItems: true
+        submission_method:
+          title: Submission method
+          description: Method for submitting to this market
+          type: string
+          enum:
+          - herald
+          - manual
+          - portal
+        submission_method_display:
+          title: Submission method display
+          type: string
+          readOnly: true
+          minLength: 1
+        agency_code:
+          title: Agency code
+          description: Agency code for this market (broker-specific identifier)
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        am_best_rating:
+          title: Am best rating
+          description: AM Best rating for the carrier
+          type: string
+          maxLength: 10
+        commission_percentage:
+          title: Commission percentage
+          description: Commission percentage for new business (optional for wholesale markets)
+          type:
+          - string
+          - 'null'
+          format: decimal
+        renewal_commission_percentage:
+          title: Renewal commission percentage
+          description: Commission percentage for renewals (if different from new business)
+          type:
+          - string
+          - 'null'
+          format: decimal
+        billing_type:
+          title: Billing type
+          description: Default billing type for this market
+          type: string
+          enum:
+          - AGENCY_BILL
+          - DIRECT_BILL
+        billing_type_display:
+          title: Billing type display
+          type: string
+          readOnly: true
+          minLength: 1
+        eta_hours:
+          title: Eta hours
+          description: Expected turnaround time in hours for quotes
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: -2147483648
+        underwriter_emails:
+          title: Underwriter emails
+          type: string
+        remittance_emails:
+          title: Remittance emails
+          type: string
+        bank_routing_number:
+          title: Bank routing number
+          description: Bank routing number (9 digits) for agency-billed remittance
+          type:
+          - string
+          - 'null'
+          maxLength: 9
+        bank_account_number:
+          title: Bank account number
+          description: Bank account number for agency-billed remittance
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        has_bank_routing_number:
+          title: Has bank routing number
+          description: Indicates if a bank routing number is stored
+          type: boolean
+          readOnly: true
+        has_bank_account_number:
+          title: Has bank account number
+          description: Indicates if a bank account number is stored
+          type: boolean
+          readOnly: true
+        is_active:
+          title: Is active
+          description: Whether this market is currently active for submissions
+          type: boolean
+        special_notes:
+          title: Special notes
+          description: Special notes or instructions for this market
+          type: string
+        appetite:
+          title: Appetite
+          description: Appetite for this market
+          type: string
+        appetite_documents:
+          title: Appetite documents
+          type: string
+          readOnly: true
+        appetite_files:
+          type: array
+          items:
+            type: string
+            readOnly: true
+            format: uri
+        restrictions:
+          title: Restrictions
+          description: Restrictions for this market
+          type: string
+        restriction_documents:
+          title: Restriction documents
+          type: string
+          readOnly: true
+        restriction_files:
+          type: array
+          items:
+            type: string
+            readOnly: true
+            format: uri
+        remove_document_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        verification_status:
+          title: Verification status
+          description: Verification status of this market
+          type: string
+          enum:
+          - verified
+          - pending
+          - needs_verification
+          - failed
+        failure_reason:
+          title: Failure reason
+          description: Explanation shown to brokers when verification fails; editable by admins only.
+          type: string
+          readOnly: true
+          minLength: 1
+        source:
+          title: Source
+          description: How this market record was created (manual vs auto-added by an automated process).
+          type: string
+          enum:
+          - manual
+          - auto_added
+        filing_type:
+          title: Filing type
+          description: Filing type for this market
+          type: string
+          enum:
+          - admitted
+          - surplus
+          - admitted_and_surplus
+        portal_url:
+          title: Portal url
+          description: URL for the portal
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        portal_username:
+          title: Portal username
+          description: Username for the portal
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        portal_password:
+          title: Portal password
+          description: Password for the portal
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        has_portal_password:
+          title: Has portal password
+          description: Indicates if a portal password is stored
+          type: boolean
+          readOnly: true
+        is_platform_market:
+          title: Is platform market
+          type: boolean
+          readOnly: true
+        is_broker_market:
+          title: Is broker market
+          type: boolean
+          readOnly: true
+        supports_herald:
+          title: Supports herald
+          type: boolean
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    MarketList:
+      required:
+      - type
+      - product_lines
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        type:
+          title: Type
+          description: Whether this market is platform-owned or broker-owned
+          type: string
+          enum:
+          - PLATFORM
+          - BROKER
+        carrier:
+          title: Carrier
+          description: The carrier for this market
+          type:
+          - string
+          - 'null'
+          format: uuid
+        carrier_name:
+          title: Carrier name
+          type: string
+          readOnly: true
+          minLength: 1
+        wholesaler:
+          title: Wholesaler
+          description: The wholesaler for this market (if applicable)
+          type:
+          - string
+          - 'null'
+          format: uuid
+        wholesaler_name:
+          title: Wholesaler name
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        broker:
+          title: Broker
+          description: Only set when type=BROKER
+          type:
+          - integer
+          - 'null'
+        broker_name:
+          title: Broker name
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        groups:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        group_names:
+          title: Group names
+          type: string
+          readOnly: true
+        producer:
+          title: Producer
+          description: The producer identity for this market
+          type:
+          - string
+          - 'null'
+          format: uuid
+        mga:
+          $ref: '#/components/schemas/Wholesaler'
+        producer_name:
+          title: Producer name
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        product_lines:
+          description: Product lines supported by this market
+          type: array
+          items:
+            description: Product lines supported by this market
+            type: string
+            format: uuid
+          uniqueItems: true
+        product_line_names:
+          title: Product line names
+          type: string
+          readOnly: true
+        sub_product_lines:
+          description: Sub-product lines supported by this market (e.g., D&O, EP for ML)
+          type: array
+          items:
+            description: Sub-product lines supported by this market (e.g., D&O, EP for ML)
+            type: string
+            format: uuid
+          uniqueItems: true
+        submission_method:
+          title: Submission method
+          description: Method for submitting to this market
+          type: string
+          enum:
+          - herald
+          - manual
+          - portal
+        submission_method_display:
+          title: Submission method display
+          type: string
+          readOnly: true
+          minLength: 1
+        agency_code:
+          title: Agency code
+          description: Agency code for this market (broker-specific identifier)
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        am_best_rating:
+          title: Am best rating
+          description: AM Best rating for the carrier
+          type: string
+          maxLength: 10
+        commission_percentage:
+          title: Commission percentage
+          description: Commission percentage for new business (optional for wholesale markets)
+          type:
+          - string
+          - 'null'
+          format: decimal
+        renewal_commission_percentage:
+          title: Renewal commission percentage
+          description: Commission percentage for renewals (if different from new business)
+          type:
+          - string
+          - 'null'
+          format: decimal
+        billing_type:
+          title: Billing type
+          description: Default billing type for this market
+          type: string
+          enum:
+          - AGENCY_BILL
+          - DIRECT_BILL
+        billing_type_display:
+          title: Billing type display
+          type: string
+          readOnly: true
+          minLength: 1
+        filing_type:
+          title: Filing type
+          description: Filing type for this market
+          type: string
+          enum:
+          - admitted
+          - surplus
+          - admitted_and_surplus
+        portal_url:
+          title: Portal url
+          description: URL for the portal
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        portal_username:
+          title: Portal username
+          description: Username for the portal
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        portal_password:
+          title: Portal password
+          description: Password for the portal
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        has_portal_password:
+          title: Has portal password
+          description: Indicates if a portal password is stored
+          type: boolean
+          readOnly: true
+        eta_hours:
+          title: Eta hours
+          description: Expected turnaround time in hours for quotes
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: -2147483648
+        underwriter_emails:
+          title: Underwriter emails
+          type: string
+        remittance_emails:
+          title: Remittance emails
+          type: string
+        bank_routing_number:
+          title: Bank routing number
+          description: Bank routing number (9 digits) for agency-billed remittance
+          type:
+          - string
+          - 'null'
+          maxLength: 9
+        bank_account_number:
+          title: Bank account number
+          description: Bank account number for agency-billed remittance
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        has_bank_routing_number:
+          title: Has bank routing number
+          description: Indicates if a bank routing number is stored
+          type: boolean
+          readOnly: true
+        has_bank_account_number:
+          title: Has bank account number
+          description: Indicates if a bank account number is stored
+          type: boolean
+          readOnly: true
+        is_active:
+          title: Is active
+          description: Whether this market is currently active for submissions
+          type: boolean
+        special_notes:
+          title: Special notes
+          description: Special notes or instructions for this market
+          type: string
+        appetite:
+          title: Appetite
+          description: Appetite for this market
+          type: string
+        appetite_documents:
+          title: Appetite documents
+          type: string
+          readOnly: true
+        restrictions:
+          title: Restrictions
+          description: Restrictions for this market
+          type: string
+        restriction_documents:
+          title: Restriction documents
+          type: string
+          readOnly: true
+        verification_status:
+          title: Verification status
+          description: Verification status of this market
+          type: string
+          enum:
+          - verified
+          - pending
+          - needs_verification
+          - failed
+        failure_reason:
+          title: Failure reason
+          description: Explanation shown to brokers when verification fails; editable by admins only.
+          type: string
+          readOnly: true
+          minLength: 1
+        supports_herald:
+          title: Supports herald
+          type: boolean
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+    MarketCreate:
+      required:
+      - product_lines
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        carrier:
+          title: Carrier
+          description: The carrier for this market
+          type:
+          - string
+          - 'null'
+          format: uuid
+        wholesaler:
+          title: Wholesaler
+          description: The wholesaler for this market (if applicable)
+          type:
+          - string
+          - 'null'
+          format: uuid
+        groups:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        product_lines:
+          description: Product lines supported by this market
+          type: array
+          items:
+            description: Product lines supported by this market
+            type: string
+            format: uuid
+          uniqueItems: true
+        sub_product_lines:
+          description: Sub-product lines supported by this market (e.g., D&O, EP for ML)
+          type: array
+          items:
+            description: Sub-product lines supported by this market (e.g., D&O, EP for ML)
+            type: string
+            format: uuid
+          uniqueItems: true
+        producer_id:
+          title: Producer id
+          description: Producer ID (auto-created if not provided)
+          type: string
+          format: uuid
+        producer:
+          title: Producer
+          description: The producer identity for this market
+          type:
+          - string
+          - 'null'
+          format: uuid
+          readOnly: true
+        herald_products:
+          description: Herald products available for this market
+          type: array
+          items:
+            description: Herald products available for this market
+            type: string
+            format: uuid
+          uniqueItems: true
+        submission_method:
+          title: Submission method
+          description: Method for submitting to this market
+          type: string
+          enum:
+          - herald
+          - manual
+          - portal
+        agency_code:
+          title: Agency code
+          description: Agency code for this market (broker-specific identifier)
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        am_best_rating:
+          title: Am best rating
+          description: AM Best rating for the carrier
+          type: string
+          maxLength: 10
+        commission_percentage:
+          title: Commission percentage
+          description: Commission percentage for new business (optional for wholesale markets)
+          type:
+          - string
+          - 'null'
+          format: decimal
+        renewal_commission_percentage:
+          title: Renewal commission percentage
+          description: Commission percentage for renewals (optional)
+          type:
+          - string
+          - 'null'
+          format: decimal
+        filing_type:
+          title: Filing type
+          description: Filing type for this market
+          type: string
+          enum:
+          - admitted
+          - surplus
+          - admitted_and_surplus
+        portal_url:
+          title: Portal url
+          description: URL for the portal
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        portal_username:
+          title: Portal username
+          description: Username for the portal
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        portal_password:
+          title: Portal password
+          description: Password for the portal
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        has_portal_password:
+          title: Has portal password
+          description: Indicates if a portal password is stored
+          type: boolean
+          readOnly: true
+        billing_type:
+          title: Billing type
+          description: Default billing type for this market
+          type: string
+          enum:
+          - AGENCY_BILL
+          - DIRECT_BILL
+        eta_hours:
+          title: Eta hours
+          description: Expected turnaround time in hours for quotes
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: -2147483648
+        underwriter_emails:
+          title: Underwriter emails
+          type: string
+        remittance_emails:
+          title: Remittance emails
+          type: string
+        bank_routing_number:
+          title: Bank routing number
+          description: Bank routing number (9 digits) for agency-billed remittance
+          type:
+          - string
+          - 'null'
+          maxLength: 9
+        bank_account_number:
+          title: Bank account number
+          description: Bank account number for agency-billed remittance
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        has_bank_routing_number:
+          title: Has bank routing number
+          description: Indicates if a bank routing number is stored
+          type: boolean
+          readOnly: true
+        has_bank_account_number:
+          title: Has bank account number
+          description: Indicates if a bank account number is stored
+          type: boolean
+          readOnly: true
+        is_active:
+          title: Is active
+          description: Whether this market is currently active for submissions
+          type: boolean
+        special_notes:
+          title: Special notes
+          description: Special notes or instructions for this market
+          type: string
+        appetite:
+          title: Appetite
+          description: Appetite for this market
+          type: string
+        appetite_documents:
+          title: Appetite documents
+          type: string
+          readOnly: true
+        appetite_files:
+          type: array
+          items:
+            type: string
+            readOnly: true
+            format: uri
+        restrictions:
+          title: Restrictions
+          description: Restrictions for this market
+          type: string
+        restriction_documents:
+          title: Restriction documents
+          type: string
+          readOnly: true
+        restriction_files:
+          type: array
+          items:
+            type: string
+            readOnly: true
+            format: uri
+        remove_document_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        source:
+          title: Source
+          description: How this market record was created (manual vs auto-added by an automated process).
+          type: string
+          enum:
+          - manual
+          - auto_added
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    Wholesaler:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        is_active:
+          title: Is active
+          type: boolean
+        is_owned_by_1fort:
+          title: Is owned by 1fort
+          description: Indicates if this wholesaler is owned by 1Fort
+          type: boolean
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

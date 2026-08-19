@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Business API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "business",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get business details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/business"
+          },
+          "docs": "\nRetrieve business details.\n\nTo Update:\nA subsidiaries list can be passed to update\n the business with subsidiaries.\n Example:\n \"subsidiaries\": [\n     {\n         \"name\": \"Subsidiary 1\",\n     }\n ]\n"
+        },
+        {
+          "info": {
+            "name": "Business agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/business/my-agents"
+          },
+          "docs": "Business agents"
+        },
+        {
+          "info": {
+            "name": "Business broker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/business/my-broker"
+          },
+          "docs": "Business broker"
+        },
+        {
+          "info": {
+            "name": "Notify business broker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/business/notify-broker"
+          },
+          "docs": "Notify business broker"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

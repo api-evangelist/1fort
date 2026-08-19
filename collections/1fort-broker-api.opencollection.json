@@ -1,0 +1,853 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Broker API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "broker",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Brokers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "\nList all brokers.\nThis endpoint lists all brokers.\n"
+        },
+        {
+          "info": {
+            "name": "Create Broker",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/broker",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nCreate a broker.\nThis endpoint creates a broker.\n"
+        },
+        {
+          "info": {
+            "name": "Accept Invite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/accept-invite",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nAccept an invite.\nThis endpoint accepts a broker user(agent) invite.\n"
+        },
+        {
+          "info": {
+            "name": "List Broker Clients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "\nList all clients.\nThis endpoint lists all the broker's clients.\n"
+        },
+        {
+          "info": {
+            "name": "Create Broker Client",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nCreate a broker client.\nThis endpoint creates a client.\n\nA subsidiaries list can be passed to create\na client with subsidiaries.\nExample:\n\"subsidiaries\": [\n    {\n        \"name\": \"Subsidiary 1\",\n    }\n]\n"
+        },
+        {
+          "info": {
+            "name": "List Broker Client Invites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients/:client_pk/invites",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "client_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "\nList all client invites.\nThis endpoint lists all the broker's client invites.\n"
+        },
+        {
+          "info": {
+            "name": "Invite Client",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients/:client_pk/invites",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "client_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nSend an invite to a client.\nThis endpoint creates a client invite.\n\nOptional fields:\n- application_id: Link invite to specific application\n- trigger_email: Whether to send invitation email immediately\n- custom_message: Personalized message to include in invitation email\n"
+        },
+        {
+          "info": {
+            "name": "Cancel Broker Client Invite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients/:client_pk/invites/cancel-invite",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "client_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "\nCancel an invite to a client.\nThis endpoint deletes all broker client invites.\n"
+        },
+        {
+          "info": {
+            "name": "Resend Broker Client Invite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients/:client_pk/invites/resend-invite",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "client_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "\nResend an invite to a client.\nThis endpoint resends an existing pending client invite.\n"
+        },
+        {
+          "info": {
+            "name": "Get Broker Client details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients/:id",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business."
+              }
+            ]
+          },
+          "docs": "\nRetrieve a broker client.\nThis endpoint Get a broker client.\n"
+        },
+        {
+          "info": {
+            "name": "Update Broker Client",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients/:id",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nUpdate a broker client.\nThis endpoint updates a broker client.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Broker Client",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/clients/:id",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business."
+              }
+            ]
+          },
+          "docs": "\nDelete a broker client.\nThis endpoint deletes a broker client.\n"
+        },
+        {
+          "info": {
+            "name": "List Broker Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/files",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search files by name"
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (default: 10)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Starting position for pagination (default: 0)"
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by file type (comma-separated)"
+              },
+              {
+                "name": "insured",
+                "value": "",
+                "type": "query",
+                "description": "Filter by insured ID (comma-separated)"
+              },
+              {
+                "name": "team",
+                "value": "",
+                "type": "query",
+                "description": "Filter by team member ID (comma-separated)"
+              },
+              {
+                "name": "date_min",
+                "value": "",
+                "type": "query",
+                "description": "Filter by minimum date (YYYY-MM-DD, compared in UTC)"
+              },
+              {
+                "name": "date_max",
+                "value": "",
+                "type": "query",
+                "description": "Filter by maximum date (YYYY-MM-DD, compared in UTC)"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Filter by source (email, platform)"
+              }
+            ]
+          },
+          "docs": "\nList all files associated with the broker's insureds.\n\nThis endpoint aggregates files from multiple sources:\n- Quote files (Herald quotes, manual quotes)\n- Application supplementary documents\n- Policy documents\n- Carrier files (invoices, etc.)\n\n**Query Parameters:**\n- `search` (optional): Search by file name\n- `file_type` (optional): Filter by file type (cois, quote, proposal, application, policy, invoice)\n- `insured` (optional): Filter by insured ID (comma-separated for multiple)\n- `team` (opt"
+        },
+        {
+          "info": {
+            "name": "List Broker User Invites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/invites",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "\nList all user invites.\nThis endpoint lists all the broker's user invites.\n"
+        },
+        {
+          "info": {
+            "name": "Invite Broker User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/invites",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nSend an invite to an broker user(agent).\nThis endpoint invites a user.\n"
+        },
+        {
+          "info": {
+            "name": "Update Broker User Invite",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/invites/:id",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this broker invite."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nUpdate a pending broker user invite.\nThis endpoint allows updating the role and type of a pending invite.\nOnly pending invites can be updated.\n"
+        },
+        {
+          "info": {
+            "name": "Partially Update Broker User Invite",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/invites/:id",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this broker invite."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nPartially update a pending broker user invite.\nThis endpoint allows updating the role and/or type of a pending invite.\nOnly pending invites can be updated.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Broker User Invite",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/invites/:id",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this broker invite."
+              }
+            ]
+          },
+          "docs": "\nDelete a broker user invite.\nThis endpoint cancels a broker user invite by setting its status to cancelled.\n"
+        },
+        {
+          "info": {
+            "name": "List Sent Notification Emails",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/notification-emails",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "\nList all successfully sent notification emails to business users and underwriters\nassociated with the authenticated broker's agency.\n\nReturns only emails with 'sent' status.\nIncludes subject, sender, recipient, recipient type, and date sent information.\nOnly returns emails for businesses and underwriters belonging to the broker's agency.\n\n**Query Parameters:**\n- `business_id` (optional): Filter emails to only show those sent to users of a specific business/insured\n\n**Exclusions:**\n- OTP/Login c"
+        },
+        {
+          "info": {
+            "name": "List Received Notification Emails",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/received-notification-emails",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "\nList all successfully sent notification emails received by the authenticated broker user.\n\nReturns only emails with 'sent' status sent to the authenticated user making the request.\nIncludes subject, sender, recipient, and date sent information.\n\n**Exclusions:**\n- OTP/Login code emails are excluded from results\n\n**Response Fields:**\n- `id`: Unique identifier for the email\n- `subject`: Email subject line\n- `sender_email`: Sender's email address\n- `sender_name`: Sender's display name\n- `recipient_"
+        },
+        {
+          "info": {
+            "name": "Mark Notification as Read",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/received-notification-emails/:id/mark-as-read",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nMark a specific notification email as read for the authenticated broker user.\n\nThis endpoint updates the UserNotification record status to \"read\" and sets\nthe read_at timestamp. If no UserNotification record exists for this email,\none will be created with status \"read\".\n\n**URL Pattern:**\n`POST /apis/broker/{broker_id}/received-notification-emails/{id}/mark_as_read`\n\n**Response:**\nReturns the updated notification email with `is_read: true`.\n"
+        },
+        {
+          "info": {
+            "name": "List Broker users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/users",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "\nList all broker users.\nThis endpoint lists all the broker's users.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve Broker user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/users/:id",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this broker user."
+              }
+            ]
+          },
+          "docs": "\nRetrieve a broker user.\nThis endpoint retrieves a broker user.\n"
+        },
+        {
+          "info": {
+            "name": "Update Broker user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/users/:id",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this broker user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nUpdate a broker user.\nThis endpoint updates a broker user.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Broker user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.1fort.com/apis/broker/:broker_pk/users/:id",
+            "params": [
+              {
+                "name": "broker_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this broker user."
+              }
+            ]
+          },
+          "docs": "\nDelete a broker user.\nThis endpoint deletes a broker user.\n"
+        },
+        {
+          "info": {
+            "name": "Get Broker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/broker/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this broker agency."
+              }
+            ]
+          },
+          "docs": "\nRetrieve a broker.\nThis endpoint Get a broker.\n"
+        },
+        {
+          "info": {
+            "name": "Update Broker",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/broker/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this broker agency."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nUpdate a broker.\nThis endpoint updates a broker .\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

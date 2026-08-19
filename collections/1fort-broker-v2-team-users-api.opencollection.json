@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation broker (v2): team-users API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "broker (v2): team-users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Combined roster for the broker team page.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/team-users"
+          },
+          "docs": "Returns the agency's team members merged with email-integration mailbox\nusers in a single list, deduplicated by email address:\n- Every team member appears once with ``source: \"team\"``. When a mailbox\n  user with the same email exists, it is attached as ``email_user``.\n- Mailbox users with no matching team member appear as ``source: \"email\"``\n  rows (admin and maintainer requesters only), with the team-member fields\n  set to null and the mailbox data in ``email_user``.\n\nResponse shape: ``{\"count\""
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

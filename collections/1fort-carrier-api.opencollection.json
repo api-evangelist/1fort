@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Carrier API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "carrier",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Carriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/carriers",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List Carriers"
+        },
+        {
+          "info": {
+            "name": "Combined list of carriers and wholesalers in a single paginated response.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/carriers-wholesalers",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Each result item carries a ``type`` field (``\"carrier\"`` or ``\"wholesaler\"``)\nalongside common fields (``id``, ``name``, ``logo``, ``domains``) and\ntype-specific extras.  Results are sorted by name (case-insensitive, ascending)\nacross both types, then deduplicated by name — the first occurrence is kept\n(carriers precede wholesalers for the same name).\n\nSupported query params:\n    search               - case-insensitive name substring match (applied to both)\n    include_inactive     - ``true`` to"
+        },
+        {
+          "info": {
+            "name": "Direct products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/carriers/direct",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List of direct carriers a broker has access to and their products."
+        },
+        {
+          "info": {
+            "name": "List Wholesalers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/wholesalers",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "is_active",
+                "value": "",
+                "type": "query",
+                "description": "is_active"
+              },
+              {
+                "name": "is_owned_by_1fort",
+                "value": "",
+                "type": "query",
+                "description": "is_owned_by_1fort"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List Wholesalers"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

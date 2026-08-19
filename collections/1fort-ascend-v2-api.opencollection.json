@@ -1,0 +1,204 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation ascend (v2) ascend (v2) API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ascend (v2)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return a list of payments with summary data and applied filters.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/ascend/payments",
+            "params": [
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": ".. deprecated::\n    Prefer ``GET /apis/v2/billing/payments`` (insurance invoice backed).\n    This Ascend program list remains for legacy transition only."
+        },
+        {
+          "info": {
+            "name": "Export csv",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/ascend/payments/csv",
+            "params": [
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Export payments to CSV format.\nReturns all filtered payments without pagination (same filters as the list view)."
+        },
+        {
+          "info": {
+            "name": "Filter options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/ascend/payments/filter-options",
+            "params": [
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Get available filter options for frontend dropdowns.\nReturns unique values for each filterable field.\nRestricted to broker users and maintainer users via OrPermissions.\n\nAdmin and maintainer users see agency-wide filter options, while member users see only options for data they can access."
+        },
+        {
+          "info": {
+            "name": "Retrieve Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/ascend/payments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "ViewSet for retrieving payment data from Ascend.\nProvides payment information including premium amounts, due dates,\nbroker information, and carrier details.\n\nSupports filtering by:\n- insured: Filter by insured ID (dropdown selection)\n- quote_status: Filter by quote status (exact match)\n- payment_status: Filter by program status (exact match)\n- primary_agent: Filter by primary agent (team member) BrokerUser ID - supports multi-select with comma-separated BrokerUser IDs (e.g., \"123,456,789\")\n- sta"
+        },
+        {
+          "info": {
+            "name": "Update billable",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/v2/ascend/payments/:id/billables/:billable_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "billable_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a billable (policy) for this payment. Only allowed when not purchased.\nPATCHes the billable in Ascend and syncs the local DB from the response.\nPATCH /apis/v2/ascend/payments/{id}/billables/{billable_id}"
+        },
+        {
+          "info": {
+            "name": "Update program due date.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/v2/ascend/payments/:id/due-date",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Saves the due_date to the local database immediately for instant UI feedback,\nthen schedules an async task to sync the change to Ascend.\n\nPATCH /apis/v2/ascend/payments/{id}/due-date"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

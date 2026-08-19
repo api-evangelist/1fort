@@ -1,0 +1,859 @@
+openapi: 3.2.0
+info:
+  title: '1Fort API Documentation broker (v2): quotes API'
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: 'broker (v2): quotes'
+  x-displayName: Quotes
+  description: '**Access:** requires a JWT access token.'
+paths:
+  /v2/broker/quotes:
+    parameters: []
+    get:
+      operationId: v2_broker_quotes_list
+      summary: Paginated ViewSet for retrieving quotes for the broker.
+      description: "Supports Filtering By:\n- insured\n- has_tasks\n- status\n- payment_status\n- coverage_type\n- carrier (carrier UUID; comma-separated for multiple)\n- wholesaler (wholesaler UUID; comma-separated for multiple)\n- broker (Agent ID)\n- effective_date_min (minimum effective date, inclusive)\n- effective_date_max (maximum effective date, inclusive)\n\nSupports Searching By:\n- insured\n\nSupports Sorting By:\n- created_at\n- effective_date\n\nAdditional actions:\n- GET ``filter-options``: returns the distinct carriers and wholesalers\n  that appear in the broker's quotes, for populating filter dropdowns\n  without fetching the global carrier/wholesaler lists."
+      parameters:
+      - name: insured
+        in: query
+        description: 'Filter quotes by insured name.
+
+
+          Examples:
+
+          - `?insured=Acme Inc.` - Matches quotes with ''Acme Inc.'' in insured name
+
+          - `?insured=Acme Inc., Acme Corp.` - Matches quotes with ''Acme Inc.'' or ''Acme Corp.'' in insured name'
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: "Filter quotes by effective status. Supports comma-separated values.\n\n**Important:** For 'active' and 'expired' filters, this considers the `quote_validity_date` to determine the effective status, not just the database status field.\n\n**Status Behavior:**\n- `active` - Matches quotes with database status 'active' AND validity date in the future (or null)\n- `expired` - Matches quotes with:\n  - Database status 'expired', OR\n  - In-progress statuses (active, pending, referred, referral, awaiting_payment) with past validity date\n  - **Note:** Terminal statuses (declined, rejected, unsupported, unresponsive, archived) and bound statuses (bound, bind_requested) remain in their final state regardless of validity date\n- Other statuses (pending, declined, etc.) - Matches database status directly\n\n**Available statuses:**\n- `active`, `pending`, `referred`, `referral`, `declined`, `rejected`, `unsupported`, `unresponsive`, `expired`, `bind_requested`, `awaiting_payment`, `bound`, `archived`\n\n**Examples:**\n- `?status=active` - Active quotes that haven't expired by date\n- `?status=expired` - Quotes that are expired (by status or date)\n- `?status=active,pending` - Active or pending quotes\n- `?status=declined` - Declined quotes (remains declined regardless of validity date)"
+        required: false
+        schema:
+          type: string
+      - name: payment_status
+        in: query
+        description: 'Filter quotes by unified billing status (Ascend program and/or native checkout). Supports comma-separated values.
+
+
+          Special value:
+
+          - `pending` - No Ascend program / no program status, and no active native checkout invoice (or program row with blank status and no draft/open/partial/paid checkout)
+
+
+          Standard values:
+
+          - `created`, `ready_for_checkout`, `elected`, `checked_out`, `purchased`, `archived` — for native checkout, `created` maps to checkout draft; `ready_for_checkout` to open/partially paid; `purchased` to paid; `elected`/`checked_out`/`archived` remain Ascend program only.
+
+
+          Examples:
+
+          - `?payment_status=purchased` - Matches quotes with purchased Ascend program or paid native checkout
+
+          - `?payment_status=ready_for_checkout` - Ascend ready_for_checkout or native checkout open/partially paid
+
+          - `?payment_status=purchased,checked_out` - Matches either status
+
+          - `?payment_status=pending,purchased` - Pending (no billing activity) OR purchased'
+        required: false
+        schema:
+          type: string
+      - name: coverage_type
+        in: query
+        description: 'Filter quotes by coverage type.
+
+
+          Examples:
+
+          - `?coverage_type=CYBER` - Matches quotes with ''CYBER'' in coverage type
+
+          - `?coverage_type=CYBER, GENERAL_LIABILITY` - Matches quotes with ''CYBER'' or ''GENERAL_LIABILITY'' in coverage type'
+        required: false
+        schema:
+          type: string
+      - name: carrier
+        in: query
+        description: 'Filter quotes by carrier (market) UUID. Matches the quote''s carrier, the product''s carrier, or a carrier on any coverage under the quote''s coverage term. Supports comma-separated values for multiple carriers. Non-UUID tokens are ignored; if no valid UUIDs remain after parsing, the result set is empty.
+
+
+          Examples:
+
+          - `?carrier=<uuid>` - Quotes for that carrier
+
+          - `?carrier=<uuid1>,<uuid2>` - Quotes for either carrier'
+        required: false
+        schema:
+          type: string
+      - name: wholesaler
+        in: query
+        description: wholesaler
+        required: false
+        schema:
+          type: string
+      - name: has_tasks
+        in: query
+        description: 'Filter quotes by whether they have tasks.
+
+
+          Examples:
+
+          - `?has_tasks=true` - Matches quotes with tasks
+
+          - `?has_tasks=false` - Matches quotes without tasks'
+        required: false
+        schema:
+          type: boolean
+      - name: broker
+        in: query
+        description: 'Filter quotes by broker agent ID (BrokerUser). Supports comma-separated values to filter by multiple agents.
+
+
+          Examples:
+
+          - `?broker=20` - Matches quotes where agent with ID 20 is assigned
+
+          - `?broker=20,21,22` - Matches quotes where agents with IDs 20, 21, or 22 are assigned'
+        required: false
+        schema:
+          type: string
+      - name: effective_date_min
+        in: query
+        description: 'Filter quotes by minimum effective date (inclusive). Use ISO 8601 date format.
+
+
+          Examples:
+
+          - `?effective_date_min=2024-01-01` - Matches quotes with effective date on or after January 1, 2024
+
+          - `?effective_date_min=2024-01-01&effective_date_max=2024-12-31` - Matches quotes with effective date in 2024'
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: effective_date_max
+        in: query
+        description: 'Filter quotes by maximum effective date (inclusive). Use ISO 8601 date format.
+
+
+          Examples:
+
+          - `?effective_date_max=2024-12-31` - Matches quotes with effective date on or before December 31, 2024
+
+          - `?effective_date_min=2024-01-01&effective_date_max=2024-12-31` - Matches quotes with effective date in 2024'
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: 'Sort quotes by specified field. Use a minus sign (-) prefix for descending order.
+
+
+          **Available fields:**
+
+          - `created_at` - Sort by creation date (default: newest first)
+
+          - `effective_date` - Sort by policy effective date
+
+
+          **Examples:**
+
+          - `?ordering=-created_at` - Sort by newest first (default)
+
+          - `?ordering=created_at` - Sort by oldest first
+
+          - `?ordering=-effective_date` - Sort by newest effective date first
+
+          - `?ordering=effective_date` - Sort by oldest effective date first'
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BrokerQuoteV2FlexFields'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'broker (v2): quotes'
+  /v2/broker/quotes/filter-options:
+    parameters: []
+    get:
+      operationId: v2_broker_quotes_filter_options
+      summary: Return distinct markets (carriers and wholesalers) for the broker's quotes.
+      description: 'Used to populate the Markets filter on the broker /quotes page without
+
+        loading the full global carrier/wholesaler catalogues. Honors the same
+
+        role-based scoping as the list endpoint (members only see quotes for
+
+        businesses they''re assigned to).'
+      parameters:
+      - name: insured
+        in: query
+        description: insured
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: status
+        required: false
+        schema:
+          type: string
+      - name: payment_status
+        in: query
+        description: payment_status
+        required: false
+        schema:
+          type: string
+      - name: coverage_type
+        in: query
+        description: coverage_type
+        required: false
+        schema:
+          type: string
+      - name: carrier
+        in: query
+        description: carrier
+        required: false
+        schema:
+          type: string
+      - name: wholesaler
+        in: query
+        description: wholesaler
+        required: false
+        schema:
+          type: string
+      - name: has_tasks
+        in: query
+        description: has_tasks
+        required: false
+        schema:
+          type: string
+      - name: broker
+        in: query
+        description: broker
+        required: false
+        schema:
+          type: string
+      - name: effective_date_min
+        in: query
+        description: effective_date_min
+        required: false
+        schema:
+          type: string
+      - name: effective_date_max
+        in: query
+        description: effective_date_max
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BrokerQuoteV2FlexFields'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'broker (v2): quotes'
+  /v2/broker/quotes/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this Quote (Coverage Term).
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: v2_broker_quotes_read
+      summary: Paginated ViewSet for retrieving quotes for the broker.
+      description: "Supports Filtering By:\n- insured\n- has_tasks\n- status\n- payment_status\n- coverage_type\n- carrier (carrier UUID; comma-separated for multiple)\n- wholesaler (wholesaler UUID; comma-separated for multiple)\n- broker (Agent ID)\n- effective_date_min (minimum effective date, inclusive)\n- effective_date_max (maximum effective date, inclusive)\n\nSupports Searching By:\n- insured\n\nSupports Sorting By:\n- created_at\n- effective_date\n\nAdditional actions:\n- GET ``filter-options``: returns the distinct carriers and wholesalers\n  that appear in the broker's quotes, for populating filter dropdowns\n  without fetching the global carrier/wholesaler lists."
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerQuoteV2FlexFields'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'broker (v2): quotes'
+    patch:
+      operationId: v2_broker_quotes_partial_update
+      summary: Update Quote Follow-Up Notifications
+      description: Toggle follow-up reminder emails to underwriters for this quote. Only follow_up_notifications is writable; all other quote fields are read-only and ignored if included.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerQuoteFollowUpNotification'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'broker (v2): quotes'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrokerQuoteFollowUpNotification'
+        required: true
+components:
+  schemas:
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    BrokerQuoteFollowUpNotification:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        follow_up_notifications:
+          title: Follow up notifications
+          description: This will disable us sending email follow-ups to the underwriter for this quote
+          type: boolean
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    CarrierList:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        am_best_rating:
+          title: Am best rating
+          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    BrokerQuoteV2FlexFields:
+      required:
+      - carrier
+      - coverage_type
+      - task_count
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        insured:
+          title: Insured
+          type: string
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        status:
+          title: Status
+          description: 'Market status of the quote. not_submitted: We have not submitted to the market yet, or decided not to because of appetite concerns. pending: We are actively sending this submission to the market. more_info_needed: We are unable to send the submission to the market because we are missing info about the insured, or the market has requested additional info. referred: The market has received all the info they need, and is still considering the risk. active: The market has provided a bindable quote. bind_requested: The insured or broker has expressed intent to move forward in binding this quote. bound: The market has bound the quote. declined: The market has reviewed the submission, but declined to provide a quote. expired: The quote is no longer valid (past its validity date with no bind request). archived: The broker has archived the quote.'
+          type: string
+          readOnly: true
+        market_status_reason:
+          title: Market status reason
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        primary_agent:
+          title: Primary agent
+          type: string
+          readOnly: true
+        all_agents:
+          title: All agents
+          type: string
+          readOnly: true
+        carrier:
+          $ref: '#/components/schemas/CarrierList'
+        coverage_application:
+          title: Coverage application
+          type:
+          - string
+          - 'null'
+          format: uuid
+        coverage_type:
+          title: Coverage type
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        aggregate_limit:
+          title: Aggregate limit
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        aggregate_retention:
+          title: Aggregate retention
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        effective_date:
+          title: Effective date
+          type:
+          - string
+          - 'null'
+          format: date
+        payment_status:
+          title: Payment status
+          type: string
+          readOnly: true
+        task_count:
+          title: Task count
+          type: integer
+        has_tasks:
+          title: Has tasks
+          type: string
+          readOnly: true
+        payment_link:
+          title: Payment link
+          type: string
+          readOnly: true
+        total_amount_cents:
+          title: Total amount cents
+          type: string
+          readOnly: true
+        insurance_invoice_ids:
+          title: Insurance invoice ids
+          type: string
+          readOnly: true
+        follow_up_notifications:
+          title: Follow up notifications
+          description: This will disable us sending email follow-ups to the underwriter for this quote
+          type: boolean
+        source:
+          title: Source
+          type: string
+          readOnly: true
+        source_display:
+          title: Source display
+          type: string
+          readOnly: true
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

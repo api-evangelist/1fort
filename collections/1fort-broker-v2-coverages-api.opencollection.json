@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation broker (v2): coverages API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "broker (v2): coverages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Paginated ViewSet for retrieving coverages for the broker.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/coverages",
+            "params": [
+              {
+                "name": "insured",
+                "value": "",
+                "type": "query",
+                "description": "Filter coverages by insured.\n\nExamples:\n- `?insured=Acme Inc.` - Matches coverages with 'Acme Inc.' in insured name\n- `?insured=Acme Inc., Acme Corp.` - Matches coverages with 'Acme Inc.' or 'Acme Corp.' in insured name"
+              },
+              {
+                "name": "coverage_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter coverages by coverage type.\n\nExamples:\n- `?coverage_type=CYBER` - Matches coverages with 'CYBER' in coverage type\n- `?coverage_type=CYBER, GENERAL_LIABILITY` - Matches coverages with 'CYBER' or 'GENERAL_LIABILITY' in coverage type"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter coverages by status.\n\nExamples:\n- `?status=ACTIVE` - Matches coverages with 'ACTIVE' in status\n- `?status=ACTIVE, PENDING` - Matches coverages with 'ACTIVE' or 'PENDING' in status"
+              },
+              {
+                "name": "agent",
+                "value": "",
+                "type": "query",
+                "description": "Filter coverages by assigned team member.\n\nExamples:\n- `?agent=123` - Matches coverages where agent id 123 is assigned\n- `?agent=123,456` - Matches coverages where agent id 123 or 456 is assigned"
+              },
+              {
+                "name": "submission_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter coverages by submission type. Supports comma-separated values.\n\nAvailable values:\n- `NEW` - New business submissions\n- `RENEWAL` - Renewal submissions\n- `OTHER` - Other submission types\n\nExamples:\n- `?submission_type=NEW` - Matches new business submissions\n- `?submission_type=NEW,RENEWAL` - Matches new or renewal submissions"
+              },
+              {
+                "name": "effective_date_min",
+                "value": "",
+                "type": "query",
+                "description": "Filter coverages by minimum effective date (inclusive). Use ISO 8601 date format.\n\nExamples:\n- `?effective_date_min=2024-01-01` - Matches coverages with effective date on or after January 1, 2024\n- `?effective_date_min=2024-01-01&effective_date_max=2024-12-31` - Matches coverages with effective date in 2024"
+              },
+              {
+                "name": "effective_date_max",
+                "value": "",
+                "type": "query",
+                "description": "Filter coverages by maximum effective date (inclusive). Use ISO 8601 date format.\n\nExamples:\n- `?effective_date_max=2024-12-31` - Matches coverages with effective date on or before December 31, 2024\n- `?effective_date_min=2024-01-01&effective_date_max=2024-12-31` - Matches coverages with effective date in 2024"
+              },
+              {
+                "name": "exclude_source",
+                "value": "",
+                "type": "query",
+                "description": "exclude_source"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Supports Filtering By:\n- insured\n- coverage_type\n- agent (any assigned team member, not just primary)\n- status\n- submission_type\n- effective_date_min (minimum effective date, inclusive)\n- effective_date_max (maximum effective date, inclusive)\n\nSupports Searching By:\n- insured"
+        },
+        {
+          "info": {
+            "name": "Paginated ViewSet for retrieving coverages for the broker.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/coverages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this coverage application."
+              }
+            ]
+          },
+          "docs": "Supports Filtering By:\n- insured\n- coverage_type\n- agent (any assigned team member, not just primary)\n- status\n- submission_type\n- effective_date_min (minimum effective date, inclusive)\n- effective_date_max (maximum effective date, inclusive)\n\nSupports Searching By:\n- insured"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

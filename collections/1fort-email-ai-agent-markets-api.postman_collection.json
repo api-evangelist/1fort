@@ -1,0 +1,930 @@
+{
+  "item": [
+    {
+      "id": "232b67a5-a20f-4f3d-bb5d-3a92b3f52dab",
+      "name": "Email AI Agent - Markets",
+      "description": {
+        "content": "**Access:** requires a JWT access token.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b0f3f348-c308-486c-acc2-7849d7597b23",
+          "name": "Log Market Transaction",
+          "request": {
+            "name": "Log Market Transaction",
+            "description": {
+              "content": "\nRecord a single agent-driven `markets/upsert` attempt (success or failure).\n\n- On success, `market_id` is required and `error_code`/`error_message` must be omitted.\n- On failure, `error_code` and `error_message` are required and `market_id` must be omitted.\n\nBoth `email_id` and `market_id` (when present) must belong to the session broker.\n\n**Authentication**: Requires API Key + Session Token\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "agent",
+                "markets",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Processing session token (scopes access to broker)",
+                "key": "X-Processing-Session",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email_id\": \"<uuid>\",\n  \"status\": \"<string>\",\n  \"market_id\": \"<string,null-uuid>\",\n  \"request_payload\": \"<string>\",\n  \"response_payload\": \"<string>\",\n  \"error_code\": \"<string>\",\n  \"error_message\": \"<string>\",\n  \"attempted_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0b5b34b1-abc7-414b-a701-d51c3f1beda7",
+              "name": "Transaction logged",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "agent",
+                    "markets",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Processing session token (scopes access to broker)",
+                    "key": "X-Processing-Session",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email_id\": \"<uuid>\",\n  \"status\": \"<string>\",\n  \"market_id\": \"<string,null-uuid>\",\n  \"request_payload\": \"<string>\",\n  \"response_payload\": \"<string>\",\n  \"error_code\": \"<string>\",\n  \"error_message\": \"<string>\",\n  \"attempted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "793f3113-c02a-4a4e-b0fc-4d0ccf2c8e7b",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "agent",
+                    "markets",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Processing session token (scopes access to broker)",
+                    "key": "X-Processing-Session",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email_id\": \"<uuid>\",\n  \"status\": \"<string>\",\n  \"market_id\": \"<string,null-uuid>\",\n  \"request_payload\": \"<string>\",\n  \"response_payload\": \"<string>\",\n  \"error_code\": \"<string>\",\n  \"error_message\": \"<string>\",\n  \"attempted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f872d6f0-fc7a-4228-b5cc-e8f77a34b205",
+              "name": "Unauthorized - Invalid or missing API key or session token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "agent",
+                    "markets",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Processing session token (scopes access to broker)",
+                    "key": "X-Processing-Session",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email_id\": \"<uuid>\",\n  \"status\": \"<string>\",\n  \"market_id\": \"<string,null-uuid>\",\n  \"request_payload\": \"<string>\",\n  \"response_payload\": \"<string>\",\n  \"error_code\": \"<string>\",\n  \"error_message\": \"<string>\",\n  \"attempted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"UNAUTHORIZED\",\n    \"message\": \"Invalid or missing authentication credentials\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5ff491f-3d4f-4a9a-b066-4435296c4494",
+              "name": "Forbidden - Resource belongs to unauthorized broker",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "agent",
+                    "markets",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Processing session token (scopes access to broker)",
+                    "key": "X-Processing-Session",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email_id\": \"<uuid>\",\n  \"status\": \"<string>\",\n  \"market_id\": \"<string,null-uuid>\",\n  \"request_payload\": \"<string>\",\n  \"response_payload\": \"<string>\",\n  \"error_code\": \"<string>\",\n  \"error_message\": \"<string>\",\n  \"attempted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"FORBIDDEN\",\n    \"message\": \"Access denied - resource outside session scope\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ead729d-1798-4f08-a280-70aff4d8cf1b",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "agent",
+                    "markets",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Processing session token (scopes access to broker)",
+                    "key": "X-Processing-Session",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email_id\": \"<uuid>\",\n  \"status\": \"<string>\",\n  \"market_id\": \"<string,null-uuid>\",\n  \"request_payload\": \"<string>\",\n  \"response_payload\": \"<string>\",\n  \"error_code\": \"<string>\",\n  \"error_message\": \"<string>\",\n  \"attempted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ebd749f-1af6-4f09-940c-692791e9422f",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "agent",
+                    "markets",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Processing session token (scopes access to broker)",
+                    "key": "X-Processing-Session",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email_id\": \"<uuid>\",\n  \"status\": \"<string>\",\n  \"market_id\": \"<string,null-uuid>\",\n  \"request_payload\": \"<string>\",\n  \"response_payload\": \"<string>\",\n  \"error_code\": \"<string>\",\n  \"error_message\": \"<string>\",\n  \"attempted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca337c4b-20cd-41c0-a1c6-e8c855acdb7a",
+          "name": "Upsert Market",
+          "request": {
+            "name": "Upsert Market",
+            "description": {
+              "content": "\nCreate or update a broker market for the session broker matched by `(carrier, wholesaler, product_lines)`.\n\nAt least one of `carrier` or `wholesaler` must be provided. `product_lines` must be non-empty.\n\nIf no existing market for the session broker matches the key exactly, a new one is created\nand `201 Created` is returned. If exactly one match is found, it is updated and `200 OK` is\nreturned with the same `id`.\n\nIf multiple rows match the key (data anomaly), `400 Bad Request` is returned — use\n`PATCH /markets/{id}` to resolve.\n\n**Authentication**: Requires API Key + Session Token\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "agent",
+                "markets",
+                "upsert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Processing session token (scopes access to broker)",
+                "key": "X-Processing-Session",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product_lines\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"carrier\": \"<string,null-uuid>\",\n  \"wholesaler\": \"<string,null-uuid>\",\n  \"sub_product_lines\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"herald_products\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"submission_method\": \"<string>\",\n  \"agency_code\": \"<string,null>\",\n  \"am_best_rating\": \"<string>\",\n  \"commission_percentage\": \"<string,null-decimal>\",\n  \"renewal_commission_percentage\": \"<string,null-decimal>\",\n  \"filing_type\": \"<string>\",\n  \"billing_type\": \"<string>\",\n  \"eta_hours\": \"<integer,null>\",\n  \"underwriter_emails\": \"<string>\",\n  \"remittance_emails\": \"<string>\",\n  \"bank_routing_number\": \"<string,null>\",\n  \"bank_account_number\": \"<string,null>\",\n  \"is_active\": \"<boolean>\",\n  \"special_notes\": \"<string>\",\n  \"restrictions\": \"<string>\",\n  \"source\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0185b7d9-5bd8-4a4c-9af3-8d591534f4c6",
+              "name": "Market updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "agent",
+                    "markets",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Processing session token (scopes access to broker)",
+                    "key": "X-Processing-Session",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"product_lines\": [\n    \"<uuid>\"\n  ],\n  \"carrier\": \"<string,null-uuid>\",\n  \"wholesaler\": \"<string,null-uuid>\",\n  \"sub_product_lines\": [\n    \"<uuid>\"\n  ],\n  \"herald_products\": [\n    \"<uuid>\"\n  ],\n  \"submission_method\": \"<string>\",\n  \"agency_code\": \"<string,null>\",\n  \"am_best_rating\": \"<string>\",\n  \"commission_percentage\": \"<string,null-decimal>\",\n  \"renewal_commission_percentage\": \"<string,null-decimal>\",\n  \"filing_type\": \"<string>\",\n  \"billing_type\": \"<string>\",\n  \"eta_hours\": \"<integer,null>\",\n  \"underwriter_emails\": \"<string>\",\n  \"remittance_emails\": \"<string>\",\n  \"bank_routing_number\": \"<string,null>\",\n  \"bank_account_number\": \"<string,null>\",\n  \"is_active\": \"<boolean>\",\n  \"special_notes\": \"<string>\",\n  \"restrictions\": \"<string>\",\n  \"source\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3c5577e1-ec5e-432d-9db1-68fea083d97d",
+              "name": "Market created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "agent",
+                    "markets",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Processing session token (scopes access to broker)",
+                    "key": "X-Processing-Session",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"product_lines\": [\n    \"<uuid>\"\n  ],\n  \"carrier\": \"<string,null-uuid>\",\n  \"wholesaler\": \"<string,null-uuid>\",\n  \"sub_product_lines\": [\n    \"<uuid>\"\n  ],\n  \"herald_products\": [\n    \"<uuid>\"\n  ],\n  \"submission_method\": \"<string>\",\n  \"agency_code\": \"<string,null>\",\n  \"am_best_rating\": \"<string>\",\n  \"commission_percentage\": \"<string,null-decimal>\",\n  \"renewal_commission_percentage\": \"<string,null-decimal>\",\n  \"filing_type\": \"<string>\",\n  \"billing_type\": \"<string>\",\n  \"eta_hours\": \"<integer,null>\",\n  \"underwriter_emails\": \"<string>\",\n  \"remittance_emails\": \"<string>\",\n  \"bank_routing_number\": \"<string,null>\",\n  \"bank_account_number\": \"<string,null>\",\n  \"is_active\": \"<boolean>\",\n  \"special_notes\": \"<string>\",\n  \"restrictions\": \"<string>\",\n  \"source\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b7ee7abe-21ab-42f6-afeb-9441255c6176",
+              "name": "Validation error or ambiguous match",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "agent",
+                    "markets",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Processing session token (scopes access to broker)",
+                    "key": "X-Processing-Session",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"product_lines\": [\n    \"<uuid>\"\n  ],\n  \"carrier\": \"<string,null-uuid>\",\n  \"wholesaler\": \"<string,null-uuid>\",\n  \"sub_product_lines\": [\n    \"<uuid>\"\n  ],\n  \"herald_products\": [\n    \"<uuid>\"\n  ],\n  \"submission_method\": \"<string>\",\n  \"agency_code\": \"<string,null>\",\n  \"am_best_rating\": \"<string>\",\n  \"commission_percentage\": \"<string,null-decimal>\",\n  \"renewal_commission_percentage\": \"<string,null-decimal>\",\n  \"filing_type\": \"<string>\",\n  \"billing_type\": \"<string>\",\n  \"eta_hours\": \"<integer,null>\",\n  \"underwriter_emails\": \"<string>\",\n  \"remittance_emails\": \"<string>\",\n  \"bank_routing_number\": \"<string,null>\",\n  \"bank_account_number\": \"<string,null>\",\n  \"is_active\": \"<boolean>\",\n  \"special_notes\": \"<string>\",\n  \"restrictions\": \"<string>\",\n  \"source\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6fb98ee9-39ca-4221-b5de-eaac52a6e868",
+              "name": "Unauthorized - Invalid or missing API key or session token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "agent",
+                    "markets",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Processing session token (scopes access to broker)",
+                    "key": "X-Processing-Session",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"product_lines\": [\n    \"<uuid>\"\n  ],\n  \"carrier\": \"<string,null-uuid>\",\n  \"wholesaler\": \"<string,null-uuid>\",\n  \"sub_product_lines\": [\n    \"<uuid>\"\n  ],\n  \"herald_products\": [\n    \"<uuid>\"\n  ],\n  \"submission_method\": \"<string>\",\n  \"agency_code\": \"<string,null>\",\n  \"am_best_rating\": \"<string>\",\n  \"commission_percentage\": \"<string,null-decimal>\",\n  \"renewal_commission_percentage\": \"<string,null-decimal>\",\n  \"filing_type\": \"<string>\",\n  \"billing_type\": \"<string>\",\n  \"eta_hours\": \"<integer,null>\",\n  \"underwriter_emails\": \"<string>\",\n  \"remittance_emails\": \"<string>\",\n  \"bank_routing_number\": \"<string,null>\",\n  \"bank_account_number\": \"<string,null>\",\n  \"is_active\": \"<boolean>\",\n  \"special_notes\": \"<string>\",\n  \"restrictions\": \"<string>\",\n  \"source\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"UNAUTHORIZED\",\n    \"message\": \"Invalid or missing authentication credentials\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b8be8cd-323b-49d6-89a9-df6fb72c8920",
+              "name": "Forbidden - Resource belongs to unauthorized broker",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "agent",
+                    "markets",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Processing session token (scopes access to broker)",
+                    "key": "X-Processing-Session",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"product_lines\": [\n    \"<uuid>\"\n  ],\n  \"carrier\": \"<string,null-uuid>\",\n  \"wholesaler\": \"<string,null-uuid>\",\n  \"sub_product_lines\": [\n    \"<uuid>\"\n  ],\n  \"herald_products\": [\n    \"<uuid>\"\n  ],\n  \"submission_method\": \"<string>\",\n  \"agency_code\": \"<string,null>\",\n  \"am_best_rating\": \"<string>\",\n  \"commission_percentage\": \"<string,null-decimal>\",\n  \"renewal_commission_percentage\": \"<string,null-decimal>\",\n  \"filing_type\": \"<string>\",\n  \"billing_type\": \"<string>\",\n  \"eta_hours\": \"<integer,null>\",\n  \"underwriter_emails\": \"<string>\",\n  \"remittance_emails\": \"<string>\",\n  \"bank_routing_number\": \"<string,null>\",\n  \"bank_account_number\": \"<string,null>\",\n  \"is_active\": \"<boolean>\",\n  \"special_notes\": \"<string>\",\n  \"restrictions\": \"<string>\",\n  \"source\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"FORBIDDEN\",\n    \"message\": \"Access denied - resource outside session scope\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abfa1cd9-5279-43e3-bc4a-a032035e520e",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "agent",
+                    "markets",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Processing session token (scopes access to broker)",
+                    "key": "X-Processing-Session",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"product_lines\": [\n    \"<uuid>\"\n  ],\n  \"carrier\": \"<string,null-uuid>\",\n  \"wholesaler\": \"<string,null-uuid>\",\n  \"sub_product_lines\": [\n    \"<uuid>\"\n  ],\n  \"herald_products\": [\n    \"<uuid>\"\n  ],\n  \"submission_method\": \"<string>\",\n  \"agency_code\": \"<string,null>\",\n  \"am_best_rating\": \"<string>\",\n  \"commission_percentage\": \"<string,null-decimal>\",\n  \"renewal_commission_percentage\": \"<string,null-decimal>\",\n  \"filing_type\": \"<string>\",\n  \"billing_type\": \"<string>\",\n  \"eta_hours\": \"<integer,null>\",\n  \"underwriter_emails\": \"<string>\",\n  \"remittance_emails\": \"<string>\",\n  \"bank_routing_number\": \"<string,null>\",\n  \"bank_account_number\": \"<string,null>\",\n  \"is_active\": \"<boolean>\",\n  \"special_notes\": \"<string>\",\n  \"restrictions\": \"<string>\",\n  \"source\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "176ff173-4975-4f8f-a551-75d24a37972d",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "agent",
+                    "markets",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Processing session token (scopes access to broker)",
+                    "key": "X-Processing-Session",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"product_lines\": [\n    \"<uuid>\"\n  ],\n  \"carrier\": \"<string,null-uuid>\",\n  \"wholesaler\": \"<string,null-uuid>\",\n  \"sub_product_lines\": [\n    \"<uuid>\"\n  ],\n  \"herald_products\": [\n    \"<uuid>\"\n  ],\n  \"submission_method\": \"<string>\",\n  \"agency_code\": \"<string,null>\",\n  \"am_best_rating\": \"<string>\",\n  \"commission_percentage\": \"<string,null-decimal>\",\n  \"renewal_commission_percentage\": \"<string,null-decimal>\",\n  \"filing_type\": \"<string>\",\n  \"billing_type\": \"<string>\",\n  \"eta_hours\": \"<integer,null>\",\n  \"underwriter_emails\": \"<string>\",\n  \"remittance_emails\": \"<string>\",\n  \"bank_routing_number\": \"<string,null>\",\n  \"bank_account_number\": \"<string,null>\",\n  \"is_active\": \"<boolean>\",\n  \"special_notes\": \"<string>\",\n  \"restrictions\": \"<string>\",\n  \"source\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.1fort.com/apis/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "be6c2cdf-3cbf-4822-8d74-e7a5f116e66c",
+    "name": "1Fort API Documentation Email AI Agent - Markets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# 1Fort API\n\nREST API for the 1Fort insurance platform. This document is the authoritative\nmap of the API surface; endpoints are grouped in the sidebar by **app** and\n**version**, and large apps are split into per-resource sub-groups.\n\n## Authentication\n\nAlmost every endpoint requires a **JWT access token**. Send it in the\n`Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may\nalso be presented as an HTTP-only cookie. Endpoints documented with no security\nrequirement are intentionally public (for example sign-in, OTP and storefront\nendpoints).\n\n## Multi-tenancy\n\nResources are scoped to a tenant. Nested routes carry the owning resource id in\nthe path (for example `/v2/broker/{business_pk}/applications`); a token is only\nauthorised for the businesses its user may access. Object-level permissions are\nenforced per endpoint.\n\n## Versioning\n\n`v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`\nendpoints remain documented for compatibility. Endpoints marked **deprecated**\nare scheduled for removal; prefer the documented replacement.\n",
+      "type": "text/plain"
+    }
+  }
+}

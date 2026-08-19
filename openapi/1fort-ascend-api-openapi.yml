@@ -1,0 +1,898 @@
+openapi: 3.2.0
+info:
+  title: 1Fort API Documentation Ascend API
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: ascend
+  x-displayName: Ascend
+  description: '**Deprecated.** Legacy Ascend billing/payments; use the Billing (v2) endpoints instead.
+
+
+    **Access:** mixed; some endpoints are public, others require JWT or an API key (per endpoint).'
+paths:
+  /ascend/invoice/{invoice_id}/download/:
+    parameters:
+    - name: invoice_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: ascend_invoice_download_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - ascend
+      security:
+      - ApiKey: []
+      summary: List Download
+      deprecated: true
+    post:
+      operationId: ascend_invoice_download_create
+      description: 'Generate a custom invoice PDF for the specified invoice.
+
+        This endpoint generates a PDF using our internal PDF generator instead of
+
+        proxying to Ascend''s invoice URL.
+
+
+        Query Parameters:
+
+        - return_json: If true, returns the JSON payload used for PDF generation instead of the PDF'
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - ascend
+      security:
+      - ApiKey: []
+      summary: Create Download
+      deprecated: true
+  /ascend/invoice/{invoice_id}/receipt/:
+    parameters:
+    - name: invoice_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: ascend_invoice_receipt_list
+      description: 'Serve a receipt PDF for the specified invoice.
+
+        This endpoint serves receipt PDFs from S3 if available.'
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - ascend
+      security:
+      - ApiKey: []
+      summary: List Receipt
+      deprecated: true
+    post:
+      operationId: ascend_invoice_receipt_create
+      description: 'Generate a custom receipt PDF for the specified invoice.
+
+        This endpoint generates a receipt using our internal PDF generator.
+
+
+        Query Parameters:
+
+        - return_json: If true, returns the JSON payload used for receipt PDF generation instead of the PDF'
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - ascend
+      security:
+      - ApiKey: []
+      summary: Create Receipt
+      deprecated: true
+  /ascend/payouts:
+    parameters: []
+    get:
+      operationId: ascend_payouts_list
+      description: Return a list of payouts with summary data and applied filters.
+      parameters:
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Payout'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - ascend
+      summary: List Payouts
+      deprecated: true
+  /ascend/payouts/csv:
+    parameters: []
+    get:
+      operationId: ascend_payouts_export_csv
+      description: 'Export payouts to CSV format.
+
+        Returns all filtered payouts without pagination.'
+      parameters:
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            '*/*':
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Payout'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - ascend
+      summary: Export csv
+      deprecated: true
+  /ascend/payouts/filter-options:
+    parameters: []
+    get:
+      operationId: ascend_payouts_filter_options
+      description: 'Get available filter options for frontend dropdowns.
+
+        Returns unique values for each filterable field within the user''s accessible data.'
+      parameters:
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Payout'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - ascend
+      summary: Filter options
+      deprecated: true
+  /ascend/payouts/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: ascend_payouts_read
+      description: 'ViewSet for retrieving payout data from Ascend.
+
+        Provides comprehensive payout information including amounts, status, timing,
+
+        and related program, invoice, and account details.
+
+
+        Supports filtering by:
+
+        - status: Filter by payout status (exact match)
+
+        - reference: Filter by payout reference (partial match)
+
+        - amount_min/amount_max: Filter by payout amount range (in dollars)
+
+        - purchased_on_from/purchased_on_to: Filter by program purchase date range
+
+        - initiated_on_from/initiated_on_to: Filter by payout initiation date range
+
+        - cleared_on_from/cleared_on_to: Filter by payout cleared date range
+
+        - customer: Filter by customer/insured name (partial match)
+
+        - payout_type: Filter by payout type (exact match)
+
+        - program_id: Filter by related program ID (exact match)
+
+        - invoice_id: Filter by related invoice ID (exact match)
+
+        - payable_account_id: Filter by payable account ID (exact match)
+
+        - ascend_id: Filter by Ascend payout ID (partial match)
+
+
+        Supports sorting by:
+
+        - customer, status, reference, amount, purchased date, initiated date, cleared date
+
+
+        Performance Notes:
+
+        - All filters use indexed fields for optimal performance
+
+        - Date range filters are optimized for large datasets'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payout'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - ascend
+      summary: Retrieve Payout
+      deprecated: true
+  /ascend/payouts/{id}/dispatch:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: ascend_payouts_dispatch_payable
+      description: 'Manually release an on_hold Stripe market payable once remittance setup
+
+        is complete (verified agency-bill market with bank details).'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payout'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - ascend
+      summary: Dispatch payable
+      deprecated: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payout'
+        required: true
+  /ascend/webhook/invoice:
+    parameters: []
+    post:
+      operationId: ascend_webhook_invoice_webhook
+      summary: ViewSet for handling Ascend webhook events.
+      description: 'The INVOICE_UPDATE_RESTRICTIONS dictionary defines which updates are not
+
+        allowed for specific event types and current invoice statuses. This ensures
+
+        that invoices follow a predetermined lifecycle and prevents invalid state changes.'
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - ascend
+      security: []
+      deprecated: true
+  /ascend/webhook/payout:
+    parameters: []
+    post:
+      operationId: ascend_webhook_payout_webhook
+      summary: ViewSet for handling Ascend webhook events.
+      description: 'The INVOICE_UPDATE_RESTRICTIONS dictionary defines which updates are not
+
+        allowed for specific event types and current invoice statuses. This ensures
+
+        that invoices follow a predetermined lifecycle and prevents invalid state changes.'
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - ascend
+      security: []
+      deprecated: true
+components:
+  schemas:
+    Payout:
+      required:
+      - status
+      - payout_type
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        ascend_id:
+          title: Ascend id
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        source:
+          title: Source
+          type: string
+          enum:
+          - ascend
+          - stripe
+        gross_payout_amount:
+          title: Gross payout amount
+          type: string
+          readOnly: true
+        net_payout_amount:
+          title: Net payout amount
+          type: string
+          readOnly: true
+        status:
+          title: Status
+          type: string
+          maxLength: 50
+          minLength: 1
+        payout_type:
+          title: Payout type
+          type: string
+          maxLength: 50
+          minLength: 1
+        paid_at:
+          title: Paid at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        failed_at:
+          title: Failed at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paying_at:
+          title: Paying at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        ascend_created_at:
+          title: Ascend created at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        ascend_updated_at:
+          title: Ascend updated at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paid_at_formatted:
+          title: Paid at formatted
+          type: string
+          readOnly: true
+        failed_at_formatted:
+          title: Failed at formatted
+          type: string
+          readOnly: true
+        paying_at_formatted:
+          title: Paying at formatted
+          type: string
+          readOnly: true
+        created_at_formatted:
+          title: Created at formatted
+          type: string
+          readOnly: true
+        reference:
+          title: Reference
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        subscription_id:
+          title: Subscription id
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        installment_id:
+          title: Installment id
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        recipient:
+          title: Recipient
+          type:
+          - object
+          - 'null'
+        program_info:
+          title: Program info
+          type: string
+          readOnly: true
+        invoice_info:
+          title: Invoice info
+          type: string
+          readOnly: true
+        billable_info:
+          title: Billable info
+          type: string
+          readOnly: true
+        payable_account_info:
+          title: Payable account info
+          type: string
+          readOnly: true
+        can_dispatch:
+          title: Can dispatch
+          type: string
+          readOnly: true
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

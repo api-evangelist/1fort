@@ -1,0 +1,1954 @@
+openapi: 3.2.0
+info:
+  title: 1Fort API Documentation Business User API
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: business-user
+  x-displayName: User
+  description: '**Access:** requires a JWT access token.'
+paths:
+  /business-employee-type-permission:
+    parameters: []
+    get:
+      operationId: business-employee-type-permission_list
+      summary: Get Employee Type Permissions
+      description: '
+
+        Get the list of permissions for an employee type. If an employee type is not returned in the response, it means that it has no permissions.
+
+
+        **Permissions:** ADMIN, SUPER_ADMIN
+
+        '
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BusinessEmployeeTypePermission'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+    post:
+      operationId: business-employee-type-permission_create
+      summary: Create Employee Type Permission
+      description: '
+
+        Create an employee type permission.
+
+
+        **Permissions:** SUPER_ADMIN, ADMIN
+
+        '
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessEmployeeTypePermission'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessEmployeeTypePermission'
+        required: true
+  /business-employee-type-permission/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this business employee type permission.
+      required: true
+      schema:
+        type: integer
+    get:
+      operationId: business-employee-type-permission_read
+      summary: Get Employee Type Permission
+      description: '
+
+        Get an employee type permission.
+
+
+        **Permissions:** SUPER_ADMIN, ADMIN
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessEmployeeTypePermission'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+    patch:
+      operationId: business-employee-type-permission_partial_update
+      summary: Update Employee Type Permission
+      description: '
+
+        Update an employee type permission.
+
+
+        **Permissions:** SUPER_ADMIN, ADMIN
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessEmployeeTypePermission'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessEmployeeTypePermission'
+        required: true
+    delete:
+      operationId: business-employee-type-permission_delete
+      summary: Delete Employee Type Permission
+      description: '
+
+        Delete an employee type permission.
+
+
+        **Permissions:** SUPER_ADMIN, ADMIN
+
+        '
+      responses:
+        '204':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+  /business-group:
+    parameters: []
+    get:
+      operationId: business-group_list
+      summary: Get Groups
+      description: '
+
+        Get the business user groups.
+
+
+        **Permissions:** `can_manage_user_groups`
+
+        '
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BusinessGroup'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+    post:
+      operationId: business-group_create
+      summary: Create Group
+      description: '
+
+        Create a group.
+
+
+        **Permissions:** `can_manage_user_groups`
+
+        '
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessGroup'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessGroup'
+        required: true
+  /business-group/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this business group.
+      required: true
+      schema:
+        type: integer
+    get:
+      operationId: business-group_read
+      summary: Get Group Details
+      description: '
+
+        Get details of a group.
+
+
+        **Permissions:** ADMIN, SUPER_ADMIN
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessGroup'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+    patch:
+      operationId: business-group_partial_update
+      summary: Update Group
+      description: '
+
+        Update a group.
+
+
+        **Permissions:** ADMIN, SUPER_ADMIN
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessGroup'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessGroup'
+        required: true
+    delete:
+      operationId: business-group_delete
+      summary: Delete Group
+      description: '
+
+        Delete a group.
+
+
+        **Permissions:** ADMIN, SUPER_ADMIN
+
+        '
+      responses:
+        '204':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+  /business-group/{id}/add-users:
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this business group.
+      required: true
+      schema:
+        type: integer
+    post:
+      operationId: business-group_add_users
+      summary: Add Users to Group
+      description: '
+
+        Add users to a group.
+
+
+        **Permissions:** `can_manage_user_groups`
+
+        '
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessGroup'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessGroup'
+        required: true
+  /business-group/{id}/get-users:
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this business group.
+      required: true
+      schema:
+        type: integer
+    get:
+      operationId: business-group_get_users
+      summary: Get Group Users
+      description: '
+
+        Get the list of users in a group.
+
+
+        **Permissions:** ADMIN, SUPER_ADMIN
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessGroup'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+  /business-group/{id}/remove-users:
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this business group.
+      required: true
+      schema:
+        type: integer
+    post:
+      operationId: business-group_remove_users
+      summary: Remove Users from Group
+      description: '
+
+        Remove users from a group.
+
+
+        **Permissions:** `can_manage_user_groups`
+
+        '
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessGroup'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessGroup'
+        required: true
+  /business-user:
+    parameters: []
+    get:
+      operationId: business-user_list
+      summary: Get Business Users
+      description: '
+
+        Get the list of all the users in the logged in user''s business.
+
+
+        **Permissions:** ADMIN, SUPER_ADMIN
+
+        '
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: user__status
+        in: query
+        description: user__status
+        required: false
+        schema:
+          type: string
+          enum:
+          - Not Invited
+          - Invited
+          - Active
+          - Removed
+      - name: employee_type
+        in: query
+        description: employee_type
+        required: false
+        schema:
+          type: string
+          enum:
+          - employee
+          - contractor
+          - non_employee
+          - auditor
+          - soc2
+          - it_security
+          - other
+      - name: is_administrator
+        in: query
+        description: is_administrator
+        required: false
+        schema:
+          type: string
+      - name: role
+        in: query
+        description: role
+        required: false
+        schema:
+          type: string
+          enum:
+          - admin
+          - super_admin
+          - user
+          - one_fort_maintainer
+          - auditor
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BusinessUser'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+  /business-user/my-businesses:
+    parameters: []
+    get:
+      operationId: business-user_my-businesses_list
+      summary: List my businesses
+      description: '
+
+        Return every business the authenticated user is a member of, along with
+
+        their role in each. Powers the client portal business switcher for users
+
+        who belong to more than one business.
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyBusinessListResponse'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+  /business-user/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this business user.
+      required: true
+      schema:
+        type: integer
+    get:
+      operationId: business-user_read
+      summary: Get Business User Details
+      description: '
+
+        Get details of a user.
+
+
+        `/me` endpoint can be used to get details of the logged in user, where the `id` is `me`.
+
+        For `/me` endpoint, the `can_manage_users` permission is not required. Logged in users can get details of themselves.
+
+
+        **Permissions:** ADMIN, SUPER_ADMIN, or me
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessUser'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+    patch:
+      operationId: business-user_partial_update
+      summary: Get Business User Details
+      description: '
+
+        Get details of a user.
+
+
+        `/me` endpoint can be used to update details of the logged in user, where the `id` is `me`.
+
+        For `/me` endpoint, the `can_manage_users` permission is not required. Logged in users can update basic details of themselves.
+
+
+        **Permissions:** ADMIN, SUPER_ADMIN, or me
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessUser'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessUser'
+        required: true
+  /business-user/{id}/access-role:
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this business user.
+      required: true
+      schema:
+        type: integer
+    post:
+      operationId: business-user_set_access_role
+      summary: Add access role
+      description: '
+
+        Set access role for users. The {id} of the users is required in the request body.
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessUser'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              example:
+                access_role:
+                - Access role is required
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                access_role:
+                  description: Access role
+                  type: string
+        required: true
+  /business-user/{id}/groups:
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this business user.
+      required: true
+      schema:
+        type: integer
+    post:
+      operationId: business-user_set_user_groups
+      summary: Set user groups
+      description: '
+
+        Update the groups of a user.
+
+
+        **Permissions:** `can_manage_user_groups`
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessUser'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                group_ids:
+                  description: Group ids
+                  type: array
+                  items:
+                    type: integer
+        required: true
+  /business-user/{id}/send-invitation-reminder:
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this business user.
+      required: true
+      schema:
+        type: integer
+    get:
+      operationId: business-user_send_invitation_reminder
+      summary: Send invitation reminder
+      description: '
+
+        Send an invitation reminder to a user.
+
+
+        **Permissions:** SUPER_ADMIN, ADMIN
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessUser'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+  /custom-access-role:
+    parameters: []
+    get:
+      operationId: custom-access-role_list
+      summary: Get Custom Access Roles
+      description: '
+
+        Get all the Custom Access Roles for the Business.
+
+
+        **Permissions:** `can_manage_access_roles`
+
+        '
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BusinessAccessRole'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+    post:
+      operationId: custom-access-role_create
+      summary: Create Custom Access Role
+      description: '
+
+        Create a Custom Access Role for the Business.
+
+        You can get the list of all the permissions from the `GET /custom-access-roles/permissions` endpoint.
+
+
+        **Permissions:** `can_manage_access_roles`
+
+        '
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessAccessRole'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessAccessRole'
+        required: true
+  /custom-access-role/permissions:
+    parameters: []
+    get:
+      operationId: custom-access-role_get_all_permissions
+      summary: Get all allowed permissions
+      description: '
+
+        Get all the allowed permissions for the Custom Access Roles.
+
+
+        **Permissions:** `can_manage_access_roles`
+
+        '
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BusinessAccessRole'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+  /custom-access-role/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this business access role.
+      required: true
+      schema:
+        type: integer
+    get:
+      operationId: custom-access-role_read
+      summary: Get Custom Access Role
+      description: '
+
+        Get a Custom Access Role for the Business.
+
+
+        **Permissions:** `can_manage_access_roles`
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessAccessRole'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+    patch:
+      operationId: custom-access-role_partial_update
+      summary: Update Custom Access Role
+      description: '
+
+        Update a Custom Access Role for the Business.
+
+
+        You can get the list of all the permissions from the `GET /custom-access-roles/permissions` endpoint.
+
+
+        **Permissions:** `can_manage_access_roles`
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessAccessRole'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessAccessRole'
+        required: true
+    delete:
+      operationId: custom-access-role_delete
+      summary: Delete Custom Access Role
+      description: '
+
+        Delete a Custom Access Role for the Business.
+
+
+        **Permissions:** `can_manage_access_roles`
+
+        '
+      responses:
+        '204':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - business-user
+components:
+  schemas:
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    BusinessAccessRole:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        permissions:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        created_by:
+          title: Created by
+          type:
+          - integer
+          - 'null'
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    MyBusiness:
+      type: object
+      properties:
+        business_user_id:
+          title: Business user id
+          type: integer
+          readOnly: true
+        business:
+          $ref: '#/components/schemas/BusinessList'
+        role:
+          title: Role
+          type: string
+          enum:
+          - admin
+          - super_admin
+          - user
+          - one_fort_maintainer
+          - auditor
+        employee_type:
+          title: Employee type
+          type: string
+          enum:
+          - employee
+          - contractor
+          - non_employee
+          - auditor
+          - soc2
+          - it_security
+          - other
+        is_administrator:
+          title: Is administrator
+          type: boolean
+    BusinessList:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        industry:
+          title: Industry
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        number_of_employees:
+          title: Number of employees
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        active:
+          title: Active
+          type: boolean
+        domain_name:
+          title: Domain name
+          type:
+          - string
+          - 'null'
+          maxLength: 500
+        subsidiaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessSubsidiary'
+          readOnly: true
+        revenue:
+          title: Revenue
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+    BusinessUser:
+      required:
+      - first_name
+      - last_name
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        email:
+          title: Email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        first_name:
+          title: First name
+          type: string
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          minLength: 1
+        access_role:
+          title: Access role
+          type: string
+          readOnly: true
+          minLength: 1
+        groups:
+          title: Groups
+          type: string
+          readOnly: true
+        start_date:
+          title: Start date
+          type: string
+          format: date
+        end_date:
+          title: End date
+          type: string
+          format: date
+        employee_type:
+          title: Employee type
+          type: string
+          enum:
+          - employee
+          - contractor
+          - non_employee
+          - auditor
+          - soc2
+          - it_security
+          - other
+        is_active:
+          title: Is active
+          type: boolean
+          readOnly: true
+        status:
+          title: Status
+          type: string
+          readOnly: true
+        last_active:
+          title: Last active
+          type: string
+          format: date-time
+          readOnly: true
+        invite_status:
+          title: Invite status
+          type: string
+          readOnly: true
+        completed_onboarding_at:
+          title: Completed onboarding at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        profile_image:
+          title: Profile image
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        is_administrator:
+          title: Is administrator
+          type: boolean
+        position:
+          title: Position
+          type:
+          - string
+          - 'null'
+          maxLength: 100
+        company_role:
+          title: Company Role
+          description: The role or position of the user within their company
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+        preference_skip_warning_when_failing_a_control:
+          title: Skip warning when failing a control
+          type: boolean
+        manager:
+          title: Manager
+          type:
+          - integer
+          - 'null'
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    MyBusinessListResponse:
+      required:
+      - results
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/MyBusiness'
+    BusinessSubsidiary:
+      required:
+      - name
+      - business
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        ownership:
+          title: Ownership
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        business:
+          title: Business
+          type: integer
+    BusinessEmployeeTypePermission:
+      required:
+      - employee_type
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        employee_type:
+          title: Employee type
+          type: string
+          enum:
+          - employee
+          - contractor
+          - non_employee
+          - auditor
+          - soc2
+          - it_security
+          - other
+        permissions:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+        created_by:
+          title: Created by
+          type:
+          - integer
+          - 'null'
+    BusinessGroup:
+      required:
+      - name
+      - business
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          minLength: 1
+        user_count:
+          title: User count
+          type: string
+          readOnly: true
+        permissions:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+        deleted_at:
+          title: Deleted at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        business:
+          title: Business
+          type: integer
+        created_by:
+          title: Created by
+          type:
+          - integer
+          - 'null'
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

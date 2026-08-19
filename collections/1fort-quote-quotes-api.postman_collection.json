@@ -1,0 +1,783 @@
+{
+  "item": [
+    {
+      "id": "5f895779-d5df-4548-8426-ca37b07d0815",
+      "name": "quote: quotes",
+      "description": {
+        "content": "**Access:** requires a JWT access token.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6dab0b66-92f5-43d6-baec-0b181279f281",
+          "name": "List Business Quotes",
+          "request": {
+            "name": "List Business Quotes",
+            "description": {
+              "content": "List all quotes for the business associated with the logged-in user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "02b77e8d-899a-4f47-8027-45510ccd706a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 6301,\n  \"results\": [\n    {\n      \"id\": \"01be5fa2-f946-2f2a-6c39-56c9f40a3b2f\",\n      \"business\": {\n        \"name\": \"string\",\n        \"id\": 1445,\n        \"created_at\": \"1947-09-26T00:27:06.493Z\",\n        \"industry\": \"string\",\n        \"number_of_employees\": 639279863,\n        \"active\": false,\n        \"domain_name\": null,\n        \"subsidiaries\": [\n          {\n            \"name\": \"string\",\n            \"business\": 6478,\n            \"id\": 9928,\n            \"description\": \"string\",\n            \"ownership\": 502351789\n          },\n          {\n            \"name\": \"string\",\n            \"business\": 69,\n            \"id\": 548,\n            \"description\": null,\n            \"ownership\": 783096401\n          }\n        ],\n        \"revenue\": null\n      },\n      \"broker\": {\n        \"name\": \"string\",\n        \"domain_name\": \"string\",\n        \"id\": 4616,\n        \"user\": {\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"user_defined_role\": \"string\"\n        },\n        \"broker_group\": \"string\",\n        \"agency_fee_type\": \"percentage\",\n        \"subscription_plan_display\": \"string\",\n        \"subscription\": {\n          \"name\": \"string\",\n          \"price\": \"string\",\n          \"billing_frequency\": \"ANNUALLY\",\n          \"billing_frequency_display\": \"string\",\n          \"payment_status\": \"PAID\",\n          \"payment_status_display\": \"string\",\n          \"manage_plan_url\": \"https://KGomcpqUzdQdnCZV.vlhffXKd17-5irT-jyuDxc69dQglmCpRNVNpkcJRdQjYOAVZr.3sa5kghn-ZXQisfo3Ad\"\n        },\n        \"slug\": \"iXX6xm\",\n        \"logo\": null,\n        \"phone_number\": \"string\",\n        \"created_at\": \"1951-03-06T03:09:34.728Z\",\n        \"plan\": \"SAAS\",\n        \"subscription_plan\": \"PREMIUM\",\n        \"is_test_account\": false,\n        \"can_download_readiness_reports\": false,\n        \"agency_id\": \"string\",\n        \"full_address\": null,\n        \"program_fee_cap\": null,\n        \"program_fee_rate\": \"string\",\n        \"program_fee_rate_no_submission\": \"string\",\n        \"checkout_processing_fee_percent\": null,\n        \"stripe_connect_payouts_enabled\": false,\n        \"disclaimer\": \"string\",\n        \"support_email\": \"Y3yJHHZti8OWu@ktGglGfduFpvyxUNyXcSXzjBMWhzC.xaw\",\n        \"accounting_email\": [\n          \"zv3@uryvEPxPvwrhYUIuXufRuFAs.oeg\",\n          \"JLNlcB5uQHKlv@ZqKzUVTeJg.gefs\"\n        ],\n        \"marketing_placements_email\": null,\n        \"total_commercial_premium\": \"string\",\n        \"agency_fee\": \"string\",\n        \"agency_fee_percentage\": null,\n        \"disable_all_broker_emails\": false,\n        \"auto_submit_renewal_applications\": true,\n        \"disable_all_insured_emails\": true,\n        \"disable_submission_follow_up_emails\": true,\n        \"auto_create_sendgrid_domain_auth\": true,\n        \"sendgrid_domain_id\": null,\n        \"dba\": \"string\",\n        \"ein\": \"string\",\n        \"company_type\": \"S_CORPORATION\",\n        \"agency_type\": \"RETAILER\",\n        \"bank_owner_type\": \"INDIVIDUAL\",\n        \"bank_account_holder_name\": \"string\",\n        \"bank_account_number\": \"string\",\n        \"bank_routing_number\": \"string\",\n        \"trust_bank_owner_type\": \"COMPANY\",\n        \"trust_bank_account_holder_name\": null,\n        \"trust_bank_routing_number\": null,\n        \"trust_bank_account_number\": \"string\",\n        \"carrier_payables_enabled\": false,\n        \"payment_schedule\": \"monthly_1st\",\n        \"one_time_payment_account\": \"operational\",\n        \"require_refund_approval_via_check\": true,\n        \"require_refund_approval_over_amount_cents\": null,\n        \"market_access_enabled\": true,\n        \"use_accord_forms\": true,\n        \"broker_email\": \"VLy@goHFZodAAiJqdqWeaQgnxzyfpfJlaeOgm.cwvu\",\n        \"broker_password\": \"string\",\n        \"default_storefront_broker_user\": 1841\n      },\n      \"application\": {\n        \"id\": \"21ae0ba0-113d-4a0d-b312-7b6208fac7af\",\n        \"is_active\": false,\n        \"created_at\": \"2005-05-24T04:29:28.360Z\",\n        \"name\": null,\n        \"description\": \"string\",\n        \"effective_date\": null,\n        \"due_date\": \"1993-01-03\",\n        \"policy_type\": \"SURPLUS_LINES\",\n        \"year\": -258652697,\n        \"prefilled_application\": \"https://hDZxQmiOUBzYnkwLaxPpPR.bfdpfWuFGghEfbuQJtLv3rALtYIE4gTV95zASxzzBoUk6LUk.C-5Q4l-gPg\",\n        \"additional_documents\": \"string\",\n        \"status\": \"archived\",\n        \"email_type\": \"default\",\n        \"submission_type\": \"RENEWAL\",\n        \"form_override\": \"https://HrUjvmml.gyggzpzkCAJP3iobHnrN1PyOGMzlykSQkSjd0kW1GwW5dS\",\n        \"submitted_by_business_at\": \"2024-04-03T09:59:17.525Z\",\n        \"brokerage_wants_place_directly\": false,\n        \"brokerage_wants_wholesale_with_1fort\": true,\n        \"can_1fort_approach_any_market_wholesale\": false,\n        \"quote_version\": \"MANUAL\",\n        \"copy_src\": \"string\",\n        \"source\": \"email_ai\",\n        \"business\": 8816,\n        \"brokerage_direct_placement_carriers\": [\n          \"eaaef696-6585-0298-64bd-3dab546ce646\",\n          \"79a850bd-1f83-7e98-1f10-cdbca90d7a02\"\n        ],\n        \"carriers_1fort_should_not_approach\": [\n          \"98397bfa-bdbf-b0e0-18c7-991c70440e27\",\n          \"4bb8ebbf-e50f-2cb2-e76b-3fdb7c2308a4\"\n        ],\n        \"coverage_types\": [\n          \"e7e9b5b4-f43d-1e12-d0df-544e02e9cc1f\",\n          \"eef8a872-7390-a302-1d16-91b501492822\"\n        ]\n      },\n      \"carrier\": {\n        \"name\": \"string\",\n        \"products\": [\n          {\n            \"code\": \"string\",\n            \"product_line\": null,\n            \"is_active\": false,\n            \"policy_type\": \"SURPLUS_LINES\",\n            \"name\": null,\n            \"am_best_rating\": \"string\",\n            \"eta_hours\": 1681280996\n          },\n          {\n            \"code\": \"string\",\n            \"product_line\": \"string\",\n            \"is_active\": true,\n            \"policy_type\": \"SURPLUS_LINES\",\n            \"name\": \"string\",\n            \"am_best_rating\": \"string\",\n            \"eta_hours\": null\n          }\n        ],\n        \"id\": \"cbe02099-0ddb-d7e3-f703-0ac6b6df3e4a\",\n        \"logo\": \"https://kFeOPNXNFMMEFREFhav.czQk.HHtzapAcqV.pqCTgrMaqDC8tArX3cJtBK8otA5KB5JZAmfrk+k1nqkwX\",\n        \"am_best_rating\": null,\n        \"domains\": null\n      },\n      \"mga\": {\n        \"name\": \"string\",\n        \"id\": \"f1f3494e-39f4-26ca-162a-b60dc70bc6b0\",\n        \"logo\": null,\n        \"is_active\": false,\n        \"is_owned_by_1fort\": true,\n        \"domains\": null\n      },\n      \"download_pdf\": \"string\",\n      \"files\": [\n        {\n          \"quote\": \"ea52ddb0-20f6-df7f-1aad-51d57f042f73\",\n          \"id\": \"73e40163-d303-fa03-be24-38fa87a812d1\",\n          \"download_file\": \"string\",\n          \"file\": \"https://HBkJsrfLIHJTmHTmExf.yylPykFKlhC2zsFk-yJLbcppdDGiPCjBQ0glkVYg0zQs.Sn5lXSgeMx9Sz7eVDJgHpZIsM\",\n          \"created_at\": \"1967-09-17T12:35:24.822Z\",\n          \"file_type\": \"binder\"\n        },\n        {\n          \"quote\": \"2127c265-e844-4376-c79a-fec3e2a329f7\",\n          \"id\": \"0e348e85-21dc-fb0e-a6de-2bf5f92580b3\",\n          \"download_file\": \"string\",\n          \"file\": \"http://sUwwQsiBXbiJPKmBtQZ.goswQfH6MnuTMdYj5BiE9U5r.Bo\",\n          \"created_at\": \"1949-10-06T02:17:31.460Z\",\n          \"file_type\": \"invoice\"\n        }\n      ],\n      \"has_bind_request\": \"string\",\n      \"version\": \"string\",\n      \"created_at\": \"2019-01-04T04:59:55.901Z\",\n      \"status\": \"draft\",\n      \"quote_type\": \"ADMITTED\",\n      \"quote_number\": \"string\",\n      \"policy_number\": \"string\",\n      \"limit\": 847788583847987200,\n      \"retention\": -5780634818568780000,\n      \"premium\": 8120262655412249000,\n      \"policy_term_months\": 486955105,\n      \"issue_date\": \"1987-08-04\",\n      \"minimum_days_to_cancel\": 1392635917,\n      \"additional_notes\": \"string\",\n      \"type\": \"CYBER\"\n    },\n    {\n      \"id\": \"7f3bf394-afaf-d35f-0ece-ee9d1ebf73aa\",\n      \"business\": {\n        \"name\": \"string\",\n        \"id\": 2708,\n        \"created_at\": \"1990-10-05T11:02:47.095Z\",\n        \"industry\": \"string\",\n        \"number_of_employees\": 243094886,\n        \"active\": true,\n        \"domain_name\": \"string\",\n        \"subsidiaries\": [\n          {\n            \"name\": \"string\",\n            \"business\": 1642,\n            \"id\": 3883,\n            \"description\": null,\n            \"ownership\": 1556328914\n          },\n          {\n            \"name\": \"string\",\n            \"business\": 734,\n            \"id\": 8934,\n            \"description\": null,\n            \"ownership\": 1260161135\n          }\n        ],\n        \"revenue\": 3961826539649378300\n      },\n      \"broker\": {\n        \"name\": \"string\",\n        \"domain_name\": \"string\",\n        \"id\": 3948,\n        \"user\": {\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"user_defined_role\": \"string\"\n        },\n        \"broker_group\": \"string\",\n        \"agency_fee_type\": \"percentage\",\n        \"subscription_plan_display\": \"string\",\n        \"subscription\": {\n          \"name\": \"string\",\n          \"price\": \"string\",\n          \"billing_frequency\": \"MONTHLY\",\n          \"billing_frequency_display\": \"string\",\n          \"payment_status\": \"UNPAID\",\n          \"payment_status_display\": \"string\",\n          \"manage_plan_url\": \"https://DXEiwpgOvafolPSNjBeXTwqvHvmlt.yhmcyy3-x+X03YpCAN-9hJv8bKhIDSRIsIS2D,Ab0Y5qruW3M4wah8bBeRco.WreLjB,DYbh\"\n        },\n        \"slug\": \"i-M6XXYJTaz\",\n        \"logo\": null,\n        \"phone_number\": null,\n        \"created_at\": \"1956-06-13T12:40:52.696Z\",\n        \"plan\": \"SAAS\",\n        \"subscription_plan\": \"ESSENTIALS\",\n        \"is_test_account\": true,\n        \"can_download_readiness_reports\": false,\n        \"agency_id\": \"string\",\n        \"full_address\": \"string\",\n        \"program_fee_cap\": null,\n        \"program_fee_rate\": \"string\",\n        \"program_fee_rate_no_submission\": \"string\",\n        \"checkout_processing_fee_percent\": \"string\",\n        \"stripe_connect_payouts_enabled\": true,\n        \"disclaimer\": \"string\",\n        \"support_email\": null,\n        \"accounting_email\": [\n          \"joTY7Kcq2PEJ7@IrpThPrrEzvuzZiPXmLMcU.mqb\",\n          \"mCvEx@NrKYdgHnMqnmlNg.nh\"\n        ],\n        \"marketing_placements_email\": null,\n        \"total_commercial_premium\": \"string\",\n        \"agency_fee\": \"string\",\n        \"agency_fee_percentage\": \"string\",\n        \"disable_all_broker_emails\": true,\n        \"auto_submit_renewal_applications\": false,\n        \"disable_all_insured_emails\": false,\n        \"disable_submission_follow_up_emails\": true,\n        \"auto_create_sendgrid_domain_auth\": true,\n        \"sendgrid_domain_id\": null,\n        \"dba\": null,\n        \"ein\": \"string\",\n        \"company_type\": \"S_CORPORATION\",\n        \"agency_type\": \"WHOLESALER\",\n        \"bank_owner_type\": \"INDIVIDUAL\",\n        \"bank_account_holder_name\": \"string\",\n        \"bank_account_number\": \"string\",\n        \"bank_routing_number\": null,\n        \"trust_bank_owner_type\": \"COMPANY\",\n        \"trust_bank_account_holder_name\": \"string\",\n        \"trust_bank_routing_number\": null,\n        \"trust_bank_account_number\": \"string\",\n        \"carrier_payables_enabled\": true,\n        \"payment_schedule\": \"as_available\",\n        \"one_time_payment_account\": \"operational\",\n        \"require_refund_approval_via_check\": false,\n        \"require_refund_approval_over_amount_cents\": null,\n        \"market_access_enabled\": false,\n        \"use_accord_forms\": false,\n        \"broker_email\": null,\n        \"broker_password\": \"string\",\n        \"default_storefront_broker_user\": 4136\n      },\n      \"application\": {\n        \"id\": \"15ebc25d-0f5b-c1e0-4d1f-7d31a7aafc20\",\n        \"is_active\": true,\n        \"created_at\": \"1971-06-23T02:26:44.102Z\",\n        \"name\": null,\n        \"description\": null,\n        \"effective_date\": \"1998-02-16\",\n        \"due_date\": \"2023-03-22\",\n        \"policy_type\": \"ADMITTED_AND_SURPLUS_LINES\",\n        \"year\": 1719420966,\n        \"prefilled_application\": \"http://Jpprn.pyvcL7Iq6dwMU8hpgvm+okIhmXBQinf7GuVmKS\",\n        \"additional_documents\": \"string\",\n        \"status\": \"draft\",\n        \"email_type\": \"conversation\",\n        \"submission_type\": \"RENEWAL\",\n        \"form_override\": \"http://GMcOQRbrMjrxSDYDLExMxEBIJpJ.mtnVCL6wqvoU4BhvThEw7QSkBEjCulXkT9fnwKAc7EjTtwqOtVyS0g5\",\n        \"submitted_by_business_at\": null,\n        \"brokerage_wants_place_directly\": false,\n        \"brokerage_wants_wholesale_with_1fort\": true,\n        \"can_1fort_approach_any_market_wholesale\": false,\n        \"quote_version\": \"MANUAL\",\n        \"copy_src\": \"string\",\n        \"source\": \"broker_in_portal\",\n        \"business\": 4656,\n        \"brokerage_direct_placement_carriers\": [\n          \"4b9358ee-e21a-f246-3459-7e156a9f7d71\",\n          \"d6be8fa7-11ff-f5ff-f064-c266fa94c46d\"\n        ],\n        \"carriers_1fort_should_not_approach\": [\n          \"4c333c7f-eba4-beb4-8175-d33c9213486e\",\n          \"40c6a20d-8c5a-c037-94ff-0bdfcdaaafae\"\n        ],\n        \"coverage_types\": [\n          \"1f1a11f5-05ad-7760-e45a-db082174c114\",\n          \"27222e13-a4a5-e9e0-cbef-d1592f08bdb8\"\n        ]\n      },\n      \"carrier\": {\n        \"name\": \"string\",\n        \"products\": [\n          {\n            \"code\": \"string\",\n            \"product_line\": \"string\",\n            \"is_active\": false,\n            \"policy_type\": \"ADMITTED\",\n            \"name\": null,\n            \"am_best_rating\": \"string\",\n            \"eta_hours\": -366127783\n          },\n          {\n            \"code\": null,\n            \"product_line\": \"string\",\n            \"is_active\": true,\n            \"policy_type\": \"SURPLUS_LINES\",\n            \"name\": null,\n            \"am_best_rating\": \"string\",\n            \"eta_hours\": null\n          }\n        ],\n        \"id\": \"e43ba671-f7f9-a132-1b3c-ddb7740c95f4\",\n        \"logo\": null,\n        \"am_best_rating\": \"string\",\n        \"domains\": null\n      },\n      \"mga\": {\n        \"name\": \"string\",\n        \"id\": \"3e5f80e3-f098-cff9-ec4e-6c84424ea0ac\",\n        \"logo\": null,\n        \"is_active\": false,\n        \"is_owned_by_1fort\": true,\n        \"domains\": null\n      },\n      \"download_pdf\": \"string\",\n      \"files\": [\n        {\n          \"quote\": \"7250adce-3f4f-596a-60e5-7442e4572a54\",\n          \"id\": \"7fc3df64-c7a5-462c-7b06-a05a5f88ab18\",\n          \"download_file\": \"string\",\n          \"file\": \"http://kESjotCbnczippdqahTYrRdcjyXgBanV.lmphfaVnjb+cD1IIkG\",\n          \"created_at\": \"1977-08-09T02:31:13.275Z\",\n          \"file_type\": \"invoice\"\n        },\n        {\n          \"quote\": \"459463b4-32e5-75c0-6285-443c6efaeea0\",\n          \"id\": \"fc9afb26-b0f4-9483-1c2d-5b934687bced\",\n          \"download_file\": \"string\",\n          \"file\": \"https://wjLRQIuiaIsWkvRce.cqbiTOINjWCJX7Sd02MsZc7kfjezzxdt4WREa.hqJEmhapIyxHVNUVLJXEaqsfQDjEenyOp9A\",\n          \"created_at\": \"2026-01-20T00:48:52.087Z\",\n          \"file_type\": \"quote\"\n        }\n      ],\n      \"has_bind_request\": \"string\",\n      \"version\": \"string\",\n      \"created_at\": \"1973-01-07T04:19:00.978Z\",\n      \"status\": \"selected_for_binding\",\n      \"quote_type\": \"SURPLUS_LINES\",\n      \"quote_number\": \"string\",\n      \"policy_number\": null,\n      \"limit\": -5394987244447629000,\n      \"retention\": 4428993438202462000,\n      \"premium\": 6292491598710526000,\n      \"policy_term_months\": -720499531,\n      \"issue_date\": null,\n      \"minimum_days_to_cancel\": -2144776396,\n      \"additional_notes\": null,\n      \"type\": \"KIDNAP_AND_RANSOM\"\n    }\n  ],\n  \"next\": null,\n  \"previous\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dba04f71-06cd-4cfd-a0ce-49989bc43544",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a565dba-1c1c-43bd-8a3e-3b85bb4ca8fa",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be90140b-b552-428e-8127-ea81e0faa0b9",
+          "name": "Retrieve Business Quote",
+          "request": {
+            "name": "Retrieve Business Quote",
+            "description": {
+              "content": "Retrieve a quote for the business associated with the logged-in user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quotes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this quote."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d43dad76-3d27-44a0-bf6f-722bf2b18cd3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this quote."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"f27ad397-5a71-f035-d6ab-ab0173ea28b2\",\n  \"business\": {\n    \"name\": \"string\",\n    \"id\": 2536,\n    \"created_at\": \"1957-08-26T09:31:42.728Z\",\n    \"industry\": null,\n    \"number_of_employees\": null,\n    \"active\": true,\n    \"domain_name\": \"string\",\n    \"subsidiaries\": [\n      {\n        \"name\": \"string\",\n        \"business\": 8098,\n        \"id\": 9527,\n        \"description\": \"string\",\n        \"ownership\": 1170359931\n      },\n      {\n        \"name\": \"string\",\n        \"business\": 7405,\n        \"id\": 1934,\n        \"description\": \"string\",\n        \"ownership\": 910696917\n      }\n    ],\n    \"revenue\": null\n  },\n  \"broker\": {\n    \"name\": \"string\",\n    \"domain_name\": \"string\",\n    \"id\": 881,\n    \"user\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"user_defined_role\": \"string\"\n    },\n    \"broker_group\": \"string\",\n    \"agency_fee_type\": \"minimum_commission\",\n    \"subscription_plan_display\": \"string\",\n    \"subscription\": {\n      \"name\": \"string\",\n      \"price\": \"string\",\n      \"billing_frequency\": \"MONTHLY\",\n      \"billing_frequency_display\": \"string\",\n      \"payment_status\": \"UNPAID\",\n      \"payment_status_display\": \"string\",\n      \"manage_plan_url\": \"https://ZqLiwBqpTeVHDNurlNA.ebbexH5sd,g+bQzxgdamxLTXU-AXPgNIOnUC\"\n    },\n    \"slug\": \"AhGKl\",\n    \"logo\": null,\n    \"phone_number\": null,\n    \"created_at\": \"2015-03-08T18:27:29.738Z\",\n    \"plan\": \"WHOLESALE\",\n    \"subscription_plan\": \"PREMIUM\",\n    \"is_test_account\": true,\n    \"can_download_readiness_reports\": true,\n    \"agency_id\": \"string\",\n    \"full_address\": null,\n    \"program_fee_cap\": \"string\",\n    \"program_fee_rate\": \"string\",\n    \"program_fee_rate_no_submission\": \"string\",\n    \"checkout_processing_fee_percent\": null,\n    \"stripe_connect_payouts_enabled\": false,\n    \"disclaimer\": null,\n    \"support_email\": null,\n    \"accounting_email\": null,\n    \"marketing_placements_email\": null,\n    \"total_commercial_premium\": null,\n    \"agency_fee\": \"string\",\n    \"agency_fee_percentage\": \"string\",\n    \"disable_all_broker_emails\": false,\n    \"auto_submit_renewal_applications\": false,\n    \"disable_all_insured_emails\": true,\n    \"disable_submission_follow_up_emails\": false,\n    \"auto_create_sendgrid_domain_auth\": false,\n    \"sendgrid_domain_id\": null,\n    \"dba\": \"string\",\n    \"ein\": null,\n    \"company_type\": \"LIMITED_LIABILITY_PARTNERSHIP\",\n    \"agency_type\": \"RETAILER\",\n    \"bank_owner_type\": \"INDIVIDUAL\",\n    \"bank_account_holder_name\": null,\n    \"bank_account_number\": null,\n    \"bank_routing_number\": \"string\",\n    \"trust_bank_owner_type\": \"COMPANY\",\n    \"trust_bank_account_holder_name\": \"string\",\n    \"trust_bank_routing_number\": \"string\",\n    \"trust_bank_account_number\": null,\n    \"carrier_payables_enabled\": true,\n    \"payment_schedule\": \"monthly_15th\",\n    \"one_time_payment_account\": \"trust\",\n    \"require_refund_approval_via_check\": true,\n    \"require_refund_approval_over_amount_cents\": 1079209921,\n    \"market_access_enabled\": false,\n    \"use_accord_forms\": true,\n    \"broker_email\": \"TY-MuDj5U@fy.mf\",\n    \"broker_password\": null,\n    \"default_storefront_broker_user\": null\n  },\n  \"application\": {\n    \"id\": \"79b74c7d-5a11-acdb-9957-1b95a91da95f\",\n    \"is_active\": true,\n    \"created_at\": \"1948-05-18T14:08:11.331Z\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"effective_date\": null,\n    \"due_date\": null,\n    \"policy_type\": \"ADMITTED_AND_SURPLUS_LINES\",\n    \"year\": 984480430,\n    \"prefilled_application\": null,\n    \"additional_documents\": \"string\",\n    \"status\": \"submitted\",\n    \"email_type\": \"default\",\n    \"submission_type\": \"RENEWAL\",\n    \"form_override\": null,\n    \"submitted_by_business_at\": null,\n    \"brokerage_wants_place_directly\": true,\n    \"brokerage_wants_wholesale_with_1fort\": true,\n    \"can_1fort_approach_any_market_wholesale\": true,\n    \"quote_version\": \"API\",\n    \"copy_src\": \"string\",\n    \"source\": \"email_ai\",\n    \"business\": 3175,\n    \"brokerage_direct_placement_carriers\": [\n      \"5148c945-74a5-6345-66e5-9df5eecf3c91\",\n      \"488abe0a-c3e2-b1cf-f1bf-8d37f758d578\"\n    ],\n    \"carriers_1fort_should_not_approach\": [\n      \"5060c78e-edb4-92db-6c7b-d28c463e3861\",\n      \"ee9cfe57-dbbd-5b42-33e5-5bf80bcbcf50\"\n    ],\n    \"coverage_types\": [\n      \"14eddc57-21ae-0180-8ae2-0020295efe2e\",\n      \"be7622d6-3478-0050-2735-03e5b07d31b3\"\n    ]\n  },\n  \"carrier\": {\n    \"name\": \"string\",\n    \"products\": [\n      {\n        \"code\": null,\n        \"product_line\": \"string\",\n        \"is_active\": true,\n        \"policy_type\": \"SURPLUS_LINES\",\n        \"name\": \"string\",\n        \"am_best_rating\": null,\n        \"eta_hours\": -1703963715\n      },\n      {\n        \"code\": null,\n        \"product_line\": null,\n        \"is_active\": true,\n        \"policy_type\": \"ADMITTED\",\n        \"name\": null,\n        \"am_best_rating\": \"string\",\n        \"eta_hours\": 1310166280\n      }\n    ],\n    \"id\": \"eaa31ebd-fa57-532b-112a-3d7503f85dbd\",\n    \"logo\": null,\n    \"am_best_rating\": null,\n    \"domains\": null\n  },\n  \"mga\": {\n    \"name\": \"string\",\n    \"id\": \"82323aa9-0e5d-8975-0b8d-611736b3804e\",\n    \"logo\": null,\n    \"is_active\": false,\n    \"is_owned_by_1fort\": false,\n    \"domains\": null\n  },\n  \"download_pdf\": \"string\",\n  \"files\": [\n    {\n      \"quote\": \"74a15309-8acd-717e-e5ea-01e5b9721f95\",\n      \"id\": \"2b754c79-dc58-58d3-cc45-b14d8aedf686\",\n      \"download_file\": \"string\",\n      \"file\": \"http://tBLnEBUAsOcwupYkk.naeG,NGqGFDRWJzPQ\",\n      \"created_at\": \"1965-01-15T00:18:18.905Z\",\n      \"file_type\": \"quote\"\n    },\n    {\n      \"quote\": \"7c4a6f7f-86b8-d6b4-1744-9957433e276e\",\n      \"id\": \"5e51393c-fbdb-a08c-027f-ca6f54e63b8d\",\n      \"download_file\": \"string\",\n      \"file\": \"https://vpzJbmHdtCtkBTnzKhm.wbQWQCGK8urYJGbh\",\n      \"created_at\": \"1983-11-12T02:55:25.764Z\",\n      \"file_type\": \"quote\"\n    }\n  ],\n  \"has_bind_request\": \"string\",\n  \"version\": \"string\",\n  \"created_at\": \"1974-01-29T06:25:02.639Z\",\n  \"status\": \"cancelled\",\n  \"quote_type\": \"SURPLUS_LINES\",\n  \"quote_number\": null,\n  \"policy_number\": null,\n  \"limit\": 7896190034588598000,\n  \"retention\": -4186569745736716300,\n  \"premium\": -693756259317784600,\n  \"policy_term_months\": 864545851,\n  \"issue_date\": null,\n  \"minimum_days_to_cancel\": 157091125,\n  \"additional_notes\": null,\n  \"type\": \"MISCELLANEOUS_PROFESSIONAL_LIABILITY\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "149cb393-b6ea-4151-b458-df7a09c6a3e3",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this quote."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27615343-d7c6-4259-8788-b53355edb488",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this quote."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae4bc4a1-d697-4ba3-a789-cbb6dd76db9e",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this quote."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47b6a37e-155a-4f7c-841a-2a2c8146650d",
+          "name": "Download pdf",
+          "request": {
+            "name": "Download pdf",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quotes",
+                ":id",
+                "download-pdf"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this quote."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0764b735-0541-4238-bfd4-5bafef56811d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id",
+                    "download-pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this quote."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"f27ad397-5a71-f035-d6ab-ab0173ea28b2\",\n  \"business\": {\n    \"name\": \"string\",\n    \"id\": 2536,\n    \"created_at\": \"1957-08-26T09:31:42.728Z\",\n    \"industry\": null,\n    \"number_of_employees\": null,\n    \"active\": true,\n    \"domain_name\": \"string\",\n    \"subsidiaries\": [\n      {\n        \"name\": \"string\",\n        \"business\": 8098,\n        \"id\": 9527,\n        \"description\": \"string\",\n        \"ownership\": 1170359931\n      },\n      {\n        \"name\": \"string\",\n        \"business\": 7405,\n        \"id\": 1934,\n        \"description\": \"string\",\n        \"ownership\": 910696917\n      }\n    ],\n    \"revenue\": null\n  },\n  \"broker\": {\n    \"name\": \"string\",\n    \"domain_name\": \"string\",\n    \"id\": 881,\n    \"user\": {\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"user_defined_role\": \"string\"\n    },\n    \"broker_group\": \"string\",\n    \"agency_fee_type\": \"minimum_commission\",\n    \"subscription_plan_display\": \"string\",\n    \"subscription\": {\n      \"name\": \"string\",\n      \"price\": \"string\",\n      \"billing_frequency\": \"MONTHLY\",\n      \"billing_frequency_display\": \"string\",\n      \"payment_status\": \"UNPAID\",\n      \"payment_status_display\": \"string\",\n      \"manage_plan_url\": \"https://ZqLiwBqpTeVHDNurlNA.ebbexH5sd,g+bQzxgdamxLTXU-AXPgNIOnUC\"\n    },\n    \"slug\": \"AhGKl\",\n    \"logo\": null,\n    \"phone_number\": null,\n    \"created_at\": \"2015-03-08T18:27:29.738Z\",\n    \"plan\": \"WHOLESALE\",\n    \"subscription_plan\": \"PREMIUM\",\n    \"is_test_account\": true,\n    \"can_download_readiness_reports\": true,\n    \"agency_id\": \"string\",\n    \"full_address\": null,\n    \"program_fee_cap\": \"string\",\n    \"program_fee_rate\": \"string\",\n    \"program_fee_rate_no_submission\": \"string\",\n    \"checkout_processing_fee_percent\": null,\n    \"stripe_connect_payouts_enabled\": false,\n    \"disclaimer\": null,\n    \"support_email\": null,\n    \"accounting_email\": null,\n    \"marketing_placements_email\": null,\n    \"total_commercial_premium\": null,\n    \"agency_fee\": \"string\",\n    \"agency_fee_percentage\": \"string\",\n    \"disable_all_broker_emails\": false,\n    \"auto_submit_renewal_applications\": false,\n    \"disable_all_insured_emails\": true,\n    \"disable_submission_follow_up_emails\": false,\n    \"auto_create_sendgrid_domain_auth\": false,\n    \"sendgrid_domain_id\": null,\n    \"dba\": \"string\",\n    \"ein\": null,\n    \"company_type\": \"LIMITED_LIABILITY_PARTNERSHIP\",\n    \"agency_type\": \"RETAILER\",\n    \"bank_owner_type\": \"INDIVIDUAL\",\n    \"bank_account_holder_name\": null,\n    \"bank_account_number\": null,\n    \"bank_routing_number\": \"string\",\n    \"trust_bank_owner_type\": \"COMPANY\",\n    \"trust_bank_account_holder_name\": \"string\",\n    \"trust_bank_routing_number\": \"string\",\n    \"trust_bank_account_number\": null,\n    \"carrier_payables_enabled\": true,\n    \"payment_schedule\": \"monthly_15th\",\n    \"one_time_payment_account\": \"trust\",\n    \"require_refund_approval_via_check\": true,\n    \"require_refund_approval_over_amount_cents\": 1079209921,\n    \"market_access_enabled\": false,\n    \"use_accord_forms\": true,\n    \"broker_email\": \"TY-MuDj5U@fy.mf\",\n    \"broker_password\": null,\n    \"default_storefront_broker_user\": null\n  },\n  \"application\": {\n    \"id\": \"79b74c7d-5a11-acdb-9957-1b95a91da95f\",\n    \"is_active\": true,\n    \"created_at\": \"1948-05-18T14:08:11.331Z\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"effective_date\": null,\n    \"due_date\": null,\n    \"policy_type\": \"ADMITTED_AND_SURPLUS_LINES\",\n    \"year\": 984480430,\n    \"prefilled_application\": null,\n    \"additional_documents\": \"string\",\n    \"status\": \"submitted\",\n    \"email_type\": \"default\",\n    \"submission_type\": \"RENEWAL\",\n    \"form_override\": null,\n    \"submitted_by_business_at\": null,\n    \"brokerage_wants_place_directly\": true,\n    \"brokerage_wants_wholesale_with_1fort\": true,\n    \"can_1fort_approach_any_market_wholesale\": true,\n    \"quote_version\": \"API\",\n    \"copy_src\": \"string\",\n    \"source\": \"email_ai\",\n    \"business\": 3175,\n    \"brokerage_direct_placement_carriers\": [\n      \"5148c945-74a5-6345-66e5-9df5eecf3c91\",\n      \"488abe0a-c3e2-b1cf-f1bf-8d37f758d578\"\n    ],\n    \"carriers_1fort_should_not_approach\": [\n      \"5060c78e-edb4-92db-6c7b-d28c463e3861\",\n      \"ee9cfe57-dbbd-5b42-33e5-5bf80bcbcf50\"\n    ],\n    \"coverage_types\": [\n      \"14eddc57-21ae-0180-8ae2-0020295efe2e\",\n      \"be7622d6-3478-0050-2735-03e5b07d31b3\"\n    ]\n  },\n  \"carrier\": {\n    \"name\": \"string\",\n    \"products\": [\n      {\n        \"code\": null,\n        \"product_line\": \"string\",\n        \"is_active\": true,\n        \"policy_type\": \"SURPLUS_LINES\",\n        \"name\": \"string\",\n        \"am_best_rating\": null,\n        \"eta_hours\": -1703963715\n      },\n      {\n        \"code\": null,\n        \"product_line\": null,\n        \"is_active\": true,\n        \"policy_type\": \"ADMITTED\",\n        \"name\": null,\n        \"am_best_rating\": \"string\",\n        \"eta_hours\": 1310166280\n      }\n    ],\n    \"id\": \"eaa31ebd-fa57-532b-112a-3d7503f85dbd\",\n    \"logo\": null,\n    \"am_best_rating\": null,\n    \"domains\": null\n  },\n  \"mga\": {\n    \"name\": \"string\",\n    \"id\": \"82323aa9-0e5d-8975-0b8d-611736b3804e\",\n    \"logo\": null,\n    \"is_active\": false,\n    \"is_owned_by_1fort\": false,\n    \"domains\": null\n  },\n  \"download_pdf\": \"string\",\n  \"files\": [\n    {\n      \"quote\": \"74a15309-8acd-717e-e5ea-01e5b9721f95\",\n      \"id\": \"2b754c79-dc58-58d3-cc45-b14d8aedf686\",\n      \"download_file\": \"string\",\n      \"file\": \"http://tBLnEBUAsOcwupYkk.naeG,NGqGFDRWJzPQ\",\n      \"created_at\": \"1965-01-15T00:18:18.905Z\",\n      \"file_type\": \"quote\"\n    },\n    {\n      \"quote\": \"7c4a6f7f-86b8-d6b4-1744-9957433e276e\",\n      \"id\": \"5e51393c-fbdb-a08c-027f-ca6f54e63b8d\",\n      \"download_file\": \"string\",\n      \"file\": \"https://vpzJbmHdtCtkBTnzKhm.wbQWQCGK8urYJGbh\",\n      \"created_at\": \"1983-11-12T02:55:25.764Z\",\n      \"file_type\": \"quote\"\n    }\n  ],\n  \"has_bind_request\": \"string\",\n  \"version\": \"string\",\n  \"created_at\": \"1974-01-29T06:25:02.639Z\",\n  \"status\": \"cancelled\",\n  \"quote_type\": \"SURPLUS_LINES\",\n  \"quote_number\": null,\n  \"policy_number\": null,\n  \"limit\": 7896190034588598000,\n  \"retention\": -4186569745736716300,\n  \"premium\": -693756259317784600,\n  \"policy_term_months\": 864545851,\n  \"issue_date\": null,\n  \"minimum_days_to_cancel\": 157091125,\n  \"additional_notes\": null,\n  \"type\": \"MISCELLANEOUS_PROFESSIONAL_LIABILITY\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67fe2f20-c585-4ff6-9b8e-ff66b0ee8a09",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id",
+                    "download-pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this quote."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a45ef17-4f8a-4618-978f-60b28ffbc2e3",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id",
+                    "download-pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this quote."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7af04547-8d5d-40f2-bc5d-4d14a82d19ca",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id",
+                    "download-pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this quote."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.1fort.com/apis/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9b0cc6e1-0c63-4089-8d86-1311cac5618a",
+    "name": "1Fort API Documentation quote: quotes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# 1Fort API\n\nREST API for the 1Fort insurance platform. This document is the authoritative\nmap of the API surface; endpoints are grouped in the sidebar by **app** and\n**version**, and large apps are split into per-resource sub-groups.\n\n## Authentication\n\nAlmost every endpoint requires a **JWT access token**. Send it in the\n`Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may\nalso be presented as an HTTP-only cookie. Endpoints documented with no security\nrequirement are intentionally public (for example sign-in, OTP and storefront\nendpoints).\n\n## Multi-tenancy\n\nResources are scoped to a tenant. Nested routes carry the owning resource id in\nthe path (for example `/v2/broker/{business_pk}/applications`); a token is only\nauthorised for the businesses its user may access. Object-level permissions are\nenforced per endpoint.\n\n## Versioning\n\n`v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`\nendpoints remain documented for compatibility. Endpoints marked **deprecated**\nare scheduled for removal; prefer the documented replacement.\n",
+      "type": "text/plain"
+    }
+  }
+}

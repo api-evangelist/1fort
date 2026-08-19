@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Markets API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Markets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Available Markets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/markets/available-markets",
+            "params": [
+              {
+                "name": "product_line_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter by product line code(s), case-insensitive. Comma-separated values match markets that include any of the listed product lines (OR), e.g. CYBER,GL,PROP."
+              },
+              {
+                "name": "sub_product_line_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by sub product line name(s). Supports comma-separated list (e.g., 'D&O', 'EP', or 'D&O,EP' for ML)"
+              },
+              {
+                "name": "carrier_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by carrier UUID"
+              },
+              {
+                "name": "wholesaler_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by wholesaler UUID"
+              },
+              {
+                "name": "submission_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Market.submission_method: portal (in-portal), manual (email), herald (API)."
+              },
+              {
+                "name": "market_type",
+                "value": "",
+                "type": "query",
+                "description": "Distribution channel: ``broker`` = carrier only (no wholesaler/MGA); ``platform`` = wholesaler and/or MGA present."
+              },
+              {
+                "name": "admitted",
+                "value": "",
+                "type": "query",
+                "description": "Filter by admitted status (true for admitted, false for non-admitted/surplus lines). Only applicable for Herald markets."
+              },
+              {
+                "name": "verification",
+                "value": "",
+                "type": "query",
+                "description": "verification"
+              },
+              {
+                "name": "billing",
+                "value": "",
+                "type": "query",
+                "description": "billing"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "group_id"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              },
+              {
+                "name": "coverage_application_id",
+                "value": "",
+                "type": "query",
+                "description": "Optional. A single coverage-application UUID or a comma-separated list of UUIDs. When provided, the response switches to the grouped-per-id shape (see response schema). When omitted, the broker-wide flat shape is returned."
+              }
+            ]
+          },
+          "docs": "\nRetrieve markets available for submission with advanced filtering options.\n\nThis endpoint returns markets that match the specified criteria. When a\ncoverage_application_id is provided, it returns markets specifically available\nfor that application. Without it, returns all markets accessible to the broker.\n\n**Filtering Options:**\n- Product Line: Filter by product line code(s); comma-separated codes use OR logic\n- Carrier: Filter by insurance carrier\n- Wholesaler: Filter by wholesaler organizatio"
+        },
+        {
+          "info": {
+            "name": "Submit Application to Markets (Broker)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/markets/broker-submit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nSubmit an insurance application to one or more markets as a broker.\n\nThis endpoint allows brokers to submit coverage applications to available markets.\nThe submission process will:\n1. Validate the application is ready for submission\n2. Create submission records for each selected market\n3. Trigger quote generation for Herald-enabled markets\n4. Update application status to 'Submitted'\n\nIf no market_ids are provided, the system will automatically select all\navailable markets for the coverage appli"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

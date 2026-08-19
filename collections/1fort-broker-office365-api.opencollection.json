@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Broker Office365 API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "broker-office365",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "set office365 admin permissions for broker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/office365/broker/permissions",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "query",
+                "description": "Tenant ID"
+              },
+              {
+                "name": "admin_consent",
+                "value": "",
+                "type": "query",
+                "description": "Admin consent"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "State"
+              }
+            ]
+          },
+          "docs": "\nThis endpoint is used by the Office365 admin to set the permissions for broker integration.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

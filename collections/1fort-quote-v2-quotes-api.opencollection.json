@@ -1,0 +1,865 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation quote (v2): quotes API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "quote (v2): quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/quotes",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List Quotes"
+        },
+        {
+          "info": {
+            "name": "Create Broker Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/quotes/create",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new quote for a coverage application. This allows brokers to add quotes from carriers that they have obtained outside of the Herald system (e.g., expiring quotes, competitor quotes)."
+        },
+        {
+          "info": {
+            "name": "Get overview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/quotes/overview",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Get overview"
+        },
+        {
+          "info": {
+            "name": "Retrieve Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/quotes/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Quote (Coverage Term)."
+              }
+            ]
+          },
+          "docs": "Retrieve Quote"
+        },
+        {
+          "info": {
+            "name": "Get file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/quotes/:id/files/:file_pk",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Quote (Coverage Term)."
+              },
+              {
+                "name": "file_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get file"
+        },
+        {
+          "info": {
+            "name": "Get surplus file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/quotes/:id/surplus-files/:file_pk",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Quote (Coverage Term)."
+              },
+              {
+                "name": "file_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get surplus file"
+        },
+        {
+          "info": {
+            "name": "List Bind",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/quotes/:quote_pk/bind",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "quote_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List Bind"
+        },
+        {
+          "info": {
+            "name": "Create Bind",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/quotes/:quote_pk/bind",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "quote_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Bind"
+        },
+        {
+          "info": {
+            "name": "Retrieve Bind",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/quotes/:quote_pk/bind/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "quote_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this quote bind request."
+              }
+            ]
+          },
+          "docs": "Retrieve Bind"
+        },
+        {
+          "info": {
+            "name": "List Tasks for a Specific Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/quotes/:quote_pk/tasks",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "quote_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "type"
+              },
+              {
+                "name": "business",
+                "value": "",
+                "type": "query",
+                "description": "business"
+              },
+              {
+                "name": "broker",
+                "value": "",
+                "type": "query",
+                "description": "broker"
+              },
+              {
+                "name": "coverage",
+                "value": "",
+                "type": "query",
+                "description": "coverage"
+              },
+              {
+                "name": "carrier",
+                "value": "",
+                "type": "query",
+                "description": "carrier"
+              },
+              {
+                "name": "insured",
+                "value": "",
+                "type": "query",
+                "description": "insured"
+              },
+              {
+                "name": "assigned_to_email",
+                "value": "",
+                "type": "query",
+                "description": "assigned_to_email"
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List all quote tasks for a specific quote (from the latest task group).\n\nExpandable fields via expand query parameter (comma separated):\n- quote: Full quote details (omits tasks to prevent recursion)\n- business: Business details\n- broker: Broker agency details\n- group: Task group details (omits tasks to prevent recursion)\n- completed_by: Broker user who completed the task\n\nFilters available:\n- status: Filter by task status (todo, done, dismissed, n/a)\n- type: Filter by task type (signature, subj"
+        },
+        {
+          "info": {
+            "name": "Resolve QuoteTasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/quotes/:quote_pk/tasks",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "quote_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resolve one or multiple tasks with comments and/or documents"
+        },
+        {
+          "info": {
+            "name": "Notify insured about requests for multiple tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/quotes/:quote_pk/tasks/notify-insured-requests",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "quote_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers email notifications to specified email addresses about insured requests for a list of tasks. The emails parameter accepts an array of email addresses to notify."
+        },
+        {
+          "info": {
+            "name": "ViewSet for managing quote tasks for a specific quote.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/quotes/:quote_pk/tasks/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "quote_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Only returns tasks from the most recently created task group for the quote."
+        },
+        {
+          "info": {
+            "name": "List Visible Tasks for a Business and Quote/Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/quotes/:quote_pk/visible-tasks",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "quote_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "type"
+              },
+              {
+                "name": "business",
+                "value": "",
+                "type": "query",
+                "description": "business"
+              },
+              {
+                "name": "broker",
+                "value": "",
+                "type": "query",
+                "description": "broker"
+              },
+              {
+                "name": "coverage",
+                "value": "",
+                "type": "query",
+                "description": "coverage"
+              },
+              {
+                "name": "carrier",
+                "value": "",
+                "type": "query",
+                "description": "carrier"
+              },
+              {
+                "name": "insured",
+                "value": "",
+                "type": "query",
+                "description": "insured"
+              },
+              {
+                "name": "assigned_to_email",
+                "value": "",
+                "type": "query",
+                "description": "assigned_to_email"
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List all visible quote tasks for a specific business and quote/application (from the latest task groups).\n\nOnly returns tasks with visible_to_business=True.\n\nThis endpoint can be accessed with either a quote_pk or application_pk parameter.\n\nExpandable fields via expand query parameter (comma separated):\n- quote: Full quote details (omits tasks to prevent recursion)\n- business: Business details\n- broker: Broker agency details\n- group: Task group details (omits tasks to prevent recursion)\n- comple"
+        },
+        {
+          "info": {
+            "name": "ViewSet for retrieving quote tasks that are visible to businesses.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/quotes/:quote_pk/visible-tasks/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "quote_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Only returns tasks with visible_to_business=True from the most recently created task group.\nThis endpoint can be accessed by both broker users and business users.\n\nIt supports filtering by either quote_id or application_id."
+        },
+        {
+          "info": {
+            "name": "ViewSet for allowing business users to resolve quote tasks for a specific quote.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/quotes/:quote_pk/tasks",
+            "params": [
+              {
+                "name": "quote_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "type"
+              },
+              {
+                "name": "business",
+                "value": "",
+                "type": "query",
+                "description": "business"
+              },
+              {
+                "name": "broker",
+                "value": "",
+                "type": "query",
+                "description": "broker"
+              },
+              {
+                "name": "coverage",
+                "value": "",
+                "type": "query",
+                "description": "coverage"
+              },
+              {
+                "name": "carrier",
+                "value": "",
+                "type": "query",
+                "description": "carrier"
+              },
+              {
+                "name": "insured",
+                "value": "",
+                "type": "query",
+                "description": "insured"
+              },
+              {
+                "name": "assigned_to_email",
+                "value": "",
+                "type": "query",
+                "description": "assigned_to_email"
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Only returns tasks that are visible to business users."
+        },
+        {
+          "info": {
+            "name": "Business User Resolution of QuoteTasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/quotes/:quote_pk/tasks",
+            "params": [
+              {
+                "name": "quote_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows business users to resolve one or multiple tasks with comments and/or documents"
+        },
+        {
+          "info": {
+            "name": "ViewSet for allowing business users to resolve quote tasks for a specific quote.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/quotes/:quote_pk/tasks/:id",
+            "params": [
+              {
+                "name": "quote_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Only returns tasks that are visible to business users."
+        },
+        {
+          "info": {
+            "name": "List Visible Tasks for a Business and Quote/Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/quotes/:quote_pk/visible-tasks",
+            "params": [
+              {
+                "name": "quote_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "type"
+              },
+              {
+                "name": "business",
+                "value": "",
+                "type": "query",
+                "description": "business"
+              },
+              {
+                "name": "broker",
+                "value": "",
+                "type": "query",
+                "description": "broker"
+              },
+              {
+                "name": "coverage",
+                "value": "",
+                "type": "query",
+                "description": "coverage"
+              },
+              {
+                "name": "carrier",
+                "value": "",
+                "type": "query",
+                "description": "carrier"
+              },
+              {
+                "name": "insured",
+                "value": "",
+                "type": "query",
+                "description": "insured"
+              },
+              {
+                "name": "assigned_to_email",
+                "value": "",
+                "type": "query",
+                "description": "assigned_to_email"
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List all visible quote tasks for a specific business and quote/application (from the latest task groups).\n\nOnly returns tasks with visible_to_business=True.\n\nThis endpoint can be accessed with either a quote_pk or application_pk parameter.\n\nExpandable fields via expand query parameter (comma separated):\n- quote: Full quote details (omits tasks to prevent recursion)\n- business: Business details\n- broker: Broker agency details\n- group: Task group details (omits tasks to prevent recursion)\n- comple"
+        },
+        {
+          "info": {
+            "name": "ViewSet for retrieving quote tasks that are visible to businesses.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/quotes/:quote_pk/visible-tasks/:id",
+            "params": [
+              {
+                "name": "quote_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Only returns tasks with visible_to_business=True from the most recently created task group.\nThis endpoint can be accessed by both broker users and business users.\n\nIt supports filtering by either quote_id or application_id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

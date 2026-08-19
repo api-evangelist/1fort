@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation email_ai (v2): emails API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "email_ai (v2): emails",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/emails/:email_pk/attachments/:id/metadata/schema",
+            "params": [
+              {
+                "name": "email_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Return the schema for this endpoint."
+        },
+        {
+          "info": {
+            "name": "List Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/emails/:id/schema",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Return the schema for this endpoint."
+        },
+        {
+          "info": {
+            "name": "Retrieve Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_id/emails/:id",
+            "params": [
+              {
+                "name": "business_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Email."
+              }
+            ]
+          },
+          "docs": "Retrieve email details with attachments"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

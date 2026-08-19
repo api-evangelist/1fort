@@ -1,0 +1,4171 @@
+openapi: 3.2.0
+info:
+  title: 1Fort API Documentation Broker API
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: broker
+  x-displayName: Broker
+  description: '**Access:** mixed; some endpoints are public, others require JWT (per endpoint).'
+paths:
+  /broker:
+    parameters: []
+    get:
+      operationId: broker_list
+      summary: List Brokers
+      description: '
+
+        List all brokers.
+
+        This endpoint lists all brokers.
+
+        '
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BrokerAgency'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+    post:
+      operationId: broker_create
+      summary: Create Broker
+      description: '
+
+        Create a broker.
+
+        This endpoint creates a broker.
+
+        '
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerAgency'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrokerAgency'
+        required: true
+  /broker/{broker_pk}/accept-invite:
+    parameters:
+    - name: broker_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: broker_accept-invite_create
+      summary: Accept Invite
+      description: '
+
+        Accept an invite.
+
+        This endpoint accepts a broker user(agent) invite.
+
+        '
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptBrokerInvite'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptBrokerInvite'
+        required: true
+  /broker/{broker_pk}/clients:
+    parameters:
+    - name: broker_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: broker_clients_list
+      summary: List Broker Clients
+      description: '
+
+        List all clients.
+
+        This endpoint lists all the broker''s clients.
+
+        '
+      parameters:
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BrokerClient'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+    post:
+      operationId: broker_clients_create
+      summary: Create Broker Client
+      description: "\nCreate a broker client.\nThis endpoint creates a client.\n\nA subsidiaries list can be passed to create\na client with subsidiaries.\nExample:\n\"subsidiaries\": [\n    {\n        \"name\": \"Subsidiary 1\",\n    }\n]\n"
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerClient'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrokerClient'
+        required: true
+  /broker/{broker_pk}/clients/{client_pk}/invites:
+    parameters:
+    - name: broker_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: client_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: broker_clients_invites_list
+      summary: List Broker Client Invites
+      description: '
+
+        List all client invites.
+
+        This endpoint lists all the broker''s client invites.
+
+        '
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+    post:
+      operationId: broker_clients_invites_create
+      summary: Invite Client
+      description: '
+
+        Send an invite to a client.
+
+        This endpoint creates a client invite.
+
+
+        Optional fields:
+
+        - application_id: Link invite to specific application
+
+        - trigger_email: Whether to send invitation email immediately
+
+        - custom_message: Personalized message to include in invitation email
+
+        '
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BrokerBusinessUserInvite'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/BrokerBusinessUserInvite'
+        required: true
+  /broker/{broker_pk}/clients/{client_pk}/invites/cancel-invite:
+    parameters:
+    - name: broker_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: client_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: broker_clients_invites_cancel_invite
+      summary: Cancel Broker Client Invite
+      description: '
+
+        Cancel an invite to a client.
+
+        This endpoint deletes all broker client invites.
+
+        '
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+  /broker/{broker_pk}/clients/{client_pk}/invites/resend-invite:
+    parameters:
+    - name: broker_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: client_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: broker_clients_invites_resend_invite
+      summary: Resend Broker Client Invite
+      description: '
+
+        Resend an invite to a client.
+
+        This endpoint resends an existing pending client invite.
+
+        '
+      responses:
+        '201':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+  /broker/{broker_pk}/clients/{id}:
+    parameters:
+    - name: broker_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: A unique integer value identifying this business.
+      required: true
+      schema:
+        type: integer
+    get:
+      operationId: broker_clients_read
+      summary: Get Broker Client details
+      description: '
+
+        Retrieve a broker client.
+
+        This endpoint Get a broker client.
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerClient'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+    patch:
+      operationId: broker_clients_partial_update
+      summary: Update Broker Client
+      description: '
+
+        Update a broker client.
+
+        This endpoint updates a broker client.
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerClient'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrokerClient'
+        required: true
+    delete:
+      operationId: broker_clients_delete
+      summary: Delete Broker Client
+      description: '
+
+        Delete a broker client.
+
+        This endpoint deletes a broker client.
+
+        '
+      responses:
+        '204':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+  /broker/{broker_pk}/files:
+    parameters:
+    - name: broker_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: broker_files_list
+      summary: List Broker Files
+      description: '
+
+        List all files associated with the broker''s insureds.
+
+
+        This endpoint aggregates files from multiple sources:
+
+        - Quote files (Herald quotes, manual quotes)
+
+        - Application supplementary documents
+
+        - Policy documents
+
+        - Carrier files (invoices, etc.)
+
+
+        **Query Parameters:**
+
+        - `search` (optional): Search by file name
+
+        - `file_type` (optional): Filter by file type (cois, quote, proposal, application, policy, invoice)
+
+        - `insured` (optional): Filter by insured ID (comma-separated for multiple)
+
+        - `team` (optional): Filter by team member ID (comma-separated for multiple)
+
+        - `date_min` (optional): Filter by minimum date (YYYY-MM-DD, compared in UTC)
+
+        - `date_max` (optional): Filter by maximum date (YYYY-MM-DD, compared in UTC)
+
+        - `source` (optional): Filter by source (email, platform)
+
+        - `limit` (optional): Number of results per page (default: 10)
+
+        - `offset` (optional): Starting position for pagination (default: 0)
+
+
+        **Authorization:**
+
+        Returns 403 Forbidden if the authenticated user doesn''t belong to the specified broker agency.
+
+        '
+      parameters:
+      - name: search
+        in: query
+        description: Search files by name
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: 'Number of results per page (default: 10)'
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: 'Starting position for pagination (default: 0)'
+        schema:
+          type: integer
+      - name: file_type
+        in: query
+        description: Filter by file type (comma-separated)
+        schema:
+          type: string
+      - name: insured
+        in: query
+        description: Filter by insured ID (comma-separated)
+        schema:
+          type: string
+      - name: team
+        in: query
+        description: Filter by team member ID (comma-separated)
+        schema:
+          type: string
+      - name: date_min
+        in: query
+        description: Filter by minimum date (YYYY-MM-DD, compared in UTC)
+        schema:
+          type: string
+          format: date
+      - name: date_max
+        in: query
+        description: Filter by maximum date (YYYY-MM-DD, compared in UTC)
+        schema:
+          type: string
+          format: date
+      - name: source
+        in: query
+        description: Filter by source (email, platform)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BrokerFile'
+        '403':
+          description: User does not have access to this broker
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+  /broker/{broker_pk}/invites:
+    parameters:
+    - name: broker_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: broker_invites_list
+      summary: List Broker User Invites
+      description: '
+
+        List all user invites.
+
+        This endpoint lists all the broker''s user invites.
+
+        '
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BrokerUserInvite'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+    post:
+      operationId: broker_invites_create
+      summary: Invite Broker User
+      description: '
+
+        Send an invite to an broker user(agent).
+
+        This endpoint invites a user.
+
+        '
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BrokerUserInvite'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/BrokerUserInvite'
+        required: true
+  /broker/{broker_pk}/invites/{id}:
+    parameters:
+    - name: broker_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: A unique integer value identifying this broker invite.
+      required: true
+      schema:
+        type: integer
+    put:
+      operationId: broker_invites_update
+      summary: Update Broker User Invite
+      description: '
+
+        Update a pending broker user invite.
+
+        This endpoint allows updating the role and type of a pending invite.
+
+        Only pending invites can be updated.
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerUserInvite'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrokerUserInvite'
+        required: true
+    patch:
+      operationId: broker_invites_partial_update
+      summary: Partially Update Broker User Invite
+      description: '
+
+        Partially update a pending broker user invite.
+
+        This endpoint allows updating the role and/or type of a pending invite.
+
+        Only pending invites can be updated.
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerUserInvite'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrokerUserInvite'
+        required: true
+    delete:
+      operationId: broker_invites_delete
+      summary: Delete Broker User Invite
+      description: '
+
+        Delete a broker user invite.
+
+        This endpoint cancels a broker user invite by setting its status to cancelled.
+
+        '
+      responses:
+        '204':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+  /broker/{broker_pk}/notification-emails:
+    parameters:
+    - name: broker_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: broker_notification-emails_list
+      summary: List Sent Notification Emails
+      description: '
+
+        List all successfully sent notification emails to business users and underwriters
+
+        associated with the authenticated broker''s agency.
+
+
+        Returns only emails with ''sent'' status.
+
+        Includes subject, sender, recipient, recipient type, and date sent information.
+
+        Only returns emails for businesses and underwriters belonging to the broker''s agency.
+
+
+        **Query Parameters:**
+
+        - `business_id` (optional): Filter emails to only show those sent to users of a specific business/insured
+
+
+        **Exclusions:**
+
+        - OTP/Login code emails are excluded from results
+
+
+        **Response Fields:**
+
+        - `id`: Unique identifier for the email
+
+        - `subject`: Email subject line
+
+        - `sender_email`: Sender''s email address
+
+        - `sender_name`: Sender''s display name
+
+        - `recipient_email`: Recipient''s email address
+
+        - `recipient_type`: Type of recipient - "Insured" (business user), "Carrier" (underwriter), or null
+
+        - `sent_at`: Timestamp when email was sent
+
+        - `created_at`: Timestamp when email was created
+
+        - `status`: Email status (always "sent" for this endpoint)
+
+        - `email_type`: Type of notification email (e.g., "BROKER_INACTIVITY", "BROKER_WEEKLY_DIGEST")
+
+        '
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BrokerNotificationEmail'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+  /broker/{broker_pk}/received-notification-emails:
+    parameters:
+    - name: broker_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: broker_received-notification-emails_list
+      summary: List Received Notification Emails
+      description: '
+
+        List all successfully sent notification emails received by the authenticated broker user.
+
+
+        Returns only emails with ''sent'' status sent to the authenticated user making the request.
+
+        Includes subject, sender, recipient, and date sent information.
+
+
+        **Exclusions:**
+
+        - OTP/Login code emails are excluded from results
+
+
+        **Response Fields:**
+
+        - `id`: Unique identifier for the email
+
+        - `subject`: Email subject line
+
+        - `sender_email`: Sender''s email address
+
+        - `sender_name`: Sender''s display name
+
+        - `recipient_email`: Recipient''s email address (will match authenticated user''s email)
+
+        - `sent_at`: Timestamp when email was sent
+
+        - `created_at`: Timestamp when email was created
+
+        - `status`: Email status (always "sent" for this endpoint)
+
+        - `email_type`: Type of notification email (e.g., "BROKER_INACTIVITY", "BROKER_WEEKLY_DIGEST")
+
+        - `is_read`: Boolean indicating if the notification has been read (false for new emails on first GET)
+
+
+        **Note:** UserNotification records are auto-created on first GET request with "unread" status.
+
+        '
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BrokerReceivedNotificationEmail'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+  /broker/{broker_pk}/received-notification-emails/{id}/mark-as-read:
+    parameters:
+    - name: broker_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: broker_received-notification-emails_mark_as_read
+      summary: Mark Notification as Read
+      description: '
+
+        Mark a specific notification email as read for the authenticated broker user.
+
+
+        This endpoint updates the UserNotification record status to "read" and sets
+
+        the read_at timestamp. If no UserNotification record exists for this email,
+
+        one will be created with status "read".
+
+
+        **URL Pattern:**
+
+        `POST /apis/broker/{broker_id}/received-notification-emails/{id}/mark_as_read`
+
+
+        **Response:**
+
+        Returns the updated notification email with `is_read: true`.
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerReceivedNotificationEmail'
+        '404':
+          description: Notification email not found
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrokerReceivedNotificationEmail'
+        required: true
+  /broker/{broker_pk}/users:
+    parameters:
+    - name: broker_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: broker_users_list
+      summary: List Broker users
+      description: '
+
+        List all broker users.
+
+        This endpoint lists all the broker''s users.
+
+        '
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BrokerUser'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+  /broker/{broker_pk}/users/{id}:
+    parameters:
+    - name: broker_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: A unique integer value identifying this broker user.
+      required: true
+      schema:
+        type: integer
+    get:
+      operationId: broker_users_read
+      summary: Retrieve Broker user
+      description: '
+
+        Retrieve a broker user.
+
+        This endpoint retrieves a broker user.
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerUser'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+    put:
+      operationId: broker_users_update
+      summary: Update Broker user
+      description: '
+
+        Update a broker user.
+
+        This endpoint updates a broker user.
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerUser'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrokerUser'
+        required: true
+    delete:
+      operationId: broker_users_delete
+      summary: Delete Broker user
+      description: '
+
+        Delete a broker user.
+
+        This endpoint deletes a broker user.
+
+        '
+      responses:
+        '204':
+          description: ''
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+  /broker/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this broker agency.
+      required: true
+      schema:
+        type: integer
+    get:
+      operationId: broker_read
+      summary: Get Broker
+      description: '
+
+        Retrieve a broker.
+
+        This endpoint Get a broker.
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerAgencyDetail'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+    patch:
+      operationId: broker_partial_update
+      summary: Update Broker
+      description: '
+
+        Update a broker.
+
+        This endpoint updates a broker .
+
+        '
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerAgencyDetail'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - broker
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrokerAgencyDetail'
+        required: true
+components:
+  schemas:
+    ApplicationPrefilledForm:
+      required:
+      - business
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        document_content:
+          title: Document content
+          type:
+          - string
+          - 'null'
+        form:
+          title: Form
+          type: string
+          readOnly: true
+          format: uri
+        application:
+          title: Application
+          type:
+          - string
+          - 'null'
+          format: uuid
+        created_by:
+          title: Created by
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        business:
+          title: Business
+          type: integer
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    BusinessSubsidiary:
+      required:
+      - name
+      - business
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        ownership:
+          title: Ownership
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        business:
+          title: Business
+          type: integer
+    BrokerClient:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        industry_classification:
+          title: Industry classification
+          type: string
+          format: uuid
+        subsidiaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessSubsidiary'
+          readOnly: true
+        broker_team:
+          title: Broker team
+          type: string
+          readOnly: true
+        prefilled_forms:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationPrefilledForm'
+          readOnly: true
+        applicant_name:
+          title: Applicant name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        applicant_email:
+          title: Applicant email
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        applicant_phone:
+          title: Applicant phone
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        legal_entity:
+          title: Legal entity
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        address_line_1:
+          title: Address line 1
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        address_line_2:
+          title: Address line 2
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        city:
+          title: City
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        state_code:
+          title: State code
+          type:
+          - string
+          - 'null'
+          maxLength: 2
+        country_code:
+          title: Country code
+          type:
+          - string
+          - 'null'
+          maxLength: 5
+        zip_code:
+          title: Zip code
+          type:
+          - string
+          - 'null'
+          maxLength: 10
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        domain_name:
+          title: Domain name
+          type:
+          - string
+          - 'null'
+          maxLength: 500
+        has_no_domain_name:
+          title: Has no domain name
+          type: boolean
+        industry:
+          title: Industry
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        number_of_employees:
+          title: Number of employees
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        active:
+          title: Active
+          type: boolean
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        revenue:
+          title: Revenue
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        state_of_incorporation:
+          title: State of incorporation
+          type:
+          - string
+          - 'null'
+          maxLength: 2
+        country_of_incorporation:
+          title: Country of incorporation
+          type:
+          - string
+          - 'null'
+          maxLength: 2
+        year_founded:
+          title: Year founded
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        naics_code:
+          title: Naics code
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        ein:
+          title: Ein
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        is_franchise:
+          title: Is franchise
+          type:
+          - boolean
+          - 'null'
+        premium_plan:
+          title: Premium plan
+          type:
+          - boolean
+          - 'null'
+        is_test_account:
+          title: Is test account
+          type: boolean
+        has_notified_clients_of_breach:
+          title: Has notified clients of breach
+          type:
+          - boolean
+          - 'null'
+        has_notified_clients_of_breach_description:
+          title: Has notified clients of breach description
+          type:
+          - string
+          - 'null'
+        has_been_investigated_for_privacy_violations:
+          title: Has been investigated for privacy violations
+          type:
+          - boolean
+          - 'null'
+        has_been_investigated_for_privacy_violations_description:
+          title: Has been investigated for privacy violations description
+          type:
+          - string
+          - 'null'
+        has_been_hacked_description:
+          title: Has been hacked description
+          type:
+          - string
+          - 'null'
+        active_carriers:
+          type:
+          - array
+          - 'null'
+          items:
+            title: Active carriers
+            type: string
+            maxLength: 255
+            minLength: 1
+        ownership_type:
+          title: Ownership type
+          type:
+          - string
+          - 'null'
+          enum:
+          - PUBLIC
+          - PRIVATE
+          - NONPROFIT
+          - PUBLIC_SECTOR
+          - PARTNERSHIP
+          - NON_CORPORATES
+        phone_number:
+          title: Phone number
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        security_contact_title:
+          title: Security contact title
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        security_email:
+          title: Security email
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        security_phone_number:
+          title: Security phone number
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        name_of_security_contact:
+          title: Name of security contact
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        security_designation:
+          title: Security designation
+          type:
+          - string
+          - 'null'
+        number_of_it_personnel:
+          title: Number of it personnel
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        number_of_dedicated_security_personnel:
+          title: Number of dedicated security personnel
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        help_center_url:
+          title: Help center url
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        carrier_page_url:
+          title: Carrier page url
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        company_updates_url:
+          title: Company updates url
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        terms_of_service_url:
+          title: Terms of service url
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        privacy_policy_url:
+          title: Privacy policy url
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        security_commitments_url:
+          title: Security commitments url
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 200
+        has_been_hacked:
+          title: Has been hacked
+          type:
+          - boolean
+          - 'null'
+        income_coverage_limit:
+          title: Income coverage limit
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        deductible:
+          title: Deductible
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        retention:
+          title: Retention
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        has_subsidiaries:
+          title: Has subsidiaries
+          type:
+          - boolean
+          - 'null'
+        no_of_subsidiary:
+          title: No of subsidiary
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        net_revenue:
+          title: Net revenue
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        gross_profit:
+          title: Gross profit
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: -2147483648
+        last_year_revenue:
+          title: Last year revenue
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        last_two_year_revenue:
+          title: Last two year revenue
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        have_cyber_claim:
+          title: Have cyber claim
+          type:
+          - boolean
+          - 'null'
+        cyber_claim_lost:
+          title: Cyber claim lost
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        cyber_claim_description:
+          title: Cyber claim description
+          type:
+          - string
+          - 'null'
+        potential_claim:
+          title: Potential claim
+          type:
+          - boolean
+          - 'null'
+        potential_claim_description:
+          title: Potential claim description
+          type:
+          - string
+          - 'null'
+        received_complaint:
+          title: Received complaint
+          type:
+          - boolean
+          - 'null'
+        received_complaint_description:
+          title: Received complaint description
+          type:
+          - string
+          - 'null'
+        owner_id:
+          title: Owner id
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        archived_at:
+          title: Archived at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        broker_sharing_setting:
+          title: Broker sharing setting
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        carrier_sharing_setting:
+          title: Carrier sharing setting
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        store_pii:
+          title: Store pii
+          type:
+          - boolean
+          - 'null'
+        social_security_numbers:
+          title: Social security numbers
+          type:
+          - string
+          - 'null'
+          enum:
+          - '0'
+          - <100K
+          - 100K-500K
+          - 500k - 1M
+          - 1M - 2M
+          - 2M - 5M
+          - 5M - 10M
+          - '>10M'
+        consumer_financial_information:
+          title: Consumer financial information
+          type:
+          - string
+          - 'null'
+          enum:
+          - '0'
+          - <100K
+          - 100K-500K
+          - 500k - 1M
+          - 1M - 2M
+          - 2M - 5M
+          - 5M - 10M
+          - '>10M'
+        payment_card_information:
+          title: Payment card information
+          type:
+          - string
+          - 'null'
+          enum:
+          - '0'
+          - <100K
+          - 100K-500K
+          - 500k - 1M
+          - 1M - 2M
+          - 2M - 5M
+          - 5M - 10M
+          - '>10M'
+        protected_health_information:
+          title: Protected health information
+          type:
+          - string
+          - 'null'
+          enum:
+          - '0'
+          - <100K
+          - 100K-500K
+          - 500k - 1M
+          - 1M - 2M
+          - 2M - 5M
+          - 5M - 10M
+          - '>10M'
+        biometric_information:
+          title: Biometric information
+          type:
+          - string
+          - 'null'
+          enum:
+          - '0'
+          - <100K
+          - 100K-500K
+          - 500k - 1M
+          - 1M - 2M
+          - 2M - 5M
+          - 5M - 10M
+          - '>10M'
+        social_security_numbers_on_paper_records:
+          title: Social security numbers on paper records
+          type:
+          - string
+          - 'null'
+          enum:
+          - '0'
+          - <100K
+          - 100K-500K
+          - 500k - 1M
+          - 1M - 2M
+          - 2M - 5M
+          - 5M - 10M
+          - '>10M'
+        consumer_financial_information_on_paper_records:
+          title: Consumer financial information on paper records
+          type:
+          - string
+          - 'null'
+          enum:
+          - '0'
+          - <100K
+          - 100K-500K
+          - 500k - 1M
+          - 1M - 2M
+          - 2M - 5M
+          - 5M - 10M
+          - '>10M'
+        payment_card_information_on_paper_records:
+          title: Payment card information on paper records
+          type:
+          - string
+          - 'null'
+          enum:
+          - '0'
+          - <100K
+          - 100K-500K
+          - 500k - 1M
+          - 1M - 2M
+          - 2M - 5M
+          - 5M - 10M
+          - '>10M'
+        protected_health_information_on_paper_records:
+          title: Protected health information on paper records
+          type:
+          - string
+          - 'null'
+          enum:
+          - '0'
+          - <100K
+          - 100K-500K
+          - 500k - 1M
+          - 1M - 2M
+          - 2M - 5M
+          - 5M - 10M
+          - '>10M'
+        biometric_information_on_paper_records:
+          title: Biometric information on paper records
+          type:
+          - string
+          - 'null'
+          enum:
+          - '0'
+          - <100K
+          - 100K-500K
+          - 500k - 1M
+          - 1M - 2M
+          - 2M - 5M
+          - 5M - 10M
+          - '>10M'
+        social_security_numbers_electronic_records:
+          title: Social security numbers electronic records
+          type:
+          - string
+          - 'null'
+          enum:
+          - '0'
+          - <100K
+          - 100K-500K
+          - 500k - 1M
+          - 1M - 2M
+          - 2M - 5M
+          - 5M - 10M
+          - '>10M'
+        consumer_financial_information_electronic_records:
+          title: Consumer financial information electronic records
+          type:
+          - string
+          - 'null'
+          enum:
+          - '0'
+          - <100K
+          - 100K-500K
+          - 500k - 1M
+          - 1M - 2M
+          - 2M - 5M
+          - 5M - 10M
+          - '>10M'
+        payment_card_information_electronic_records:
+          title: Payment card information electronic records
+          type:
+          - string
+          - 'null'
+          enum:
+          - '0'
+          - <100K
+          - 100K-500K
+          - 500k - 1M
+          - 1M - 2M
+          - 2M - 5M
+          - 5M - 10M
+          - '>10M'
+        protected_health_information_electronic_records:
+          title: Protected health information electronic records
+          type:
+          - string
+          - 'null'
+          enum:
+          - '0'
+          - <100K
+          - 100K-500K
+          - 500k - 1M
+          - 1M - 2M
+          - 2M - 5M
+          - 5M - 10M
+          - '>10M'
+        biometric_information_electronic_records:
+          title: Biometric information electronic records
+          type:
+          - string
+          - 'null'
+          enum:
+          - '0'
+          - <100K
+          - 100K-500K
+          - 500k - 1M
+          - 1M - 2M
+          - 2M - 5M
+          - 5M - 10M
+          - '>10M'
+        is_pci_dss_compliant:
+          title: Is pci dss compliant
+          type:
+          - boolean
+          - 'null'
+        has_reviewed_sensitive_data_policy:
+          title: Has reviewed sensitive data policy
+          type:
+          - boolean
+          - 'null'
+        has_received_cyber_extortion_threat:
+          title: Has received cyber extortion threat
+          type:
+          - boolean
+          - 'null'
+        has_experienced_cyber_attack_network_outage_wire_transfer_fraud:
+          title: Has experienced cyber attack network outage wire transfer fraud
+          type:
+          - boolean
+          - 'null'
+        has_unscheduled_network_outage:
+          title: Has unscheduled network outage
+          type:
+          - boolean
+          - 'null'
+        unscheduled_network_outage_description:
+          title: Unscheduled network outage description
+          type:
+          - string
+          - 'null'
+        has_experienced_wire_transfer_fraud:
+          title: Has experienced wire transfer fraud
+          type:
+          - boolean
+          - 'null'
+        wire_transfer_fraud_description:
+          title: Wire transfer fraud description
+          type:
+          - string
+          - 'null'
+        has_experienced_cyber_attack:
+          title: Has experienced cyber attack
+          type:
+          - boolean
+          - 'null'
+        cyber_attack_description:
+          title: Cyber attack description
+          type:
+          - string
+          - 'null'
+        service_provider_outage_past_3_years:
+          title: Service provider outage past 3 years
+          type:
+          - boolean
+          - 'null'
+        business_interruption_due_to_outage:
+          title: Business interruption due to outage
+          type:
+          - boolean
+          - 'null'
+        it_budget:
+          title: It budget
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        network_security_management:
+          title: Network security management
+          type:
+          - string
+          - 'null'
+          enum:
+          - OUTSOURCED
+          - IN_HOUSE
+        security_provider_name:
+          title: Security provider name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        security_contact_person_name:
+          title: Security contact person name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        security_contact_person_email:
+          title: Security contact person email
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        has_revenue_outside_domicile:
+          title: Has revenue outside domicile
+          type:
+          - boolean
+          - 'null'
+        revenue_outside_domicile_percentage:
+          title: Revenue outside domicile percentage
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        has_recent_merger_acquisition:
+          title: Has recent merger acquisition
+          type:
+          - boolean
+          - 'null'
+        merger_acquisition_details:
+          title: Merger acquisition details
+          type:
+          - string
+          - 'null'
+        process_stores_or_handles_credit_card_transactions:
+          title: Process stores or handles credit card transactions
+          type:
+          - boolean
+          - 'null'
+        business_email:
+          title: Business email
+          description: Auto-generated unique email @1fort.com
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        business_password:
+          title: Business password
+          description: Auto-generated secure password
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        deleted_at:
+          title: Deleted at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        smtp_tls_status:
+          title: Smtp tls status
+          type: string
+          enum:
+          - active
+          - inactive
+          - unknown
+        cyber_risk_areas_for_improvement:
+          title: Cyber risk areas for improvement
+          type:
+          - string
+          - 'null'
+        cyber_risk_areas_of_strength:
+          title: Cyber risk areas of strength
+          type:
+          - string
+          - 'null'
+        COI_vendor_tracking:
+          title: COI vendor tracking
+          type:
+          - string
+          - 'null'
+          enum:
+          - IN_PLACE
+          - ACTIVELY_LOOKING
+          - INTEND_TO_GET
+          - NOT_USED
+        employee_benefits_management_software:
+          title: Employee benefits management software
+          type:
+          - string
+          - 'null'
+          enum:
+          - IN_PLACE
+          - ACTIVELY_LOOKING
+          - INTEND_TO_GET
+          - NOT_USED
+        governance_risk_compliance_software:
+          title: Governance risk compliance software
+          type:
+          - string
+          - 'null'
+          enum:
+          - IN_PLACE
+          - ACTIVELY_LOOKING
+          - INTEND_TO_GET
+          - NOT_USED
+        security_monitoring:
+          title: Security monitoring
+          type:
+          - string
+          - 'null'
+          enum:
+          - IN_PLACE
+          - ACTIVELY_LOOKING
+          - INTEND_TO_GET
+          - NOT_USED
+        privacy_frameworks:
+          title: Privacy frameworks
+          type:
+          - string
+          - 'null'
+          enum:
+          - IN_PLACE
+          - ACTIVELY_LOOKING
+          - INTEND_TO_GET
+          - NOT_USED
+        NIST_tool:
+          title: NIST tool
+          type:
+          - string
+          - 'null'
+          enum:
+          - IN_PLACE
+          - ACTIVELY_LOOKING
+          - INTEND_TO_GET
+          - NOT_USED
+        GDPR_tool:
+          title: GDPR tool
+          type:
+          - string
+          - 'null'
+          enum:
+          - IN_PLACE
+          - ACTIVELY_LOOKING
+          - INTEND_TO_GET
+          - NOT_USED
+        HIPAA_tool:
+          title: HIPAA tool
+          type:
+          - string
+          - 'null'
+          enum:
+          - IN_PLACE
+          - ACTIVELY_LOOKING
+          - INTEND_TO_GET
+          - NOT_USED
+        CMMC_tool:
+          title: CMMC tool
+          type:
+          - string
+          - 'null'
+          enum:
+          - IN_PLACE
+          - ACTIVELY_LOOKING
+          - INTEND_TO_GET
+          - NOT_USED
+        ISO_27001_tool:
+          title: ISO 27001 tool
+          type:
+          - string
+          - 'null'
+          enum:
+          - IN_PLACE
+          - ACTIVELY_LOOKING
+          - INTEND_TO_GET
+          - NOT_USED
+        CCPA_tool:
+          title: CCPA tool
+          type:
+          - string
+          - 'null'
+          enum:
+          - IN_PLACE
+          - ACTIVELY_LOOKING
+          - INTEND_TO_GET
+          - NOT_USED
+        FedRAMP_tool:
+          title: FedRAMP tool
+          type:
+          - string
+          - 'null'
+          enum:
+          - IN_PLACE
+          - ACTIVELY_LOOKING
+          - INTEND_TO_GET
+          - NOT_USED
+        industries_company_participates_in:
+          title: Industries company participates in
+          type:
+          - object
+          - 'null'
+        percentage_of_written_agreements_standard_vs_manuscript:
+          title: Percentage of written agreements standard vs manuscript
+          type:
+          - string
+          - 'null'
+          enum:
+          - 80/20
+          - 60/40
+          - 50/50
+          - 40/60
+          - 20/80
+        is_there_limitation_of_liability_clause_utilized:
+          title: Is there limitation of liability clause utilized
+          type:
+          - boolean
+          - 'null'
+        is_there_hold_harmless_clause_utilized:
+          title: Is there hold harmless clause utilized
+          type:
+          - boolean
+          - 'null'
+        is_there_indemnification_clause_utilized:
+          title: Is there indemnification clause utilized
+          type:
+          - boolean
+          - 'null'
+        is_there_exclusion_of_consequential_damages_clause_utilized:
+          title: Is there exclusion of consequential damages clause utilized
+          type:
+          - boolean
+          - 'null'
+        is_there_mandatory_or_binding_arbitration_clause_utilized:
+          title: Is there mandatory or binding arbitration clause utilized
+          type:
+          - boolean
+          - 'null'
+        is_there_other_clause_utilized:
+          title: Is there other clause utilized
+          type:
+          - boolean
+          - 'null'
+        is_there_directors_and_officers_coverage_in_place:
+          title: Is there directors and officers coverage in place
+          type:
+          - boolean
+          - 'null'
+        is_there_epl_coverage_in_place:
+          title: Is there epl coverage in place
+          type:
+          - boolean
+          - 'null'
+        is_there_fiduciary_liability_coverage_in_place:
+          title: Is there fiduciary liability coverage in place
+          type:
+          - boolean
+          - 'null'
+        is_there_cyber_coverage_in_place:
+          title: Is there cyber coverage in place
+          type:
+          - boolean
+          - 'null'
+        is_there_tech_errors_and_omissions_coverage_in_place:
+          title: Is there tech errors and omissions coverage in place
+          type:
+          - boolean
+          - 'null'
+        resource_owner:
+          title: Resource owner
+          type:
+          - integer
+          - 'null'
+        designated_ciso:
+          title: Designated ciso
+          type:
+          - integer
+          - 'null'
+        designated_privacy_officer:
+          title: Designated privacy officer
+          type:
+          - integer
+          - 'null'
+        broker:
+          title: Broker
+          type:
+          - integer
+          - 'null'
+    BrokerUserInvite:
+      required:
+      - invitee_email
+      type: object
+      properties:
+        pk:
+          title: ID
+          type: integer
+          readOnly: true
+        invitee_email:
+          title: Invitee email
+          type: string
+          format: email
+          maxLength: 254
+          minLength: 1
+        first_name:
+          title: First name
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        last_name:
+          title: Last name
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        inviter:
+          title: Inviter
+          type: integer
+          readOnly: true
+        role:
+          title: Role
+          description: Role determines access level. Set to null to revoke platform access.
+          type:
+          - string
+          - 'null'
+          enum:
+          - Admin
+          - Member
+          - Billing
+          - IT
+          - OneFort Maintainer
+        type:
+          title: Type
+          description: Specifies the insurance-related role type of the user within the agency.
+          type:
+          - string
+          - 'null'
+          enum:
+          - LEADERSHIP
+          - SALES
+          - SERVICE
+          - MARKETS
+          - OPERATIONS
+        status:
+          title: Status
+          type: string
+          enum:
+          - accepted
+          - pending
+          - cancelled
+          readOnly: true
+        created_at:
+          title: Created at
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+    AgencySubscription:
+      type: object
+      properties:
+        name:
+          title: Name
+          description: Display name for the plan (e.g. "Pro plan").
+          type: string
+          readOnly: true
+          minLength: 1
+        price:
+          title: Price
+          description: Plan price in dollars for the selected billing frequency.
+          type: string
+          format: decimal
+          readOnly: true
+        billing_frequency:
+          title: Billing frequency
+          description: How often the plan is billed.
+          type: string
+          enum:
+          - MONTHLY
+          - QUARTERLY
+          - ANNUALLY
+          readOnly: true
+        billing_frequency_display:
+          title: Billing frequency display
+          type: string
+          readOnly: true
+          minLength: 1
+        payment_status:
+          title: Payment status
+          description: Whether the agency has paid for the current billing period.
+          type: string
+          enum:
+          - PAID
+          - UNPAID
+          readOnly: true
+        payment_status_display:
+          title: Payment status display
+          type: string
+          readOnly: true
+          minLength: 1
+        manage_plan_url:
+          title: Manage plan url
+          description: External URL for the Manage plan button in broker settings.
+          type: string
+          format: uri
+          readOnly: true
+          minLength: 1
+    UserForBrokerAgency:
+      type: object
+      properties:
+        first_name:
+          title: First name
+          type: string
+          maxLength: 255
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          maxLength: 255
+          minLength: 1
+        user_defined_role:
+          title: User defined role
+          type: string
+          maxLength: 255
+          minLength: 1
+    BrokerBusinessUserInvite:
+      required:
+      - email
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        invitee_email:
+          title: Invitee email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        inviter:
+          title: Inviter
+          type: integer
+          readOnly: true
+        status:
+          title: Status
+          type: string
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          format: email
+          minLength: 1
+        trigger_email:
+          title: Trigger email
+          type: boolean
+        application_id:
+          title: Application id
+          type:
+          - string
+          - 'null'
+        custom_message:
+          title: Custom message
+          type:
+          - string
+          - 'null'
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    BrokerNotificationEmail:
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        subject:
+          title: Subject
+          type: string
+          readOnly: true
+          minLength: 1
+        sender_email:
+          title: Sender email
+          type:
+          - string
+          - 'null'
+          format: email
+          readOnly: true
+          minLength: 1
+        sender_name:
+          title: Sender name
+          type: string
+          readOnly: true
+        recipient_email:
+          title: Recipient email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        recipient_type:
+          title: Recipient type
+          type: string
+          readOnly: true
+        sent_at:
+          title: Sent at
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        status:
+          title: Status
+          type: string
+          enum:
+          - pending
+          - sent
+          - failed
+          readOnly: true
+        email_type:
+          title: Email type
+          description: Type of email notification
+          type:
+          - string
+          - 'null'
+          enum:
+          - OTP
+          - BROKER_INACTIVITY
+          - BROKER_WEEKLY_DIGEST
+          - STOREFRONT_APPLICATION_STARTED
+          - STOREFRONT_APPLICATION_SUBMITTED
+          - STOREFRONT_APPLICATION_REMINDER
+          readOnly: true
+    BrokerFile:
+      required:
+      - id
+      - name
+      - insured_id
+      - insured_name
+      - date
+      - file_type
+      - team_member_id
+      - team_member_name
+      - team_member_avatar
+      - file_size
+      - source
+      - download_url
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          minLength: 1
+        name:
+          title: Name
+          type: string
+          minLength: 1
+        insured_id:
+          title: Insured id
+          type: string
+          minLength: 1
+        insured_name:
+          title: Insured name
+          type: string
+          minLength: 1
+        date:
+          title: Date
+          type: string
+          format: date-time
+        file_type:
+          title: File type
+          type: string
+          minLength: 1
+        team_member_id:
+          title: Team member id
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        team_member_name:
+          title: Team member name
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        team_member_avatar:
+          title: Team member avatar
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        file_size:
+          title: File size
+          type:
+          - integer
+          - 'null'
+        source:
+          title: Source
+          type: string
+          minLength: 1
+        download_url:
+          title: Download url
+          type:
+          - string
+          - 'null'
+          minLength: 1
+    BrokerAgencyDetail:
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        broker_group:
+          title: Broker group
+          type: string
+          readOnly: true
+        proposal_design_style:
+          title: Proposal design style
+          type: string
+          enum:
+          - editorial-executive
+          - swiss-minimal
+          - soft-modern
+          - bold-corporate
+        proposal_design_colors:
+          title: Proposal design colors
+          type:
+          - object
+          - 'null'
+        agency_fee_type:
+          title: Agency fee type
+          type:
+          - string
+          - 'null'
+          enum:
+          - fixed
+          - minimum_commission
+          - percentage
+        subscription_plan_display:
+          title: Subscription plan display
+          type: string
+          readOnly: true
+          minLength: 1
+        subscription:
+          $ref: '#/components/schemas/AgencySubscription'
+        domain_name:
+          title: Domain name
+          type: string
+          readOnly: true
+          minLength: 1
+        slug:
+          title: Slug
+          description: URL-safe identifier derived from domain_name (second-level label). Populated automatically when empty.
+          type:
+          - string
+          - 'null'
+          format: slug
+          pattern: ^[-a-zA-Z0-9_]+$
+          maxLength: 255
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        phone_number:
+          title: Phone number
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        plan:
+          title: Plan
+          type: string
+          enum:
+          - WHOLESALE
+          - SAAS
+          readOnly: true
+        subscription_plan:
+          title: Subscription plan
+          type: string
+          enum:
+          - ESSENTIALS
+          - PREMIUM
+          - ENTERPRISE
+          readOnly: true
+        is_test_account:
+          title: Is test account
+          type: boolean
+          readOnly: true
+        can_download_readiness_reports:
+          title: Can download readiness reports
+          type: boolean
+          readOnly: true
+        agency_id:
+          title: Agency id
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        full_address:
+          title: Full address
+          type:
+          - string
+          - 'null'
+        program_fee_cap:
+          title: Program fee cap
+          description: The maximum amount of program fee that the 1Fort can charge to the customer.
+          type:
+          - string
+          - 'null'
+          format: decimal
+        program_fee_rate:
+          title: Program fee rate
+          description: Program fee rate (%) for quotes where 1Fort helped with submission (e.g., Herald, Manual).
+          type: string
+          format: decimal
+          readOnly: true
+        program_fee_rate_no_submission:
+          title: Program fee rate no submission
+          description: Program fee rate (%) for quotes where 1Fort did not help with submission (e.g., Email AI).
+          type: string
+          format: decimal
+        checkout_processing_fee_percent:
+          title: Checkout processing fee percent
+          description: Checkout card processing fee (%) — percent of subtotal only (no fixed fee; capped at 3%). Leave blank for default 3%. ACH/wire use a separate 1% + $0.30 default when this field is blank.
+          type:
+          - string
+          - 'null'
+          format: decimal
+        stripe_connect_payouts_enabled:
+          title: Stripe connect payouts enabled
+          description: When enabled, successful checkout payments allocate Stripe Connect transfers to the broker and carrier Express accounts.
+          type: boolean
+        disclaimer:
+          title: Disclaimer
+          type:
+          - string
+          - 'null'
+        support_email:
+          title: Support email
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 255
+        accounting_email:
+          description: List of accounting email addresses for this agency
+          type:
+          - array
+          - 'null'
+          items:
+            title: Accounting email
+            type: string
+            format: email
+            maxLength: 254
+            minLength: 1
+        marketing_placements_email:
+          description: List of marketing/placements email addresses for this agency
+          type:
+          - array
+          - 'null'
+          items:
+            title: Marketing placements email
+            type: string
+            format: email
+            maxLength: 254
+            minLength: 1
+        total_commercial_premium:
+          title: Total commercial premium
+          description: Total commercial premium for this agency
+          type:
+          - string
+          - 'null'
+          format: decimal
+        agency_fee:
+          title: Agency fee
+          description: Agency fee in dollars (used when agency_fee_type is null or fixed)
+          type: string
+          format: decimal
+        agency_fee_percentage:
+          title: Agency fee percentage
+          description: Agency fee as percentage (0-100), used when agency_fee_type is minimum_commission or percentage
+          type:
+          - string
+          - 'null'
+          format: decimal
+        disable_all_broker_emails:
+          title: Disable all broker emails
+          description: When enabled, disables all automated emails to brokers within this agency
+          type: boolean
+        auto_submit_renewal_applications:
+          title: Auto submit renewal applications
+          description: 'Opt-in: when on, renewal applications for this agency''s policies are created automatically ahead of policy expiration and renewal notification emails are sent'
+          type: boolean
+        disable_all_insured_emails:
+          title: Disable all insured emails
+          description: When enabled, disables all automated emails to insured/business users in this agency's businesses
+          type: boolean
+        disable_submission_follow_up_emails:
+          title: Disable submission follow up emails
+          description: When enabled, disables submission follow-up reminder emails for quotes in this agency
+          type: boolean
+        auto_create_sendgrid_domain_auth:
+          title: Auto create sendgrid domain auth
+          description: Automatically create SendGrid domain authentication records when this agency is created
+          type: boolean
+        sendgrid_domain_id:
+          title: Sendgrid domain id
+          description: SendGrid domain authentication ID returned when domain is registered
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        dba:
+          title: Dba
+          description: Doing Business As (DBA) name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        ein:
+          title: Ein
+          description: Employer Identification Number (EIN)
+          type:
+          - string
+          - 'null'
+          maxLength: 10
+        company_type:
+          title: Company type
+          description: Legal structure of the company
+          type:
+          - string
+          - 'null'
+          enum:
+          - SOLE_PROPRIETORSHIP
+          - GENERAL_PARTNERSHIP
+          - LIMITED_PARTNERSHIP
+          - LIMITED_LIABILITY_PARTNERSHIP
+          - LIMITED_LIABILITY_COMPANY
+          - C_CORPORATION
+          - S_CORPORATION
+        agency_type:
+          title: Agency type
+          description: Type of broker agency - Retailer or Wholesaler
+          type: string
+          enum:
+          - RETAILER
+          - WHOLESALER
+        bank_owner_type:
+          title: Bank owner type
+          description: Bank account owner type (Company or Individual)
+          type:
+          - string
+          - 'null'
+          enum:
+          - COMPANY
+          - INDIVIDUAL
+        bank_account_holder_name:
+          title: Bank account holder name
+          description: Name on the bank account
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        bank_account_number:
+          title: Bank account number
+          description: Bank account number
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        bank_routing_number:
+          title: Bank routing number
+          description: Bank routing number (9 digits)
+          type:
+          - string
+          - 'null'
+          maxLength: 9
+        trust_bank_owner_type:
+          title: Trust bank owner type
+          description: Trust bank account owner type (Company or Individual)
+          type:
+          - string
+          - 'null'
+          enum:
+          - COMPANY
+          - INDIVIDUAL
+        trust_bank_account_holder_name:
+          title: Trust bank account holder name
+          description: Name on the trust bank account
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        trust_bank_routing_number:
+          title: Trust bank routing number
+          description: Trust bank routing number (9 digits)
+          type:
+          - string
+          - 'null'
+          maxLength: 9
+        trust_bank_account_number:
+          title: Trust bank account number
+          description: Trust bank account number
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        carrier_payables_enabled:
+          title: Carrier payables enabled
+          description: Enable or disable carrier payables for this agency
+          type: boolean
+        payment_schedule:
+          title: Payment schedule
+          description: Payable schedule for the billing company
+          type: string
+          enum:
+          - as_available
+          - monthly_1st
+          - monthly_15th
+          - monthly_last_day
+        one_time_payment_account:
+          title: One time payment account
+          description: Account where one-time payment funds are transferred
+          type:
+          - string
+          - 'null'
+          enum:
+          - operational
+          - trust
+        require_refund_approval_via_check:
+          title: Require refund approval via check
+          description: Require approval for all refunds issued via check
+          type: boolean
+        require_refund_approval_over_amount_cents:
+          title: Require refund approval over amount cents
+          description: Require approval for all refunds over this amount (in cents). When set, e.g. 500000 = $5,000.
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        market_access_enabled:
+          title: Market access enabled
+          description: Enable Market Access feature for this agency. When enabled, brokers can access 1Fort wholesale markets.
+          type: boolean
+        use_accord_forms:
+          title: Use accord forms
+          description: When enabled for non-core coverage applications, use ACORD form tables to generate questions instead of LLM.
+          type: boolean
+        broker_email:
+          title: Broker email
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        broker_password:
+          title: Broker password
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        default_storefront_broker_user:
+          title: Default storefront broker user
+          description: Broker user whose storefront is used for agency subdomain root and generic pay-bill when no broker-user slug is in the URL.
+          type:
+          - integer
+          - 'null'
+    AcceptBrokerInvite:
+      required:
+      - invite_token
+      - type
+      type: object
+      properties:
+        refresh:
+          title: Refresh
+          type: string
+          readOnly: true
+          minLength: 1
+        access:
+          title: Access
+          type: string
+          readOnly: true
+          minLength: 1
+        id:
+          title: Id
+          type: integer
+          readOnly: true
+        email:
+          title: Email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        first_name:
+          title: First name
+          type: string
+        last_name:
+          title: Last name
+          type: string
+        invite_token:
+          title: Invite token
+          type: string
+          minLength: 1
+        type:
+          title: Type
+          description: The insurance-related role type of the user within the agency. Required for new broker users.
+          type: string
+          enum:
+          - LEADERSHIP
+          - SALES
+          - SERVICE
+          - MARKETS
+          - OPERATIONS
+    BrokerUser:
+      required:
+      - first_name
+      - last_name
+      type: object
+      properties:
+        pk:
+          title: ID
+          type: integer
+          readOnly: true
+        user_defined_role:
+          title: User defined role
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        type:
+          title: Type
+          description: Specifies the insurance-related role type of the user within the agency.
+          type:
+          - string
+          - 'null'
+          enum:
+          - LEADERSHIP
+          - SALES
+          - SERVICE
+          - MARKETS
+          - OPERATIONS
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        first_name:
+          title: First name
+          type: string
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          readOnly: true
+          minLength: 1
+        role:
+          title: Role
+          description: User's role in the agency. Set to null to revoke platform access.
+          type:
+          - string
+          - 'null'
+          enum:
+          - Admin
+          - Member
+          - Billing
+          - IT
+          - OneFort Maintainer
+        status:
+          title: Status
+          type: string
+          readOnly: true
+        producer_id:
+          title: Producer id
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        phone_number:
+          title: Phone number
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        primary_workflow_activities:
+          type: array
+          items:
+            type: string
+            maxLength: 128
+            minLength: 1
+        is_current_user:
+          title: Is current user
+          type: boolean
+          readOnly: true
+        is_storefront_default:
+          title: Is storefront default
+          type: string
+          readOnly: true
+        storefront_id:
+          title: Storefront id
+          type:
+          - string
+          - 'null'
+          format: uuid
+          readOnly: true
+        storefront_url_slug:
+          title: Storefront url slug
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        slug:
+          title: Slug
+          description: URL-safe identifier per agency from the user's name (e.g. ernesto-freyre). Populated automatically when empty.
+          type:
+          - string
+          - 'null'
+          format: slug
+          pattern: ^[-a-zA-Z0-9_]+$
+          readOnly: true
+          minLength: 1
+        review_submissions_before_submitting:
+          title: Review submissions before submitting
+          description: When on, business submissions for accounts where this user is the primary agent are held in Needs Review instead of being sent to carriers immediately.
+          type: boolean
+        auto_submit_renewal_applications:
+          title: Auto submit renewal applications
+          description: 'Opt-in: when on, renewal applications for accounts where this user is the primary agent are created automatically ahead of policy expiration and renewal notification emails are sent. The agency-level field of the same name exists but this per-user flag is the active gate.'
+          type: boolean
+        renewal_submission_lead_days:
+          title: Renewal submission lead days
+          description: How many days before a policy's expiration date its renewal application is created automatically (30-180).
+          type: integer
+          maximum: 180
+          minimum: 30
+        renewal_due_date_days:
+          title: Renewal due date days
+          description: How many days before the renewal effective date the renewal application is due (15-30).
+          type: integer
+          maximum: 30
+          minimum: 15
+    BrokerAgency:
+      required:
+      - name
+      - domain_name
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/UserForBrokerAgency'
+        broker_group:
+          title: Broker group
+          type: string
+          readOnly: true
+        agency_fee_type:
+          title: Agency fee type
+          type:
+          - string
+          - 'null'
+          enum:
+          - fixed
+          - minimum_commission
+          - percentage
+        subscription_plan_display:
+          title: Subscription plan display
+          type: string
+          readOnly: true
+          minLength: 1
+        subscription:
+          $ref: '#/components/schemas/AgencySubscription'
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        domain_name:
+          title: Domain name
+          type: string
+          maxLength: 500
+          minLength: 1
+        slug:
+          title: Slug
+          description: URL-safe identifier derived from domain_name (second-level label). Populated automatically when empty.
+          type:
+          - string
+          - 'null'
+          format: slug
+          pattern: ^[-a-zA-Z0-9_]+$
+          maxLength: 255
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        phone_number:
+          title: Phone number
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        plan:
+          title: Plan
+          type: string
+          enum:
+          - WHOLESALE
+          - SAAS
+          readOnly: true
+        subscription_plan:
+          title: Subscription plan
+          type: string
+          enum:
+          - ESSENTIALS
+          - PREMIUM
+          - ENTERPRISE
+          readOnly: true
+        is_test_account:
+          title: Is test account
+          type: boolean
+          readOnly: true
+        can_download_readiness_reports:
+          title: Can download readiness reports
+          type: boolean
+          readOnly: true
+        agency_id:
+          title: Agency id
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        full_address:
+          title: Full address
+          type:
+          - string
+          - 'null'
+        program_fee_cap:
+          title: Program fee cap
+          description: The maximum amount of program fee that the 1Fort can charge to the customer.
+          type:
+          - string
+          - 'null'
+          format: decimal
+          readOnly: true
+        program_fee_rate:
+          title: Program fee rate
+          description: Program fee rate (%) for quotes where 1Fort helped with submission (e.g., Herald, Manual).
+          type: string
+          format: decimal
+          readOnly: true
+        program_fee_rate_no_submission:
+          title: Program fee rate no submission
+          description: Program fee rate (%) for quotes where 1Fort did not help with submission (e.g., Email AI).
+          type: string
+          format: decimal
+        checkout_processing_fee_percent:
+          title: Checkout processing fee percent
+          description: Checkout card processing fee (%) — percent of subtotal only (no fixed fee; capped at 3%). Leave blank for default 3%. ACH/wire use a separate 1% + $0.30 default when this field is blank.
+          type:
+          - string
+          - 'null'
+          format: decimal
+        stripe_connect_payouts_enabled:
+          title: Stripe connect payouts enabled
+          description: When enabled, successful checkout payments allocate Stripe Connect transfers to the broker and carrier Express accounts.
+          type: boolean
+        disclaimer:
+          title: Disclaimer
+          type:
+          - string
+          - 'null'
+        support_email:
+          title: Support email
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 255
+        accounting_email:
+          description: List of accounting email addresses for this agency
+          type:
+          - array
+          - 'null'
+          items:
+            title: Accounting email
+            type: string
+            format: email
+            maxLength: 254
+            minLength: 1
+        marketing_placements_email:
+          description: List of marketing/placements email addresses for this agency
+          type:
+          - array
+          - 'null'
+          items:
+            title: Marketing placements email
+            type: string
+            format: email
+            maxLength: 254
+            minLength: 1
+        total_commercial_premium:
+          title: Total commercial premium
+          description: Total commercial premium for this agency
+          type:
+          - string
+          - 'null'
+          format: decimal
+        agency_fee:
+          title: Agency fee
+          description: Agency fee in dollars (used when agency_fee_type is null or fixed)
+          type: string
+          format: decimal
+        agency_fee_percentage:
+          title: Agency fee percentage
+          description: Agency fee as percentage (0-100), used when agency_fee_type is minimum_commission or percentage
+          type:
+          - string
+          - 'null'
+          format: decimal
+        disable_all_broker_emails:
+          title: Disable all broker emails
+          description: When enabled, disables all automated emails to brokers within this agency
+          type: boolean
+        auto_submit_renewal_applications:
+          title: Auto submit renewal applications
+          description: 'Opt-in: when on, renewal applications for this agency''s policies are created automatically ahead of policy expiration and renewal notification emails are sent'
+          type: boolean
+        disable_all_insured_emails:
+          title: Disable all insured emails
+          description: When enabled, disables all automated emails to insured/business users in this agency's businesses
+          type: boolean
+        disable_submission_follow_up_emails:
+          title: Disable submission follow up emails
+          description: When enabled, disables submission follow-up reminder emails for quotes in this agency
+          type: boolean
+        auto_create_sendgrid_domain_auth:
+          title: Auto create sendgrid domain auth
+          description: Automatically create SendGrid domain authentication records when this agency is created
+          type: boolean
+        sendgrid_domain_id:
+          title: Sendgrid domain id
+          description: SendGrid domain authentication ID returned when domain is registered
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        dba:
+          title: Dba
+          description: Doing Business As (DBA) name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        ein:
+          title: Ein
+          description: Employer Identification Number (EIN)
+          type:
+          - string
+          - 'null'
+          maxLength: 10
+        company_type:
+          title: Company type
+          description: Legal structure of the company
+          type:
+          - string
+          - 'null'
+          enum:
+          - SOLE_PROPRIETORSHIP
+          - GENERAL_PARTNERSHIP
+          - LIMITED_PARTNERSHIP
+          - LIMITED_LIABILITY_PARTNERSHIP
+          - LIMITED_LIABILITY_COMPANY
+          - C_CORPORATION
+          - S_CORPORATION
+        agency_type:
+          title: Agency type
+          description: Type of broker agency - Retailer or Wholesaler
+          type: string
+          enum:
+          - RETAILER
+          - WHOLESALER
+        bank_owner_type:
+          title: Bank owner type
+          description: Bank account owner type (Company or Individual)
+          type:
+          - string
+          - 'null'
+          enum:
+          - COMPANY
+          - INDIVIDUAL
+        bank_account_holder_name:
+          title: Bank account holder name
+          description: Name on the bank account
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        bank_account_number:
+          title: Bank account number
+          description: Bank account number
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        bank_routing_number:
+          title: Bank routing number
+          description: Bank routing number (9 digits)
+          type:
+          - string
+          - 'null'
+          maxLength: 9
+        trust_bank_owner_type:
+          title: Trust bank owner type
+          description: Trust bank account owner type (Company or Individual)
+          type:
+          - string
+          - 'null'
+          enum:
+          - COMPANY
+          - INDIVIDUAL
+        trust_bank_account_holder_name:
+          title: Trust bank account holder name
+          description: Name on the trust bank account
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        trust_bank_routing_number:
+          title: Trust bank routing number
+          description: Trust bank routing number (9 digits)
+          type:
+          - string
+          - 'null'
+          maxLength: 9
+        trust_bank_account_number:
+          title: Trust bank account number
+          description: Trust bank account number
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        carrier_payables_enabled:
+          title: Carrier payables enabled
+          description: Enable or disable carrier payables for this agency
+          type: boolean
+        payment_schedule:
+          title: Payment schedule
+          description: Payable schedule for the billing company
+          type: string
+          enum:
+          - as_available
+          - monthly_1st
+          - monthly_15th
+          - monthly_last_day
+        one_time_payment_account:
+          title: One time payment account
+          description: Account where one-time payment funds are transferred
+          type:
+          - string
+          - 'null'
+          enum:
+          - operational
+          - trust
+        require_refund_approval_via_check:
+          title: Require refund approval via check
+          description: Require approval for all refunds issued via check
+          type: boolean
+        require_refund_approval_over_amount_cents:
+          title: Require refund approval over amount cents
+          description: Require approval for all refunds over this amount (in cents). When set, e.g. 500000 = $5,000.
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        market_access_enabled:
+          title: Market access enabled
+          description: Enable Market Access feature for this agency. When enabled, brokers can access 1Fort wholesale markets.
+          type: boolean
+        use_accord_forms:
+          title: Use accord forms
+          description: When enabled for non-core coverage applications, use ACORD form tables to generate questions instead of LLM.
+          type: boolean
+        broker_email:
+          title: Broker email
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        broker_password:
+          title: Broker password
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        default_storefront_broker_user:
+          title: Default storefront broker user
+          description: Broker user whose storefront is used for agency subdomain root and generic pay-bill when no broker-user slug is in the URL.
+          type:
+          - integer
+          - 'null'
+    BrokerReceivedNotificationEmail:
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        subject:
+          title: Subject
+          type: string
+          readOnly: true
+          minLength: 1
+        sender_email:
+          title: Sender email
+          type:
+          - string
+          - 'null'
+          format: email
+          readOnly: true
+          minLength: 1
+        sender_name:
+          title: Sender name
+          type: string
+          readOnly: true
+        recipient_email:
+          title: Recipient email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        sent_at:
+          title: Sent at
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        status:
+          title: Status
+          type: string
+          enum:
+          - pending
+          - sent
+          - failed
+          readOnly: true
+        email_type:
+          title: Email type
+          description: Type of email notification
+          type:
+          - string
+          - 'null'
+          enum:
+          - OTP
+          - BROKER_INACTIVITY
+          - BROKER_WEEKLY_DIGEST
+          - STOREFRONT_APPLICATION_STARTED
+          - STOREFRONT_APPLICATION_SUBMITTED
+          - STOREFRONT_APPLICATION_REMINDER
+          readOnly: true
+        is_read:
+          title: Is read
+          type: string
+          readOnly: true
+        triggered_by_details:
+          title: Triggered by details
+          type: string
+          readOnly: true
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

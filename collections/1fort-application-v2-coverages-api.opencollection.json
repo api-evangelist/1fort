@@ -1,0 +1,491 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation application (v2): coverages API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "application (v2): coverages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Coverages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverages",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              },
+              {
+                "name": "application__submission_type",
+                "value": "",
+                "type": "query",
+                "description": "application__submission_type"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List Coverages"
+        },
+        {
+          "info": {
+            "name": "Retrieve Coverage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverages/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this coverage application."
+              }
+            ]
+          },
+          "docs": "Retrieve Coverage"
+        },
+        {
+          "info": {
+            "name": "Update Coverage",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverages/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this coverage application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Coverage"
+        },
+        {
+          "info": {
+            "name": "Update Coverage",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverages/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this coverage application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Coverage"
+        },
+        {
+          "info": {
+            "name": "Stream the blank Acroform PDF of an ACORD form linked to this coverage.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverages/:id/accord-forms/:accord_form_pk/acroform-pdf",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this coverage application."
+              },
+              {
+                "name": "accord_form_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Served through the API (instead of a presigned S3 URL) so the browser\ncan fetch the bytes without the S3 bucket needing a CORS policy."
+        },
+        {
+          "info": {
+            "name": "Accord form mapping file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverages/:id/accord-forms/:accord_form_pk/mapping-file",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this coverage application."
+              },
+              {
+                "name": "accord_form_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stream the mapping list file (CSV or legacy XLS) of an ACORD form\nlinked to this coverage. Same CORS rationale as the Acroform PDF."
+        },
+        {
+          "info": {
+            "name": "Kick off AI web research to guess answers for the coverage\napplication's raw_question_values.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverages/:id/answer-with-ai",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this coverage application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Nothing is persisted: the merged question set is retrieved by polling\nGET answer-with-ai/{task_id}, reviewed by the user in the frontend,\nand saved through the regular PATCH."
+        },
+        {
+          "info": {
+            "name": "Answer with AI result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverages/:id/answer-with-ai/:task_id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this coverage application."
+              },
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Poll the result of an answer-with-ai task."
+        },
+        {
+          "info": {
+            "name": "Approve",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverages/:id/approve",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this coverage application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Approve a coverage application held for broker review and submit it\nto carriers immediately."
+        },
+        {
+          "info": {
+            "name": "Submit a coverage application using the submission service.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverages/:id/submit",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this coverage application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The service will determine whether to use the market-based flow\nor the legacy flow based on the presence of selected_markets."
+        },
+        {
+          "info": {
+            "name": "Generate and stream the supplemental application PDF for preview.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverages/:id/supplemental-application-pdf",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this coverage application."
+              }
+            ]
+          },
+          "docs": "Always generated fresh (never served from stored CoverageApplicationPDF\nrecords, which may predate the latest answers) so the preview matches\nwhat GenerateApplicationPDFService attaches to the underwriter\nsubmission email at send time. Returned inline so the browser can\nrender it rather than download it."
+        },
+        {
+          "info": {
+            "name": "List Coverages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/coverages",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              },
+              {
+                "name": "application__submission_type",
+                "value": "",
+                "type": "query",
+                "description": "application__submission_type"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List Coverages"
+        },
+        {
+          "info": {
+            "name": "Retrieve Coverage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/coverages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this coverage application."
+              }
+            ]
+          },
+          "docs": "Retrieve Coverage"
+        },
+        {
+          "info": {
+            "name": "Update Coverage",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/v2/coverages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this coverage application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Coverage"
+        },
+        {
+          "info": {
+            "name": "Update Coverage",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/v2/coverages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this coverage application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Coverage"
+        },
+        {
+          "info": {
+            "name": "Collect signatures",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/coverages/:id/collect-signatures",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this coverage application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Collects and saves the signature (text or image) for a coverage application\nwithout submitting the application itself or changing its status."
+        },
+        {
+          "info": {
+            "name": "Submit a coverage application as a business user using the submission service.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/coverages/:id/submit",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this coverage application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The service will determine whether to use the market-based flow\nor the legacy flow based on the presence of selected_markets.\nSignature is required before submission."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

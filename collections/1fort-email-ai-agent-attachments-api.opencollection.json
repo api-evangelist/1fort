@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Email AI Agent - Attachments API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Email AI Agent - Attachments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update Attachment Metadata (Merge)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/emails/:email_pk/attachments/:id/metadata",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "email_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Email Attachment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nUpdate attachment metadata after classification/extraction.\n\n**Merge semantics**: keys present in the request body overwrite the\ncorresponding keys on the row; keys absent from the body are preserved.\nThe agent only needs to send the fields it wants to change.\n\nUse this endpoint to record:\n- Document type classification\n- Processing status\n- Extraction results (insureds found, coverage types)\n\n**Authentication**: Requires API Key + Session Token\n\n**Scoping**: Attachment must belong to an email "
+        },
+        {
+          "info": {
+            "name": "Update Attachment Metadata (Merge)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/emails/:email_pk/attachments/:id/metadata",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "email_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Email Attachment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nUpdate attachment metadata after classification/extraction.\n\n**Merge semantics**: keys present in the request body overwrite the\ncorresponding keys on the row; keys absent from the body are preserved.\nThe agent only needs to send the fields it wants to change.\n\nUse this endpoint to record:\n- Document type classification\n- Processing status\n- Extraction results (insureds found, coverage types)\n\n**Authentication**: Requires API Key + Session Token\n\n**Scoping**: Attachment must belong to an email "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

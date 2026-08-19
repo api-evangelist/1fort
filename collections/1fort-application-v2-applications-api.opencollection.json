@@ -1,0 +1,1102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation application (v2): applications API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "application (v2): applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/applications",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              },
+              {
+                "name": "submission_type",
+                "value": "",
+                "type": "query",
+                "description": "submission_type"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List Applications"
+        },
+        {
+          "info": {
+            "name": "List Coverages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/applications/:application_pk/coverages",
+            "params": [
+              {
+                "name": "application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              },
+              {
+                "name": "application__submission_type",
+                "value": "",
+                "type": "query",
+                "description": "application__submission_type"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List Coverages"
+        },
+        {
+          "info": {
+            "name": "List Supplementary documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/applications/:application_pk/supplementary-documents",
+            "params": [
+              {
+                "name": "application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List Supplementary documents"
+        },
+        {
+          "info": {
+            "name": "Create Supplementary document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/applications/:application_pk/supplementary-documents",
+            "params": [
+              {
+                "name": "application_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Supplementary document"
+        },
+        {
+          "info": {
+            "name": "Retrieve Supplementary document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/applications/:application_pk/supplementary-documents/:id",
+            "params": [
+              {
+                "name": "application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this application supplementary document."
+              }
+            ]
+          },
+          "docs": "Retrieve Supplementary document"
+        },
+        {
+          "info": {
+            "name": "Delete Supplementary document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.1fort.com/apis/v2/applications/:application_pk/supplementary-documents/:id",
+            "params": [
+              {
+                "name": "application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this application supplementary document."
+              }
+            ]
+          },
+          "docs": "Delete Supplementary document"
+        },
+        {
+          "info": {
+            "name": "Download",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/applications/:application_pk/supplementary-documents/:id/download",
+            "params": [
+              {
+                "name": "application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this application supplementary document."
+              }
+            ]
+          },
+          "docs": "Download"
+        },
+        {
+          "info": {
+            "name": "Retrieve Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/applications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ]
+          },
+          "docs": "Retrieve Application"
+        },
+        {
+          "info": {
+            "name": "Collect signature for application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/applications/:id/collect-signature",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Collects and saves the signature for every coverage application under\nthis application, skipping ones that are already signed.\n\nOne request replaces the old per-coverage collect-signatures fanout;\nthe response carries one result per coverage application. Returns 201\nif any signature was created, 200 if every coverage was already\nsigned, 400 if all attempts failed."
+        },
+        {
+          "info": {
+            "name": "Downloads the 1Fort application PDF.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/applications/:id/download-1fort-application-pdf",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ]
+          },
+          "docs": "Priority order:\n1. Check for existing herald files with type=\"1fort_application\"\n2. Check for existing CoverageApplicationPDF records\n3. Generate PDF in memory and return directly"
+        },
+        {
+          "info": {
+            "name": "Downloads the insurance proposal PDF (quote summary file from herald).",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/applications/:id/download-insurance-proposal-pdf",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ]
+          },
+          "docs": "Looks for herald files with type=\"quote_summary\" and returns the first available one."
+        },
+        {
+          "info": {
+            "name": "Get signature for application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/applications/:id/get-signature",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ]
+          },
+          "docs": "Retrieves the signature for the primary/first coverage application\nassociated with this application, if it exists."
+        },
+        {
+          "info": {
+            "name": "Add prefilled forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/applications/:id/pre-filled-forms",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add prefilled forms"
+        },
+        {
+          "info": {
+            "name": "Get prefilled forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/applications/:id/pre-filled-forms/:sessions_pk",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              },
+              {
+                "name": "sessions_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get prefilled forms"
+        },
+        {
+          "info": {
+            "name": "Get quote data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/applications/:id/quote-data",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ]
+          },
+          "docs": "Get quote data for a specific application.\nThis endpoint returns the same quote data that brokers see,\nbut filtered to only include quotes for this application."
+        },
+        {
+          "info": {
+            "name": "Submit all eligible coverage applications of this application.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/applications/:id/submit",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Manual-strategy underwriter emails are grouped per market, so a market\nselected on multiple coverage applications receives one combined email."
+        },
+        {
+          "info": {
+            "name": "List Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              },
+              {
+                "name": "submission_type",
+                "value": "",
+                "type": "query",
+                "description": "submission_type"
+              },
+              {
+                "name": "policy_type",
+                "value": "",
+                "type": "query",
+                "description": "policy_type"
+              },
+              {
+                "name": "quote_version",
+                "value": "",
+                "type": "query",
+                "description": "quote_version"
+              },
+              {
+                "name": "coverage_layer",
+                "value": "",
+                "type": "query",
+                "description": "coverage_layer"
+              },
+              {
+                "name": "email_type",
+                "value": "",
+                "type": "query",
+                "description": "email_type"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List Applications"
+        },
+        {
+          "info": {
+            "name": "Create Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Application"
+        },
+        {
+          "info": {
+            "name": "List Coverages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:application_pk/coverages",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              },
+              {
+                "name": "application__submission_type",
+                "value": "",
+                "type": "query",
+                "description": "application__submission_type"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List Coverages"
+        },
+        {
+          "info": {
+            "name": "List Indications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:application_pk/indications",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Indications"
+        },
+        {
+          "info": {
+            "name": "Create Indication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:application_pk/indications",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create Indication"
+        },
+        {
+          "info": {
+            "name": "List Supplementary documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:application_pk/supplementary-documents",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List Supplementary documents"
+        },
+        {
+          "info": {
+            "name": "Create Supplementary document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:application_pk/supplementary-documents",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Supplementary document"
+        },
+        {
+          "info": {
+            "name": "Retrieve Supplementary document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:application_pk/supplementary-documents/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this application supplementary document."
+              }
+            ]
+          },
+          "docs": "Retrieve Supplementary document"
+        },
+        {
+          "info": {
+            "name": "Delete Supplementary document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:application_pk/supplementary-documents/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this application supplementary document."
+              }
+            ]
+          },
+          "docs": "Delete Supplementary document"
+        },
+        {
+          "info": {
+            "name": "Download",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:application_pk/supplementary-documents/:id/download",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this application supplementary document."
+              }
+            ]
+          },
+          "docs": "Download"
+        },
+        {
+          "info": {
+            "name": "Retrieve Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ]
+          },
+          "docs": "Retrieve Application"
+        },
+        {
+          "info": {
+            "name": "Update Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Application"
+        },
+        {
+          "info": {
+            "name": "Update Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Application"
+        },
+        {
+          "info": {
+            "name": "Delete Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ]
+          },
+          "docs": "Delete Application"
+        },
+        {
+          "info": {
+            "name": "Approve all coverage applications of this application held for broker\nreview and submit them to carriers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:id/approve",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Manual-strategy underwriter emails are grouped per market, so a market\nshared by multiple approved coverage applications receives one\ncombined email."
+        },
+        {
+          "info": {
+            "name": "Copy Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:id/copy",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nCreate a copy of an existing application with optional field overrides.\n\nThis endpoint allows you to create a copy of an existing application while optionally\noverriding specific fields in the new application. The copy will maintain all the\noriginal application's data and relationships except for the fields that are explicitly\noverridden.\n\nWhen copying an excess application:\n- If new primary_quote_files are provided, they will be used for the new application\n- If no new files are provided, the "
+        },
+        {
+          "info": {
+            "name": "Generate questions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:id/generate-questions",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate questions"
+        },
+        {
+          "info": {
+            "name": "Add prefilled forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:id/pre-filled-forms",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add prefilled forms"
+        },
+        {
+          "info": {
+            "name": "Get prefilled forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:id/pre-filled-forms/:sessions_pk",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              },
+              {
+                "name": "sessions_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get prefilled forms"
+        },
+        {
+          "info": {
+            "name": "Get relevant carriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:id/relevant-carriers",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ]
+          },
+          "docs": "Get relevant carriers"
+        },
+        {
+          "info": {
+            "name": "Start application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:id/start",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start application"
+        },
+        {
+          "info": {
+            "name": "Submit all eligible coverage applications of this application.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/applications/:id/submit",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Manual-strategy underwriter emails are grouped per market, so a market\nselected on multiple coverage applications receives one combined email."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

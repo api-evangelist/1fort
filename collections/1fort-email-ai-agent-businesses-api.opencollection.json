@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Email AI Agent - Businesses API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Email AI Agent - Businesses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Businesses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/businesses/search",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Full-text search query (name, domain)"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by name (case-insensitive contains)"
+              },
+              {
+                "name": "name__iexact",
+                "value": "",
+                "type": "query",
+                "description": "Filter by name (exact match)"
+              },
+              {
+                "name": "domain_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by domain"
+              },
+              {
+                "name": "has_profiles",
+                "value": "",
+                "type": "query",
+                "description": "Filter by having linked profiles"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results limit (default: 20, max: 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              }
+            ]
+          },
+          "docs": "\nSearch the broker's businesses for linking to profiles.\n\nAll results are scoped to the session's broker.\n\n**Query Parameters**:\n- `q`: Full-text search query (searches name and domain)\n- `name`: Filter by name (case-insensitive contains)\n- `name__iexact`: Filter by name (exact match)\n- `domain_name`: Filter by domain\n- `has_profiles`: Filter by having linked EmailInsured profiles\n- `limit`: Results limit (default: 20, max: 100)\n- `offset`: Pagination offset\n\n**Authentication**: Requires API Key"
+        },
+        {
+          "info": {
+            "name": "Get Business",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/businesses/:id",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business."
+              }
+            ]
+          },
+          "docs": "\nRetrieve detailed business information with linked profiles.\n\n**Authentication**: Requires API Key + Session Token\n\n**Scoping**: Business must belong to the session's broker.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

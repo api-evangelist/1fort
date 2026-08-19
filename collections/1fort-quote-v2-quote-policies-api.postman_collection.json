@@ -1,0 +1,1403 @@
+{
+  "item": [
+    {
+      "id": "066573ed-22ef-4b75-ba4a-f22f1418372a",
+      "name": "quote (v2): quote-policies",
+      "description": {
+        "content": "**Access:** requires a JWT access token.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d16ead09-b96a-4ac8-ae15-fed5df22fb84",
+          "name": "List Quote policies",
+          "request": {
+            "name": "List Quote policies",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                ":business_pk",
+                "quote-policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "status"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "business_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "db378d22-7d2f-4840-849d-b4b1d3280177",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "quote-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1409,\n  \"results\": [\n    {\n      \"id\": \"95cf70a5-a6e1-974b-0ab5-26b15f60328f\",\n      \"created_at\": \"1952-03-26T20:32:44.470Z\",\n      \"coverage_application\": null,\n      \"status\": \"string\",\n      \"type\": \"string\",\n      \"quote\": \"string\",\n      \"herald_quote\": \"ed87f8d5-4aa2-b622-94a4-2a5bc78df907\",\n      \"carrier\": \"string\",\n      \"limit\": 9717,\n      \"date_issued\": \"1979-05-27\",\n      \"effective_date\": null,\n      \"expiration_date\": \"2015-05-13\",\n      \"policy_number\": \"string\",\n      \"product_line\": \"string\",\n      \"coverage_name\": \"string\",\n      \"premium\": \"string\",\n      \"total_premium\": \"string\",\n      \"billing_type\": \"string\",\n      \"date_taxes_filed\": \"1968-03-29\",\n      \"payment_to_carrier_status\": \"done\",\n      \"carrier_invoice_due_date\": null,\n      \"carrier_invoice_number\": null,\n      \"remittance_date\": null,\n      \"remittance_amount\": \"string\",\n      \"mercury_transaction_url\": null,\n      \"ach_last_four\": \"9252\",\n      \"payment_reference_description\": \"string\",\n      \"ramp_transaction_url\": null,\n      \"remittance_notification_sent\": true,\n      \"remittance_notification_sent_at\": \"1952-06-09T16:05:54.620Z\",\n      \"remittance_notifications\": [\n        \"498077bf-f11a-20a9-2f0b-7c43f5fa997c\",\n        \"ccd3d1a6-7f38-c245-a204-f5156d52e455\"\n      ],\n      \"documents\": \"string\"\n    },\n    {\n      \"id\": \"3d661347-a22c-c73f-8e70-7cd3a469244b\",\n      \"created_at\": \"2019-10-23T07:42:54.964Z\",\n      \"coverage_application\": \"6d760a01-94e7-55e7-0b31-06b193ad9ffc\",\n      \"status\": \"string\",\n      \"type\": \"string\",\n      \"quote\": \"string\",\n      \"herald_quote\": \"fbd7ccb7-09cf-794d-26f5-6e671410164b\",\n      \"carrier\": \"string\",\n      \"limit\": 6947,\n      \"date_issued\": \"1954-07-11\",\n      \"effective_date\": \"1976-07-06\",\n      \"expiration_date\": \"2007-09-30\",\n      \"policy_number\": \"string\",\n      \"product_line\": \"string\",\n      \"coverage_name\": \"string\",\n      \"premium\": \"string\",\n      \"total_premium\": \"string\",\n      \"billing_type\": \"string\",\n      \"date_taxes_filed\": \"2008-10-15\",\n      \"payment_to_carrier_status\": \"n/a\",\n      \"carrier_invoice_due_date\": \"1993-07-07\",\n      \"carrier_invoice_number\": \"string\",\n      \"remittance_date\": \"1958-08-21\",\n      \"remittance_amount\": null,\n      \"mercury_transaction_url\": \"http://nZUZamdbkz.ptsYH\",\n      \"ach_last_four\": \"5318\",\n      \"payment_reference_description\": \"string\",\n      \"ramp_transaction_url\": \"https://rgIelELYY.nzvDIXbbsh3uqXl\",\n      \"remittance_notification_sent\": false,\n      \"remittance_notification_sent_at\": \"2017-07-10T13:49:06.842Z\",\n      \"remittance_notifications\": [\n        \"1d5788a2-72fc-bf8f-04b3-ab5b52daecaa\",\n        \"37fe09c7-0b31-c1a5-63dc-eef8339c7bd9\"\n      ],\n      \"documents\": \"string\"\n    }\n  ],\n  \"next\": \"https://vXBnyZGvjFhvPeq.kqxa4cKjS9O4,yQj3MekERzQsgccMyDjltqevpR0Ls7Fk5disZw,q1Jk\",\n  \"previous\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b28cd36-085b-4001-869c-d17f312db229",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "quote-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74c13d3d-739f-438a-b31e-3b0c6e85273a",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "quote-policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e93fbd3-450d-45fd-ac78-8d8e044ec638",
+          "name": "Retrieve Quote policy",
+          "request": {
+            "name": "Retrieve Quote policy",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                ":business_pk",
+                "quote-policies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "business_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Policy."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f80fc121-f080-4a29-a5fc-2a46316e599f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "quote-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"a10e5f35-6b07-c412-5a72-04f896e47ae1\",\n  \"created_at\": \"2016-10-15T19:18:11.172Z\",\n  \"coverage_application\": null,\n  \"status\": \"string\",\n  \"type\": \"string\",\n  \"quote\": \"string\",\n  \"herald_quote\": \"1db63c06-4897-5802-d002-606b6d15fbfd\",\n  \"carrier\": \"string\",\n  \"limit\": 5474,\n  \"date_issued\": \"1994-10-10\",\n  \"effective_date\": \"2018-07-09\",\n  \"expiration_date\": null,\n  \"policy_number\": \"string\",\n  \"product_line\": \"string\",\n  \"coverage_name\": \"string\",\n  \"premium\": \"string\",\n  \"total_premium\": \"string\",\n  \"billing_type\": \"string\",\n  \"date_taxes_filed\": \"1994-11-26\",\n  \"payment_to_carrier_status\": \"n/a\",\n  \"carrier_invoice_due_date\": null,\n  \"carrier_invoice_number\": \"string\",\n  \"remittance_date\": \"1955-04-03\",\n  \"remittance_amount\": null,\n  \"mercury_transaction_url\": \"https://DyhJMossVYMHpeFmElPfkDyWj.qxvLG54ifnaQNb.RhzOzhDXxdCSlT.dMq9wP-\",\n  \"ach_last_four\": \"4337\",\n  \"payment_reference_description\": \"string\",\n  \"ramp_transaction_url\": null,\n  \"remittance_notification_sent\": false,\n  \"remittance_notification_sent_at\": null,\n  \"remittance_notifications\": [\n    \"c6be576a-025e-e1a3-55db-96e8a1541ee4\",\n    \"fa40177e-ef12-90f8-a726-9bd24d737c4e\"\n  ],\n  \"documents\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3682e655-aa03-4b6f-8b9a-e67e0b506c7e",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "quote-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "921b63b5-1e69-459c-9eaf-c5a9215b1e4c",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "quote-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b91a751f-4d66-4d86-9177-20e24d596491",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "quote-policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c837a0bb-940f-492e-9c6d-757749666744",
+          "name": "Get document",
+          "request": {
+            "name": "Get document",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                ":business_pk",
+                "quote-policies",
+                ":id",
+                "documents",
+                ":document_pk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "business_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Policy."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "document_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5774af12-a49f-4e67-88fe-d80afda24862",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "quote-policies",
+                    ":id",
+                    "documents",
+                    ":document_pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"a10e5f35-6b07-c412-5a72-04f896e47ae1\",\n  \"created_at\": \"2016-10-15T19:18:11.172Z\",\n  \"coverage_application\": null,\n  \"status\": \"string\",\n  \"type\": \"string\",\n  \"quote\": \"string\",\n  \"herald_quote\": \"1db63c06-4897-5802-d002-606b6d15fbfd\",\n  \"carrier\": \"string\",\n  \"limit\": 5474,\n  \"date_issued\": \"1994-10-10\",\n  \"effective_date\": \"2018-07-09\",\n  \"expiration_date\": null,\n  \"policy_number\": \"string\",\n  \"product_line\": \"string\",\n  \"coverage_name\": \"string\",\n  \"premium\": \"string\",\n  \"total_premium\": \"string\",\n  \"billing_type\": \"string\",\n  \"date_taxes_filed\": \"1994-11-26\",\n  \"payment_to_carrier_status\": \"n/a\",\n  \"carrier_invoice_due_date\": null,\n  \"carrier_invoice_number\": \"string\",\n  \"remittance_date\": \"1955-04-03\",\n  \"remittance_amount\": null,\n  \"mercury_transaction_url\": \"https://DyhJMossVYMHpeFmElPfkDyWj.qxvLG54ifnaQNb.RhzOzhDXxdCSlT.dMq9wP-\",\n  \"ach_last_four\": \"4337\",\n  \"payment_reference_description\": \"string\",\n  \"ramp_transaction_url\": null,\n  \"remittance_notification_sent\": false,\n  \"remittance_notification_sent_at\": null,\n  \"remittance_notifications\": [\n    \"c6be576a-025e-e1a3-55db-96e8a1541ee4\",\n    \"fa40177e-ef12-90f8-a726-9bd24d737c4e\"\n  ],\n  \"documents\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f84f0d64-ae9f-471b-98cd-c6cf5b72745d",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "quote-policies",
+                    ":id",
+                    "documents",
+                    ":document_pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d1688e6-228e-4b2a-951c-d19346081d29",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "quote-policies",
+                    ":id",
+                    "documents",
+                    ":document_pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "182d5dd2-d228-477e-86af-e1e2c2438a93",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "quote-policies",
+                    ":id",
+                    "documents",
+                    ":document_pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb04b2bb-1f8c-44fe-9c84-1fe2a7b9c931",
+          "name": "Renew application",
+          "request": {
+            "name": "Renew application",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                ":business_pk",
+                "quote-policies",
+                ":id",
+                "renew"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "business_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Policy."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coverage_application\": \"<string,null-uuid>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"expiration_date\": \"<string,null-date>\",\n  \"policy_number\": \"<string>\",\n  \"date_taxes_filed\": \"<string,null-date>\",\n  \"payment_to_carrier_status\": \"<string>\",\n  \"carrier_invoice_due_date\": \"<string,null-date>\",\n  \"carrier_invoice_number\": \"<string,null>\",\n  \"remittance_date\": \"<string,null-date>\",\n  \"remittance_amount\": \"<string,null-decimal>\",\n  \"mercury_transaction_url\": \"<string,null-uri>\",\n  \"ach_last_four\": \"<string,null>\",\n  \"payment_reference_description\": \"<string,null>\",\n  \"ramp_transaction_url\": \"<string,null-uri>\",\n  \"remittance_notification_sent\": \"<boolean>\",\n  \"remittance_notification_sent_at\": \"<string,null-date-time>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cffb8bad-876c-4b87-80f1-ce9adb148c2f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "quote-policies",
+                    ":id",
+                    "renew"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coverage_application\": \"<string,null-uuid>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"expiration_date\": \"<string,null-date>\",\n  \"policy_number\": \"<string>\",\n  \"date_taxes_filed\": \"<string,null-date>\",\n  \"payment_to_carrier_status\": \"<string>\",\n  \"carrier_invoice_due_date\": \"<string,null-date>\",\n  \"carrier_invoice_number\": \"<string,null>\",\n  \"remittance_date\": \"<string,null-date>\",\n  \"remittance_amount\": \"<string,null-decimal>\",\n  \"mercury_transaction_url\": \"<string,null-uri>\",\n  \"ach_last_four\": \"<string,null>\",\n  \"payment_reference_description\": \"<string,null>\",\n  \"ramp_transaction_url\": \"<string,null-uri>\",\n  \"remittance_notification_sent\": \"<boolean>\",\n  \"remittance_notification_sent_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"5590d120-618f-c06a-e539-af0e3722c5a4\",\n  \"created_at\": \"2015-10-17T09:18:06.569Z\",\n  \"coverage_application\": \"<string,null-uuid>\",\n  \"status\": \"string\",\n  \"type\": \"string\",\n  \"quote\": \"string\",\n  \"herald_quote\": \"d22541f3-52b3-f396-88cd-1928afd2b2aa\",\n  \"carrier\": \"string\",\n  \"limit\": 1924,\n  \"date_issued\": \"1946-09-18\",\n  \"effective_date\": \"<string,null-date>\",\n  \"expiration_date\": \"<string,null-date>\",\n  \"policy_number\": \"<string>\",\n  \"product_line\": \"string\",\n  \"coverage_name\": \"string\",\n  \"premium\": \"string\",\n  \"total_premium\": \"string\",\n  \"billing_type\": \"string\",\n  \"date_taxes_filed\": \"<string,null-date>\",\n  \"payment_to_carrier_status\": \"<string>\",\n  \"carrier_invoice_due_date\": \"<string,null-date>\",\n  \"carrier_invoice_number\": \"<string,null>\",\n  \"remittance_date\": \"<string,null-date>\",\n  \"remittance_amount\": \"<string,null-decimal>\",\n  \"mercury_transaction_url\": \"<string,null-uri>\",\n  \"ach_last_four\": \"<string,null>\",\n  \"payment_reference_description\": \"<string,null>\",\n  \"ramp_transaction_url\": \"<string,null-uri>\",\n  \"remittance_notification_sent\": \"<boolean>\",\n  \"remittance_notification_sent_at\": \"<string,null-date-time>\",\n  \"remittance_notifications\": [\n    \"0f398091-4d5c-888a-9347-05a08a7a1e7c\",\n    \"f8a09f84-1c47-c740-1c61-b1e782f3e1e7\"\n  ],\n  \"documents\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ffd2928-cf3e-49e2-be7b-b81c95a55367",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "quote-policies",
+                    ":id",
+                    "renew"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coverage_application\": \"<string,null-uuid>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"expiration_date\": \"<string,null-date>\",\n  \"policy_number\": \"<string>\",\n  \"date_taxes_filed\": \"<string,null-date>\",\n  \"payment_to_carrier_status\": \"<string>\",\n  \"carrier_invoice_due_date\": \"<string,null-date>\",\n  \"carrier_invoice_number\": \"<string,null>\",\n  \"remittance_date\": \"<string,null-date>\",\n  \"remittance_amount\": \"<string,null-decimal>\",\n  \"mercury_transaction_url\": \"<string,null-uri>\",\n  \"ach_last_four\": \"<string,null>\",\n  \"payment_reference_description\": \"<string,null>\",\n  \"ramp_transaction_url\": \"<string,null-uri>\",\n  \"remittance_notification_sent\": \"<boolean>\",\n  \"remittance_notification_sent_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"non_field_errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48972fdb-6771-4dea-b53e-4354c774134b",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "quote-policies",
+                    ":id",
+                    "renew"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coverage_application\": \"<string,null-uuid>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"expiration_date\": \"<string,null-date>\",\n  \"policy_number\": \"<string>\",\n  \"date_taxes_filed\": \"<string,null-date>\",\n  \"payment_to_carrier_status\": \"<string>\",\n  \"carrier_invoice_due_date\": \"<string,null-date>\",\n  \"carrier_invoice_number\": \"<string,null>\",\n  \"remittance_date\": \"<string,null-date>\",\n  \"remittance_amount\": \"<string,null-decimal>\",\n  \"mercury_transaction_url\": \"<string,null-uri>\",\n  \"ach_last_four\": \"<string,null>\",\n  \"payment_reference_description\": \"<string,null>\",\n  \"ramp_transaction_url\": \"<string,null-uri>\",\n  \"remittance_notification_sent\": \"<boolean>\",\n  \"remittance_notification_sent_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f6bd1a7-5e27-4bff-b154-7556d3a7a07c",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "quote-policies",
+                    ":id",
+                    "renew"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coverage_application\": \"<string,null-uuid>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"expiration_date\": \"<string,null-date>\",\n  \"policy_number\": \"<string>\",\n  \"date_taxes_filed\": \"<string,null-date>\",\n  \"payment_to_carrier_status\": \"<string>\",\n  \"carrier_invoice_due_date\": \"<string,null-date>\",\n  \"carrier_invoice_number\": \"<string,null>\",\n  \"remittance_date\": \"<string,null-date>\",\n  \"remittance_amount\": \"<string,null-decimal>\",\n  \"mercury_transaction_url\": \"<string,null-uri>\",\n  \"ach_last_four\": \"<string,null>\",\n  \"payment_reference_description\": \"<string,null>\",\n  \"ramp_transaction_url\": \"<string,null-uri>\",\n  \"remittance_notification_sent\": \"<boolean>\",\n  \"remittance_notification_sent_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "672b18d0-52aa-4efa-974e-8c8bbfb1a9b1",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    ":business_pk",
+                    "quote-policies",
+                    ":id",
+                    "renew"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "business_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Policy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coverage_application\": \"<string,null-uuid>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"expiration_date\": \"<string,null-date>\",\n  \"policy_number\": \"<string>\",\n  \"date_taxes_filed\": \"<string,null-date>\",\n  \"payment_to_carrier_status\": \"<string>\",\n  \"carrier_invoice_due_date\": \"<string,null-date>\",\n  \"carrier_invoice_number\": \"<string,null>\",\n  \"remittance_date\": \"<string,null-date>\",\n  \"remittance_amount\": \"<string,null-decimal>\",\n  \"mercury_transaction_url\": \"<string,null-uri>\",\n  \"ach_last_four\": \"<string,null>\",\n  \"payment_reference_description\": \"<string,null>\",\n  \"ramp_transaction_url\": \"<string,null-uri>\",\n  \"remittance_notification_sent\": \"<boolean>\",\n  \"remittance_notification_sent_at\": \"<string,null-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.1fort.com/apis/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5cbcd1ce-00f3-4582-ac40-a8bc96b89319",
+    "name": "1Fort API Documentation quote (v2): quote-policies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# 1Fort API\n\nREST API for the 1Fort insurance platform. This document is the authoritative\nmap of the API surface; endpoints are grouped in the sidebar by **app** and\n**version**, and large apps are split into per-resource sub-groups.\n\n## Authentication\n\nAlmost every endpoint requires a **JWT access token**. Send it in the\n`Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may\nalso be presented as an HTTP-only cookie. Endpoints documented with no security\nrequirement are intentionally public (for example sign-in, OTP and storefront\nendpoints).\n\n## Multi-tenancy\n\nResources are scoped to a tenant. Nested routes carry the owning resource id in\nthe path (for example `/v2/broker/{business_pk}/applications`); a token is only\nauthorised for the businesses its user may access. Object-level permissions are\nenforced per endpoint.\n\n## Versioning\n\n`v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`\nendpoints remain documented for compatibility. Endpoints marked **deprecated**\nare scheduled for removal; prefer the documented replacement.\n",
+      "type": "text/plain"
+    }
+  }
+}

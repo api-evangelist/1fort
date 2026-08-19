@@ -1,0 +1,1200 @@
+{
+  "item": [
+    {
+      "id": "076ad00c-7f4f-47ef-8d03-9b2a0dd4230d",
+      "name": "application: applications",
+      "description": {
+        "content": "**Access:** requires a JWT access token.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f454c06d-d84c-41e0-8e0d-1482685dba80",
+          "name": "List Applications",
+          "request": {
+            "name": "List Applications",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "status"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_active",
+                  "value": "<string>",
+                  "description": "is_active"
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_source",
+                  "value": "<string>",
+                  "description": "exclude_source"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb854a58-c9d5-44be-b80e-6209713b90d9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_active",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude_source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 576,\n  \"results\": [\n    {\n      \"id\": \"1e43205a-a8a5-8f40-cb79-59ba20322c86\",\n      \"carriers\": [\n        \"string\"\n      ],\n      \"selected_markets\": [\n        \"530a9077-4c30-3d17-5f13-ee17c4086f05\",\n        \"dcb8265b-3940-bf8a-f1e9-b3f4facbdf39\"\n      ],\n      \"is_active\": true,\n      \"business\": {\n        \"name\": \"string\",\n        \"id\": 2053,\n        \"created_at\": \"2022-11-06T07:41:59.373Z\",\n        \"industry\": null,\n        \"number_of_employees\": null,\n        \"active\": true,\n        \"domain_name\": \"string\",\n        \"subsidiaries\": [\n          {\n            \"name\": \"string\",\n            \"business\": 1591,\n            \"id\": 1391,\n            \"description\": \"string\",\n            \"ownership\": null\n          },\n          {\n            \"name\": \"string\",\n            \"business\": 2659,\n            \"id\": 3747,\n            \"description\": null,\n            \"ownership\": null\n          }\n        ],\n        \"revenue\": 1387706017065564200\n      },\n      \"created_by\": {\n        \"id\": 5698,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"string\",\n        \"producer_id\": \"string\",\n        \"type\": \"OPERATIONS\",\n        \"slug\": \"q\"\n      },\n      \"brokerage_direct_placement_carriers\": [\n        \"5e4f405f-75eb-24b5-c00c-b5e878ff9c2f\",\n        \"64d02585-2179-29b5-986c-d5981e5c3291\"\n      ],\n      \"carriers_1fort_should_not_approach\": [\n        \"e644bce3-b9f5-d3f9-a071-3d4b9d105a04\",\n        \"efee36ed-2f63-5528-cf70-85bc9e0a29ec\"\n      ],\n      \"created_at\": \"1968-07-15T23:30:24.686Z\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"effective_date\": \"1973-04-03\",\n      \"due_date\": null,\n      \"policy_type\": \"ADMITTED_AND_SURPLUS_LINES\",\n      \"year\": 82305394,\n      \"prefilled_application\": \"http://tmMsmmkEIpuCPXXrQFtlH.lpo+-AG4wfR.fLFHqeWWpvx0TFgkSN2hGqKdvI5hml-Uq\",\n      \"additional_documents\": \"string\",\n      \"status\": \"draft\",\n      \"email_type\": \"default\",\n      \"submission_type\": \"NEW\",\n      \"form_override\": \"https://XQBUuJumnVbqxqj.havwzGxd\",\n      \"submitted_by_business_at\": null,\n      \"brokerage_wants_place_directly\": true,\n      \"brokerage_wants_wholesale_with_1fort\": true,\n      \"can_1fort_approach_any_market_wholesale\": true,\n      \"quote_version\": \"API\",\n      \"copy_src\": null,\n      \"source\": \"storefront\",\n      \"coverage_types\": [\n        \"1e7db4f8-4051-d753-d57a-a919dc229711\",\n        \"b4eccfa6-55f3-9165-b5f9-7995c40f1f06\"\n      ]\n    },\n    {\n      \"id\": \"9559858a-2983-5ee9-795a-aafbc635508f\",\n      \"carriers\": [\n        \"string\"\n      ],\n      \"selected_markets\": [\n        \"e897637d-aaaa-b7f1-7839-ec0044010ff4\",\n        \"561c24f6-44c0-e713-acd9-142535bc7909\"\n      ],\n      \"is_active\": true,\n      \"business\": {\n        \"name\": \"string\",\n        \"id\": 355,\n        \"created_at\": \"1980-02-10T17:32:03.280Z\",\n        \"industry\": null,\n        \"number_of_employees\": null,\n        \"active\": true,\n        \"domain_name\": \"string\",\n        \"subsidiaries\": [\n          {\n            \"name\": \"string\",\n            \"business\": 4367,\n            \"id\": 201,\n            \"description\": \"string\",\n            \"ownership\": 1448535691\n          },\n          {\n            \"name\": \"string\",\n            \"business\": 9359,\n            \"id\": 7977,\n            \"description\": \"string\",\n            \"ownership\": null\n          }\n        ],\n        \"revenue\": null\n      },\n      \"created_by\": {\n        \"id\": 3292,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"string\",\n        \"producer_id\": \"string\",\n        \"type\": \"OPERATIONS\",\n        \"slug\": \"foUGLQFB\"\n      },\n      \"brokerage_direct_placement_carriers\": [\n        \"7d7dac31-c6ec-64ea-85e2-e790fe796cb8\",\n        \"ecdd6c68-19fe-06f8-4ba2-3e7da32c0c22\"\n      ],\n      \"carriers_1fort_should_not_approach\": [\n        \"775e1d43-ee2c-6bd1-9824-6137992ae09c\",\n        \"35fcd154-008d-7e7a-620f-7eae9894895f\"\n      ],\n      \"created_at\": \"1986-03-17T03:47:29.013Z\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"effective_date\": \"1955-09-04\",\n      \"due_date\": \"1963-07-03\",\n      \"policy_type\": \"ADMITTED\",\n      \"year\": 1039396269,\n      \"prefilled_application\": null,\n      \"additional_documents\": \"string\",\n      \"status\": \"needs_review\",\n      \"email_type\": \"default\",\n      \"submission_type\": \"RENEWAL\",\n      \"form_override\": \"http://VySWheECEVgLDtTHssIPWktpbf.qbdKfNw9IZEaDP3eB7gWxRadK0iHaSQfFVAFDOg\",\n      \"submitted_by_business_at\": null,\n      \"brokerage_wants_place_directly\": false,\n      \"brokerage_wants_wholesale_with_1fort\": true,\n      \"can_1fort_approach_any_market_wholesale\": false,\n      \"quote_version\": \"MANUAL\",\n      \"copy_src\": null,\n      \"source\": \"storefront\",\n      \"coverage_types\": [\n        \"fe4f5cb5-94cd-09ee-76d4-567411892dac\",\n        \"3df1604d-c173-2585-a495-b2b26374be1c\"\n      ]\n    }\n  ],\n  \"next\": \"https://XcaFkLpohvWs.cexwlLqHYLhtumFf0mgtu,qUp--NvaPqrThR0Ketm-6H\",\n  \"previous\": \"https://TNSGDucLHDiIEkqxAxMAQtDn.jgxtxs27,.Tq7aTV0bYDfrl.Tr0PKNsyRMUth4V6eu2WCUD.R35kC,NwBRLlzB\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea02e59f-5dca-4e24-990f-6420804d1ae4",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_active",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude_source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39cbb4ec-d27c-4c41-85dc-367a416eacdd",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_active",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude_source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46f61754-1121-492d-b647-a7fe8a018c39",
+          "name": "Count",
+          "request": {
+            "name": "Count",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "status"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_active",
+                  "value": "<string>",
+                  "description": "is_active"
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_source",
+                  "value": "<string>",
+                  "description": "exclude_source"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "14a000ca-3063-4501-8c8e-cc7cbde6184a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_active",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude_source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 6381,\n  \"results\": [\n    {\n      \"id\": \"97a821fd-5c02-5dac-829b-523ad7aee560\",\n      \"carriers\": [\n        \"string\"\n      ],\n      \"selected_markets\": [\n        \"1075d3ce-aae3-2a27-effb-06e2bddc5dc4\",\n        \"3af6ca15-7d71-1371-a7e4-4bc242f2c71e\"\n      ],\n      \"is_active\": false,\n      \"business\": {\n        \"name\": \"string\",\n        \"id\": 5189,\n        \"created_at\": \"1958-10-03T14:17:15.056Z\",\n        \"industry\": \"string\",\n        \"number_of_employees\": null,\n        \"active\": false,\n        \"domain_name\": \"string\",\n        \"subsidiaries\": [\n          {\n            \"name\": \"string\",\n            \"business\": 9346,\n            \"id\": 7522,\n            \"description\": \"string\",\n            \"ownership\": null\n          },\n          {\n            \"name\": \"string\",\n            \"business\": 1978,\n            \"id\": 2975,\n            \"description\": null,\n            \"ownership\": null\n          }\n        ],\n        \"revenue\": 2702820987109140500\n      },\n      \"created_by\": {\n        \"id\": 5806,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"string\",\n        \"producer_id\": \"string\",\n        \"type\": \"OPERATIONS\",\n        \"slug\": \"RM76f\"\n      },\n      \"brokerage_direct_placement_carriers\": [\n        \"f78c8892-ba28-5cd8-4bd6-bb58330207cb\",\n        \"6f5d58ed-0006-c226-a6ea-a66e0505d66f\"\n      ],\n      \"carriers_1fort_should_not_approach\": [\n        \"05996fc5-679a-dc16-53e7-c36d90662728\",\n        \"b46f2c39-a320-6230-500a-a2292692a8b7\"\n      ],\n      \"created_at\": \"2000-12-30T05:02:26.611Z\",\n      \"name\": \"string\",\n      \"description\": null,\n      \"effective_date\": null,\n      \"due_date\": null,\n      \"policy_type\": \"ADMITTED_AND_SURPLUS_LINES\",\n      \"year\": -752886316,\n      \"prefilled_application\": \"http://HcJRmpbavIvv.xjlCO2PhdASJbtGszW.E.ibdm2\",\n      \"additional_documents\": \"string\",\n      \"status\": \"needs_review\",\n      \"email_type\": \"conversation\",\n      \"submission_type\": \"NEW\",\n      \"form_override\": \"https://NtMjlTqpeVAyZXEIdaCXgoCJJSA.bpkoQjkrU08lhXgkcFmphBl,Yw1tRV49FHQCi7rmnsFFlvLSg.gzxovpbBjtyp4\",\n      \"submitted_by_business_at\": null,\n      \"brokerage_wants_place_directly\": false,\n      \"brokerage_wants_wholesale_with_1fort\": false,\n      \"can_1fort_approach_any_market_wholesale\": false,\n      \"quote_version\": \"MANUAL\",\n      \"copy_src\": \"string\",\n      \"source\": \"renewal\",\n      \"coverage_types\": [\n        \"9b988799-f1f9-15a4-6311-c61d4a58589f\",\n        \"4dcbe1cb-982b-9ca6-af8f-ec0770400f81\"\n      ]\n    },\n    {\n      \"id\": \"8a7f13d6-aa35-dfaf-ec4e-1a7178e49d32\",\n      \"carriers\": [\n        \"string\"\n      ],\n      \"selected_markets\": [\n        \"7613364b-27aa-b4ee-5ff4-c455ecd0169c\",\n        \"df53d5cf-37bb-3a2b-150b-45be0467bb00\"\n      ],\n      \"is_active\": false,\n      \"business\": {\n        \"name\": \"string\",\n        \"id\": 5252,\n        \"created_at\": \"2022-07-13T09:04:11.455Z\",\n        \"industry\": null,\n        \"number_of_employees\": null,\n        \"active\": false,\n        \"domain_name\": \"string\",\n        \"subsidiaries\": [\n          {\n            \"name\": \"string\",\n            \"business\": 703,\n            \"id\": 2249,\n            \"description\": \"string\",\n            \"ownership\": 351165306\n          },\n          {\n            \"name\": \"string\",\n            \"business\": 7336,\n            \"id\": 9874,\n            \"description\": \"string\",\n            \"ownership\": null\n          }\n        ],\n        \"revenue\": null\n      },\n      \"created_by\": {\n        \"id\": 5100,\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"email\": \"string\",\n        \"producer_id\": \"string\",\n        \"type\": \"LEADERSHIP\",\n        \"slug\": \"9tLt1Cx\"\n      },\n      \"brokerage_direct_placement_carriers\": [\n        \"424fd314-dc55-36a8-1cd6-50c9268826fa\",\n        \"67db4146-a3f2-d84b-fc26-5e44ee877b2c\"\n      ],\n      \"carriers_1fort_should_not_approach\": [\n        \"b07a9a83-3055-e9c3-078d-b6dbc3762a60\",\n        \"ad4e44f3-2a71-aec6-388d-8b67a585b41e\"\n      ],\n      \"created_at\": \"1962-07-28T06:59:17.543Z\",\n      \"name\": null,\n      \"description\": \"string\",\n      \"effective_date\": null,\n      \"due_date\": \"2020-12-12\",\n      \"policy_type\": \"ADMITTED\",\n      \"year\": 1218718144,\n      \"prefilled_application\": \"http://MNfjjoubMMiYYrFrcvXqmOhkbiLXU.uiykdf-cebh-0SHDepXIuHq,ZjiRV.kMK\",\n      \"additional_documents\": null,\n      \"status\": \"draft\",\n      \"email_type\": \"default\",\n      \"submission_type\": \"OTHER\",\n      \"form_override\": null,\n      \"submitted_by_business_at\": \"1978-02-01T05:01:22.155Z\",\n      \"brokerage_wants_place_directly\": true,\n      \"brokerage_wants_wholesale_with_1fort\": false,\n      \"can_1fort_approach_any_market_wholesale\": false,\n      \"quote_version\": \"MANUAL\",\n      \"copy_src\": null,\n      \"source\": \"broker_in_portal\",\n      \"coverage_types\": [\n        \"e7feaea2-cf40-18fd-6adc-06675b071187\",\n        \"91befe50-a6b3-8a45-1920-27c404cd0dfc\"\n      ]\n    }\n  ],\n  \"next\": null,\n  \"previous\": \"https://STuvZNIxChfkmXIzazTUITapOLX.fgdzoRwFiM.gMe41JJriEUJKnBY5czT4a6sAZPfT9iL,\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f54954eb-06ae-46b3-919a-deffda3926d6",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_active",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude_source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fdb8a85-e203-404c-b399-e7506f6659c9",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_active",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude_source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84025fa5-1623-45b7-bef5-506666a4642b",
+          "name": "Retrieve Application",
+          "request": {
+            "name": "Retrieve Application",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Application."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b36fc4e9-8ce6-4139-8ffc-4315730c4af4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"03324a8c-cd0d-84a4-fc57-4858ceed1cbc\",\n  \"carriers\": [\n    \"string\"\n  ],\n  \"selected_markets\": [\n    \"53fdb82e-247f-79f7-a757-6f67effbeb45\",\n    \"d67848db-8e71-53fb-7cd2-4dc1c2ea8feb\"\n  ],\n  \"is_active\": false,\n  \"business\": {\n    \"name\": \"string\",\n    \"id\": 4504,\n    \"created_at\": \"1966-09-11T21:41:16.586Z\",\n    \"industry\": null,\n    \"number_of_employees\": null,\n    \"active\": false,\n    \"domain_name\": \"string\",\n    \"subsidiaries\": [\n      {\n        \"name\": \"string\",\n        \"business\": 6282,\n        \"id\": 6978,\n        \"description\": null,\n        \"ownership\": null\n      },\n      {\n        \"name\": \"string\",\n        \"business\": 4217,\n        \"id\": 5381,\n        \"description\": null,\n        \"ownership\": 1806636093\n      }\n    ],\n    \"revenue\": null\n  },\n  \"created_by\": {\n    \"id\": 7765,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"string\",\n    \"producer_id\": \"string\",\n    \"type\": \"SERVICE\",\n    \"slug\": \"ylznT-78B\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"0f5e3f1a-49f4-0940-ae88-fb9676b725fa\",\n    \"0fe8c873-f2f4-436f-ecd2-7b648dfe43ed\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"207ff726-80ff-b5df-88a8-7b597c61b1f4\",\n    \"ad06569c-39a4-ddf2-725c-9f99a6447fef\"\n  ],\n  \"created_at\": \"1992-08-18T09:29:24.562Z\",\n  \"name\": \"string\",\n  \"description\": null,\n  \"effective_date\": null,\n  \"due_date\": \"1957-01-04\",\n  \"policy_type\": \"ADMITTED\",\n  \"year\": -330277149,\n  \"prefilled_application\": \"https://lTRIOhJ.tkclYDDLr\",\n  \"additional_documents\": null,\n  \"status\": \"archived\",\n  \"email_type\": \"default\",\n  \"submission_type\": \"NEW\",\n  \"form_override\": \"http://SVShJswrqfYfjhyRlHFKdA.faia40HtOub7G7dl9RbHRAIyQAa8dAS8sSd\",\n  \"submitted_by_business_at\": \"1968-03-01T13:24:32.223Z\",\n  \"brokerage_wants_place_directly\": false,\n  \"brokerage_wants_wholesale_with_1fort\": false,\n  \"can_1fort_approach_any_market_wholesale\": false,\n  \"quote_version\": \"MANUAL\",\n  \"copy_src\": \"string\",\n  \"source\": \"email_ai\",\n  \"coverage_types\": [\n    \"12c15de4-741e-0c2e-cd69-02c84d1dde2f\",\n    \"6e311592-4312-a5d9-4cb2-eaf93d47f97d\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37bf6441-3a09-4c3a-8375-4437e706f7a5",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99f8d6dd-d8db-496a-9aa9-dcfe2787981e",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3a628d2-cad9-4ac6-b11b-b363cd12686e",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d040145b-b0f5-4b87-bd03-91b84d7c7dbc",
+          "name": "Submit",
+          "request": {
+            "name": "Submit",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":id",
+                "submit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Application."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carriers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "022faa0c-d3c3-4555-b0cd-1ec6d84bf516",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":id",
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"bc7d9787-320b-1698-2085-4fcc52b5ffef\",\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"is_active\": false,\n  \"business\": {\n    \"name\": \"<string>\",\n    \"id\": 7199,\n    \"created_at\": \"1970-11-19T14:41:29.358Z\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"subsidiaries\": [\n      {\n        \"name\": \"string\",\n        \"business\": 2300,\n        \"id\": 9656,\n        \"description\": null,\n        \"ownership\": null\n      },\n      {\n        \"name\": \"string\",\n        \"business\": 4335,\n        \"id\": 6934,\n        \"description\": null,\n        \"ownership\": null\n      }\n    ],\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"id\": 1024,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"string\",\n    \"producer_id\": \"string\",\n    \"type\": \"<string,null>\",\n    \"slug\": \"CvJnIs\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"created_at\": \"1994-02-19T19:07:35.696Z\",\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"prefilled_application\": \"http://arsBgIGmig.fmqTQDW+5nQDnav4cbgWsmBqj,sM+s5oaac84aTvMRJXUUIW-g8dcUj04B\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"form_override\": null,\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"source\": \"email_ai\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56beff3d-3392-4b12-aafd-f0044b635ce6",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":id",
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"non_field_errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bb51020-1dd5-4d56-b810-82e0499e2b6e",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":id",
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2dcbf0c4-c60b-48c4-bf3f-fb0097293272",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":id",
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15604b00-7b00-4722-92f2-39381330ba80",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":id",
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.1fort.com/apis/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c68e4c96-5c12-450f-8dbc-3c5210dbf4ce",
+    "name": "1Fort API Documentation application: applications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# 1Fort API\n\nREST API for the 1Fort insurance platform. This document is the authoritative\nmap of the API surface; endpoints are grouped in the sidebar by **app** and\n**version**, and large apps are split into per-resource sub-groups.\n\n## Authentication\n\nAlmost every endpoint requires a **JWT access token**. Send it in the\n`Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may\nalso be presented as an HTTP-only cookie. Endpoints documented with no security\nrequirement are intentionally public (for example sign-in, OTP and storefront\nendpoints).\n\n## Multi-tenancy\n\nResources are scoped to a tenant. Nested routes carry the owning resource id in\nthe path (for example `/v2/broker/{business_pk}/applications`); a token is only\nauthorised for the businesses its user may access. Object-level permissions are\nenforced per endpoint.\n\n## Versioning\n\n`v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`\nendpoints remain documented for compatibility. Endpoints marked **deprecated**\nare scheduled for removal; prefer the documented replacement.\n",
+      "type": "text/plain"
+    }
+  }
+}

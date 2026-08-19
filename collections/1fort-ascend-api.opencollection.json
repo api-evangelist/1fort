@@ -1,0 +1,277 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Ascend API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ascend",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Download",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/ascend/invoice/:invoice_id/download/",
+            "params": [
+              {
+                "name": "invoice_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List Download"
+        },
+        {
+          "info": {
+            "name": "Create Download",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/ascend/invoice/:invoice_id/download/",
+            "params": [
+              {
+                "name": "invoice_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Generate a custom invoice PDF for the specified invoice.\nThis endpoint generates a PDF using our internal PDF generator instead of\nproxying to Ascend's invoice URL.\n\nQuery Parameters:\n- return_json: If true, returns the JSON payload used for PDF generation instead of the PDF"
+        },
+        {
+          "info": {
+            "name": "List Receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/ascend/invoice/:invoice_id/receipt/",
+            "params": [
+              {
+                "name": "invoice_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Serve a receipt PDF for the specified invoice.\nThis endpoint serves receipt PDFs from S3 if available."
+        },
+        {
+          "info": {
+            "name": "Create Receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/ascend/invoice/:invoice_id/receipt/",
+            "params": [
+              {
+                "name": "invoice_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Generate a custom receipt PDF for the specified invoice.\nThis endpoint generates a receipt using our internal PDF generator.\n\nQuery Parameters:\n- return_json: If true, returns the JSON payload used for receipt PDF generation instead of the PDF"
+        },
+        {
+          "info": {
+            "name": "List Payouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/ascend/payouts",
+            "params": [
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Return a list of payouts with summary data and applied filters."
+        },
+        {
+          "info": {
+            "name": "Export csv",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/ascend/payouts/csv",
+            "params": [
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Export payouts to CSV format.\nReturns all filtered payouts without pagination."
+        },
+        {
+          "info": {
+            "name": "Filter options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/ascend/payouts/filter-options",
+            "params": [
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Get available filter options for frontend dropdowns.\nReturns unique values for each filterable field within the user's accessible data."
+        },
+        {
+          "info": {
+            "name": "Retrieve Payout",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/ascend/payouts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "ViewSet for retrieving payout data from Ascend.\nProvides comprehensive payout information including amounts, status, timing,\nand related program, invoice, and account details.\n\nSupports filtering by:\n- status: Filter by payout status (exact match)\n- reference: Filter by payout reference (partial match)\n- amount_min/amount_max: Filter by payout amount range (in dollars)\n- purchased_on_from/purchased_on_to: Filter by program purchase date range\n- initiated_on_from/initiated_on_to: Filter by payout"
+        },
+        {
+          "info": {
+            "name": "Dispatch payable",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/ascend/payouts/:id/dispatch",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Manually release an on_hold Stripe market payable once remittance setup\nis complete (verified agency-bill market with bank details)."
+        },
+        {
+          "info": {
+            "name": "ViewSet for handling Ascend webhook events.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/ascend/webhook/invoice"
+          },
+          "docs": "The INVOICE_UPDATE_RESTRICTIONS dictionary defines which updates are not\nallowed for specific event types and current invoice statuses. This ensures\nthat invoices follow a predetermined lifecycle and prevents invalid state changes."
+        },
+        {
+          "info": {
+            "name": "ViewSet for handling Ascend webhook events.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/ascend/webhook/payout"
+          },
+          "docs": "The INVOICE_UPDATE_RESTRICTIONS dictionary defines which updates are not\nallowed for specific event types and current invoice statuses. This ensures\nthat invoices follow a predetermined lifecycle and prevents invalid state changes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

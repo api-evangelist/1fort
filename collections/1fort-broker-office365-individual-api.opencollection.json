@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Broker Office365 Individual API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "broker-office365-individual",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Handle Office365 OAuth callback for individual users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/office365/broker/individual/permissions",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Authorization code from Microsoft"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "State parameter"
+              },
+              {
+                "name": "error",
+                "value": "",
+                "type": "query",
+                "description": "Error code if authorization failed"
+              }
+            ]
+          },
+          "docs": "\nThis endpoint handles the OAuth callback from Microsoft for individual user authentication.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

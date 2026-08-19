@@ -1,0 +1,901 @@
+openapi: 3.2.0
+info:
+  title: 1Fort API Documentation Risk Manager API
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: risk_manager
+  x-displayName: Risk manager
+  description: '**Access:** requires a JWT access token.'
+paths:
+  /financial-risk:
+    parameters: []
+    post:
+      operationId: financial-risk_create
+      summary: Calculate financial risk winnability (Broker and Business Users)
+      description: Calculate the winnability percentage and estimated premium for a specific coverage type and business client using AI analysis of risk parameters, policies, and quotes. Broker users must pass business_id. Business users derive the business from their account and cannot force refresh.
+      responses:
+        '200':
+          description: Successful response with winnability percentage
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinancialRiskCategoryResponse'
+        '400':
+          description: Bad request - Invalid input or user has no associated business
+        '403':
+          description: Forbidden - Business not found, broker doesn't have access, or business user attempted force refresh
+        '500':
+          description: Internal server error - AI calculation failed
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+      tags:
+      - risk_manager
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinancialRisk'
+        required: true
+  /risks:
+    parameters: []
+    get:
+      operationId: risks_list
+      summary: List risks
+      description: Retrieve a list of risks for the authenticated user's business.
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Risk'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - risk_manager
+  /risks/assessment_status:
+    parameters: []
+    get:
+      operationId: risks_assessment_status
+      summary: Get risk assessment status
+      description: Retrieve the status of the latest risk assessment for the user's business.
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - risk_manager
+  /risks/chat:
+    parameters: []
+    get:
+      operationId: risks_chat_list
+      summary: List chat messages
+      description: Retrieve a paginated list of chat messages for the current business user.
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RiskManagerChatMessage'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - risk_manager
+    post:
+      operationId: risks_chat_create
+      summary: Send a chat message
+      description: Send a new message to the risk manager chat and get a response.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  created_at:
+                    type: string
+                    format: date-time
+                  message:
+                    type: string
+                  role:
+                    type: string
+                    enum:
+                    - assistant
+        '400':
+          description: User is not associated with a business or content is required
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - risk_manager
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - message
+              type: object
+              properties:
+                message:
+                  type: string
+        required: true
+  /risks/overview:
+    parameters: []
+    get:
+      operationId: risks_overview_list
+      summary: Get risk overview
+      description: Retrieve an overview of risks categorized by type, including completion scores and risk counts.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        category:
+                          type: string
+                        completion_score:
+                          type: number
+                        risk_count:
+                          type: integer
+                        completion_score_last_week:
+                          type: number
+                        completion_score_change:
+                          type: number
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+        '400':
+          description: User is not a business user
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - risk_manager
+  /risks/{id}:
+    parameters:
+    - name: id
+      in: path
+      description: A UUID string identifying this risk.
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: risks_read
+      summary: Retrieve risk
+      description: Get details of a specific risk.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Risk'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - risk_manager
+    put:
+      operationId: risks_update
+      summary: Update risk
+      description: Update a specific risk, including its status.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Risk'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - risk_manager
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Risk'
+        required: true
+    patch:
+      operationId: risks_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Risk'
+        '400':
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - risk_manager
+      summary: Update Risk
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Risk'
+        required: true
+components:
+  schemas:
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    PremiumRange:
+      description: Estimated annual premium range in dollars based on recommended limit
+      required:
+      - min
+      - max
+      type:
+      - object
+      - 'null'
+      properties:
+        min:
+          title: Min
+          type: integer
+          minimum: 1000
+        max:
+          title: Max
+          type: integer
+          minimum: 1000
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    Risk:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          title: Title
+          type: string
+          readOnly: true
+          minLength: 1
+        category:
+          title: Category
+          type: string
+          enum:
+          - FINANCE
+          - IT
+          - HR
+          - OPERATIONS
+          - LEGAL
+          - GOVERNANCE
+          - COMPLIANCE
+          readOnly: true
+        likelihood:
+          title: Likelihood
+          type: string
+          enum:
+          - INSIGNIFICANT
+          - MODERATE
+          - SEVERE
+          readOnly: true
+        impact:
+          title: Impact
+          type: string
+          enum:
+          - MINOR
+          - MODERATE
+          - SEVERE
+          readOnly: true
+        remediation:
+          title: Remediation
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        status:
+          title: Status
+          type: string
+          enum:
+          - TODO
+          - IN_PROGRESS
+          - DONE
+          - IGNORE
+        done_at:
+          title: Done at
+          type:
+          - string
+          - 'null'
+          format: date-time
+    RiskManagerChatMessage:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        message:
+          title: Message
+          type: string
+          readOnly: true
+        role:
+          title: Role
+          type: string
+          enum:
+          - assistant
+          - user
+          readOnly: true
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    FinancialRiskCategoryResponse:
+      required:
+      - coverage_type
+      type: object
+      properties:
+        coverage_type:
+          title: Coverage type
+          type: string
+          minLength: 1
+        coverage_id:
+          title: Coverage id
+          description: UUID of the corresponding ProductLine for UI matching
+          type:
+          - string
+          - 'null'
+          format: uuid
+        coverage_description:
+          title: Coverage description
+          type:
+          - string
+          - 'null'
+        winnability:
+          title: Winnability
+          description: Likelihood that the insured will purchase this coverage
+          type:
+          - string
+          - 'null'
+          enum:
+          - high
+          - medium
+          - low
+        premium_est_range:
+          $ref: '#/components/schemas/PremiumRange'
+        rationale:
+          title: Rationale
+          description: Explanation of why this insured needs this coverage
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        limit_recommendation:
+          title: Limit recommendation
+          description: Recommended aggregate limit in dollars
+          type:
+          - integer
+          - 'null'
+        status:
+          title: Status
+          description: 'Coverage status: insured (has adequate coverage), uninsured (no coverage), underinsured (has coverage but below recommended limit)'
+          type:
+          - string
+          - 'null'
+          enum:
+          - insured
+          - uninsured
+          - underinsured
+        calculation_status:
+          title: Calculation status
+          description: Status of AI calculations
+          type: string
+          enum:
+          - PENDING
+          - CALCULATING
+          - COMPLETED
+          - FAILED
+        error_message:
+          title: Error message
+          description: Error message if calculation failed
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        detailed_rationale:
+          title: Detailed rationale
+          description: Detailed rationale with specific issues and recommendations
+          type:
+          - object
+          - 'null'
+        data_sources:
+          title: Data sources
+          description: Data sources used for calculations
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+    FinancialRisk:
+      type: object
+      properties:
+        coverage_type:
+          title: Coverage type
+          description: Type of coverage being evaluated (e.g., 'Cyber', 'D&O', 'MPL', 'EPL', 'Tech E&O', 'Fiduciary')
+          type:
+          - string
+          - 'null'
+        business_id:
+          title: Business id
+          description: ID of the business/insured. Required for broker users, optional for business users.
+          type:
+          - integer
+          - 'null'
+        force_refresh:
+          title: Force refresh
+          description: If True, clears all cached financial risk data for this business and triggers fresh calculations
+          type: boolean
+          default: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

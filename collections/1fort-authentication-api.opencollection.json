@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Authentication API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request or Verify Email OTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/otp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nHandles both requesting an OTP and verifying it for login/signup.\n\n**Step 1: Request OTP**\n- Provide `email` and `action` ('signup' or 'login').\n- Sends an OTP to the email if validation passes.\n- Returns: `{\"message\": \"OTP sent...\"}`\n\n**Step 2: Verify OTP & Authenticate**\n- Provide `email` and `code` received via email.\n- Optionally provide `auth_type`: 'session' (default) or 'jwt'.\n- Optionally provide `first_name`, `last_name`, `user_role` if signing up.\n- Verifies the code. If valid, create"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

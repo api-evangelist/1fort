@@ -1,0 +1,170 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation insurance (v2) insurance (v2) API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "insurance (v2)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Insurance coverage types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/insurance-coverage-types",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List and retrieve CoverageType (reference data)."
+        },
+        {
+          "info": {
+            "name": "Retrieve Insurance coverage type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/insurance-coverage-types/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Coverage Type."
+              }
+            ]
+          },
+          "docs": "List and retrieve CoverageType (reference data)."
+        },
+        {
+          "info": {
+            "name": "Read + Create coverage terms.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverage-terms",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "- GET  /coverage-terms/           — list for this business\n- GET  /coverage-terms/{id}/      — single with full nested tree\n- POST /coverage-terms/           — create with nested lines/limits/deductibles/fees"
+        },
+        {
+          "info": {
+            "name": "Read + Create coverage terms.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverage-terms",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "- GET  /coverage-terms/           — list for this business\n- GET  /coverage-terms/{id}/      — single with full nested tree\n- POST /coverage-terms/           — create with nested lines/limits/deductibles/fees"
+        },
+        {
+          "info": {
+            "name": "Read + Create coverage terms.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/:business_pk/coverage-terms/:id",
+            "params": [
+              {
+                "name": "business_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Coverage Term."
+              }
+            ]
+          },
+          "docs": "- GET  /coverage-terms/           — list for this business\n- GET  /coverage-terms/{id}/      — single with full nested tree\n- POST /coverage-terms/           — create with nested lines/limits/deductibles/fees"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

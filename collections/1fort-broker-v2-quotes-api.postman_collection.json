@@ -1,0 +1,1520 @@
+{
+  "item": [
+    {
+      "id": "312e9330-9555-429d-aea2-3c738fdb07cc",
+      "name": "broker (v2): quotes",
+      "description": {
+        "content": "**Access:** requires a JWT access token.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "20959d04-0351-4c8b-bed6-9d7d26d00d18",
+          "name": "Paginated ViewSet for retrieving quotes for the broker.",
+          "request": {
+            "name": "Paginated ViewSet for retrieving quotes for the broker.",
+            "description": {
+              "content": "Supports Filtering By:\n- insured\n- has_tasks\n- status\n- payment_status\n- coverage_type\n- carrier (carrier UUID; comma-separated for multiple)\n- wholesaler (wholesaler UUID; comma-separated for multiple)\n- broker (Agent ID)\n- effective_date_min (minimum effective date, inclusive)\n- effective_date_max (maximum effective date, inclusive)\n\nSupports Searching By:\n- insured\n\nSupports Sorting By:\n- created_at\n- effective_date\n\nAdditional actions:\n- GET ``filter-options``: returns the distinct carriers and wholesalers\n  that appear in the broker's quotes, for populating filter dropdowns\n  without fetching the global carrier/wholesaler lists.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "insured",
+                  "value": "<string>",
+                  "description": "Filter quotes by insured name.\n\nExamples:\n- `?insured=Acme Inc.` - Matches quotes with 'Acme Inc.' in insured name\n- `?insured=Acme Inc., Acme Corp.` - Matches quotes with 'Acme Inc.' or 'Acme Corp.' in insured name"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter quotes by effective status. Supports comma-separated values.\n\n**Important:** For 'active' and 'expired' filters, this considers the `quote_validity_date` to determine the effective status, not just the database status field.\n\n**Status Behavior:**\n- `active` - Matches quotes with database status 'active' AND validity date in the future (or null)\n- `expired` - Matches quotes with:\n  - Database status 'expired', OR\n  - In-progress statuses (active, pending, referred, referral, awaiting_payment) with past validity date\n  - **Note:** Terminal statuses (declined, rejected, unsupported, unresponsive, archived) and bound statuses (bound, bind_requested) remain in their final state regardless of validity date\n- Other statuses (pending, declined, etc.) - Matches database status directly\n\n**Available statuses:**\n- `active`, `pending`, `referred`, `referral`, `declined`, `rejected`, `unsupported`, `unresponsive`, `expired`, `bind_requested`, `awaiting_payment`, `bound`, `archived`\n\n**Examples:**\n- `?status=active` - Active quotes that haven't expired by date\n- `?status=expired` - Quotes that are expired (by status or date)\n- `?status=active,pending` - Active or pending quotes\n- `?status=declined` - Declined quotes (remains declined regardless of validity date)"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_status",
+                  "value": "<string>",
+                  "description": "Filter quotes by unified billing status (Ascend program and/or native checkout). Supports comma-separated values.\n\nSpecial value:\n- `pending` - No Ascend program / no program status, and no active native checkout invoice (or program row with blank status and no draft/open/partial/paid checkout)\n\nStandard values:\n- `created`, `ready_for_checkout`, `elected`, `checked_out`, `purchased`, `archived` — for native checkout, `created` maps to checkout draft; `ready_for_checkout` to open/partially paid; `purchased` to paid; `elected`/`checked_out`/`archived` remain Ascend program only.\n\nExamples:\n- `?payment_status=purchased` - Matches quotes with purchased Ascend program or paid native checkout\n- `?payment_status=ready_for_checkout` - Ascend ready_for_checkout or native checkout open/partially paid\n- `?payment_status=purchased,checked_out` - Matches either status\n- `?payment_status=pending,purchased` - Pending (no billing activity) OR purchased"
+                },
+                {
+                  "disabled": false,
+                  "key": "coverage_type",
+                  "value": "<string>",
+                  "description": "Filter quotes by coverage type.\n\nExamples:\n- `?coverage_type=CYBER` - Matches quotes with 'CYBER' in coverage type\n- `?coverage_type=CYBER, GENERAL_LIABILITY` - Matches quotes with 'CYBER' or 'GENERAL_LIABILITY' in coverage type"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier",
+                  "value": "<string>",
+                  "description": "Filter quotes by carrier (market) UUID. Matches the quote's carrier, the product's carrier, or a carrier on any coverage under the quote's coverage term. Supports comma-separated values for multiple carriers. Non-UUID tokens are ignored; if no valid UUIDs remain after parsing, the result set is empty.\n\nExamples:\n- `?carrier=<uuid>` - Quotes for that carrier\n- `?carrier=<uuid1>,<uuid2>` - Quotes for either carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "wholesaler",
+                  "value": "<string>",
+                  "description": "wholesaler"
+                },
+                {
+                  "disabled": false,
+                  "key": "has_tasks",
+                  "value": "<boolean>",
+                  "description": "Filter quotes by whether they have tasks.\n\nExamples:\n- `?has_tasks=true` - Matches quotes with tasks\n- `?has_tasks=false` - Matches quotes without tasks"
+                },
+                {
+                  "disabled": false,
+                  "key": "broker",
+                  "value": "<string>",
+                  "description": "Filter quotes by broker agent ID (BrokerUser). Supports comma-separated values to filter by multiple agents.\n\nExamples:\n- `?broker=20` - Matches quotes where agent with ID 20 is assigned\n- `?broker=20,21,22` - Matches quotes where agents with IDs 20, 21, or 22 are assigned"
+                },
+                {
+                  "disabled": false,
+                  "key": "effective_date_min",
+                  "value": "<date>",
+                  "description": "Filter quotes by minimum effective date (inclusive). Use ISO 8601 date format.\n\nExamples:\n- `?effective_date_min=2024-01-01` - Matches quotes with effective date on or after January 1, 2024\n- `?effective_date_min=2024-01-01&effective_date_max=2024-12-31` - Matches quotes with effective date in 2024"
+                },
+                {
+                  "disabled": false,
+                  "key": "effective_date_max",
+                  "value": "<date>",
+                  "description": "Filter quotes by maximum effective date (inclusive). Use ISO 8601 date format.\n\nExamples:\n- `?effective_date_max=2024-12-31` - Matches quotes with effective date on or before December 31, 2024\n- `?effective_date_min=2024-01-01&effective_date_max=2024-12-31` - Matches quotes with effective date in 2024"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Sort quotes by specified field. Use a minus sign (-) prefix for descending order.\n\n**Available fields:**\n- `created_at` - Sort by creation date (default: newest first)\n- `effective_date` - Sort by policy effective date\n\n**Examples:**\n- `?ordering=-created_at` - Sort by newest first (default)\n- `?ordering=created_at` - Sort by oldest first\n- `?ordering=-effective_date` - Sort by newest effective date first\n- `?ordering=effective_date` - Sort by oldest effective date first"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a91c655c-6e91-4b01-891f-15fde44affb9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wholesaler",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "has_tasks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_min",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "effective_date_max",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 3029,\n  \"results\": [\n    {\n      \"carrier\": {\n        \"name\": \"string\",\n        \"id\": \"4922daab-96d1-4eb0-5344-fb0267f4f54e\",\n        \"logo\": \"https://ERzwEpNphjA.vku9pwkJH2\",\n        \"am_best_rating\": null,\n        \"domains\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"coverage_type\": null,\n      \"task_count\": 5637,\n      \"id\": \"13e423a1-0299-5d1f-a1c7-9b8910f44231\",\n      \"insured\": \"string\",\n      \"created_at\": \"2004-07-02T04:59:35.145Z\",\n      \"status\": \"string\",\n      \"market_status_reason\": null,\n      \"primary_agent\": \"string\",\n      \"all_agents\": \"string\",\n      \"coverage_application\": \"cbf27d2b-3abf-2aac-d239-246f2faf43e7\",\n      \"aggregate_limit\": null,\n      \"aggregate_retention\": 2443136879208395000,\n      \"effective_date\": \"2004-08-25\",\n      \"payment_status\": \"string\",\n      \"has_tasks\": \"string\",\n      \"payment_link\": \"string\",\n      \"total_amount_cents\": \"string\",\n      \"insurance_invoice_ids\": \"string\",\n      \"follow_up_notifications\": true,\n      \"source\": \"string\",\n      \"source_display\": \"string\"\n    },\n    {\n      \"carrier\": {\n        \"name\": \"string\",\n        \"id\": \"1ec8b544-9ee3-5359-8a27-e59da7db0c37\",\n        \"logo\": \"https://RczRukoPKZJqpOEODWhFZsxb.cxngNdyyvXxf+U0GVOBrRmClL8lW5byqf.aguEOp-EwZJbWsK.en77lU1-SGjgRI5niF4MxomSvwaG\",\n        \"am_best_rating\": null,\n        \"domains\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"coverage_type\": null,\n      \"task_count\": 784,\n      \"id\": \"b00dea41-7daf-33f3-82e1-2c9ecf79644c\",\n      \"insured\": \"string\",\n      \"created_at\": \"1958-11-03T03:40:00.954Z\",\n      \"status\": \"string\",\n      \"market_status_reason\": \"string\",\n      \"primary_agent\": \"string\",\n      \"all_agents\": \"string\",\n      \"coverage_application\": null,\n      \"aggregate_limit\": -3270482661434364000,\n      \"aggregate_retention\": 5326400795595262000,\n      \"effective_date\": \"2025-11-17\",\n      \"payment_status\": \"string\",\n      \"has_tasks\": \"string\",\n      \"payment_link\": \"string\",\n      \"total_amount_cents\": \"string\",\n      \"insurance_invoice_ids\": \"string\",\n      \"follow_up_notifications\": false,\n      \"source\": \"string\",\n      \"source_display\": \"string\"\n    }\n  ],\n  \"next\": \"http://pJFPYidGlEDtiAoncRLEMQIFCE.fsmzxe3UVfG35SzIpLFx5yiHn9G.Copmb\",\n  \"previous\": \"https://gWtdpLDgGWmokptG.vfbf3UTZHIYOTueDfLD3D\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ef5be21-f8a6-4eb6-b8b0-7e2242d92c8d",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wholesaler",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "has_tasks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_min",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "effective_date_max",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17818b35-f862-472f-980c-c9b53cfeae8b",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wholesaler",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "has_tasks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_min",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "effective_date_max",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2482d913-84ad-43dd-a82b-a11b4188f161",
+          "name": "Return distinct markets (carriers and wholesalers) for the broker's quotes.",
+          "request": {
+            "name": "Return distinct markets (carriers and wholesalers) for the broker's quotes.",
+            "description": {
+              "content": "Used to populate the Markets filter on the broker /quotes page without\nloading the full global carrier/wholesaler catalogues. Honors the same\nrole-based scoping as the list endpoint (members only see quotes for\nbusinesses they're assigned to).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "quotes",
+                "filter-options"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "insured",
+                  "value": "<string>",
+                  "description": "insured"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "status"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_status",
+                  "value": "<string>",
+                  "description": "payment_status"
+                },
+                {
+                  "disabled": false,
+                  "key": "coverage_type",
+                  "value": "<string>",
+                  "description": "coverage_type"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier",
+                  "value": "<string>",
+                  "description": "carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "wholesaler",
+                  "value": "<string>",
+                  "description": "wholesaler"
+                },
+                {
+                  "disabled": false,
+                  "key": "has_tasks",
+                  "value": "<string>",
+                  "description": "has_tasks"
+                },
+                {
+                  "disabled": false,
+                  "key": "broker",
+                  "value": "<string>",
+                  "description": "broker"
+                },
+                {
+                  "disabled": false,
+                  "key": "effective_date_min",
+                  "value": "<string>",
+                  "description": "effective_date_min"
+                },
+                {
+                  "disabled": false,
+                  "key": "effective_date_max",
+                  "value": "<string>",
+                  "description": "effective_date_max"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4f49715f-492a-40a5-a21c-fc66bf6a1caa",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quotes",
+                    "filter-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wholesaler",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "has_tasks",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_max",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 3029,\n  \"results\": [\n    {\n      \"carrier\": {\n        \"name\": \"string\",\n        \"id\": \"4922daab-96d1-4eb0-5344-fb0267f4f54e\",\n        \"logo\": \"https://ERzwEpNphjA.vku9pwkJH2\",\n        \"am_best_rating\": null,\n        \"domains\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"coverage_type\": null,\n      \"task_count\": 5637,\n      \"id\": \"13e423a1-0299-5d1f-a1c7-9b8910f44231\",\n      \"insured\": \"string\",\n      \"created_at\": \"2004-07-02T04:59:35.145Z\",\n      \"status\": \"string\",\n      \"market_status_reason\": null,\n      \"primary_agent\": \"string\",\n      \"all_agents\": \"string\",\n      \"coverage_application\": \"cbf27d2b-3abf-2aac-d239-246f2faf43e7\",\n      \"aggregate_limit\": null,\n      \"aggregate_retention\": 2443136879208395000,\n      \"effective_date\": \"2004-08-25\",\n      \"payment_status\": \"string\",\n      \"has_tasks\": \"string\",\n      \"payment_link\": \"string\",\n      \"total_amount_cents\": \"string\",\n      \"insurance_invoice_ids\": \"string\",\n      \"follow_up_notifications\": true,\n      \"source\": \"string\",\n      \"source_display\": \"string\"\n    },\n    {\n      \"carrier\": {\n        \"name\": \"string\",\n        \"id\": \"1ec8b544-9ee3-5359-8a27-e59da7db0c37\",\n        \"logo\": \"https://RczRukoPKZJqpOEODWhFZsxb.cxngNdyyvXxf+U0GVOBrRmClL8lW5byqf.aguEOp-EwZJbWsK.en77lU1-SGjgRI5niF4MxomSvwaG\",\n        \"am_best_rating\": null,\n        \"domains\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"coverage_type\": null,\n      \"task_count\": 784,\n      \"id\": \"b00dea41-7daf-33f3-82e1-2c9ecf79644c\",\n      \"insured\": \"string\",\n      \"created_at\": \"1958-11-03T03:40:00.954Z\",\n      \"status\": \"string\",\n      \"market_status_reason\": \"string\",\n      \"primary_agent\": \"string\",\n      \"all_agents\": \"string\",\n      \"coverage_application\": null,\n      \"aggregate_limit\": -3270482661434364000,\n      \"aggregate_retention\": 5326400795595262000,\n      \"effective_date\": \"2025-11-17\",\n      \"payment_status\": \"string\",\n      \"has_tasks\": \"string\",\n      \"payment_link\": \"string\",\n      \"total_amount_cents\": \"string\",\n      \"insurance_invoice_ids\": \"string\",\n      \"follow_up_notifications\": false,\n      \"source\": \"string\",\n      \"source_display\": \"string\"\n    }\n  ],\n  \"next\": \"http://pJFPYidGlEDtiAoncRLEMQIFCE.fsmzxe3UVfG35SzIpLFx5yiHn9G.Copmb\",\n  \"previous\": \"https://gWtdpLDgGWmokptG.vfbf3UTZHIYOTueDfLD3D\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb234dcf-14ba-4fe1-88a1-e29dd31a3cd4",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quotes",
+                    "filter-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wholesaler",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "has_tasks",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_max",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0161da4c-7843-47f0-8942-ce77e2eb0bc1",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quotes",
+                    "filter-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "insured",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "carrier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wholesaler",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "has_tasks",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effective_date_max",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9bb61f3a-abfd-4f40-a0d7-29d136e56c0c",
+          "name": "Paginated ViewSet for retrieving quotes for the broker.",
+          "request": {
+            "name": "Paginated ViewSet for retrieving quotes for the broker.",
+            "description": {
+              "content": "Supports Filtering By:\n- insured\n- has_tasks\n- status\n- payment_status\n- coverage_type\n- carrier (carrier UUID; comma-separated for multiple)\n- wholesaler (wholesaler UUID; comma-separated for multiple)\n- broker (Agent ID)\n- effective_date_min (minimum effective date, inclusive)\n- effective_date_max (maximum effective date, inclusive)\n\nSupports Searching By:\n- insured\n\nSupports Sorting By:\n- created_at\n- effective_date\n\nAdditional actions:\n- GET ``filter-options``: returns the distinct carriers and wholesalers\n  that appear in the broker's quotes, for populating filter dropdowns\n  without fetching the global carrier/wholesaler lists.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "quotes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7f9ab213-2e3c-48fd-8c0d-e9a0b2737cf2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carrier\": {\n    \"name\": \"stri\",\n    \"id\": \"e6daf4ab-dddf-7702-3f8d-5b3a3c93e1db\",\n    \"logo\": \"http://ZmFMxMkZTBDLbGfNvIQZEmidDDZC.gcahfjJwYtFhaCeEcxoFrhQB5MM9SfAdeFwhqHyf3OJdud1dyuESJ3y1\",\n    \"am_best_rating\": null,\n    \"domains\": null\n  },\n  \"coverage_type\": null,\n  \"task_count\": 8346,\n  \"id\": \"c340429a-021c-b605-6df2-454eebe16cb0\",\n  \"insured\": \"string\",\n  \"created_at\": \"1960-08-25T06:02:42.713Z\",\n  \"status\": \"string\",\n  \"market_status_reason\": \"string\",\n  \"primary_agent\": \"string\",\n  \"all_agents\": \"string\",\n  \"coverage_application\": \"78e2c9e2-44dc-f48f-5e54-d433a369b424\",\n  \"aggregate_limit\": -7282575669090681000,\n  \"aggregate_retention\": null,\n  \"effective_date\": null,\n  \"payment_status\": \"string\",\n  \"has_tasks\": \"string\",\n  \"payment_link\": \"string\",\n  \"total_amount_cents\": \"string\",\n  \"insurance_invoice_ids\": \"string\",\n  \"follow_up_notifications\": true,\n  \"source\": \"string\",\n  \"source_display\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c43981b8-ad1a-4b27-aaad-b0293dc845d6",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04c77de0-d7d8-403a-8695-fcb069fa4bce",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ff38e4a-d85d-4b59-8b8f-470edef211b1",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9dd753e7-4430-4143-80e8-afaca9be104f",
+          "name": "Update Quote Follow-Up Notifications",
+          "request": {
+            "name": "Update Quote Follow-Up Notifications",
+            "description": {
+              "content": "Toggle follow-up reminder emails to underwriters for this quote. Only follow_up_notifications is writable; all other quote fields are read-only and ignored if included.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "broker",
+                "quotes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"follow_up_notifications\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2d5cea0f-92c4-4328-a308-5aa9d7e4a44d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"follow_up_notifications\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"953607ab-07fb-72f5-bec2-f940f196d567\",\n  \"follow_up_notifications\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ebbf5d3-1eb8-4ab8-87f4-458e482088c3",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"follow_up_notifications\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"non_field_errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_1\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37ce83b0-e4af-414f-9596-b6992954f006",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"follow_up_notifications\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1df01a21-468e-452f-8f14-7136bc16d59f",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"follow_up_notifications\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4c370bd-e086-46f0-9511-e937dd9a7ac8",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "broker",
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Quote (Coverage Term)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"follow_up_notifications\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.1fort.com/apis/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6423db7f-0946-43af-8a88-69f7105aff7b",
+    "name": "1Fort API Documentation broker (v2): quotes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# 1Fort API\n\nREST API for the 1Fort insurance platform. This document is the authoritative\nmap of the API surface; endpoints are grouped in the sidebar by **app** and\n**version**, and large apps are split into per-resource sub-groups.\n\n## Authentication\n\nAlmost every endpoint requires a **JWT access token**. Send it in the\n`Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may\nalso be presented as an HTTP-only cookie. Endpoints documented with no security\nrequirement are intentionally public (for example sign-in, OTP and storefront\nendpoints).\n\n## Multi-tenancy\n\nResources are scoped to a tenant. Nested routes carry the owning resource id in\nthe path (for example `/v2/broker/{business_pk}/applications`); a token is only\nauthorised for the businesses its user may access. Object-level permissions are\nenforced per endpoint.\n\n## Versioning\n\n`v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`\nendpoints remain documented for compatibility. Endpoints marked **deprecated**\nare scheduled for removal; prefer the documented replacement.\n",
+      "type": "text/plain"
+    }
+  }
+}

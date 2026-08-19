@@ -1,0 +1,2958 @@
+{
+  "item": [
+    {
+      "id": "c903f87c-03b9-46f4-a0b5-136b41535003",
+      "name": "application: clients",
+      "description": {
+        "content": "**Access:** requires a JWT access token.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b2102f9a-f655-4ba6-943e-550a95b567ae",
+          "name": "List Applications",
+          "request": {
+            "name": "List Applications",
+            "description": {
+              "content": "Filter out applications that are in draft state and application without herald applications if it's API application",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "broker",
+                ":broker_pk",
+                "clients",
+                ":client_pk",
+                "applications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "broker_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "07c0312a-e094-40d7-af84-44558d126126",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 5793,\n  \"results\": [\n    {\n      \"id\": \"3afa2904-7176-c502-155e-6e8e51513877\",\n      \"coverage_types\": [\n        \"string\"\n      ],\n      \"has_coverages\": \"string\",\n      \"coverage_applications\": [\n        \"4c88b69a-1159-6ffb-23ab-70363ac13cac\",\n        \"2acebbe5-c7fc-0adb-648b-4a118a918e69\"\n      ],\n      \"markets\": \"string\",\n      \"created_at\": \"1999-03-18T07:45:31.424Z\",\n      \"name\": null,\n      \"description\": null,\n      \"is_active\": true,\n      \"effective_date\": null,\n      \"due_date\": null,\n      \"policy_type\": \"ADMITTED_AND_SURPLUS_LINES\",\n      \"year\": -286031741,\n      \"additional_documents\": \"string\",\n      \"status\": \"draft\",\n      \"email_type\": \"default\",\n      \"submission_type\": \"OTHER\",\n      \"submitted_by_business_at\": null,\n      \"brokerage_wants_place_directly\": true,\n      \"brokerage_wants_wholesale_with_1fort\": true,\n      \"can_1fort_approach_any_market_wholesale\": true,\n      \"quote_version\": \"API\",\n      \"copy_src\": null,\n      \"source\": \"storefront\"\n    },\n    {\n      \"id\": \"d90e3b9d-3e85-7fe5-fc05-25ccd566352a\",\n      \"coverage_types\": [\n        \"string\"\n      ],\n      \"has_coverages\": \"string\",\n      \"coverage_applications\": [\n        \"475e4a91-c90f-93cb-f83d-1404b71c8541\",\n        \"3bafd1bf-5847-6570-ec77-f95dab686217\"\n      ],\n      \"markets\": \"string\",\n      \"created_at\": \"1992-04-27T03:03:32.203Z\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"is_active\": false,\n      \"effective_date\": null,\n      \"due_date\": null,\n      \"policy_type\": \"SURPLUS_LINES\",\n      \"year\": -905193604,\n      \"additional_documents\": null,\n      \"status\": \"archived\",\n      \"email_type\": \"conversation\",\n      \"submission_type\": \"NEW\",\n      \"submitted_by_business_at\": \"1959-03-07T02:33:27.817Z\",\n      \"brokerage_wants_place_directly\": true,\n      \"brokerage_wants_wholesale_with_1fort\": false,\n      \"can_1fort_approach_any_market_wholesale\": true,\n      \"quote_version\": \"API\",\n      \"copy_src\": \"string\",\n      \"source\": \"storefront\"\n    }\n  ],\n  \"next\": null,\n  \"previous\": \"https://gbVnSDluhjgwQHDMv.ebY6\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9172a29b-eaa9-4730-a618-30ec539e4816",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d87e40d0-2647-43e8-a1dd-522d2a72c8b8",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2bf126db-7de3-4fe8-9e04-26238f648980",
+          "name": "Create Application",
+          "request": {
+            "name": "Create Application",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "broker",
+                ":broker_pk",
+                "clients",
+                ":client_pk",
+                "applications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "broker_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carriers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "511855b7-160e-4941-bdf8-5ba20fb88e57",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"b9e70843-a290-84da-1e86-4160b3863e31\",\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"is_active\": true,\n  \"business\": {\n    \"name\": \"<string>\",\n    \"id\": 7692,\n    \"created_at\": \"1968-06-01T15:32:12.902Z\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"subsidiaries\": [\n      {\n        \"name\": \"string\",\n        \"business\": 1221,\n        \"id\": 9642,\n        \"description\": null,\n        \"ownership\": null\n      },\n      {\n        \"name\": \"string\",\n        \"business\": 2811,\n        \"id\": 5485,\n        \"description\": null,\n        \"ownership\": null\n      }\n    ],\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"id\": 62,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"string\",\n    \"producer_id\": \"string\",\n    \"type\": \"<string,null>\",\n    \"slug\": \"Aqs84kdv\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"created_at\": \"1976-08-18T18:57:20.845Z\",\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"prefilled_application\": null,\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"form_override\": \"https://nJvrnRrJlLhfEqiQAjRnbIrMUCDCmHxH.rmkwjvZaeN7Q6MyXZAiy.YfWixAR6GAwKkh\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"source\": \"renewal\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "720ec415-75d7-47cb-9e18-18998e17270c",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"non_field_errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_1\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_2\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_3\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d07be86e-6215-4c90-8f2a-85a60d2204c9",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5d90b62-3307-402b-b31b-f71fb841195f",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "acdf1a6a-aa18-4dc3-9713-3ea56ce283a2",
+          "name": "Retrieve Application",
+          "request": {
+            "name": "Retrieve Application",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "broker",
+                ":broker_pk",
+                "clients",
+                ":client_pk",
+                "applications",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "broker_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Application."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e015b564-ac12-42f1-9a01-6e9289842fca",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"bb5b0ef7-9282-96bd-6acf-bd5e9592c6d4\",\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"is_active\": true,\n  \"business\": {\n    \"name\": \"<string>\",\n    \"id\": 4520,\n    \"created_at\": \"2010-01-22T19:30:55.708Z\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"subsidiaries\": [\n      {\n        \"name\": \"string\",\n        \"business\": 7394,\n        \"id\": 4891,\n        \"description\": \"string\",\n        \"ownership\": 1328386426\n      },\n      {\n        \"name\": \"string\",\n        \"business\": 8822,\n        \"id\": 7647,\n        \"description\": null,\n        \"ownership\": 587502899\n      }\n    ],\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"id\": 3704,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"string\",\n    \"producer_id\": \"string\",\n    \"type\": \"<string,null>\",\n    \"slug\": \"l4\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"created_at\": \"1997-03-17T22:14:15.881Z\",\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"prefilled_application\": \"http://skUGmyHxaLuUohQ.mbpvPTQH0Na-qZ9YiIaKvFagD4nt\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"form_override\": \"http://DnyMsKvdyfGBGskIHQKEtqSu.syjqmtQWKCeaR5QSXuECZ\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"source\": \"broker_in_portal\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a801bc84-e67e-48ed-8dca-8685994203aa",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "282df3d5-d410-42d0-915d-6a00b51b64a2",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ec73bb7-67ae-42c0-b8b7-fcfbfd671654",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6fd6b79a-e7bf-4fd7-a978-58ccaed387c9",
+          "name": "Update Application",
+          "request": {
+            "name": "Update Application",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "broker",
+                ":broker_pk",
+                "clients",
+                ":client_pk",
+                "applications",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "broker_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Application."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carriers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "24db3d2c-e919-41d0-a7e2-1533aaaa129a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"bb5b0ef7-9282-96bd-6acf-bd5e9592c6d4\",\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"is_active\": true,\n  \"business\": {\n    \"name\": \"<string>\",\n    \"id\": 4520,\n    \"created_at\": \"2010-01-22T19:30:55.708Z\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"subsidiaries\": [\n      {\n        \"name\": \"string\",\n        \"business\": 7394,\n        \"id\": 4891,\n        \"description\": \"string\",\n        \"ownership\": 1328386426\n      },\n      {\n        \"name\": \"string\",\n        \"business\": 8822,\n        \"id\": 7647,\n        \"description\": null,\n        \"ownership\": 587502899\n      }\n    ],\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"id\": 3704,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"string\",\n    \"producer_id\": \"string\",\n    \"type\": \"<string,null>\",\n    \"slug\": \"l4\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"created_at\": \"1997-03-17T22:14:15.881Z\",\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"prefilled_application\": \"http://skUGmyHxaLuUohQ.mbpvPTQH0Na-qZ9YiIaKvFagD4nt\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"form_override\": \"http://DnyMsKvdyfGBGskIHQKEtqSu.syjqmtQWKCeaR5QSXuECZ\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"source\": \"broker_in_portal\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "218092de-da76-4089-a7a6-fc7926f21505",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"non_field_errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bf9ca4e-4f29-43d0-9fdc-55a0c73f7844",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "028595dd-bee4-4440-8953-c717e66f46ce",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ea2cd0a-7524-4970-be48-caa5b03af527",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8694492-1054-4acb-bf74-01c034bea15c",
+          "name": "Update Application",
+          "request": {
+            "name": "Update Application",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "broker",
+                ":broker_pk",
+                "clients",
+                ":client_pk",
+                "applications",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "broker_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Application."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carriers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "507cd977-d8c7-4668-838a-819da548ddf3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"bb5b0ef7-9282-96bd-6acf-bd5e9592c6d4\",\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"is_active\": true,\n  \"business\": {\n    \"name\": \"<string>\",\n    \"id\": 4520,\n    \"created_at\": \"2010-01-22T19:30:55.708Z\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"subsidiaries\": [\n      {\n        \"name\": \"string\",\n        \"business\": 7394,\n        \"id\": 4891,\n        \"description\": \"string\",\n        \"ownership\": 1328386426\n      },\n      {\n        \"name\": \"string\",\n        \"business\": 8822,\n        \"id\": 7647,\n        \"description\": null,\n        \"ownership\": 587502899\n      }\n    ],\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"id\": 3704,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"string\",\n    \"producer_id\": \"string\",\n    \"type\": \"<string,null>\",\n    \"slug\": \"l4\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"created_at\": \"1997-03-17T22:14:15.881Z\",\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"prefilled_application\": \"http://skUGmyHxaLuUohQ.mbpvPTQH0Na-qZ9YiIaKvFagD4nt\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"form_override\": \"http://DnyMsKvdyfGBGskIHQKEtqSu.syjqmtQWKCeaR5QSXuECZ\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"source\": \"broker_in_portal\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a07bc08-a7c6-4ad6-8bef-87085c9b5b7a",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"non_field_errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41620b94-7900-4a0b-b3c2-318183b7d254",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36b8fff8-89cd-4349-8eb3-fd0f77f3bf95",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c4fac53-e27b-412a-a4e4-9d2cf2783e1f",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"business\": {\n    \"name\": \"<string>\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"type\": \"<string,null>\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "056e056a-efb0-42e2-87f4-1ebffe3f7c56",
+          "name": "Delete Application",
+          "request": {
+            "name": "Delete Application",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "broker",
+                ":broker_pk",
+                "clients",
+                ":client_pk",
+                "applications",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "broker_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Application."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ac09b41-d1da-46b2-b532-f62d5469d1bc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "78c7b7d3-d175-4c8f-b634-2ecd878cdc32",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e05aeae5-53ec-4384-96d1-456af09d936d",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afb8ad2a-40fb-429c-be19-b6a837951bc9",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8475f8f9-821c-4d9e-b62c-575f3d0550c7",
+          "name": "Get quotes",
+          "request": {
+            "name": "Get quotes",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "broker",
+                ":broker_pk",
+                "clients",
+                ":client_pk",
+                "applications",
+                ":id",
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "broker_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Application."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ea71602-30e4-4b81-a1b8-d829e1c62c7d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"bb5b0ef7-9282-96bd-6acf-bd5e9592c6d4\",\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"is_active\": true,\n  \"business\": {\n    \"name\": \"<string>\",\n    \"id\": 4520,\n    \"created_at\": \"2010-01-22T19:30:55.708Z\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"subsidiaries\": [\n      {\n        \"name\": \"string\",\n        \"business\": 7394,\n        \"id\": 4891,\n        \"description\": \"string\",\n        \"ownership\": 1328386426\n      },\n      {\n        \"name\": \"string\",\n        \"business\": 8822,\n        \"id\": 7647,\n        \"description\": null,\n        \"ownership\": 587502899\n      }\n    ],\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"id\": 3704,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"string\",\n    \"producer_id\": \"string\",\n    \"type\": \"<string,null>\",\n    \"slug\": \"l4\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"created_at\": \"1997-03-17T22:14:15.881Z\",\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"prefilled_application\": \"http://skUGmyHxaLuUohQ.mbpvPTQH0Na-qZ9YiIaKvFagD4nt\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"form_override\": \"http://DnyMsKvdyfGBGskIHQKEtqSu.syjqmtQWKCeaR5QSXuECZ\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"source\": \"broker_in_portal\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1df0bee8-1fe6-4269-8ea5-b5bb942aff10",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fff72f93-5000-4997-96fa-aacfaceff217",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6981a68b-5f2e-49a9-b7c3-225e04052619",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "139efeb7-fcc0-4f70-9678-f3a83218bf42",
+          "name": "Get report",
+          "request": {
+            "name": "Get report",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "broker",
+                ":broker_pk",
+                "clients",
+                ":client_pk",
+                "applications",
+                ":id",
+                "report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "broker_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client_pk",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) A UUID string identifying this Application."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6f10b64-9704-4113-9b4a-970ffe5ad4b0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"bb5b0ef7-9282-96bd-6acf-bd5e9592c6d4\",\n  \"carriers\": [\n    \"<string>\"\n  ],\n  \"selected_markets\": [\n    \"<uuid>\"\n  ],\n  \"is_active\": true,\n  \"business\": {\n    \"name\": \"<string>\",\n    \"id\": 4520,\n    \"created_at\": \"2010-01-22T19:30:55.708Z\",\n    \"industry\": \"<string,null>\",\n    \"number_of_employees\": \"<integer,null>\",\n    \"active\": \"<boolean>\",\n    \"domain_name\": \"<string,null>\",\n    \"subsidiaries\": [\n      {\n        \"name\": \"string\",\n        \"business\": 7394,\n        \"id\": 4891,\n        \"description\": \"string\",\n        \"ownership\": 1328386426\n      },\n      {\n        \"name\": \"string\",\n        \"business\": 8822,\n        \"id\": 7647,\n        \"description\": null,\n        \"ownership\": 587502899\n      }\n    ],\n    \"revenue\": \"<integer,null>\"\n  },\n  \"created_by\": {\n    \"id\": 3704,\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"string\",\n    \"producer_id\": \"string\",\n    \"type\": \"<string,null>\",\n    \"slug\": \"l4\"\n  },\n  \"brokerage_direct_placement_carriers\": [\n    \"<uuid>\"\n  ],\n  \"carriers_1fort_should_not_approach\": [\n    \"<uuid>\"\n  ],\n  \"created_at\": \"1997-03-17T22:14:15.881Z\",\n  \"name\": \"<string,null>\",\n  \"description\": \"<string,null>\",\n  \"effective_date\": \"<string,null-date>\",\n  \"due_date\": \"<string,null-date>\",\n  \"policy_type\": \"<string>\",\n  \"year\": \"<integer>\",\n  \"prefilled_application\": \"http://skUGmyHxaLuUohQ.mbpvPTQH0Na-qZ9YiIaKvFagD4nt\",\n  \"additional_documents\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"email_type\": \"<string>\",\n  \"submission_type\": \"<string>\",\n  \"form_override\": \"http://DnyMsKvdyfGBGskIHQKEtqSu.syjqmtQWKCeaR5QSXuECZ\",\n  \"submitted_by_business_at\": \"<string,null-date-time>\",\n  \"brokerage_wants_place_directly\": \"<boolean>\",\n  \"brokerage_wants_wholesale_with_1fort\": \"<boolean>\",\n  \"can_1fort_approach_any_market_wholesale\": \"<boolean>\",\n  \"quote_version\": \"<string>\",\n  \"copy_src\": \"<string,null>\",\n  \"source\": \"broker_in_portal\",\n  \"coverage_types\": [\n    \"<uuid>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "423e7f09-492b-41c4-a58d-3feb6e1886e3",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "314fc52a-82f9-44d4-908d-678dfac5db18",
+              "name": "Object does not exist or caller has insufficient permissions to access it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ebf539f-7c6e-4d10-9d3d-c76bfb68efdd",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "clients",
+                    ":client_pk",
+                    "applications",
+                    ":id",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_pk",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) A UUID string identifying this Application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.1fort.com/apis/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0dc58368-f964-41dc-a622-11154e2f21a0",
+    "name": "1Fort API Documentation application: clients API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# 1Fort API\n\nREST API for the 1Fort insurance platform. This document is the authoritative\nmap of the API surface; endpoints are grouped in the sidebar by **app** and\n**version**, and large apps are split into per-resource sub-groups.\n\n## Authentication\n\nAlmost every endpoint requires a **JWT access token**. Send it in the\n`Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may\nalso be presented as an HTTP-only cookie. Endpoints documented with no security\nrequirement are intentionally public (for example sign-in, OTP and storefront\nendpoints).\n\n## Multi-tenancy\n\nResources are scoped to a tenant. Nested routes carry the owning resource id in\nthe path (for example `/v2/broker/{business_pk}/applications`); a token is only\nauthorised for the businesses its user may access. Object-level permissions are\nenforced per endpoint.\n\n## Versioning\n\n`v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`\nendpoints remain documented for compatibility. Endpoints marked **deprecated**\nare scheduled for removal; prefer the documented replacement.\n",
+      "type": "text/plain"
+    }
+  }
+}

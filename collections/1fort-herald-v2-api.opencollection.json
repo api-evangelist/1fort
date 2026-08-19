@@ -1,0 +1,295 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation herald (v2) herald (v2) API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "herald (v2)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Coverage types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/coverage-types",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List Coverage types"
+        },
+        {
+          "info": {
+            "name": "Retrieve Coverage type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/coverage-types/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this product line."
+              }
+            ]
+          },
+          "docs": "Retrieve Coverage type"
+        },
+        {
+          "info": {
+            "name": "List Proposal content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/quotes/:quote_id/proposal-content/",
+            "params": [
+              {
+                "name": "quote_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GET/PUT per-quote proposal content overrides."
+        },
+        {
+          "info": {
+            "name": "Update Proposal content",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/v2/broker/quotes/:quote_id/proposal-content/",
+            "params": [
+              {
+                "name": "quote_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GET/PUT per-quote proposal content overrides."
+        },
+        {
+          "info": {
+            "name": "Generate and return a proposal PDF for the specified quote with optional comparison quotes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/quotes/:quote_id/proposal-pdf/",
+            "params": [
+              {
+                "name": "quote_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Query Parameters:\n- comparison_quote_ids: Comma-separated list of quote IDs to include as comparisons\n- coverage_types: Coverage types to include in coverage review section.\n  Supports multiple formats:\n  * Multiple parameters: coverage_types=A&coverage_types=B&coverage_types=C\n  * Comma-separated: coverage_types=A,B,C\n  * Mixed: coverage_types=A,B&coverage_types=C\n- include_quote_summary: If false, skips merging the carrier quote summary PDF\n  (default: true)\n- quote_summary_pages: Optional com"
+        },
+        {
+          "info": {
+            "name": "List Coverage types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/coverage-types",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "List Coverage types"
+        },
+        {
+          "info": {
+            "name": "Retrieve Coverage type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/coverage-types/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this product line."
+              }
+            ]
+          },
+          "docs": "Retrieve Coverage type"
+        },
+        {
+          "info": {
+            "name": "Create Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/herald/webhook"
+          },
+          "docs": "Create Webhook"
+        },
+        {
+          "info": {
+            "name": "List Industry classifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/industry-classifications",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List Industry classifications"
+        },
+        {
+          "info": {
+            "name": "Get by herald ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/industry-classifications/herald/:herald_id",
+            "params": [
+              {
+                "name": "herald_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get by herald ID"
+        },
+        {
+          "info": {
+            "name": "Retrieve Industry classification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/industry-classifications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this industry classification."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve Industry classification"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

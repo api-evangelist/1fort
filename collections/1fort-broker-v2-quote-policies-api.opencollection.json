@@ -1,0 +1,299 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation broker (v2): quote-policies API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "broker (v2): quote-policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Paginated ViewSet for retrieving quote policies for the broker.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/quote-policies",
+            "params": [
+              {
+                "name": "insured",
+                "value": "",
+                "type": "query",
+                "description": "Filter policies by insured name. Supports comma-separated values.\n\nExamples:\n- `?insured=Acme Inc.` - Matches policies with 'Acme Inc.' in insured name\n- `?insured=Acme Inc.,Acme Corp.` - Matches policies with 'Acme Inc.' or 'Acme Corp.' in insured name"
+              },
+              {
+                "name": "coverage",
+                "value": "",
+                "type": "query",
+                "description": "Filter policies by coverage type code. Supports comma-separated values.\n\nAvailable codes:\n- `BOP` - Business Owners Policy\n- `WC` - Workers Compensation\n- `GL` - General Liability\n- `ML` - Management Liability\n- `MPL` - Miscellaneous Professional Liability\n- `CYB` - Cyber\n- `PL` - Professional Liability\n- `TEO` - Technology Errors & Omissions\n- `PROP` - Property\n- `AUTO` - Auto\n- `UMB` - Umbrella\n- `FLOOD` - Flood\n\nExamples:\n- `?coverage=CYB` - Matches Cyber policies\n- `?coverage=CYB,GL` - Matches Cyber or General Liability policies"
+              },
+              {
+                "name": "primary_agent",
+                "value": "",
+                "type": "query",
+                "description": "Filter policies by primary agent(s). Supports comma-separated values to filter by multiple agents. Searches by user id.\n\nExamples:\n- `?primary_agent=123` - Matches primary agents with user id 123\n- `?primary_agent=123,456` - Matches primary agents with user id 123 or 456"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "query",
+                "description": "Filter policies by owner (alias for primary_agent). Supports comma-separated values to filter by multiple owners. Searches by user id.\n\nExamples:\n- `?owner=123` - Matches owners with user id 123\n- `?owner=123,456` - Matches owners with user id 123 or 456"
+              },
+              {
+                "name": "payment_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter policies by payment status. Supports comma-separated values.\n\nExamples:\n- `?payment_status=done` - Matches policies with 'done' payment status\n- `?payment_status=todo,done` - Matches policies with 'todo' or 'done' payment status"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter policies by status. Supports comma-separated values.\n\nExamples:\n- `?status=ISSUED` - Matches policies with 'ISSUED' status\n- `?status=ISSUED,ACTIVE` - Matches policies with 'ISSUED' or 'ACTIVE' status"
+              },
+              {
+                "name": "market",
+                "value": "",
+                "type": "query",
+                "description": "Filter policies by market ID. Supports comma-separated values to filter by multiple markets.\n\nExamples:\n- `?market=550e8400-e29b-41d4-a716-446655440000` - Matches policies from specific market\n- `?market=market-id-1,market-id-2` - Matches policies from multiple markets"
+              },
+              {
+                "name": "carrier",
+                "value": "",
+                "type": "query",
+                "description": "Filter policies by carrier ID. Supports comma-separated values to filter by multiple carriers.\n\nExamples:\n- `?carrier=1` - Matches policies from carrier with ID 1\n- `?carrier=1,2,3` - Matches policies from carriers with IDs 1, 2, or 3"
+              },
+              {
+                "name": "effective_date_min",
+                "value": "",
+                "type": "query",
+                "description": "Filter policies by minimum effective date (inclusive). Use ISO 8601 date format.\n\nExamples:\n- `?effective_date_min=2024-01-01` - Matches policies with effective date on or after January 1, 2024\n- `?effective_date_min=2024-01-01&effective_date_max=2024-12-31` - Matches policies with effective date in 2024"
+              },
+              {
+                "name": "effective_date_max",
+                "value": "",
+                "type": "query",
+                "description": "Filter policies by maximum effective date (inclusive). Use ISO 8601 date format.\n\nExamples:\n- `?effective_date_max=2024-12-31` - Matches policies with effective date on or before December 31, 2024\n- `?effective_date_min=2024-01-01&effective_date_max=2024-12-31` - Matches policies with effective date in 2024"
+              },
+              {
+                "name": "team_member",
+                "value": "",
+                "type": "query",
+                "description": "team_member"
+              },
+              {
+                "name": "broker",
+                "value": "",
+                "type": "query",
+                "description": "broker"
+              },
+              {
+                "name": "expires_in",
+                "value": "",
+                "type": "query",
+                "description": "expires_in"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Order policies by specified fields. Use '-' prefix for descending order.\n\nAvailable fields:\n- `created_at` - Creation date\n- `effective_date` - Policy effective date\n\nExamples:\n- `?ordering=created_at` - Order by creation date (oldest first)\n- `?ordering=-created_at` - Order by creation date (newest first, default)\n- `?ordering=effective_date` - Order by effective date (oldest first)\n- `?ordering=-effective_date` - Order by effective date (newest first)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Supports Filtering By:\n- insured (business name)\n- coverage (product line code: BOP, CYB, GL, etc.)\n- primary_agent (user id)\n- owner (alias for primary_agent, user id)\n- team_member (broker user id, any assigned agent - primary or not)\n- market (market id)\n- carrier (carrier id)\n- payment_status\n- status\n- effective_date_min (minimum effective date, inclusive)\n- effective_date_max (maximum effective date, inclusive)\n- expires_in (number of days from today, filters policies expiring within that "
+        },
+        {
+          "info": {
+            "name": "Export csv",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/quote-policies/csv",
+            "params": [
+              {
+                "name": "insured",
+                "value": "",
+                "type": "query",
+                "description": "insured"
+              },
+              {
+                "name": "coverage",
+                "value": "",
+                "type": "query",
+                "description": "coverage"
+              },
+              {
+                "name": "primary_agent",
+                "value": "",
+                "type": "query",
+                "description": "primary_agent"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "query",
+                "description": "owner"
+              },
+              {
+                "name": "payment_status",
+                "value": "",
+                "type": "query",
+                "description": "payment_status"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "status"
+              },
+              {
+                "name": "market",
+                "value": "",
+                "type": "query",
+                "description": "market"
+              },
+              {
+                "name": "carrier",
+                "value": "",
+                "type": "query",
+                "description": "carrier"
+              },
+              {
+                "name": "effective_date_min",
+                "value": "",
+                "type": "query",
+                "description": "effective_date_min"
+              },
+              {
+                "name": "effective_date_max",
+                "value": "",
+                "type": "query",
+                "description": "effective_date_max"
+              },
+              {
+                "name": "team_member",
+                "value": "",
+                "type": "query",
+                "description": "team_member"
+              },
+              {
+                "name": "broker",
+                "value": "",
+                "type": "query",
+                "description": "broker"
+              },
+              {
+                "name": "expires_in",
+                "value": "",
+                "type": "query",
+                "description": "expires_in"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Export quote policies to CSV format.\nReturns all filtered policies without pagination, up to a maximum limit."
+        },
+        {
+          "info": {
+            "name": "Paginated ViewSet for retrieving quote policies for the broker.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/quote-policies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Policy."
+              }
+            ]
+          },
+          "docs": "Supports Filtering By:\n- insured (business name)\n- coverage (product line code: BOP, CYB, GL, etc.)\n- primary_agent (user id)\n- owner (alias for primary_agent, user id)\n- team_member (broker user id, any assigned agent - primary or not)\n- market (market id)\n- carrier (carrier id)\n- payment_status\n- status\n- effective_date_min (minimum effective date, inclusive)\n- effective_date_max (maximum effective date, inclusive)\n- expires_in (number of days from today, filters policies expiring within that "
+        },
+        {
+          "info": {
+            "name": "Get document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/quote-policies/:id/documents/:document_pk",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Policy."
+              },
+              {
+                "name": "document_pk",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a document for a quote policy."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

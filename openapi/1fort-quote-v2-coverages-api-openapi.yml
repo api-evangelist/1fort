@@ -1,0 +1,1046 @@
+openapi: 3.2.0
+info:
+  title: '1Fort API Documentation quote (v2): coverages API'
+  description: '# 1Fort API
+
+
+    REST API for the 1Fort insurance platform. This document is the authoritative
+
+    map of the API surface; endpoints are grouped in the sidebar by **app** and
+
+    **version**, and large apps are split into per-resource sub-groups.
+
+
+    ## Authentication
+
+
+    Almost every endpoint requires a **JWT access token**. Send it in the
+
+    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
+
+    also be presented as an HTTP-only cookie. Endpoints documented with no security
+
+    requirement are intentionally public (for example sign-in, OTP and storefront
+
+    endpoints).
+
+
+    ## Multi-tenancy
+
+
+    Resources are scoped to a tenant. Nested routes carry the owning resource id in
+
+    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
+
+    authorised for the businesses its user may access. Object-level permissions are
+
+    enforced per endpoint.
+
+
+    ## Versioning
+
+
+    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
+
+    endpoints remain documented for compatibility. Endpoints marked **deprecated**
+
+    are scheduled for removal; prefer the documented replacement.
+
+    '
+  termsOfService: https://www.1fort.com/
+  license:
+    name: Privately owned
+  version: v1
+servers:
+- url: https://api.1fort.com/apis/
+security:
+- Bearer: []
+tags:
+- name: 'quote (v2): coverages'
+  x-displayName: Coverages
+  description: '**Access:** requires a JWT access token.'
+paths:
+  /v2/broker/{business_pk}/coverages/{coverage_application_pk}/quotes:
+    parameters:
+    - name: business_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: coverage_application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_coverages_quotes_list
+      description: ''
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/QuoteWithAggregates'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'quote (v2): coverages'
+      summary: List Quotes
+  /v2/broker/{business_pk}/coverages/{coverage_application_pk}/quotes/create:
+    parameters:
+    - name: business_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: coverage_application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      operationId: v2_broker_coverages_quotes_create_quote
+      summary: Create Broker Quote
+      description: Create a new quote for a coverage application. This allows brokers to add quotes from carriers that they have obtained outside of the Herald system (e.g., expiring quotes, competitor quotes).
+      responses:
+        '201':
+          description: Quote created successfully
+        '400':
+          description: Invalid input data
+        '404':
+          description: Coverage application not found
+        '403':
+          description: Permission denied
+        '500':
+          description: Internal server error.
+      tags:
+      - 'quote (v2): coverages'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrokerQuoteCreate'
+        required: true
+  /v2/broker/{business_pk}/coverages/{coverage_application_pk}/quotes/overview:
+    parameters:
+    - name: business_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: coverage_application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_coverages_quotes_get_overview
+      description: ''
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        schema:
+          type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The initial index from which to return the results.
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                required:
+                - count
+                - results
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    format: uri
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/QuoteWithAggregates'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'quote (v2): coverages'
+      summary: Get overview
+  /v2/broker/{business_pk}/coverages/{coverage_application_pk}/quotes/{id}:
+    parameters:
+    - name: business_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: coverage_application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: A UUID string identifying this Quote (Coverage Term).
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: v2_broker_coverages_quotes_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteWithAggregates'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'quote (v2): coverages'
+      summary: Retrieve Quote
+  /v2/broker/{business_pk}/coverages/{coverage_application_pk}/quotes/{id}/files/{file_pk}:
+    parameters:
+    - name: business_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: coverage_application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: A UUID string identifying this Quote (Coverage Term).
+      required: true
+      schema:
+        type: string
+        format: uuid
+    - name: file_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_coverages_quotes_get_file
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteWithAggregates'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'quote (v2): coverages'
+      summary: Get file
+  /v2/broker/{business_pk}/coverages/{coverage_application_pk}/quotes/{id}/surplus-files/{file_pk}:
+    parameters:
+    - name: business_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: coverage_application_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: A UUID string identifying this Quote (Coverage Term).
+      required: true
+      schema:
+        type: string
+        format: uuid
+    - name: file_pk
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v2_broker_coverages_quotes_get_surplus_file
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteWithAggregates'
+        '403':
+          description: Authentication credentials were invalid, absent or insufficient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+        '404':
+          description: Object does not exist or caller has insufficient permissions to access it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIException'
+        '500':
+          description: Internal server error.
+      tags:
+      - 'quote (v2): coverages'
+      summary: Get surplus file
+components:
+  schemas:
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    CarrierList:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        am_best_rating:
+          title: Am best rating
+          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+    PriceDetail:
+      type: object
+      properties:
+        amount:
+          title: Amount
+          type:
+          - string
+          - 'null'
+          format: decimal
+        type:
+          title: Type
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        text:
+          title: Text
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+    QuoteWithAggregates:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        short_id:
+          title: Short id
+          description: Short alphanumeric identifier for checkout URLs
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        status:
+          title: Status
+          description: 'Market status of the quote. not_submitted: We have not submitted to the market yet, or decided not to because of appetite concerns. pending: We are actively sending this submission to the market. more_info_needed: We are unable to send the submission to the market because we are missing info about the insured, or the market has requested additional info. referred: The market has received all the info they need, and is still considering the risk. active: The market has provided a bindable quote. bind_requested: The insured or broker has expressed intent to move forward in binding this quote. bound: The market has bound the quote. declined: The market has reviewed the submission, but declined to provide a quote. expired: The quote is no longer valid (past its validity date with no bind request). archived: The broker has archived the quote.'
+          type: string
+          readOnly: true
+        carrier:
+          $ref: '#/components/schemas/CarrierList'
+        product:
+          $ref: '#/components/schemas/CarrierProduct'
+        mga:
+          $ref: '#/components/schemas/Wholesaler'
+        premium_before_taxes_and_fees:
+          title: Premium before taxes and fees
+          type:
+          - string
+          - 'null'
+          format: decimal
+        premium_with_taxes_and_fees:
+          title: Premium with taxes and fees
+          type:
+          - string
+          - 'null'
+          format: decimal
+        bind_status:
+          title: Bind status
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        quote_number:
+          title: Quote number
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        admitted:
+          title: Admitted
+          type:
+          - boolean
+          - 'null'
+        am_best_rating:
+          title: Am best rating
+          description: Carrier AM Best Rating. Auto-populated from product or set manually
+          type: string
+          maxLength: 10
+        status_details:
+          title: Status details
+          type:
+          - object
+          - 'null'
+        market_status_reason:
+          title: Market status reason
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        files:
+          title: Files
+          type: string
+          readOnly: true
+        price_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceDetail'
+          readOnly: true
+        fees:
+          title: Fees
+          type: string
+          readOnly: true
+        aggregate_limit:
+          title: Aggregate limit
+          type: integer
+        aggregate_retention:
+          title: Aggregate retention
+          type: integer
+        waiting_period:
+          title: Waiting period
+          type: integer
+        effective_date:
+          title: Effective date
+          type: string
+          format: date
+        expiration_date:
+          title: Expiration date
+          type: string
+          format: date
+        has_bind_requests:
+          title: Has bind requests
+          type: string
+          readOnly: true
+        version:
+          title: Version
+          type: string
+          readOnly: true
+        method:
+          title: Method
+          type: string
+          readOnly: true
+        application_submitted_at:
+          title: Application submitted at
+          type: string
+          readOnly: true
+        is_wholesale:
+          title: Is wholesale
+          type: boolean
+          readOnly: true
+        is_1fort_wholesale:
+          title: Is 1fort wholesale
+          type: boolean
+          readOnly: true
+        wholesaler:
+          $ref: '#/components/schemas/Wholesaler'
+        coverage_type_display_name:
+          title: Coverage type display name
+          type: string
+          readOnly: true
+        coverage_type_image_slug:
+          title: Coverage type image slug
+          type: string
+          readOnly: true
+        coverage_application:
+          title: Coverage application
+          type: string
+          format: uuid
+          readOnly: true
+        application:
+          title: Application
+          type: string
+          format: uuid
+          readOnly: true
+        payment_url:
+          title: Payment url
+          type: string
+          readOnly: true
+        payment:
+          title: Payment
+          type: string
+          readOnly: true
+        broker_commission_rate:
+          title: Broker commission rate
+          type: string
+          readOnly: true
+        insured_address:
+          title: Insured address
+          type: string
+          readOnly: true
+        excess_quotes:
+          title: Excess quotes
+          type: string
+          readOnly: true
+        is_excess:
+          title: Is excess
+          type: string
+          readOnly: true
+        type:
+          title: Type
+          description: Quote type for internal classification.
+          type: string
+          enum:
+          - new
+          - incumbent
+          - competitor
+          - expiring
+          - other
+        type_display:
+          title: Type display
+          type: string
+          readOnly: true
+          minLength: 1
+        quote_validity_date:
+          title: Quote validity date
+          description: The date until which the carrier will honor the quoted terms. After this date, the quote terms may no longer be valid.
+          type:
+          - string
+          - 'null'
+          format: date
+        issuance_date:
+          title: Issuance date
+          description: The date when the quote was issued by the underwriter
+          type:
+          - string
+          - 'null'
+          format: date
+        coverage_term_id:
+          title: Coverage term id
+          type: string
+          readOnly: true
+        coverages:
+          title: Coverages
+          type: string
+          readOnly: true
+        coverage_types:
+          title: Coverage types
+          type: string
+          readOnly: true
+        insurance_invoice_ids:
+          title: Insurance invoice ids
+          type: string
+          readOnly: true
+        follow_up_notifications:
+          title: Follow up notifications
+          description: This will disable us sending email follow-ups to the underwriter for this quote
+          type: boolean
+        open_tasks:
+          title: Open tasks
+          description: Open tasks on this quote (to-do, in the latest task group, not expired, and passing the task-type visibility rules) - the same payload the quote's tasks endpoint returns with ?status=todo, embedded here so clients listing quotes don't need a tasks request per quote.
+          type: string
+          readOnly: true
+        analysis:
+          title: Analysis
+          description: This quote's latest completed AI analysis, or null when it has none - the same record the coverage's analyze-quotes endpoint returns for it, including `recommended` and `comparison_status`. Embedded here so clients listing quotes don't need a second request to render the analysis.
+          type: string
+          readOnly: true
+    BrokerQuoteCreate:
+      required:
+      - type
+      - carrier
+      - admitted
+      - premium
+      - limit
+      - retention
+      type: object
+      properties:
+        type:
+          title: Type
+          description: Type of quote being added
+          type: string
+          enum:
+          - expiring
+          - competitor
+          - other
+        carrier:
+          title: Carrier
+          description: The carrier for this quote
+          type: string
+          format: uuid
+        wholesaler:
+          title: Wholesaler
+          description: 'Optional: The wholesaler for this quote (if applicable)'
+          type:
+          - string
+          - 'null'
+          format: uuid
+        admitted:
+          title: Admitted
+          description: True for admitted, False for surplus lines
+          type: boolean
+        premium:
+          title: Premium
+          description: Premium amount before taxes and fees
+          type: string
+          format: decimal
+        limit:
+          title: Limit
+          description: Coverage limit amount
+          type: integer
+        retention:
+          title: Retention
+          description: Retention/deductible amount
+          type: integer
+        quote_files:
+          description: Quote documents
+          type: array
+          items:
+            type: string
+            readOnly: true
+            format: uri
+        policy_specimen_files:
+          description: Policy specimen documents
+          type: array
+          items:
+            type: string
+            readOnly: true
+            format: uri
+        quote_number:
+          title: Quote number
+          description: 'Optional: Carrier''s quote reference number. If not provided, will be auto-generated.'
+          type: string
+          maxLength: 50
+        effective_date:
+          title: Effective date
+          description: 'Optional: Policy effective date. If not provided, uses application effective date.'
+          type: string
+          format: date
+        expiration_date:
+          title: Expiration date
+          description: 'Optional: Policy expiration date. If not provided but effective date exists, defaults to 1 year after effective date.'
+          type: string
+          format: date
+    CarrierProduct:
+      type: object
+      properties:
+        code:
+          title: Code
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        product_line:
+          title: Product line
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        is_active:
+          title: Is active
+          type: boolean
+        policy_type:
+          title: Policy type
+          type: string
+          enum:
+          - ADMITTED
+          - SURPLUS_LINES
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        am_best_rating:
+          title: Am best rating
+          description: Carrier AM Best Rating.
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        eta_hours:
+          title: Eta hours
+          description: Estimated turnaround time in hours for this carrier product.
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: -2147483648
+    Wholesaler:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        is_active:
+          title: Is active
+          type: boolean
+        is_owned_by_1fort:
+          title: Is owned by 1fort
+          description: Indicates if this wholesaler is owned by 1Fort
+          type: boolean
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT access token. Send as `Bearer <token>` or `JWT <token>`.
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: API key. Send as `Api-Key <key>`.
+x-tagGroups:
+- name: Agent runtime (v2)
+  tags:
+  - agent_runtime (v2)
+- name: Analytics
+  tags:
+  - analytics
+- name: Application
+  tags:
+  - 'application: applications'
+  - 'application: clients'
+- name: Application (v2)
+  tags:
+  - 'application (v2): applications'
+  - 'application (v2): coverages'
+- name: Ascend
+  tags:
+  - ascend
+- name: Ascend (v2)
+  tags:
+  - ascend (v2)
+- name: Authentication
+  tags:
+  - Authentication
+  - auth
+- name: Billing (v2)
+  tags:
+  - billing (v2)
+- name: Broker
+  tags:
+  - broker
+  - broker-ams-integration
+  - broker-google
+  - broker-office365
+  - broker-office365-individual
+  - 'broker: ai-customization-types'
+  - 'broker: ai-customizations'
+  - 'broker: clients'
+  - 'broker: email_preferences'
+  - 'broker: proposal-preferences'
+  - 'broker: take-rates'
+  - 'broker: user-ai-customizations'
+  - 'broker: users'
+  - broker_groups
+  - broker_settings
+- name: Broker (v2)
+  tags:
+  - 'broker (v2): applications'
+  - 'broker (v2): clients'
+  - 'broker (v2): coverages'
+  - 'broker (v2): email-templates'
+  - 'broker (v2): quote-policies'
+  - 'broker (v2): quotes'
+  - 'broker (v2): storefront'
+  - 'broker (v2): team-users'
+- name: Business
+  tags:
+  - business
+  - business-broker-users
+  - business-user
+  - business_admin
+- name: Carrier
+  tags:
+  - carrier
+- name: Checkout
+  tags:
+  - checkout
+- name: Email AI
+  tags:
+  - email_ai
+- name: Email AI (v2)
+  tags:
+  - 'email_ai (v2): attachments'
+  - 'email_ai (v2): carriers'
+  - 'email_ai (v2): coverage-types'
+  - 'email_ai (v2): emails'
+  - 'email_ai (v2): gmail'
+  - 'email_ai (v2): office365'
+  - 'email_ai (v2): profiles'
+  - 'email_ai (v2): wholesalers'
+- name: Email AI Agent
+  tags:
+  - Email AI Agent
+  - Email AI Agent - Attachments
+  - Email AI Agent - Businesses
+  - Email AI Agent - Entities
+  - Email AI Agent - Markets
+  - Email AI Agent - Profiles
+  - Email AI Agent - Reference Data
+- name: Google workspace (v2)
+  tags:
+  - google_workspace (v2)
+- name: Herald (v2)
+  tags:
+  - herald (v2)
+- name: Indications (v2)
+  tags:
+  - indications (v2)
+- name: Insurance (v2)
+  tags:
+  - insurance (v2)
+- name: Invite
+  tags:
+  - invite
+- name: Legal
+  tags:
+  - legal
+- name: Market
+  tags:
+  - Markets
+  - Markets - Business
+- name: Market (v2)
+  tags:
+  - market (v2)
+- name: Office365 (v2)
+  tags:
+  - office365 (v2)
+- name: Premium finance (v2)
+  tags:
+  - premium_finance (v2)
+- name: Quote
+  tags:
+  - 'quote: applications'
+  - 'quote: clients'
+  - 'quote: quotes'
+- name: Quote (v2)
+  tags:
+  - 'quote (v2): application'
+  - 'quote (v2): binders'
+  - 'quote (v2): checkout'
+  - 'quote (v2): cios'
+  - 'quote (v2): coverages'
+  - 'quote (v2): quote-policies'
+  - 'quote (v2): quotes'
+  - 'quote (v2): tasks'
+  - quote_ai (v2)
+- name: Reports
+  tags:
+  - reports
+- name: Reward
+  tags:
+  - reward
+- name: Risk manager
+  tags:
+  - risk_manager
+- name: Sanity check AI
+  tags:
+  - sanity_check_ai
+- name: Storefront (v2)
+  tags:
+  - storefront (v2)
+- name: Stripe
+  tags:
+  - stripe
+- name: Suggestion AI
+  tags:
+  - suggestion_ai
+- name: Treasury (v2)
+  tags:
+  - treasury (v2)
+- name: User
+  tags:
+  - user
+  - 'user: default-access-role'

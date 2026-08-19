@@ -1,0 +1,263 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation billing (v2) billing (v2) API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "billing (v2)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Broker billing/payments list backed by insurance invoices.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/billing/payments",
+            "params": [
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Payment collection status and checkout URLs are derived from linked\nCheckoutInvoice rows (pay-in-full and premium-finance segments)."
+        },
+        {
+          "info": {
+            "name": "Broker billing/payments list backed by insurance invoices.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/billing/payments/csv",
+            "params": [
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Payment collection status and checkout URLs are derived from linked\nCheckoutInvoice rows (pay-in-full and premium-finance segments)."
+        },
+        {
+          "info": {
+            "name": "Broker billing/payments list backed by insurance invoices.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/billing/payments/filter-options",
+            "params": [
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "Payment collection status and checkout URLs are derived from linked\nCheckoutInvoice rows (pay-in-full and premium-finance segments)."
+        },
+        {
+          "info": {
+            "name": "Billing dashboard stat cards (payments at risk, invoices/policies\nneeding action, premium sold).",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/billing/payments/stats",
+            "params": [
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "GET /apis/v2/billing/payments/stats"
+        },
+        {
+          "info": {
+            "name": "Broker billing/payments list backed by insurance invoices.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/billing/payments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Payment collection status and checkout URLs are derived from linked\nCheckoutInvoice rows (pay-in-full and premium-finance segments)."
+        },
+        {
+          "info": {
+            "name": "Update Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/v2/billing/payments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit payment details (market, commission, min earned premium, agency\nfee, direct vs agency bill) on the underlying insurance invoice.\n\nPATCH /apis/v2/billing/payments/{id}"
+        },
+        {
+          "info": {
+            "name": "Stripe receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/billing/payments/:id/stripe-receipt",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "On-demand Stripe receipt details for a checkout payment on this\nbilling payment (receipt_url plus fields to render it in-app).\n\nGET /apis/v2/billing/payments/{id}/stripe-receipt[?payment_id=<uuid>]\n\n``payment_id`` selects a specific CheckoutPayment (as listed in the\ndetail response's ``payments``); defaults to the latest completed one.\nNothing is stored locally — details come from Stripe per request."
+        },
+        {
+          "info": {
+            "name": "Refunded checkout payments of the broker's insurance invoices.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/billing/refunds",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "GET /apis/v2/billing/refunds\n\nBacks the billing \"Refunds\" tab: payments with at least one Stripe\nrefund, with the refunded amount and current status."
+        },
+        {
+          "info": {
+            "name": "Refunded checkout payments of the broker's insurance invoices.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/billing/refunds/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GET /apis/v2/billing/refunds\n\nBacks the billing \"Refunds\" tab: payments with at least one Stripe\nrefund, with the refunded amount and current status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

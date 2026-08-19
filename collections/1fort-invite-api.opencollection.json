@@ -1,0 +1,157 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Invite API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "invite",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get invites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/invite",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Which field to use when ordering the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The initial index from which to return the results."
+              }
+            ]
+          },
+          "docs": "\nGet invites in the logged in user's business.\n\n**Permissions:** `can_invite_users`\n"
+        },
+        {
+          "info": {
+            "name": "Send Invites",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/invite",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nSend Invites to the logged in user's business.\n\n**Permissions:** `can_invite_users`\n"
+        },
+        {
+          "info": {
+            "name": "Accept business user invite with email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/invite/accept/email",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nAccept business user invite with email.\n\n**Rate limit:** 10 requests per minute\n"
+        },
+        {
+          "info": {
+            "name": "Accept business user invite with google",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/invite/accept/google",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nAccept business user invite with google.\n\n**Rate limit:** 10 requests per minute\n"
+        },
+        {
+          "info": {
+            "name": "Accept business user invite with office 365",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/invite/accept/office-365",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nAccept business user invite with office 365.\n\n\n**Rate limit:** 10 requests per minute\n"
+        },
+        {
+          "info": {
+            "name": "Validate invite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/invite/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nValidate invite.\n\n**Rate limit:** 10 requests per minute\n"
+        },
+        {
+          "info": {
+            "name": "Cancel Invite",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.1fort.com/apis/invite/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A unique integer value identifying this business user invite."
+              }
+            ]
+          },
+          "docs": "\nCancel an invite.\n\n\n**Permissions:** `can_invite_users`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

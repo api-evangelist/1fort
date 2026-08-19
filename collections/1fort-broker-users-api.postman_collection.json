@@ -1,0 +1,1229 @@
+{
+  "item": [
+    {
+      "id": "e8f66eb0-1738-463f-a454-a449aa50174d",
+      "name": "broker: users",
+      "description": {
+        "content": "**Access:** requires a JWT access token.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "14b61eb5-021f-4f08-b064-e3a45bdfcdf2",
+          "name": "Retrieve Notification preference",
+          "request": {
+            "name": "Retrieve Notification preference",
+            "description": {
+              "content": "Get or update notification preferences for the current broker user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "broker",
+                ":broker_pk",
+                "users",
+                "me",
+                "notification-preferences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "broker_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1a22676a-c181-4e70-850f-ab564cbc579b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "users",
+                    "me",
+                    "notification-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 7081,\n  \"results\": [\n    {\n      \"id\": \"4fcd403c-6971-8add-92f5-fe3449601808\",\n      \"client_has_issues\": false,\n      \"team_grew\": false,\n      \"digest\": true,\n      \"email_ai_proposal_notifications\": false,\n      \"email_ai_binder_notifications\": true,\n      \"email_ai_invoice_notifications\": true,\n      \"renewal_notifications\": true,\n      \"follow_up_notifications\": true,\n      \"new_quote_notifications\": false,\n      \"new_binder_notifications\": false,\n      \"new_policy_notifications\": false,\n      \"insured_completed_application_notifications\": true,\n      \"task_completed_notifications\": true,\n      \"insured_started_application_notifications\": true,\n      \"end_of_month_submission_notifications\": true,\n      \"unbound_quote_help_notifications\": false,\n      \"unsubscribe_from_all\": false,\n      \"preferences\": \"string\"\n    },\n    {\n      \"id\": \"d2a8658f-7057-b316-81df-5c23f8a00ff6\",\n      \"client_has_issues\": true,\n      \"team_grew\": false,\n      \"digest\": false,\n      \"email_ai_proposal_notifications\": true,\n      \"email_ai_binder_notifications\": false,\n      \"email_ai_invoice_notifications\": false,\n      \"renewal_notifications\": true,\n      \"follow_up_notifications\": false,\n      \"new_quote_notifications\": true,\n      \"new_binder_notifications\": false,\n      \"new_policy_notifications\": false,\n      \"insured_completed_application_notifications\": false,\n      \"task_completed_notifications\": true,\n      \"insured_started_application_notifications\": false,\n      \"end_of_month_submission_notifications\": true,\n      \"unbound_quote_help_notifications\": true,\n      \"unsubscribe_from_all\": false,\n      \"preferences\": \"string\"\n    }\n  ],\n  \"next\": \"https://XTtGyScZlgeexqMmnvHFtuLazgNUM.beuNNlMLBDEhXpQNyi2m-.hsEkv-CzFMQS5WgB9FuZQrs\",\n  \"previous\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f38d5f0b-c502-4475-aae5-18e0a2aef539",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "users",
+                    "me",
+                    "notification-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c215b42-1376-4e1c-bb90-afa961bd3d48",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "users",
+                    "me",
+                    "notification-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd88ca82-b03e-4b2b-9ea6-6b7f3848b362",
+          "name": "Update Notification preference",
+          "request": {
+            "name": "Update Notification preference",
+            "description": {
+              "content": "Get or update notification preferences for the current broker user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "broker",
+                ":broker_pk",
+                "users",
+                "me",
+                "notification-preferences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "broker_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_has_issues\": \"<boolean>\",\n  \"team_grew\": \"<boolean>\",\n  \"digest\": \"<boolean>\",\n  \"email_ai_proposal_notifications\": \"<boolean>\",\n  \"email_ai_binder_notifications\": \"<boolean>\",\n  \"email_ai_invoice_notifications\": \"<boolean>\",\n  \"renewal_notifications\": \"<boolean>\",\n  \"follow_up_notifications\": \"<boolean>\",\n  \"new_quote_notifications\": \"<boolean>\",\n  \"new_binder_notifications\": \"<boolean>\",\n  \"new_policy_notifications\": \"<boolean>\",\n  \"insured_completed_application_notifications\": \"<boolean>\",\n  \"task_completed_notifications\": \"<boolean>\",\n  \"insured_started_application_notifications\": \"<boolean>\",\n  \"end_of_month_submission_notifications\": \"<boolean>\",\n  \"unbound_quote_help_notifications\": \"<boolean>\",\n  \"unsubscribe_from_all\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b677d118-a5c9-4103-969d-b90697766492",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "users",
+                    "me",
+                    "notification-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_has_issues\": \"<boolean>\",\n  \"team_grew\": \"<boolean>\",\n  \"digest\": \"<boolean>\",\n  \"email_ai_proposal_notifications\": \"<boolean>\",\n  \"email_ai_binder_notifications\": \"<boolean>\",\n  \"email_ai_invoice_notifications\": \"<boolean>\",\n  \"renewal_notifications\": \"<boolean>\",\n  \"follow_up_notifications\": \"<boolean>\",\n  \"new_quote_notifications\": \"<boolean>\",\n  \"new_binder_notifications\": \"<boolean>\",\n  \"new_policy_notifications\": \"<boolean>\",\n  \"insured_completed_application_notifications\": \"<boolean>\",\n  \"task_completed_notifications\": \"<boolean>\",\n  \"insured_started_application_notifications\": \"<boolean>\",\n  \"end_of_month_submission_notifications\": \"<boolean>\",\n  \"unbound_quote_help_notifications\": \"<boolean>\",\n  \"unsubscribe_from_all\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"b2bcf1a9-0e11-c824-8972-2cd77579f3a6\",\n  \"client_has_issues\": \"<boolean>\",\n  \"team_grew\": \"<boolean>\",\n  \"digest\": \"<boolean>\",\n  \"email_ai_proposal_notifications\": \"<boolean>\",\n  \"email_ai_binder_notifications\": \"<boolean>\",\n  \"email_ai_invoice_notifications\": \"<boolean>\",\n  \"renewal_notifications\": \"<boolean>\",\n  \"follow_up_notifications\": \"<boolean>\",\n  \"new_quote_notifications\": \"<boolean>\",\n  \"new_binder_notifications\": \"<boolean>\",\n  \"new_policy_notifications\": \"<boolean>\",\n  \"insured_completed_application_notifications\": \"<boolean>\",\n  \"task_completed_notifications\": \"<boolean>\",\n  \"insured_started_application_notifications\": \"<boolean>\",\n  \"end_of_month_submission_notifications\": \"<boolean>\",\n  \"unbound_quote_help_notifications\": \"<boolean>\",\n  \"unsubscribe_from_all\": \"<boolean>\",\n  \"preferences\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b78b007-e3f4-4200-bd66-45c790087771",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "users",
+                    "me",
+                    "notification-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_has_issues\": \"<boolean>\",\n  \"team_grew\": \"<boolean>\",\n  \"digest\": \"<boolean>\",\n  \"email_ai_proposal_notifications\": \"<boolean>\",\n  \"email_ai_binder_notifications\": \"<boolean>\",\n  \"email_ai_invoice_notifications\": \"<boolean>\",\n  \"renewal_notifications\": \"<boolean>\",\n  \"follow_up_notifications\": \"<boolean>\",\n  \"new_quote_notifications\": \"<boolean>\",\n  \"new_binder_notifications\": \"<boolean>\",\n  \"new_policy_notifications\": \"<boolean>\",\n  \"insured_completed_application_notifications\": \"<boolean>\",\n  \"task_completed_notifications\": \"<boolean>\",\n  \"insured_started_application_notifications\": \"<boolean>\",\n  \"end_of_month_submission_notifications\": \"<boolean>\",\n  \"unbound_quote_help_notifications\": \"<boolean>\",\n  \"unsubscribe_from_all\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"non_field_errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57ce3ca3-eb72-4a28-968b-478be3072e14",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "users",
+                    "me",
+                    "notification-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_has_issues\": \"<boolean>\",\n  \"team_grew\": \"<boolean>\",\n  \"digest\": \"<boolean>\",\n  \"email_ai_proposal_notifications\": \"<boolean>\",\n  \"email_ai_binder_notifications\": \"<boolean>\",\n  \"email_ai_invoice_notifications\": \"<boolean>\",\n  \"renewal_notifications\": \"<boolean>\",\n  \"follow_up_notifications\": \"<boolean>\",\n  \"new_quote_notifications\": \"<boolean>\",\n  \"new_binder_notifications\": \"<boolean>\",\n  \"new_policy_notifications\": \"<boolean>\",\n  \"insured_completed_application_notifications\": \"<boolean>\",\n  \"task_completed_notifications\": \"<boolean>\",\n  \"insured_started_application_notifications\": \"<boolean>\",\n  \"end_of_month_submission_notifications\": \"<boolean>\",\n  \"unbound_quote_help_notifications\": \"<boolean>\",\n  \"unsubscribe_from_all\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b3d6b61-9c49-40ab-bcda-4e8b2eb75ff5",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "users",
+                    "me",
+                    "notification-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_has_issues\": \"<boolean>\",\n  \"team_grew\": \"<boolean>\",\n  \"digest\": \"<boolean>\",\n  \"email_ai_proposal_notifications\": \"<boolean>\",\n  \"email_ai_binder_notifications\": \"<boolean>\",\n  \"email_ai_invoice_notifications\": \"<boolean>\",\n  \"renewal_notifications\": \"<boolean>\",\n  \"follow_up_notifications\": \"<boolean>\",\n  \"new_quote_notifications\": \"<boolean>\",\n  \"new_binder_notifications\": \"<boolean>\",\n  \"new_policy_notifications\": \"<boolean>\",\n  \"insured_completed_application_notifications\": \"<boolean>\",\n  \"task_completed_notifications\": \"<boolean>\",\n  \"insured_started_application_notifications\": \"<boolean>\",\n  \"end_of_month_submission_notifications\": \"<boolean>\",\n  \"unbound_quote_help_notifications\": \"<boolean>\",\n  \"unsubscribe_from_all\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2f1da18-583e-4b22-a897-7ae0fe421904",
+          "name": "Retrieve Proposal preference",
+          "request": {
+            "name": "Retrieve Proposal preference",
+            "description": {
+              "content": "Get or update proposal download defaults for the current broker user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "broker",
+                ":broker_pk",
+                "users",
+                "me",
+                "proposal-preferences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Which field to use when ordering the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The initial index from which to return the results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "broker_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b37dda7c-d721-4329-a3eb-cc8108bf780a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "users",
+                    "me",
+                    "proposal-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1915,\n  \"results\": [\n    {\n      \"id\": \"c251758a-c3e4-7dae-1d05-ab892afc4489\",\n      \"include_recommended_coverages\": false,\n      \"include_coverage_analysis\": true,\n      \"include_original_quote_doc\": false,\n      \"include_payment_link\": true,\n      \"include_quote_comparison\": true,\n      \"preferences\": \"string\"\n    },\n    {\n      \"id\": \"b6f8149e-b3db-f915-14ec-715686d4e5e5\",\n      \"include_recommended_coverages\": true,\n      \"include_coverage_analysis\": false,\n      \"include_original_quote_doc\": false,\n      \"include_payment_link\": true,\n      \"include_quote_comparison\": false,\n      \"preferences\": \"string\"\n    }\n  ],\n  \"next\": null,\n  \"previous\": \"http://zzGvYaCcqLhEBVqZO.qxssU71VZftA1VQFvF.nZke2jOwmMNy02opasRzomUuTz6pq9WtNgwsBQHv-nQaga1Cl\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df513320-ffa6-4cfd-979f-c13f5173e563",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "users",
+                    "me",
+                    "proposal-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76583e60-4a2d-4547-926e-27d14e8734cb",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "users",
+                    "me",
+                    "proposal-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28a5901b-2cc0-4505-80b5-221faa2b8d48",
+          "name": "Update Proposal preference",
+          "request": {
+            "name": "Update Proposal preference",
+            "description": {
+              "content": "Get or update proposal download defaults for the current broker user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "broker",
+                ":broker_pk",
+                "users",
+                "me",
+                "proposal-preferences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "broker_pk",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"include_recommended_coverages\": \"<boolean>\",\n  \"include_coverage_analysis\": \"<boolean>\",\n  \"include_original_quote_doc\": \"<boolean>\",\n  \"include_payment_link\": \"<boolean>\",\n  \"include_quote_comparison\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7553a8be-54e2-4ae9-88f7-1114daaa63bd",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "users",
+                    "me",
+                    "proposal-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"include_recommended_coverages\": \"<boolean>\",\n  \"include_coverage_analysis\": \"<boolean>\",\n  \"include_original_quote_doc\": \"<boolean>\",\n  \"include_payment_link\": \"<boolean>\",\n  \"include_quote_comparison\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"649a6d92-516f-3cf1-3d80-4ed6e4c8a33e\",\n  \"include_recommended_coverages\": \"<boolean>\",\n  \"include_coverage_analysis\": \"<boolean>\",\n  \"include_original_quote_doc\": \"<boolean>\",\n  \"include_payment_link\": \"<boolean>\",\n  \"include_quote_comparison\": \"<boolean>\",\n  \"preferences\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52c5e3c4-1228-4824-9198-a4fcf3f974f5",
+              "name": "Invalid input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "users",
+                    "me",
+                    "proposal-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"include_recommended_coverages\": \"<boolean>\",\n  \"include_coverage_analysis\": \"<boolean>\",\n  \"include_original_quote_doc\": \"<boolean>\",\n  \"include_payment_link\": \"<boolean>\",\n  \"include_quote_comparison\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"non_field_errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19655589-8f8f-4e1f-83ea-2cb369b8468c",
+              "name": "Authentication credentials were invalid, absent or insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "users",
+                    "me",
+                    "proposal-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"include_recommended_coverages\": \"<boolean>\",\n  \"include_coverage_analysis\": \"<boolean>\",\n  \"include_original_quote_doc\": \"<boolean>\",\n  \"include_payment_link\": \"<boolean>\",\n  \"include_quote_comparison\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb23defe-d42c-46fc-847d-a25303896a20",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "broker",
+                    ":broker_pk",
+                    "users",
+                    "me",
+                    "proposal-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "broker_pk",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"include_recommended_coverages\": \"<boolean>\",\n  \"include_coverage_analysis\": \"<boolean>\",\n  \"include_original_quote_doc\": \"<boolean>\",\n  \"include_payment_link\": \"<boolean>\",\n  \"include_quote_comparison\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.1fort.com/apis/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0fe5aef0-f89c-435c-8abd-a88143fcbd37",
+    "name": "1Fort API Documentation broker: users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# 1Fort API\n\nREST API for the 1Fort insurance platform. This document is the authoritative\nmap of the API surface; endpoints are grouped in the sidebar by **app** and\n**version**, and large apps are split into per-resource sub-groups.\n\n## Authentication\n\nAlmost every endpoint requires a **JWT access token**. Send it in the\n`Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may\nalso be presented as an HTTP-only cookie. Endpoints documented with no security\nrequirement are intentionally public (for example sign-in, OTP and storefront\nendpoints).\n\n## Multi-tenancy\n\nResources are scoped to a tenant. Nested routes carry the owning resource id in\nthe path (for example `/v2/broker/{business_pk}/applications`); a token is only\nauthorised for the businesses its user may access. Object-level permissions are\nenforced per endpoint.\n\n## Versioning\n\n`v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`\nendpoints remain documented for compatibility. Endpoints marked **deprecated**\nare scheduled for removal; prefer the documented replacement.\n",
+      "type": "text/plain"
+    }
+  }
+}

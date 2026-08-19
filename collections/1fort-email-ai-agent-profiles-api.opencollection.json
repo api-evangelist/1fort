@@ -1,0 +1,298 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Email AI Agent - Profiles API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Email AI Agent - Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/profiles",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "\nRetrieve detailed information for a single profile.\n\n**Authentication**: Requires API Key + Session Token\n\n**Scoping**: Profile must belong to the session's broker.\n"
+        },
+        {
+          "info": {
+            "name": "Create Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/profiles",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nCreate a new insured profile.\n\nReturns the opensearch_profile_id which should be used for subsequent updates.\n\n**Authentication**: Requires API Key + Session Token\n"
+        },
+        {
+          "info": {
+            "name": "Update Profile (Full Replace)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/profiles",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nReplace an existing profile with new data.\n\nUses PUT semantics - the entire profile is replaced with the provided data.\nUse the opensearch_profile_id from search results or creation response.\n\n**Authentication**: Requires API Key + Session Token\n"
+        },
+        {
+          "info": {
+            "name": "Search Profiles (OpenSearch)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/profiles/search",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nExecute an OpenSearch query against the broker's profile index.\n\nThe request body should be a valid OpenSearch query DSL. The query is executed\nagainst the broker-specific index (`insureds-{broker_id}`), ensuring tenant isolation.\n\n**Example Query - Full-text search**:\n```json\n{\n  \"query\": {\n    \"multi_match\": {\n      \"query\": \"acme\",\n      \"fields\": [\"insured\", \"domains\", \"emails\"],\n      \"fuzziness\": \"AUTO\"\n    }\n  },\n  \"size\": 20\n}\n```\n\n**Example Query - Exact domain match**:\n```json\n{\n  \"qu"
+        },
+        {
+          "info": {
+            "name": "Get Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/profiles/:id",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "\nRetrieve detailed information for a single profile.\n\n**Authentication**: Requires API Key + Session Token\n\n**Scoping**: Profile must belong to the session's broker.\n"
+        },
+        {
+          "info": {
+            "name": "Create Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/profiles/:id",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nCreate a new insured profile.\n\nReturns the opensearch_profile_id which should be used for subsequent updates.\n\n**Authentication**: Requires API Key + Session Token\n"
+        },
+        {
+          "info": {
+            "name": "Update Profile (Full Replace)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/profiles/:id",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nReplace an existing profile with new data.\n\nUses PUT semantics - the entire profile is replaced with the provided data.\nUse the opensearch_profile_id from search results or creation response.\n\n**Authentication**: Requires API Key + Session Token\n"
+        },
+        {
+          "info": {
+            "name": "Get Business Candidates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/profiles/:id/business-candidates",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Email Insured Profile."
+              }
+            ]
+          },
+          "docs": "\nGet scored business candidates for a profile, ranked best-first.\n\nEach candidate carries a `score` in [0, 1], the `match_reasons` that\ncontributed (e.g. `domain_match`, `name_exact`, `name_normalized`,\n`business_user_email`, `parameter_value`, `fuzzy_search`) and any `conflicts`\nthat should give pause before linking (e.g. `archived_business`,\n`generic_domain_only`). Candidate generation combines deterministic Postgres\nsignals (recency-safe) with fuzzy OpenSearch recall for typos/variants.\n\nThe "
+        },
+        {
+          "info": {
+            "name": "Create Business from Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/profiles/:id/create-business",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Email Insured Profile."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nCreate a new business entity from the profile's data and link them.\n\n**Request Body** (optional overrides):\n- `name`: Override business name (defaults to profile's insured name)\n- `domain_name`: Override domain (defaults to first domain in profile)\n- `assign_agent_from_email`: Assign business to agent from source email's user (default: true)\n- `confirmed_duplicate_reviewed`: Confirm you reviewed a prior 409's candidates and none is the same company\n- `duplicate_review_reason`: Why the closest c"
+        },
+        {
+          "info": {
+            "name": "Link Profile to Business",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/profiles/:id/link-business",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Email Insured Profile."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nLink a profile to an existing business.\n\n**Request Body**:\n- `business_id` (required): Business ID to link to\n\n**Validation**:\n- Business must belong to same broker\n- Returns error if profile is already linked to a different business\n\n**Authentication**: Requires API Key + Session Token\n\n**Scoping**: Profile and business must belong to the session's broker.\n"
+        },
+        {
+          "info": {
+            "name": "Link Profile to Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/profiles/:id/link-email",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Email Insured Profile."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nLink a profile to additional emails and/or attachments.\n\n**Request Body**:\n- `email_id`: Email ID to link\n- `attachment_ids`: List of attachment IDs to link\n\nAt least one of email_id or attachment_ids must be provided.\n\n**Authentication**: Requires API Key + Session Token\n\n**Scoping**: Profile, email, and attachments must belong to the session's broker.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

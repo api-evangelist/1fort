@@ -1,0 +1,165 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "1Fort API Documentation Email AI Agent API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Email AI Agent",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Attachment Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/emails/:email_pk/attachments/:id",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "email_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Email Attachment."
+              }
+            ]
+          },
+          "docs": "\nRetrieve attachment metadata from the database.\n\nUse this endpoint to get attachment details before downloading content:\n- File information (name, mime_type, size)\n- Processing status\n- Document type (if classified)\n- Metadata\n\n**Authentication**: Requires API Key + Session Token\n\n**Scoping**: Attachment must belong to an email within the session's broker scope.\n"
+        },
+        {
+          "info": {
+            "name": "Get Attachment Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/emails/:email_pk/attachments/:id/content",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "email_pk",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Email Attachment."
+              }
+            ]
+          },
+          "docs": "\nDownload the binary content of an attachment file.\n\nReturns the actual file content for document processing:\n- Content-Type header set to the file's MIME type\n- Content-Disposition header with filename\n- Binary file content in response body\n\n**Usage**:\n```python\nresponse = requests.get(\n    f\"{BASE_URL}/emails/{email_id}/attachments/{attachment_id}/content\",\n    headers={\"Authorization\": f\"Api-Key {API_KEY}\", \"X-Processing-Session\": token},\n    stream=True\n)\nwith open(\"/tmp/document.pdf\", \"wb\")"
+        },
+        {
+          "info": {
+            "name": "Get Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/emails/:id",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Email."
+              }
+            ]
+          },
+          "docs": "\nRetrieve a single email with full context for processing.\n\nReturns the complete email data including:\n- Email content (subject, body)\n- Participants (sender, to, cc, bcc)\n- Metadata (received_at, direction, provider, thread_id)\n- Current classification and processing status\n- User information (email owner with broker_id for scoping)\n- All attachments with metadata\n\n**Authentication**: Requires API Key + Session Token\n\n**Scoping**: Email must belong to a broker within the session's scope.\n"
+        },
+        {
+          "info": {
+            "name": "Update Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/emails/:id",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Email."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\nUpdate email classification and/or processing status.\n\nUse this endpoint to:\n- Set the classification (COMMERCIAL_INSURANCE, PERSONAL_INSURANCE, etc.)\n- Update the processing status. Valid values: `SYNCING`, `READY`,\n  `PROCESSING`, `COMPLETED`, `FAILED`, `SKIPPED`, `LINKED`. `COMPLETED`\n  and `SKIPPED` are terminal — further updates return 409.\n- Optionally include classification details (method, confidence, reasoning)\n\nAt least one of `classification` or `processing_status` must be provided.\n"
+        },
+        {
+          "info": {
+            "name": "Get Email Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.1fort.com/apis/v2/broker/agent/emails/:id/content",
+            "headers": [
+              {
+                "name": "X-Processing-Session",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A UUID string identifying this Email."
+              }
+            ]
+          },
+          "docs": "\nRetrieve the full email body content.\n\nUse this endpoint when you need the complete email body for processing,\nafter reviewing the body_snippet from the GET /emails/{id} endpoint.\n\n**Authentication**: Requires API Key + Session Token\n\n**Scoping**: Email must belong to a broker within the session's scope.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
