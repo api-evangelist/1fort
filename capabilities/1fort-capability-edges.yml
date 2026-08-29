@@ -3,7 +3,7 @@ provider: 1Fort
 generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
-- Software & Technology
+- Insurance
 min_confidence: 0.7
 capability_model:
   source: https://github.com/vincentmakes/turbo-ea-capabilities
@@ -11,69 +11,220 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 6
+edge_count: 21
 edges:
-- tag: 'quote (v2): quotes'
-  spec_file: 1fort-quote-v2-quotes-api-openapi.yml
-  capability_id: BC-410.40
-  capability_id_l1: BC-410
-  capability_name: Quote & Configuration Management
-  confidence: 0.8
-  evidence: POST /v2/broker/{business_pk}/quotes/create  Create Broker Quote; POST .../bind  Create Bind;
-    schemas CarrierProduct, Wholesaler, PriceDetail
-  reason: Operations create, retrieve and bind priced quotes against carrier products with price details
-    — configure/price/quote of an insurance offer, i.e. Quote & Configuration Management. Some ambiguity
-    remains because binding also touches order capture.
-- tag: 'quote: clients'
-  spec_file: 1fort-quote-clients-api-openapi.yml
-  capability_id: BC-410.40
-  capability_id_l1: BC-410
-  capability_name: Quote & Configuration Management
-  confidence: 0.75
-  evidence: POST /broker/{broker_pk}/clients/{client_pk}/quotes/{id}/bind  Request to bind; POST /clients/{client_pk}/quote-change-requests/  Create
-    Quote Change Request
-  reason: Client-scoped quote retrieval, PDF download, change requests and bind requests — the quoting
-    motion of the broker toward a client. Invoice endpoint adds slight ambiguity toward receivables but
-    quoting dominates.
-- tag: 'quote: quotes'
-  spec_file: 1fort-quote-quotes-api-openapi.yml
-  capability_id: BC-410.40
-  capability_id_l1: BC-410
-  capability_name: Quote & Configuration Management
-  confidence: 0.75
-  evidence: GET /quotes  List Business Quotes; GET /quotes/{id}/download-pdf  Download pdf
-  reason: Business-facing listing, retrieval and PDF export of insurance quotes with Carrier/CarrierProduct
-    schemas — quote management. Read-only surface so confidence held at 0.75.
 - tag: 'broker (v2): quotes'
   spec_file: 1fort-broker-v2-quotes-api-openapi.yml
-  capability_id: BC-410.40
-  capability_id_l1: BC-410
-  capability_name: Quote & Configuration Management
-  confidence: 0.7
-  evidence: GET /v2/broker/quotes 'Paginated ViewSet for retrieving quotes for the broker.'; 'Return distinct
-    markets (carriers and wholesalers) for the broker's quotes.'; PATCH 'Update Quote Follow-Up Notifications'
-  reason: Operations list, filter and update quotes obtained from carriers/wholesalers — the quote lifecycle
-    of the broker's sales process, which maps to Quote & Configuration Management. Some ambiguity because
-    insurance-specific quoting is not represented in the frame.
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.85
+  evidence: '"Return distinct markets (carriers and wholesalers) for the broker''s quotes." ; "Update
+    Quote Follow-Up Notifications" ; schema "BrokerQuoteV2FlexFields"'
+  reason: Operations manage insurance quotes obtained from carriers and wholesalers on behalf of a broker,
+    including follow-up tracking — squarely quote and submission management within insurance distribution.
+- tag: indications (v2)
+  spec_file: 1fort-indications-v2-api-openapi.yml
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.85
+  evidence: 'POST /v2/broker/{business_pk}/indications/create  v2_broker_indications_create_quote  Create
+    Broker Quote; schemas: QuoteWithAggregates, CarrierProduct, Wholesaler, PriceDetail'
+  reason: Broker-side indications are pre-quote pricing indications generated against carrier/wholesale
+    markets; operations create and retrieve broker quotes, which is quote & submission management within
+    insurance distribution.
 - tag: 'quote (v2): coverages'
   spec_file: 1fort-quote-v2-coverages-api-openapi.yml
-  capability_id: BC-410.40
-  capability_id_l1: BC-410
-  capability_name: Quote & Configuration Management
-  confidence: 0.7
-  evidence: '"List Quotes", POST .../quotes/create — "Create Broker Quote", "Retrieve Quote"; schemas
-    QuoteWithAggregates, BrokerQuoteCreate, PriceDetail, CarrierProduct'
-  reason: Operations create, list, retrieve and aggregate priced quotes against a coverage application,
-    with carrier product and price detail — configure/price/quote of a customer offer. Cross-industry
-    quote management is the closest honest fit given no insurance-specific capability in the list.
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.85
+  evidence: 'POST /v2/broker/{business_pk}/coverages/{coverage_application_pk}/quotes/create  Create Broker
+    Quote; schemas: QuoteWithAggregates, CarrierProduct, Wholesaler'
+  reason: Quote generation and retrieval against a coverage application, with carrier/wholesaler pricing
+    — quote & submission management in the broker distribution flow.
+- tag: 'quote (v2): quotes'
+  spec_file: 1fort-quote-v2-quotes-api-openapi.yml
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.85
+  evidence: POST /v2/broker/{business_pk}/quotes/create  Create Broker Quote; POST .../quotes/{quote_pk}/bind  Create
+    Bind; schemas QuoteWithAggregates, CarrierProduct, Wholesaler, QuoteBindRequest
+  reason: Broker-side quote generation across carriers/wholesalers plus bind requests is exactly submission
+    intake, quote generation and quote-to-bind conversion.
+- tag: Markets
+  spec_file: 1fort-markets-api-openapi.yml
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.8
+  evidence: POST /v2/broker/markets/broker-submit v2_broker_markets_broker_submit Submit Application to
+    Markets (Broker); GET /v2/broker/markets/available-markets
+  reason: Determining eligible markets and submitting the insurance application to them is submission
+    intake/placement flow into underwriting, i.e. quote & submission management within distribution.
+- tag: Markets - Business
+  spec_file: 1fort-markets-business-api-openapi.yml
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.8
+  evidence: POST /v2/markets/submit v2_markets_submit Submit Application to Markets (Business)
+  reason: 'Same placement flow initiated by the insured business: an insurance application is submitted
+    to carrier markets, which is submission/quote flow management.'
+- tag: 'application (v2): coverages'
+  spec_file: 1fort-application-v2-coverages-api-openapi.yml
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.8
+  evidence: '"Submit a coverage application using the submission service."; "Generate and stream the supplemental
+    application PDF"; schema CoverageApplicationWithCompositeResponse'
+  reason: 'Tag covers per-coverage application records: filling ACORD/supplemental forms, AI-assisted
+    answering, approval and submission to markets — submission intake and quote-to-bind flow rather than
+    product catalogue configuration.'
+- tag: insurance (v2)
+  spec_file: 1fort-insurance-v2-api-openapi.yml
+  capability_id: BC-2100.10
+  capability_id_l1: BC-2100
+  capability_name: Insurance Product Catalogue Management
+  confidence: 0.8
+  evidence: 'GET /v2/broker/insurance-coverage-types  List Insurance coverage types; schemas: CoverageLimit,
+    CoverageDeductible, CoverageExclusion, CoverageForm, CoverageType'
+  reason: Operations maintain the coverage type catalogue and coverage terms (limits, deductibles, exclusions,
+    forms) — insurance product/coverage and form library master data.
 - tag: 'quote: applications'
   spec_file: 1fort-quote-applications-api-openapi.yml
-  capability_id: BC-410.40
-  capability_id_l1: BC-410
-  capability_name: Quote & Configuration Management
-  confidence: 0.7
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.8
   evidence: GET /applications/{application_pk}/quotes  List Quotes by Application; schemas QuoteReadOnly,
+    ApplicationList, Carrier, CarrierProduct
+  reason: Retrieval of carrier quotes against an insurance application — submission-to-quote flow for
+    a broker, i.e. quote and submission management.
+- tag: 'quote: clients'
+  spec_file: 1fort-quote-clients-api-openapi.yml
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.8
+  evidence: POST /broker/{broker_pk}/clients/{client_pk}/quotes/{id}/bind  Request to bind; POST /clients/{client_pk}/quote-change-requests/  Create
+    Quote Change Request
+  reason: Client-scoped quote listing, quote documents, change requests and request-to-bind are quote
+    generation and quote-to-bind conversion for a broker.
+- tag: 'quote: quotes'
+  spec_file: 1fort-quote-quotes-api-openapi.yml
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.8
+  evidence: GET /quotes  List Business Quotes; GET /quotes/{id}/download-pdf  Download pdf; schemas QuoteReadOnly,
     CarrierProduct, Wholesaler
-  reason: Despite the tag name 'applications', the operations only list and retrieve quotes tied to an
-    insurance application, with carrier/wholesaler product schemas — quote management. Read-only and thin,
-    hence 0.7.
+  reason: Read surface over insurance quotes obtained from carriers/wholesalers, including quote PDF issuance
+    — quote and submission management.
+- tag: 'application (v2): applications'
+  spec_file: 1fort-application-v2-applications-api-openapi.yml
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.78
+  evidence: GET /v2/applications/{application_pk}/coverages List Coverages; "Downloads the insurance proposal
+    PDF (quote summary file from herald)"; POST /v2/applications/{id}/collect-signature
+  reason: Operations manage commercial insurance applications, their coverages, supporting documents and
+    proposal/quote PDFs on a broker platform — i.e. submission intake and quote generation flow into underwriting,
+    which is Quote & Submission Management.
+- tag: 'application: clients'
+  spec_file: 1fort-application-clients-api-openapi.yml
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.78
+  evidence: POST /broker/{broker_pk}/clients/{client_pk}/applications broker_clients_applications_create
+    Create Application; GET .../applications/{id}/quotes broker_clients_applications_get_quotes Get quotes
+  reason: Creates and maintains insurance applications per broker client and retrieves quotes for them
+    — submission intake and quote generation.
+- tag: market (v2)
+  spec_file: 1fort-market-v2-api-openapi.yml
+  capability_id: BC-2110.10
+  capability_id_l1: BC-2110
+  capability_name: Producer & Intermediary Management
+  confidence: 0.75
+  evidence: 'GET /v2/broker/markets  List Markets; GET /v2/broker/producers  ViewSet for MarketProducer
+    CRUD operations; schemas: MarketProducer, Wholesaler'
+  reason: CRUD over insurance markets (carriers/wholesalers) and their producer contacts — management
+    of intermediary/market relationships in the distribution chain.
+- tag: billing (v2)
+  spec_file: 1fort-billing-v2-api-openapi.yml
+  capability_id: BC-2150.20
+  capability_id_l1: BC-2150
+  capability_name: Premium Collection Management
+  confidence: 0.74
+  evidence: '"Broker billing/payments list backed by insurance invoices."; "Refunded checkout payments
+    of the broker''s insurance invoices."; "Billing dashboard stat cards (payments at risk, invoices/policies
+    needing action, premium sold)"'
+  reason: Tracks receipt of premium payments against insurance invoices, refunds and at-risk payments
+    for the broker — premium collection operations.
+- tag: 'application: applications'
+  spec_file: 1fort-application-applications-api-openapi.yml
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.72
+  evidence: GET /applications applications_list List Applications; POST /applications/{id}/submit applications_submit
+    Submit
+  reason: v1 surface for listing and submitting insurance applications on a broker platform; the submit
+    operation grounds it as submission intake, though the operation set is thin.
+- tag: checkout
+  spec_file: 1fort-checkout-api-openapi.yml
+  capability_id: BC-2150.20
+  capability_id_l1: BC-2150
+  capability_name: Premium Collection Management
+  confidence: 0.72
+  evidence: POST /checkout/invoices/payment-intent — "Create a Stripe PaymentIntent for the given invoices";
+    GET /checkout/invoices/{id}/receipt
+  reason: Operations retrieve insurance invoices and take payment for them (payment intent, receipt, invoice
+    PDF) on a commercial insurance broker platform — i.e. collection of premium payments. Split between
+    billing (.10) and collection (.20) is somewhat ambiguous, but the payment/receipt operations point
+    to collection.
+- tag: premium_finance (v2)
+  spec_file: 1fort-premium-finance-v2-api-openapi.yml
+  capability_id: BC-2150.20
+  capability_id_l1: BC-2150
+  capability_name: Premium Collection Management
+  confidence: 0.7
+  evidence: POST /v2/broker/{business_pk}/insurance-invoices/{insurance_invoice_pk}/premium-finance-plans/  Create
+    Premium finance plan
+  reason: Premium finance plans attached to insurance invoices are an instalment/collection mechanism
+    for premium payment; sits within premium accounting, though financing itself is adjacent.
+- tag: 'quote (v2): binders'
+  spec_file: 1fort-quote-v2-binders-api-openapi.yml
+  capability_id: BC-2130.40
+  capability_id_l1: BC-2130
+  capability_name: Underwriting Decision & Authority Management
+  confidence: 0.7
+  evidence: GET /v2/broker/{business_pk}/binders  List Binders; GET /v2/broker/{business_pk}/binders/{id}/documents/{document_pk}  Get
+    document
+  reason: Binders record the acceptance/binding of coverage; retrieval of binders and binder documents
+    relates to underwriting decision and binding, though read-only.
+- tag: 'quote (v2): cios'
+  spec_file: 1fort-quote-v2-cios-api-openapi.yml
+  capability_id: BC-2140.50
+  capability_id_l1: BC-2140
+  capability_name: Policy Document & Records Management
+  confidence: 0.7
+  evidence: 'GET /v2/broker/{business_pk}/cios  List CIOs; schemas: CertificateOfInsuranceFlexFields'
+  reason: Certificates of insurance and their documents are policy evidence records; listing and retrieving
+    them is policy document and records management.
+- tag: storefront (v2)
+  spec_file: 1fort-storefront-v2-api-openapi.yml
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.7
+  evidence: POST /v2/storefront-applications  Create Storefront application; POST /v2/storefront-applications/{id}/submit  Submit
+    a StoreFront Application; POST .../pre-filled-forms  Add prefilled forms
+  reason: Public digital storefront that captures and submits insurance applications for an agency/broker
+    — submission intake feeding quoting. Could alternatively be read as direct digital channel operation
+    (BC-2110.40), hence 0.7.
