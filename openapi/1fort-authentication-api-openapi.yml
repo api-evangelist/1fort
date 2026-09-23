@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -68,9 +26,7 @@ paths:
     post:
       operationId: otp_create
       summary: Request or Verify Email OTP
-      description: '
-
-        Handles both requesting an OTP and verifying it for login/signup.
+      description: 'Handles both requesting an OTP and verifying it for login/signup.
 
 
         **Step 1: Request OTP**
@@ -94,9 +50,7 @@ paths:
 
         - Returns (Session Auth): `{"user": {...}, "created": bool, "auth_type": "session"}` -> Browser receives `sessionid` and `csrftoken` cookies.
 
-        - Returns (JWT Auth, if enabled): `{"user": {...}, "created": bool, "auth_type": "jwt", "access": "...", "refresh": "..."}`
-
-        '
+        - Returns (JWT Auth, if enabled): `{"user": {...}, "created": bool, "auth_type": "jwt", "access": "...", "refresh": "..."}`'
       responses:
         '201':
           description: ''
@@ -123,6 +77,46 @@ paths:
         required: true
 components:
   schemas:
+    UserList:
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        email:
+          title: Email address
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        first_name:
+          title: First name
+          type: string
+          maxLength: 150
+        last_name:
+          title: Last name
+          type: string
+          maxLength: 150
+        title:
+          title: Title
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        role:
+          title: Role
+          description: Role is for determining the access level control of the user.
+          type:
+          - string
+          - 'null'
+          enum:
+          - Owner
+          - Admin
+          - User
+          - Broker
+          - Underwriter
+          readOnly: true
     OTPEmail:
       required:
       - email
@@ -195,46 +189,6 @@ components:
         type: array
         items:
           type: string
-    UserList:
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        email:
-          title: Email address
-          type: string
-          format: email
-          readOnly: true
-          minLength: 1
-        first_name:
-          title: First name
-          type: string
-          maxLength: 150
-        last_name:
-          title: Last name
-          type: string
-          maxLength: 150
-        title:
-          title: Title
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        role:
-          title: Role
-          description: Role is for determining the access level control of the user.
-          type:
-          - string
-          - 'null'
-          enum:
-          - Owner
-          - Admin
-          - User
-          - Broker
-          - Underwriter
-          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

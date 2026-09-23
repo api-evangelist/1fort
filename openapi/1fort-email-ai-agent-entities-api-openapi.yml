@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -70,9 +28,7 @@ paths:
     post:
       operationId: agent_search_entities
       summary: Search All Entities
-      description: '
-
-        Search across all entity types for a profile''s linked business.
+      description: 'Search across all entity types for a profile''s linked business.
 
 
         **Requires**: Profile must be linked to a business.
@@ -96,9 +52,7 @@ paths:
         **Entity Types**: coverage_applications, quotes, policies, invoices, binders, cois
 
 
-        **Authentication**: Requires API Key + Session Token
-
-        '
+        **Authentication**: Requires API Key + Session Token'
       parameters:
       - name: X-Processing-Session
         in: header
@@ -210,6 +164,37 @@ components:
           items:
             type: string
             minLength: 1
+    ErrorResponse:
+      required:
+      - error
+      type: object
+      properties:
+        error:
+          title: Error
+          description: Error details with code and message.
+          type: object
+          additionalProperties:
+            type: string
+            minLength: 1
+        request_id:
+          title: Request id
+          description: Request ID for debugging.
+          type: string
+          minLength: 1
+        timestamp:
+          title: Timestamp
+          description: When the error occurred.
+          type: string
+          format: date-time
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     EntitySearchResponse:
       required:
       - profile_id
@@ -282,37 +267,6 @@ components:
               type:
               - string
               - 'null'
-    ErrorResponse:
-      required:
-      - error
-      type: object
-      properties:
-        error:
-          title: Error
-          description: Error details with code and message.
-          type: object
-          additionalProperties:
-            type: string
-            minLength: 1
-        request_id:
-          title: Request id
-          description: Request ID for debugging.
-          type: string
-          minLength: 1
-        timestamp:
-          title: Timestamp
-          description: When the error occurred.
-          type: string
-          format: date-time
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
   securitySchemes:
     Bearer:
       type: apiKey

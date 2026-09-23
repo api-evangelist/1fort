@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -290,7 +248,7 @@ paths:
       summary: Retrieve Binder
     patch:
       operationId: v2_broker_agent_profiles_binders_partial_update
-      summary: Update an existing binder.
+      summary: Update an existing binder
       description: 'A structured `coverage_term` replaces the binder''s term wholesale;
 
         `status` round-trips through the legacy vocabulary via normalize_status.'
@@ -486,7 +444,7 @@ paths:
       summary: List Coverage applications
     post:
       operationId: v2_broker_agent_profiles_coverage-applications_create
-      summary: Create a new CoverageApplication with auto-created parent Application.
+      summary: Create a new CoverageApplication with auto-created parent Application
       description: Creates both Application and CoverageApplication as a unified entity.
       responses:
         '201':
@@ -657,7 +615,7 @@ paths:
       summary: List Invoices
     post:
       operationId: v2_broker_agent_profiles_invoices_create
-      summary: Create an insurance invoice with auto-checkout.
+      summary: Create an insurance invoice with auto-checkout
       description: 'If ``herald_quote_id`` is provided, the invoice is built from the
 
         quote (program/agency fees + CT-derived line items) via
@@ -731,7 +689,7 @@ paths:
       summary: Retrieve Invoice
     patch:
       operationId: v2_broker_agent_profiles_invoices_partial_update
-      summary: Update an existing invoice, optionally replacing line items.
+      summary: Update an existing invoice, optionally replacing line items
       description: 'Wrapped in @transaction.atomic so that if checkout regeneration
 
         fails, the invoice/line-item changes are rolled back — preventing
@@ -770,7 +728,7 @@ paths:
         type: string
     post:
       operationId: v2_broker_agent_profiles_invoices_send_email
-      summary: Queue an invoice email send.
+      summary: Queue an invoice email send
       description: 'Returns 202; the actual delivery is dispatched asynchronously (see
 
         ``AgentActionService`` on the server side for how queueing and
@@ -950,7 +908,7 @@ paths:
       summary: Retrieve Policy
     patch:
       operationId: v2_broker_agent_profiles_policies_partial_update
-      summary: Update an existing policy.
+      summary: Update an existing policy
       description: 'A structured `coverage_term` replaces the policy''s term wholesale and
 
         supersedes the flat limit/carrier scalars. Otherwise coverage scalars
@@ -997,7 +955,7 @@ paths:
       summary: List Quotes
     post:
       operationId: v2_broker_agent_profiles_quotes_create
-      summary: Create a new quote with optional structured coverage_term or legacy flat fields.
+      summary: Create a new quote with optional structured coverage_term or legacy flat fields
       description: 'Post-creation steps (outside atomic block):
 
         1. Upload attachments (async)
@@ -1153,7 +1111,7 @@ paths:
         type: string
     post:
       operationId: v2_broker_agent_profiles_quotes_send_proposal
-      summary: Queue a proposal email send.
+      summary: Queue a proposal email send
       description: 'Returns 202; the actual delivery is dispatched asynchronously (see
 
         ``AgentActionService`` on the server side for how queueing and

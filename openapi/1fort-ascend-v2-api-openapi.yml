@@ -1,52 +1,10 @@
 openapi: 3.2.0
 info:
-  title: 1Fort API Documentation ascend (v2) ascend (v2) API
+  title: 1Fort API Documentation ascend (v2) API
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -67,8 +25,12 @@ paths:
     parameters: []
     get:
       operationId: v2_ascend_payments_list
-      summary: Return a list of payments with summary data and applied filters.
-      description: ".. deprecated::\n    Prefer ``GET /apis/v2/billing/payments`` (insurance invoice backed).\n    This Ascend program list remains for legacy transition only."
+      summary: Return a list of payments with summary data and applied filters
+      description: '.. deprecated::
+
+        Prefer ``GET /apis/v2/billing/payments`` (insurance invoice backed).
+
+        This Ascend program list remains for legacy transition only.'
       parameters:
       - name: ordering
         in: query
@@ -407,7 +369,7 @@ paths:
         type: string
     patch:
       operationId: v2_ascend_payments_update_due_date
-      summary: Update program due date.
+      summary: Update program due date
       description: 'Saves the due_date to the local database immediately for instant UI feedback,
 
         then schedules an async task to sync the change to Ascend.
@@ -461,164 +423,6 @@ components:
         detail:
           description: Error details
           type: string
-    BillableDetail:
-      required:
-      - billable_identifier
-      - effective_date
-      - expiration_date
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        ascend_id:
-          title: Ascend id
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        billable_type:
-          title: Billable type
-          type: string
-          enum:
-          - quote
-          - endorsement
-        billable_identifier:
-          title: Billable identifier
-          type: string
-          maxLength: 255
-          minLength: 1
-        policy_number:
-          title: Policy number
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        effective_date:
-          title: Effective date
-          type: string
-          format: date
-        expiration_date:
-          title: Expiration date
-          type: string
-          format: date
-        premium:
-          title: Premium
-          type: string
-          readOnly: true
-        agency_fees:
-          title: Agency fees
-          type: string
-          readOnly: true
-        broker_fee:
-          title: Broker fee
-          type: string
-          readOnly: true
-        policy_fee:
-          title: Policy fee
-          type: string
-          readOnly: true
-        other_fees:
-          title: Other fees
-          type: string
-          readOnly: true
-        taxes_and_fees:
-          title: Taxes and fees
-          type: string
-          readOnly: true
-        surplus_lines_tax:
-          title: Surplus lines tax
-          type: string
-          readOnly: true
-        total_fees:
-          title: Total fees
-          type: string
-          readOnly: true
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        min_earned_rate:
-          title: Min earned rate
-          description: Minimum earned premium rate as a decimal (e.g., 0.25 for 25%)
-          type:
-          - number
-          - 'null'
-        carrier_detail:
-          title: Carrier detail
-          type: string
-          readOnly: true
-        coverage_type_detail:
-          title: Coverage type detail
-          type: string
-          readOnly: true
-        wholesaler_detail:
-          title: Wholesaler detail
-          type: string
-          readOnly: true
-        quote_detail:
-          title: Quote detail
-          type: string
-          readOnly: true
-    Payment:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        insured:
-          title: Insured
-          type: string
-          readOnly: true
-        payment_status:
-          title: Payment status
-          type: string
-          readOnly: true
-        quote_status:
-          title: Quote status
-          type: string
-          readOnly: true
-        quote:
-          title: Quote
-          type: string
-          readOnly: true
-        total:
-          title: Total
-          type: string
-          readOnly: true
-        due_date:
-          title: Due date
-          type: string
-          readOnly: true
-        broker:
-          title: Broker
-          type: string
-          readOnly: true
-        producer:
-          title: Producer
-          type: string
-          readOnly: true
-        all_agents:
-          title: All agents
-          type: string
-          readOnly: true
-        carrier:
-          title: Carrier
-          type: string
-          readOnly: true
-        coverage_type:
-          title: Coverage type
-          type: string
-          readOnly: true
-        actions:
-          title: Actions
-          type: string
-          readOnly: true
     GenericError:
       title: Generic API Error
       required:
@@ -628,95 +432,6 @@ components:
         detail:
           description: Error details
           type: string
-    LoanDetail:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        ascend_id:
-          title: Ascend id
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        status:
-          title: Status
-          type:
-          - string
-          - 'null'
-          enum:
-          - bound
-          - canceled
-          - completed
-          - pending_bind
-          - pending_cancel
-          - ready
-          - missing_terms
-        status_display:
-          title: Status display
-          type: string
-          readOnly: true
-        allowed_late_days:
-          title: Allowed late days
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        amount_financed:
-          title: Amount financed
-          type: string
-          readOnly: true
-        apr:
-          title: Apr
-          type:
-          - string
-          - 'null'
-          format: decimal
-        downpayment:
-          title: Downpayment
-          type: string
-          readOnly: true
-        late_charge:
-          title: Late charge
-          type: string
-          readOnly: true
-        number_of_payments:
-          title: Number of payments
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        term_payment:
-          title: Term payment
-          type: string
-          readOnly: true
-        is_active:
-          title: Is active
-          type: boolean
-        completed_disclosure_url:
-          title: Completed disclosure url
-          type:
-          - string
-          - 'null'
-          format: uri
-          maxLength: 2048
-        ascend_created_at:
-          title: Ascend created at
-          type:
-          - string
-          - 'null'
-          format: date-time
-        ascend_updated_at:
-          title: Ascend updated at
-          type:
-          - string
-          - 'null'
-          format: date-time
     ValidationError:
       title: Validation Error
       type: object
@@ -980,6 +695,253 @@ components:
           title: Updated at
           type: string
           format: date-time
+          readOnly: true
+    LoanDetail:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        ascend_id:
+          title: Ascend id
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        status:
+          title: Status
+          type:
+          - string
+          - 'null'
+          enum:
+          - bound
+          - canceled
+          - completed
+          - pending_bind
+          - pending_cancel
+          - ready
+          - missing_terms
+        status_display:
+          title: Status display
+          type: string
+          readOnly: true
+        allowed_late_days:
+          title: Allowed late days
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        amount_financed:
+          title: Amount financed
+          type: string
+          readOnly: true
+        apr:
+          title: Apr
+          type:
+          - string
+          - 'null'
+          format: decimal
+        downpayment:
+          title: Downpayment
+          type: string
+          readOnly: true
+        late_charge:
+          title: Late charge
+          type: string
+          readOnly: true
+        number_of_payments:
+          title: Number of payments
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        term_payment:
+          title: Term payment
+          type: string
+          readOnly: true
+        is_active:
+          title: Is active
+          type: boolean
+        completed_disclosure_url:
+          title: Completed disclosure url
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 2048
+        ascend_created_at:
+          title: Ascend created at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        ascend_updated_at:
+          title: Ascend updated at
+          type:
+          - string
+          - 'null'
+          format: date-time
+    BillableDetail:
+      required:
+      - billable_identifier
+      - effective_date
+      - expiration_date
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        ascend_id:
+          title: Ascend id
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        billable_type:
+          title: Billable type
+          type: string
+          enum:
+          - quote
+          - endorsement
+        billable_identifier:
+          title: Billable identifier
+          type: string
+          maxLength: 255
+          minLength: 1
+        policy_number:
+          title: Policy number
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        effective_date:
+          title: Effective date
+          type: string
+          format: date
+        expiration_date:
+          title: Expiration date
+          type: string
+          format: date
+        premium:
+          title: Premium
+          type: string
+          readOnly: true
+        agency_fees:
+          title: Agency fees
+          type: string
+          readOnly: true
+        broker_fee:
+          title: Broker fee
+          type: string
+          readOnly: true
+        policy_fee:
+          title: Policy fee
+          type: string
+          readOnly: true
+        other_fees:
+          title: Other fees
+          type: string
+          readOnly: true
+        taxes_and_fees:
+          title: Taxes and fees
+          type: string
+          readOnly: true
+        surplus_lines_tax:
+          title: Surplus lines tax
+          type: string
+          readOnly: true
+        total_fees:
+          title: Total fees
+          type: string
+          readOnly: true
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        min_earned_rate:
+          title: Min earned rate
+          description: Minimum earned premium rate as a decimal (e.g., 0.25 for 25%)
+          type:
+          - number
+          - 'null'
+        carrier_detail:
+          title: Carrier detail
+          type: string
+          readOnly: true
+        coverage_type_detail:
+          title: Coverage type detail
+          type: string
+          readOnly: true
+        wholesaler_detail:
+          title: Wholesaler detail
+          type: string
+          readOnly: true
+        quote_detail:
+          title: Quote detail
+          type: string
+          readOnly: true
+    Payment:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        insured:
+          title: Insured
+          type: string
+          readOnly: true
+        payment_status:
+          title: Payment status
+          type: string
+          readOnly: true
+        quote_status:
+          title: Quote status
+          type: string
+          readOnly: true
+        quote:
+          title: Quote
+          type: string
+          readOnly: true
+        total:
+          title: Total
+          type: string
+          readOnly: true
+        due_date:
+          title: Due date
+          type: string
+          readOnly: true
+        broker:
+          title: Broker
+          type: string
+          readOnly: true
+        producer:
+          title: Producer
+          type: string
+          readOnly: true
+        all_agents:
+          title: All agents
+          type: string
+          readOnly: true
+        carrier:
+          title: Carrier
+          type: string
+          readOnly: true
+        coverage_type:
+          title: Coverage type
+          type: string
+          readOnly: true
+        actions:
+          title: Actions
+          type: string
           readOnly: true
   securitySchemes:
     Bearer:

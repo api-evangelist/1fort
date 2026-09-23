@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -56,7 +14,7 @@ servers:
 security:
 - Bearer: []
 tags:
-- name: legal
+- name: Legal
   x-displayName: Legal
   description: 'Legal documents and agreements.
 
@@ -129,7 +87,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - legal
+      - Legal
       summary: List Legal documents
   /legal-documents/{document_type}:
     parameters:
@@ -164,7 +122,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - legal
+      - Legal
       summary: Retrieve Legal document
   /legal-documents/{document_type}/sign:
     parameters:
@@ -205,7 +163,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - legal
+      - Legal
       summary: Sign
       requestBody:
         content:
@@ -215,46 +173,6 @@ paths:
         required: true
 components:
   schemas:
-    LegalDocumentUserSignature:
-      required:
-      - signature_text
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        signature_text:
-          title: Signature text
-          description: The user's typed full legal name.
-          type: string
-          maxLength: 255
-          minLength: 1
-        document_version:
-          title: Document version
-          description: Document version at the time of signing.
-          type: string
-          maxLength: 32
-        signed_at:
-          title: Signed at
-          type: string
-          format: date-time
-          readOnly: true
-        is_current:
-          title: Is current
-          type: boolean
-          readOnly: true
-    LegalDocumentSign:
-      required:
-      - signature_text
-      type: object
-      properties:
-        signature_text:
-          title: Signature text
-          type: string
-          maxLength: 255
-          minLength: 1
     APIException:
       title: Generic API Error
       required:
@@ -263,6 +181,29 @@ components:
       properties:
         detail:
           description: Error details
+          type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
           type: string
     LegalDocument:
       required:
@@ -315,29 +256,46 @@ components:
           title: Is signed
           type: boolean
           readOnly: true
-    GenericError:
-      title: Generic API Error
+    LegalDocumentSign:
       required:
-      - detail
+      - signature_text
       type: object
       properties:
-        detail:
-          description: Error details
+        signature_text:
+          title: Signature text
           type: string
-    ValidationError:
-      title: Validation Error
+          maxLength: 255
+          minLength: 1
+    LegalDocumentUserSignature:
+      required:
+      - signature_text
       type: object
       properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
+        id:
+          title: Id
           type: string
+          format: uuid
+          readOnly: true
+        signature_text:
+          title: Signature text
+          description: The user's typed full legal name.
+          type: string
+          maxLength: 255
+          minLength: 1
+        document_version:
+          title: Document version
+          description: Document version at the time of signing.
+          type: string
+          maxLength: 32
+        signed_at:
+          title: Signed at
+          type: string
+          format: date-time
+          readOnly: true
+        is_current:
+          title: Is current
+          type: boolean
+          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

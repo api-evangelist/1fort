@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -65,7 +23,80 @@ paths:
     post:
       operationId: agent_search_carriers
       summary: Search Carriers (OpenSearch)
-      description: "\nExecute an OpenSearch query against the carrier index.\n\nThis is faster than /match as it bypasses embeddings. The agent constructs\nthe query directly using OpenSearch Query DSL.\n\n**Example - Fuzzy name search**:\n```json\n{\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\"match\": {\"name\": {\"query\": \"Liberty Mutual\", \"fuzziness\": \"AUTO\"}}}\n      ],\n      \"filter\": [\n        {\"term\": {\"is_active\": true}}\n      ]\n    }\n  },\n  \"size\": 10\n}\n```\n\n**Example - Exact state filter**:\n```json\n{\n  \"query\": {\n    \"bool\": {\n      \"must\": [{\"match\": {\"name\": \"Chubb\"}}],\n      \"filter\": [{\"term\": {\"mailing_address_state\": \"NY\"}}]\n    }\n  }\n}\n```\n\n**Index Fields**:\n- `name` (text, boosted): Carrier name\n- `is_active` (boolean): Active status\n- `mailing_address_state` (keyword): State code\n\n**Limits**: size max 100\n"
+      description: 'Execute an OpenSearch query against the carrier index.
+
+
+        This is faster than /match as it bypasses embeddings. The agent constructs
+
+        the query directly using OpenSearch Query DSL.
+
+
+        **Example - Fuzzy name search**:
+
+        ```json
+
+        {
+
+        "query": {
+
+        "bool": {
+
+        "must": [
+
+        {"match": {"name": {"query": "Liberty Mutual", "fuzziness": "AUTO"}}}
+
+        ],
+
+        "filter": [
+
+        {"term": {"is_active": true}}
+
+        ]
+
+        }
+
+        },
+
+        "size": 10
+
+        }
+
+        ```
+
+
+        **Example - Exact state filter**:
+
+        ```json
+
+        {
+
+        "query": {
+
+        "bool": {
+
+        "must": [{"match": {"name": "Chubb"}}],
+
+        "filter": [{"term": {"mailing_address_state": "NY"}}]
+
+        }
+
+        }
+
+        }
+
+        ```
+
+
+        **Index Fields**:
+
+        - `name` (text, boosted): Carrier name
+
+        - `is_active` (boolean): Active status
+
+        - `mailing_address_state` (keyword): State code
+
+
+        **Limits**: size max 100'
       responses:
         '200':
           description: Search results
@@ -115,7 +146,65 @@ paths:
     post:
       operationId: agent_search_coverage_types
       summary: Search Coverage Types (OpenSearch)
-      description: "\nExecute an OpenSearch query against the coverage type (ProductLine) index.\n\n**Example - Name search**:\n```json\n{\n  \"query\": {\n    \"bool\": {\n      \"must\": [{\"match\": {\"display_name\": {\"query\": \"Cyber\", \"fuzziness\": \"AUTO\"}}}],\n      \"filter\": [{\"term\": {\"is_active\": true}}]\n    }\n  },\n  \"size\": 10\n}\n```\n\n**Example - Exact code match**:\n```json\n{\n  \"query\": {\n    \"term\": {\"code\": \"CYBER\"}\n  }\n}\n```\n\n**Index Fields**:\n- `display_name` (text, boosted): Display name (e.g., \"Cyber Liability\")\n- `code` (keyword): Code for exact match (e.g., \"CYBER\", \"GL\")\n- `description` (text): Description\n- `is_active` (boolean): Active status\n- `is_core` (boolean): Core coverage type flag\n\n**Limits**: size max 100\n"
+      description: 'Execute an OpenSearch query against the coverage type (ProductLine) index.
+
+
+        **Example - Name search**:
+
+        ```json
+
+        {
+
+        "query": {
+
+        "bool": {
+
+        "must": [{"match": {"display_name": {"query": "Cyber", "fuzziness": "AUTO"}}}],
+
+        "filter": [{"term": {"is_active": true}}]
+
+        }
+
+        },
+
+        "size": 10
+
+        }
+
+        ```
+
+
+        **Example - Exact code match**:
+
+        ```json
+
+        {
+
+        "query": {
+
+        "term": {"code": "CYBER"}
+
+        }
+
+        }
+
+        ```
+
+
+        **Index Fields**:
+
+        - `display_name` (text, boosted): Display name (e.g., "Cyber Liability")
+
+        - `code` (keyword): Code for exact match (e.g., "CYBER", "GL")
+
+        - `description` (text): Description
+
+        - `is_active` (boolean): Active status
+
+        - `is_core` (boolean): Core coverage type flag
+
+
+        **Limits**: size max 100'
       responses:
         '200':
           description: Search results
@@ -153,7 +242,53 @@ paths:
     post:
       operationId: agent_search_wholesalers
       summary: Search Wholesalers/MGAs (OpenSearch)
-      description: "\nExecute an OpenSearch query against the wholesaler index.\n\nThis endpoint searches both wholesalers AND MGAs (same model).\nThe agent determines from context whether to use the ID as wholesaler_id or mga_id.\n\n**Example - Name search**:\n```json\n{\n  \"query\": {\n    \"bool\": {\n      \"must\": [{\"match\": {\"name\": {\"query\": \"CRC Insurance\", \"fuzziness\": \"AUTO\"}}}],\n      \"filter\": [{\"term\": {\"is_active\": true}}]\n    }\n  },\n  \"size\": 10\n}\n```\n\n**Index Fields**:\n- `name` (text, boosted): Wholesaler/MGA name\n- `is_active` (boolean): Active status\n- `mailing_address_city` (keyword): City\n- `mailing_address_state` (keyword): State code\n- `ascend_identifier` (keyword): Ascend ID for exact match\n\n**Limits**: size max 100\n"
+      description: 'Execute an OpenSearch query against the wholesaler index.
+
+
+        This endpoint searches both wholesalers AND MGAs (same model).
+
+        The agent determines from context whether to use the ID as wholesaler_id or mga_id.
+
+
+        **Example - Name search**:
+
+        ```json
+
+        {
+
+        "query": {
+
+        "bool": {
+
+        "must": [{"match": {"name": {"query": "CRC Insurance", "fuzziness": "AUTO"}}}],
+
+        "filter": [{"term": {"is_active": true}}]
+
+        }
+
+        },
+
+        "size": 10
+
+        }
+
+        ```
+
+
+        **Index Fields**:
+
+        - `name` (text, boosted): Wholesaler/MGA name
+
+        - `is_active` (boolean): Active status
+
+        - `mailing_address_city` (keyword): City
+
+        - `mailing_address_state` (keyword): State code
+
+        - `ascend_identifier` (keyword): Ascend ID for exact match
+
+
+        **Limits**: size max 100'
       responses:
         '200':
           description: Search results

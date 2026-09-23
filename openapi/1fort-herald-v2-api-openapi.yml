@@ -1,52 +1,10 @@
 openapi: 3.2.0
 info:
-  title: 1Fort API Documentation herald (v2) herald (v2) API
+  title: 1Fort API Documentation herald (v2) API
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -214,8 +172,49 @@ paths:
         type: string
     get:
       operationId: v2_broker_quotes_proposal-pdf_list
-      summary: Generate and return a proposal PDF for the specified quote with optional comparison quotes.
-      description: "Query Parameters:\n- comparison_quote_ids: Comma-separated list of quote IDs to include as comparisons\n- coverage_types: Coverage types to include in coverage review section.\n  Supports multiple formats:\n  * Multiple parameters: coverage_types=A&coverage_types=B&coverage_types=C\n  * Comma-separated: coverage_types=A,B,C\n  * Mixed: coverage_types=A,B&coverage_types=C\n- include_quote_summary: If false, skips merging the carrier quote summary PDF\n  (default: true)\n- quote_summary_pages: Optional comma/range page selection for the quote summary\n  PDF (1-based, e.g. \"1-3, 5\"). When omitted or empty, all pages are included.\n  Ignored when include_quote_summary is false.\n- include_payment_link: If false, omits payment links from the proposal PDF\n  (default: true)\n- include_coverage_analysis: If false, omits the Coverage Analysis pages\n  (key limits, retentions, and related tables) from the proposal PDF\n  (default: true)\n- include_quote_comparison: If false, omits the quote comparison section\n  from the proposal PDF (default: true)\n- return_json: If true, returns the JSON payload used for PDF generation instead of the PDF\n\nAlways generates the PDF on-demand to ensure dynamic comparison data is current."
+      summary: Generate and return a proposal PDF for the specified quote with optional…
+      description: 'Query Parameters:
+
+        - comparison_quote_ids: Comma-separated list of quote IDs to include as comparisons
+
+        - coverage_types: Coverage types to include in coverage review section.
+
+        Supports multiple formats:
+
+        * Multiple parameters: coverage_types=A&coverage_types=B&coverage_types=C
+
+        * Comma-separated: coverage_types=A,B,C
+
+        * Mixed: coverage_types=A,B&coverage_types=C
+
+        - include_quote_summary: If false, skips merging the carrier quote summary PDF
+
+        (default: true)
+
+        - quote_summary_pages: Optional comma/range page selection for the quote summary
+
+        PDF (1-based, e.g. "1-3, 5"). When omitted or empty, all pages are included.
+
+        Ignored when include_quote_summary is false.
+
+        - include_payment_link: If false, omits payment links from the proposal PDF
+
+        (default: true)
+
+        - include_coverage_analysis: If false, omits the Coverage Analysis pages
+
+        (key limits, retentions, and related tables) from the proposal PDF
+
+        (default: true)
+
+        - include_quote_comparison: If false, omits the quote comparison section
+
+        from the proposal PDF (default: true)
+
+        - return_json: If true, returns the JSON payload used for PDF generation instead of the PDF
+
+
+        Always generates the PDF on-demand to ensure dynamic comparison data is current.'
       responses:
         '200':
           description: ''
@@ -532,9 +531,9 @@ components:
         detail:
           description: Error details
           type: string
-    CanonicalProductLineRef:
+    IndustryClassification:
       required:
-      - code
+      - herald_id
       type: object
       properties:
         id:
@@ -542,17 +541,27 @@ components:
           type: string
           format: uuid
           readOnly: true
-        code:
-          title: Code
+        herald_id:
+          title: Herald id
           type: string
-          maxLength: 150
+          maxLength: 255
           minLength: 1
-        display_name:
-          title: Display name
+        naics:
+          title: Naics
+          type: string
+          readOnly: true
+          minLength: 1
+        description:
+          title: Description
           type:
           - string
           - 'null'
           maxLength: 255
+        naics_description:
+          title: Naics description
+          type: string
+          readOnly: true
+          minLength: 1
     GenericError:
       title: Generic API Error
       required:
@@ -562,39 +571,6 @@ components:
         detail:
           description: Error details
           type: string
-    SubProductLine:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        display_name:
-          title: Display name
-          description: Name used on the Frontend.
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
     ProductLine:
       required:
       - code
@@ -647,9 +623,7 @@ components:
           - Property only
         canonical_product_line:
           $ref: '#/components/schemas/CanonicalProductLineRef'
-    IndustryClassification:
-      required:
-      - herald_id
+    SubProductLine:
       type: object
       properties:
         id:
@@ -657,27 +631,52 @@ components:
           type: string
           format: uuid
           readOnly: true
-        herald_id:
-          title: Herald id
-          type: string
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
           maxLength: 255
-          minLength: 1
-        naics:
-          title: Naics
-          type: string
-          readOnly: true
-          minLength: 1
+        display_name:
+          title: Display name
+          description: Name used on the Frontend.
+          type:
+          - string
+          - 'null'
+          maxLength: 255
         description:
           title: Description
           type:
           - string
           - 'null'
-          maxLength: 255
-        naics_description:
-          title: Naics description
-          type: string
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
           readOnly: true
+          format: uri
+    CanonicalProductLineRef:
+      required:
+      - code
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        code:
+          title: Code
+          type: string
+          maxLength: 150
           minLength: 1
+        display_name:
+          title: Display name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
   securitySchemes:
     Bearer:
       type: apiKey

@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -69,7 +27,7 @@ paths:
         type: string
     get:
       operationId: broker_user-ai-customizations_list
-      summary: ViewSet for managing the current broker user's own AI customizations.
+      summary: ViewSet for managing the current broker user's own AI customizations
       description: 'Every broker user can fully manage their own personalizations; the
 
         ``broker_pk`` in the URL is the user''s agency and is validated for access,
@@ -133,7 +91,7 @@ paths:
       - 'broker: user-ai-customizations'
     post:
       operationId: broker_user-ai-customizations_create
-      summary: ViewSet for managing the current broker user's own AI customizations.
+      summary: ViewSet for managing the current broker user's own AI customizations
       description: 'Every broker user can fully manage their own personalizations; the
 
         ``broker_pk`` in the URL is the user''s agency and is validated for access,
@@ -182,7 +140,7 @@ paths:
         type: string
     get:
       operationId: broker_user-ai-customizations_read
-      summary: ViewSet for managing the current broker user's own AI customizations.
+      summary: ViewSet for managing the current broker user's own AI customizations
       description: 'Every broker user can fully manage their own personalizations; the
 
         ``broker_pk`` in the URL is the user''s agency and is validated for access,
@@ -213,7 +171,7 @@ paths:
       - 'broker: user-ai-customizations'
     put:
       operationId: broker_user-ai-customizations_update
-      summary: ViewSet for managing the current broker user's own AI customizations.
+      summary: ViewSet for managing the current broker user's own AI customizations
       description: 'Every broker user can fully manage their own personalizations; the
 
         ``broker_pk`` in the URL is the user''s agency and is validated for access,
@@ -256,7 +214,7 @@ paths:
         required: true
     patch:
       operationId: broker_user-ai-customizations_partial_update
-      summary: ViewSet for managing the current broker user's own AI customizations.
+      summary: ViewSet for managing the current broker user's own AI customizations
       description: 'Every broker user can fully manage their own personalizations; the
 
         ``broker_pk`` in the URL is the user''s agency and is validated for access,
@@ -299,7 +257,7 @@ paths:
         required: true
     delete:
       operationId: broker_user-ai-customizations_delete
-      summary: ViewSet for managing the current broker user's own AI customizations.
+      summary: ViewSet for managing the current broker user's own AI customizations
       description: 'Every broker user can fully manage their own personalizations; the
 
         ``broker_pk`` in the URL is the user''s agency and is validated for access,
@@ -326,19 +284,6 @@ paths:
       - 'broker: user-ai-customizations'
 components:
   schemas:
-    UserAICustomizationCreateUpdate:
-      required:
-      - customization_type
-      type: object
-      properties:
-        customization_type:
-          title: Customization type
-          type: string
-          format: uuid
-        value:
-          title: Value
-          description: Custom value for this type
-          type: string
     APIException:
       title: Generic API Error
       required:
@@ -347,20 +292,6 @@ components:
       properties:
         detail:
           description: Error details
-          type: string
-    UserAICustomization:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        customization_type:
-          $ref: '#/components/schemas/AICustomizationType'
-        value:
-          title: Value
-          description: Custom value for this type
           type: string
     GenericError:
       title: Generic API Error
@@ -405,6 +336,33 @@ components:
           type: string
           readOnly: true
           minLength: 1
+    UserAICustomizationCreateUpdate:
+      required:
+      - customization_type
+      type: object
+      properties:
+        customization_type:
+          title: Customization type
+          type: string
+          format: uuid
+        value:
+          title: Value
+          description: Custom value for this type
+          type: string
+    UserAICustomization:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        customization_type:
+          $ref: '#/components/schemas/AICustomizationType'
+        value:
+          title: Value
+          description: Custom value for this type
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

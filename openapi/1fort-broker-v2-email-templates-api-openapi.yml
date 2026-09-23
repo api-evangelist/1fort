@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -64,10 +22,30 @@ paths:
     parameters: []
     get:
       operationId: v2_broker_email-templates_manual-application-multi-coverage-template_list
-      summary: 'SendGrid content and message data for the combined multi-coverage
+      summary: SendGrid content and message data for the combined multi-coverage manual…
+      description: 'Returns the template''s latest active version (HTML and subject template)
 
-        manual application underwriter email.'
-      description: "Returns the template's latest active version (HTML and subject template)\ntogether with the same ``message_data`` and ``subject`` the combined\nunderwriter email is built from, so the frontend can render the exact\nemail locally.\n\nQuery params:\n- ``application_id``: application UUID (required). The message data is\n  built directly from the application's coverage applications (ordered\n  by creation), so it works before any quotes exist.\n\nThe AI fields (``narrative``, ``description_of_operations``) are\ngenerated the same way the send flow does, so responses take a few\nseconds; either key is omitted when generation fails."
+        together with the same ``message_data`` and ``subject`` the combined
+
+        underwriter email is built from, so the frontend can render the exact
+
+        email locally.
+
+
+        Query params:
+
+        - ``application_id``: application UUID (required). The message data is
+
+        built directly from the application''s coverage applications (ordered
+
+        by creation), so it works before any quotes exist.
+
+
+        The AI fields (``narrative``, ``description_of_operations``) are
+
+        generated the same way the send flow does, so responses take a few
+
+        seconds; either key is omitted when generation fails.'
       responses:
         '200':
           description: ''

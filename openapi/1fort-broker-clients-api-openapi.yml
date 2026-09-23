@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -362,46 +320,6 @@ paths:
         required: true
 components:
   schemas:
-    ApplicationPrefilledForm:
-      required:
-      - business
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        document_content:
-          title: Document content
-          type:
-          - string
-          - 'null'
-        form:
-          title: Form
-          type: string
-          readOnly: true
-          format: uri
-        application:
-          title: Application
-          type:
-          - string
-          - 'null'
-          format: uuid
-        created_by:
-          title: Created by
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        business:
-          title: Business
-          type: integer
     APIException:
       title: Generic API Error
       required:
@@ -411,6 +329,36 @@ components:
         detail:
           description: Error details
           type: string
+    BusinessSubsidiary:
+      required:
+      - name
+      - business
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        ownership:
+          title: Ownership
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        business:
+          title: Business
+          type: integer
     GenericError:
       title: Generic API Error
       required:
@@ -420,6 +368,57 @@ components:
         detail:
           description: Error details
           type: string
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    BrokerUserBusiness:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+          readOnly: true
+        first_name:
+          title: First name
+          type: string
+          readOnly: true
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          readOnly: true
+          minLength: 1
+        phone_number:
+          title: Phone number
+          type: string
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          readOnly: true
+          minLength: 1
+        type:
+          title: Type
+          type: string
+          readOnly: true
+          minLength: 1
+        is_primary:
+          title: Is primary
+          type: boolean
+          readOnly: true
+          default: false
     BrokerClient:
       required:
       - name
@@ -1449,87 +1448,6 @@ components:
           type:
           - integer
           - 'null'
-    BrokerUserBusiness:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: integer
-          readOnly: true
-        first_name:
-          title: First name
-          type: string
-          readOnly: true
-          minLength: 1
-        last_name:
-          title: Last name
-          type: string
-          readOnly: true
-          minLength: 1
-        phone_number:
-          title: Phone number
-          type: string
-          readOnly: true
-          minLength: 1
-        email:
-          title: Email
-          type: string
-          readOnly: true
-          minLength: 1
-        type:
-          title: Type
-          type: string
-          readOnly: true
-          minLength: 1
-        is_primary:
-          title: Is primary
-          type: boolean
-          readOnly: true
-          default: false
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    BusinessSubsidiary:
-      required:
-      - name
-      - business
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        ownership:
-          title: Ownership
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        business:
-          title: Business
-          type: integer
     BusinessUser:
       required:
       - first_name
@@ -1646,6 +1564,46 @@ components:
           type:
           - integer
           - 'null'
+    ApplicationPrefilledForm:
+      required:
+      - business
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        document_content:
+          title: Document content
+          type:
+          - string
+          - 'null'
+        form:
+          title: Form
+          type: string
+          readOnly: true
+          format: uri
+        application:
+          title: Application
+          type:
+          - string
+          - 'null'
+          format: uuid
+        created_by:
+          title: Created by
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        business:
+          title: Business
+          type: integer
   securitySchemes:
     Bearer:
       type: apiKey

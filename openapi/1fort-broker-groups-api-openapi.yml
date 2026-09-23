@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -70,13 +28,9 @@ paths:
     get:
       operationId: broker_groups_list
       summary: List Broker User Groups
-      description: '
+      description: 'List all broker user groups.
 
-        List all broker user groups.
-
-        Returns groups with member count for each group.
-
-        '
+        Returns groups with member count for each group.'
       parameters:
       - name: ordering
         in: query
@@ -142,11 +96,7 @@ paths:
     post:
       operationId: broker_groups_create
       summary: Create Broker User Group
-      description: '
-
-        Create a new broker user group.
-
-        '
+      description: Create a new broker user group.
       responses:
         '201':
           description: ''
@@ -191,11 +141,7 @@ paths:
     get:
       operationId: broker_groups_members_list
       summary: List Group Memberships
-      description: '
-
-        List all memberships for a specific broker user group.
-
-        '
+      description: List all memberships for a specific broker user group.
       parameters:
       - name: ordering
         in: query
@@ -261,13 +207,9 @@ paths:
     post:
       operationId: broker_groups_members_create
       summary: Add User to Group
-      description: '
+      description: 'Add a broker user to a group.
 
-        Add a broker user to a group.
-
-        Note: Each user can only have one active group membership at a time.
-
-        '
+        Note: Each user can only have one active group membership at a time.'
       responses:
         '201':
           description: ''
@@ -317,11 +259,7 @@ paths:
     delete:
       operationId: broker_groups_members_delete
       summary: Remove User from Group
-      description: '
-
-        Remove a broker user from a group by deleting the membership.
-
-        '
+      description: Remove a broker user from a group by deleting the membership.
       responses:
         '204':
           description: ''
@@ -356,11 +294,7 @@ paths:
     get:
       operationId: broker_groups_read
       summary: Get Broker User Group
-      description: '
-
-        Get detailed information about a specific broker user group.
-
-        '
+      description: Get detailed information about a specific broker user group.
       responses:
         '200':
           description: ''
@@ -387,11 +321,7 @@ paths:
     put:
       operationId: broker_groups_update
       summary: Update Broker User Group
-      description: '
-
-        Update a broker user group.
-
-        '
+      description: Update a broker user group.
       responses:
         '200':
           description: ''
@@ -430,11 +360,7 @@ paths:
     patch:
       operationId: broker_groups_partial_update
       summary: Partially Update Broker User Group
-      description: '
-
-        Partially update a broker user group.
-
-        '
+      description: Partially update a broker user group.
       responses:
         '200':
           description: ''
@@ -473,11 +399,7 @@ paths:
     delete:
       operationId: broker_groups_delete
       summary: Delete Broker User Group
-      description: '
-
-        Delete a broker user group. Only groups without members can be deleted.
-
-        '
+      description: Delete a broker user group. Only groups without members can be deleted.
       responses:
         '204':
           description: ''
@@ -508,6 +430,15 @@ components:
         detail:
           description: Error details
           type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     BrokerUserGroupMembershipCreate:
       required:
       - broker_user
@@ -521,15 +452,163 @@ components:
           title: Is active
           description: Whether this membership is currently active
           type: boolean
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
+    ValidationError:
+      title: Validation Error
       type: object
       properties:
-        detail:
-          description: Error details
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
           type: string
+    BrokerUserGroupMembershipList:
+      required:
+      - broker_user
+      - group
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        broker_user:
+          title: Broker user
+          description: The broker user who is a member of the group
+          type: integer
+        broker_user_email:
+          title: Broker user email
+          type: string
+          readOnly: true
+          minLength: 1
+        broker_user_name:
+          title: Broker user name
+          type: string
+          readOnly: true
+        group:
+          title: Group
+          description: The group the broker user belongs to
+          type: string
+          format: uuid
+        group_name:
+          title: Group name
+          type: string
+          readOnly: true
+          minLength: 1
+        is_active:
+          title: Is active
+          description: Whether this membership is currently active
+          type: boolean
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+    BrokerUserGroupDetail:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          description: Name of the broker user group
+          type: string
+          maxLength: 255
+          minLength: 1
+        domain:
+          title: Domain
+          description: Domain name associated with this group
+          type:
+          - string
+          - 'null'
+          maxLength: 500
+        agency:
+          title: Agency
+          description: The agency this group belongs to
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        agency_name:
+          title: Agency name
+          type: string
+          readOnly: true
+          minLength: 1
+        address:
+          title: Address
+          description: Full address of the group
+          type:
+          - string
+          - 'null'
+        npn_number:
+          title: Npn number
+          description: National Producer Number (NPN) for this group
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        phone_number:
+          title: Phone number
+          description: Primary phone number for the group
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        office_phone_number:
+          title: Office phone number
+          description: Office phone number for the group
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        accounting_email:
+          description: List of accounting email addresses for this group
+          type:
+          - array
+          - 'null'
+          items:
+            title: Accounting email
+            type: string
+            format: email
+            maxLength: 254
+            minLength: 1
+        logo:
+          title: Logo
+          description: Logo for this broker user group
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        member_count:
+          title: Member count
+          type: string
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
     BrokerUserGroupList:
       required:
       - name
@@ -689,163 +768,6 @@ components:
           - 'null'
           readOnly: true
           format: uri
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    BrokerUserGroupDetail:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          description: Name of the broker user group
-          type: string
-          maxLength: 255
-          minLength: 1
-        domain:
-          title: Domain
-          description: Domain name associated with this group
-          type:
-          - string
-          - 'null'
-          maxLength: 500
-        agency:
-          title: Agency
-          description: The agency this group belongs to
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        agency_name:
-          title: Agency name
-          type: string
-          readOnly: true
-          minLength: 1
-        address:
-          title: Address
-          description: Full address of the group
-          type:
-          - string
-          - 'null'
-        npn_number:
-          title: Npn number
-          description: National Producer Number (NPN) for this group
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        phone_number:
-          title: Phone number
-          description: Primary phone number for the group
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        office_phone_number:
-          title: Office phone number
-          description: Office phone number for the group
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        accounting_email:
-          description: List of accounting email addresses for this group
-          type:
-          - array
-          - 'null'
-          items:
-            title: Accounting email
-            type: string
-            format: email
-            maxLength: 254
-            minLength: 1
-        logo:
-          title: Logo
-          description: Logo for this broker user group
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        member_count:
-          title: Member count
-          type: string
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          title: Updated at
-          type: string
-          format: date-time
-          readOnly: true
-    BrokerUserGroupMembershipList:
-      required:
-      - broker_user
-      - group
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        broker_user:
-          title: Broker user
-          description: The broker user who is a member of the group
-          type: integer
-        broker_user_email:
-          title: Broker user email
-          type: string
-          readOnly: true
-          minLength: 1
-        broker_user_name:
-          title: Broker user name
-          type: string
-          readOnly: true
-        group:
-          title: Group
-          description: The group the broker user belongs to
-          type: string
-          format: uuid
-        group_name:
-          title: Group name
-          type: string
-          readOnly: true
-          minLength: 1
-        is_active:
-          title: Is active
-          description: Whether this membership is currently active
-          type: boolean
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          title: Updated at
-          type: string
-          format: date-time
-          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

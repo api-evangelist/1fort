@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -56,7 +14,7 @@ servers:
 security:
 - Bearer: []
 tags:
-- name: checkout
+- name: Checkout
   x-displayName: Checkout
   description: 'Checkout and payment session endpoints.
 
@@ -67,8 +25,10 @@ paths:
     parameters: []
     get:
       operationId: checkout_invoices_list
-      summary: Get invoices by IDs for checkout display.
-      description: "Query params:\n    ids: Comma-separated list of invoice UUIDs and/or short ids"
+      summary: Get invoices by IDs for checkout display
+      description: 'Query params:
+
+        ids: Comma-separated list of invoice UUIDs and/or short ids'
       responses:
         '200':
           description: ''
@@ -81,14 +41,18 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - checkout
+      - Checkout
       security: []
   /checkout/invoices/payment-intent:
     parameters: []
     post:
       operationId: checkout_invoices_create_payment_intent
-      summary: Create a Stripe PaymentIntent for the given invoices.
-      description: "Request body:\n    invoice_ids: List of invoice UUIDs\n    amounts: Optional list of amounts (in cents) per invoice"
+      summary: Create a Stripe PaymentIntent for the given invoices
+      description: 'Request body:
+
+        invoice_ids: List of invoice UUIDs
+
+        amounts: Optional list of amounts (in cents) per invoice'
       responses:
         '201':
           description: ''
@@ -101,7 +65,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - checkout
+      - Checkout
       security: []
   /checkout/invoices/search:
     parameters: []
@@ -120,7 +84,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - checkout
+      - Checkout
       security: []
       summary: Search
   /checkout/invoices/{id}/pdf:
@@ -153,7 +117,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - checkout
+      - Checkout
       security: []
       summary: Pdf
   /checkout/invoices/{id}/proposal:
@@ -165,9 +129,7 @@ paths:
         type: string
     get:
       operationId: checkout_invoices_proposal
-      summary: 'Generate and stream the insurance proposal PDF for the quote that
-
-        backs this CheckoutInvoice.'
+      summary: Generate and stream the insurance proposal PDF for the quote that backs this…
       description: 'Public counterpart to the broker-authenticated proposal endpoint:
 
         always regenerates via ``ProposalPDFService`` (executive format) so
@@ -204,7 +166,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - checkout
+      - Checkout
       security: []
   /checkout/invoices/{id}/receipt:
     parameters:
@@ -245,7 +207,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - checkout
+      - Checkout
       security: []
       summary: Receipt
   /checkout/sessions:
@@ -314,7 +276,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - checkout
+      - Checkout
       security: []
       summary: List Sessions
   /checkout/sessions/{id}:
@@ -351,7 +313,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - checkout
+      - Checkout
       security: []
       summary: Retrieve Session
   /checkout/sessions/{id}/stripe-amount:
@@ -394,7 +356,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - checkout
+      - Checkout
       security: []
       summary: Stripe amount
       requestBody:
@@ -414,7 +376,7 @@ paths:
         format: uuid
     get:
       operationId: checkout_sessions_stripe_receipt
-      summary: On-demand Stripe receipt details for the session's completed payment.
+      summary: On-demand Stripe receipt details for the session's completed payment
       description: 'GET /checkout/sessions/{id}/stripe-receipt
 
 
@@ -449,7 +411,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - checkout
+      - Checkout
       security: []
   /checkout/webhook:
     parameters: []
@@ -468,11 +430,43 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - checkout
+      - Checkout
       security: []
       summary: Create Webhook
 components:
   schemas:
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
     CheckoutSession:
       required:
       - total_amount_cents
@@ -535,38 +529,6 @@ components:
           - string
           - 'null'
           format: date-time
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
   securitySchemes:
     Bearer:
       type: apiKey

@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -234,7 +192,7 @@ paths:
     parameters: []
     get:
       operationId: v2_broker_tasks_count
-      summary: ViewSet for managing quote tasks for the broker agency.
+      summary: ViewSet for managing quote tasks for the broker agency
       description: Only returns tasks from the most recently created task group for each quote.
       parameters:
       - name: status
@@ -349,7 +307,7 @@ paths:
         type: string
     get:
       operationId: v2_broker_tasks_read
-      summary: ViewSet for managing quote tasks for the broker agency.
+      summary: ViewSet for managing quote tasks for the broker agency
       description: Only returns tasks from the most recently created task group for each quote.
       responses:
         '200':
@@ -534,7 +492,7 @@ paths:
         type: string
     get:
       operationId: v2_broker_tasks_read
-      summary: ViewSet for managing quote tasks for a specific business.
+      summary: ViewSet for managing quote tasks for a specific business
       description: Only returns tasks from the most recently created task group for each quote.
       responses:
         '200':
@@ -561,6 +519,27 @@ paths:
       - 'quote (v2): tasks'
 components:
   schemas:
+    QuoteTaskDocument:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        document:
+          title: Document
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
     APIException:
       title: Generic API Error
       required:
@@ -570,6 +549,70 @@ components:
         detail:
           description: Error details
           type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    QuoteTaskResolve:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+        status:
+          title: Status
+          type: string
+          enum:
+          - todo
+          - done
+          - dismissed
+          - n/a
+        resolution_comment:
+          title: Resolution comment
+          type: string
+        quote_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        document_files:
+          type: array
+          items:
+            type: string
+            readOnly: true
+            format: uri
+        document_names:
+          type: array
+          items:
+            type: string
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteTaskDocument'
+          readOnly: true
     QuoteTaskFlexFields:
       required:
       - title
@@ -689,91 +732,6 @@ components:
           type:
           - integer
           - 'null'
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    QuoteTaskResolve:
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-        status:
-          title: Status
-          type: string
-          enum:
-          - todo
-          - done
-          - dismissed
-          - n/a
-        resolution_comment:
-          title: Resolution comment
-          type: string
-        quote_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          uniqueItems: true
-        document_files:
-          type: array
-          items:
-            type: string
-            readOnly: true
-            format: uri
-        document_names:
-          type: array
-          items:
-            type: string
-        documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteTaskDocument'
-          readOnly: true
-    QuoteTaskDocument:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        document:
-          title: Document
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
     QuoteTaskBulkResolve:
       required:
       - tasks

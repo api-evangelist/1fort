@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -77,9 +35,7 @@ paths:
     put:
       operationId: agent_update_attachment_metadata
       summary: Update Attachment Metadata (Merge)
-      description: '
-
-        Update attachment metadata after classification/extraction.
+      description: 'Update attachment metadata after classification/extraction.
 
 
         **Merge semantics**: keys present in the request body overwrite the
@@ -101,9 +57,7 @@ paths:
         **Authentication**: Requires API Key + Session Token
 
 
-        **Scoping**: Attachment must belong to an email within the session''s broker scope.
-
-        '
+        **Scoping**: Attachment must belong to an email within the session''s broker scope.'
       parameters:
       - name: X-Processing-Session
         in: header
@@ -163,9 +117,7 @@ paths:
     patch:
       operationId: agent_update_attachment_metadata
       summary: Update Attachment Metadata (Merge)
-      description: '
-
-        Update attachment metadata after classification/extraction.
+      description: 'Update attachment metadata after classification/extraction.
 
 
         **Merge semantics**: keys present in the request body overwrite the
@@ -187,9 +139,7 @@ paths:
         **Authentication**: Requires API Key + Session Token
 
 
-        **Scoping**: Attachment must belong to an email within the session''s broker scope.
-
-        '
+        **Scoping**: Attachment must belong to an email within the session''s broker scope.'
       parameters:
       - name: X-Processing-Session
         in: header
@@ -248,31 +198,28 @@ paths:
         required: true
 components:
   schemas:
-    AttachmentMetadataUpdate:
+    ErrorResponse:
       required:
-      - processing_status
-      - metadata
+      - error
       type: object
       properties:
-        processing_status:
-          title: Processing status
-          description: 'Processing status (required): UNPROCESSED, QUEUED, PROCESSING, COMPLETED, FAILED, SKIPPED.'
-          type: string
-          enum:
-          - UNPROCESSED
-          - QUEUED
-          - PROCESSING
-          - COMPLETED
-          - FAILED
-          - SKIPPED
-        metadata:
-          title: Metadata
-          description: 'Fields to merge into existing metadata (per-key upsert). Common fields: document_type, document_year, coverage_types, insurance_context, extracted, potential_insureds_count.'
+        error:
+          title: Error
+          description: Error details with code and message.
           type: object
           additionalProperties:
-            type:
-            - string
-            - 'null'
+            type: string
+            minLength: 1
+        request_id:
+          title: Request id
+          description: Request ID for debugging.
+          type: string
+          minLength: 1
+        timestamp:
+          title: Timestamp
+          description: When the error occurred.
+          type: string
+          format: date-time
     AttachmentMetadataUpdateResponse:
       type: object
       properties:
@@ -316,28 +263,31 @@ components:
           type: string
           format: date-time
           readOnly: true
-    ErrorResponse:
+    AttachmentMetadataUpdate:
       required:
-      - error
+      - processing_status
+      - metadata
       type: object
       properties:
-        error:
-          title: Error
-          description: Error details with code and message.
+        processing_status:
+          title: Processing status
+          description: 'Processing status (required): UNPROCESSED, QUEUED, PROCESSING, COMPLETED, FAILED, SKIPPED.'
+          type: string
+          enum:
+          - UNPROCESSED
+          - QUEUED
+          - PROCESSING
+          - COMPLETED
+          - FAILED
+          - SKIPPED
+        metadata:
+          title: Metadata
+          description: 'Fields to merge into existing metadata (per-key upsert). Common fields: document_type, document_year, coverage_types, insurance_context, extracted, potential_insureds_count.'
           type: object
           additionalProperties:
-            type: string
-            minLength: 1
-        request_id:
-          title: Request id
-          description: Request ID for debugging.
-          type: string
-          minLength: 1
-        timestamp:
-          title: Timestamp
-          description: When the error occurred.
-          type: string
-          format: date-time
+            type:
+            - string
+            - 'null'
   securitySchemes:
     Bearer:
       type: apiKey

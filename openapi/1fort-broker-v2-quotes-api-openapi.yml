@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -64,8 +22,49 @@ paths:
     parameters: []
     get:
       operationId: v2_broker_quotes_list
-      summary: Paginated ViewSet for retrieving quotes for the broker.
-      description: "Supports Filtering By:\n- insured\n- has_tasks\n- status\n- payment_status\n- coverage_type\n- carrier (carrier UUID; comma-separated for multiple)\n- wholesaler (wholesaler UUID; comma-separated for multiple)\n- broker (Agent ID)\n- effective_date_min (minimum effective date, inclusive)\n- effective_date_max (maximum effective date, inclusive)\n\nSupports Searching By:\n- insured\n\nSupports Sorting By:\n- created_at\n- effective_date\n\nAdditional actions:\n- GET ``filter-options``: returns the distinct carriers and wholesalers\n  that appear in the broker's quotes, for populating filter dropdowns\n  without fetching the global carrier/wholesaler lists."
+      summary: Paginated ViewSet for retrieving quotes for the broker
+      description: 'Supports Filtering By:
+
+        - insured
+
+        - has_tasks
+
+        - status
+
+        - payment_status
+
+        - coverage_type
+
+        - carrier (carrier UUID; comma-separated for multiple)
+
+        - wholesaler (wholesaler UUID; comma-separated for multiple)
+
+        - broker (Agent ID)
+
+        - effective_date_min (minimum effective date, inclusive)
+
+        - effective_date_max (maximum effective date, inclusive)
+
+
+        Supports Searching By:
+
+        - insured
+
+
+        Supports Sorting By:
+
+        - created_at
+
+        - effective_date
+
+
+        Additional actions:
+
+        - GET ``filter-options``: returns the distinct carriers and wholesalers
+
+        that appear in the broker''s quotes, for populating filter dropdowns
+
+        without fetching the global carrier/wholesaler lists.'
       parameters:
       - name: insured
         in: query
@@ -282,7 +281,7 @@ paths:
     parameters: []
     get:
       operationId: v2_broker_quotes_filter_options
-      summary: Return distinct markets (carriers and wholesalers) for the broker's quotes.
+      summary: Return distinct markets (carriers and wholesalers) for the broker's quotes
       description: 'Used to populate the Markets filter on the broker /quotes page without
 
         loading the full global carrier/wholesaler catalogues. Honors the same
@@ -423,8 +422,49 @@ paths:
         format: uuid
     get:
       operationId: v2_broker_quotes_read
-      summary: Paginated ViewSet for retrieving quotes for the broker.
-      description: "Supports Filtering By:\n- insured\n- has_tasks\n- status\n- payment_status\n- coverage_type\n- carrier (carrier UUID; comma-separated for multiple)\n- wholesaler (wholesaler UUID; comma-separated for multiple)\n- broker (Agent ID)\n- effective_date_min (minimum effective date, inclusive)\n- effective_date_max (maximum effective date, inclusive)\n\nSupports Searching By:\n- insured\n\nSupports Sorting By:\n- created_at\n- effective_date\n\nAdditional actions:\n- GET ``filter-options``: returns the distinct carriers and wholesalers\n  that appear in the broker's quotes, for populating filter dropdowns\n  without fetching the global carrier/wholesaler lists."
+      summary: Paginated ViewSet for retrieving quotes for the broker
+      description: 'Supports Filtering By:
+
+        - insured
+
+        - has_tasks
+
+        - status
+
+        - payment_status
+
+        - coverage_type
+
+        - carrier (carrier UUID; comma-separated for multiple)
+
+        - wholesaler (wholesaler UUID; comma-separated for multiple)
+
+        - broker (Agent ID)
+
+        - effective_date_min (minimum effective date, inclusive)
+
+        - effective_date_max (maximum effective date, inclusive)
+
+
+        Supports Searching By:
+
+        - insured
+
+
+        Supports Sorting By:
+
+        - created_at
+
+        - effective_date
+
+
+        Additional actions:
+
+        - GET ``filter-options``: returns the distinct carriers and wholesalers
+
+        that appear in the broker''s quotes, for populating filter dropdowns
+
+        without fetching the global carrier/wholesaler lists.'
       responses:
         '200':
           description: ''
@@ -497,80 +537,6 @@ components:
       properties:
         detail:
           description: Error details
-          type: string
-    BrokerQuoteFollowUpNotification:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        follow_up_notifications:
-          title: Follow up notifications
-          description: This will disable us sending email follow-ups to the underwriter for this quote
-          type: boolean
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    CarrierList:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        am_best_rating:
-          title: Am best rating
-          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
           type: string
     BrokerQuoteV2FlexFields:
       required:
@@ -682,6 +648,80 @@ components:
           title: Source display
           type: string
           readOnly: true
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    BrokerQuoteFollowUpNotification:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        follow_up_notifications:
+          title: Follow up notifications
+          description: This will disable us sending email follow-ups to the underwriter for this quote
+          type: boolean
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    CarrierList:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        am_best_rating:
+          title: Am best rating
+          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
   securitySchemes:
     Bearer:
       type: apiKey

@@ -1,52 +1,10 @@
 openapi: 3.2.0
 info:
-  title: 1Fort API Documentation storefront (v2) storefront (v2) API
+  title: 1Fort API Documentation storefront (v2) API
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -77,7 +35,7 @@ paths:
         type: string
     get:
       operationId: v2_storefront-agencies_brokers_read
-      summary: Public broker user card resolved by agency identifier + broker user ``slug``.
+      summary: Public broker user card resolved by agency identifier + broker user ``slug``
       description: '``AllowAny`` (API key optional). Response includes contact fields (``email``,
 
         ``phone_number``) for intentional “contact your agent” storefront UI; the
@@ -363,7 +321,7 @@ paths:
         type: string
     post:
       operationId: v2_storefront-applications_submit
-      summary: Submit a StoreFront Application.
+      summary: Submit a StoreFront Application
       description: 'The service fans out over every CoverageApplication under the parent
 
         Application; successful covapps are marked SUBMITTED, failed covapps
@@ -427,7 +385,7 @@ paths:
         type: string
     post:
       operationId: v2_storefront-applications_sanity-check-ai_create
-      summary: Create a new sanity check request for the storefront application.
+      summary: Create a new sanity check request for the storefront application
       description: Returns existing sanity check if one already exists with matching context hash.
       responses:
         '201':
@@ -553,7 +511,7 @@ paths:
         format: uuid
     get:
       operationId: v2_storefront-applications_sanity-check-ai_read
-      summary: ViewSet for AI sanity check on storefront applications.
+      summary: ViewSet for AI sanity check on storefront applications
       description: 'Uses API key authentication (StoreFrontPermission) instead of broker auth.
 
         Resolves coverage_application from the storefront_application_pk URL parameter.'
@@ -584,7 +542,7 @@ paths:
       - ApiKey: []
     put:
       operationId: v2_storefront-applications_sanity-check-ai_update
-      summary: ViewSet for AI sanity check on storefront applications.
+      summary: ViewSet for AI sanity check on storefront applications
       description: 'Uses API key authentication (StoreFrontPermission) instead of broker auth.
 
         Resolves coverage_application from the storefront_application_pk URL parameter.'
@@ -896,7 +854,7 @@ paths:
         type: string
     post:
       operationId: v2_storefront-applications_supplementary-questions_create
-      summary: Trigger supplementary questions generation.
+      summary: Trigger supplementary questions generation
       description: 'Returns an existing non-failed request if one already exists with the same
 
         context hash, otherwise creates a new one and starts processing.'
@@ -947,7 +905,7 @@ paths:
         format: uuid
     get:
       operationId: v2_storefront-applications_supplementary-questions_read
-      summary: ViewSet for generating supplementary questions for storefront applications via Claude AI.
+      summary: ViewSet for generating supplementary questions for storefront applications via…
       description: 'Uses StoreFrontPermission (API key auth). Resolves coverage_application from
 
         the storefront_application_pk URL parameter.'
@@ -978,7 +936,7 @@ paths:
       - ApiKey: []
     put:
       operationId: v2_storefront-applications_supplementary-questions_update
-      summary: ViewSet for generating supplementary questions for storefront applications via Claude AI.
+      summary: ViewSet for generating supplementary questions for storefront applications via…
       description: 'Uses StoreFrontPermission (API key auth). Resolves coverage_application from
 
         the storefront_application_pk URL parameter.'
@@ -1064,7 +1022,7 @@ paths:
     parameters: []
     post:
       operationId: v2_storefront-auth_create
-      summary: Exchange a storefront sharable-link token for JWT credentials.
+      summary: Exchange a storefront sharable-link token for JWT credentials
       description: 'Single-use: provisions the applicant''s User + BusinessUser on first use;
 
         once a BusinessUser exists for the email + business, responds 409 so the
@@ -1103,7 +1061,7 @@ paths:
     parameters: []
     get:
       operationId: v2_storefront-coverage-types_list
-      summary: ViewSet for retrieving coverage types available for storefronts.
+      summary: ViewSet for retrieving coverage types available for storefronts
       description: 'Returns active canonical product lines (those with no `canonical_product_line`
 
         alias set) that have at least one active carrier product. Aliased rows are
@@ -1186,7 +1144,7 @@ paths:
         format: uuid
     get:
       operationId: v2_storefront-coverage-types_read
-      summary: ViewSet for retrieving coverage types available for storefronts.
+      summary: ViewSet for retrieving coverage types available for storefronts
       description: 'Returns active canonical product lines (those with no `canonical_product_line`
 
         alias set) that have at least one active carrier product. Aliased rows are
@@ -1377,7 +1335,7 @@ paths:
         type: string
     get:
       operationId: v2_storefronts_read
-      summary: Retrieve a storefront by URL slug.
+      summary: Retrieve a storefront by URL slug
       description: 'If the slug is an old slug that has been changed, returns the storefront
 
         data with an additional `redirect_to_slug` field. The frontend should use
@@ -1416,8 +1374,23 @@ paths:
         type: string
     post:
       operationId: v2_storefronts_coverage_recommendations
-      summary: Return coverage recommendations for the storefront's broker.
-      description: "Accepts a JSON body with context about the prospective business:\n  - brokerSlug (str, optional) — if provided, must match the URL slug; 400 on mismatch\n  - industryClassification (str)\n  - address (object: line1, line2, city, state, postal_code, country_code)\n  - domain (str)\n\nUses Claude Sonnet via OpenRouter to pick the top 3 coverages from the\nbroker's available product lines and return customer-facing explanations.\nReturns 502 if the LLM call fails."
+      summary: Return coverage recommendations for the storefront's broker
+      description: 'Accepts a JSON body with context about the prospective business:
+
+        - brokerSlug (str, optional) — if provided, must match the URL slug; 400 on mismatch
+
+        - industryClassification (str)
+
+        - address (object: line1, line2, city, state, postal_code, country_code)
+
+        - domain (str)
+
+
+        Uses Claude Sonnet via OpenRouter to pick the top 3 coverages from the
+
+        broker''s available product lines and return customer-facing explanations.
+
+        Returns 502 if the LLM call fails.'
       responses:
         '201':
           description: ''
@@ -1463,7 +1436,7 @@ paths:
         type: string
     get:
       operationId: v2_storefronts_coverage_types
-      summary: Get the coverage types for the broker who owns the storefront.
+      summary: Get the coverage types for the broker who owns the storefront
       description: 'If the slug is an old slug that has been changed, includes `redirect_to_slug`
 
         in the response for frontend to update the URL.'
@@ -1493,54 +1466,6 @@ paths:
       security: []
 components:
   schemas:
-    StoreFrontBrokerUserCard:
-      type: object
-      properties:
-        slug:
-          title: Slug
-          description: URL-safe identifier per agency from the user's name (e.g. ernesto-freyre). Populated automatically when empty.
-          type:
-          - string
-          - 'null'
-          format: slug
-          pattern: ^[-a-zA-Z0-9_]+$
-          maxLength: 255
-        first_name:
-          title: First name
-          type: string
-          readOnly: true
-          minLength: 1
-        last_name:
-          title: Last name
-          type: string
-          readOnly: true
-          minLength: 1
-        email:
-          title: Email
-          type: string
-          format: email
-          readOnly: true
-          minLength: 1
-        phone_number:
-          title: Phone number
-          type: string
-          readOnly: true
-        type:
-          title: Type
-          description: Specifies the insurance-related role type of the user within the agency.
-          type:
-          - string
-          - 'null'
-          enum:
-          - LEADERSHIP
-          - SALES
-          - SERVICE
-          - MARKETS
-          - OPERATIONS
-        storefront_url_slug:
-          title: Storefront url slug
-          type: string
-          readOnly: true
     APIException:
       title: Generic API Error
       required:
@@ -1550,7 +1475,14 @@ components:
         detail:
           description: Error details
           type: string
-    CanonicalProductLineRef:
+    SupplementaryQuestionsUpdate:
+      type: object
+      properties:
+        user_answers:
+          title: User Answers
+          description: User-provided answers to supplementary questions keyed by question id
+          type: object
+    ProductLine:
       required:
       - code
       type: object
@@ -1565,19 +1497,76 @@ components:
           type: string
           maxLength: 150
           minLength: 1
-        display_name:
-          title: Display name
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        name:
+          title: Name
+          type: string
+          readOnly: true
+        is_core:
+          title: Is core
+          type: boolean
+          readOnly: true
+        sub_product_lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubProductLine'
+          readOnly: true
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        category:
+          title: Category
+          type:
+          - string
+          - 'null'
+          enum:
+          - Property
+          - Casualty
+          - Both
+          - Property only
+        canonical_product_line:
+          $ref: '#/components/schemas/CanonicalProductLineRef'
+    SubProductLine:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
           type:
           - string
           - 'null'
           maxLength: 255
-    SupplementaryQuestionsUpdate:
-      type: object
-      properties:
-        user_answers:
-          title: User Answers
-          description: User-provided answers to supplementary questions keyed by question id
-          type: object
+        display_name:
+          title: Display name
+          description: Name used on the Frontend.
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
     SupplementaryQuestionsRequest:
       required:
       - coverage_application
@@ -1642,100 +1631,20 @@ components:
           description: The coverage application to generate supplementary questions for
           type: string
           format: uuid
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
+    ValidationError:
+      title: Validation Error
       type: object
       properties:
-        detail:
-          description: Error details
-          type: string
-    SubProductLine:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        display_name:
-          title: Display name
-          description: Name used on the Frontend.
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-    ProductLine:
-      required:
-      - code
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        code:
-          title: Code
-          type: string
-          maxLength: 150
-          minLength: 1
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        name:
-          title: Name
-          type: string
-          readOnly: true
-        is_core:
-          title: Is core
-          type: boolean
-          readOnly: true
-        sub_product_lines:
+        non_field_errors:
+          description: List of validation errors not related to any field
           type: array
           items:
-            $ref: '#/components/schemas/SubProductLine'
-          readOnly: true
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        category:
-          title: Category
-          type:
-          - string
-          - 'null'
-          enum:
-          - Property
-          - Casualty
-          - Both
-          - Property only
-        canonical_product_line:
-          $ref: '#/components/schemas/CanonicalProductLineRef'
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
     SanityCheckRequest:
       required:
       - coverage_application
@@ -1801,27 +1710,27 @@ components:
           type:
           - string
           - 'null'
-    ValidationError:
-      title: Validation Error
+    StoreFrontPublic:
       type: object
       properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
+        id:
+          title: Id
           type: string
-    SanityCheckUpdate:
-      type: object
-      properties:
-        hidden_fields:
-          title: Hidden Fields
-          description: Dismissed or no longer relevant fields that should be removed from the ai_response.
-          type: object
+          format: uuid
+          readOnly: true
+        broker_user:
+          $ref: '#/components/schemas/StoreFrontBrokerUserPublic'
+        url_slug:
+          title: Url slug
+          type: string
+          readOnly: true
+          minLength: 1
+        broker:
+          $ref: '#/components/schemas/StoreFrontBroker'
+        broker_group:
+          title: Broker group
+          type: string
+          readOnly: true
     StoreFrontAgencyPublic:
       required:
       - name
@@ -1879,67 +1788,6 @@ components:
           title: Default broker user card
           type: string
           readOnly: true
-    StoreFrontPublic:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        broker_user:
-          $ref: '#/components/schemas/StoreFrontBrokerUserPublic'
-        url_slug:
-          title: Url slug
-          type: string
-          readOnly: true
-          minLength: 1
-        broker:
-          $ref: '#/components/schemas/StoreFrontBroker'
-        broker_group:
-          title: Broker group
-          type: string
-          readOnly: true
-    StoreFrontApplicationSupplementaryDocument:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        question_elabel_id:
-          title: Question elabel id
-          description: Links this document to a specific file_upload question by elabel_id
-          type:
-          - string
-          - 'null'
-          maxLength: 100
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          title: Updated at
-          type: string
-          format: date-time
-          readOnly: true
-        download_url:
-          title: Download url
-          type: string
-          readOnly: true
     StoreFrontBroker:
       required:
       - name
@@ -1976,6 +1824,15 @@ components:
           - string
           - 'null'
           maxLength: 255
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     StoreFrontBrokerUserPublic:
       type: object
       properties:
@@ -2020,6 +1877,122 @@ components:
           - SERVICE
           - MARKETS
           - OPERATIONS
+    SanityCheckUpdate:
+      type: object
+      properties:
+        hidden_fields:
+          title: Hidden Fields
+          description: Dismissed or no longer relevant fields that should be removed from the ai_response.
+          type: object
+    StoreFrontBrokerUserCard:
+      type: object
+      properties:
+        slug:
+          title: Slug
+          description: URL-safe identifier per agency from the user's name (e.g. ernesto-freyre). Populated automatically when empty.
+          type:
+          - string
+          - 'null'
+          format: slug
+          pattern: ^[-a-zA-Z0-9_]+$
+          maxLength: 255
+        first_name:
+          title: First name
+          type: string
+          readOnly: true
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        phone_number:
+          title: Phone number
+          type: string
+          readOnly: true
+        type:
+          title: Type
+          description: Specifies the insurance-related role type of the user within the agency.
+          type:
+          - string
+          - 'null'
+          enum:
+          - LEADERSHIP
+          - SALES
+          - SERVICE
+          - MARKETS
+          - OPERATIONS
+        storefront_url_slug:
+          title: Storefront url slug
+          type: string
+          readOnly: true
+    CanonicalProductLineRef:
+      required:
+      - code
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        code:
+          title: Code
+          type: string
+          maxLength: 150
+          minLength: 1
+        display_name:
+          title: Display name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+    StoreFrontApplicationSupplementaryDocument:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        question_elabel_id:
+          title: Question elabel id
+          description: Links this document to a specific file_upload question by elabel_id
+          type:
+          - string
+          - 'null'
+          maxLength: 100
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+        download_url:
+          title: Download url
+          type: string
+          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

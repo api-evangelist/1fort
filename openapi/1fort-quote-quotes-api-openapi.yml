@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -202,50 +160,6 @@ paths:
       summary: Download pdf
 components:
   schemas:
-    Carrier:
-      required:
-      - name
-      - products
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        am_best_rating:
-          title: Am best rating
-          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-        products:
-          type: array
-          items:
-            $ref: '#/components/schemas/CarrierProduct'
     APIException:
       title: Generic API Error
       required:
@@ -255,296 +169,6 @@ components:
         detail:
           description: Error details
           type: string
-    QuoteReadOnly:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        business:
-          $ref: '#/components/schemas/BusinessList'
-        broker:
-          $ref: '#/components/schemas/BrokerAgency'
-        application:
-          $ref: '#/components/schemas/ApplicationList'
-        carrier:
-          $ref: '#/components/schemas/Carrier'
-        mga:
-          $ref: '#/components/schemas/Wholesaler'
-        download_pdf:
-          title: Download pdf
-          type: string
-          readOnly: true
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteFile'
-          readOnly: true
-        has_bind_request:
-          title: Has bind request
-          type: string
-          readOnly: true
-        version:
-          title: Version
-          type: string
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        status:
-          title: Status
-          type: string
-          enum:
-          - draft
-          - issued
-          - declined
-          - expired
-          - selected_for_binding
-          - awaiting_payment
-          - bound
-          - cancelled
-        quote_type:
-          title: Quote type
-          type: string
-          enum:
-          - excess
-          - ADMITTED
-          - SURPLUS_LINES
-          - ADMITTED_AND_SURPLUS_LINES
-        quote_number:
-          title: Quote number
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        policy_number:
-          title: Policy number
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        limit:
-          title: Limit
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-        retention:
-          title: Retention
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-        premium:
-          title: Premium
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-        policy_term_months:
-          title: Policy term months
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        issue_date:
-          title: Issue date
-          type:
-          - string
-          - 'null'
-          format: date
-        minimum_days_to_cancel:
-          title: Minimum days to cancel
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        additional_notes:
-          title: Additional notes
-          type:
-          - string
-          - 'null'
-        type:
-          title: Type
-          type:
-          - string
-          - 'null'
-          enum:
-          - BUSINESS_OWNERS_POLICY
-          - WORKERS_COMPENSATION
-          - GENERAL_LIABILITY
-          - MISCELLANEOUS_PROFESSIONAL_LIABILITY
-          - CYBER
-          - PROFESSIONAL_LIABILITY
-          - TECHNOLOGY_ERRORS_AND_OMISSIONS
-          - DIRECTORS_AND_OFFICERS
-          - EMPLOYMENT_PRACTICES_LIABILITY
-          - FIDUCIARY_LIABILITY
-          - KIDNAP_AND_RANSOM
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    BusinessList:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        industry:
-          title: Industry
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        number_of_employees:
-          title: Number of employees
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        active:
-          title: Active
-          type: boolean
-        domain_name:
-          title: Domain name
-          type:
-          - string
-          - 'null'
-          maxLength: 500
-        subsidiaries:
-          type: array
-          items:
-            $ref: '#/components/schemas/BusinessSubsidiary'
-          readOnly: true
-        revenue:
-          title: Revenue
-          type:
-          - integer
-          - 'null'
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-    UserForBrokerAgency:
-      type: object
-      properties:
-        first_name:
-          title: First name
-          type: string
-          maxLength: 255
-          minLength: 1
-        last_name:
-          title: Last name
-          type: string
-          maxLength: 255
-          minLength: 1
-        user_defined_role:
-          title: User defined role
-          type: string
-          maxLength: 255
-          minLength: 1
-    AgencySubscription:
-      type: object
-      properties:
-        name:
-          title: Name
-          description: Display name for the plan (e.g. "Pro plan").
-          type: string
-          readOnly: true
-          minLength: 1
-        price:
-          title: Price
-          description: Plan price in dollars for the selected billing frequency.
-          type: string
-          format: decimal
-          readOnly: true
-        billing_frequency:
-          title: Billing frequency
-          description: How often the plan is billed.
-          type: string
-          enum:
-          - MONTHLY
-          - QUARTERLY
-          - ANNUALLY
-          readOnly: true
-        billing_frequency_display:
-          title: Billing frequency display
-          type: string
-          readOnly: true
-          minLength: 1
-        payment_status:
-          title: Payment status
-          description: Whether the agency has paid for the current billing period.
-          type: string
-          enum:
-          - PAID
-          - UNPAID
-          readOnly: true
-        payment_status_display:
-          title: Payment status display
-          type: string
-          readOnly: true
-          minLength: 1
-        manage_plan_url:
-          title: Manage plan url
-          description: External URL for the Manage plan button in broker settings.
-          type: string
-          format: uri
-          readOnly: true
-          minLength: 1
-    QuoteFile:
-      required:
-      - quote
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        download_file:
-          title: Download file
-          type: string
-          readOnly: true
-        file:
-          title: File
-          type: string
-          readOnly: true
-          format: uri
-        quote:
-          title: Quote
-          type: string
-          format: uuid
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        file_type:
-          title: File type
-          type: string
-          enum:
-          - quote
-          - binder
-          - invoice
-          - unspecified
     ApplicationList:
       type: object
       properties:
@@ -700,36 +324,131 @@ components:
             type: string
             format: uuid
           uniqueItems: true
-    BusinessSubsidiary:
-      required:
-      - name
-      - business
+    QuoteReadOnly:
       type: object
       properties:
         id:
-          title: ID
-          type: integer
-          readOnly: true
-        name:
-          title: Name
+          title: Id
           type: string
-          maxLength: 255
-          minLength: 1
-        description:
-          title: Description
+          format: uuid
+          readOnly: true
+        business:
+          $ref: '#/components/schemas/BusinessList'
+        broker:
+          $ref: '#/components/schemas/BrokerAgency'
+        application:
+          $ref: '#/components/schemas/ApplicationList'
+        carrier:
+          $ref: '#/components/schemas/Carrier'
+        mga:
+          $ref: '#/components/schemas/Wholesaler'
+        download_pdf:
+          title: Download pdf
+          type: string
+          readOnly: true
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteFile'
+          readOnly: true
+        has_bind_request:
+          title: Has bind request
+          type: string
+          readOnly: true
+        version:
+          title: Version
+          type: string
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        status:
+          title: Status
+          type: string
+          enum:
+          - draft
+          - issued
+          - declined
+          - expired
+          - selected_for_binding
+          - awaiting_payment
+          - bound
+          - cancelled
+        quote_type:
+          title: Quote type
+          type: string
+          enum:
+          - excess
+          - ADMITTED
+          - SURPLUS_LINES
+          - ADMITTED_AND_SURPLUS_LINES
+        quote_number:
+          title: Quote number
           type:
           - string
           - 'null'
-        ownership:
-          title: Ownership
+          maxLength: 255
+        policy_number:
+          title: Policy number
           type:
-          - integer
+          - string
           - 'null'
-          maximum: 2147483647
-          minimum: 0
-        business:
-          title: Business
+          maxLength: 255
+        limit:
+          title: Limit
           type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        retention:
+          title: Retention
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        premium:
+          title: Premium
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        policy_term_months:
+          title: Policy term months
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        issue_date:
+          title: Issue date
+          type:
+          - string
+          - 'null'
+          format: date
+        minimum_days_to_cancel:
+          title: Minimum days to cancel
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        additional_notes:
+          title: Additional notes
+          type:
+          - string
+          - 'null'
+        type:
+          title: Type
+          type:
+          - string
+          - 'null'
+          enum:
+          - BUSINESS_OWNERS_POLICY
+          - WORKERS_COMPENSATION
+          - GENERAL_LIABILITY
+          - MISCELLANEOUS_PROFESSIONAL_LIABILITY
+          - CYBER
+          - PROFESSIONAL_LIABILITY
+          - TECHNOLOGY_ERRORS_AND_OMISSIONS
+          - DIRECTORS_AND_OFFICERS
+          - EMPLOYMENT_PRACTICES_LIABILITY
+          - FIDUCIARY_LIABILITY
+          - KIDNAP_AND_RANSOM
     CarrierProduct:
       type: object
       properties:
@@ -775,6 +494,36 @@ components:
           - 'null'
           maximum: 2147483647
           minimum: -2147483648
+    BusinessSubsidiary:
+      required:
+      - name
+      - business
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        ownership:
+          title: Ownership
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        business:
+          title: Business
+          type: integer
     BrokerAgency:
       required:
       - name
@@ -1145,6 +894,215 @@ components:
           type:
           - integer
           - 'null'
+    AgencySubscription:
+      type: object
+      properties:
+        name:
+          title: Name
+          description: Display name for the plan (e.g. "Pro plan").
+          type: string
+          readOnly: true
+          minLength: 1
+        price:
+          title: Price
+          description: Plan price in dollars for the selected billing frequency.
+          type: string
+          format: decimal
+          readOnly: true
+        billing_frequency:
+          title: Billing frequency
+          description: How often the plan is billed.
+          type: string
+          enum:
+          - MONTHLY
+          - QUARTERLY
+          - ANNUALLY
+          readOnly: true
+        billing_frequency_display:
+          title: Billing frequency display
+          type: string
+          readOnly: true
+          minLength: 1
+        payment_status:
+          title: Payment status
+          description: Whether the agency has paid for the current billing period.
+          type: string
+          enum:
+          - PAID
+          - UNPAID
+          readOnly: true
+        payment_status_display:
+          title: Payment status display
+          type: string
+          readOnly: true
+          minLength: 1
+        manage_plan_url:
+          title: Manage plan url
+          description: External URL for the Manage plan button in broker settings.
+          type: string
+          format: uri
+          readOnly: true
+          minLength: 1
+    QuoteFile:
+      required:
+      - quote
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        download_file:
+          title: Download file
+          type: string
+          readOnly: true
+        file:
+          title: File
+          type: string
+          readOnly: true
+          format: uri
+        quote:
+          title: Quote
+          type: string
+          format: uuid
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        file_type:
+          title: File type
+          type: string
+          enum:
+          - quote
+          - binder
+          - invoice
+          - unspecified
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    UserForBrokerAgency:
+      type: object
+      properties:
+        first_name:
+          title: First name
+          type: string
+          maxLength: 255
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          maxLength: 255
+          minLength: 1
+        user_defined_role:
+          title: User defined role
+          type: string
+          maxLength: 255
+          minLength: 1
+    BusinessList:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        industry:
+          title: Industry
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        number_of_employees:
+          title: Number of employees
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        active:
+          title: Active
+          type: boolean
+        domain_name:
+          title: Domain name
+          type:
+          - string
+          - 'null'
+          maxLength: 500
+        subsidiaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessSubsidiary'
+          readOnly: true
+        revenue:
+          title: Revenue
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+    Carrier:
+      required:
+      - name
+      - products
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        am_best_rating:
+          title: Am best rating
+          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarrierProduct'
     Wholesaler:
       required:
       - name

@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -64,8 +22,41 @@ paths:
     parameters: []
     post:
       operationId: v2_broker_office365_webhook_create
-      summary: Process incoming Office 365 push notification or validation request.
-      description: "Validation request format (during subscription setup):\nGET with query param: ?validationToken=abc123xyz\n\nNotification payload format:\n{\n    \"value\": [{\n        \"subscriptionId\": \"...\",\n        \"changeType\": \"created\",\n        \"clientState\": \"secretClientValue\",\n        \"resource\": \"Users/{userId}/Messages/{messageId}\",\n        \"resourceData\": {\n            \"@odata.type\": \"#Microsoft.Graph.Message\",\n            \"@odata.id\": \"Users/{userId}/Messages/{messageId}\",\n            \"id\": \"{messageId}\"\n        },\n        \"subscriptionExpirationDateTime\": \"2024-01-04T00:00:00.0000000Z\"\n    }]\n}"
+      summary: Process incoming Office 365 push notification or validation request
+      description: 'Validation request format (during subscription setup):
+
+        GET with query param: ?validationToken=abc123xyz
+
+
+        Notification payload format:
+
+        {
+
+        "value": [{
+
+        "subscriptionId": "...",
+
+        "changeType": "created",
+
+        "clientState": "secretClientValue",
+
+        "resource": "Users/{userId}/Messages/{messageId}",
+
+        "resourceData": {
+
+        "@odata.type": "#Microsoft.Graph.Message",
+
+        "@odata.id": "Users/{userId}/Messages/{messageId}",
+
+        "id": "{messageId}"
+
+        },
+
+        "subscriptionExpirationDateTime": "2024-01-04T00:00:00.0000000Z"
+
+        }]
+
+        }'
       responses:
         '201':
           description: ''

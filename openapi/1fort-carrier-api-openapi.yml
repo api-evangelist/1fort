@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -56,7 +14,7 @@ servers:
 security:
 - Bearer: []
 tags:
-- name: carrier
+- name: Carrier
   x-displayName: Carrier
   description: '**Access:** requires a JWT access token.'
 paths:
@@ -120,14 +78,35 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - carrier
+      - Carrier
       summary: List Carriers
   /carriers-wholesalers:
     parameters: []
     get:
       operationId: carriers-wholesalers_list
-      summary: Combined list of carriers and wholesalers in a single paginated response.
-      description: "Each result item carries a ``type`` field (``\"carrier\"`` or ``\"wholesaler\"``)\nalongside common fields (``id``, ``name``, ``logo``, ``domains``) and\ntype-specific extras.  Results are sorted by name (case-insensitive, ascending)\nacross both types, then deduplicated by name — the first occurrence is kept\n(carriers precede wholesalers for the same name).\n\nSupported query params:\n    search               - case-insensitive name substring match (applied to both)\n    include_inactive     - ``true`` to include inactive records (both)\n    include_unassociated - defaults to ``true`` (all active carriers); pass ``false``\n                           to restrict carriers to those tied to the default producer\n    limit / offset       - pagination (default page size 100)"
+      summary: Combined list of carriers and wholesalers in a single paginated response
+      description: 'Each result item carries a ``type`` field (``"carrier"`` or ``"wholesaler"``)
+
+        alongside common fields (``id``, ``name``, ``logo``, ``domains``) and
+
+        type-specific extras. Results are sorted by name (case-insensitive, ascending)
+
+        across both types, then deduplicated by name — the first occurrence is kept
+
+        (carriers precede wholesalers for the same name).
+
+
+        Supported query params:
+
+        search - case-insensitive name substring match (applied to both)
+
+        include_inactive - ``true`` to include inactive records (both)
+
+        include_unassociated - defaults to ``true`` (all active carriers); pass ``false``
+
+        to restrict carriers to those tied to the default producer
+
+        limit / offset - pagination (default page size 100)'
       parameters:
       - name: search
         in: query
@@ -165,7 +144,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - carrier
+      - Carrier
   /carriers/direct:
     parameters: []
     get:
@@ -226,7 +205,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - carrier
+      - Carrier
       summary: Direct products
   /wholesalers:
     parameters: []
@@ -300,54 +279,10 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - carrier
+      - Carrier
       summary: List Wholesalers
 components:
   schemas:
-    Carrier:
-      required:
-      - name
-      - products
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        am_best_rating:
-          title: Am best rating
-          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-        products:
-          type: array
-          items:
-            $ref: '#/components/schemas/CarrierProduct'
     GenericError:
       title: Generic API Error
       required:
@@ -441,6 +376,50 @@ components:
             type: string
             maxLength: 255
             minLength: 1
+    Carrier:
+      required:
+      - name
+      - products
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        am_best_rating:
+          title: Am best rating
+          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarrierProduct'
   securitySchemes:
     Bearer:
       type: apiKey

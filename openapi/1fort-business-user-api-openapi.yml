@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -65,14 +23,10 @@ paths:
     get:
       operationId: business-employee-type-permission_list
       summary: Get Employee Type Permissions
-      description: '
-
-        Get the list of permissions for an employee type. If an employee type is not returned in the response, it means that it has no permissions.
+      description: 'Get the list of permissions for an employee type. If an employee type is not returned in the response, it means that it has no permissions.
 
 
-        **Permissions:** ADMIN, SUPER_ADMIN
-
-        '
+        **Permissions:** ADMIN, SUPER_ADMIN'
       parameters:
       - name: search
         in: query
@@ -138,14 +92,10 @@ paths:
     post:
       operationId: business-employee-type-permission_create
       summary: Create Employee Type Permission
-      description: '
-
-        Create an employee type permission.
+      description: 'Create an employee type permission.
 
 
-        **Permissions:** SUPER_ADMIN, ADMIN
-
-        '
+        **Permissions:** SUPER_ADMIN, ADMIN'
       responses:
         '201':
           description: ''
@@ -186,14 +136,10 @@ paths:
     get:
       operationId: business-employee-type-permission_read
       summary: Get Employee Type Permission
-      description: '
-
-        Get an employee type permission.
+      description: 'Get an employee type permission.
 
 
-        **Permissions:** SUPER_ADMIN, ADMIN
-
-        '
+        **Permissions:** SUPER_ADMIN, ADMIN'
       responses:
         '200':
           description: ''
@@ -220,14 +166,10 @@ paths:
     patch:
       operationId: business-employee-type-permission_partial_update
       summary: Update Employee Type Permission
-      description: '
-
-        Update an employee type permission.
+      description: 'Update an employee type permission.
 
 
-        **Permissions:** SUPER_ADMIN, ADMIN
-
-        '
+        **Permissions:** SUPER_ADMIN, ADMIN'
       responses:
         '200':
           description: ''
@@ -266,14 +208,10 @@ paths:
     delete:
       operationId: business-employee-type-permission_delete
       summary: Delete Employee Type Permission
-      description: '
-
-        Delete an employee type permission.
+      description: 'Delete an employee type permission.
 
 
-        **Permissions:** SUPER_ADMIN, ADMIN
-
-        '
+        **Permissions:** SUPER_ADMIN, ADMIN'
       responses:
         '204':
           description: ''
@@ -298,14 +236,10 @@ paths:
     get:
       operationId: business-group_list
       summary: Get Groups
-      description: '
-
-        Get the business user groups.
+      description: 'Get the business user groups.
 
 
-        **Permissions:** `can_manage_user_groups`
-
-        '
+        **Permissions:** `can_manage_user_groups`'
       parameters:
       - name: search
         in: query
@@ -365,14 +299,10 @@ paths:
     post:
       operationId: business-group_create
       summary: Create Group
-      description: '
-
-        Create a group.
+      description: 'Create a group.
 
 
-        **Permissions:** `can_manage_user_groups`
-
-        '
+        **Permissions:** `can_manage_user_groups`'
       responses:
         '201':
           description: ''
@@ -413,14 +343,10 @@ paths:
     get:
       operationId: business-group_read
       summary: Get Group Details
-      description: '
-
-        Get details of a group.
+      description: 'Get details of a group.
 
 
-        **Permissions:** ADMIN, SUPER_ADMIN
-
-        '
+        **Permissions:** ADMIN, SUPER_ADMIN'
       responses:
         '200':
           description: ''
@@ -447,14 +373,10 @@ paths:
     patch:
       operationId: business-group_partial_update
       summary: Update Group
-      description: '
-
-        Update a group.
+      description: 'Update a group.
 
 
-        **Permissions:** ADMIN, SUPER_ADMIN
-
-        '
+        **Permissions:** ADMIN, SUPER_ADMIN'
       responses:
         '200':
           description: ''
@@ -493,14 +415,10 @@ paths:
     delete:
       operationId: business-group_delete
       summary: Delete Group
-      description: '
-
-        Delete a group.
+      description: 'Delete a group.
 
 
-        **Permissions:** ADMIN, SUPER_ADMIN
-
-        '
+        **Permissions:** ADMIN, SUPER_ADMIN'
       responses:
         '204':
           description: ''
@@ -531,14 +449,10 @@ paths:
     post:
       operationId: business-group_add_users
       summary: Add Users to Group
-      description: '
-
-        Add users to a group.
+      description: 'Add users to a group.
 
 
-        **Permissions:** `can_manage_user_groups`
-
-        '
+        **Permissions:** `can_manage_user_groups`'
       responses:
         '201':
           description: ''
@@ -585,14 +499,10 @@ paths:
     get:
       operationId: business-group_get_users
       summary: Get Group Users
-      description: '
-
-        Get the list of users in a group.
+      description: 'Get the list of users in a group.
 
 
-        **Permissions:** ADMIN, SUPER_ADMIN
-
-        '
+        **Permissions:** ADMIN, SUPER_ADMIN'
       responses:
         '200':
           description: ''
@@ -627,14 +537,10 @@ paths:
     post:
       operationId: business-group_remove_users
       summary: Remove Users from Group
-      description: '
-
-        Remove users from a group.
+      description: 'Remove users from a group.
 
 
-        **Permissions:** `can_manage_user_groups`
-
-        '
+        **Permissions:** `can_manage_user_groups`'
       responses:
         '201':
           description: ''
@@ -675,14 +581,10 @@ paths:
     get:
       operationId: business-user_list
       summary: Get Business Users
-      description: '
-
-        Get the list of all the users in the logged in user''s business.
+      description: 'Get the list of all the users in the logged in user''s business.
 
 
-        **Permissions:** ADMIN, SUPER_ADMIN
-
-        '
+        **Permissions:** ADMIN, SUPER_ADMIN'
       parameters:
       - name: search
         in: query
@@ -787,15 +689,11 @@ paths:
     get:
       operationId: business-user_my-businesses_list
       summary: List my businesses
-      description: '
-
-        Return every business the authenticated user is a member of, along with
+      description: 'Return every business the authenticated user is a member of, along with
 
         their role in each. Powers the client portal business switcher for users
 
-        who belong to more than one business.
-
-        '
+        who belong to more than one business.'
       responses:
         '200':
           description: ''
@@ -824,9 +722,7 @@ paths:
     get:
       operationId: business-user_read
       summary: Get Business User Details
-      description: '
-
-        Get details of a user.
+      description: 'Get details of a user.
 
 
         `/me` endpoint can be used to get details of the logged in user, where the `id` is `me`.
@@ -834,9 +730,7 @@ paths:
         For `/me` endpoint, the `can_manage_users` permission is not required. Logged in users can get details of themselves.
 
 
-        **Permissions:** ADMIN, SUPER_ADMIN, or me
-
-        '
+        **Permissions:** ADMIN, SUPER_ADMIN, or me'
       responses:
         '200':
           description: ''
@@ -863,9 +757,7 @@ paths:
     patch:
       operationId: business-user_partial_update
       summary: Get Business User Details
-      description: '
-
-        Get details of a user.
+      description: 'Get details of a user.
 
 
         `/me` endpoint can be used to update details of the logged in user, where the `id` is `me`.
@@ -873,9 +765,7 @@ paths:
         For `/me` endpoint, the `can_manage_users` permission is not required. Logged in users can update basic details of themselves.
 
 
-        **Permissions:** ADMIN, SUPER_ADMIN, or me
-
-        '
+        **Permissions:** ADMIN, SUPER_ADMIN, or me'
       responses:
         '200':
           description: ''
@@ -922,11 +812,7 @@ paths:
     post:
       operationId: business-user_set_access_role
       summary: Add access role
-      description: '
-
-        Set access role for users. The {id} of the users is required in the request body.
-
-        '
+      description: Set access role for users. The {id} of the users is required in the request body.
       responses:
         '200':
           description: ''
@@ -978,14 +864,10 @@ paths:
     post:
       operationId: business-user_set_user_groups
       summary: Set user groups
-      description: '
-
-        Update the groups of a user.
+      description: 'Update the groups of a user.
 
 
-        **Permissions:** `can_manage_user_groups`
-
-        '
+        **Permissions:** `can_manage_user_groups`'
       responses:
         '200':
           description: ''
@@ -1038,14 +920,10 @@ paths:
     get:
       operationId: business-user_send_invitation_reminder
       summary: Send invitation reminder
-      description: '
-
-        Send an invitation reminder to a user.
+      description: 'Send an invitation reminder to a user.
 
 
-        **Permissions:** SUPER_ADMIN, ADMIN
-
-        '
+        **Permissions:** SUPER_ADMIN, ADMIN'
       responses:
         '200':
           description: ''
@@ -1074,14 +952,10 @@ paths:
     get:
       operationId: custom-access-role_list
       summary: Get Custom Access Roles
-      description: '
-
-        Get all the Custom Access Roles for the Business.
+      description: 'Get all the Custom Access Roles for the Business.
 
 
-        **Permissions:** `can_manage_access_roles`
-
-        '
+        **Permissions:** `can_manage_access_roles`'
       parameters:
       - name: search
         in: query
@@ -1147,16 +1021,12 @@ paths:
     post:
       operationId: custom-access-role_create
       summary: Create Custom Access Role
-      description: '
-
-        Create a Custom Access Role for the Business.
+      description: 'Create a Custom Access Role for the Business.
 
         You can get the list of all the permissions from the `GET /custom-access-roles/permissions` endpoint.
 
 
-        **Permissions:** `can_manage_access_roles`
-
-        '
+        **Permissions:** `can_manage_access_roles`'
       responses:
         '201':
           description: ''
@@ -1191,14 +1061,10 @@ paths:
     get:
       operationId: custom-access-role_get_all_permissions
       summary: Get all allowed permissions
-      description: '
-
-        Get all the allowed permissions for the Custom Access Roles.
+      description: 'Get all the allowed permissions for the Custom Access Roles.
 
 
-        **Permissions:** `can_manage_access_roles`
-
-        '
+        **Permissions:** `can_manage_access_roles`'
       parameters:
       - name: search
         in: query
@@ -1272,14 +1138,10 @@ paths:
     get:
       operationId: custom-access-role_read
       summary: Get Custom Access Role
-      description: '
-
-        Get a Custom Access Role for the Business.
+      description: 'Get a Custom Access Role for the Business.
 
 
-        **Permissions:** `can_manage_access_roles`
-
-        '
+        **Permissions:** `can_manage_access_roles`'
       responses:
         '200':
           description: ''
@@ -1306,17 +1168,13 @@ paths:
     patch:
       operationId: custom-access-role_partial_update
       summary: Update Custom Access Role
-      description: '
-
-        Update a Custom Access Role for the Business.
+      description: 'Update a Custom Access Role for the Business.
 
 
         You can get the list of all the permissions from the `GET /custom-access-roles/permissions` endpoint.
 
 
-        **Permissions:** `can_manage_access_roles`
-
-        '
+        **Permissions:** `can_manage_access_roles`'
       responses:
         '200':
           description: ''
@@ -1355,14 +1213,10 @@ paths:
     delete:
       operationId: custom-access-role_delete
       summary: Delete Custom Access Role
-      description: '
-
-        Delete a Custom Access Role for the Business.
+      description: 'Delete a Custom Access Role for the Business.
 
 
-        **Permissions:** `can_manage_access_roles`
-
-        '
+        **Permissions:** `can_manage_access_roles`'
       responses:
         '204':
           description: ''
@@ -1427,6 +1281,36 @@ components:
           type:
           - integer
           - 'null'
+    BusinessSubsidiary:
+      required:
+      - name
+      - business
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        ownership:
+          title: Ownership
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        business:
+          title: Business
+          type: integer
     GenericError:
       title: Generic API Error
       required:
@@ -1468,6 +1352,116 @@ components:
         is_administrator:
           title: Is administrator
           type: boolean
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    MyBusinessListResponse:
+      required:
+      - results
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/MyBusiness'
+    BusinessGroup:
+      required:
+      - name
+      - business
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          minLength: 1
+        user_count:
+          title: User count
+          type: string
+          readOnly: true
+        permissions:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+        deleted_at:
+          title: Deleted at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        business:
+          title: Business
+          type: integer
+        created_by:
+          title: Created by
+          type:
+          - integer
+          - 'null'
+    BusinessEmployeeTypePermission:
+      required:
+      - employee_type
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        employee_type:
+          title: Employee type
+          type: string
+          enum:
+          - employee
+          - contractor
+          - non_employee
+          - auditor
+          - soc2
+          - it_security
+          - other
+        permissions:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+        created_by:
+          title: Created by
+          type:
+          - integer
+          - 'null'
     BusinessList:
       required:
       - name
@@ -1634,146 +1628,6 @@ components:
           type: boolean
         manager:
           title: Manager
-          type:
-          - integer
-          - 'null'
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    MyBusinessListResponse:
-      required:
-      - results
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/MyBusiness'
-    BusinessSubsidiary:
-      required:
-      - name
-      - business
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        ownership:
-          title: Ownership
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        business:
-          title: Business
-          type: integer
-    BusinessEmployeeTypePermission:
-      required:
-      - employee_type
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        employee_type:
-          title: Employee type
-          type: string
-          enum:
-          - employee
-          - contractor
-          - non_employee
-          - auditor
-          - soc2
-          - it_security
-          - other
-        permissions:
-          type: array
-          items:
-            type: string
-          uniqueItems: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          title: Updated at
-          type: string
-          format: date-time
-          readOnly: true
-        created_by:
-          title: Created by
-          type:
-          - integer
-          - 'null'
-    BusinessGroup:
-      required:
-      - name
-      - business
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          minLength: 1
-        user_count:
-          title: User count
-          type: string
-          readOnly: true
-        permissions:
-          type: array
-          items:
-            type: string
-          uniqueItems: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          title: Updated at
-          type: string
-          format: date-time
-          readOnly: true
-        deleted_at:
-          title: Deleted at
-          type:
-          - string
-          - 'null'
-          format: date-time
-        business:
-          title: Business
-          type: integer
-        created_by:
-          title: Created by
           type:
           - integer
           - 'null'

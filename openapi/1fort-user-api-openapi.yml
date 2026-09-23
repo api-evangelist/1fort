@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -56,7 +14,7 @@ servers:
 security:
 - Bearer: []
 tags:
-- name: user
+- name: User
   x-displayName: User
   description: '**Access:** requires a JWT access token.'
 paths:
@@ -65,11 +23,7 @@ paths:
     get:
       operationId: user_list
       summary: Retrieve user
-      description: '
-
-        Retrieve team members
-
-        '
+      description: Retrieve team members
       parameters:
       - name: search
         in: query
@@ -131,7 +85,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - user
+      - User
   /user/{username}:
     parameters:
     - name: username
@@ -144,11 +98,7 @@ paths:
     put:
       operationId: user_update
       summary: Update user
-      description: '
-
-        Update user attributes (first/last name, title, )
-
-        '
+      description: Update user attributes (first/last name, title, )
       responses:
         '200':
           description: ''
@@ -177,7 +127,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - user
+      - User
       requestBody:
         content:
           application/json:
@@ -215,7 +165,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - user
+      - User
       summary: Update User
       requestBody:
         content:
@@ -233,6 +183,59 @@ components:
       properties:
         detail:
           description: Error details
+          type: string
+    BusinessSubsidiary:
+      required:
+      - name
+      - business
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        ownership:
+          title: Ownership
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        business:
+          title: Business
+          type: integer
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
           type: string
     UserList:
       type: object
@@ -274,15 +277,51 @@ components:
           - Broker
           - Underwriter
           readOnly: true
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
+    UserDetail:
       type: object
       properties:
-        detail:
-          description: Error details
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        email:
+          title: Email address
           type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        first_name:
+          title: First name
+          type: string
+          maxLength: 150
+        last_name:
+          title: Last name
+          type: string
+          maxLength: 150
+        title:
+          title: Title
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        business:
+          $ref: '#/components/schemas/BusinessList'
+        role:
+          title: Role
+          description: Role is for determining the access level control of the user.
+          type:
+          - string
+          - 'null'
+          enum:
+          - Owner
+          - Admin
+          - User
+          - Broker
+          - Underwriter
+        date_joined:
+          title: Date joined
+          type: string
+          format: date-time
     BusinessList:
       required:
       - name
@@ -336,95 +375,6 @@ components:
           - 'null'
           maximum: 9223372036854775807
           minimum: -9223372036854775808
-    UserDetail:
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        email:
-          title: Email address
-          type: string
-          format: email
-          readOnly: true
-          minLength: 1
-        first_name:
-          title: First name
-          type: string
-          maxLength: 150
-        last_name:
-          title: Last name
-          type: string
-          maxLength: 150
-        title:
-          title: Title
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        business:
-          $ref: '#/components/schemas/BusinessList'
-        role:
-          title: Role
-          description: Role is for determining the access level control of the user.
-          type:
-          - string
-          - 'null'
-          enum:
-          - Owner
-          - Admin
-          - User
-          - Broker
-          - Underwriter
-        date_joined:
-          title: Date joined
-          type: string
-          format: date-time
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    BusinessSubsidiary:
-      required:
-      - name
-      - business
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        ownership:
-          title: Ownership
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        business:
-          title: Business
-          type: integer
   securitySchemes:
     Bearer:
       type: apiKey

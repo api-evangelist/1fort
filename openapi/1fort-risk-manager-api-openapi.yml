@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -492,23 +450,6 @@ components:
         detail:
           description: Error details
           type: string
-    PremiumRange:
-      description: Estimated annual premium range in dollars based on recommended limit
-      required:
-      - min
-      - max
-      type:
-      - object
-      - 'null'
-      properties:
-        min:
-          title: Min
-          type: integer
-          minimum: 1000
-        max:
-          title: Max
-          type: integer
-          minimum: 1000
     GenericError:
       title: Generic API Error
       required:
@@ -517,6 +458,44 @@ components:
       properties:
         detail:
           description: Error details
+          type: string
+    RiskManagerChatMessage:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        message:
+          title: Message
+          type: string
+          readOnly: true
+        role:
+          title: Role
+          type: string
+          enum:
+          - assistant
+          - user
+          readOnly: true
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
           type: string
     Risk:
       type: object
@@ -580,44 +559,26 @@ components:
           - string
           - 'null'
           format: date-time
-    RiskManagerChatMessage:
+    FinancialRisk:
       type: object
       properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        message:
-          title: Message
-          type: string
-          readOnly: true
-        role:
-          title: Role
-          type: string
-          enum:
-          - assistant
-          - user
-          readOnly: true
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
+        coverage_type:
+          title: Coverage type
+          description: Type of coverage being evaluated (e.g., 'Cyber', 'D&O', 'MPL', 'EPL', 'Tech E&O', 'Fiduciary')
+          type:
+          - string
+          - 'null'
+        business_id:
+          title: Business id
+          description: ID of the business/insured. Required for broker users, optional for business users.
+          type:
+          - integer
+          - 'null'
+        force_refresh:
+          title: Force refresh
+          description: If True, clears all cached financial risk data for this business and triggers fresh calculations
+          type: boolean
+          default: false
     FinancialRiskCategoryResponse:
       required:
       - coverage_type
@@ -704,26 +665,23 @@ components:
             type:
             - string
             - 'null'
-    FinancialRisk:
-      type: object
+    PremiumRange:
+      description: Estimated annual premium range in dollars based on recommended limit
+      required:
+      - min
+      - max
+      type:
+      - object
+      - 'null'
       properties:
-        coverage_type:
-          title: Coverage type
-          description: Type of coverage being evaluated (e.g., 'Cyber', 'D&O', 'MPL', 'EPL', 'Tech E&O', 'Fiduciary')
-          type:
-          - string
-          - 'null'
-        business_id:
-          title: Business id
-          description: ID of the business/insured. Required for broker users, optional for business users.
-          type:
-          - integer
-          - 'null'
-        force_refresh:
-          title: Force refresh
-          description: If True, clears all cached financial risk data for this business and triggers fresh calculations
-          type: boolean
-          default: false
+        min:
+          title: Min
+          type: integer
+          minimum: 1000
+        max:
+          title: Max
+          type: integer
+          minimum: 1000
   securitySchemes:
     Bearer:
       type: apiKey

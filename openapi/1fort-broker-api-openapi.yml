@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -56,7 +14,7 @@ servers:
 security:
 - Bearer: []
 tags:
-- name: broker
+- name: Broker
   x-displayName: Broker
   description: '**Access:** mixed; some endpoints are public, others require JWT (per endpoint).'
 paths:
@@ -65,13 +23,9 @@ paths:
     get:
       operationId: broker_list
       summary: List Brokers
-      description: '
+      description: 'List all brokers.
 
-        List all brokers.
-
-        This endpoint lists all brokers.
-
-        '
+        This endpoint lists all brokers.'
       parameters:
       - name: search
         in: query
@@ -115,17 +69,13 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
     post:
       operationId: broker_create
       summary: Create Broker
-      description: '
+      description: 'Create a broker.
 
-        Create a broker.
-
-        This endpoint creates a broker.
-
-        '
+        This endpoint creates a broker.'
       responses:
         '201':
           description: ''
@@ -148,7 +98,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
       requestBody:
         content:
           application/json:
@@ -165,13 +115,9 @@ paths:
     post:
       operationId: broker_accept-invite_create
       summary: Accept Invite
-      description: '
+      description: 'Accept an invite.
 
-        Accept an invite.
-
-        This endpoint accepts a broker user(agent) invite.
-
-        '
+        This endpoint accepts a broker user(agent) invite.'
       responses:
         '201':
           description: ''
@@ -194,7 +140,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
       security: []
       requestBody:
         content:
@@ -212,13 +158,9 @@ paths:
     get:
       operationId: broker_clients_list
       summary: List Broker Clients
-      description: '
+      description: 'List all clients.
 
-        List all clients.
-
-        This endpoint lists all the broker''s clients.
-
-        '
+        This endpoint lists all the broker''s clients.'
       parameters:
       - name: ordering
         in: query
@@ -280,11 +222,30 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
     post:
       operationId: broker_clients_create
       summary: Create Broker Client
-      description: "\nCreate a broker client.\nThis endpoint creates a client.\n\nA subsidiaries list can be passed to create\na client with subsidiaries.\nExample:\n\"subsidiaries\": [\n    {\n        \"name\": \"Subsidiary 1\",\n    }\n]\n"
+      description: 'Create a broker client.
+
+        This endpoint creates a client.
+
+
+        A subsidiaries list can be passed to create
+
+        a client with subsidiaries.
+
+        Example:
+
+        "subsidiaries": [
+
+        {
+
+        "name": "Subsidiary 1",
+
+        }
+
+        ]'
       responses:
         '201':
           description: ''
@@ -307,7 +268,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
       requestBody:
         content:
           application/json:
@@ -329,13 +290,9 @@ paths:
     get:
       operationId: broker_clients_invites_list
       summary: List Broker Client Invites
-      description: '
+      description: 'List all client invites.
 
-        List all client invites.
-
-        This endpoint lists all the broker''s client invites.
-
-        '
+        This endpoint lists all the broker''s client invites.'
       parameters:
       - name: search
         in: query
@@ -373,13 +330,11 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
     post:
       operationId: broker_clients_invites_create
       summary: Invite Client
-      description: '
-
-        Send an invite to a client.
+      description: 'Send an invite to a client.
 
         This endpoint creates a client invite.
 
@@ -390,9 +345,7 @@ paths:
 
         - trigger_email: Whether to send invitation email immediately
 
-        - custom_message: Personalized message to include in invitation email
-
-        '
+        - custom_message: Personalized message to include in invitation email'
       responses:
         '201':
           description: ''
@@ -417,7 +370,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
       requestBody:
         content:
           application/json:
@@ -441,13 +394,9 @@ paths:
     post:
       operationId: broker_clients_invites_cancel_invite
       summary: Cancel Broker Client Invite
-      description: '
+      description: 'Cancel an invite to a client.
 
-        Cancel an invite to a client.
-
-        This endpoint deletes all broker client invites.
-
-        '
+        This endpoint deletes all broker client invites.'
       responses:
         '201':
           description: ''
@@ -460,7 +409,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
   /broker/{broker_pk}/clients/{client_pk}/invites/resend-invite:
     parameters:
     - name: broker_pk
@@ -476,13 +425,9 @@ paths:
     post:
       operationId: broker_clients_invites_resend_invite
       summary: Resend Broker Client Invite
-      description: '
+      description: 'Resend an invite to a client.
 
-        Resend an invite to a client.
-
-        This endpoint resends an existing pending client invite.
-
-        '
+        This endpoint resends an existing pending client invite.'
       responses:
         '201':
           description: ''
@@ -495,7 +440,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
   /broker/{broker_pk}/clients/{id}:
     parameters:
     - name: broker_pk
@@ -512,13 +457,9 @@ paths:
     get:
       operationId: broker_clients_read
       summary: Get Broker Client details
-      description: '
+      description: 'Retrieve a broker client.
 
-        Retrieve a broker client.
-
-        This endpoint Get a broker client.
-
-        '
+        This endpoint Get a broker client.'
       responses:
         '200':
           description: ''
@@ -541,17 +482,13 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
     patch:
       operationId: broker_clients_partial_update
       summary: Update Broker Client
-      description: '
+      description: 'Update a broker client.
 
-        Update a broker client.
-
-        This endpoint updates a broker client.
-
-        '
+        This endpoint updates a broker client.'
       responses:
         '200':
           description: ''
@@ -580,7 +517,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
       requestBody:
         content:
           application/json:
@@ -590,13 +527,9 @@ paths:
     delete:
       operationId: broker_clients_delete
       summary: Delete Broker Client
-      description: '
+      description: 'Delete a broker client.
 
-        Delete a broker client.
-
-        This endpoint deletes a broker client.
-
-        '
+        This endpoint deletes a broker client.'
       responses:
         '204':
           description: ''
@@ -615,7 +548,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
   /broker/{broker_pk}/files:
     parameters:
     - name: broker_pk
@@ -626,9 +559,7 @@ paths:
     get:
       operationId: broker_files_list
       summary: List Broker Files
-      description: '
-
-        List all files associated with the broker''s insureds.
+      description: 'List all files associated with the broker''s insureds.
 
 
         This endpoint aggregates files from multiple sources:
@@ -665,9 +596,7 @@ paths:
 
         **Authorization:**
 
-        Returns 403 Forbidden if the authenticated user doesn''t belong to the specified broker agency.
-
-        '
+        Returns 403 Forbidden if the authenticated user doesn''t belong to the specified broker agency.'
       parameters:
       - name: search
         in: query
@@ -736,7 +665,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
   /broker/{broker_pk}/invites:
     parameters:
     - name: broker_pk
@@ -747,13 +676,9 @@ paths:
     get:
       operationId: broker_invites_list
       summary: List Broker User Invites
-      description: '
+      description: 'List all user invites.
 
-        List all user invites.
-
-        This endpoint lists all the broker''s user invites.
-
-        '
+        This endpoint lists all the broker''s user invites.'
       parameters:
       - name: search
         in: query
@@ -815,17 +740,13 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
     post:
       operationId: broker_invites_create
       summary: Invite Broker User
-      description: '
+      description: 'Send an invite to an broker user(agent).
 
-        Send an invite to an broker user(agent).
-
-        This endpoint invites a user.
-
-        '
+        This endpoint invites a user.'
       responses:
         '201':
           description: ''
@@ -850,7 +771,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
       requestBody:
         content:
           application/json:
@@ -875,15 +796,11 @@ paths:
     put:
       operationId: broker_invites_update
       summary: Update Broker User Invite
-      description: '
-
-        Update a pending broker user invite.
+      description: 'Update a pending broker user invite.
 
         This endpoint allows updating the role and type of a pending invite.
 
-        Only pending invites can be updated.
-
-        '
+        Only pending invites can be updated.'
       responses:
         '200':
           description: ''
@@ -912,7 +829,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
       requestBody:
         content:
           application/json:
@@ -922,15 +839,11 @@ paths:
     patch:
       operationId: broker_invites_partial_update
       summary: Partially Update Broker User Invite
-      description: '
-
-        Partially update a pending broker user invite.
+      description: 'Partially update a pending broker user invite.
 
         This endpoint allows updating the role and/or type of a pending invite.
 
-        Only pending invites can be updated.
-
-        '
+        Only pending invites can be updated.'
       responses:
         '200':
           description: ''
@@ -959,7 +872,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
       requestBody:
         content:
           application/json:
@@ -969,13 +882,9 @@ paths:
     delete:
       operationId: broker_invites_delete
       summary: Delete Broker User Invite
-      description: '
+      description: 'Delete a broker user invite.
 
-        Delete a broker user invite.
-
-        This endpoint cancels a broker user invite by setting its status to cancelled.
-
-        '
+        This endpoint cancels a broker user invite by setting its status to cancelled.'
       responses:
         '204':
           description: ''
@@ -994,7 +903,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
   /broker/{broker_pk}/notification-emails:
     parameters:
     - name: broker_pk
@@ -1005,9 +914,7 @@ paths:
     get:
       operationId: broker_notification-emails_list
       summary: List Sent Notification Emails
-      description: '
-
-        List all successfully sent notification emails to business users and underwriters
+      description: 'List all successfully sent notification emails to business users and underwriters
 
         associated with the authenticated broker''s agency.
 
@@ -1049,9 +956,7 @@ paths:
 
         - `status`: Email status (always "sent" for this endpoint)
 
-        - `email_type`: Type of notification email (e.g., "BROKER_INACTIVITY", "BROKER_WEEKLY_DIGEST")
-
-        '
+        - `email_type`: Type of notification email (e.g., "BROKER_INACTIVITY", "BROKER_WEEKLY_DIGEST")'
       parameters:
       - name: search
         in: query
@@ -1095,7 +1000,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
   /broker/{broker_pk}/received-notification-emails:
     parameters:
     - name: broker_pk
@@ -1106,9 +1011,7 @@ paths:
     get:
       operationId: broker_received-notification-emails_list
       summary: List Received Notification Emails
-      description: '
-
-        List all successfully sent notification emails received by the authenticated broker user.
+      description: 'List all successfully sent notification emails received by the authenticated broker user.
 
 
         Returns only emails with ''sent'' status sent to the authenticated user making the request.
@@ -1144,9 +1047,7 @@ paths:
         - `is_read`: Boolean indicating if the notification has been read (false for new emails on first GET)
 
 
-        **Note:** UserNotification records are auto-created on first GET request with "unread" status.
-
-        '
+        **Note:** UserNotification records are auto-created on first GET request with "unread" status.'
       parameters:
       - name: search
         in: query
@@ -1190,7 +1091,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
   /broker/{broker_pk}/received-notification-emails/{id}/mark-as-read:
     parameters:
     - name: broker_pk
@@ -1206,9 +1107,7 @@ paths:
     post:
       operationId: broker_received-notification-emails_mark_as_read
       summary: Mark Notification as Read
-      description: '
-
-        Mark a specific notification email as read for the authenticated broker user.
+      description: 'Mark a specific notification email as read for the authenticated broker user.
 
 
         This endpoint updates the UserNotification record status to "read" and sets
@@ -1225,9 +1124,7 @@ paths:
 
         **Response:**
 
-        Returns the updated notification email with `is_read: true`.
-
-        '
+        Returns the updated notification email with `is_read: true`.'
       responses:
         '200':
           description: ''
@@ -1252,7 +1149,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
       requestBody:
         content:
           application/json:
@@ -1269,13 +1166,9 @@ paths:
     get:
       operationId: broker_users_list
       summary: List Broker users
-      description: '
+      description: 'List all broker users.
 
-        List all broker users.
-
-        This endpoint lists all the broker''s users.
-
-        '
+        This endpoint lists all the broker''s users.'
       parameters:
       - name: search
         in: query
@@ -1337,7 +1230,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
   /broker/{broker_pk}/users/{id}:
     parameters:
     - name: broker_pk
@@ -1354,13 +1247,9 @@ paths:
     get:
       operationId: broker_users_read
       summary: Retrieve Broker user
-      description: '
+      description: 'Retrieve a broker user.
 
-        Retrieve a broker user.
-
-        This endpoint retrieves a broker user.
-
-        '
+        This endpoint retrieves a broker user.'
       responses:
         '200':
           description: ''
@@ -1383,17 +1272,13 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
     put:
       operationId: broker_users_update
       summary: Update Broker user
-      description: '
+      description: 'Update a broker user.
 
-        Update a broker user.
-
-        This endpoint updates a broker user.
-
-        '
+        This endpoint updates a broker user.'
       responses:
         '200':
           description: ''
@@ -1422,7 +1307,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
       requestBody:
         content:
           application/json:
@@ -1432,13 +1317,9 @@ paths:
     delete:
       operationId: broker_users_delete
       summary: Delete Broker user
-      description: '
+      description: 'Delete a broker user.
 
-        Delete a broker user.
-
-        This endpoint deletes a broker user.
-
-        '
+        This endpoint deletes a broker user.'
       responses:
         '204':
           description: ''
@@ -1457,7 +1338,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
   /broker/{id}:
     parameters:
     - name: id
@@ -1469,13 +1350,9 @@ paths:
     get:
       operationId: broker_read
       summary: Get Broker
-      description: '
+      description: 'Retrieve a broker.
 
-        Retrieve a broker.
-
-        This endpoint Get a broker.
-
-        '
+        This endpoint Get a broker.'
       responses:
         '200':
           description: ''
@@ -1498,17 +1375,13 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
     patch:
       operationId: broker_partial_update
       summary: Update Broker
-      description: '
+      description: 'Update a broker.
 
-        Update a broker.
-
-        This endpoint updates a broker .
-
-        '
+        This endpoint updates a broker .'
       responses:
         '200':
           description: ''
@@ -1537,7 +1410,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - broker
+      - Broker
       requestBody:
         content:
           application/json:
@@ -1546,46 +1419,146 @@ paths:
         required: true
 components:
   schemas:
-    ApplicationPrefilledForm:
-      required:
-      - business
+    BrokerReceivedNotificationEmail:
       type: object
       properties:
         id:
-          title: Id
+          title: ID
+          type: integer
+          readOnly: true
+        subject:
+          title: Subject
           type: string
-          format: uuid
+          readOnly: true
+          minLength: 1
+        sender_email:
+          title: Sender email
+          type:
+          - string
+          - 'null'
+          format: email
+          readOnly: true
+          minLength: 1
+        sender_name:
+          title: Sender name
+          type: string
+          readOnly: true
+        recipient_email:
+          title: Recipient email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        sent_at:
+          title: Sent at
+          type:
+          - string
+          - 'null'
+          format: date-time
           readOnly: true
         created_at:
           title: Created at
           type: string
           format: date-time
           readOnly: true
-        document_content:
-          title: Document content
+        status:
+          title: Status
+          type: string
+          enum:
+          - pending
+          - sent
+          - failed
+          readOnly: true
+        email_type:
+          title: Email type
+          description: Type of email notification
           type:
           - string
           - 'null'
-        form:
-          title: Form
+          enum:
+          - OTP
+          - BROKER_INACTIVITY
+          - BROKER_WEEKLY_DIGEST
+          - STOREFRONT_APPLICATION_STARTED
+          - STOREFRONT_APPLICATION_SUBMITTED
+          - STOREFRONT_APPLICATION_REMINDER
+          readOnly: true
+        is_read:
+          title: Is read
           type: string
           readOnly: true
-          format: uri
-        application:
-          title: Application
+        triggered_by_details:
+          title: Triggered by details
+          type: string
+          readOnly: true
+    BrokerNotificationEmail:
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        subject:
+          title: Subject
+          type: string
+          readOnly: true
+          minLength: 1
+        sender_email:
+          title: Sender email
           type:
           - string
           - 'null'
-          format: uuid
-        created_by:
-          title: Created by
-          type:
-          - integer
-          - 'null'
+          format: email
           readOnly: true
-        business:
-          title: Business
-          type: integer
+          minLength: 1
+        sender_name:
+          title: Sender name
+          type: string
+          readOnly: true
+        recipient_email:
+          title: Recipient email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        recipient_type:
+          title: Recipient type
+          type: string
+          readOnly: true
+        sent_at:
+          title: Sent at
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        status:
+          title: Status
+          type: string
+          enum:
+          - pending
+          - sent
+          - failed
+          readOnly: true
+        email_type:
+          title: Email type
+          description: Type of email notification
+          type:
+          - string
+          - 'null'
+          enum:
+          - OTP
+          - BROKER_INACTIVITY
+          - BROKER_WEEKLY_DIGEST
+          - STOREFRONT_APPLICATION_STARTED
+          - STOREFRONT_APPLICATION_SUBMITTED
+          - STOREFRONT_APPLICATION_REMINDER
+          readOnly: true
     APIException:
       title: Generic API Error
       required:
@@ -1595,15 +1568,128 @@ components:
         detail:
           description: Error details
           type: string
-    GenericError:
-      title: Generic API Error
+    BrokerFile:
       required:
-      - detail
+      - id
+      - name
+      - insured_id
+      - insured_name
+      - date
+      - file_type
+      - team_member_id
+      - team_member_name
+      - team_member_avatar
+      - file_size
+      - source
+      - download_url
       type: object
       properties:
-        detail:
-          description: Error details
+        id:
+          title: Id
           type: string
+          minLength: 1
+        name:
+          title: Name
+          type: string
+          minLength: 1
+        insured_id:
+          title: Insured id
+          type: string
+          minLength: 1
+        insured_name:
+          title: Insured name
+          type: string
+          minLength: 1
+        date:
+          title: Date
+          type: string
+          format: date-time
+        file_type:
+          title: File type
+          type: string
+          minLength: 1
+        team_member_id:
+          title: Team member id
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        team_member_name:
+          title: Team member name
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        team_member_avatar:
+          title: Team member avatar
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        file_size:
+          title: File size
+          type:
+          - integer
+          - 'null'
+        source:
+          title: Source
+          type: string
+          minLength: 1
+        download_url:
+          title: Download url
+          type:
+          - string
+          - 'null'
+          minLength: 1
+    AgencySubscription:
+      type: object
+      properties:
+        name:
+          title: Name
+          description: Display name for the plan (e.g. "Pro plan").
+          type: string
+          readOnly: true
+          minLength: 1
+        price:
+          title: Price
+          description: Plan price in dollars for the selected billing frequency.
+          type: string
+          format: decimal
+          readOnly: true
+        billing_frequency:
+          title: Billing frequency
+          description: How often the plan is billed.
+          type: string
+          enum:
+          - MONTHLY
+          - QUARTERLY
+          - ANNUALLY
+          readOnly: true
+        billing_frequency_display:
+          title: Billing frequency display
+          type: string
+          readOnly: true
+          minLength: 1
+        payment_status:
+          title: Payment status
+          description: Whether the agency has paid for the current billing period.
+          type: string
+          enum:
+          - PAID
+          - UNPAID
+          readOnly: true
+        payment_status_display:
+          title: Payment status display
+          type: string
+          readOnly: true
+          minLength: 1
+        manage_plan_url:
+          title: Manage plan url
+          description: External URL for the Manage plan button in broker settings.
+          type: string
+          format: uri
+          readOnly: true
+          minLength: 1
     BusinessSubsidiary:
       required:
       - name
@@ -1634,6 +1720,591 @@ components:
         business:
           title: Business
           type: integer
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    BrokerAgency:
+      required:
+      - name
+      - domain_name
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/UserForBrokerAgency'
+        broker_group:
+          title: Broker group
+          type: string
+          readOnly: true
+        agency_fee_type:
+          title: Agency fee type
+          type:
+          - string
+          - 'null'
+          enum:
+          - fixed
+          - minimum_commission
+          - percentage
+        subscription_plan_display:
+          title: Subscription plan display
+          type: string
+          readOnly: true
+          minLength: 1
+        subscription:
+          $ref: '#/components/schemas/AgencySubscription'
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        domain_name:
+          title: Domain name
+          type: string
+          maxLength: 500
+          minLength: 1
+        slug:
+          title: Slug
+          description: URL-safe identifier derived from domain_name (second-level label). Populated automatically when empty.
+          type:
+          - string
+          - 'null'
+          format: slug
+          pattern: ^[-a-zA-Z0-9_]+$
+          maxLength: 255
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        phone_number:
+          title: Phone number
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        plan:
+          title: Plan
+          type: string
+          enum:
+          - WHOLESALE
+          - SAAS
+          readOnly: true
+        subscription_plan:
+          title: Subscription plan
+          type: string
+          enum:
+          - ESSENTIALS
+          - PREMIUM
+          - ENTERPRISE
+          readOnly: true
+        is_test_account:
+          title: Is test account
+          type: boolean
+          readOnly: true
+        can_download_readiness_reports:
+          title: Can download readiness reports
+          type: boolean
+          readOnly: true
+        agency_id:
+          title: Agency id
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        full_address:
+          title: Full address
+          type:
+          - string
+          - 'null'
+        program_fee_cap:
+          title: Program fee cap
+          description: The maximum amount of program fee that the 1Fort can charge to the customer.
+          type:
+          - string
+          - 'null'
+          format: decimal
+          readOnly: true
+        program_fee_rate:
+          title: Program fee rate
+          description: Program fee rate (%) for quotes where 1Fort helped with submission (e.g., Herald, Manual).
+          type: string
+          format: decimal
+          readOnly: true
+        program_fee_rate_no_submission:
+          title: Program fee rate no submission
+          description: Program fee rate (%) for quotes where 1Fort did not help with submission (e.g., Email AI).
+          type: string
+          format: decimal
+        checkout_processing_fee_percent:
+          title: Checkout processing fee percent
+          description: Checkout card processing fee (%) — percent of subtotal only (no fixed fee; capped at 3%). Leave blank for default 3%. ACH/wire use a separate 1% + $0.30 default when this field is blank.
+          type:
+          - string
+          - 'null'
+          format: decimal
+        stripe_connect_payouts_enabled:
+          title: Stripe connect payouts enabled
+          description: When enabled, successful checkout payments allocate Stripe Connect transfers to the broker and carrier Express accounts.
+          type: boolean
+        disclaimer:
+          title: Disclaimer
+          type:
+          - string
+          - 'null'
+        support_email:
+          title: Support email
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 255
+        accounting_email:
+          description: List of accounting email addresses for this agency
+          type:
+          - array
+          - 'null'
+          items:
+            title: Accounting email
+            type: string
+            format: email
+            maxLength: 254
+            minLength: 1
+        marketing_placements_email:
+          description: List of marketing/placements email addresses for this agency
+          type:
+          - array
+          - 'null'
+          items:
+            title: Marketing placements email
+            type: string
+            format: email
+            maxLength: 254
+            minLength: 1
+        total_commercial_premium:
+          title: Total commercial premium
+          description: Total commercial premium for this agency
+          type:
+          - string
+          - 'null'
+          format: decimal
+        agency_fee:
+          title: Agency fee
+          description: Agency fee in dollars (used when agency_fee_type is null or fixed)
+          type: string
+          format: decimal
+        agency_fee_percentage:
+          title: Agency fee percentage
+          description: Agency fee as percentage (0-100), used when agency_fee_type is minimum_commission or percentage
+          type:
+          - string
+          - 'null'
+          format: decimal
+        disable_all_broker_emails:
+          title: Disable all broker emails
+          description: When enabled, disables all automated emails to brokers within this agency
+          type: boolean
+        auto_submit_renewal_applications:
+          title: Auto submit renewal applications
+          description: 'Opt-in: when on, renewal applications for this agency''s policies are created automatically ahead of policy expiration and renewal notification emails are sent'
+          type: boolean
+        disable_all_insured_emails:
+          title: Disable all insured emails
+          description: When enabled, disables all automated emails to insured/business users in this agency's businesses
+          type: boolean
+        disable_submission_follow_up_emails:
+          title: Disable submission follow up emails
+          description: When enabled, disables submission follow-up reminder emails for quotes in this agency
+          type: boolean
+        auto_create_sendgrid_domain_auth:
+          title: Auto create sendgrid domain auth
+          description: Automatically create SendGrid domain authentication records when this agency is created
+          type: boolean
+        sendgrid_domain_id:
+          title: Sendgrid domain id
+          description: SendGrid domain authentication ID returned when domain is registered
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        dba:
+          title: Dba
+          description: Doing Business As (DBA) name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        ein:
+          title: Ein
+          description: Employer Identification Number (EIN)
+          type:
+          - string
+          - 'null'
+          maxLength: 10
+        company_type:
+          title: Company type
+          description: Legal structure of the company
+          type:
+          - string
+          - 'null'
+          enum:
+          - SOLE_PROPRIETORSHIP
+          - GENERAL_PARTNERSHIP
+          - LIMITED_PARTNERSHIP
+          - LIMITED_LIABILITY_PARTNERSHIP
+          - LIMITED_LIABILITY_COMPANY
+          - C_CORPORATION
+          - S_CORPORATION
+        agency_type:
+          title: Agency type
+          description: Type of broker agency - Retailer or Wholesaler
+          type: string
+          enum:
+          - RETAILER
+          - WHOLESALER
+        bank_owner_type:
+          title: Bank owner type
+          description: Bank account owner type (Company or Individual)
+          type:
+          - string
+          - 'null'
+          enum:
+          - COMPANY
+          - INDIVIDUAL
+        bank_account_holder_name:
+          title: Bank account holder name
+          description: Name on the bank account
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        bank_account_number:
+          title: Bank account number
+          description: Bank account number
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        bank_routing_number:
+          title: Bank routing number
+          description: Bank routing number (9 digits)
+          type:
+          - string
+          - 'null'
+          maxLength: 9
+        trust_bank_owner_type:
+          title: Trust bank owner type
+          description: Trust bank account owner type (Company or Individual)
+          type:
+          - string
+          - 'null'
+          enum:
+          - COMPANY
+          - INDIVIDUAL
+        trust_bank_account_holder_name:
+          title: Trust bank account holder name
+          description: Name on the trust bank account
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        trust_bank_routing_number:
+          title: Trust bank routing number
+          description: Trust bank routing number (9 digits)
+          type:
+          - string
+          - 'null'
+          maxLength: 9
+        trust_bank_account_number:
+          title: Trust bank account number
+          description: Trust bank account number
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        carrier_payables_enabled:
+          title: Carrier payables enabled
+          description: Enable or disable carrier payables for this agency
+          type: boolean
+        payment_schedule:
+          title: Payment schedule
+          description: Payable schedule for the billing company
+          type: string
+          enum:
+          - as_available
+          - monthly_1st
+          - monthly_15th
+          - monthly_last_day
+        one_time_payment_account:
+          title: One time payment account
+          description: Account where one-time payment funds are transferred
+          type:
+          - string
+          - 'null'
+          enum:
+          - operational
+          - trust
+        require_refund_approval_via_check:
+          title: Require refund approval via check
+          description: Require approval for all refunds issued via check
+          type: boolean
+        require_refund_approval_over_amount_cents:
+          title: Require refund approval over amount cents
+          description: Require approval for all refunds over this amount (in cents). When set, e.g. 500000 = $5,000.
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        market_access_enabled:
+          title: Market access enabled
+          description: Enable Market Access feature for this agency. When enabled, brokers can access 1Fort wholesale markets.
+          type: boolean
+        use_accord_forms:
+          title: Use accord forms
+          description: When enabled for non-core coverage applications, use ACORD form tables to generate questions instead of LLM.
+          type: boolean
+        broker_email:
+          title: Broker email
+          type:
+          - string
+          - 'null'
+          format: email
+          maxLength: 254
+        broker_password:
+          title: Broker password
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        default_storefront_broker_user:
+          title: Default storefront broker user
+          description: Broker user whose storefront is used for agency subdomain root and generic pay-bill when no broker-user slug is in the URL.
+          type:
+          - integer
+          - 'null'
+    BrokerUser:
+      required:
+      - first_name
+      - last_name
+      type: object
+      properties:
+        pk:
+          title: ID
+          type: integer
+          readOnly: true
+        user_defined_role:
+          title: User defined role
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        type:
+          title: Type
+          description: Specifies the insurance-related role type of the user within the agency.
+          type:
+          - string
+          - 'null'
+          enum:
+          - LEADERSHIP
+          - SALES
+          - SERVICE
+          - MARKETS
+          - OPERATIONS
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        first_name:
+          title: First name
+          type: string
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          readOnly: true
+          minLength: 1
+        role:
+          title: Role
+          description: User's role in the agency. Set to null to revoke platform access.
+          type:
+          - string
+          - 'null'
+          enum:
+          - Admin
+          - Member
+          - Billing
+          - IT
+          - OneFort Maintainer
+        status:
+          title: Status
+          type: string
+          readOnly: true
+        producer_id:
+          title: Producer id
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        phone_number:
+          title: Phone number
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        primary_workflow_activities:
+          type: array
+          items:
+            type: string
+            maxLength: 128
+            minLength: 1
+        is_current_user:
+          title: Is current user
+          type: boolean
+          readOnly: true
+        is_storefront_default:
+          title: Is storefront default
+          type: string
+          readOnly: true
+        storefront_id:
+          title: Storefront id
+          type:
+          - string
+          - 'null'
+          format: uuid
+          readOnly: true
+        storefront_url_slug:
+          title: Storefront url slug
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        slug:
+          title: Slug
+          description: URL-safe identifier per agency from the user's name (e.g. ernesto-freyre). Populated automatically when empty.
+          type:
+          - string
+          - 'null'
+          format: slug
+          pattern: ^[-a-zA-Z0-9_]+$
+          readOnly: true
+          minLength: 1
+        review_submissions_before_submitting:
+          title: Review submissions before submitting
+          description: When on, business submissions for accounts where this user is the primary agent are held in Needs Review instead of being sent to carriers immediately.
+          type: boolean
+        auto_submit_renewal_applications:
+          title: Auto submit renewal applications
+          description: 'Opt-in: when on, renewal applications for accounts where this user is the primary agent are created automatically ahead of policy expiration and renewal notification emails are sent. The agency-level field of the same name exists but this per-user flag is the active gate.'
+          type: boolean
+        renewal_submission_lead_days:
+          title: Renewal submission lead days
+          description: How many days before a policy's expiration date its renewal application is created automatically (30-180).
+          type: integer
+          maximum: 180
+          minimum: 30
+        renewal_due_date_days:
+          title: Renewal due date days
+          description: How many days before the renewal effective date the renewal application is due (15-30).
+          type: integer
+          maximum: 30
+          minimum: 15
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    BrokerBusinessUserInvite:
+      required:
+      - email
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        invitee_email:
+          title: Invitee email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        inviter:
+          title: Inviter
+          type: integer
+          readOnly: true
+        status:
+          title: Status
+          type: string
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          format: email
+          minLength: 1
+        trigger_email:
+          title: Trigger email
+          type: boolean
+        application_id:
+          title: Application id
+          type:
+          - string
+          - 'null'
+        custom_message:
+          title: Custom message
+          type:
+          - string
+          - 'null'
+    UserForBrokerAgency:
+      type: object
+      properties:
+        first_name:
+          title: First name
+          type: string
+          maxLength: 255
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          maxLength: 255
+          minLength: 1
+        user_defined_role:
+          title: User defined role
+          type: string
+          maxLength: 255
+          minLength: 1
     BrokerClient:
       required:
       - name
@@ -2663,340 +3334,6 @@ components:
           type:
           - integer
           - 'null'
-    BrokerUserInvite:
-      required:
-      - invitee_email
-      type: object
-      properties:
-        pk:
-          title: ID
-          type: integer
-          readOnly: true
-        invitee_email:
-          title: Invitee email
-          type: string
-          format: email
-          maxLength: 254
-          minLength: 1
-        first_name:
-          title: First name
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        last_name:
-          title: Last name
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        inviter:
-          title: Inviter
-          type: integer
-          readOnly: true
-        role:
-          title: Role
-          description: Role determines access level. Set to null to revoke platform access.
-          type:
-          - string
-          - 'null'
-          enum:
-          - Admin
-          - Member
-          - Billing
-          - IT
-          - OneFort Maintainer
-        type:
-          title: Type
-          description: Specifies the insurance-related role type of the user within the agency.
-          type:
-          - string
-          - 'null'
-          enum:
-          - LEADERSHIP
-          - SALES
-          - SERVICE
-          - MARKETS
-          - OPERATIONS
-        status:
-          title: Status
-          type: string
-          enum:
-          - accepted
-          - pending
-          - cancelled
-          readOnly: true
-        created_at:
-          title: Created at
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-    AgencySubscription:
-      type: object
-      properties:
-        name:
-          title: Name
-          description: Display name for the plan (e.g. "Pro plan").
-          type: string
-          readOnly: true
-          minLength: 1
-        price:
-          title: Price
-          description: Plan price in dollars for the selected billing frequency.
-          type: string
-          format: decimal
-          readOnly: true
-        billing_frequency:
-          title: Billing frequency
-          description: How often the plan is billed.
-          type: string
-          enum:
-          - MONTHLY
-          - QUARTERLY
-          - ANNUALLY
-          readOnly: true
-        billing_frequency_display:
-          title: Billing frequency display
-          type: string
-          readOnly: true
-          minLength: 1
-        payment_status:
-          title: Payment status
-          description: Whether the agency has paid for the current billing period.
-          type: string
-          enum:
-          - PAID
-          - UNPAID
-          readOnly: true
-        payment_status_display:
-          title: Payment status display
-          type: string
-          readOnly: true
-          minLength: 1
-        manage_plan_url:
-          title: Manage plan url
-          description: External URL for the Manage plan button in broker settings.
-          type: string
-          format: uri
-          readOnly: true
-          minLength: 1
-    UserForBrokerAgency:
-      type: object
-      properties:
-        first_name:
-          title: First name
-          type: string
-          maxLength: 255
-          minLength: 1
-        last_name:
-          title: Last name
-          type: string
-          maxLength: 255
-          minLength: 1
-        user_defined_role:
-          title: User defined role
-          type: string
-          maxLength: 255
-          minLength: 1
-    BrokerBusinessUserInvite:
-      required:
-      - email
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        invitee_email:
-          title: Invitee email
-          type: string
-          format: email
-          readOnly: true
-          minLength: 1
-        inviter:
-          title: Inviter
-          type: integer
-          readOnly: true
-        status:
-          title: Status
-          type: string
-          readOnly: true
-          minLength: 1
-        email:
-          title: Email
-          type: string
-          format: email
-          minLength: 1
-        trigger_email:
-          title: Trigger email
-          type: boolean
-        application_id:
-          title: Application id
-          type:
-          - string
-          - 'null'
-        custom_message:
-          title: Custom message
-          type:
-          - string
-          - 'null'
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    BrokerNotificationEmail:
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        subject:
-          title: Subject
-          type: string
-          readOnly: true
-          minLength: 1
-        sender_email:
-          title: Sender email
-          type:
-          - string
-          - 'null'
-          format: email
-          readOnly: true
-          minLength: 1
-        sender_name:
-          title: Sender name
-          type: string
-          readOnly: true
-        recipient_email:
-          title: Recipient email
-          type: string
-          format: email
-          readOnly: true
-          minLength: 1
-        recipient_type:
-          title: Recipient type
-          type: string
-          readOnly: true
-        sent_at:
-          title: Sent at
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        status:
-          title: Status
-          type: string
-          enum:
-          - pending
-          - sent
-          - failed
-          readOnly: true
-        email_type:
-          title: Email type
-          description: Type of email notification
-          type:
-          - string
-          - 'null'
-          enum:
-          - OTP
-          - BROKER_INACTIVITY
-          - BROKER_WEEKLY_DIGEST
-          - STOREFRONT_APPLICATION_STARTED
-          - STOREFRONT_APPLICATION_SUBMITTED
-          - STOREFRONT_APPLICATION_REMINDER
-          readOnly: true
-    BrokerFile:
-      required:
-      - id
-      - name
-      - insured_id
-      - insured_name
-      - date
-      - file_type
-      - team_member_id
-      - team_member_name
-      - team_member_avatar
-      - file_size
-      - source
-      - download_url
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          minLength: 1
-        name:
-          title: Name
-          type: string
-          minLength: 1
-        insured_id:
-          title: Insured id
-          type: string
-          minLength: 1
-        insured_name:
-          title: Insured name
-          type: string
-          minLength: 1
-        date:
-          title: Date
-          type: string
-          format: date-time
-        file_type:
-          title: File type
-          type: string
-          minLength: 1
-        team_member_id:
-          title: Team member id
-          type:
-          - string
-          - 'null'
-          minLength: 1
-        team_member_name:
-          title: Team member name
-          type:
-          - string
-          - 'null'
-          minLength: 1
-        team_member_avatar:
-          title: Team member avatar
-          type:
-          - string
-          - 'null'
-          minLength: 1
-        file_size:
-          title: File size
-          type:
-          - integer
-          - 'null'
-        source:
-          title: Source
-          type: string
-          minLength: 1
-        download_url:
-          title: Download url
-          type:
-          - string
-          - 'null'
-          minLength: 1
     BrokerAgencyDetail:
       type: object
       properties:
@@ -3420,22 +3757,49 @@ components:
           - SERVICE
           - MARKETS
           - OPERATIONS
-    BrokerUser:
+    BrokerUserInvite:
       required:
-      - first_name
-      - last_name
+      - invitee_email
       type: object
       properties:
         pk:
           title: ID
           type: integer
           readOnly: true
-        user_defined_role:
-          title: User defined role
+        invitee_email:
+          title: Invitee email
+          type: string
+          format: email
+          maxLength: 254
+          minLength: 1
+        first_name:
+          title: First name
           type:
           - string
           - 'null'
-          maxLength: 255
+          maxLength: 50
+        last_name:
+          title: Last name
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        inviter:
+          title: Inviter
+          type: integer
+          readOnly: true
+        role:
+          title: Role
+          description: Role determines access level. Set to null to revoke platform access.
+          type:
+          - string
+          - 'null'
+          enum:
+          - Admin
+          - Member
+          - Billing
+          - IT
+          - OneFort Maintainer
         type:
           title: Type
           description: Specifies the insurance-related role type of the user within the agency.
@@ -3448,552 +3812,61 @@ components:
           - SERVICE
           - MARKETS
           - OPERATIONS
+        status:
+          title: Status
+          type: string
+          enum:
+          - accepted
+          - pending
+          - cancelled
+          readOnly: true
+        created_at:
+          title: Created at
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+    ApplicationPrefilledForm:
+      required:
+      - business
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
         created_at:
           title: Created at
           type: string
           format: date-time
           readOnly: true
-        first_name:
-          title: First name
-          type: string
-          minLength: 1
-        last_name:
-          title: Last name
-          type: string
-          minLength: 1
-        email:
-          title: Email
-          type: string
-          readOnly: true
-          minLength: 1
-        role:
-          title: Role
-          description: User's role in the agency. Set to null to revoke platform access.
+        document_content:
+          title: Document content
           type:
           - string
           - 'null'
-          enum:
-          - Admin
-          - Member
-          - Billing
-          - IT
-          - OneFort Maintainer
-        status:
-          title: Status
+        form:
+          title: Form
           type: string
           readOnly: true
-        producer_id:
-          title: Producer id
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        phone_number:
-          title: Phone number
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        primary_workflow_activities:
-          type: array
-          items:
-            type: string
-            maxLength: 128
-            minLength: 1
-        is_current_user:
-          title: Is current user
-          type: boolean
-          readOnly: true
-        is_storefront_default:
-          title: Is storefront default
-          type: string
-          readOnly: true
-        storefront_id:
-          title: Storefront id
+          format: uri
+        application:
+          title: Application
           type:
           - string
           - 'null'
           format: uuid
-          readOnly: true
-        storefront_url_slug:
-          title: Storefront url slug
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        slug:
-          title: Slug
-          description: URL-safe identifier per agency from the user's name (e.g. ernesto-freyre). Populated automatically when empty.
-          type:
-          - string
-          - 'null'
-          format: slug
-          pattern: ^[-a-zA-Z0-9_]+$
-          readOnly: true
-          minLength: 1
-        review_submissions_before_submitting:
-          title: Review submissions before submitting
-          description: When on, business submissions for accounts where this user is the primary agent are held in Needs Review instead of being sent to carriers immediately.
-          type: boolean
-        auto_submit_renewal_applications:
-          title: Auto submit renewal applications
-          description: 'Opt-in: when on, renewal applications for accounts where this user is the primary agent are created automatically ahead of policy expiration and renewal notification emails are sent. The agency-level field of the same name exists but this per-user flag is the active gate.'
-          type: boolean
-        renewal_submission_lead_days:
-          title: Renewal submission lead days
-          description: How many days before a policy's expiration date its renewal application is created automatically (30-180).
-          type: integer
-          maximum: 180
-          minimum: 30
-        renewal_due_date_days:
-          title: Renewal due date days
-          description: How many days before the renewal effective date the renewal application is due (15-30).
-          type: integer
-          maximum: 30
-          minimum: 15
-    BrokerAgency:
-      required:
-      - name
-      - domain_name
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        user:
-          $ref: '#/components/schemas/UserForBrokerAgency'
-        broker_group:
-          title: Broker group
-          type: string
-          readOnly: true
-        agency_fee_type:
-          title: Agency fee type
-          type:
-          - string
-          - 'null'
-          enum:
-          - fixed
-          - minimum_commission
-          - percentage
-        subscription_plan_display:
-          title: Subscription plan display
-          type: string
-          readOnly: true
-          minLength: 1
-        subscription:
-          $ref: '#/components/schemas/AgencySubscription'
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        domain_name:
-          title: Domain name
-          type: string
-          maxLength: 500
-          minLength: 1
-        slug:
-          title: Slug
-          description: URL-safe identifier derived from domain_name (second-level label). Populated automatically when empty.
-          type:
-          - string
-          - 'null'
-          format: slug
-          pattern: ^[-a-zA-Z0-9_]+$
-          maxLength: 255
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        phone_number:
-          title: Phone number
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        plan:
-          title: Plan
-          type: string
-          enum:
-          - WHOLESALE
-          - SAAS
-          readOnly: true
-        subscription_plan:
-          title: Subscription plan
-          type: string
-          enum:
-          - ESSENTIALS
-          - PREMIUM
-          - ENTERPRISE
-          readOnly: true
-        is_test_account:
-          title: Is test account
-          type: boolean
-          readOnly: true
-        can_download_readiness_reports:
-          title: Can download readiness reports
-          type: boolean
-          readOnly: true
-        agency_id:
-          title: Agency id
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        full_address:
-          title: Full address
-          type:
-          - string
-          - 'null'
-        program_fee_cap:
-          title: Program fee cap
-          description: The maximum amount of program fee that the 1Fort can charge to the customer.
-          type:
-          - string
-          - 'null'
-          format: decimal
-          readOnly: true
-        program_fee_rate:
-          title: Program fee rate
-          description: Program fee rate (%) for quotes where 1Fort helped with submission (e.g., Herald, Manual).
-          type: string
-          format: decimal
-          readOnly: true
-        program_fee_rate_no_submission:
-          title: Program fee rate no submission
-          description: Program fee rate (%) for quotes where 1Fort did not help with submission (e.g., Email AI).
-          type: string
-          format: decimal
-        checkout_processing_fee_percent:
-          title: Checkout processing fee percent
-          description: Checkout card processing fee (%) — percent of subtotal only (no fixed fee; capped at 3%). Leave blank for default 3%. ACH/wire use a separate 1% + $0.30 default when this field is blank.
-          type:
-          - string
-          - 'null'
-          format: decimal
-        stripe_connect_payouts_enabled:
-          title: Stripe connect payouts enabled
-          description: When enabled, successful checkout payments allocate Stripe Connect transfers to the broker and carrier Express accounts.
-          type: boolean
-        disclaimer:
-          title: Disclaimer
-          type:
-          - string
-          - 'null'
-        support_email:
-          title: Support email
-          type:
-          - string
-          - 'null'
-          format: email
-          maxLength: 255
-        accounting_email:
-          description: List of accounting email addresses for this agency
-          type:
-          - array
-          - 'null'
-          items:
-            title: Accounting email
-            type: string
-            format: email
-            maxLength: 254
-            minLength: 1
-        marketing_placements_email:
-          description: List of marketing/placements email addresses for this agency
-          type:
-          - array
-          - 'null'
-          items:
-            title: Marketing placements email
-            type: string
-            format: email
-            maxLength: 254
-            minLength: 1
-        total_commercial_premium:
-          title: Total commercial premium
-          description: Total commercial premium for this agency
-          type:
-          - string
-          - 'null'
-          format: decimal
-        agency_fee:
-          title: Agency fee
-          description: Agency fee in dollars (used when agency_fee_type is null or fixed)
-          type: string
-          format: decimal
-        agency_fee_percentage:
-          title: Agency fee percentage
-          description: Agency fee as percentage (0-100), used when agency_fee_type is minimum_commission or percentage
-          type:
-          - string
-          - 'null'
-          format: decimal
-        disable_all_broker_emails:
-          title: Disable all broker emails
-          description: When enabled, disables all automated emails to brokers within this agency
-          type: boolean
-        auto_submit_renewal_applications:
-          title: Auto submit renewal applications
-          description: 'Opt-in: when on, renewal applications for this agency''s policies are created automatically ahead of policy expiration and renewal notification emails are sent'
-          type: boolean
-        disable_all_insured_emails:
-          title: Disable all insured emails
-          description: When enabled, disables all automated emails to insured/business users in this agency's businesses
-          type: boolean
-        disable_submission_follow_up_emails:
-          title: Disable submission follow up emails
-          description: When enabled, disables submission follow-up reminder emails for quotes in this agency
-          type: boolean
-        auto_create_sendgrid_domain_auth:
-          title: Auto create sendgrid domain auth
-          description: Automatically create SendGrid domain authentication records when this agency is created
-          type: boolean
-        sendgrid_domain_id:
-          title: Sendgrid domain id
-          description: SendGrid domain authentication ID returned when domain is registered
+        created_by:
+          title: Created by
           type:
           - integer
           - 'null'
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-        dba:
-          title: Dba
-          description: Doing Business As (DBA) name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        ein:
-          title: Ein
-          description: Employer Identification Number (EIN)
-          type:
-          - string
-          - 'null'
-          maxLength: 10
-        company_type:
-          title: Company type
-          description: Legal structure of the company
-          type:
-          - string
-          - 'null'
-          enum:
-          - SOLE_PROPRIETORSHIP
-          - GENERAL_PARTNERSHIP
-          - LIMITED_PARTNERSHIP
-          - LIMITED_LIABILITY_PARTNERSHIP
-          - LIMITED_LIABILITY_COMPANY
-          - C_CORPORATION
-          - S_CORPORATION
-        agency_type:
-          title: Agency type
-          description: Type of broker agency - Retailer or Wholesaler
-          type: string
-          enum:
-          - RETAILER
-          - WHOLESALER
-        bank_owner_type:
-          title: Bank owner type
-          description: Bank account owner type (Company or Individual)
-          type:
-          - string
-          - 'null'
-          enum:
-          - COMPANY
-          - INDIVIDUAL
-        bank_account_holder_name:
-          title: Bank account holder name
-          description: Name on the bank account
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        bank_account_number:
-          title: Bank account number
-          description: Bank account number
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        bank_routing_number:
-          title: Bank routing number
-          description: Bank routing number (9 digits)
-          type:
-          - string
-          - 'null'
-          maxLength: 9
-        trust_bank_owner_type:
-          title: Trust bank owner type
-          description: Trust bank account owner type (Company or Individual)
-          type:
-          - string
-          - 'null'
-          enum:
-          - COMPANY
-          - INDIVIDUAL
-        trust_bank_account_holder_name:
-          title: Trust bank account holder name
-          description: Name on the trust bank account
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        trust_bank_routing_number:
-          title: Trust bank routing number
-          description: Trust bank routing number (9 digits)
-          type:
-          - string
-          - 'null'
-          maxLength: 9
-        trust_bank_account_number:
-          title: Trust bank account number
-          description: Trust bank account number
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        carrier_payables_enabled:
-          title: Carrier payables enabled
-          description: Enable or disable carrier payables for this agency
-          type: boolean
-        payment_schedule:
-          title: Payment schedule
-          description: Payable schedule for the billing company
-          type: string
-          enum:
-          - as_available
-          - monthly_1st
-          - monthly_15th
-          - monthly_last_day
-        one_time_payment_account:
-          title: One time payment account
-          description: Account where one-time payment funds are transferred
-          type:
-          - string
-          - 'null'
-          enum:
-          - operational
-          - trust
-        require_refund_approval_via_check:
-          title: Require refund approval via check
-          description: Require approval for all refunds issued via check
-          type: boolean
-        require_refund_approval_over_amount_cents:
-          title: Require refund approval over amount cents
-          description: Require approval for all refunds over this amount (in cents). When set, e.g. 500000 = $5,000.
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        market_access_enabled:
-          title: Market access enabled
-          description: Enable Market Access feature for this agency. When enabled, brokers can access 1Fort wholesale markets.
-          type: boolean
-        use_accord_forms:
-          title: Use accord forms
-          description: When enabled for non-core coverage applications, use ACORD form tables to generate questions instead of LLM.
-          type: boolean
-        broker_email:
-          title: Broker email
-          type:
-          - string
-          - 'null'
-          format: email
-          maxLength: 254
-        broker_password:
-          title: Broker password
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        default_storefront_broker_user:
-          title: Default storefront broker user
-          description: Broker user whose storefront is used for agency subdomain root and generic pay-bill when no broker-user slug is in the URL.
-          type:
-          - integer
-          - 'null'
-    BrokerReceivedNotificationEmail:
-      type: object
-      properties:
-        id:
-          title: ID
+          readOnly: true
+        business:
+          title: Business
           type: integer
-          readOnly: true
-        subject:
-          title: Subject
-          type: string
-          readOnly: true
-          minLength: 1
-        sender_email:
-          title: Sender email
-          type:
-          - string
-          - 'null'
-          format: email
-          readOnly: true
-          minLength: 1
-        sender_name:
-          title: Sender name
-          type: string
-          readOnly: true
-        recipient_email:
-          title: Recipient email
-          type: string
-          format: email
-          readOnly: true
-          minLength: 1
-        sent_at:
-          title: Sent at
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        status:
-          title: Status
-          type: string
-          enum:
-          - pending
-          - sent
-          - failed
-          readOnly: true
-        email_type:
-          title: Email type
-          description: Type of email notification
-          type:
-          - string
-          - 'null'
-          enum:
-          - OTP
-          - BROKER_INACTIVITY
-          - BROKER_WEEKLY_DIGEST
-          - STOREFRONT_APPLICATION_STARTED
-          - STOREFRONT_APPLICATION_SUBMITTED
-          - STOREFRONT_APPLICATION_REMINDER
-          readOnly: true
-        is_read:
-          title: Is read
-          type: string
-          readOnly: true
-        triggered_by_details:
-          title: Triggered by details
-          type: string
-          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

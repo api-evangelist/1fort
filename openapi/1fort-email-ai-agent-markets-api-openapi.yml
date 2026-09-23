@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -65,9 +23,7 @@ paths:
     post:
       operationId: agent_create_market_transaction
       summary: Log Market Transaction
-      description: '
-
-        Record a single agent-driven `markets/upsert` attempt (success or failure).
+      description: 'Record a single agent-driven `markets/upsert` attempt (success or failure).
 
 
         - On success, `market_id` is required and `error_code`/`error_message` must be omitted.
@@ -78,9 +34,7 @@ paths:
         Both `email_id` and `market_id` (when present) must belong to the session broker.
 
 
-        **Authentication**: Requires API Key + Session Token
-
-        '
+        **Authentication**: Requires API Key + Session Token'
       parameters:
       - name: X-Processing-Session
         in: header
@@ -134,9 +88,7 @@ paths:
     post:
       operationId: agent_upsert_market
       summary: Upsert Market
-      description: '
-
-        Create or update a broker market for the session broker matched by `(carrier, wholesaler, product_lines)`.
+      description: 'Create or update a broker market for the session broker matched by `(carrier, wholesaler, product_lines)`.
 
 
         At least one of `carrier` or `wholesaler` must be provided. `product_lines` must be non-empty.
@@ -154,9 +106,7 @@ paths:
         `PATCH /markets/{id}` to resolve.
 
 
-        **Authentication**: Requires API Key + Session Token
-
-        '
+        **Authentication**: Requires API Key + Session Token'
       parameters:
       - name: X-Processing-Session
         in: header
@@ -209,64 +159,6 @@ paths:
         required: true
 components:
   schemas:
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    MarketTransaction:
-      required:
-      - email_id
-      - status
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        email_id:
-          title: Email id
-          type: string
-          format: uuid
-        status:
-          title: Status
-          type: string
-          enum:
-          - success
-          - failed
-        market_id:
-          title: Market id
-          type:
-          - string
-          - 'null'
-          format: uuid
-        request_payload:
-          title: Request payload
-          type: string
-        response_payload:
-          title: Response payload
-          type: string
-        error_code:
-          title: Error code
-          type: string
-          maxLength: 64
-        error_message:
-          title: Error message
-          type: string
-        attempted_at:
-          title: Attempted at
-          type: string
-          format: date-time
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
     MarketAgentUpsert:
       required:
       - product_lines
@@ -402,6 +294,64 @@ components:
           description: When the error occurred.
           type: string
           format: date-time
+    MarketTransaction:
+      required:
+      - email_id
+      - status
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        email_id:
+          title: Email id
+          type: string
+          format: uuid
+        status:
+          title: Status
+          type: string
+          enum:
+          - success
+          - failed
+        market_id:
+          title: Market id
+          type:
+          - string
+          - 'null'
+          format: uuid
+        request_payload:
+          title: Request payload
+          type: string
+        response_payload:
+          title: Response payload
+          type: string
+        error_code:
+          title: Error code
+          type: string
+          maxLength: 64
+        error_message:
+          title: Error message
+          type: string
+        attempted_at:
+          title: Attempted at
+          type: string
+          format: date-time
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

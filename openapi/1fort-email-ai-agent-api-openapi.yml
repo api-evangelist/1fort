@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -77,9 +35,7 @@ paths:
     get:
       operationId: agent_get_attachment
       summary: Get Attachment Metadata
-      description: '
-
-        Retrieve attachment metadata from the database.
+      description: 'Retrieve attachment metadata from the database.
 
 
         Use this endpoint to get attachment details before downloading content:
@@ -96,9 +52,7 @@ paths:
         **Authentication**: Requires API Key + Session Token
 
 
-        **Scoping**: Attachment must belong to an email within the session''s broker scope.
-
-        '
+        **Scoping**: Attachment must belong to an email within the session''s broker scope.'
       parameters:
       - name: X-Processing-Session
         in: header
@@ -164,7 +118,45 @@ paths:
     get:
       operationId: agent_get_attachment_content
       summary: Get Attachment Content
-      description: "\nDownload the binary content of an attachment file.\n\nReturns the actual file content for document processing:\n- Content-Type header set to the file's MIME type\n- Content-Disposition header with filename\n- Binary file content in response body\n\n**Usage**:\n```python\nresponse = requests.get(\n    f\"{BASE_URL}/emails/{email_id}/attachments/{attachment_id}/content\",\n    headers={\"Authorization\": f\"Api-Key {API_KEY}\", \"X-Processing-Session\": token},\n    stream=True\n)\nwith open(\"/tmp/document.pdf\", \"wb\") as f:\n    for chunk in response.iter_content(chunk_size=8192):\n        f.write(chunk)\n```\n\n**Authentication**: Requires API Key + Session Token\n\n**Scoping**: Attachment must belong to an email within the session's broker scope.\n"
+      description: 'Download the binary content of an attachment file.
+
+
+        Returns the actual file content for document processing:
+
+        - Content-Type header set to the file''s MIME type
+
+        - Content-Disposition header with filename
+
+        - Binary file content in response body
+
+
+        **Usage**:
+
+        ```python
+
+        response = requests.get(
+
+        f"{BASE_URL}/emails/{email_id}/attachments/{attachment_id}/content",
+
+        headers={"Authorization": f"Api-Key {API_KEY}", "X-Processing-Session": token},
+
+        stream=True
+
+        )
+
+        with open("/tmp/document.pdf", "wb") as f:
+
+        for chunk in response.iter_content(chunk_size=8192):
+
+        f.write(chunk)
+
+        ```
+
+
+        **Authentication**: Requires API Key + Session Token
+
+
+        **Scoping**: Attachment must belong to an email within the session''s broker scope.'
       parameters:
       - name: X-Processing-Session
         in: header
@@ -226,9 +218,7 @@ paths:
     get:
       operationId: agent_get_email
       summary: Get Email
-      description: '
-
-        Retrieve a single email with full context for processing.
+      description: 'Retrieve a single email with full context for processing.
 
 
         Returns the complete email data including:
@@ -249,9 +239,7 @@ paths:
         **Authentication**: Requires API Key + Session Token
 
 
-        **Scoping**: Email must belong to a broker within the session''s scope.
-
-        '
+        **Scoping**: Email must belong to a broker within the session''s scope.'
       parameters:
       - name: X-Processing-Session
         in: header
@@ -303,7 +291,29 @@ paths:
     patch:
       operationId: agent_update_email
       summary: Update Email
-      description: "\nUpdate email classification and/or processing status.\n\nUse this endpoint to:\n- Set the classification (COMMERCIAL_INSURANCE, PERSONAL_INSURANCE, etc.)\n- Update the processing status. Valid values: `SYNCING`, `READY`,\n  `PROCESSING`, `COMPLETED`, `FAILED`, `SKIPPED`, `LINKED`. `COMPLETED`\n  and `SKIPPED` are terminal — further updates return 409.\n- Optionally include classification details (method, confidence, reasoning)\n\nAt least one of `classification` or `processing_status` must be provided.\n\n**Authentication**: Requires API Key + Session Token\n\n**Scoping**: Email must belong to a broker within the session's scope.\n"
+      description: 'Update email classification and/or processing status.
+
+
+        Use this endpoint to:
+
+        - Set the classification (COMMERCIAL_INSURANCE, PERSONAL_INSURANCE, etc.)
+
+        - Update the processing status. Valid values: `SYNCING`, `READY`,
+
+        `PROCESSING`, `COMPLETED`, `FAILED`, `SKIPPED`, `LINKED`. `COMPLETED`
+
+        and `SKIPPED` are terminal — further updates return 409.
+
+        - Optionally include classification details (method, confidence, reasoning)
+
+
+        At least one of `classification` or `processing_status` must be provided.
+
+
+        **Authentication**: Requires API Key + Session Token
+
+
+        **Scoping**: Email must belong to a broker within the session''s scope.'
       parameters:
       - name: X-Processing-Session
         in: header
@@ -382,9 +392,7 @@ paths:
     get:
       operationId: agent_get_email_content
       summary: Get Email Content
-      description: '
-
-        Retrieve the full email body content.
+      description: 'Retrieve the full email body content.
 
 
         Use this endpoint when you need the complete email body for processing,
@@ -395,9 +403,7 @@ paths:
         **Authentication**: Requires API Key + Session Token
 
 
-        **Scoping**: Email must belong to a broker within the session''s scope.
-
-        '
+        **Scoping**: Email must belong to a broker within the session''s scope.'
       parameters:
       - name: X-Processing-Session
         in: header
@@ -448,195 +454,6 @@ paths:
       - Email AI Agent
 components:
   schemas:
-    AgentEmailUser:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        email:
-          title: Email
-          type: string
-          format: email
-          readOnly: true
-          minLength: 1
-        display_name:
-          title: Display name
-          type: string
-          readOnly: true
-          minLength: 1
-        broker_id:
-          title: Broker id
-          type: string
-          readOnly: true
-    ErrorResponse:
-      required:
-      - error
-      type: object
-      properties:
-        error:
-          title: Error
-          description: Error details with code and message.
-          type: object
-          additionalProperties:
-            type: string
-            minLength: 1
-        request_id:
-          title: Request id
-          description: Request ID for debugging.
-          type: string
-          minLength: 1
-        timestamp:
-          title: Timestamp
-          description: When the error occurred.
-          type: string
-          format: date-time
-    AgentEmailUpdate:
-      type: object
-      properties:
-        classification:
-          title: Classification
-          description: New classification value for the email.
-          type: string
-          enum:
-          - UNKNOWN
-          - INSURANCE_UNKNOWN
-          - COMMERCIAL_INSURANCE
-          - PERSONAL_INSURANCE
-          - NON_INSURANCE
-        processing_status:
-          title: Processing status
-          description: New processing status for the email.
-          type: string
-          enum:
-          - SYNCING
-          - READY
-          - PROCESSING
-          - COMPLETED
-          - FAILED
-          - SKIPPED
-          - LINKED
-        classification_details:
-          title: Classification details
-          description: Metadata about the classification decision (method, confidence, reasoning, etc.).
-          type: object
-          default: {}
-    AgentAttachmentDetail:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        email_id:
-          title: Email id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        mime_type:
-          title: Mime type
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        size:
-          title: Size
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        document_type:
-          title: Document type
-          type: string
-          readOnly: true
-        processing_status:
-          title: Processing status
-          description: Current processing status for quick filtering
-          type: string
-          enum:
-          - UNPROCESSED
-          - QUEUED
-          - PROCESSING
-          - COMPLETED
-          - FAILED
-          - SKIPPED
-          readOnly: true
-        metadata:
-          title: Metadata
-          type: object
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-    AgentAttachment:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        mime_type:
-          title: Mime type
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        size:
-          title: Size
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        document_type:
-          title: Document type
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        processing_status:
-          title: Processing status
-          description: Current processing status for quick filtering
-          type: string
-          enum:
-          - UNPROCESSED
-          - QUEUED
-          - PROCESSING
-          - COMPLETED
-          - FAILED
-          - SKIPPED
-          readOnly: true
-        metadata:
-          title: Metadata
-          type: object
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
     AgentEmailDetail:
       type: object
       properties:
@@ -741,6 +558,152 @@ components:
           items:
             $ref: '#/components/schemas/AgentAttachment'
           readOnly: true
+    AgentEmailUpdate:
+      type: object
+      properties:
+        classification:
+          title: Classification
+          description: New classification value for the email.
+          type: string
+          enum:
+          - UNKNOWN
+          - INSURANCE_UNKNOWN
+          - COMMERCIAL_INSURANCE
+          - PERSONAL_INSURANCE
+          - NON_INSURANCE
+        processing_status:
+          title: Processing status
+          description: New processing status for the email.
+          type: string
+          enum:
+          - SYNCING
+          - READY
+          - PROCESSING
+          - COMPLETED
+          - FAILED
+          - SKIPPED
+          - LINKED
+        classification_details:
+          title: Classification details
+          description: Metadata about the classification decision (method, confidence, reasoning, etc.).
+          type: object
+          default: {}
+    AgentEmailContent:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        body:
+          title: Body
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+    ErrorResponse:
+      required:
+      - error
+      type: object
+      properties:
+        error:
+          title: Error
+          description: Error details with code and message.
+          type: object
+          additionalProperties:
+            type: string
+            minLength: 1
+        request_id:
+          title: Request id
+          description: Request ID for debugging.
+          type: string
+          minLength: 1
+        timestamp:
+          title: Timestamp
+          description: When the error occurred.
+          type: string
+          format: date-time
+    AgentEmailUser:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        email:
+          title: Email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        display_name:
+          title: Display name
+          type: string
+          readOnly: true
+          minLength: 1
+        broker_id:
+          title: Broker id
+          type: string
+          readOnly: true
+    AgentAttachment:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        mime_type:
+          title: Mime type
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        size:
+          title: Size
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        document_type:
+          title: Document type
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        processing_status:
+          title: Processing status
+          description: Current processing status for quick filtering
+          type: string
+          enum:
+          - UNPROCESSED
+          - QUEUED
+          - PROCESSING
+          - COMPLETED
+          - FAILED
+          - SKIPPED
+          readOnly: true
+        metadata:
+          title: Metadata
+          type: object
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
     AgentEmailUpdateResponse:
       type: object
       properties:
@@ -764,7 +727,7 @@ components:
           type: string
           format: date-time
           readOnly: true
-    AgentEmailContent:
+    AgentAttachmentDetail:
       type: object
       properties:
         id:
@@ -772,13 +735,56 @@ components:
           type: string
           format: uuid
           readOnly: true
-        body:
-          title: Body
+        email_id:
+          title: Email id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
           type:
           - string
           - 'null'
           readOnly: true
           minLength: 1
+        mime_type:
+          title: Mime type
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        size:
+          title: Size
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        document_type:
+          title: Document type
+          type: string
+          readOnly: true
+        processing_status:
+          title: Processing status
+          description: Current processing status for quick filtering
+          type: string
+          enum:
+          - UNPROCESSED
+          - QUEUED
+          - PROCESSING
+          - COMPLETED
+          - FAILED
+          - SKIPPED
+          readOnly: true
+        metadata:
+          title: Metadata
+          type: object
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

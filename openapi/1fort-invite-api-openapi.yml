@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -56,7 +14,7 @@ servers:
 security:
 - Bearer: []
 tags:
-- name: invite
+- name: Invite
   x-displayName: Invite
   description: 'Invitations for broker and business users.
 
@@ -68,14 +26,10 @@ paths:
     get:
       operationId: invite_list
       summary: Get invites
-      description: '
-
-        Get invites in the logged in user''s business.
+      description: 'Get invites in the logged in user''s business.
 
 
-        **Permissions:** `can_invite_users`
-
-        '
+        **Permissions:** `can_invite_users`'
       parameters:
       - name: search
         in: query
@@ -137,18 +91,14 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - invite
+      - Invite
     post:
       operationId: invite_create
       summary: Send Invites
-      description: '
-
-        Send Invites to the logged in user''s business.
+      description: 'Send Invites to the logged in user''s business.
 
 
-        **Permissions:** `can_invite_users`
-
-        '
+        **Permissions:** `can_invite_users`'
       responses:
         '201':
           description: ''
@@ -173,7 +123,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - invite
+      - Invite
       requestBody:
         content:
           application/json:
@@ -187,14 +137,10 @@ paths:
     post:
       operationId: invite_accept_accept_business_user
       summary: Accept business user invite with email
-      description: '
-
-        Accept business user invite with email.
+      description: 'Accept business user invite with email.
 
 
-        **Rate limit:** 10 requests per minute
-
-        '
+        **Rate limit:** 10 requests per minute'
       responses:
         '201':
           description: ''
@@ -217,7 +163,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - invite
+      - Invite
       security: []
       requestBody:
         content:
@@ -230,14 +176,10 @@ paths:
     post:
       operationId: invite_accept_accept_business_user_google
       summary: Accept business user invite with google
-      description: '
-
-        Accept business user invite with google.
+      description: 'Accept business user invite with google.
 
 
-        **Rate limit:** 10 requests per minute
-
-        '
+        **Rate limit:** 10 requests per minute'
       responses:
         '201':
           description: ''
@@ -260,7 +202,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - invite
+      - Invite
       security: []
       requestBody:
         content:
@@ -273,15 +215,10 @@ paths:
     post:
       operationId: invite_accept_accept_business_user_office_365
       summary: Accept business user invite with office 365
-      description: '
-
-        Accept business user invite with office 365.
+      description: 'Accept business user invite with office 365.
 
 
-
-        **Rate limit:** 10 requests per minute
-
-        '
+        **Rate limit:** 10 requests per minute'
       responses:
         '201':
           description: ''
@@ -304,7 +241,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - invite
+      - Invite
       security: []
       requestBody:
         content:
@@ -317,14 +254,10 @@ paths:
     post:
       operationId: invite_validate_create
       summary: Validate invite
-      description: '
-
-        Validate invite.
+      description: 'Validate invite.
 
 
-        **Rate limit:** 10 requests per minute
-
-        '
+        **Rate limit:** 10 requests per minute'
       responses:
         '200':
           description: Validate invite token and return users email
@@ -358,7 +291,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - invite
+      - Invite
       security: []
       requestBody:
         content:
@@ -377,15 +310,10 @@ paths:
     delete:
       operationId: invite_delete
       summary: Cancel Invite
-      description: '
-
-        Cancel an invite.
+      description: 'Cancel an invite.
 
 
-
-        **Permissions:** `can_invite_users`
-
-        '
+        **Permissions:** `can_invite_users`'
       responses:
         '204':
           description: ''
@@ -404,7 +332,7 @@ paths:
         '500':
           description: Internal server error.
       tags:
-      - invite
+      - Invite
 components:
   schemas:
     APIException:
@@ -416,6 +344,15 @@ components:
         detail:
           description: Error details
           type: string
+    ValidateInvite:
+      required:
+      - token
+      type: object
+      properties:
+        token:
+          title: Token
+          type: string
+          minLength: 1
     GenericError:
       title: Generic API Error
       required:
@@ -425,7 +362,107 @@ components:
         detail:
           description: Error details
           type: string
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    BusinessUserInviteAccept:
+      required:
+      - invite_token
+      - email
+      type: object
+      properties:
+        refresh:
+          title: Refresh
+          type: string
+          readOnly: true
+          minLength: 1
+        access:
+          title: Access
+          type: string
+          readOnly: true
+          minLength: 1
+        id:
+          title: Id
+          type: integer
+          readOnly: true
+        invite_token:
+          title: Invite token
+          type: string
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          format: email
+          minLength: 1
+        first_name:
+          title: First name
+          type: string
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          minLength: 1
+        company_role:
+          title: Company role
+          type: string
+          minLength: 1
     BusinessUserInviteAcceptGoogle:
+      required:
+      - invite_token
+      - id_token
+      type: object
+      properties:
+        refresh:
+          title: Refresh
+          type: string
+          readOnly: true
+          minLength: 1
+        access:
+          title: Access
+          type: string
+          readOnly: true
+          minLength: 1
+        id:
+          title: Id
+          type: integer
+          readOnly: true
+        invite_token:
+          title: Invite token
+          type: string
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          readOnly: true
+          minLength: 1
+        first_name:
+          title: First name
+          type: string
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          minLength: 1
+        company_role:
+          title: Company role
+          type: string
+          minLength: 1
+        id_token:
+          title: Id token
+          type: string
+          minLength: 1
+    BusinessUserInviteAcceptOffice365:
       required:
       - invite_token
       - id_token
@@ -541,115 +578,6 @@ components:
           type: array
           items:
             type: integer
-    BusinessUserInviteAcceptOffice365:
-      required:
-      - invite_token
-      - id_token
-      type: object
-      properties:
-        refresh:
-          title: Refresh
-          type: string
-          readOnly: true
-          minLength: 1
-        access:
-          title: Access
-          type: string
-          readOnly: true
-          minLength: 1
-        id:
-          title: Id
-          type: integer
-          readOnly: true
-        invite_token:
-          title: Invite token
-          type: string
-          minLength: 1
-        email:
-          title: Email
-          type: string
-          readOnly: true
-          minLength: 1
-        first_name:
-          title: First name
-          type: string
-          minLength: 1
-        last_name:
-          title: Last name
-          type: string
-          minLength: 1
-        company_role:
-          title: Company role
-          type: string
-          minLength: 1
-        id_token:
-          title: Id token
-          type: string
-          minLength: 1
-    ValidateInvite:
-      required:
-      - token
-      type: object
-      properties:
-        token:
-          title: Token
-          type: string
-          minLength: 1
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    BusinessUserInviteAccept:
-      required:
-      - invite_token
-      - email
-      type: object
-      properties:
-        refresh:
-          title: Refresh
-          type: string
-          readOnly: true
-          minLength: 1
-        access:
-          title: Access
-          type: string
-          readOnly: true
-          minLength: 1
-        id:
-          title: Id
-          type: integer
-          readOnly: true
-        invite_token:
-          title: Invite token
-          type: string
-          minLength: 1
-        email:
-          title: Email
-          type: string
-          format: email
-          minLength: 1
-        first_name:
-          title: First name
-          type: string
-          minLength: 1
-        last_name:
-          title: Last name
-          type: string
-          minLength: 1
-        company_role:
-          title: Company role
-          type: string
-          minLength: 1
   securitySchemes:
     Bearer:
       type: apiKey

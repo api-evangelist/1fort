@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -64,8 +22,35 @@ paths:
     parameters: []
     post:
       operationId: v2_broker_gmail_webhook_create
-      summary: Process incoming Gmail push notification from Pub/Sub.
-      description: "Expected payload format:\n{\n    \"message\": {\n        \"data\": \"base64-encoded-json\",\n        \"messageId\": \"unique-message-id\",\n        \"publishTime\": \"2024-01-01T00:00:00.000Z\"\n    },\n    \"subscription\": \"projects/{project}/subscriptions/{subscription}\"\n}\n\nDecoded data format:\n{\n    \"emailAddress\": \"user@example.com\",\n    \"historyId\": \"1234567890\"\n}"
+      summary: Process incoming Gmail push notification from Pub/Sub
+      description: 'Expected payload format:
+
+        {
+
+        "message": {
+
+        "data": "base64-encoded-json",
+
+        "messageId": "unique-message-id",
+
+        "publishTime": "2024-01-01T00:00:00.000Z"
+
+        },
+
+        "subscription": "projects/{project}/subscriptions/{subscription}"
+
+        }
+
+
+        Decoded data format:
+
+        {
+
+        "emailAddress": "user@example.com",
+
+        "historyId": "1234567890"
+
+        }'
       responses:
         '201':
           description: ''

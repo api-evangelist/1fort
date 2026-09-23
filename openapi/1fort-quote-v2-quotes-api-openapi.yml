@@ -4,49 +4,7 @@ info:
   description: '# 1Fort API
 
 
-    REST API for the 1Fort insurance platform. This document is the authoritative
-
-    map of the API surface; endpoints are grouped in the sidebar by **app** and
-
-    **version**, and large apps are split into per-resource sub-groups.
-
-
-    ## Authentication
-
-
-    Almost every endpoint requires a **JWT access token**. Send it in the
-
-    `Authorization` header as either `Bearer <token>` or `JWT <token>`. Tokens may
-
-    also be presented as an HTTP-only cookie. Endpoints documented with no security
-
-    requirement are intentionally public (for example sign-in, OTP and storefront
-
-    endpoints).
-
-
-    ## Multi-tenancy
-
-
-    Resources are scoped to a tenant. Nested routes carry the owning resource id in
-
-    the path (for example `/v2/broker/{business_pk}/applications`); a token is only
-
-    authorised for the businesses its user may access. Object-level permissions are
-
-    enforced per endpoint.
-
-
-    ## Versioning
-
-
-    `v2` endpoints live under `/apis/v2/...` and are the current surface. `v1`
-
-    endpoints remain documented for compatibility. Endpoints marked **deprecated**
-
-    are scheduled for removal; prefer the documented replacement.
-
-    '
+    REST API for the 1Fort insurance platform.'
   termsOfService: https://www.1fort.com/
   license:
     name: Privately owned
@@ -770,7 +728,7 @@ paths:
         type: string
     get:
       operationId: v2_broker_quotes_tasks_read
-      summary: ViewSet for managing quote tasks for a specific quote.
+      summary: ViewSet for managing quote tasks for a specific quote
       description: Only returns tasks from the most recently created task group for the quote.
       responses:
         '200':
@@ -968,7 +926,7 @@ paths:
         type: string
     get:
       operationId: v2_broker_quotes_visible-tasks_read
-      summary: ViewSet for retrieving quote tasks that are visible to businesses.
+      summary: ViewSet for retrieving quote tasks that are visible to businesses
       description: 'Only returns tasks with visible_to_business=True from the most recently created task group.
 
         This endpoint can be accessed by both broker users and business users.
@@ -1007,7 +965,7 @@ paths:
         type: string
     get:
       operationId: v2_quotes_tasks_list
-      summary: ViewSet for allowing business users to resolve quote tasks for a specific quote.
+      summary: ViewSet for allowing business users to resolve quote tasks for a specific quote
       description: Only returns tasks that are visible to business users.
       parameters:
       - name: status
@@ -1168,7 +1126,7 @@ paths:
         type: string
     get:
       operationId: v2_quotes_tasks_read
-      summary: ViewSet for allowing business users to resolve quote tasks for a specific quote.
+      summary: ViewSet for allowing business users to resolve quote tasks for a specific quote
       description: Only returns tasks that are visible to business users.
       responses:
         '200':
@@ -1356,7 +1314,7 @@ paths:
         type: string
     get:
       operationId: v2_quotes_visible-tasks_read
-      summary: ViewSet for retrieving quote tasks that are visible to businesses.
+      summary: ViewSet for retrieving quote tasks that are visible to businesses
       description: 'Only returns tasks with visible_to_business=True from the most recently created task group.
 
         This endpoint can be accessed by both broker users and business users.
@@ -1388,283 +1346,6 @@ paths:
       - 'quote (v2): quotes'
 components:
   schemas:
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    QuoteTaskNotifyInsuredRequest:
-      required:
-      - task_ids
-      - emails
-      type: object
-      properties:
-        task_ids:
-          description: List of task IDs to notify insured about
-          type: array
-          items:
-            type: string
-            format: uuid
-        emails:
-          description: List of email addresses to notify
-          type: array
-          items:
-            type: string
-            format: email
-            minLength: 1
-    QuoteTaskFlexFields:
-      required:
-      - title
-      - group
-      - quote
-      - business
-      - broker
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteTaskDocument'
-          readOnly: true
-        status_display:
-          title: Status display
-          type: string
-          readOnly: true
-          minLength: 1
-        type_display:
-          title: Type display
-          type: string
-          readOnly: true
-          minLength: 1
-        program_url:
-          title: Program url
-          type: string
-          readOnly: true
-        invoice_url:
-          title: Invoice url
-          type: string
-          readOnly: true
-        quote_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          uniqueItems: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        title:
-          title: Title
-          type: string
-          minLength: 1
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        status:
-          title: Status
-          type: string
-          enum:
-          - todo
-          - done
-          - dismissed
-          - n/a
-        type:
-          title: Type
-          type:
-          - string
-          - 'null'
-          enum:
-          - signature
-          - subjectivities
-          - clarifications
-          - payment
-        due_date:
-          title: Due date
-          type:
-          - string
-          - 'null'
-          format: date
-        completed_date:
-          title: Completed date
-          type:
-          - string
-          - 'null'
-          format: date
-        resolution_comment:
-          title: Resolution comment
-          type:
-          - string
-          - 'null'
-        visible_to_business:
-          title: Visible to business
-          description: Flag to indicate if this task is visible to the business
-          type: boolean
-        expired:
-          title: Expired
-          description: Flag to indicate if this task has expired
-          type: boolean
-        group:
-          title: Group
-          type: string
-          format: uuid
-        quote:
-          title: Quote
-          type: string
-          format: uuid
-        business:
-          title: Business
-          type: integer
-        broker:
-          title: Broker
-          type: integer
-        completed_by:
-          title: Completed by
-          type:
-          - integer
-          - 'null'
-    BrokerUserList:
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        first_name:
-          title: First name
-          type: string
-          readOnly: true
-          minLength: 1
-        last_name:
-          title: Last name
-          type: string
-          readOnly: true
-          minLength: 1
-        email:
-          title: Email
-          type: string
-          readOnly: true
-          minLength: 1
-        producer_id:
-          title: Producer id
-          type: string
-          readOnly: true
-          minLength: 1
-        type:
-          title: Type
-          description: Specifies the insurance-related role type of the user within the agency.
-          type:
-          - string
-          - 'null'
-          enum:
-          - LEADERSHIP
-          - SALES
-          - SERVICE
-          - MARKETS
-          - OPERATIONS
-        slug:
-          title: Slug
-          type: string
-          format: slug
-          pattern: ^[-a-zA-Z0-9_]+$
-          readOnly: true
-          minLength: 1
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    QuoteBindRequest:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        requested_by:
-          $ref: '#/components/schemas/BrokerUserList'
-        signed_application_files:
-          type: array
-          items:
-            type: string
-            readOnly: true
-            format: uri
-        no_known_loss_files:
-          type: array
-          items:
-            type: string
-            readOnly: true
-            format: uri
-        additional_subjectivity_files:
-          type: array
-          items:
-            type: string
-            readOnly: true
-            format: uri
-        insured_email_for_signitures:
-          title: Insured email for signitures
-          type: string
-          format: email
-          minLength: 1
-        insured_email_for_subjectivities:
-          title: Insured email for subjectivities
-          type: string
-          format: email
-          minLength: 1
-        selected_subjectivities:
-          title: Selected subjectivities
-          type: object
-        notify_for_payment:
-          title: Notify for payment
-          type: boolean
-        effective_date:
-          title: Effective date
-          type:
-          - string
-          - 'null'
-          format: date
-        expiration_date:
-          title: Expiration date
-          type:
-          - string
-          - 'null'
-          format: date
-        additional_notes:
-          title: Additional notes
-          type:
-          - string
-          - 'null'
-        additional_subjectivity_text:
-          title: Additional subjectivity text
-          type:
-          - string
-          - 'null'
-        notify_for_signatures:
-          title: Notify for signatures
-          description: If True, send email notifications to users in insured_email_for_signatures
-          type: boolean
-        quote:
-          title: Quote
-          type: string
-          format: uuid
-          readOnly: true
     QuoteTaskDocument:
       type: object
       properties:
@@ -1686,86 +1367,6 @@ components:
           - 'null'
           readOnly: true
           format: uri
-    CarrierList:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        am_best_rating:
-          title: Am best rating
-          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-    QuoteTaskResolve:
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-        status:
-          title: Status
-          type: string
-          enum:
-          - todo
-          - done
-          - dismissed
-          - n/a
-        resolution_comment:
-          title: Resolution comment
-          type: string
-        quote_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          uniqueItems: true
-        document_files:
-          type: array
-          items:
-            type: string
-            readOnly: true
-            format: uri
-        document_names:
-          type: array
-          items:
-            type: string
-        documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteTaskDocument'
-          readOnly: true
     PriceDetail:
       type: object
       properties:
@@ -1787,19 +1388,14 @@ components:
           - string
           - 'null'
           maxLength: 255
-    ValidationError:
-      title: Validation Error
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
       type: object
       properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
+        detail:
+          description: Error details
           type: string
     QuoteWithAggregates:
       type: object
@@ -2031,6 +1627,25 @@ components:
           description: This quote's latest completed AI analysis, or null when it has none - the same record the coverage's analyze-quotes endpoint returns for it, including `recommended` and `comparison_status`. Embedded here so clients listing quotes don't need a second request to render the analysis.
           type: string
           readOnly: true
+    QuoteTaskNotifyInsuredRequest:
+      required:
+      - task_ids
+      - emails
+      type: object
+      properties:
+        task_ids:
+          description: List of task IDs to notify insured about
+          type: array
+          items:
+            type: string
+            format: uuid
+        emails:
+          description: List of email addresses to notify
+          type: array
+          items:
+            type: string
+            format: email
+            minLength: 1
     BrokerQuoteCreate:
       required:
       - type
@@ -2107,15 +1722,81 @@ components:
           description: 'Optional: Policy expiration date. If not provided but effective date exists, defaults to 1 year after effective date.'
           type: string
           format: date
-    QuoteTaskBulkResolve:
-      required:
-      - tasks
+    QuoteBindRequest:
       type: object
       properties:
-        tasks:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        requested_by:
+          $ref: '#/components/schemas/BrokerUserList'
+        signed_application_files:
           type: array
           items:
-            $ref: '#/components/schemas/QuoteTaskResolve'
+            type: string
+            readOnly: true
+            format: uri
+        no_known_loss_files:
+          type: array
+          items:
+            type: string
+            readOnly: true
+            format: uri
+        additional_subjectivity_files:
+          type: array
+          items:
+            type: string
+            readOnly: true
+            format: uri
+        insured_email_for_signitures:
+          title: Insured email for signitures
+          type: string
+          format: email
+          minLength: 1
+        insured_email_for_subjectivities:
+          title: Insured email for subjectivities
+          type: string
+          format: email
+          minLength: 1
+        selected_subjectivities:
+          title: Selected subjectivities
+          type: object
+        notify_for_payment:
+          title: Notify for payment
+          type: boolean
+        effective_date:
+          title: Effective date
+          type:
+          - string
+          - 'null'
+          format: date
+        expiration_date:
+          title: Expiration date
+          type:
+          - string
+          - 'null'
+          format: date
+        additional_notes:
+          title: Additional notes
+          type:
+          - string
+          - 'null'
+        additional_subjectivity_text:
+          title: Additional subjectivity text
+          type:
+          - string
+          - 'null'
+        notify_for_signatures:
+          title: Notify for signatures
+          description: If True, send email notifications to users in insured_email_for_signatures
+          type: boolean
+        quote:
+          title: Quote
+          type: string
+          format: uuid
+          readOnly: true
     CarrierProduct:
       type: object
       properties:
@@ -2161,6 +1842,283 @@ components:
           - 'null'
           maximum: 2147483647
           minimum: -2147483648
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    BrokerUserList:
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        first_name:
+          title: First name
+          type: string
+          readOnly: true
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          readOnly: true
+          minLength: 1
+        producer_id:
+          title: Producer id
+          type: string
+          readOnly: true
+          minLength: 1
+        type:
+          title: Type
+          description: Specifies the insurance-related role type of the user within the agency.
+          type:
+          - string
+          - 'null'
+          enum:
+          - LEADERSHIP
+          - SALES
+          - SERVICE
+          - MARKETS
+          - OPERATIONS
+        slug:
+          title: Slug
+          type: string
+          format: slug
+          pattern: ^[-a-zA-Z0-9_]+$
+          readOnly: true
+          minLength: 1
+    CarrierList:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        am_best_rating:
+          title: Am best rating
+          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+    QuoteTaskResolve:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+        status:
+          title: Status
+          type: string
+          enum:
+          - todo
+          - done
+          - dismissed
+          - n/a
+        resolution_comment:
+          title: Resolution comment
+          type: string
+        quote_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        document_files:
+          type: array
+          items:
+            type: string
+            readOnly: true
+            format: uri
+        document_names:
+          type: array
+          items:
+            type: string
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteTaskDocument'
+          readOnly: true
+    QuoteTaskFlexFields:
+      required:
+      - title
+      - group
+      - quote
+      - business
+      - broker
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteTaskDocument'
+          readOnly: true
+        status_display:
+          title: Status display
+          type: string
+          readOnly: true
+          minLength: 1
+        type_display:
+          title: Type display
+          type: string
+          readOnly: true
+          minLength: 1
+        program_url:
+          title: Program url
+          type: string
+          readOnly: true
+        invoice_url:
+          title: Invoice url
+          type: string
+          readOnly: true
+        quote_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        title:
+          title: Title
+          type: string
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        status:
+          title: Status
+          type: string
+          enum:
+          - todo
+          - done
+          - dismissed
+          - n/a
+        type:
+          title: Type
+          type:
+          - string
+          - 'null'
+          enum:
+          - signature
+          - subjectivities
+          - clarifications
+          - payment
+        due_date:
+          title: Due date
+          type:
+          - string
+          - 'null'
+          format: date
+        completed_date:
+          title: Completed date
+          type:
+          - string
+          - 'null'
+          format: date
+        resolution_comment:
+          title: Resolution comment
+          type:
+          - string
+          - 'null'
+        visible_to_business:
+          title: Visible to business
+          description: Flag to indicate if this task is visible to the business
+          type: boolean
+        expired:
+          title: Expired
+          description: Flag to indicate if this task has expired
+          type: boolean
+        group:
+          title: Group
+          type: string
+          format: uuid
+        quote:
+          title: Quote
+          type: string
+          format: uuid
+        business:
+          title: Business
+          type: integer
+        broker:
+          title: Broker
+          type: integer
+        completed_by:
+          title: Completed by
+          type:
+          - integer
+          - 'null'
+    QuoteTaskBulkResolve:
+      required:
+      - tasks
+      type: object
+      properties:
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteTaskResolve'
     Wholesaler:
       required:
       - name
