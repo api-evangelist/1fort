@@ -497,7 +497,7 @@ paths:
       - google_workspace (v2)
 components:
   schemas:
-    APIException:
+    GenericError:
       title: Generic API Error
       required:
       - detail
@@ -506,6 +506,52 @@ components:
         detail:
           description: Error details
           type: string
+    BrokerGoogleOAuthIntegration:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        integration_status:
+          title: Integration status
+          type: string
+          enum:
+          - PENDING
+          - PENDING_SETUP
+          - CONNECTED
+          - DISCONNECTED
+          - ERROR
+          readOnly: true
+        user_email:
+          title: User email
+          description: Email of the user who granted OAuth consent
+          type:
+          - string
+          - 'null'
+          format: email
+          readOnly: true
+          minLength: 1
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+        last_synced:
+          title: Last synced
+          type: string
+          format: date-time
+          readOnly: true
+        connection_link:
+          title: Connection link
+          type: string
+          readOnly: true
     BrokerGoogleDwdIntegration:
       required:
       - domain
@@ -570,7 +616,7 @@ components:
           title: Scopes
           type: string
           readOnly: true
-    GenericError:
+    APIException:
       title: Generic API Error
       required:
       - detail
@@ -593,52 +639,6 @@ components:
         type: array
         items:
           type: string
-    BrokerGoogleOAuthIntegration:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        integration_status:
-          title: Integration status
-          type: string
-          enum:
-          - PENDING
-          - PENDING_SETUP
-          - CONNECTED
-          - DISCONNECTED
-          - ERROR
-          readOnly: true
-        user_email:
-          title: User email
-          description: Email of the user who granted OAuth consent
-          type:
-          - string
-          - 'null'
-          format: email
-          readOnly: true
-          minLength: 1
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          title: Updated at
-          type: string
-          format: date-time
-          readOnly: true
-        last_synced:
-          title: Last synced
-          type: string
-          format: date-time
-          readOnly: true
-        connection_link:
-          title: Connection link
-          type: string
-          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

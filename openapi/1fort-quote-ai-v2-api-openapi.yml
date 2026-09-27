@@ -1195,15 +1195,6 @@ paths:
       summary: Uploaded files
 components:
   schemas:
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     GenericError:
       title: Generic API Error
       required:
@@ -1237,20 +1228,6 @@ components:
           - assistant
           - user
           readOnly: true
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
     QuoteAnalysisFlex:
       required:
       - quote
@@ -1288,6 +1265,29 @@ components:
           type:
           - integer
           - 'null'
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

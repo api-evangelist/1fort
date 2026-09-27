@@ -107,15 +107,6 @@ components:
         detail:
           description: Error details
           type: string
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     ValidationError:
       title: Validation Error
       type: object
@@ -141,6 +132,15 @@ components:
           title: Disable all insured emails
           description: When enabled, disables all automated emails to insured/business users in this agency's businesses
           type: boolean
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

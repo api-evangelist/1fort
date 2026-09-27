@@ -421,15 +421,6 @@ paths:
       - broker_groups
 components:
   schemas:
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     GenericError:
       title: Generic API Error
       required:
@@ -438,33 +429,6 @@ components:
       properties:
         detail:
           description: Error details
-          type: string
-    BrokerUserGroupMembershipCreate:
-      required:
-      - broker_user
-      type: object
-      properties:
-        broker_user:
-          title: Broker user
-          description: The broker user who is a member of the group
-          type: integer
-        is_active:
-          title: Is active
-          description: Whether this membership is currently active
-          type: boolean
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
           type: string
     BrokerUserGroupMembershipList:
       required:
@@ -514,6 +478,70 @@ components:
           type: string
           format: date-time
           readOnly: true
+    BrokerUserGroupCreateUpdate:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          description: Name of the broker user group
+          type: string
+          maxLength: 255
+          minLength: 1
+        domain:
+          title: Domain
+          description: Domain name associated with this group
+          type:
+          - string
+          - 'null'
+          maxLength: 500
+        address:
+          title: Address
+          description: Full address of the group
+          type:
+          - string
+          - 'null'
+        npn_number:
+          title: Npn number
+          description: National Producer Number (NPN) for this group
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        phone_number:
+          title: Phone number
+          description: Primary phone number for the group
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        office_phone_number:
+          title: Office phone number
+          description: Office phone number for the group
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        accounting_email:
+          description: List of accounting email addresses for this group
+          type:
+          - array
+          - 'null'
+          items:
+            title: Accounting email
+            type: string
+            format: email
+            maxLength: 254
+            minLength: 1
+        logo:
+          title: Logo
+          description: Logo for this broker user group
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
     BrokerUserGroupDetail:
       required:
       - name
@@ -609,6 +637,19 @@ components:
           type: string
           format: date-time
           readOnly: true
+    BrokerUserGroupMembershipCreate:
+      required:
+      - broker_user
+      type: object
+      properties:
+        broker_user:
+          title: Broker user
+          description: The broker user who is a member of the group
+          type: integer
+        is_active:
+          title: Is active
+          description: Whether this membership is currently active
+          type: boolean
     BrokerUserGroupList:
       required:
       - name
@@ -704,70 +745,29 @@ components:
           type: string
           format: date-time
           readOnly: true
-    BrokerUserGroupCreateUpdate:
+    APIException:
+      title: Generic API Error
       required:
-      - name
+      - detail
       type: object
       properties:
-        name:
-          title: Name
-          description: Name of the broker user group
+        detail:
+          description: Error details
           type: string
-          maxLength: 255
-          minLength: 1
-        domain:
-          title: Domain
-          description: Domain name associated with this group
-          type:
-          - string
-          - 'null'
-          maxLength: 500
-        address:
-          title: Address
-          description: Full address of the group
-          type:
-          - string
-          - 'null'
-        npn_number:
-          title: Npn number
-          description: National Producer Number (NPN) for this group
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        phone_number:
-          title: Phone number
-          description: Primary phone number for the group
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        office_phone_number:
-          title: Office phone number
-          description: Office phone number for the group
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        accounting_email:
-          description: List of accounting email addresses for this group
-          type:
-          - array
-          - 'null'
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
           items:
-            title: Accounting email
             type: string
-            format: email
-            maxLength: 254
-            minLength: 1
-        logo:
-          title: Logo
-          description: Logo for this broker user group
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

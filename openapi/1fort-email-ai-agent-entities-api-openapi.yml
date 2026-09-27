@@ -164,28 +164,6 @@ components:
           items:
             type: string
             minLength: 1
-    ErrorResponse:
-      required:
-      - error
-      type: object
-      properties:
-        error:
-          title: Error
-          description: Error details with code and message.
-          type: object
-          additionalProperties:
-            type: string
-            minLength: 1
-        request_id:
-          title: Request id
-          description: Request ID for debugging.
-          type: string
-          minLength: 1
-        timestamp:
-          title: Timestamp
-          description: When the error occurred.
-          type: string
-          format: date-time
     APIException:
       title: Generic API Error
       required:
@@ -267,6 +245,28 @@ components:
               type:
               - string
               - 'null'
+    ErrorResponse:
+      required:
+      - error
+      type: object
+      properties:
+        error:
+          title: Error
+          description: Error details with code and message.
+          type: object
+          additionalProperties:
+            type: string
+            minLength: 1
+        request_id:
+          title: Request id
+          description: Request ID for debugging.
+          type: string
+          minLength: 1
+        timestamp:
+          title: Timestamp
+          description: When the error occurred.
+          type: string
+          format: date-time
   securitySchemes:
     Bearer:
       type: apiKey

@@ -603,236 +603,7 @@ paths:
       - market (v2)
 components:
   schemas:
-    MarketCreate:
-      required:
-      - product_lines
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        carrier:
-          title: Carrier
-          description: The carrier for this market
-          type:
-          - string
-          - 'null'
-          format: uuid
-        wholesaler:
-          title: Wholesaler
-          description: The wholesaler for this market (if applicable)
-          type:
-          - string
-          - 'null'
-          format: uuid
-        groups:
-          type: array
-          items:
-            type: string
-            format: uuid
-          uniqueItems: true
-        product_lines:
-          description: Product lines supported by this market
-          type: array
-          items:
-            description: Product lines supported by this market
-            type: string
-            format: uuid
-          uniqueItems: true
-        sub_product_lines:
-          description: Sub-product lines supported by this market (e.g., D&O, EP for ML)
-          type: array
-          items:
-            description: Sub-product lines supported by this market (e.g., D&O, EP for ML)
-            type: string
-            format: uuid
-          uniqueItems: true
-        producer_id:
-          title: Producer id
-          description: Producer ID (auto-created if not provided)
-          type: string
-          format: uuid
-        producer:
-          title: Producer
-          description: The producer identity for this market
-          type:
-          - string
-          - 'null'
-          format: uuid
-          readOnly: true
-        herald_products:
-          description: Herald products available for this market
-          type: array
-          items:
-            description: Herald products available for this market
-            type: string
-            format: uuid
-          uniqueItems: true
-        submission_method:
-          title: Submission method
-          description: Method for submitting to this market
-          type: string
-          enum:
-          - herald
-          - manual
-          - portal
-        agency_code:
-          title: Agency code
-          description: Agency code for this market (broker-specific identifier)
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        am_best_rating:
-          title: Am best rating
-          description: AM Best rating for the carrier
-          type: string
-          maxLength: 10
-        commission_percentage:
-          title: Commission percentage
-          description: Commission percentage for new business (optional for wholesale markets)
-          type:
-          - string
-          - 'null'
-          format: decimal
-        renewal_commission_percentage:
-          title: Renewal commission percentage
-          description: Commission percentage for renewals (optional)
-          type:
-          - string
-          - 'null'
-          format: decimal
-        filing_type:
-          title: Filing type
-          description: Filing type for this market
-          type: string
-          enum:
-          - admitted
-          - surplus
-          - admitted_and_surplus
-        portal_url:
-          title: Portal url
-          description: URL for the portal
-          type:
-          - string
-          - 'null'
-          format: uri
-          maxLength: 200
-        portal_username:
-          title: Portal username
-          description: Username for the portal
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        portal_password:
-          title: Portal password
-          description: Password for the portal
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        has_portal_password:
-          title: Has portal password
-          description: Indicates if a portal password is stored
-          type: boolean
-          readOnly: true
-        billing_type:
-          title: Billing type
-          description: Default billing type for this market
-          type: string
-          enum:
-          - AGENCY_BILL
-          - DIRECT_BILL
-        eta_hours:
-          title: Eta hours
-          description: Expected turnaround time in hours for quotes
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: -2147483648
-        underwriter_emails:
-          title: Underwriter emails
-          type: string
-        remittance_emails:
-          title: Remittance emails
-          type: string
-        bank_routing_number:
-          title: Bank routing number
-          description: Bank routing number (9 digits) for agency-billed remittance
-          type:
-          - string
-          - 'null'
-          maxLength: 9
-        bank_account_number:
-          title: Bank account number
-          description: Bank account number for agency-billed remittance
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        has_bank_routing_number:
-          title: Has bank routing number
-          description: Indicates if a bank routing number is stored
-          type: boolean
-          readOnly: true
-        has_bank_account_number:
-          title: Has bank account number
-          description: Indicates if a bank account number is stored
-          type: boolean
-          readOnly: true
-        is_active:
-          title: Is active
-          description: Whether this market is currently active for submissions
-          type: boolean
-        special_notes:
-          title: Special notes
-          description: Special notes or instructions for this market
-          type: string
-        appetite:
-          title: Appetite
-          description: Appetite for this market
-          type: string
-        appetite_documents:
-          title: Appetite documents
-          type: string
-          readOnly: true
-        appetite_files:
-          type: array
-          items:
-            type: string
-            readOnly: true
-            format: uri
-        restrictions:
-          title: Restrictions
-          description: Restrictions for this market
-          type: string
-        restriction_documents:
-          title: Restriction documents
-          type: string
-          readOnly: true
-        restriction_files:
-          type: array
-          items:
-            type: string
-            readOnly: true
-            format: uri
-        remove_document_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-        source:
-          title: Source
-          description: How this market record was created (manual vs auto-added by an automated process).
-          type: string
-          enum:
-          - manual
-          - auto_added
-    APIException:
+    GenericError:
       title: Generic API Error
       required:
       - detail
@@ -841,6 +612,126 @@ components:
         detail:
           description: Error details
           type: string
+    MarketProducer:
+      required:
+      - email
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          description: Producer display name
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          description: Primary contact email for this producer
+          type: string
+          format: email
+          maxLength: 254
+          minLength: 1
+        provider:
+          title: Provider
+          description: Email service provider
+          type: string
+          enum:
+          - google
+          - office365
+        password:
+          title: Password
+          description: Password for email service (write-only)
+          type: string
+        hasPassword:
+          title: Haspassword
+          description: Indicates if a password is stored
+          type: string
+          readOnly: true
+        emailAutoForwarding:
+          title: Emailautoforwarding
+          type: boolean
+          default: false
+        emailStatus:
+          title: Emailstatus
+          type: string
+          readOnly: true
+          minLength: 1
+        autoForwardingStatus:
+          title: Autoforwardingstatus
+          type: string
+          readOnly: true
+          minLength: 1
+        broker:
+          title: Broker
+          description: Broker agency associated with this producer (if applicable)
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        broker_name:
+          title: Broker name
+          description: Name of the broker agency
+          type: string
+          readOnly: true
+          minLength: 1
+        user:
+          title: User
+          description: Associated user account if this producer can login to 1Fort
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        hasUserAccount:
+          title: Hasuseraccount
+          description: Indicates if this producer has a login account
+          type: string
+          readOnly: true
+        userEmail:
+          title: Useremail
+          description: User email if account exists
+          type: string
+          readOnly: true
+        createUserAccount:
+          title: Createuseraccount
+          description: Whether to create a user account for this producer to login
+          type: boolean
+          default: false
+        firstName:
+          title: Firstname
+          description: AI Employee first name
+          type:
+          - string
+          - 'null'
+        phoneNumber:
+          title: Phonenumber
+          description: AI Employee phone number for market portals
+          type:
+          - string
+          - 'null'
+        userFirstName:
+          title: Userfirstname
+          description: User account first name (required if createUserAccount=true)
+          type: string
+        userLastName:
+          title: Userlastname
+          description: User account last name (required if createUserAccount=true)
+          type: string
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
     MarketList:
       required:
       - type
@@ -1116,7 +1007,46 @@ components:
           type: string
           format: date-time
           readOnly: true
-    GenericError:
+    Wholesaler:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        is_active:
+          title: Is active
+          type: boolean
+        is_owned_by_1fort:
+          title: Is owned by 1fort
+          description: Indicates if this wholesaler is owned by 1Fort
+          type: boolean
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+    APIException:
       title: Generic API Error
       required:
       - detail
@@ -1124,20 +1054,6 @@ components:
       properties:
         detail:
           description: Error details
-          type: string
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
           type: string
     MarketDetail:
       required:
@@ -1434,9 +1350,9 @@ components:
           type: string
           format: date-time
           readOnly: true
-    MarketProducer:
+    MarketCreate:
       required:
-      - email
+      - product_lines
       type: object
       properties:
         id:
@@ -1444,155 +1360,239 @@ components:
           type: string
           format: uuid
           readOnly: true
-        name:
-          title: Name
-          description: Producer display name
+        carrier:
+          title: Carrier
+          description: The carrier for this market
           type:
           - string
           - 'null'
-          readOnly: true
-          minLength: 1
-        email:
-          title: Email
-          description: Primary contact email for this producer
+          format: uuid
+        wholesaler:
+          title: Wholesaler
+          description: The wholesaler for this market (if applicable)
+          type:
+          - string
+          - 'null'
+          format: uuid
+        groups:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        product_lines:
+          description: Product lines supported by this market
+          type: array
+          items:
+            description: Product lines supported by this market
+            type: string
+            format: uuid
+          uniqueItems: true
+        sub_product_lines:
+          description: Sub-product lines supported by this market (e.g., D&O, EP for ML)
+          type: array
+          items:
+            description: Sub-product lines supported by this market (e.g., D&O, EP for ML)
+            type: string
+            format: uuid
+          uniqueItems: true
+        producer_id:
+          title: Producer id
+          description: Producer ID (auto-created if not provided)
           type: string
-          format: email
-          maxLength: 254
-          minLength: 1
-        provider:
-          title: Provider
-          description: Email service provider
+          format: uuid
+        producer:
+          title: Producer
+          description: The producer identity for this market
+          type:
+          - string
+          - 'null'
+          format: uuid
+          readOnly: true
+        herald_products:
+          description: Herald products available for this market
+          type: array
+          items:
+            description: Herald products available for this market
+            type: string
+            format: uuid
+          uniqueItems: true
+        submission_method:
+          title: Submission method
+          description: Method for submitting to this market
           type: string
           enum:
-          - google
-          - office365
-        password:
-          title: Password
-          description: Password for email service (write-only)
-          type: string
-        hasPassword:
-          title: Haspassword
-          description: Indicates if a password is stored
-          type: string
-          readOnly: true
-        emailAutoForwarding:
-          title: Emailautoforwarding
-          type: boolean
-          default: false
-        emailStatus:
-          title: Emailstatus
-          type: string
-          readOnly: true
-          minLength: 1
-        autoForwardingStatus:
-          title: Autoforwardingstatus
-          type: string
-          readOnly: true
-          minLength: 1
-        broker:
-          title: Broker
-          description: Broker agency associated with this producer (if applicable)
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        broker_name:
-          title: Broker name
-          description: Name of the broker agency
-          type: string
-          readOnly: true
-          minLength: 1
-        user:
-          title: User
-          description: Associated user account if this producer can login to 1Fort
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        hasUserAccount:
-          title: Hasuseraccount
-          description: Indicates if this producer has a login account
-          type: string
-          readOnly: true
-        userEmail:
-          title: Useremail
-          description: User email if account exists
-          type: string
-          readOnly: true
-        createUserAccount:
-          title: Createuseraccount
-          description: Whether to create a user account for this producer to login
-          type: boolean
-          default: false
-        firstName:
-          title: Firstname
-          description: AI Employee first name
+          - herald
+          - manual
+          - portal
+        agency_code:
+          title: Agency code
+          description: Agency code for this market (broker-specific identifier)
           type:
           - string
           - 'null'
-        phoneNumber:
-          title: Phonenumber
-          description: AI Employee phone number for market portals
-          type:
-          - string
-          - 'null'
-        userFirstName:
-          title: Userfirstname
-          description: User account first name (required if createUserAccount=true)
-          type: string
-        userLastName:
-          title: Userlastname
-          description: User account last name (required if createUserAccount=true)
-          type: string
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          title: Updated at
-          type: string
-          format: date-time
-          readOnly: true
-    Wholesaler:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type: string
           maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
+        am_best_rating:
+          title: Am best rating
+          description: AM Best rating for the carrier
+          type: string
+          maxLength: 10
+        commission_percentage:
+          title: Commission percentage
+          description: Commission percentage for new business (optional for wholesale markets)
           type:
           - string
           - 'null'
-          readOnly: true
+          format: decimal
+        renewal_commission_percentage:
+          title: Renewal commission percentage
+          description: Commission percentage for renewals (optional)
+          type:
+          - string
+          - 'null'
+          format: decimal
+        filing_type:
+          title: Filing type
+          description: Filing type for this market
+          type: string
+          enum:
+          - admitted
+          - surplus
+          - admitted_and_surplus
+        portal_url:
+          title: Portal url
+          description: URL for the portal
+          type:
+          - string
+          - 'null'
           format: uri
+          maxLength: 200
+        portal_username:
+          title: Portal username
+          description: Username for the portal
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        portal_password:
+          title: Portal password
+          description: Password for the portal
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        has_portal_password:
+          title: Has portal password
+          description: Indicates if a portal password is stored
+          type: boolean
+          readOnly: true
+        billing_type:
+          title: Billing type
+          description: Default billing type for this market
+          type: string
+          enum:
+          - AGENCY_BILL
+          - DIRECT_BILL
+        eta_hours:
+          title: Eta hours
+          description: Expected turnaround time in hours for quotes
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: -2147483648
+        underwriter_emails:
+          title: Underwriter emails
+          type: string
+        remittance_emails:
+          title: Remittance emails
+          type: string
+        bank_routing_number:
+          title: Bank routing number
+          description: Bank routing number (9 digits) for agency-billed remittance
+          type:
+          - string
+          - 'null'
+          maxLength: 9
+        bank_account_number:
+          title: Bank account number
+          description: Bank account number for agency-billed remittance
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        has_bank_routing_number:
+          title: Has bank routing number
+          description: Indicates if a bank routing number is stored
+          type: boolean
+          readOnly: true
+        has_bank_account_number:
+          title: Has bank account number
+          description: Indicates if a bank account number is stored
+          type: boolean
+          readOnly: true
         is_active:
           title: Is active
+          description: Whether this market is currently active for submissions
           type: boolean
-        is_owned_by_1fort:
-          title: Is owned by 1fort
-          description: Indicates if this wholesaler is owned by 1Fort
-          type: boolean
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
+        special_notes:
+          title: Special notes
+          description: Special notes or instructions for this market
+          type: string
+        appetite:
+          title: Appetite
+          description: Appetite for this market
+          type: string
+        appetite_documents:
+          title: Appetite documents
+          type: string
+          readOnly: true
+        appetite_files:
+          type: array
           items:
-            title: Domains
             type: string
-            maxLength: 255
-            minLength: 1
+            readOnly: true
+            format: uri
+        restrictions:
+          title: Restrictions
+          description: Restrictions for this market
+          type: string
+        restriction_documents:
+          title: Restriction documents
+          type: string
+          readOnly: true
+        restriction_files:
+          type: array
+          items:
+            type: string
+            readOnly: true
+            format: uri
+        remove_document_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        source:
+          title: Source
+          description: How this market record was created (manual vs auto-added by an automated process).
+          type: string
+          enum:
+          - manual
+          - auto_added
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

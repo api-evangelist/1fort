@@ -283,6 +283,50 @@ paths:
       summary: List Wholesalers
 components:
   schemas:
+    Carrier:
+      required:
+      - name
+      - products
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        am_best_rating:
+          title: Am best rating
+          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarrierProduct'
     GenericError:
       title: Generic API Error
       required:
@@ -292,6 +336,45 @@ components:
         detail:
           description: Error details
           type: string
+    Wholesaler:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        is_active:
+          title: Is active
+          type: boolean
+        is_owned_by_1fort:
+          title: Is owned by 1fort
+          description: Indicates if this wholesaler is owned by 1Fort
+          type: boolean
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
     CarrierProduct:
       type: object
       properties:
@@ -337,89 +420,6 @@ components:
           - 'null'
           maximum: 2147483647
           minimum: -2147483648
-    Wholesaler:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        is_active:
-          title: Is active
-          type: boolean
-        is_owned_by_1fort:
-          title: Is owned by 1fort
-          description: Indicates if this wholesaler is owned by 1Fort
-          type: boolean
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-    Carrier:
-      required:
-      - name
-      - products
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        am_best_rating:
-          title: Am best rating
-          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-        products:
-          type: array
-          items:
-            $ref: '#/components/schemas/CarrierProduct'
   securitySchemes:
     Bearer:
       type: apiKey

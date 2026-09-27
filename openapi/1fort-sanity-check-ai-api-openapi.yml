@@ -241,15 +241,6 @@ paths:
         required: true
 components:
   schemas:
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     GenericError:
       title: Generic API Error
       required:
@@ -259,19 +250,21 @@ components:
         detail:
           description: Error details
           type: string
-    ValidationError:
-      title: Validation Error
+    SanityCheckUpdate:
       type: object
       properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
+        hidden_fields:
+          title: Hidden Fields
+          description: Dismissed or no longer relevant fields that should be removed from the ai_response.
+          type: object
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
           type: string
     SanityCheckRequest:
       required:
@@ -338,13 +331,20 @@ components:
           type:
           - string
           - 'null'
-    SanityCheckUpdate:
+    ValidationError:
+      title: Validation Error
       type: object
       properties:
-        hidden_fields:
-          title: Hidden Fields
-          description: Dismissed or no longer relevant fields that should be removed from the ai_response.
-          type: object
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

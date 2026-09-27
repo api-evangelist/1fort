@@ -441,15 +441,6 @@ paths:
         required: true
 components:
   schemas:
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     GenericError:
       title: Generic API Error
       required:
@@ -459,126 +450,23 @@ components:
         detail:
           description: Error details
           type: string
-    RiskManagerChatMessage:
-      type: object
+    PremiumRange:
+      description: Estimated annual premium range in dollars based on recommended limit
+      required:
+      - min
+      - max
+      type:
+      - object
+      - 'null'
       properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        message:
-          title: Message
-          type: string
-          readOnly: true
-        role:
-          title: Role
-          type: string
-          enum:
-          - assistant
-          - user
-          readOnly: true
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    Risk:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        title:
-          title: Title
-          type: string
-          readOnly: true
-          minLength: 1
-        category:
-          title: Category
-          type: string
-          enum:
-          - FINANCE
-          - IT
-          - HR
-          - OPERATIONS
-          - LEGAL
-          - GOVERNANCE
-          - COMPLIANCE
-          readOnly: true
-        likelihood:
-          title: Likelihood
-          type: string
-          enum:
-          - INSIGNIFICANT
-          - MODERATE
-          - SEVERE
-          readOnly: true
-        impact:
-          title: Impact
-          type: string
-          enum:
-          - MINOR
-          - MODERATE
-          - SEVERE
-          readOnly: true
-        remediation:
-          title: Remediation
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        status:
-          title: Status
-          type: string
-          enum:
-          - TODO
-          - IN_PROGRESS
-          - DONE
-          - IGNORE
-        done_at:
-          title: Done at
-          type:
-          - string
-          - 'null'
-          format: date-time
-    FinancialRisk:
-      type: object
-      properties:
-        coverage_type:
-          title: Coverage type
-          description: Type of coverage being evaluated (e.g., 'Cyber', 'D&O', 'MPL', 'EPL', 'Tech E&O', 'Fiduciary')
-          type:
-          - string
-          - 'null'
-        business_id:
-          title: Business id
-          description: ID of the business/insured. Required for broker users, optional for business users.
-          type:
-          - integer
-          - 'null'
-        force_refresh:
-          title: Force refresh
-          description: If True, clears all cached financial risk data for this business and triggers fresh calculations
-          type: boolean
-          default: false
+        min:
+          title: Min
+          type: integer
+          minimum: 1000
+        max:
+          title: Max
+          type: integer
+          minimum: 1000
     FinancialRiskCategoryResponse:
       required:
       - coverage_type
@@ -665,23 +553,135 @@ components:
             type:
             - string
             - 'null'
-    PremiumRange:
-      description: Estimated annual premium range in dollars based on recommended limit
-      required:
-      - min
-      - max
-      type:
-      - object
-      - 'null'
+    Risk:
+      type: object
       properties:
-        min:
-          title: Min
-          type: integer
-          minimum: 1000
-        max:
-          title: Max
-          type: integer
-          minimum: 1000
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          title: Title
+          type: string
+          readOnly: true
+          minLength: 1
+        category:
+          title: Category
+          type: string
+          enum:
+          - FINANCE
+          - IT
+          - HR
+          - OPERATIONS
+          - LEGAL
+          - GOVERNANCE
+          - COMPLIANCE
+          readOnly: true
+        likelihood:
+          title: Likelihood
+          type: string
+          enum:
+          - INSIGNIFICANT
+          - MODERATE
+          - SEVERE
+          readOnly: true
+        impact:
+          title: Impact
+          type: string
+          enum:
+          - MINOR
+          - MODERATE
+          - SEVERE
+          readOnly: true
+        remediation:
+          title: Remediation
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        status:
+          title: Status
+          type: string
+          enum:
+          - TODO
+          - IN_PROGRESS
+          - DONE
+          - IGNORE
+        done_at:
+          title: Done at
+          type:
+          - string
+          - 'null'
+          format: date-time
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    FinancialRisk:
+      type: object
+      properties:
+        coverage_type:
+          title: Coverage type
+          description: Type of coverage being evaluated (e.g., 'Cyber', 'D&O', 'MPL', 'EPL', 'Tech E&O', 'Fiduciary')
+          type:
+          - string
+          - 'null'
+        business_id:
+          title: Business id
+          description: ID of the business/insured. Required for broker users, optional for business users.
+          type:
+          - integer
+          - 'null'
+        force_refresh:
+          title: Force refresh
+          description: If True, clears all cached financial risk data for this business and triggers fresh calculations
+          type: boolean
+          default: false
+    RiskManagerChatMessage:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        message:
+          title: Message
+          type: string
+          readOnly: true
+        role:
+          title: Role
+          type: string
+          enum:
+          - assistant
+          - user
+          readOnly: true
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

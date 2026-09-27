@@ -77,46 +77,6 @@ paths:
         required: true
 components:
   schemas:
-    UserList:
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        email:
-          title: Email address
-          type: string
-          format: email
-          readOnly: true
-          minLength: 1
-        first_name:
-          title: First name
-          type: string
-          maxLength: 150
-        last_name:
-          title: Last name
-          type: string
-          maxLength: 150
-        title:
-          title: Title
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        role:
-          title: Role
-          description: Role is for determining the access level control of the user.
-          type:
-          - string
-          - 'null'
-          enum:
-          - Owner
-          - Admin
-          - User
-          - Broker
-          - Underwriter
-          readOnly: true
     OTPEmail:
       required:
       - email
@@ -189,6 +149,46 @@ components:
         type: array
         items:
           type: string
+    UserList:
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        email:
+          title: Email address
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        first_name:
+          title: First name
+          type: string
+          maxLength: 150
+        last_name:
+          title: Last name
+          type: string
+          maxLength: 150
+        title:
+          title: Title
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        role:
+          title: Role
+          description: Role is for determining the access level control of the user.
+          type:
+          - string
+          - 'null'
+          enum:
+          - Owner
+          - Admin
+          - User
+          - Broker
+          - Underwriter
+          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

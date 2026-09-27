@@ -284,15 +284,6 @@ paths:
       - 'broker: user-ai-customizations'
 components:
   schemas:
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     GenericError:
       title: Generic API Error
       required:
@@ -302,19 +293,19 @@ components:
         detail:
           description: Error details
           type: string
-    ValidationError:
-      title: Validation Error
+    UserAICustomization:
       type: object
       properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        customization_type:
+          $ref: '#/components/schemas/AICustomizationType'
+        value:
+          title: Value
+          description: Custom value for this type
           type: string
     AICustomizationType:
       type: object
@@ -336,6 +327,15 @@ components:
           type: string
           readOnly: true
           minLength: 1
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     UserAICustomizationCreateUpdate:
       required:
       - customization_type
@@ -349,19 +349,19 @@ components:
           title: Value
           description: Custom value for this type
           type: string
-    UserAICustomization:
+    ValidationError:
+      title: Validation Error
       type: object
       properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        customization_type:
-          $ref: '#/components/schemas/AICustomizationType'
-        value:
-          title: Value
-          description: Custom value for this type
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
           type: string
   securitySchemes:
     Bearer:

@@ -1466,7 +1466,7 @@ paths:
       security: []
 components:
   schemas:
-    APIException:
+    GenericError:
       title: Generic API Error
       required:
       - detail
@@ -1475,13 +1475,39 @@ components:
         detail:
           description: Error details
           type: string
-    SupplementaryQuestionsUpdate:
+    SubProductLine:
       type: object
       properties:
-        user_answers:
-          title: User Answers
-          description: User-provided answers to supplementary questions keyed by question id
-          type: object
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        display_name:
+          title: Display name
+          description: Name used on the Frontend.
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
     ProductLine:
       required:
       - code
@@ -1534,7 +1560,14 @@ components:
           - Property only
         canonical_product_line:
           $ref: '#/components/schemas/CanonicalProductLineRef'
-    SubProductLine:
+    SanityCheckUpdate:
+      type: object
+      properties:
+        hidden_fields:
+          title: Hidden Fields
+          description: Dismissed or no longer relevant fields that should be removed from the ai_response.
+          type: object
+    StoreFrontApplicationSupplementaryDocument:
       type: object
       properties:
         id:
@@ -1548,103 +1581,32 @@ components:
           - string
           - 'null'
           maxLength: 255
-        display_name:
-          title: Display name
-          description: Name used on the Frontend.
-          type:
-          - string
-          - 'null'
-          maxLength: 255
         description:
           title: Description
           type:
           - string
           - 'null'
-        logo:
-          title: Logo
+        question_elabel_id:
+          title: Question elabel id
+          description: Links this document to a specific file_upload question by elabel_id
           type:
           - string
           - 'null'
-          readOnly: true
-          format: uri
-    SupplementaryQuestionsRequest:
-      required:
-      - coverage_application
-      type: object
-      properties:
-        id:
-          title: Id
+          maxLength: 100
+        created_at:
+          title: Created at
           type: string
-          format: uuid
-          readOnly: true
-        status:
-          title: Status
-          type: string
-          enum:
-          - pending
-          - in_progress
-          - completed
-          - failed
-        ai_context:
-          title: AI Context
-          description: The context for the AI to use to generate supplementary questions
-          type:
-          - object
-          - 'null'
-        context_hash:
-          title: Context Hash
-          description: The sha256 hash of the ai_context
-          type: string
-          maxLength: 64
-          minLength: 1
-        ai_response:
-          title: AI Response
-          description: 'List of supplementary questions from the AI: [{id, question, reason, input_type, options}]'
-          type:
-          - object
-          - 'null'
-        user_answers:
-          title: User Answers
-          description: User-provided answers to supplementary questions keyed by question id
-          type: object
-        start_time:
-          title: Start Time
-          description: The UTC time the supplementary questions request started
-          type:
-          - string
-          - 'null'
           format: date-time
-        end_time:
-          title: End Time
-          description: The UTC time the supplementary questions request ended
-          type:
-          - string
-          - 'null'
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
           format: date-time
-        error:
-          title: Error
-          type:
-          - string
-          - 'null'
-        coverage_application:
-          title: Coverage Application
-          description: The coverage application to generate supplementary questions for
+          readOnly: true
+        download_url:
+          title: Download url
           type: string
-          format: uuid
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
+          readOnly: true
     SanityCheckRequest:
       required:
       - coverage_application
@@ -1710,27 +1672,6 @@ components:
           type:
           - string
           - 'null'
-    StoreFrontPublic:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        broker_user:
-          $ref: '#/components/schemas/StoreFrontBrokerUserPublic'
-        url_slug:
-          title: Url slug
-          type: string
-          readOnly: true
-          minLength: 1
-        broker:
-          $ref: '#/components/schemas/StoreFrontBroker'
-        broker_group:
-          title: Broker group
-          type: string
-          readOnly: true
     StoreFrontAgencyPublic:
       required:
       - name
@@ -1788,6 +1729,55 @@ components:
           title: Default broker user card
           type: string
           readOnly: true
+    CanonicalProductLineRef:
+      required:
+      - code
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        code:
+          title: Code
+          type: string
+          maxLength: 150
+          minLength: 1
+        display_name:
+          title: Display name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+    StoreFrontPublic:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        broker_user:
+          $ref: '#/components/schemas/StoreFrontBrokerUserPublic'
+        url_slug:
+          title: Url slug
+          type: string
+          readOnly: true
+          minLength: 1
+        broker:
+          $ref: '#/components/schemas/StoreFrontBroker'
+        broker_group:
+          title: Broker group
+          type: string
+          readOnly: true
+    SupplementaryQuestionsUpdate:
+      type: object
+      properties:
+        user_answers:
+          title: User Answers
+          description: User-provided answers to supplementary questions keyed by question id
+          type: object
     StoreFrontBroker:
       required:
       - name
@@ -1824,7 +1814,7 @@ components:
           - string
           - 'null'
           maxLength: 255
-    GenericError:
+    APIException:
       title: Generic API Error
       required:
       - detail
@@ -1877,13 +1867,6 @@ components:
           - SERVICE
           - MARKETS
           - OPERATIONS
-    SanityCheckUpdate:
-      type: object
-      properties:
-        hidden_fields:
-          title: Hidden Fields
-          description: Dismissed or no longer relevant fields that should be removed from the ai_response.
-          type: object
     StoreFrontBrokerUserCard:
       type: object
       properties:
@@ -1932,9 +1915,23 @@ components:
           title: Storefront url slug
           type: string
           readOnly: true
-    CanonicalProductLineRef:
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    SupplementaryQuestionsRequest:
       required:
-      - code
+      - coverage_application
       type: object
       properties:
         id:
@@ -1942,57 +1939,60 @@ components:
           type: string
           format: uuid
           readOnly: true
-        code:
-          title: Code
+        status:
+          title: Status
           type: string
-          maxLength: 150
+          enum:
+          - pending
+          - in_progress
+          - completed
+          - failed
+        ai_context:
+          title: AI Context
+          description: The context for the AI to use to generate supplementary questions
+          type:
+          - object
+          - 'null'
+        context_hash:
+          title: Context Hash
+          description: The sha256 hash of the ai_context
+          type: string
+          maxLength: 64
           minLength: 1
-        display_name:
-          title: Display name
+        ai_response:
+          title: AI Response
+          description: 'List of supplementary questions from the AI: [{id, question, reason, input_type, options}]'
+          type:
+          - object
+          - 'null'
+        user_answers:
+          title: User Answers
+          description: User-provided answers to supplementary questions keyed by question id
+          type: object
+        start_time:
+          title: Start Time
+          description: The UTC time the supplementary questions request started
           type:
           - string
           - 'null'
-          maxLength: 255
-    StoreFrontApplicationSupplementaryDocument:
-      type: object
-      properties:
-        id:
-          title: Id
+          format: date-time
+        end_time:
+          title: End Time
+          description: The UTC time the supplementary questions request ended
+          type:
+          - string
+          - 'null'
+          format: date-time
+        error:
+          title: Error
+          type:
+          - string
+          - 'null'
+        coverage_application:
+          title: Coverage Application
+          description: The coverage application to generate supplementary questions for
           type: string
           format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        question_elabel_id:
-          title: Question elabel id
-          description: Links this document to a specific file_upload question by elabel_id
-          type:
-          - string
-          - 'null'
-          maxLength: 100
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          title: Updated at
-          type: string
-          format: date-time
-          readOnly: true
-        download_url:
-          title: Download url
-          type: string
-          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

@@ -438,7 +438,7 @@ paths:
       schema:
         type: string
     get:
-      operationId: agent_get_profile
+      operationId: getV2BrokerAgentProfilesById
       summary: Get Profile
       description: 'Retrieve detailed information for a single profile.
 
@@ -495,8 +495,10 @@ paths:
           description: Internal server error.
       tags:
       - Email AI Agent - Profiles
+      x-operation-id-source: normalized
+      x-operation-id-original: agent_get_profile
     post:
-      operationId: agent_create_profile_v2
+      operationId: postV2BrokerAgentProfilesById
       summary: Create Profile
       description: 'Create a new insured profile.
 
@@ -557,8 +559,10 @@ paths:
             schema:
               $ref: '#/components/schemas/AgentProfileUpsert'
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: agent_create_profile_v2
     put:
-      operationId: agent_update_profile_v2
+      operationId: putV2BrokerAgentProfilesById
       summary: Update Profile (Full Replace)
       description: 'Replace an existing profile with new data.
 
@@ -625,6 +629,8 @@ paths:
             schema:
               $ref: '#/components/schemas/AgentProfileUpsert'
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: agent_update_profile_v2
   /v2/broker/agent/profiles/{id}/business-candidates:
     parameters:
     - name: id
@@ -989,70 +995,53 @@ paths:
         required: true
 components:
   schemas:
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
+    AgentProfileLinkEmailResponse:
       type: object
       properties:
-        detail:
-          description: Error details
-          type: string
-    AgentProfileCreateBusinessResponse:
-      type: object
-      properties:
-        business_id:
-          title: Business id
+        id:
+          title: Id
           type: string
           format: uuid
           readOnly: true
-        business_name:
-          title: Business name
+        linked_emails_count:
+          title: Linked emails count
+          type: integer
+          readOnly: true
+        linked_attachments_count:
+          title: Linked attachments count
+          type: integer
+          readOnly: true
+        newly_linked:
+          title: Newly linked
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          readOnly: true
+    AgentProfileLinkedEmail:
+      type: object
+      properties:
+        id:
+          title: Id
           type: string
+          format: uuid
           readOnly: true
-          minLength: 1
-        created:
-          title: Created
-          type: boolean
-          readOnly: true
-        profile_linked:
-          title: Profile linked
-          type: boolean
-          readOnly: true
-        agent_assigned:
-          title: Agent assigned
-          type: boolean
-          readOnly: true
-        agent_id:
-          title: Agent id
+        subject:
+          title: Subject
           type:
           - string
           - 'null'
-          format: uuid
-          readOnly: true
-    AgentBusinessCandidatesResponse:
-      type: object
-      properties:
-        profile_id:
-          title: Profile id
-          type: string
-          format: uuid
-          readOnly: true
-        profile_name:
-          title: Profile name
-          type: string
           readOnly: true
           minLength: 1
-        candidates:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentBusinessCandidate'
+        received_at:
+          title: Received at
+          type:
+          - string
+          - 'null'
+          format: date-time
           readOnly: true
-        has_candidates:
-          title: Has candidates
-          type: boolean
-          readOnly: true
-    AgentProfileBusiness:
+    AgentProfileLinkedAttachment:
       type: object
       properties:
         id:
@@ -1062,16 +1051,92 @@ components:
           readOnly: true
         name:
           title: Name
-          type: string
-          readOnly: true
-          minLength: 1
-        domain_name:
-          title: Domain name
           type:
           - string
           - 'null'
           readOnly: true
           minLength: 1
+        email_id:
+          title: Email id
+          type: string
+          format: uuid
+          readOnly: true
+    AgentProfileLinkEmail:
+      type: object
+      properties:
+        email_id:
+          title: Email id
+          description: Email ID to link.
+          type:
+          - string
+          - 'null'
+          format: uuid
+        attachment_ids:
+          description: List of attachment IDs to link.
+          type: array
+          items:
+            type: string
+            format: uuid
+          default: []
+    AgentSourceDocument:
+      required:
+      - document_type
+      - document_id
+      type: object
+      properties:
+        document_type:
+          title: Document type
+          description: Whether source is email body or attachment.
+          type: string
+          enum:
+          - email_body
+          - attachment
+        document_id:
+          title: Document id
+          description: UUID of the source email or attachment.
+          type: string
+          format: uuid
+        email_id:
+          title: Email id
+          description: UUID of the parent email (for attachments).
+          type:
+          - string
+          - 'null'
+          format: uuid
+    AgentAddress:
+      type: object
+      properties:
+        street:
+          title: Street
+          type: string
+        city:
+          title: City
+          type: string
+        state:
+          title: State
+          type: string
+        zip:
+          title: Zip
+          type: string
+        postal_code:
+          title: Postal code
+          type: string
+        country:
+          title: Country
+          type: string
+        full_address:
+          title: Full address
+          type: string
+    AgentProfileLinkBusiness:
+      required:
+      - business_id
+      type: object
+      properties:
+        business_id:
+          title: Business id
+          description: Business ID to link to.
+          type: string
+          format: uuid
     AgentProfileDetail:
       type: object
       properties:
@@ -1148,6 +1213,126 @@ components:
           readOnly: true
         business:
           $ref: '#/components/schemas/AgentProfileBusiness'
+    AgentBusinessCandidatesResponse:
+      type: object
+      properties:
+        profile_id:
+          title: Profile id
+          type: string
+          format: uuid
+          readOnly: true
+        profile_name:
+          title: Profile name
+          type: string
+          readOnly: true
+          minLength: 1
+        candidates:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentBusinessCandidate'
+          readOnly: true
+        has_candidates:
+          title: Has candidates
+          type: boolean
+          readOnly: true
+    AgentProfileLinkBusinessResponse:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        business_id:
+          title: Business id
+          type: string
+          format: uuid
+          readOnly: true
+        business_name:
+          title: Business name
+          type: string
+          readOnly: true
+          minLength: 1
+        linked:
+          title: Linked
+          type: boolean
+          readOnly: true
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    AgentBusinessCandidate:
+      type: object
+      properties:
+        business_id:
+          title: Business id
+          type: string
+          format: uuid
+          readOnly: true
+        business_name:
+          title: Business name
+          type: string
+          readOnly: true
+          minLength: 1
+        domain_name:
+          title: Domain name
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        score:
+          title: Score
+          description: Confidence score in [0, 1] aggregated across matched signals; candidates are returned ranked best-first.
+          type: number
+          readOnly: true
+        match_reasons:
+          description: 'Signals that matched: domain_match, name_exact, business_user_email, parameter_value, fuzzy_search.'
+          type: array
+          items:
+            type: string
+            minLength: 1
+          readOnly: true
+        conflicts:
+          description: 'Reasons to pause before linking: archived_business, generic_domain_only.'
+          type: array
+          items:
+            type: string
+            minLength: 1
+          readOnly: true
+        match_details:
+          title: Match details
+          description: 'Details about what matched: matched_name, matched_emails, matched_domain, matched_normalized_domain, matched_parameters, fuzzy_score.'
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          readOnly: true
+    AgentPerson:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          minLength: 1
+        role:
+          title: Role
+          type: string
+        email:
+          title: Email
+          type: string
+          format: email
+        phone:
+          title: Phone
+          type: string
     AgentProfileUpsert:
       required:
       - insured
@@ -1237,23 +1422,6 @@ components:
           items:
             $ref: '#/components/schemas/AgentSourceDocument'
           default: []
-    AgentProfileLinkEmail:
-      type: object
-      properties:
-        email_id:
-          title: Email id
-          description: Email ID to link.
-          type:
-          - string
-          - 'null'
-          format: uuid
-        attachment_ids:
-          description: List of attachment IDs to link.
-          type: array
-          items:
-            type: string
-            format: uuid
-          default: []
     AgentProfileCreateBusiness:
       type: object
       properties:
@@ -1282,60 +1450,58 @@ components:
           description: Why the closest candidate is a different company (recorded for audit). Required with confirmed_duplicate_reviewed.
           type: string
           minLength: 1
-    AgentPerson:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          title: Name
-          type: string
-          minLength: 1
-        role:
-          title: Role
-          type: string
-        email:
-          title: Email
-          type: string
-          format: email
-        phone:
-          title: Phone
-          type: string
-    AgentSourceDocument:
-      required:
-      - document_type
-      - document_id
-      type: object
-      properties:
-        document_type:
-          title: Document type
-          description: Whether source is email body or attachment.
-          type: string
-          enum:
-          - email_body
-          - attachment
-        document_id:
-          title: Document id
-          description: UUID of the source email or attachment.
-          type: string
-          format: uuid
-        email_id:
-          title: Email id
-          description: UUID of the parent email (for attachments).
-          type:
-          - string
-          - 'null'
-          format: uuid
-    AgentProfileLinkBusiness:
-      required:
-      - business_id
+    AgentProfileCreateBusinessResponse:
       type: object
       properties:
         business_id:
           title: Business id
-          description: Business ID to link to.
           type: string
           format: uuid
+          readOnly: true
+        business_name:
+          title: Business name
+          type: string
+          readOnly: true
+          minLength: 1
+        created:
+          title: Created
+          type: boolean
+          readOnly: true
+        profile_linked:
+          title: Profile linked
+          type: boolean
+          readOnly: true
+        agent_assigned:
+          title: Agent assigned
+          type: boolean
+          readOnly: true
+        agent_id:
+          title: Agent id
+          type:
+          - string
+          - 'null'
+          format: uuid
+          readOnly: true
+    AgentProfileBusiness:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          readOnly: true
+          minLength: 1
+        domain_name:
+          title: Domain name
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
     ErrorResponse:
       required:
       - error
@@ -1358,166 +1524,6 @@ components:
           description: When the error occurred.
           type: string
           format: date-time
-    AgentProfileLinkEmailResponse:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        linked_emails_count:
-          title: Linked emails count
-          type: integer
-          readOnly: true
-        linked_attachments_count:
-          title: Linked attachments count
-          type: integer
-          readOnly: true
-        newly_linked:
-          title: Newly linked
-          type: object
-          additionalProperties:
-            type:
-            - string
-            - 'null'
-          readOnly: true
-    AgentProfileLinkedAttachment:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        email_id:
-          title: Email id
-          type: string
-          format: uuid
-          readOnly: true
-    AgentProfileLinkedEmail:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        subject:
-          title: Subject
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        received_at:
-          title: Received at
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-    AgentBusinessCandidate:
-      type: object
-      properties:
-        business_id:
-          title: Business id
-          type: string
-          format: uuid
-          readOnly: true
-        business_name:
-          title: Business name
-          type: string
-          readOnly: true
-          minLength: 1
-        domain_name:
-          title: Domain name
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        score:
-          title: Score
-          description: Confidence score in [0, 1] aggregated across matched signals; candidates are returned ranked best-first.
-          type: number
-          readOnly: true
-        match_reasons:
-          description: 'Signals that matched: domain_match, name_exact, business_user_email, parameter_value, fuzzy_search.'
-          type: array
-          items:
-            type: string
-            minLength: 1
-          readOnly: true
-        conflicts:
-          description: 'Reasons to pause before linking: archived_business, generic_domain_only.'
-          type: array
-          items:
-            type: string
-            minLength: 1
-          readOnly: true
-        match_details:
-          title: Match details
-          description: 'Details about what matched: matched_name, matched_emails, matched_domain, matched_normalized_domain, matched_parameters, fuzzy_score.'
-          type: object
-          additionalProperties:
-            type:
-            - string
-            - 'null'
-          readOnly: true
-    AgentAddress:
-      type: object
-      properties:
-        street:
-          title: Street
-          type: string
-        city:
-          title: City
-          type: string
-        state:
-          title: State
-          type: string
-        zip:
-          title: Zip
-          type: string
-        postal_code:
-          title: Postal code
-          type: string
-        country:
-          title: Country
-          type: string
-        full_address:
-          title: Full address
-          type: string
-    AgentProfileLinkBusinessResponse:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        business_id:
-          title: Business id
-          type: string
-          format: uuid
-          readOnly: true
-        business_name:
-          title: Business name
-          type: string
-          readOnly: true
-          minLength: 1
-        linked:
-          title: Linked
-          type: boolean
-          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

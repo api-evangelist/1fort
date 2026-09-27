@@ -335,24 +335,6 @@ paths:
       - Invite
 components:
   schemas:
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    ValidateInvite:
-      required:
-      - token
-      type: object
-      properties:
-        token:
-          title: Token
-          type: string
-          minLength: 1
     GenericError:
       title: Generic API Error
       required:
@@ -362,61 +344,6 @@ components:
         detail:
           description: Error details
           type: string
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    BusinessUserInviteAccept:
-      required:
-      - invite_token
-      - email
-      type: object
-      properties:
-        refresh:
-          title: Refresh
-          type: string
-          readOnly: true
-          minLength: 1
-        access:
-          title: Access
-          type: string
-          readOnly: true
-          minLength: 1
-        id:
-          title: Id
-          type: integer
-          readOnly: true
-        invite_token:
-          title: Invite token
-          type: string
-          minLength: 1
-        email:
-          title: Email
-          type: string
-          format: email
-          minLength: 1
-        first_name:
-          title: First name
-          type: string
-          minLength: 1
-        last_name:
-          title: Last name
-          type: string
-          minLength: 1
-        company_role:
-          title: Company role
-          type: string
-          minLength: 1
     BusinessUserInviteAcceptGoogle:
       required:
       - invite_token
@@ -578,6 +505,79 @@ components:
           type: array
           items:
             type: integer
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    BusinessUserInviteAccept:
+      required:
+      - invite_token
+      - email
+      type: object
+      properties:
+        refresh:
+          title: Refresh
+          type: string
+          readOnly: true
+          minLength: 1
+        access:
+          title: Access
+          type: string
+          readOnly: true
+          minLength: 1
+        id:
+          title: Id
+          type: integer
+          readOnly: true
+        invite_token:
+          title: Invite token
+          type: string
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          format: email
+          minLength: 1
+        first_name:
+          title: First name
+          type: string
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          minLength: 1
+        company_role:
+          title: Company role
+          type: string
+          minLength: 1
+    ValidateInvite:
+      required:
+      - token
+      type: object
+      properties:
+        token:
+          title: Token
+          type: string
+          minLength: 1
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

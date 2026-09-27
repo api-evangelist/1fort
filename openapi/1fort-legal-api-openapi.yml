@@ -173,15 +173,6 @@ paths:
         required: true
 components:
   schemas:
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     GenericError:
       title: Generic API Error
       required:
@@ -190,20 +181,6 @@ components:
       properties:
         detail:
           description: Error details
-          type: string
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
           type: string
     LegalDocument:
       required:
@@ -256,16 +233,15 @@ components:
           title: Is signed
           type: boolean
           readOnly: true
-    LegalDocumentSign:
+    APIException:
+      title: Generic API Error
       required:
-      - signature_text
+      - detail
       type: object
       properties:
-        signature_text:
-          title: Signature text
+        detail:
+          description: Error details
           type: string
-          maxLength: 255
-          minLength: 1
     LegalDocumentUserSignature:
       required:
       - signature_text
@@ -296,6 +272,30 @@ components:
           title: Is current
           type: boolean
           readOnly: true
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    LegalDocumentSign:
+      required:
+      - signature_text
+      type: object
+      properties:
+        signature_text:
+          title: Signature text
+          type: string
+          maxLength: 255
+          minLength: 1
   securitySchemes:
     Bearer:
       type: apiKey

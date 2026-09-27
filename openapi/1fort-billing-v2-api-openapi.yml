@@ -515,79 +515,6 @@ paths:
       - Billing (V2)
 components:
   schemas:
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    BrokerPaymentList:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        insured:
-          title: Insured
-          type: string
-          readOnly: true
-        payment_status:
-          title: Payment status
-          type: string
-          readOnly: true
-        quote_status:
-          title: Quote status
-          type: string
-          readOnly: true
-        quote:
-          title: Quote
-          type: string
-          readOnly: true
-        total:
-          title: Total
-          type: string
-          readOnly: true
-        due_date:
-          title: Due date
-          type: string
-          readOnly: true
-        broker:
-          title: Broker
-          type: string
-          readOnly: true
-        producer:
-          title: Producer
-          type: string
-          readOnly: true
-        all_agents:
-          title: All agents
-          type: string
-          readOnly: true
-        primary_agent:
-          title: Primary agent
-          type: string
-          readOnly: true
-        carrier:
-          title: Carrier
-          type: string
-          readOnly: true
-        coverage_type:
-          title: Coverage type
-          type: string
-          readOnly: true
-        actions:
-          title: Actions
-          type: string
-          readOnly: true
-        connect_payout_status:
-          title: Connect payout status
-          type: string
-          readOnly: true
     GenericError:
       title: Generic API Error
       required:
@@ -597,153 +524,6 @@ components:
         detail:
           description: Error details
           type: string
-    BrokerRefund:
-      required:
-      - amount_cents
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        status:
-          title: Status
-          type: string
-          enum:
-          - pending
-          - succeeded
-          - failed
-          - refunded
-          - partially_refunded
-        amount_cents:
-          title: Amount cents
-          description: Payment amount in cents
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-        amount_refunded_cents:
-          title: Amount refunded cents
-          description: Amount refunded in cents
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-        payment_method_type:
-          title: Payment method type
-          type:
-          - string
-          - 'null'
-          enum:
-          - card
-          - us_bank_account
-        payment_method_details:
-          title: Payment method details
-          description: Card last4, bank name, etc.
-          type: object
-        paid_at:
-          title: Paid at
-          description: Payment timestamp
-          type:
-          - string
-          - 'null'
-          format: date-time
-        updated_at:
-          title: Updated at
-          type: string
-          format: date-time
-          readOnly: true
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    InsuranceLineItem:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        line_item_type:
-          title: Line item type
-          type: string
-          enum:
-          - premium
-          - agency_fee
-          - broker_fee
-          - policy_fee
-          - surplus_lines_tax
-          - stamping_fee
-          - state_tax
-          - municipal_fee
-          - inspection_fee
-          - platform_fee
-          - surcharge
-          - discount
-          - credit
-          - other
-        description:
-          title: Description
-          description: Display text from the invoice PDF
-          type: string
-          maxLength: 255
-        amount:
-          title: Amount
-          description: Line item amount
-          type:
-          - string
-          - 'null'
-          format: decimal
-        commission_rate:
-          title: Commission rate
-          description: Broker commission percentage for this line
-          type:
-          - string
-          - 'null'
-          format: decimal
-        commission_amount:
-          title: Commission amount
-          description: Broker commission dollar amount for this line
-          type:
-          - string
-          - 'null'
-          format: decimal
-        policy_number:
-          title: Policy number
-          description: Raw extracted policy number — for multi-policy invoices
-          type: string
-          maxLength: 100
-        effective_date:
-          title: Effective date
-          description: Coverage period for this line item
-          type:
-          - string
-          - 'null'
-          format: date
-        expiration_date:
-          title: Expiration date
-          type:
-          - string
-          - 'null'
-          format: date
-        carrier:
-          title: Carrier
-          type: string
-          readOnly: true
-        coverage_type:
-          title: Coverage type
-          type: string
-          readOnly: true
     BrokerPaymentDetail:
       required:
       - insurance_invoice_number
@@ -880,6 +660,226 @@ components:
           type: string
           format: date-time
           readOnly: true
+    InsuranceLineItem:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        line_item_type:
+          title: Line item type
+          type: string
+          enum:
+          - premium
+          - agency_fee
+          - broker_fee
+          - policy_fee
+          - surplus_lines_tax
+          - stamping_fee
+          - state_tax
+          - municipal_fee
+          - inspection_fee
+          - platform_fee
+          - surcharge
+          - discount
+          - credit
+          - other
+        description:
+          title: Description
+          description: Display text from the invoice PDF
+          type: string
+          maxLength: 255
+        amount:
+          title: Amount
+          description: Line item amount
+          type:
+          - string
+          - 'null'
+          format: decimal
+        commission_rate:
+          title: Commission rate
+          description: Broker commission percentage for this line
+          type:
+          - string
+          - 'null'
+          format: decimal
+        commission_amount:
+          title: Commission amount
+          description: Broker commission dollar amount for this line
+          type:
+          - string
+          - 'null'
+          format: decimal
+        policy_number:
+          title: Policy number
+          description: Raw extracted policy number — for multi-policy invoices
+          type: string
+          maxLength: 100
+        effective_date:
+          title: Effective date
+          description: Coverage period for this line item
+          type:
+          - string
+          - 'null'
+          format: date
+        expiration_date:
+          title: Expiration date
+          type:
+          - string
+          - 'null'
+          format: date
+        carrier:
+          title: Carrier
+          type: string
+          readOnly: true
+        coverage_type:
+          title: Coverage type
+          type: string
+          readOnly: true
+    BrokerRefund:
+      required:
+      - amount_cents
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          title: Status
+          type: string
+          enum:
+          - pending
+          - succeeded
+          - failed
+          - refunded
+          - partially_refunded
+        amount_cents:
+          title: Amount cents
+          description: Payment amount in cents
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        amount_refunded_cents:
+          title: Amount refunded cents
+          description: Amount refunded in cents
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        payment_method_type:
+          title: Payment method type
+          type:
+          - string
+          - 'null'
+          enum:
+          - card
+          - us_bank_account
+        payment_method_details:
+          title: Payment method details
+          description: Card last4, bank name, etc.
+          type: object
+        paid_at:
+          title: Paid at
+          description: Payment timestamp
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+    BrokerPaymentList:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        insured:
+          title: Insured
+          type: string
+          readOnly: true
+        payment_status:
+          title: Payment status
+          type: string
+          readOnly: true
+        quote_status:
+          title: Quote status
+          type: string
+          readOnly: true
+        quote:
+          title: Quote
+          type: string
+          readOnly: true
+        total:
+          title: Total
+          type: string
+          readOnly: true
+        due_date:
+          title: Due date
+          type: string
+          readOnly: true
+        broker:
+          title: Broker
+          type: string
+          readOnly: true
+        producer:
+          title: Producer
+          type: string
+          readOnly: true
+        all_agents:
+          title: All agents
+          type: string
+          readOnly: true
+        primary_agent:
+          title: Primary agent
+          type: string
+          readOnly: true
+        carrier:
+          title: Carrier
+          type: string
+          readOnly: true
+        coverage_type:
+          title: Coverage type
+          type: string
+          readOnly: true
+        actions:
+          title: Actions
+          type: string
+          readOnly: true
+        connect_payout_status:
+          title: Connect payout status
+          type: string
+          readOnly: true
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

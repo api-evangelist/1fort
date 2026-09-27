@@ -175,45 +175,6 @@ paths:
         required: true
 components:
   schemas:
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    BusinessSubsidiary:
-      required:
-      - name
-      - business
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        ownership:
-          title: Ownership
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        business:
-          title: Business
-          type: integer
     GenericError:
       title: Generic API Error
       required:
@@ -223,60 +184,6 @@ components:
         detail:
           description: Error details
           type: string
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    UserList:
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        email:
-          title: Email address
-          type: string
-          format: email
-          readOnly: true
-          minLength: 1
-        first_name:
-          title: First name
-          type: string
-          maxLength: 150
-        last_name:
-          title: Last name
-          type: string
-          maxLength: 150
-        title:
-          title: Title
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        role:
-          title: Role
-          description: Role is for determining the access level control of the user.
-          type:
-          - string
-          - 'null'
-          enum:
-          - Owner
-          - Admin
-          - User
-          - Broker
-          - Underwriter
-          readOnly: true
     UserDetail:
       type: object
       properties:
@@ -322,6 +229,85 @@ components:
           title: Date joined
           type: string
           format: date-time
+    UserList:
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        email:
+          title: Email address
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        first_name:
+          title: First name
+          type: string
+          maxLength: 150
+        last_name:
+          title: Last name
+          type: string
+          maxLength: 150
+        title:
+          title: Title
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        role:
+          title: Role
+          description: Role is for determining the access level control of the user.
+          type:
+          - string
+          - 'null'
+          enum:
+          - Owner
+          - Admin
+          - User
+          - Broker
+          - Underwriter
+          readOnly: true
+    BusinessSubsidiary:
+      required:
+      - name
+      - business
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        ownership:
+          title: Ownership
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        business:
+          title: Business
+          type: integer
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     BusinessList:
       required:
       - name
@@ -375,6 +361,20 @@ components:
           - 'null'
           maximum: 9223372036854775807
           minimum: -9223372036854775808
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey
