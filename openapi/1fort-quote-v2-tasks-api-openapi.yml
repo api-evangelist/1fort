@@ -523,36 +523,47 @@ paths:
       x-operation-id-original: v2_broker_tasks_read
 components:
   schemas:
-    QuoteTaskDocument:
+    QuoteTaskResolve:
+      required:
+      - id
       type: object
       properties:
         id:
           title: Id
           type: string
           format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        document:
-          title: Document
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
+        status:
+          title: Status
           type: string
+          enum:
+          - todo
+          - done
+          - dismissed
+          - n/a
+        resolution_comment:
+          title: Resolution comment
+          type: string
+        quote_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        document_files:
+          type: array
+          items:
+            type: string
+            readOnly: true
+            format: uri
+        document_names:
+          type: array
+          items:
+            type: string
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteTaskDocument'
+          readOnly: true
     QuoteTaskFlexFields:
       required:
       - title
@@ -672,56 +683,15 @@ components:
           type:
           - integer
           - 'null'
-    QuoteTaskResolve:
+    GenericError:
+      title: Generic API Error
       required:
-      - id
+      - detail
       type: object
       properties:
-        id:
-          title: Id
+        detail:
+          description: Error details
           type: string
-          format: uuid
-        status:
-          title: Status
-          type: string
-          enum:
-          - todo
-          - done
-          - dismissed
-          - n/a
-        resolution_comment:
-          title: Resolution comment
-          type: string
-        quote_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          uniqueItems: true
-        document_files:
-          type: array
-          items:
-            type: string
-            readOnly: true
-            format: uri
-        document_names:
-          type: array
-          items:
-            type: string
-        documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteTaskDocument'
-          readOnly: true
-    QuoteTaskBulkResolve:
-      required:
-      - tasks
-      type: object
-      properties:
-        tasks:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteTaskResolve'
     APIException:
       title: Generic API Error
       required:
@@ -745,6 +715,36 @@ components:
         type: array
         items:
           type: string
+    QuoteTaskDocument:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        document:
+          title: Document
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+    QuoteTaskBulkResolve:
+      required:
+      - tasks
+      type: object
+      properties:
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteTaskResolve'
   securitySchemes:
     Bearer:
       type: apiKey

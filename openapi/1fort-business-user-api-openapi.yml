@@ -1238,18 +1238,10 @@ paths:
       - business-user
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    BusinessAccessRole:
+    BusinessGroup:
       required:
       - name
+      - business
       type: object
       properties:
         id:
@@ -1259,23 +1251,35 @@ components:
         name:
           title: Name
           type: string
-          maxLength: 255
           minLength: 1
+        user_count:
+          title: User count
+          type: string
+          readOnly: true
         permissions:
           type: array
           items:
             type: string
           uniqueItems: true
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
         created_at:
           title: Created at
           type: string
           format: date-time
           readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+        deleted_at:
+          title: Deleted at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        business:
+          title: Business
+          type: integer
         created_by:
           title: Created by
           type:
@@ -1321,6 +1325,166 @@ components:
           type:
           - integer
           - 'null'
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    MyBusinessListResponse:
+      required:
+      - results
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/MyBusiness'
+    BusinessList:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        industry:
+          title: Industry
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        number_of_employees:
+          title: Number of employees
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        active:
+          title: Active
+          type: boolean
+        domain_name:
+          title: Domain name
+          type:
+          - string
+          - 'null'
+          maxLength: 500
+        subsidiaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessSubsidiary'
+          readOnly: true
+        revenue:
+          title: Revenue
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+    MyBusiness:
+      type: object
+      properties:
+        business_user_id:
+          title: Business user id
+          type: integer
+          readOnly: true
+        business:
+          $ref: '#/components/schemas/BusinessList'
+        role:
+          title: Role
+          type: string
+          enum:
+          - admin
+          - super_admin
+          - user
+          - one_fort_maintainer
+          - auditor
+        employee_type:
+          title: Employee type
+          type: string
+          enum:
+          - employee
+          - contractor
+          - non_employee
+          - auditor
+          - soc2
+          - it_security
+          - other
+        is_administrator:
+          title: Is administrator
+          type: boolean
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    BusinessAccessRole:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        permissions:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        created_by:
+          title: Created by
+          type:
+          - integer
+          - 'null'
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
     BusinessUser:
       required:
       - first_name
@@ -1437,47 +1601,6 @@ components:
           type:
           - integer
           - 'null'
-    MyBusinessListResponse:
-      required:
-      - results
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/MyBusiness'
-    MyBusiness:
-      type: object
-      properties:
-        business_user_id:
-          title: Business user id
-          type: integer
-          readOnly: true
-        business:
-          $ref: '#/components/schemas/BusinessList'
-        role:
-          title: Role
-          type: string
-          enum:
-          - admin
-          - super_admin
-          - user
-          - one_fort_maintainer
-          - auditor
-        employee_type:
-          title: Employee type
-          type: string
-          enum:
-          - employee
-          - contractor
-          - non_employee
-          - auditor
-          - soc2
-          - it_security
-          - other
-        is_administrator:
-          title: Is administrator
-          type: boolean
     BusinessSubsidiary:
       required:
       - name
@@ -1508,129 +1631,6 @@ components:
         business:
           title: Business
           type: integer
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    BusinessList:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        industry:
-          title: Industry
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        number_of_employees:
-          title: Number of employees
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        active:
-          title: Active
-          type: boolean
-        domain_name:
-          title: Domain name
-          type:
-          - string
-          - 'null'
-          maxLength: 500
-        subsidiaries:
-          type: array
-          items:
-            $ref: '#/components/schemas/BusinessSubsidiary'
-          readOnly: true
-        revenue:
-          title: Revenue
-          type:
-          - integer
-          - 'null'
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    BusinessGroup:
-      required:
-      - name
-      - business
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          minLength: 1
-        user_count:
-          title: User count
-          type: string
-          readOnly: true
-        permissions:
-          type: array
-          items:
-            type: string
-          uniqueItems: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          title: Updated at
-          type: string
-          format: date-time
-          readOnly: true
-        deleted_at:
-          title: Deleted at
-          type:
-          - string
-          - 'null'
-          format: date-time
-        business:
-          title: Business
-          type: integer
-        created_by:
-          title: Created by
-          type:
-          - integer
-          - 'null'
   securitySchemes:
     Bearer:
       type: apiKey

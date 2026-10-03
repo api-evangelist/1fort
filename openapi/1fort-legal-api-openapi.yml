@@ -173,6 +173,16 @@ paths:
         required: true
 components:
   schemas:
+    LegalDocumentSign:
+      required:
+      - signature_text
+      type: object
+      properties:
+        signature_text:
+          title: Signature text
+          type: string
+          maxLength: 255
+          minLength: 1
     GenericError:
       title: Generic API Error
       required:
@@ -286,16 +296,6 @@ components:
         type: array
         items:
           type: string
-    LegalDocumentSign:
-      required:
-      - signature_text
-      type: object
-      properties:
-        signature_text:
-          title: Signature text
-          type: string
-          maxLength: 255
-          minLength: 1
   securitySchemes:
     Bearer:
       type: apiKey

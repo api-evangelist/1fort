@@ -273,6 +273,158 @@ components:
         detail:
           description: Error details
           type: string
+    BrokerUserList:
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        first_name:
+          title: First name
+          type: string
+          readOnly: true
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          readOnly: true
+          minLength: 1
+        producer_id:
+          title: Producer id
+          type: string
+          readOnly: true
+          minLength: 1
+        type:
+          title: Type
+          description: Specifies the insurance-related role type of the user within the agency.
+          type:
+          - string
+          - 'null'
+          enum:
+          - LEADERSHIP
+          - SALES
+          - SERVICE
+          - MARKETS
+          - OPERATIONS
+        slug:
+          title: Slug
+          type: string
+          format: slug
+          pattern: ^[-a-zA-Z0-9_]+$
+          readOnly: true
+          minLength: 1
+    BusinessList:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        industry:
+          title: Industry
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        number_of_employees:
+          title: Number of employees
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        active:
+          title: Active
+          type: boolean
+        domain_name:
+          title: Domain name
+          type:
+          - string
+          - 'null'
+          maxLength: 500
+        subsidiaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessSubsidiary'
+          readOnly: true
+        revenue:
+          title: Revenue
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    BusinessSubsidiary:
+      required:
+      - name
+      - business
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        ownership:
+          title: Ownership
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        business:
+          title: Business
+          type: integer
     Application:
       type: object
       properties:
@@ -439,158 +591,6 @@ components:
             type: string
             format: uuid
           uniqueItems: true
-    BusinessSubsidiary:
-      required:
-      - name
-      - business
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        ownership:
-          title: Ownership
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        business:
-          title: Business
-          type: integer
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    BusinessList:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        industry:
-          title: Industry
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        number_of_employees:
-          title: Number of employees
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        active:
-          title: Active
-          type: boolean
-        domain_name:
-          title: Domain name
-          type:
-          - string
-          - 'null'
-          maxLength: 500
-        subsidiaries:
-          type: array
-          items:
-            $ref: '#/components/schemas/BusinessSubsidiary'
-          readOnly: true
-        revenue:
-          title: Revenue
-          type:
-          - integer
-          - 'null'
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-    BrokerUserList:
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        first_name:
-          title: First name
-          type: string
-          readOnly: true
-          minLength: 1
-        last_name:
-          title: Last name
-          type: string
-          readOnly: true
-          minLength: 1
-        email:
-          title: Email
-          type: string
-          readOnly: true
-          minLength: 1
-        producer_id:
-          title: Producer id
-          type: string
-          readOnly: true
-          minLength: 1
-        type:
-          title: Type
-          description: Specifies the insurance-related role type of the user within the agency.
-          type:
-          - string
-          - 'null'
-          enum:
-          - LEADERSHIP
-          - SALES
-          - SERVICE
-          - MARKETS
-          - OPERATIONS
-        slug:
-          title: Slug
-          type: string
-          format: slug
-          pattern: ^[-a-zA-Z0-9_]+$
-          readOnly: true
-          minLength: 1
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
   securitySchemes:
     Bearer:
       type: apiKey

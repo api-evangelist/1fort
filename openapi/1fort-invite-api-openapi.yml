@@ -335,15 +335,6 @@ paths:
       - Invite
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     BusinessUserInviteAcceptGoogle:
       required:
       - invite_token
@@ -434,6 +425,15 @@ components:
           title: Id token
           type: string
           minLength: 1
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     BusinessUserInvite:
       required:
       - invitee_email
@@ -505,15 +505,6 @@ components:
           type: array
           items:
             type: integer
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     BusinessUserInviteAccept:
       required:
       - invite_token
@@ -564,6 +555,15 @@ components:
           title: Token
           type: string
           minLength: 1
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     ValidationError:
       title: Validation Error
       type: object

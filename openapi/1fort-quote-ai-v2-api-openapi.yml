@@ -1195,15 +1195,6 @@ paths:
       summary: Uploaded files
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     QuoteChatMessage:
       type: object
       properties:
@@ -1228,6 +1219,15 @@ components:
           - assistant
           - user
           readOnly: true
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     QuoteAnalysisFlex:
       required:
       - quote

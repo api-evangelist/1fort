@@ -190,28 +190,6 @@ paths:
       - Email AI Agent - Businesses
 components:
   schemas:
-    AgentBusinessLinkedProfile:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          readOnly: true
-          minLength: 1
-        insured:
-          title: Insured
-          type: string
-          readOnly: true
-          minLength: 1
-        domains:
-          title: Domains
-          type: object
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
     AgentBusinessDetail:
       type: object
       properties:
@@ -356,6 +334,28 @@ components:
           description: When the error occurred.
           type: string
           format: date-time
+    AgentBusinessLinkedProfile:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          readOnly: true
+          minLength: 1
+        insured:
+          title: Insured
+          type: string
+          readOnly: true
+          minLength: 1
+        domains:
+          title: Domains
+          type: object
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

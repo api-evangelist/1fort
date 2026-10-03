@@ -180,7 +180,64 @@ paths:
       summary: Get document
 components:
   schemas:
+    BinderFlexFields:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          title: Status
+          type: string
+          readOnly: true
+          minLength: 1
+        herald_quote:
+          title: Herald quote
+          type: string
+          format: uuid
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        payment_status:
+          title: Payment status
+          type: string
+          readOnly: true
+          minLength: 1
+        payment_due_date:
+          title: Payment due date
+          type: string
+          format: date
+          readOnly: true
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invoice'
+          readOnly: true
+        effective_date:
+          title: Effective date
+          type:
+          - string
+          - 'null'
+          format: date
+        documents:
+          title: Documents
+          type: string
+          readOnly: true
     GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    APIException:
       title: Generic API Error
       required:
       - detail
@@ -230,63 +287,6 @@ components:
           title: Download url
           type: string
           readOnly: true
-    BinderFlexFields:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        status:
-          title: Status
-          type: string
-          readOnly: true
-          minLength: 1
-        herald_quote:
-          title: Herald quote
-          type: string
-          format: uuid
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        payment_status:
-          title: Payment status
-          type: string
-          readOnly: true
-          minLength: 1
-        payment_due_date:
-          title: Payment due date
-          type: string
-          format: date
-          readOnly: true
-        invoices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Invoice'
-          readOnly: true
-        effective_date:
-          title: Effective date
-          type:
-          - string
-          - 'null'
-          format: date
-        documents:
-          title: Documents
-          type: string
-          readOnly: true
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
   securitySchemes:
     Bearer:
       type: apiKey

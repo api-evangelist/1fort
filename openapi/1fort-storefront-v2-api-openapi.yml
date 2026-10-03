@@ -1466,212 +1466,6 @@ paths:
       security: []
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    SubProductLine:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        display_name:
-          title: Display name
-          description: Name used on the Frontend.
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-    ProductLine:
-      required:
-      - code
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        code:
-          title: Code
-          type: string
-          maxLength: 150
-          minLength: 1
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        name:
-          title: Name
-          type: string
-          readOnly: true
-        is_core:
-          title: Is core
-          type: boolean
-          readOnly: true
-        sub_product_lines:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubProductLine'
-          readOnly: true
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        category:
-          title: Category
-          type:
-          - string
-          - 'null'
-          enum:
-          - Property
-          - Casualty
-          - Both
-          - Property only
-        canonical_product_line:
-          $ref: '#/components/schemas/CanonicalProductLineRef'
-    SanityCheckUpdate:
-      type: object
-      properties:
-        hidden_fields:
-          title: Hidden Fields
-          description: Dismissed or no longer relevant fields that should be removed from the ai_response.
-          type: object
-    StoreFrontApplicationSupplementaryDocument:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        question_elabel_id:
-          title: Question elabel id
-          description: Links this document to a specific file_upload question by elabel_id
-          type:
-          - string
-          - 'null'
-          maxLength: 100
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          title: Updated at
-          type: string
-          format: date-time
-          readOnly: true
-        download_url:
-          title: Download url
-          type: string
-          readOnly: true
-    SanityCheckRequest:
-      required:
-      - coverage_application
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        coverage_application:
-          title: Coverage application
-          type: string
-          format: uuid
-        ai_response:
-          title: Ai response
-          type: string
-          readOnly: true
-        status:
-          title: Status
-          type: string
-          enum:
-          - pending
-          - in_progress
-          - completed
-          - failed
-        ai_context:
-          title: AI Context
-          description: The context for the AI to use to generate the sanity check
-          type:
-          - object
-          - 'null'
-        context_hash:
-          title: Context Hash
-          description: The sha256 hash of the ai_context
-          type: string
-          maxLength: 64
-          minLength: 1
-        hidden_fields:
-          title: Hidden Fields
-          description: Dismissed or no longer relevant fields that should be removed from the ai_response.
-          type: object
-        start_time:
-          title: Start Time
-          description: The UTC time the sanity check started
-          type:
-          - string
-          - 'null'
-          format: date-time
-        end_time:
-          title: End Time
-          description: The UTC time the sanity check ended
-          type:
-          - string
-          - 'null'
-          format: date-time
-        rejected_by_user:
-          title: Rejected by User
-          description: Whether the sanity check was rejected by the user
-          type: boolean
-        error:
-          title: Error
-          type:
-          - string
-          - 'null'
     StoreFrontAgencyPublic:
       required:
       - name
@@ -1750,27 +1544,6 @@ components:
           - string
           - 'null'
           maxLength: 255
-    StoreFrontPublic:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        broker_user:
-          $ref: '#/components/schemas/StoreFrontBrokerUserPublic'
-        url_slug:
-          title: Url slug
-          type: string
-          readOnly: true
-          minLength: 1
-        broker:
-          $ref: '#/components/schemas/StoreFrontBroker'
-        broker_group:
-          title: Broker group
-          type: string
-          readOnly: true
     SupplementaryQuestionsUpdate:
       type: object
       properties:
@@ -1778,51 +1551,6 @@ components:
           title: User Answers
           description: User-provided answers to supplementary questions keyed by question id
           type: object
-    StoreFrontBroker:
-      required:
-      - name
-      - domain_name
-      type: object
-      properties:
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        dba:
-          title: Dba
-          description: Doing Business As (DBA) name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        domain_name:
-          title: Domain name
-          type: string
-          maxLength: 500
-          minLength: 1
-        phone_number:
-          title: Phone number
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     StoreFrontBrokerUserPublic:
       type: object
       properties:
@@ -1867,68 +1595,6 @@ components:
           - SERVICE
           - MARKETS
           - OPERATIONS
-    StoreFrontBrokerUserCard:
-      type: object
-      properties:
-        slug:
-          title: Slug
-          description: URL-safe identifier per agency from the user's name (e.g. ernesto-freyre). Populated automatically when empty.
-          type:
-          - string
-          - 'null'
-          format: slug
-          pattern: ^[-a-zA-Z0-9_]+$
-          maxLength: 255
-        first_name:
-          title: First name
-          type: string
-          readOnly: true
-          minLength: 1
-        last_name:
-          title: Last name
-          type: string
-          readOnly: true
-          minLength: 1
-        email:
-          title: Email
-          type: string
-          format: email
-          readOnly: true
-          minLength: 1
-        phone_number:
-          title: Phone number
-          type: string
-          readOnly: true
-        type:
-          title: Type
-          description: Specifies the insurance-related role type of the user within the agency.
-          type:
-          - string
-          - 'null'
-          enum:
-          - LEADERSHIP
-          - SALES
-          - SERVICE
-          - MARKETS
-          - OPERATIONS
-        storefront_url_slug:
-          title: Storefront url slug
-          type: string
-          readOnly: true
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
     SupplementaryQuestionsRequest:
       required:
       - coverage_application
@@ -1993,6 +1659,340 @@ components:
           description: The coverage application to generate supplementary questions for
           type: string
           format: uuid
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    StoreFrontApplicationSupplementaryDocument:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        question_elabel_id:
+          title: Question elabel id
+          description: Links this document to a specific file_upload question by elabel_id
+          type:
+          - string
+          - 'null'
+          maxLength: 100
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+        download_url:
+          title: Download url
+          type: string
+          readOnly: true
+    StoreFrontPublic:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        broker_user:
+          $ref: '#/components/schemas/StoreFrontBrokerUserPublic'
+        url_slug:
+          title: Url slug
+          type: string
+          readOnly: true
+          minLength: 1
+        broker:
+          $ref: '#/components/schemas/StoreFrontBroker'
+        broker_group:
+          title: Broker group
+          type: string
+          readOnly: true
+    SanityCheckUpdate:
+      type: object
+      properties:
+        hidden_fields:
+          title: Hidden Fields
+          description: Dismissed or no longer relevant fields that should be removed from the ai_response.
+          type: object
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    SubProductLine:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        display_name:
+          title: Display name
+          description: Name used on the Frontend.
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+    SanityCheckRequest:
+      required:
+      - coverage_application
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        coverage_application:
+          title: Coverage application
+          type: string
+          format: uuid
+        ai_response:
+          title: Ai response
+          type: string
+          readOnly: true
+        status:
+          title: Status
+          type: string
+          enum:
+          - pending
+          - in_progress
+          - completed
+          - failed
+        ai_context:
+          title: AI Context
+          description: The context for the AI to use to generate the sanity check
+          type:
+          - object
+          - 'null'
+        context_hash:
+          title: Context Hash
+          description: The sha256 hash of the ai_context
+          type: string
+          maxLength: 64
+          minLength: 1
+        hidden_fields:
+          title: Hidden Fields
+          description: Dismissed or no longer relevant fields that should be removed from the ai_response.
+          type: object
+        start_time:
+          title: Start Time
+          description: The UTC time the sanity check started
+          type:
+          - string
+          - 'null'
+          format: date-time
+        end_time:
+          title: End Time
+          description: The UTC time the sanity check ended
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rejected_by_user:
+          title: Rejected by User
+          description: Whether the sanity check was rejected by the user
+          type: boolean
+        error:
+          title: Error
+          type:
+          - string
+          - 'null'
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    StoreFrontBroker:
+      required:
+      - name
+      - domain_name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        dba:
+          title: Dba
+          description: Doing Business As (DBA) name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        domain_name:
+          title: Domain name
+          type: string
+          maxLength: 500
+          minLength: 1
+        phone_number:
+          title: Phone number
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+    ProductLine:
+      required:
+      - code
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        code:
+          title: Code
+          type: string
+          maxLength: 150
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        name:
+          title: Name
+          type: string
+          readOnly: true
+        is_core:
+          title: Is core
+          type: boolean
+          readOnly: true
+        sub_product_lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubProductLine'
+          readOnly: true
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        category:
+          title: Category
+          type:
+          - string
+          - 'null'
+          enum:
+          - Property
+          - Casualty
+          - Both
+          - Property only
+        canonical_product_line:
+          $ref: '#/components/schemas/CanonicalProductLineRef'
+    StoreFrontBrokerUserCard:
+      type: object
+      properties:
+        slug:
+          title: Slug
+          description: URL-safe identifier per agency from the user's name (e.g. ernesto-freyre). Populated automatically when empty.
+          type:
+          - string
+          - 'null'
+          format: slug
+          pattern: ^[-a-zA-Z0-9_]+$
+          maxLength: 255
+        first_name:
+          title: First name
+          type: string
+          readOnly: true
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        phone_number:
+          title: Phone number
+          type: string
+          readOnly: true
+        type:
+          title: Type
+          description: Specifies the insurance-related role type of the user within the agency.
+          type:
+          - string
+          - 'null'
+          enum:
+          - LEADERSHIP
+          - SALES
+          - SERVICE
+          - MARKETS
+          - OPERATIONS
+        storefront_url_slug:
+          title: Storefront url slug
+          type: string
+          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

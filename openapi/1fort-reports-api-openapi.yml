@@ -80,33 +80,6 @@ paths:
       - Reports
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    ChartDataItem:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          title: Name
-          type: string
-          minLength: 1
-    ReportsResponse:
-      required:
-      - charts
-      type: object
-      properties:
-        charts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Chart'
     Chart:
       required:
       - chartType
@@ -131,6 +104,33 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ChartDataItem'
+    ReportsResponse:
+      required:
+      - charts
+      type: object
+      properties:
+        charts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chart'
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    ChartDataItem:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          minLength: 1
   securitySchemes:
     Bearer:
       type: apiKey

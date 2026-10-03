@@ -159,6 +159,55 @@ paths:
         required: true
 components:
   schemas:
+    MarketTransaction:
+      required:
+      - email_id
+      - status
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        email_id:
+          title: Email id
+          type: string
+          format: uuid
+        status:
+          title: Status
+          type: string
+          enum:
+          - success
+          - failed
+        market_id:
+          title: Market id
+          type:
+          - string
+          - 'null'
+          format: uuid
+        request_payload:
+          title: Request payload
+          type: string
+        response_payload:
+          title: Response payload
+          type: string
+        error_code:
+          title: Error code
+          type: string
+          maxLength: 64
+        error_message:
+          title: Error message
+          type: string
+        attempted_at:
+          title: Attempted at
+          type: string
+          format: date-time
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
     APIException:
       title: Generic API Error
       required:
@@ -168,6 +217,28 @@ components:
         detail:
           description: Error details
           type: string
+    ErrorResponse:
+      required:
+      - error
+      type: object
+      properties:
+        error:
+          title: Error
+          description: Error details with code and message.
+          type: object
+          additionalProperties:
+            type: string
+            minLength: 1
+        request_id:
+          title: Request id
+          description: Request ID for debugging.
+          type: string
+          minLength: 1
+        timestamp:
+          title: Timestamp
+          description: When the error occurred.
+          type: string
+          format: date-time
     MarketAgentUpsert:
       required:
       - product_lines
@@ -281,77 +352,6 @@ components:
           enum:
           - manual
           - auto_added
-    MarketTransaction:
-      required:
-      - email_id
-      - status
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        email_id:
-          title: Email id
-          type: string
-          format: uuid
-        status:
-          title: Status
-          type: string
-          enum:
-          - success
-          - failed
-        market_id:
-          title: Market id
-          type:
-          - string
-          - 'null'
-          format: uuid
-        request_payload:
-          title: Request payload
-          type: string
-        response_payload:
-          title: Response payload
-          type: string
-        error_code:
-          title: Error code
-          type: string
-          maxLength: 64
-        error_message:
-          title: Error message
-          type: string
-        attempted_at:
-          title: Attempted at
-          type: string
-          format: date-time
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-    ErrorResponse:
-      required:
-      - error
-      type: object
-      properties:
-        error:
-          title: Error
-          description: Error details with code and message.
-          type: object
-          additionalProperties:
-            type: string
-            minLength: 1
-        request_id:
-          title: Request id
-          description: Request ID for debugging.
-          type: string
-          minLength: 1
-        timestamp:
-          title: Timestamp
-          description: When the error occurred.
-          type: string
-          format: date-time
   securitySchemes:
     Bearer:
       type: apiKey

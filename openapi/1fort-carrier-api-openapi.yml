@@ -283,50 +283,51 @@ paths:
       summary: List Wholesalers
 components:
   schemas:
-    Carrier:
-      required:
-      - name
-      - products
+    CarrierProduct:
       type: object
       properties:
-        id:
-          title: Id
+        code:
+          title: Code
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        product_line:
+          title: Product line
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        is_active:
+          title: Is active
+          type: boolean
+        policy_type:
+          title: Policy type
           type: string
-          format: uuid
-          readOnly: true
+          enum:
+          - ADMITTED
+          - SURPLUS_LINES
         name:
           title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
           type:
           - string
           - 'null'
-          readOnly: true
-          format: uri
+          maxLength: 255
         am_best_rating:
           title: Am best rating
-          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
+          description: Carrier AM Best Rating.
           type:
           - string
           - 'null'
           maxLength: 255
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
+        eta_hours:
+          title: Eta hours
+          description: Estimated turnaround time in hours for this carrier product.
           type:
-          - array
+          - integer
           - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-        products:
-          type: array
-          items:
-            $ref: '#/components/schemas/CarrierProduct'
+          maximum: 2147483647
+          minimum: -2147483648
     GenericError:
       title: Generic API Error
       required:
@@ -375,51 +376,50 @@ components:
             type: string
             maxLength: 255
             minLength: 1
-    CarrierProduct:
+    Carrier:
+      required:
+      - name
+      - products
       type: object
       properties:
-        code:
-          title: Code
-          type:
-          - string
-          - 'null'
-          minLength: 1
-        product_line:
-          title: Product line
-          type:
-          - string
-          - 'null'
-          minLength: 1
-        is_active:
-          title: Is active
-          type: boolean
-        policy_type:
-          title: Policy type
+        id:
+          title: Id
           type: string
-          enum:
-          - ADMITTED
-          - SURPLUS_LINES
+          format: uuid
+          readOnly: true
         name:
           title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
           type:
           - string
           - 'null'
-          maxLength: 255
+          readOnly: true
+          format: uri
         am_best_rating:
           title: Am best rating
-          description: Carrier AM Best Rating.
+          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
           type:
           - string
           - 'null'
           maxLength: 255
-        eta_hours:
-          title: Eta hours
-          description: Estimated turnaround time in hours for this carrier product.
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
           type:
-          - integer
+          - array
           - 'null'
-          maximum: 2147483647
-          minimum: -2147483648
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarrierProduct'
   securitySchemes:
     Bearer:
       type: apiKey

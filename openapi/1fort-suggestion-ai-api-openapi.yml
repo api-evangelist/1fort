@@ -137,65 +137,6 @@ paths:
       summary: Retrieve Suggestion AI
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    ClassifySuggestionRequest:
-      required:
-      - company_name
-      - email
-      - address_line_1
-      - city
-      - state_code
-      - zip_code
-      - target_field
-      type: object
-      properties:
-        company_name:
-          title: Company name
-          type: string
-          maxLength: 255
-          minLength: 1
-        email:
-          title: Email
-          type: string
-          format: email
-          minLength: 1
-        domain_name:
-          title: Domain name
-          type: string
-          maxLength: 500
-        address_line_1:
-          title: Address line 1
-          type: string
-          maxLength: 255
-          minLength: 1
-        city:
-          title: City
-          type: string
-          maxLength: 255
-          minLength: 1
-        state_code:
-          title: State code
-          type: string
-          maxLength: 2
-          minLength: 1
-        zip_code:
-          title: Zip code
-          type: string
-          maxLength: 10
-          minLength: 1
-        target_field:
-          title: Target field
-          type: string
-          maxLength: 255
-          minLength: 1
     SuggestionRequest:
       required:
       - object_id
@@ -250,6 +191,15 @@ components:
           type:
           - string
           - 'null'
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     APIException:
       title: Generic API Error
       required:
@@ -273,6 +223,56 @@ components:
         type: array
         items:
           type: string
+    ClassifySuggestionRequest:
+      required:
+      - company_name
+      - email
+      - address_line_1
+      - city
+      - state_code
+      - zip_code
+      - target_field
+      type: object
+      properties:
+        company_name:
+          title: Company name
+          type: string
+          maxLength: 255
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          format: email
+          minLength: 1
+        domain_name:
+          title: Domain name
+          type: string
+          maxLength: 500
+        address_line_1:
+          title: Address line 1
+          type: string
+          maxLength: 255
+          minLength: 1
+        city:
+          title: City
+          type: string
+          maxLength: 255
+          minLength: 1
+        state_code:
+          title: State code
+          type: string
+          maxLength: 2
+          minLength: 1
+        zip_code:
+          title: Zip code
+          type: string
+          maxLength: 10
+          minLength: 1
+        target_field:
+          title: Target field
+          type: string
+          maxLength: 255
+          minLength: 1
   securitySchemes:
     Bearer:
       type: apiKey

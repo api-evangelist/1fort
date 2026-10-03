@@ -1881,48 +1881,6 @@ paths:
         required: true
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    SubProductLine:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        display_name:
-          title: Display name
-          description: Name used on the Frontend.
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
     ApplicationV2:
       type: object
       properties:
@@ -2089,59 +2047,7 @@ components:
             type: string
             format: uuid
           uniqueItems: true
-    ProductLine:
-      required:
-      - code
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        code:
-          title: Code
-          type: string
-          maxLength: 150
-          minLength: 1
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        name:
-          title: Name
-          type: string
-          readOnly: true
-        is_core:
-          title: Is core
-          type: boolean
-          readOnly: true
-        sub_product_lines:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubProductLine'
-          readOnly: true
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        category:
-          title: Category
-          type:
-          - string
-          - 'null'
-          enum:
-          - Property
-          - Casualty
-          - Both
-          - Property only
-        canonical_product_line:
-          $ref: '#/components/schemas/CanonicalProductLineRef'
-    BusinessApplicationSupplementaryDocument:
+    ApplicationSupplementaryDocument:
       type: object
       properties:
         id:
@@ -2174,7 +2080,9 @@ components:
           title: Download url
           type: string
           readOnly: true
-    CoverageApplicationDetail:
+    CanonicalProductLineRef:
+      required:
+      - code
       type: object
       properties:
         id:
@@ -2182,22 +2090,136 @@ components:
           type: string
           format: uuid
           readOnly: true
-        coverage_code:
-          title: Coverage code
+        code:
+          title: Code
+          type: string
+          maxLength: 150
+          minLength: 1
+        display_name:
+          title: Display name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+    CarrierList:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        am_best_rating:
+          title: Am best rating
+          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+    BrokerCoverageApplicationWithCompositeResponse:
+      required:
+      - coverage_type
+      - application
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
           type: string
           readOnly: true
           minLength: 1
-        sub_coverage_type:
-          title: Sub coverage type
-          type: string
-          readOnly: true
-        coverage_layer:
-          title: Coverage layer
-          description: Indicates if this is a primary or excess coverage application
+        coverage_type:
+          $ref: '#/components/schemas/ProductLine'
+        sub_coverage_types:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        status:
+          title: Status
           type: string
           enum:
-          - PRIMARY
-          - EXCESS
+          - in_progress
+          - generating_questions
+          - pending_business_info
+          - needs_review
+          - submitted
+          - archived
+        status_display:
+          title: Status display
+          type: string
+          readOnly: true
+          minLength: 1
+        application:
+          title: Application
+          type: string
+          format: uuid
+        raw_question_values:
+          title: Raw question values
+          type:
+          - object
+          - 'null'
+        policy_type:
+          title: Policy type
+          type: string
+          enum:
+          - ADMITTED
+          - SURPLUS_LINES
+          - ADMITTED_AND_SURPLUS_LINES
+        policy_type_display:
+          title: Policy type display
+          type: string
+          readOnly: true
+          minLength: 1
+        additional_notes:
+          title: Additional notes
+          description: Additional notes for the coverage application
+          type:
+          - string
+          - 'null'
+        supplementary_documents:
+          title: Supplementary documents
+          type: string
+          readOnly: true
+        due_date:
+          title: Due date
+          type: string
+          format: date
+          readOnly: true
+        effective_date:
+          title: Effective date
+          type: string
+          format: date
+          readOnly: true
         limit:
           title: Limit
           type:
@@ -2249,55 +2271,76 @@ components:
           - 'null'
           maximum: 9223372036854775807
           minimum: -9223372036854775808
-        policy_type:
-          title: Policy type
+        coverage_layer:
+          title: Coverage layer
+          description: Indicates if this is a primary or excess coverage application
           type: string
           enum:
-          - ADMITTED
-          - SURPLUS_LINES
-          - ADMITTED_AND_SURPLUS_LINES
-        primary_quote_files:
+          - PRIMARY
+          - EXCESS
+        coverage_layer_display:
+          title: Coverage layer display
+          type: string
+          readOnly: true
+          minLength: 1
+        submission_type:
+          title: Submission type
+          type: string
+          readOnly: true
+          minLength: 1
+        submission_type_display:
+          title: Submission type display
+          type: string
+          readOnly: true
+          minLength: 1
+        carriers:
           type: array
           items:
-            $ref: '#/components/schemas/ExistingQuoteFile'
+            $ref: '#/components/schemas/CarrierList'
           readOnly: true
-    ExistingQuoteFile:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
+        selected_markets:
+          title: Selected markets
           type: string
           readOnly: true
-        url:
-          title: Url
+        coverage_line_status:
+          title: Coverage line status
           type: string
           readOnly: true
-    CanonicalProductLineRef:
-      required:
-      - code
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        code:
-          title: Code
-          type: string
-          maxLength: 150
           minLength: 1
-        display_name:
-          title: Display name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
+        quote_count:
+          title: Quote count
+          type: integer
+          readOnly: true
+          default: 0
+        policy_count:
+          title: Policy count
+          type: integer
+          readOnly: true
+          default: 0
+        source:
+          title: Source
+          type: string
+          readOnly: true
+          minLength: 1
+        source_display:
+          title: Source display
+          type: string
+          readOnly: true
+          minLength: 1
+        accord_forms:
+          type: array
+          items:
+            $ref: '#/components/schemas/CoverageAccordForm'
+          readOnly: true
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     CoverageApplicationWithCompositeResponse:
       required:
       - coverage_type
@@ -2540,45 +2583,6 @@ components:
           type: string
           enum:
           - new_limit
-    CarrierList:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        am_best_rating:
-          title: Am best rating
-          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
     CoverageAccordForm:
       required:
       - accord_number
@@ -2665,6 +2669,22 @@ components:
         business:
           title: Business
           type: integer
+    ExistingQuoteFile:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          readOnly: true
+        url:
+          title: Url
+          type: string
+          readOnly: true
     APIException:
       title: Generic API Error
       required:
@@ -2674,7 +2694,54 @@ components:
         detail:
           description: Error details
           type: string
-    ApplicationSupplementaryDocument:
+    SubProductLine:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        display_name:
+          title: Display name
+          description: Name used on the Frontend.
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    BusinessApplicationSupplementaryDocument:
       type: object
       properties:
         id:
@@ -2707,10 +2774,7 @@ components:
           title: Download url
           type: string
           readOnly: true
-    BrokerCoverageApplicationWithCompositeResponse:
-      required:
-      - coverage_type
-      - application
+    CoverageApplicationDetail:
       type: object
       properties:
         id:
@@ -2718,75 +2782,22 @@ components:
           type: string
           format: uuid
           readOnly: true
-        name:
-          title: Name
+        coverage_code:
+          title: Coverage code
           type: string
           readOnly: true
           minLength: 1
-        coverage_type:
-          $ref: '#/components/schemas/ProductLine'
-        sub_coverage_types:
-          type: array
-          items:
-            type: string
-            format: uuid
-          uniqueItems: true
-        status:
-          title: Status
+        sub_coverage_type:
+          title: Sub coverage type
+          type: string
+          readOnly: true
+        coverage_layer:
+          title: Coverage layer
+          description: Indicates if this is a primary or excess coverage application
           type: string
           enum:
-          - in_progress
-          - generating_questions
-          - pending_business_info
-          - needs_review
-          - submitted
-          - archived
-        status_display:
-          title: Status display
-          type: string
-          readOnly: true
-          minLength: 1
-        application:
-          title: Application
-          type: string
-          format: uuid
-        raw_question_values:
-          title: Raw question values
-          type:
-          - object
-          - 'null'
-        policy_type:
-          title: Policy type
-          type: string
-          enum:
-          - ADMITTED
-          - SURPLUS_LINES
-          - ADMITTED_AND_SURPLUS_LINES
-        policy_type_display:
-          title: Policy type display
-          type: string
-          readOnly: true
-          minLength: 1
-        additional_notes:
-          title: Additional notes
-          description: Additional notes for the coverage application
-          type:
-          - string
-          - 'null'
-        supplementary_documents:
-          title: Supplementary documents
-          type: string
-          readOnly: true
-        due_date:
-          title: Due date
-          type: string
-          format: date
-          readOnly: true
-        effective_date:
-          title: Effective date
-          type: string
-          format: date
-          readOnly: true
+          - PRIMARY
+          - EXCESS
         limit:
           title: Limit
           type:
@@ -2838,81 +2849,70 @@ components:
           - 'null'
           maximum: 9223372036854775807
           minimum: -9223372036854775808
-        coverage_layer:
-          title: Coverage layer
-          description: Indicates if this is a primary or excess coverage application
+        policy_type:
+          title: Policy type
           type: string
           enum:
-          - PRIMARY
-          - EXCESS
-        coverage_layer_display:
-          title: Coverage layer display
-          type: string
-          readOnly: true
-          minLength: 1
-        submission_type:
-          title: Submission type
-          type: string
-          readOnly: true
-          minLength: 1
-        submission_type_display:
-          title: Submission type display
-          type: string
-          readOnly: true
-          minLength: 1
-        carriers:
+          - ADMITTED
+          - SURPLUS_LINES
+          - ADMITTED_AND_SURPLUS_LINES
+        primary_quote_files:
           type: array
           items:
-            $ref: '#/components/schemas/CarrierList'
+            $ref: '#/components/schemas/ExistingQuoteFile'
           readOnly: true
-        selected_markets:
-          title: Selected markets
-          type: string
-          readOnly: true
-        coverage_line_status:
-          title: Coverage line status
-          type: string
-          readOnly: true
-          minLength: 1
-        quote_count:
-          title: Quote count
-          type: integer
-          readOnly: true
-          default: 0
-        policy_count:
-          title: Policy count
-          type: integer
-          readOnly: true
-          default: 0
-        source:
-          title: Source
-          type: string
-          readOnly: true
-          minLength: 1
-        source_display:
-          title: Source display
-          type: string
-          readOnly: true
-          minLength: 1
-        accord_forms:
-          type: array
-          items:
-            $ref: '#/components/schemas/CoverageAccordForm'
-          readOnly: true
-    ValidationError:
-      title: Validation Error
+    ProductLine:
+      required:
+      - code
       type: object
       properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        code:
+          title: Code
+          type: string
+          maxLength: 150
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        name:
+          title: Name
+          type: string
+          readOnly: true
+        is_core:
+          title: Is core
+          type: boolean
+          readOnly: true
+        sub_product_lines:
           type: array
           items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
+            $ref: '#/components/schemas/SubProductLine'
+          readOnly: true
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        category:
+          title: Category
+          type:
+          - string
+          - 'null'
+          enum:
+          - Property
+          - Casualty
+          - Both
+          - Property only
+        canonical_product_line:
+          $ref: '#/components/schemas/CanonicalProductLineRef'
   securitySchemes:
     Bearer:
       type: apiKey

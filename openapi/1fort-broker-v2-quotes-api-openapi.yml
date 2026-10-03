@@ -529,15 +529,6 @@ paths:
         required: true
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     BrokerQuoteV2FlexFields:
       required:
       - carrier
@@ -687,6 +678,15 @@ components:
             type: string
             maxLength: 255
             minLength: 1
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     APIException:
       title: Generic API Error
       required:

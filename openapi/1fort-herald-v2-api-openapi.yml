@@ -522,9 +522,9 @@ paths:
       summary: Retrieve Industry classification
 components:
   schemas:
-    IndustryClassification:
+    CanonicalProductLineRef:
       required:
-      - herald_id
+      - code
       type: object
       properties:
         id:
@@ -532,27 +532,35 @@ components:
           type: string
           format: uuid
           readOnly: true
-        herald_id:
-          title: Herald id
+        code:
+          title: Code
           type: string
-          maxLength: 255
+          maxLength: 150
           minLength: 1
-        naics:
-          title: Naics
-          type: string
-          readOnly: true
-          minLength: 1
-        description:
-          title: Description
+        display_name:
+          title: Display name
           type:
           - string
           - 'null'
           maxLength: 255
-        naics_description:
-          title: Naics description
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
           type: string
-          readOnly: true
-          minLength: 1
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     SubProductLine:
       type: object
       properties:
@@ -586,15 +594,37 @@ components:
           - 'null'
           readOnly: true
           format: uri
-    GenericError:
-      title: Generic API Error
+    IndustryClassification:
       required:
-      - detail
+      - herald_id
       type: object
       properties:
-        detail:
-          description: Error details
+        id:
+          title: Id
           type: string
+          format: uuid
+          readOnly: true
+        herald_id:
+          title: Herald id
+          type: string
+          maxLength: 255
+          minLength: 1
+        naics:
+          title: Naics
+          type: string
+          readOnly: true
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        naics_description:
+          title: Naics description
+          type: string
+          readOnly: true
+          minLength: 1
     ProductLine:
       required:
       - code
@@ -647,36 +677,6 @@ components:
           - Property only
         canonical_product_line:
           $ref: '#/components/schemas/CanonicalProductLineRef'
-    CanonicalProductLineRef:
-      required:
-      - code
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        code:
-          title: Code
-          type: string
-          maxLength: 150
-          minLength: 1
-        display_name:
-          title: Display name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
   securitySchemes:
     Bearer:
       type: apiKey

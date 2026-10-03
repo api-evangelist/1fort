@@ -175,15 +175,6 @@ paths:
         required: true
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     UserDetail:
       type: object
       properties:
@@ -269,37 +260,7 @@ components:
           - Broker
           - Underwriter
           readOnly: true
-    BusinessSubsidiary:
-      required:
-      - name
-      - business
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        ownership:
-          title: Ownership
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        business:
-          title: Business
-          type: integer
-    APIException:
+    GenericError:
       title: Generic API Error
       required:
       - detail
@@ -361,6 +322,15 @@ components:
           - 'null'
           maximum: 9223372036854775807
           minimum: -9223372036854775808
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     ValidationError:
       title: Validation Error
       type: object
@@ -375,6 +345,36 @@ components:
         type: array
         items:
           type: string
+    BusinessSubsidiary:
+      required:
+      - name
+      - business
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        ownership:
+          title: Ownership
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        business:
+          title: Business
+          type: integer
   securitySchemes:
     Bearer:
       type: apiKey

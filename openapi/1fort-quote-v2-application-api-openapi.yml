@@ -223,15 +223,6 @@ paths:
       - 'quote (v2): application'
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     QuoteTaskDocument:
       type: object
       properties:
@@ -253,6 +244,24 @@ components:
           - 'null'
           readOnly: true
           format: uri
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     QuoteTaskFlexFields:
       required:
       - title
@@ -372,15 +381,6 @@ components:
           type:
           - integer
           - 'null'
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
   securitySchemes:
     Bearer:
       type: apiKey

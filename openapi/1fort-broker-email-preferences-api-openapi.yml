@@ -107,20 +107,6 @@ components:
         detail:
           description: Error details
           type: string
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
     BrokerAgencyEmailPreference:
       type: object
       properties:
@@ -140,6 +126,20 @@ components:
       properties:
         detail:
           description: Error details
+          type: string
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
           type: string
   securitySchemes:
     Bearer:

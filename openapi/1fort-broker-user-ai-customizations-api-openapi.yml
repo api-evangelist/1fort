@@ -293,16 +293,15 @@ components:
         detail:
           description: Error details
           type: string
-    UserAICustomization:
+    UserAICustomizationCreateUpdate:
+      required:
+      - customization_type
       type: object
       properties:
-        id:
-          title: Id
+        customization_type:
+          title: Customization type
           type: string
           format: uuid
-          readOnly: true
-        customization_type:
-          $ref: '#/components/schemas/AICustomizationType'
         value:
           title: Value
           description: Custom value for this type
@@ -336,15 +335,16 @@ components:
         detail:
           description: Error details
           type: string
-    UserAICustomizationCreateUpdate:
-      required:
-      - customization_type
+    UserAICustomization:
       type: object
       properties:
-        customization_type:
-          title: Customization type
+        id:
+          title: Id
           type: string
           format: uuid
+          readOnly: true
+        customization_type:
+          $ref: '#/components/schemas/AICustomizationType'
         value:
           title: Value
           description: Custom value for this type

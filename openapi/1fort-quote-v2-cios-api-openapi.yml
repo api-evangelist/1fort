@@ -189,6 +189,15 @@ components:
         detail:
           description: Error details
           type: string
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     CertificateOfInsuranceFlexFields:
       type: object
       properties:
@@ -277,15 +286,6 @@ components:
           - string
           - 'null'
           format: uuid
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
   securitySchemes:
     Bearer:
       type: apiKey

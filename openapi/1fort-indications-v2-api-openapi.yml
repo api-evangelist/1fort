@@ -340,6 +340,84 @@ paths:
       summary: Get surplus file
 components:
   schemas:
+    Wholesaler:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        is_active:
+          title: Is active
+          type: boolean
+        is_owned_by_1fort:
+          title: Is owned by 1fort
+          description: Indicates if this wholesaler is owned by 1Fort
+          type: boolean
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+    CarrierList:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        am_best_rating:
+          title: Am best rating
+          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
     GenericError:
       title: Generic API Error
       required:
@@ -349,6 +427,112 @@ components:
         detail:
           description: Error details
           type: string
+    PriceDetail:
+      type: object
+      properties:
+        amount:
+          title: Amount
+          type:
+          - string
+          - 'null'
+          format: decimal
+        type:
+          title: Type
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        text:
+          title: Text
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    BrokerQuoteCreate:
+      required:
+      - type
+      - carrier
+      - admitted
+      - premium
+      - limit
+      - retention
+      type: object
+      properties:
+        type:
+          title: Type
+          description: Type of quote being added
+          type: string
+          enum:
+          - expiring
+          - competitor
+          - other
+        carrier:
+          title: Carrier
+          description: The carrier for this quote
+          type: string
+          format: uuid
+        wholesaler:
+          title: Wholesaler
+          description: 'Optional: The wholesaler for this quote (if applicable)'
+          type:
+          - string
+          - 'null'
+          format: uuid
+        admitted:
+          title: Admitted
+          description: True for admitted, False for surplus lines
+          type: boolean
+        premium:
+          title: Premium
+          description: Premium amount before taxes and fees
+          type: string
+          format: decimal
+        limit:
+          title: Limit
+          description: Coverage limit amount
+          type: integer
+        retention:
+          title: Retention
+          description: Retention/deductible amount
+          type: integer
+        quote_files:
+          description: Quote documents
+          type: array
+          items:
+            type: string
+            readOnly: true
+            format: uri
+        policy_specimen_files:
+          description: Policy specimen documents
+          type: array
+          items:
+            type: string
+            readOnly: true
+            format: uri
+        quote_number:
+          title: Quote number
+          description: 'Optional: Carrier''s quote reference number. If not provided, will be auto-generated.'
+          type: string
+          maxLength: 50
+        effective_date:
+          title: Effective date
+          description: 'Optional: Policy effective date. If not provided, uses application effective date.'
+          type: string
+          format: date
+        expiration_date:
+          title: Expiration date
+          description: 'Optional: Policy expiration date. If not provided but effective date exists, defaults to 1 year after effective date.'
+          type: string
+          format: date
     QuoteWithAggregates:
       type: object
       properties:
@@ -579,190 +763,6 @@ components:
           description: This quote's latest completed AI analysis, or null when it has none - the same record the coverage's analyze-quotes endpoint returns for it, including `recommended` and `comparison_status`. Embedded here so clients listing quotes don't need a second request to render the analysis.
           type: string
           readOnly: true
-    Wholesaler:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        is_active:
-          title: Is active
-          type: boolean
-        is_owned_by_1fort:
-          title: Is owned by 1fort
-          description: Indicates if this wholesaler is owned by 1Fort
-          type: boolean
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-    BrokerQuoteCreate:
-      required:
-      - type
-      - carrier
-      - admitted
-      - premium
-      - limit
-      - retention
-      type: object
-      properties:
-        type:
-          title: Type
-          description: Type of quote being added
-          type: string
-          enum:
-          - expiring
-          - competitor
-          - other
-        carrier:
-          title: Carrier
-          description: The carrier for this quote
-          type: string
-          format: uuid
-        wholesaler:
-          title: Wholesaler
-          description: 'Optional: The wholesaler for this quote (if applicable)'
-          type:
-          - string
-          - 'null'
-          format: uuid
-        admitted:
-          title: Admitted
-          description: True for admitted, False for surplus lines
-          type: boolean
-        premium:
-          title: Premium
-          description: Premium amount before taxes and fees
-          type: string
-          format: decimal
-        limit:
-          title: Limit
-          description: Coverage limit amount
-          type: integer
-        retention:
-          title: Retention
-          description: Retention/deductible amount
-          type: integer
-        quote_files:
-          description: Quote documents
-          type: array
-          items:
-            type: string
-            readOnly: true
-            format: uri
-        policy_specimen_files:
-          description: Policy specimen documents
-          type: array
-          items:
-            type: string
-            readOnly: true
-            format: uri
-        quote_number:
-          title: Quote number
-          description: 'Optional: Carrier''s quote reference number. If not provided, will be auto-generated.'
-          type: string
-          maxLength: 50
-        effective_date:
-          title: Effective date
-          description: 'Optional: Policy effective date. If not provided, uses application effective date.'
-          type: string
-          format: date
-        expiration_date:
-          title: Expiration date
-          description: 'Optional: Policy expiration date. If not provided but effective date exists, defaults to 1 year after effective date.'
-          type: string
-          format: date
-    CarrierList:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        am_best_rating:
-          title: Am best rating
-          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-    PriceDetail:
-      type: object
-      properties:
-        amount:
-          title: Amount
-          type:
-          - string
-          - 'null'
-          format: decimal
-        type:
-          title: Type
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        text:
-          title: Text
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     CarrierProduct:
       type: object
       properties:

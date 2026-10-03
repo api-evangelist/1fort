@@ -548,6 +548,15 @@ components:
         detail:
           description: Error details
           type: string
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     ValidationError:
       title: Validation Error
       type: object
@@ -561,15 +570,6 @@ components:
         description: A list of error messages for each field that triggered a validation error
         type: array
         items:
-          type: string
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
           type: string
   securitySchemes:
     Bearer:

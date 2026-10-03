@@ -196,42 +196,6 @@ paths:
         required: true
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    TakeRateUpdate:
-      type: object
-      properties:
-        financing_take_rate:
-          title: Financing take rate
-          type:
-          - string
-          - 'null'
-          format: decimal
-        credit_card_take_rate:
-          title: Credit card take rate
-          type:
-          - string
-          - 'null'
-          format: decimal
-        ach_take_rate:
-          title: Ach take rate
-          type:
-          - string
-          - 'null'
-          format: decimal
-        wire_take_rate:
-          title: Wire take rate
-          type:
-          - string
-          - 'null'
-          format: decimal
     TakeRateList:
       type: object
       properties:
@@ -298,6 +262,42 @@ components:
           - 'null'
           format: decimal
           readOnly: true
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    TakeRateUpdate:
+      type: object
+      properties:
+        financing_take_rate:
+          title: Financing take rate
+          type:
+          - string
+          - 'null'
+          format: decimal
+        credit_card_take_rate:
+          title: Credit card take rate
+          type:
+          - string
+          - 'null'
+          format: decimal
+        ach_take_rate:
+          title: Ach take rate
+          type:
+          - string
+          - 'null'
+          format: decimal
+        wire_take_rate:
+          title: Wire take rate
+          type:
+          - string
+          - 'null'
+          format: decimal
     APIException:
       title: Generic API Error
       required:
