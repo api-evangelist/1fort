@@ -283,60 +283,6 @@ paths:
       summary: List Wholesalers
 components:
   schemas:
-    CarrierProduct:
-      type: object
-      properties:
-        code:
-          title: Code
-          type:
-          - string
-          - 'null'
-          minLength: 1
-        product_line:
-          title: Product line
-          type:
-          - string
-          - 'null'
-          minLength: 1
-        is_active:
-          title: Is active
-          type: boolean
-        policy_type:
-          title: Policy type
-          type: string
-          enum:
-          - ADMITTED
-          - SURPLUS_LINES
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        am_best_rating:
-          title: Am best rating
-          description: Carrier AM Best Rating.
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        eta_hours:
-          title: Eta hours
-          description: Estimated turnaround time in hours for this carrier product.
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: -2147483648
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     Wholesaler:
       required:
       - name
@@ -420,6 +366,60 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CarrierProduct'
+    CarrierProduct:
+      type: object
+      properties:
+        code:
+          title: Code
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        product_line:
+          title: Product line
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        is_active:
+          title: Is active
+          type: boolean
+        policy_type:
+          title: Policy type
+          type: string
+          enum:
+          - ADMITTED
+          - SURPLUS_LINES
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        am_best_rating:
+          title: Am best rating
+          description: Carrier AM Best Rating.
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        eta_hours:
+          title: Eta hours
+          description: Estimated turnaround time in hours for this carrier product.
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: -2147483648
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

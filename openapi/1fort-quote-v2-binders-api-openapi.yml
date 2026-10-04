@@ -180,6 +180,47 @@ paths:
       summary: Get document
 components:
   schemas:
+    Invoice:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        total_amount_cents:
+          title: Total amount cents
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        due_date:
+          title: Due date
+          type:
+          - string
+          - 'null'
+          format: date
+        status:
+          title: Status
+          type:
+          - string
+          - 'null'
+          enum:
+          - draft
+          - awaiting_payment
+          - processing_payment
+          - paid
+          - overdue
+          - void
+        paid_at:
+          title: Paid at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        download_url:
+          title: Download url
+          type: string
+          readOnly: true
     BinderFlexFields:
       type: object
       properties:
@@ -246,47 +287,6 @@ components:
         detail:
           description: Error details
           type: string
-    Invoice:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        total_amount_cents:
-          title: Total amount cents
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-        due_date:
-          title: Due date
-          type:
-          - string
-          - 'null'
-          format: date
-        status:
-          title: Status
-          type:
-          - string
-          - 'null'
-          enum:
-          - draft
-          - awaiting_payment
-          - processing_payment
-          - paid
-          - overdue
-          - void
-        paid_at:
-          title: Paid at
-          type:
-          - string
-          - 'null'
-          format: date-time
-        download_url:
-          title: Download url
-          type: string
-          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

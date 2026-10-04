@@ -134,24 +134,6 @@ paths:
       - 'quote: applications'
 components:
   schemas:
-    UserForBrokerAgency:
-      type: object
-      properties:
-        first_name:
-          title: First name
-          type: string
-          maxLength: 255
-          minLength: 1
-        last_name:
-          title: Last name
-          type: string
-          maxLength: 255
-          minLength: 1
-        user_defined_role:
-          title: User defined role
-          type: string
-          maxLength: 255
-          minLength: 1
     QuoteReadOnly:
       type: object
       properties:
@@ -277,151 +259,6 @@ components:
           - EMPLOYMENT_PRACTICES_LIABILITY
           - FIDUCIARY_LIABILITY
           - KIDNAP_AND_RANSOM
-    Wholesaler:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        is_active:
-          title: Is active
-          type: boolean
-        is_owned_by_1fort:
-          title: Is owned by 1fort
-          description: Indicates if this wholesaler is owned by 1Fort
-          type: boolean
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    BusinessList:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        industry:
-          title: Industry
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        number_of_employees:
-          title: Number of employees
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        active:
-          title: Active
-          type: boolean
-        domain_name:
-          title: Domain name
-          type:
-          - string
-          - 'null'
-          maxLength: 500
-        subsidiaries:
-          type: array
-          items:
-            $ref: '#/components/schemas/BusinessSubsidiary'
-          readOnly: true
-        revenue:
-          title: Revenue
-          type:
-          - integer
-          - 'null'
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-    Carrier:
-      required:
-      - name
-      - products
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        am_best_rating:
-          title: Am best rating
-          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-        products:
-          type: array
-          items:
-            $ref: '#/components/schemas/CarrierProduct'
     CarrierProduct:
       type: object
       properties:
@@ -467,15 +304,91 @@ components:
           - 'null'
           maximum: 2147483647
           minimum: -2147483648
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
+    AgencySubscription:
       type: object
       properties:
-        detail:
-          description: Error details
+        name:
+          title: Name
+          description: Display name for the plan (e.g. "Pro plan").
           type: string
+          readOnly: true
+          minLength: 1
+        price:
+          title: Price
+          description: Plan price in dollars for the selected billing frequency.
+          type: string
+          format: decimal
+          readOnly: true
+        billing_frequency:
+          title: Billing frequency
+          description: How often the plan is billed.
+          type: string
+          enum:
+          - MONTHLY
+          - QUARTERLY
+          - ANNUALLY
+          readOnly: true
+        billing_frequency_display:
+          title: Billing frequency display
+          type: string
+          readOnly: true
+          minLength: 1
+        payment_status:
+          title: Payment status
+          description: Whether the agency has paid for the current billing period.
+          type: string
+          enum:
+          - PAID
+          - UNPAID
+          readOnly: true
+        payment_status_display:
+          title: Payment status display
+          type: string
+          readOnly: true
+          minLength: 1
+        manage_plan_url:
+          title: Manage plan url
+          description: External URL for the Manage plan button in broker settings.
+          type: string
+          format: uri
+          readOnly: true
+          minLength: 1
+    QuoteFile:
+      required:
+      - quote
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        download_file:
+          title: Download file
+          type: string
+          readOnly: true
+        file:
+          title: File
+          type: string
+          readOnly: true
+          format: uri
+        quote:
+          title: Quote
+          type: string
+          format: uuid
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        file_type:
+          title: File type
+          type: string
+          enum:
+          - quote
+          - binder
+          - invoice
+          - unspecified
     BrokerAgency:
       required:
       - name
@@ -846,6 +759,24 @@ components:
           type:
           - integer
           - 'null'
+    UserForBrokerAgency:
+      type: object
+      properties:
+        first_name:
+          title: First name
+          type: string
+          maxLength: 255
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          maxLength: 255
+          minLength: 1
+        user_defined_role:
+          title: User defined role
+          type: string
+          maxLength: 255
+          minLength: 1
     BusinessSubsidiary:
       required:
       - name
@@ -876,91 +807,6 @@ components:
         business:
           title: Business
           type: integer
-    QuoteFile:
-      required:
-      - quote
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        download_file:
-          title: Download file
-          type: string
-          readOnly: true
-        file:
-          title: File
-          type: string
-          readOnly: true
-          format: uri
-        quote:
-          title: Quote
-          type: string
-          format: uuid
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        file_type:
-          title: File type
-          type: string
-          enum:
-          - quote
-          - binder
-          - invoice
-          - unspecified
-    AgencySubscription:
-      type: object
-      properties:
-        name:
-          title: Name
-          description: Display name for the plan (e.g. "Pro plan").
-          type: string
-          readOnly: true
-          minLength: 1
-        price:
-          title: Price
-          description: Plan price in dollars for the selected billing frequency.
-          type: string
-          format: decimal
-          readOnly: true
-        billing_frequency:
-          title: Billing frequency
-          description: How often the plan is billed.
-          type: string
-          enum:
-          - MONTHLY
-          - QUARTERLY
-          - ANNUALLY
-          readOnly: true
-        billing_frequency_display:
-          title: Billing frequency display
-          type: string
-          readOnly: true
-          minLength: 1
-        payment_status:
-          title: Payment status
-          description: Whether the agency has paid for the current billing period.
-          type: string
-          enum:
-          - PAID
-          - UNPAID
-          readOnly: true
-        payment_status_display:
-          title: Payment status display
-          type: string
-          readOnly: true
-          minLength: 1
-        manage_plan_url:
-          title: Manage plan url
-          description: External URL for the Manage plan button in broker settings.
-          type: string
-          format: uri
-          readOnly: true
-          minLength: 1
     ApplicationList:
       type: object
       properties:
@@ -1116,6 +962,160 @@ components:
             type: string
             format: uuid
           uniqueItems: true
+    Wholesaler:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        is_active:
+          title: Is active
+          type: boolean
+        is_owned_by_1fort:
+          title: Is owned by 1fort
+          description: Indicates if this wholesaler is owned by 1Fort
+          type: boolean
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    Carrier:
+      required:
+      - name
+      - products
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        am_best_rating:
+          title: Am best rating
+          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarrierProduct'
+    BusinessList:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        industry:
+          title: Industry
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        number_of_employees:
+          title: Number of employees
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        active:
+          title: Active
+          type: boolean
+        domain_name:
+          title: Domain name
+          type:
+          - string
+          - 'null'
+          maxLength: 500
+        subsidiaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessSubsidiary'
+          readOnly: true
+        revenue:
+          title: Revenue
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

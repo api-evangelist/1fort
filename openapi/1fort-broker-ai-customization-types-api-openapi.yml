@@ -128,6 +128,15 @@ paths:
       summary: Retrieve AI customization type
 components:
   schemas:
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     AICustomizationType:
       type: object
       properties:
@@ -148,15 +157,6 @@ components:
           type: string
           readOnly: true
           minLength: 1
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     APIException:
       title: Generic API Error
       required:

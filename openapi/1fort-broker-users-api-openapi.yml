@@ -232,6 +232,52 @@ paths:
         required: true
 components:
   schemas:
+    BrokerUserProposalPreference:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        include_recommended_coverages:
+          title: Include recommended coverages
+          description: Default for 'Include other recommended coverages'.
+          type: boolean
+        include_coverage_analysis:
+          title: Include coverage analysis
+          description: Default for 'Include coverage analysis'.
+          type: boolean
+        include_original_quote_doc:
+          title: Include original quote doc
+          description: Default for 'Include original quote doc'.
+          type: boolean
+        include_payment_link:
+          title: Include payment link
+          description: Default for 'Include payment link'.
+          type: boolean
+        include_quote_comparison:
+          title: Include quote comparison
+          description: Default for 'Include quote comparison'.
+          type: boolean
+        preferences:
+          title: Preferences
+          type: string
+          readOnly: true
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
     GenericError:
       title: Generic API Error
       required:
@@ -317,52 +363,6 @@ components:
           title: Preferences
           type: string
           readOnly: true
-    BrokerUserProposalPreference:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        include_recommended_coverages:
-          title: Include recommended coverages
-          description: Default for 'Include other recommended coverages'.
-          type: boolean
-        include_coverage_analysis:
-          title: Include coverage analysis
-          description: Default for 'Include coverage analysis'.
-          type: boolean
-        include_original_quote_doc:
-          title: Include original quote doc
-          description: Default for 'Include original quote doc'.
-          type: boolean
-        include_payment_link:
-          title: Include payment link
-          description: Default for 'Include payment link'.
-          type: boolean
-        include_quote_comparison:
-          title: Include quote comparison
-          description: Default for 'Include quote comparison'.
-          type: boolean
-        preferences:
-          title: Preferences
-          type: string
-          readOnly: true
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
   securitySchemes:
     Bearer:
       type: apiKey

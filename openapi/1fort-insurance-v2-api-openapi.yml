@@ -283,10 +283,57 @@ paths:
       - insurance (v2)
 components:
   schemas:
-    CoverageType:
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    CoverageExclusion:
       required:
       - name
-      - code
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          description: Exclusion name (e.g., 'War and Cyber War Exclusion')
+          type: string
+          maxLength: 255
+          minLength: 1
+        description:
+          title: Description
+          description: Exclusion text or summary
+          type: string
+        coverage:
+          title: Coverage
+          description: If set, exclusion applies to this specific coverage
+          type:
+          - string
+          - 'null'
+          format: uuid
+        source_form:
+          title: Source form
+          description: Which form defines this exclusion (null for base policy exclusions)
+          type:
+          - string
+          - 'null'
+          format: uuid
+    CarrierList:
+      required:
+      - name
       type: object
       properties:
         id:
@@ -299,18 +346,6 @@ components:
           type: string
           maxLength: 255
           minLength: 1
-        code:
-          title: Code
-          description: Short code (e.g., CYB, GL, PROP, AUTO, WC).
-          type: string
-          maxLength: 100
-          minLength: 1
-        is_active:
-          title: Is active
-          type: boolean
-        description:
-          title: Description
-          type: string
         logo:
           title: Logo
           type:
@@ -318,6 +353,23 @@ components:
           - 'null'
           readOnly: true
           format: uri
+        am_best_rating:
+          title: Am best rating
+          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
     GenericError:
       title: Generic API Error
       required:
@@ -364,205 +416,6 @@ components:
           description: Additional description for this limit
           type: string
           maxLength: 200
-    CoverageSubLimit:
-      required:
-      - sub_limit_amount
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        limit_type:
-          title: Limit type
-          type: string
-          enum:
-          - sub_limit
-          - inner_limit
-          - other
-        sub_limit_amount:
-          title: Sub limit amount
-          description: Sub-limit amount
-          type: string
-          format: decimal
-        retention_amount:
-          title: Retention amount
-          description: Retention/deductible amount paired with this sub-limit
-          type:
-          - string
-          - 'null'
-          format: decimal
-        description:
-          title: Description
-          description: Description (e.g., 'Social Engineering', 'Computer Fraud')
-          type: string
-          maxLength: 200
-        limit:
-          title: Limit
-          type:
-          - string
-          - 'null'
-          format: uuid
-    CoverageExclusion:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          description: Exclusion name (e.g., 'War and Cyber War Exclusion')
-          type: string
-          maxLength: 255
-          minLength: 1
-        description:
-          title: Description
-          description: Exclusion text or summary
-          type: string
-        coverage:
-          title: Coverage
-          description: If set, exclusion applies to this specific coverage
-          type:
-          - string
-          - 'null'
-          format: uuid
-        source_form:
-          title: Source form
-          description: Which form defines this exclusion (null for base policy exclusions)
-          type:
-          - string
-          - 'null'
-          format: uuid
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    CoverageFee:
-      required:
-      - fee_type
-      - amount
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        fee_type:
-          title: Fee type
-          type: string
-          enum:
-          - broker_fee
-          - policy_fee
-          - agency_fee
-          - surplus_lines_tax
-          - stamping_fee
-          - inspection_fee
-          - state_tax
-          - municipal_fee
-          - platform_fee
-          - surcharge
-          - discount
-          - credit
-          - other
-        amount:
-          title: Amount
-          description: Fee amount
-          type: string
-          format: decimal
-        description:
-          title: Description
-          description: Additional description for this fee
-          type: string
-          maxLength: 200
-        coverage:
-          title: Coverage
-          description: If set, fee is for this specific coverage; if null, fee is coverage-term-level
-          type:
-          - string
-          - 'null'
-          format: uuid
-    CoverageLimitWrite:
-      required:
-      - limit_type
-      - amount
-      type: object
-      properties:
-        limit_type:
-          title: Limit type
-          description: Type of limit (e.g., per_occurrence, aggregate, csl, per_person)
-          type: string
-          enum:
-          - per_occurrence
-          - aggregate
-          - csl
-          - per_person
-          - per_accident
-          - each_occurrence
-          - products_completed_ops
-          - personal_advertising
-          - general_aggregate
-          - policy_limit
-          - other
-        amount:
-          title: Amount
-          description: Limit amount
-          type: string
-          format: decimal
-        description:
-          title: Description
-          description: Additional description for this limit
-          type: string
-          maxLength: 200
-    CoverageTermWrite:
-      type: object
-      properties:
-        reference_number:
-          title: Reference number
-          type: string
-          maxLength: 100
-        business:
-          title: Business
-          type:
-          - integer
-          - 'null'
-        broker:
-          title: Broker
-          type:
-          - integer
-          - 'null'
-        source:
-          title: Source
-          description: Source of the coverage term (e.g., 'herald', 'email', 'manual')
-          type: string
-          maxLength: 50
-        coverages:
-          type: array
-          items:
-            $ref: '#/components/schemas/CoverageWrite'
-        fees:
-          type: array
-          items:
-            $ref: '#/components/schemas/CoverageFeeWrite'
-        sub_limits:
-          type: array
-          items:
-            $ref: '#/components/schemas/CoverageSubLimitWrite'
     CoverageForm:
       required:
       - form_name
@@ -615,9 +468,9 @@ components:
           - string
           - 'null'
           format: uuid
-    Coverage:
+    CoverageDeductible:
       required:
-      - name
+      - deductible_type
       type: object
       properties:
         id:
@@ -625,103 +478,54 @@ components:
           type: string
           format: uuid
           readOnly: true
-        name:
-          title: Name
-          description: Coverage name (e.g., 'Cyber Liability', 'Commercial Auto')
-          type: string
-          maxLength: 200
-          minLength: 1
-        coverage_type:
-          $ref: '#/components/schemas/CoverageType'
-        policy_type:
-          title: Policy type
+        deductible_type:
+          title: Deductible type
+          description: Type of deductible (e.g., per_claim, per_occurrence, aggregate, waiting_period)
           type: string
           enum:
-          - admitted
-          - surplus_lines
-        carrier:
-          $ref: '#/components/schemas/CarrierList'
-        carrier_am_best_rating:
-          title: Carrier am best rating
-          description: Snapshot of carrier's AM Best rating at the time the coverage term was created
-          type: string
-          maxLength: 50
-        underwriter_name:
-          title: Underwriter name
+          - per_claim
+          - per_occurrence
+          - aggregate
+          - waiting_period
+          - retention
+          - other
+        amount:
+          title: Amount
+          description: Deductible amount in dollars (null if percentage-only)
+          type:
+          - string
+          - 'null'
+          format: decimal
+        description:
+          title: Description
+          description: Additional description for this deductible
           type: string
           maxLength: 200
-        underwriter_email:
-          title: Underwriter email
-          type: string
-          format: email
-          maxLength: 254
-        wholesaler:
-          $ref: '#/components/schemas/Wholesaler'
-        mga:
-          $ref: '#/components/schemas/Wholesaler'
-        premium:
-          title: Premium
-          description: Premium amount for this coverage
-          type:
-          - string
-          - 'null'
-          format: decimal
-        minimum_earned_premium:
-          title: Minimum earned premium
-          description: Minimum earned premium percentage (carrier-specific)
-          type:
-          - string
-          - 'null'
-          format: decimal
-        participation_percentage:
-          title: Participation percentage
-          description: Carrier's share of the risk as percentage (e.g., 23.900 for 23.9%)
-          type:
-          - string
-          - 'null'
-          format: decimal
-        commission_rate:
-          title: Commission rate
-          description: Commission rate as percentage (e.g., 15.00 for 15%)
-          type:
-          - string
-          - 'null'
-          format: decimal
-        is_excess:
-          title: Is excess
-          description: Whether this is excess/umbrella coverage
+        is_percentage:
+          title: Is percentage
+          description: Whether this deductible is expressed as a percentage
           type: boolean
-        waiting_period_hours:
-          title: Waiting period hours
-          description: Waiting period in hours (e.g., 8.00 for 8-hour BI waiting period)
+        percentage:
+          title: Percentage
+          description: Deductible percentage (e.g., 5.000 for 5%)
           type:
           - string
           - 'null'
           format: decimal
-        limits:
-          type: array
-          items:
-            $ref: '#/components/schemas/CoverageLimit'
-          readOnly: true
-        deductibles:
-          type: array
-          items:
-            $ref: '#/components/schemas/CoverageDeductible'
-          readOnly: true
-        fees:
-          type: array
-          items:
-            $ref: '#/components/schemas/CoverageFee'
-          readOnly: true
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
+        min_amount:
+          title: Min amount
+          description: Minimum dollar floor for percentage deductibles
+          type:
+          - string
+          - 'null'
+          format: decimal
+        max_amount:
+          title: Max amount
+          description: Maximum dollar cap for percentage deductibles
+          type:
+          - string
+          - 'null'
+          format: decimal
     CoverageWrite:
       required:
       - name
@@ -827,42 +631,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CoverageDeductibleWrite'
-    CoverageFeeWrite:
+    Coverage:
       required:
-      - fee_type
-      - amount
-      type: object
-      properties:
-        fee_type:
-          title: Fee type
-          type: string
-          enum:
-          - broker_fee
-          - policy_fee
-          - agency_fee
-          - surplus_lines_tax
-          - stamping_fee
-          - inspection_fee
-          - state_tax
-          - municipal_fee
-          - platform_fee
-          - surcharge
-          - discount
-          - credit
-          - other
-        amount:
-          title: Amount
-          description: Fee amount
-          type: string
-          format: decimal
-        description:
-          title: Description
-          description: Additional description for this fee
-          type: string
-          maxLength: 200
-    CoverageDeductible:
-      required:
-      - deductible_type
+      - name
       type: object
       properties:
         id:
@@ -870,54 +641,94 @@ components:
           type: string
           format: uuid
           readOnly: true
-        deductible_type:
-          title: Deductible type
-          description: Type of deductible (e.g., per_claim, per_occurrence, aggregate, waiting_period)
-          type: string
-          enum:
-          - per_claim
-          - per_occurrence
-          - aggregate
-          - waiting_period
-          - retention
-          - other
-        amount:
-          title: Amount
-          description: Deductible amount in dollars (null if percentage-only)
-          type:
-          - string
-          - 'null'
-          format: decimal
-        description:
-          title: Description
-          description: Additional description for this deductible
+        name:
+          title: Name
+          description: Coverage name (e.g., 'Cyber Liability', 'Commercial Auto')
           type: string
           maxLength: 200
-        is_percentage:
-          title: Is percentage
-          description: Whether this deductible is expressed as a percentage
+          minLength: 1
+        coverage_type:
+          $ref: '#/components/schemas/CoverageType'
+        policy_type:
+          title: Policy type
+          type: string
+          enum:
+          - admitted
+          - surplus_lines
+        carrier:
+          $ref: '#/components/schemas/CarrierList'
+        carrier_am_best_rating:
+          title: Carrier am best rating
+          description: Snapshot of carrier's AM Best rating at the time the coverage term was created
+          type: string
+          maxLength: 50
+        underwriter_name:
+          title: Underwriter name
+          type: string
+          maxLength: 200
+        underwriter_email:
+          title: Underwriter email
+          type: string
+          format: email
+          maxLength: 254
+        wholesaler:
+          $ref: '#/components/schemas/Wholesaler'
+        mga:
+          $ref: '#/components/schemas/Wholesaler'
+        premium:
+          title: Premium
+          description: Premium amount for this coverage
+          type:
+          - string
+          - 'null'
+          format: decimal
+        minimum_earned_premium:
+          title: Minimum earned premium
+          description: Minimum earned premium percentage (carrier-specific)
+          type:
+          - string
+          - 'null'
+          format: decimal
+        participation_percentage:
+          title: Participation percentage
+          description: Carrier's share of the risk as percentage (e.g., 23.900 for 23.9%)
+          type:
+          - string
+          - 'null'
+          format: decimal
+        commission_rate:
+          title: Commission rate
+          description: Commission rate as percentage (e.g., 15.00 for 15%)
+          type:
+          - string
+          - 'null'
+          format: decimal
+        is_excess:
+          title: Is excess
+          description: Whether this is excess/umbrella coverage
           type: boolean
-        percentage:
-          title: Percentage
-          description: Deductible percentage (e.g., 5.000 for 5%)
+        waiting_period_hours:
+          title: Waiting period hours
+          description: Waiting period in hours (e.g., 8.00 for 8-hour BI waiting period)
           type:
           - string
           - 'null'
           format: decimal
-        min_amount:
-          title: Min amount
-          description: Minimum dollar floor for percentage deductibles
-          type:
-          - string
-          - 'null'
-          format: decimal
-        max_amount:
-          title: Max amount
-          description: Maximum dollar cap for percentage deductibles
-          type:
-          - string
-          - 'null'
-          format: decimal
+        limits:
+          type: array
+          items:
+            $ref: '#/components/schemas/CoverageLimit'
+          readOnly: true
+        deductibles:
+          type: array
+          items:
+            $ref: '#/components/schemas/CoverageDeductible'
+          readOnly: true
+        fees:
+          type: array
+          items:
+            $ref: '#/components/schemas/CoverageFee'
+          readOnly: true
     Wholesaler:
       required:
       - name
@@ -957,45 +768,39 @@ components:
             type: string
             maxLength: 255
             minLength: 1
-    CarrierList:
+    CoverageFeeWrite:
       required:
-      - name
+      - fee_type
+      - amount
       type: object
       properties:
-        id:
-          title: Id
+        fee_type:
+          title: Fee type
           type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
+          enum:
+          - broker_fee
+          - policy_fee
+          - agency_fee
+          - surplus_lines_tax
+          - stamping_fee
+          - inspection_fee
+          - state_tax
+          - municipal_fee
+          - platform_fee
+          - surcharge
+          - discount
+          - credit
+          - other
+        amount:
+          title: Amount
+          description: Fee amount
           type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        am_best_rating:
-          title: Am best rating
-          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
+          format: decimal
+        description:
+          title: Description
+          description: Additional description for this fee
+          type: string
+          maxLength: 200
     CoverageSubLimitWrite:
       required:
       - sub_limit_amount
@@ -1025,6 +830,51 @@ components:
           description: Description (e.g., 'Social Engineering', 'Computer Fraud')
           type: string
           maxLength: 200
+    CoverageFee:
+      required:
+      - fee_type
+      - amount
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        fee_type:
+          title: Fee type
+          type: string
+          enum:
+          - broker_fee
+          - policy_fee
+          - agency_fee
+          - surplus_lines_tax
+          - stamping_fee
+          - inspection_fee
+          - state_tax
+          - municipal_fee
+          - platform_fee
+          - surcharge
+          - discount
+          - credit
+          - other
+        amount:
+          title: Amount
+          description: Fee amount
+          type: string
+          format: decimal
+        description:
+          title: Description
+          description: Additional description for this fee
+          type: string
+          maxLength: 200
+        coverage:
+          title: Coverage
+          description: If set, fee is for this specific coverage; if null, fee is coverage-term-level
+          type:
+          - string
+          - 'null'
+          format: uuid
     CoverageDeductibleWrite:
       required:
       - deductible_type
@@ -1078,6 +928,115 @@ components:
           - string
           - 'null'
           format: decimal
+    CoverageType:
+      required:
+      - name
+      - code
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        code:
+          title: Code
+          description: Short code (e.g., CYB, GL, PROP, AUTO, WC).
+          type: string
+          maxLength: 100
+          minLength: 1
+        is_active:
+          title: Is active
+          type: boolean
+        description:
+          title: Description
+          type: string
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+    CoverageSubLimit:
+      required:
+      - sub_limit_amount
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        limit_type:
+          title: Limit type
+          type: string
+          enum:
+          - sub_limit
+          - inner_limit
+          - other
+        sub_limit_amount:
+          title: Sub limit amount
+          description: Sub-limit amount
+          type: string
+          format: decimal
+        retention_amount:
+          title: Retention amount
+          description: Retention/deductible amount paired with this sub-limit
+          type:
+          - string
+          - 'null'
+          format: decimal
+        description:
+          title: Description
+          description: Description (e.g., 'Social Engineering', 'Computer Fraud')
+          type: string
+          maxLength: 200
+        limit:
+          title: Limit
+          type:
+          - string
+          - 'null'
+          format: uuid
+    CoverageTermWrite:
+      type: object
+      properties:
+        reference_number:
+          title: Reference number
+          type: string
+          maxLength: 100
+        business:
+          title: Business
+          type:
+          - integer
+          - 'null'
+        broker:
+          title: Broker
+          type:
+          - integer
+          - 'null'
+        source:
+          title: Source
+          description: Source of the coverage term (e.g., 'herald', 'email', 'manual')
+          type: string
+          maxLength: 50
+        coverages:
+          type: array
+          items:
+            $ref: '#/components/schemas/CoverageWrite'
+        fees:
+          type: array
+          items:
+            $ref: '#/components/schemas/CoverageFeeWrite'
+        sub_limits:
+          type: array
+          items:
+            $ref: '#/components/schemas/CoverageSubLimitWrite'
     CoverageTerm:
       type: object
       properties:
@@ -1125,6 +1084,47 @@ components:
           type: string
           format: date-time
           readOnly: true
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    CoverageLimitWrite:
+      required:
+      - limit_type
+      - amount
+      type: object
+      properties:
+        limit_type:
+          title: Limit type
+          description: Type of limit (e.g., per_occurrence, aggregate, csl, per_person)
+          type: string
+          enum:
+          - per_occurrence
+          - aggregate
+          - csl
+          - per_person
+          - per_accident
+          - each_occurrence
+          - products_completed_ops
+          - personal_advertising
+          - general_aggregate
+          - policy_limit
+          - other
+        amount:
+          title: Amount
+          description: Limit amount
+          type: string
+          format: decimal
+        description:
+          title: Description
+          description: Additional description for this limit
+          type: string
+          maxLength: 200
   securitySchemes:
     Bearer:
       type: apiKey

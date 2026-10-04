@@ -137,78 +137,6 @@ paths:
       summary: Retrieve Suggestion AI
 components:
   schemas:
-    SuggestionRequest:
-      required:
-      - object_id
-      - content_type
-      - target_field
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        object_id:
-          title: Object id
-          type: string
-          minLength: 1
-        content_type:
-          title: Content type
-          type: string
-        status:
-          title: Status
-          type: string
-          enum:
-          - pending
-          - in_progress
-          - completed
-          - rejected
-          - failed
-        target_field:
-          title: Target field
-          type: string
-          maxLength: 255
-          minLength: 1
-        suggestion:
-          title: Suggestion
-          type:
-          - string
-          - 'null'
-        reasoning:
-          title: Reasoning
-          type:
-          - string
-          - 'null'
-        entity_id:
-          title: Entity id
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        error:
-          title: Error
-          type:
-          - string
-          - 'null'
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     ValidationError:
       title: Validation Error
       type: object
@@ -273,6 +201,78 @@ components:
           type: string
           maxLength: 255
           minLength: 1
+    SuggestionRequest:
+      required:
+      - object_id
+      - content_type
+      - target_field
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        object_id:
+          title: Object id
+          type: string
+          minLength: 1
+        content_type:
+          title: Content type
+          type: string
+        status:
+          title: Status
+          type: string
+          enum:
+          - pending
+          - in_progress
+          - completed
+          - rejected
+          - failed
+        target_field:
+          title: Target field
+          type: string
+          maxLength: 255
+          minLength: 1
+        suggestion:
+          title: Suggestion
+          type:
+          - string
+          - 'null'
+        reasoning:
+          title: Reasoning
+          type:
+          - string
+          - 'null'
+        entity_id:
+          title: Entity id
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        error:
+          title: Error
+          type:
+          - string
+          - 'null'
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

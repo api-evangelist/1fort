@@ -898,6 +898,140 @@ components:
           type: string
           format: date-time
           readOnly: true
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    MarketProducer:
+      required:
+      - email
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          description: Producer display name
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          description: Primary contact email for this producer
+          type: string
+          format: email
+          maxLength: 254
+          minLength: 1
+        provider:
+          title: Provider
+          description: Email service provider
+          type: string
+          enum:
+          - google
+          - office365
+        password:
+          title: Password
+          description: Password for email service (write-only)
+          type: string
+        hasPassword:
+          title: Haspassword
+          description: Indicates if a password is stored
+          type: string
+          readOnly: true
+        emailAutoForwarding:
+          title: Emailautoforwarding
+          type: boolean
+          default: false
+        emailStatus:
+          title: Emailstatus
+          type: string
+          readOnly: true
+          minLength: 1
+        autoForwardingStatus:
+          title: Autoforwardingstatus
+          type: string
+          readOnly: true
+          minLength: 1
+        broker:
+          title: Broker
+          description: Broker agency associated with this producer (if applicable)
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        broker_name:
+          title: Broker name
+          description: Name of the broker agency
+          type: string
+          readOnly: true
+          minLength: 1
+        user:
+          title: User
+          description: Associated user account if this producer can login to 1Fort
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        hasUserAccount:
+          title: Hasuseraccount
+          description: Indicates if this producer has a login account
+          type: string
+          readOnly: true
+        userEmail:
+          title: Useremail
+          description: User email if account exists
+          type: string
+          readOnly: true
+        createUserAccount:
+          title: Createuseraccount
+          description: Whether to create a user account for this producer to login
+          type: boolean
+          default: false
+        firstName:
+          title: Firstname
+          description: AI Employee first name
+          type:
+          - string
+          - 'null'
+        phoneNumber:
+          title: Phonenumber
+          description: AI Employee phone number for market portals
+          type:
+          - string
+          - 'null'
+        userFirstName:
+          title: Userfirstname
+          description: User account first name (required if createUserAccount=true)
+          type: string
+        userLastName:
+          title: Userlastname
+          description: User account last name (required if createUserAccount=true)
+          type: string
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
     Wholesaler:
       required:
       - name
@@ -937,38 +1071,6 @@ components:
             type: string
             maxLength: 255
             minLength: 1
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
     MarketList:
       required:
       - type
@@ -1244,6 +1346,24 @@ components:
           type: string
           format: date-time
           readOnly: true
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     MarketCreate:
       required:
       - product_lines
@@ -1473,126 +1593,6 @@ components:
           enum:
           - manual
           - auto_added
-    MarketProducer:
-      required:
-      - email
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          description: Producer display name
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        email:
-          title: Email
-          description: Primary contact email for this producer
-          type: string
-          format: email
-          maxLength: 254
-          minLength: 1
-        provider:
-          title: Provider
-          description: Email service provider
-          type: string
-          enum:
-          - google
-          - office365
-        password:
-          title: Password
-          description: Password for email service (write-only)
-          type: string
-        hasPassword:
-          title: Haspassword
-          description: Indicates if a password is stored
-          type: string
-          readOnly: true
-        emailAutoForwarding:
-          title: Emailautoforwarding
-          type: boolean
-          default: false
-        emailStatus:
-          title: Emailstatus
-          type: string
-          readOnly: true
-          minLength: 1
-        autoForwardingStatus:
-          title: Autoforwardingstatus
-          type: string
-          readOnly: true
-          minLength: 1
-        broker:
-          title: Broker
-          description: Broker agency associated with this producer (if applicable)
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        broker_name:
-          title: Broker name
-          description: Name of the broker agency
-          type: string
-          readOnly: true
-          minLength: 1
-        user:
-          title: User
-          description: Associated user account if this producer can login to 1Fort
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        hasUserAccount:
-          title: Hasuseraccount
-          description: Indicates if this producer has a login account
-          type: string
-          readOnly: true
-        userEmail:
-          title: Useremail
-          description: User email if account exists
-          type: string
-          readOnly: true
-        createUserAccount:
-          title: Createuseraccount
-          description: Whether to create a user account for this producer to login
-          type: boolean
-          default: false
-        firstName:
-          title: Firstname
-          description: AI Employee first name
-          type:
-          - string
-          - 'null'
-        phoneNumber:
-          title: Phonenumber
-          description: AI Employee phone number for market portals
-          type:
-          - string
-          - 'null'
-        userFirstName:
-          title: Userfirstname
-          description: User account first name (required if createUserAccount=true)
-          type: string
-        userLastName:
-          title: Userlastname
-          description: User account last name (required if createUserAccount=true)
-          type: string
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          title: Updated at
-          type: string
-          format: date-time
-          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

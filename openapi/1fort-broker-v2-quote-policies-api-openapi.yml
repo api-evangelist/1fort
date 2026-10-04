@@ -597,15 +597,6 @@ components:
         detail:
           description: Error details
           type: string
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     BrokerQuotePolicyV2FlexFields:
       type: object
       properties:
@@ -693,6 +684,15 @@ components:
           title: Source display
           type: string
           readOnly: true
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

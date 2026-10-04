@@ -241,15 +241,6 @@ paths:
       - treasury (v2)
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     TreasuryTransaction:
       required:
       - object_type
@@ -311,6 +302,15 @@ components:
           type: string
           format: date-time
           readOnly: true
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     APIException:
       title: Generic API Error
       required:

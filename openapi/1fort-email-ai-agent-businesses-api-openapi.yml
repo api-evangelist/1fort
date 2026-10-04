@@ -190,6 +190,60 @@ paths:
       - Email AI Agent - Businesses
 components:
   schemas:
+    AgentBusinessSearchResult:
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          readOnly: true
+          minLength: 1
+        domain_name:
+          title: Domain name
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        industry:
+          title: Industry
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        number_of_employees:
+          title: Number of employees
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        city:
+          title: City
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        state_code:
+          title: State code
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        linked_profile_count:
+          title: Linked profile count
+          type: string
+          readOnly: true
+        active:
+          title: Active
+          type: boolean
+          readOnly: true
     AgentBusinessDetail:
       type: object
       properties:
@@ -258,59 +312,27 @@ components:
           type: string
           format: date-time
           readOnly: true
-    AgentBusinessSearchResult:
+    AgentBusinessLinkedProfile:
       type: object
       properties:
         id:
-          title: ID
-          type: integer
-          readOnly: true
-        name:
-          title: Name
+          title: Id
           type: string
           readOnly: true
           minLength: 1
-        domain_name:
-          title: Domain name
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        industry:
-          title: Industry
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        number_of_employees:
-          title: Number of employees
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        city:
-          title: City
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        state_code:
-          title: State code
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        linked_profile_count:
-          title: Linked profile count
+        insured:
+          title: Insured
           type: string
           readOnly: true
-        active:
-          title: Active
-          type: boolean
+          minLength: 1
+        domains:
+          title: Domains
+          type: object
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
           readOnly: true
     ErrorResponse:
       required:
@@ -334,28 +356,6 @@ components:
           description: When the error occurred.
           type: string
           format: date-time
-    AgentBusinessLinkedProfile:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          readOnly: true
-          minLength: 1
-        insured:
-          title: Insured
-          type: string
-          readOnly: true
-          minLength: 1
-        domains:
-          title: Domains
-          type: object
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

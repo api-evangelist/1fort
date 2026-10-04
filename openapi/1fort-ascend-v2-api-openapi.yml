@@ -414,6 +414,20 @@ paths:
         required: true
 components:
   schemas:
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
     PaymentDetail:
       type: object
       properties:
@@ -554,204 +568,6 @@ components:
           type: string
           format: date-time
           readOnly: true
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    InvoiceDetail:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        ascend_id:
-          title: Ascend id
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        status:
-          title: Status
-          type:
-          - string
-          - 'null'
-          enum:
-          - draft
-          - awaiting_payment
-          - processing_payment
-          - paid
-          - overdue
-          - void
-        status_display:
-          title: Status display
-          type: string
-          readOnly: true
-        due_date:
-          title: Due date
-          type:
-          - string
-          - 'null'
-          format: date
-        invoice_number:
-          title: Invoice number
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        issued_at:
-          title: Issued at
-          type:
-          - string
-          - 'null'
-          format: date-time
-        total_amount:
-          title: Total amount
-          type: string
-          readOnly: true
-        paid_at:
-          title: Paid at
-          type:
-          - string
-          - 'null'
-          format: date-time
-        invoice_url:
-          title: Invoice url
-          type:
-          - string
-          - 'null'
-          format: uri
-          maxLength: 2048
-        checkout_url:
-          title: Checkout url
-          type:
-          - string
-          - 'null'
-          format: uri
-          maxLength: 2048
-        payment_method:
-          title: Payment method
-          type:
-          - object
-          - 'null'
-        payer_name:
-          title: Payer name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        memo:
-          title: Memo
-          type:
-          - string
-          - 'null'
-        invoice_items:
-          title: Invoice items
-          type: object
-        agent_invoice_docs:
-          title: Agent invoice docs
-          type: object
-        download_url:
-          title: Download url
-          type: string
-          readOnly: true
-        receipt_url:
-          title: Receipt url
-          type: string
-          readOnly: true
-        days_until_due:
-          title: Days until due
-          type: string
-          readOnly: true
-        is_overdue:
-          title: Is overdue
-          type: string
-          readOnly: true
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    Payment:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        insured:
-          title: Insured
-          type: string
-          readOnly: true
-        payment_status:
-          title: Payment status
-          type: string
-          readOnly: true
-        quote_status:
-          title: Quote status
-          type: string
-          readOnly: true
-        quote:
-          title: Quote
-          type: string
-          readOnly: true
-        total:
-          title: Total
-          type: string
-          readOnly: true
-        due_date:
-          title: Due date
-          type: string
-          readOnly: true
-        broker:
-          title: Broker
-          type: string
-          readOnly: true
-        producer:
-          title: Producer
-          type: string
-          readOnly: true
-        all_agents:
-          title: All agents
-          type: string
-          readOnly: true
-        carrier:
-          title: Carrier
-          type: string
-          readOnly: true
-        coverage_type:
-          title: Coverage type
-          type: string
-          readOnly: true
-        actions:
-          title: Actions
-          type: string
-          readOnly: true
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
     LoanDetail:
       type: object
       properties:
@@ -943,6 +759,190 @@ components:
           title: Quote detail
           type: string
           readOnly: true
+    Payment:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        insured:
+          title: Insured
+          type: string
+          readOnly: true
+        payment_status:
+          title: Payment status
+          type: string
+          readOnly: true
+        quote_status:
+          title: Quote status
+          type: string
+          readOnly: true
+        quote:
+          title: Quote
+          type: string
+          readOnly: true
+        total:
+          title: Total
+          type: string
+          readOnly: true
+        due_date:
+          title: Due date
+          type: string
+          readOnly: true
+        broker:
+          title: Broker
+          type: string
+          readOnly: true
+        producer:
+          title: Producer
+          type: string
+          readOnly: true
+        all_agents:
+          title: All agents
+          type: string
+          readOnly: true
+        carrier:
+          title: Carrier
+          type: string
+          readOnly: true
+        coverage_type:
+          title: Coverage type
+          type: string
+          readOnly: true
+        actions:
+          title: Actions
+          type: string
+          readOnly: true
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    InvoiceDetail:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        ascend_id:
+          title: Ascend id
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        status:
+          title: Status
+          type:
+          - string
+          - 'null'
+          enum:
+          - draft
+          - awaiting_payment
+          - processing_payment
+          - paid
+          - overdue
+          - void
+        status_display:
+          title: Status display
+          type: string
+          readOnly: true
+        due_date:
+          title: Due date
+          type:
+          - string
+          - 'null'
+          format: date
+        invoice_number:
+          title: Invoice number
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        issued_at:
+          title: Issued at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        total_amount:
+          title: Total amount
+          type: string
+          readOnly: true
+        paid_at:
+          title: Paid at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        invoice_url:
+          title: Invoice url
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 2048
+        checkout_url:
+          title: Checkout url
+          type:
+          - string
+          - 'null'
+          format: uri
+          maxLength: 2048
+        payment_method:
+          title: Payment method
+          type:
+          - object
+          - 'null'
+        payer_name:
+          title: Payer name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        memo:
+          title: Memo
+          type:
+          - string
+          - 'null'
+        invoice_items:
+          title: Invoice items
+          type: object
+        agent_invoice_docs:
+          title: Agent invoice docs
+          type: object
+        download_url:
+          title: Download url
+          type: string
+          readOnly: true
+        receipt_url:
+          title: Receipt url
+          type: string
+          readOnly: true
+        days_until_due:
+          title: Days until due
+          type: string
+          readOnly: true
+        is_overdue:
+          title: Is overdue
+          type: string
+          readOnly: true
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

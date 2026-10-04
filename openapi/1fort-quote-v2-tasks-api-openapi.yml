@@ -523,47 +523,29 @@ paths:
       x-operation-id-original: v2_broker_tasks_read
 components:
   schemas:
-    QuoteTaskResolve:
-      required:
-      - id
+    ValidationError:
+      title: Validation Error
       type: object
       properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-        status:
-          title: Status
-          type: string
-          enum:
-          - todo
-          - done
-          - dismissed
-          - n/a
-        resolution_comment:
-          title: Resolution comment
-          type: string
-        quote_ids:
+        non_field_errors:
+          description: List of validation errors not related to any field
           type: array
           items:
             type: string
-            format: uuid
-          uniqueItems: true
-        document_files:
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    QuoteTaskBulkResolve:
+      required:
+      - tasks
+      type: object
+      properties:
+        tasks:
           type: array
           items:
-            type: string
-            readOnly: true
-            format: uri
-        document_names:
-          type: array
-          items:
-            type: string
-        documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteTaskDocument'
-          readOnly: true
+            $ref: '#/components/schemas/QuoteTaskResolve'
     QuoteTaskFlexFields:
       required:
       - title
@@ -683,38 +665,6 @@ components:
           type:
           - integer
           - 'null'
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
     QuoteTaskDocument:
       type: object
       properties:
@@ -736,15 +686,65 @@ components:
           - 'null'
           readOnly: true
           format: uri
-    QuoteTaskBulkResolve:
+    QuoteTaskResolve:
       required:
-      - tasks
+      - id
       type: object
       properties:
-        tasks:
+        id:
+          title: Id
+          type: string
+          format: uuid
+        status:
+          title: Status
+          type: string
+          enum:
+          - todo
+          - done
+          - dismissed
+          - n/a
+        resolution_comment:
+          title: Resolution comment
+          type: string
+        quote_ids:
           type: array
           items:
-            $ref: '#/components/schemas/QuoteTaskResolve'
+            type: string
+            format: uuid
+          uniqueItems: true
+        document_files:
+          type: array
+          items:
+            type: string
+            readOnly: true
+            format: uri
+        document_names:
+          type: array
+          items:
+            type: string
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteTaskDocument'
+          readOnly: true
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

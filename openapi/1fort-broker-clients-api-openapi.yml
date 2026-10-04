@@ -320,51 +320,19 @@ paths:
         required: true
 components:
   schemas:
-    BrokerUserBusiness:
+    ValidationError:
+      title: Validation Error
       type: object
       properties:
-        id:
-          title: Id
-          type: integer
-          readOnly: true
-        first_name:
-          title: First name
-          type: string
-          readOnly: true
-          minLength: 1
-        last_name:
-          title: Last name
-          type: string
-          readOnly: true
-          minLength: 1
-        phone_number:
-          title: Phone number
-          type: string
-          readOnly: true
-          minLength: 1
-        email:
-          title: Email
-          type: string
-          readOnly: true
-          minLength: 1
-        type:
-          title: Type
-          type: string
-          readOnly: true
-          minLength: 1
-        is_primary:
-          title: Is primary
-          type: boolean
-          readOnly: true
-          default: false
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
           type: string
     BrokerClient:
       required:
@@ -1435,29 +1403,73 @@ components:
         business:
           title: Business
           type: integer
-    APIException:
-      title: Generic API Error
+    BusinessSubsidiary:
       required:
-      - detail
+      - name
+      - business
       type: object
       properties:
-        detail:
-          description: Error details
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
           type: string
-    ValidationError:
-      title: Validation Error
+          maxLength: 255
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        ownership:
+          title: Ownership
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        business:
+          title: Business
+          type: integer
+    BrokerUserBusiness:
       type: object
       properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
+        id:
+          title: Id
+          type: integer
+          readOnly: true
+        first_name:
+          title: First name
           type: string
+          readOnly: true
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          readOnly: true
+          minLength: 1
+        phone_number:
+          title: Phone number
+          type: string
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          readOnly: true
+          minLength: 1
+        type:
+          title: Type
+          type: string
+          readOnly: true
+          minLength: 1
+        is_primary:
+          title: Is primary
+          type: boolean
+          readOnly: true
+          default: false
     BusinessUser:
       required:
       - first_name
@@ -1574,36 +1586,24 @@ components:
           type:
           - integer
           - 'null'
-    BusinessSubsidiary:
+    APIException:
+      title: Generic API Error
       required:
-      - name
-      - business
+      - detail
       type: object
       properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        name:
-          title: Name
+        detail:
+          description: Error details
           type: string
-          maxLength: 255
-          minLength: 1
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        ownership:
-          title: Ownership
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        business:
-          title: Business
-          type: integer
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

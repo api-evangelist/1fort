@@ -260,6 +260,20 @@ paths:
       summary: Delete AI customization
 components:
   schemas:
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
     AICustomizationCreateUpdate:
       required:
       - customization_type
@@ -272,15 +286,6 @@ components:
         value:
           title: Value
           description: Custom value for this type
-          type: string
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
           type: string
     AICustomizationType:
       type: object
@@ -311,20 +316,6 @@ components:
         detail:
           description: Error details
           type: string
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
     AICustomization:
       type: object
       properties:
@@ -338,6 +329,15 @@ components:
         value:
           title: Value
           description: Custom value for this type
+          type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
           type: string
   securitySchemes:
     Bearer:

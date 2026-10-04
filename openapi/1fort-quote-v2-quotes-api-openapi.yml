@@ -1346,153 +1346,150 @@ paths:
       - 'quote (v2): quotes'
 components:
   schemas:
-    QuoteTaskResolve:
-      required:
-      - id
+    CarrierProduct:
       type: object
       properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-        status:
-          title: Status
+        code:
+          title: Code
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        product_line:
+          title: Product line
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        is_active:
+          title: Is active
+          type: boolean
+        policy_type:
+          title: Policy type
           type: string
           enum:
-          - todo
-          - done
-          - dismissed
-          - n/a
-        resolution_comment:
-          title: Resolution comment
-          type: string
-        quote_ids:
+          - ADMITTED
+          - SURPLUS_LINES
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        am_best_rating:
+          title: Am best rating
+          description: Carrier AM Best Rating.
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        eta_hours:
+          title: Eta hours
+          description: Estimated turnaround time in hours for this carrier product.
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: -2147483648
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
           type: array
           items:
             type: string
-            format: uuid
-          uniqueItems: true
-        document_files:
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    QuoteTaskBulkResolve:
+      required:
+      - tasks
+      type: object
+      properties:
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteTaskResolve'
+    BrokerQuoteCreate:
+      required:
+      - type
+      - carrier
+      - admitted
+      - premium
+      - limit
+      - retention
+      type: object
+      properties:
+        type:
+          title: Type
+          description: Type of quote being added
+          type: string
+          enum:
+          - expiring
+          - competitor
+          - other
+        carrier:
+          title: Carrier
+          description: The carrier for this quote
+          type: string
+          format: uuid
+        wholesaler:
+          title: Wholesaler
+          description: 'Optional: The wholesaler for this quote (if applicable)'
+          type:
+          - string
+          - 'null'
+          format: uuid
+        admitted:
+          title: Admitted
+          description: True for admitted, False for surplus lines
+          type: boolean
+        premium:
+          title: Premium
+          description: Premium amount before taxes and fees
+          type: string
+          format: decimal
+        limit:
+          title: Limit
+          description: Coverage limit amount
+          type: integer
+        retention:
+          title: Retention
+          description: Retention/deductible amount
+          type: integer
+        quote_files:
+          description: Quote documents
           type: array
           items:
             type: string
             readOnly: true
             format: uri
-        document_names:
+        policy_specimen_files:
+          description: Policy specimen documents
           type: array
           items:
             type: string
-        documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteTaskDocument'
-          readOnly: true
-    Wholesaler:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          title: Id
+            readOnly: true
+            format: uri
+        quote_number:
+          title: Quote number
+          description: 'Optional: Carrier''s quote reference number. If not provided, will be auto-generated.'
           type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
+          maxLength: 50
+        effective_date:
+          title: Effective date
+          description: 'Optional: Policy effective date. If not provided, uses application effective date.'
           type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        is_active:
-          title: Is active
-          type: boolean
-        is_owned_by_1fort:
-          title: Is owned by 1fort
-          description: Indicates if this wholesaler is owned by 1Fort
-          type: boolean
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-    CarrierList:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          title: Id
+          format: date
+        expiration_date:
+          title: Expiration date
+          description: 'Optional: Policy expiration date. If not provided but effective date exists, defaults to 1 year after effective date.'
           type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        am_best_rating:
-          title: Am best rating
-          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-    QuoteTaskNotifyInsuredRequest:
-      required:
-      - task_ids
-      - emails
-      type: object
-      properties:
-        task_ids:
-          description: List of task IDs to notify insured about
-          type: array
-          items:
-            type: string
-            format: uuid
-        emails:
-          description: List of email addresses to notify
-          type: array
-          items:
-            type: string
-            format: email
-            minLength: 1
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
+          format: date
     QuoteTaskFlexFields:
       required:
       - title
@@ -1612,82 +1609,6 @@ components:
           type:
           - integer
           - 'null'
-    BrokerUserList:
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        first_name:
-          title: First name
-          type: string
-          readOnly: true
-          minLength: 1
-        last_name:
-          title: Last name
-          type: string
-          readOnly: true
-          minLength: 1
-        email:
-          title: Email
-          type: string
-          readOnly: true
-          minLength: 1
-        producer_id:
-          title: Producer id
-          type: string
-          readOnly: true
-          minLength: 1
-        type:
-          title: Type
-          description: Specifies the insurance-related role type of the user within the agency.
-          type:
-          - string
-          - 'null'
-          enum:
-          - LEADERSHIP
-          - SALES
-          - SERVICE
-          - MARKETS
-          - OPERATIONS
-        slug:
-          title: Slug
-          type: string
-          format: slug
-          pattern: ^[-a-zA-Z0-9_]+$
-          readOnly: true
-          minLength: 1
-    PriceDetail:
-      type: object
-      properties:
-        amount:
-          title: Amount
-          type:
-          - string
-          - 'null'
-          format: decimal
-        type:
-          title: Type
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        text:
-          title: Text
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     QuoteBindRequest:
       type: object
       properties:
@@ -1763,96 +1684,6 @@ components:
           type: string
           format: uuid
           readOnly: true
-    BrokerQuoteCreate:
-      required:
-      - type
-      - carrier
-      - admitted
-      - premium
-      - limit
-      - retention
-      type: object
-      properties:
-        type:
-          title: Type
-          description: Type of quote being added
-          type: string
-          enum:
-          - expiring
-          - competitor
-          - other
-        carrier:
-          title: Carrier
-          description: The carrier for this quote
-          type: string
-          format: uuid
-        wholesaler:
-          title: Wholesaler
-          description: 'Optional: The wholesaler for this quote (if applicable)'
-          type:
-          - string
-          - 'null'
-          format: uuid
-        admitted:
-          title: Admitted
-          description: True for admitted, False for surplus lines
-          type: boolean
-        premium:
-          title: Premium
-          description: Premium amount before taxes and fees
-          type: string
-          format: decimal
-        limit:
-          title: Limit
-          description: Coverage limit amount
-          type: integer
-        retention:
-          title: Retention
-          description: Retention/deductible amount
-          type: integer
-        quote_files:
-          description: Quote documents
-          type: array
-          items:
-            type: string
-            readOnly: true
-            format: uri
-        policy_specimen_files:
-          description: Policy specimen documents
-          type: array
-          items:
-            type: string
-            readOnly: true
-            format: uri
-        quote_number:
-          title: Quote number
-          description: 'Optional: Carrier''s quote reference number. If not provided, will be auto-generated.'
-          type: string
-          maxLength: 50
-        effective_date:
-          title: Effective date
-          description: 'Optional: Policy effective date. If not provided, uses application effective date.'
-          type: string
-          format: date
-        expiration_date:
-          title: Expiration date
-          description: 'Optional: Policy expiration date. If not provided but effective date exists, defaults to 1 year after effective date.'
-          type: string
-          format: date
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
     QuoteWithAggregates:
       type: object
       properties:
@@ -2083,6 +1914,27 @@ components:
           description: This quote's latest completed AI analysis, or null when it has none - the same record the coverage's analyze-quotes endpoint returns for it, including `recommended` and `comparison_status`. Embedded here so clients listing quotes don't need a second request to render the analysis.
           type: string
           readOnly: true
+    PriceDetail:
+      type: object
+      properties:
+        amount:
+          title: Amount
+          type:
+          - string
+          - 'null'
+          format: decimal
+        type:
+          title: Type
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        text:
+          title: Text
+          type:
+          - string
+          - 'null'
+          maxLength: 255
     QuoteTaskDocument:
       type: object
       properties:
@@ -2104,60 +1956,208 @@ components:
           - 'null'
           readOnly: true
           format: uri
-    QuoteTaskBulkResolve:
+    QuoteTaskNotifyInsuredRequest:
       required:
-      - tasks
+      - task_ids
+      - emails
       type: object
       properties:
-        tasks:
+        task_ids:
+          description: List of task IDs to notify insured about
           type: array
           items:
-            $ref: '#/components/schemas/QuoteTaskResolve'
-    CarrierProduct:
+            type: string
+            format: uuid
+        emails:
+          description: List of email addresses to notify
+          type: array
+          items:
+            type: string
+            format: email
+            minLength: 1
+    QuoteTaskResolve:
+      required:
+      - id
       type: object
       properties:
-        code:
-          title: Code
+        id:
+          title: Id
+          type: string
+          format: uuid
+        status:
+          title: Status
+          type: string
+          enum:
+          - todo
+          - done
+          - dismissed
+          - n/a
+        resolution_comment:
+          title: Resolution comment
+          type: string
+        quote_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        document_files:
+          type: array
+          items:
+            type: string
+            readOnly: true
+            format: uri
+        document_names:
+          type: array
+          items:
+            type: string
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteTaskDocument'
+          readOnly: true
+    Wholesaler:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
           type:
           - string
           - 'null'
-          minLength: 1
-        product_line:
-          title: Product line
-          type:
-          - string
-          - 'null'
-          minLength: 1
+          readOnly: true
+          format: uri
         is_active:
           title: Is active
           type: boolean
-        policy_type:
-          title: Policy type
+        is_owned_by_1fort:
+          title: Is owned by 1fort
+          description: Indicates if this wholesaler is owned by 1Fort
+          type: boolean
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+    BrokerUserList:
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        first_name:
+          title: First name
           type: string
+          readOnly: true
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          readOnly: true
+          minLength: 1
+        producer_id:
+          title: Producer id
+          type: string
+          readOnly: true
+          minLength: 1
+        type:
+          title: Type
+          description: Specifies the insurance-related role type of the user within the agency.
+          type:
+          - string
+          - 'null'
           enum:
-          - ADMITTED
-          - SURPLUS_LINES
+          - LEADERSHIP
+          - SALES
+          - SERVICE
+          - MARKETS
+          - OPERATIONS
+        slug:
+          title: Slug
+          type: string
+          format: slug
+          pattern: ^[-a-zA-Z0-9_]+$
+          readOnly: true
+          minLength: 1
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    CarrierList:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
         name:
           title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
           type:
           - string
           - 'null'
-          maxLength: 255
+          readOnly: true
+          format: uri
         am_best_rating:
           title: Am best rating
-          description: Carrier AM Best Rating.
+          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
           type:
           - string
           - 'null'
           maxLength: 255
-        eta_hours:
-          title: Eta hours
-          description: Estimated turnaround time in hours for this carrier product.
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
           type:
-          - integer
+          - array
           - 'null'
-          maximum: 2147483647
-          minimum: -2147483648
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

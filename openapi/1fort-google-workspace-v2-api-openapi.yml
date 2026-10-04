@@ -497,14 +497,19 @@ paths:
       - google_workspace (v2)
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
+    ValidationError:
+      title: Validation Error
       type: object
       properties:
-        detail:
-          description: Error details
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
           type: string
     BrokerGoogleOAuthIntegration:
       type: object
@@ -560,20 +565,6 @@ components:
       properties:
         detail:
           description: Error details
-          type: string
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
           type: string
     BrokerGoogleDwdIntegration:
       required:
@@ -639,6 +630,15 @@ components:
           title: Scopes
           type: string
           readOnly: true
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

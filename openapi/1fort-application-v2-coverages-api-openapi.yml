@@ -876,66 +876,56 @@ paths:
         required: true
 components:
   schemas:
-    CanonicalProductLineRef:
+    ParameterValueUpdate:
       required:
-      - code
+      - value
       type: object
       properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        code:
-          title: Code
-          type: string
-          maxLength: 150
-          minLength: 1
-        display_name:
-          title: Display name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-    CarrierList:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
+        risk_parameter_id:
+          title: Risk parameter id
           type: string
           maxLength: 255
           minLength: 1
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        am_best_rating:
-          title: Am best rating
-          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
-          type:
-          - string
-          - 'null'
+        coverage_parameter_id:
+          title: Coverage parameter id
+          type: string
           maxLength: 255
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
+          minLength: 1
+        instance:
+          title: Instance
+          type: string
+          minLength: 1
+        child_risk_values:
+          type: array
           items:
-            title: Domains
+            type:
+            - string
+            - 'null'
+        child_coverage_values:
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+        value:
+          title: Value
+          type:
+          - object
+          - 'null'
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
             type: string
-            maxLength: 255
-            minLength: 1
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
     BrokerCoverageApplicationWithCompositeResponse:
       required:
       - coverage_type
@@ -1128,51 +1118,6 @@ components:
           items:
             $ref: '#/components/schemas/CoverageAccordForm'
           readOnly: true
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    ParameterValueUpdate:
-      required:
-      - value
-      type: object
-      properties:
-        risk_parameter_id:
-          title: Risk parameter id
-          type: string
-          maxLength: 255
-          minLength: 1
-        coverage_parameter_id:
-          title: Coverage parameter id
-          type: string
-          maxLength: 255
-          minLength: 1
-        instance:
-          title: Instance
-          type: string
-          minLength: 1
-        child_risk_values:
-          type: array
-          items:
-            type:
-            - string
-            - 'null'
-        child_coverage_values:
-          type: array
-          items:
-            type:
-            - string
-            - 'null'
-        value:
-          title: Value
-          type:
-          - object
-          - 'null'
     CoverageApplicationWithCompositeResponse:
       required:
       - coverage_type
@@ -1360,6 +1305,27 @@ components:
           type: string
           readOnly: true
           minLength: 1
+    CanonicalProductLineRef:
+      required:
+      - code
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        code:
+          title: Code
+          type: string
+          maxLength: 150
+          minLength: 1
+        display_name:
+          title: Display name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
     CoverageAccordForm:
       required:
       - accord_number
@@ -1406,16 +1372,9 @@ components:
           - string
           - 'null'
           readOnly: true
-    APIException:
-      title: Generic API Error
+    ProductLine:
       required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    SubProductLine:
+      - code
       type: object
       properties:
         id:
@@ -1423,24 +1382,29 @@ components:
           type: string
           format: uuid
           readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        display_name:
-          title: Display name
-          description: Name used on the Frontend.
-          type:
-          - string
-          - 'null'
-          maxLength: 255
+        code:
+          title: Code
+          type: string
+          maxLength: 150
+          minLength: 1
         description:
           title: Description
           type:
           - string
           - 'null'
+        name:
+          title: Name
+          type: string
+          readOnly: true
+        is_core:
+          title: Is core
+          type: boolean
+          readOnly: true
+        sub_product_lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubProductLine'
+          readOnly: true
         logo:
           title: Logo
           type:
@@ -1448,20 +1412,18 @@ components:
           - 'null'
           readOnly: true
           format: uri
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
+        category:
+          title: Category
+          type:
+          - string
+          - 'null'
+          enum:
+          - Property
+          - Casualty
+          - Both
+          - Property only
+        canonical_product_line:
+          $ref: '#/components/schemas/CanonicalProductLineRef'
     CoverageApplicationUpdate:
       type: object
       properties:
@@ -1568,9 +1530,7 @@ components:
             type: string
             format: uuid
           uniqueItems: true
-    ProductLine:
-      required:
-      - code
+    SubProductLine:
       type: object
       properties:
         id:
@@ -1578,29 +1538,24 @@ components:
           type: string
           format: uuid
           readOnly: true
-        code:
-          title: Code
-          type: string
-          maxLength: 150
-          minLength: 1
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        display_name:
+          title: Display name
+          description: Name used on the Frontend.
+          type:
+          - string
+          - 'null'
+          maxLength: 255
         description:
           title: Description
           type:
           - string
           - 'null'
-        name:
-          title: Name
-          type: string
-          readOnly: true
-        is_core:
-          title: Is core
-          type: boolean
-          readOnly: true
-        sub_product_lines:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubProductLine'
-          readOnly: true
         logo:
           title: Logo
           type:
@@ -1608,18 +1563,63 @@ components:
           - 'null'
           readOnly: true
           format: uri
-        category:
-          title: Category
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    CarrierList:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
           type:
           - string
           - 'null'
-          enum:
-          - Property
-          - Casualty
-          - Both
-          - Property only
-        canonical_product_line:
-          $ref: '#/components/schemas/CanonicalProductLineRef'
+          readOnly: true
+          format: uri
+        am_best_rating:
+          title: Am best rating
+          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

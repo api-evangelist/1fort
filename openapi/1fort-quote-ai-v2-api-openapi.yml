@@ -1195,6 +1195,20 @@ paths:
       summary: Uploaded files
 components:
   schemas:
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
     QuoteChatMessage:
       type: object
       properties:
@@ -1219,7 +1233,7 @@ components:
           - assistant
           - user
           readOnly: true
-    GenericError:
+    APIException:
       title: Generic API Error
       required:
       - detail
@@ -1265,7 +1279,7 @@ components:
           type:
           - integer
           - 'null'
-    APIException:
+    GenericError:
       title: Generic API Error
       required:
       - detail
@@ -1273,20 +1287,6 @@ components:
       properties:
         detail:
           description: Error details
-          type: string
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
           type: string
   securitySchemes:
     Bearer:

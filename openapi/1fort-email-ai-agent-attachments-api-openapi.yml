@@ -200,6 +200,31 @@ paths:
       x-operation-id-original: agent_update_attachment_metadata
 components:
   schemas:
+    AttachmentMetadataUpdate:
+      required:
+      - processing_status
+      - metadata
+      type: object
+      properties:
+        processing_status:
+          title: Processing status
+          description: 'Processing status (required): UNPROCESSED, QUEUED, PROCESSING, COMPLETED, FAILED, SKIPPED.'
+          type: string
+          enum:
+          - UNPROCESSED
+          - QUEUED
+          - PROCESSING
+          - COMPLETED
+          - FAILED
+          - SKIPPED
+        metadata:
+          title: Metadata
+          description: 'Fields to merge into existing metadata (per-key upsert). Common fields: document_type, document_year, coverage_types, insurance_context, extracted, potential_insureds_count.'
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
     AttachmentMetadataUpdateResponse:
       type: object
       properties:
@@ -243,31 +268,6 @@ components:
           type: string
           format: date-time
           readOnly: true
-    AttachmentMetadataUpdate:
-      required:
-      - processing_status
-      - metadata
-      type: object
-      properties:
-        processing_status:
-          title: Processing status
-          description: 'Processing status (required): UNPROCESSED, QUEUED, PROCESSING, COMPLETED, FAILED, SKIPPED.'
-          type: string
-          enum:
-          - UNPROCESSED
-          - QUEUED
-          - PROCESSING
-          - COMPLETED
-          - FAILED
-          - SKIPPED
-        metadata:
-          title: Metadata
-          description: 'Fields to merge into existing metadata (per-key upsert). Common fields: document_type, document_year, coverage_types, insurance_context, extracted, potential_insureds_count.'
-          type: object
-          additionalProperties:
-            type:
-            - string
-            - 'null'
     ErrorResponse:
       required:
       - error

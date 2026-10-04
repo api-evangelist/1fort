@@ -340,123 +340,51 @@ paths:
       summary: Get surplus file
 components:
   schemas:
-    Wholesaler:
-      required:
-      - name
+    CarrierProduct:
       type: object
       properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
+        code:
+          title: Code
           type:
           - string
           - 'null'
-          readOnly: true
-          format: uri
+          minLength: 1
+        product_line:
+          title: Product line
+          type:
+          - string
+          - 'null'
+          minLength: 1
         is_active:
           title: Is active
           type: boolean
-        is_owned_by_1fort:
-          title: Is owned by 1fort
-          description: Indicates if this wholesaler is owned by 1Fort
-          type: boolean
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-    CarrierList:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          title: Id
+        policy_type:
+          title: Policy type
           type: string
-          format: uuid
-          readOnly: true
+          enum:
+          - ADMITTED
+          - SURPLUS_LINES
         name:
           title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
           type:
           - string
           - 'null'
-          readOnly: true
-          format: uri
+          maxLength: 255
         am_best_rating:
           title: Am best rating
-          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
+          description: Carrier AM Best Rating.
           type:
           - string
           - 'null'
           maxLength: 255
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
+        eta_hours:
+          title: Eta hours
+          description: Estimated turnaround time in hours for this carrier product.
           type:
-          - array
+          - integer
           - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    PriceDetail:
-      type: object
-      properties:
-        amount:
-          title: Amount
-          type:
-          - string
-          - 'null'
-          format: decimal
-        type:
-          title: Type
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        text:
-          title: Text
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
+          maximum: 2147483647
+          minimum: -2147483648
     BrokerQuoteCreate:
       required:
       - type
@@ -763,51 +691,123 @@ components:
           description: This quote's latest completed AI analysis, or null when it has none - the same record the coverage's analyze-quotes endpoint returns for it, including `recommended` and `comparison_status`. Embedded here so clients listing quotes don't need a second request to render the analysis.
           type: string
           readOnly: true
-    CarrierProduct:
+    PriceDetail:
       type: object
       properties:
-        code:
-          title: Code
+        amount:
+          title: Amount
           type:
           - string
           - 'null'
-          minLength: 1
-        product_line:
-          title: Product line
+          format: decimal
+        type:
+          title: Type
           type:
           - string
           - 'null'
+          maxLength: 50
+        text:
+          title: Text
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+    Wholesaler:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
           minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
         is_active:
           title: Is active
           type: boolean
-        policy_type:
-          title: Policy type
+        is_owned_by_1fort:
+          title: Is owned by 1fort
+          description: Indicates if this wholesaler is owned by 1Fort
+          type: boolean
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
           type: string
-          enum:
-          - ADMITTED
-          - SURPLUS_LINES
+    CarrierList:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
         name:
           title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
           type:
           - string
           - 'null'
-          maxLength: 255
+          readOnly: true
+          format: uri
         am_best_rating:
           title: Am best rating
-          description: Carrier AM Best Rating.
+          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
           type:
           - string
           - 'null'
           maxLength: 255
-        eta_hours:
-          title: Eta hours
-          description: Estimated turnaround time in hours for this carrier product.
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
           type:
-          - integer
+          - array
           - 'null'
-          maximum: 2147483647
-          minimum: -2147483648
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

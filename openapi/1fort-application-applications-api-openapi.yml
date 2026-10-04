@@ -264,15 +264,50 @@ paths:
         required: true
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
+    ValidationError:
+      title: Validation Error
       type: object
       properties:
-        detail:
-          description: Error details
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
           type: string
+    BusinessSubsidiary:
+      required:
+      - name
+      - business
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        ownership:
+          title: Ownership
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        business:
+          title: Business
+          type: integer
     BrokerUserList:
       type: object
       properties:
@@ -319,6 +354,15 @@ components:
           pattern: ^[-a-zA-Z0-9_]+$
           readOnly: true
           minLength: 1
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     BusinessList:
       required:
       - name
@@ -372,7 +416,7 @@ components:
           - 'null'
           maximum: 9223372036854775807
           minimum: -9223372036854775808
-    APIException:
+    GenericError:
       title: Generic API Error
       required:
       - detail
@@ -381,50 +425,6 @@ components:
         detail:
           description: Error details
           type: string
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    BusinessSubsidiary:
-      required:
-      - name
-      - business
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        ownership:
-          title: Ownership
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        business:
-          title: Business
-          type: integer
     Application:
       type: object
       properties:

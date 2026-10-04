@@ -441,35 +441,6 @@ paths:
         required: true
 components:
   schemas:
-    FinancialRisk:
-      type: object
-      properties:
-        coverage_type:
-          title: Coverage type
-          description: Type of coverage being evaluated (e.g., 'Cyber', 'D&O', 'MPL', 'EPL', 'Tech E&O', 'Fiduciary')
-          type:
-          - string
-          - 'null'
-        business_id:
-          title: Business id
-          description: ID of the business/insured. Required for broker users, optional for business users.
-          type:
-          - integer
-          - 'null'
-        force_refresh:
-          title: Force refresh
-          description: If True, clears all cached financial risk data for this business and triggers fresh calculations
-          type: boolean
-          default: false
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     ValidationError:
       title: Validation Error
       type: object
@@ -483,56 +454,6 @@ components:
         description: A list of error messages for each field that triggered a validation error
         type: array
         items:
-          type: string
-    RiskManagerChatMessage:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        message:
-          title: Message
-          type: string
-          readOnly: true
-        role:
-          title: Role
-          type: string
-          enum:
-          - assistant
-          - user
-          readOnly: true
-    PremiumRange:
-      description: Estimated annual premium range in dollars based on recommended limit
-      required:
-      - min
-      - max
-      type:
-      - object
-      - 'null'
-      properties:
-        min:
-          title: Min
-          type: integer
-          minimum: 1000
-        max:
-          title: Max
-          type: integer
-          minimum: 1000
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
           type: string
     FinancialRiskCategoryResponse:
       required:
@@ -620,6 +541,59 @@ components:
             type:
             - string
             - 'null'
+    RiskManagerChatMessage:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        message:
+          title: Message
+          type: string
+          readOnly: true
+        role:
+          title: Role
+          type: string
+          enum:
+          - assistant
+          - user
+          readOnly: true
+    FinancialRisk:
+      type: object
+      properties:
+        coverage_type:
+          title: Coverage type
+          description: Type of coverage being evaluated (e.g., 'Cyber', 'D&O', 'MPL', 'EPL', 'Tech E&O', 'Fiduciary')
+          type:
+          - string
+          - 'null'
+        business_id:
+          title: Business id
+          description: ID of the business/insured. Required for broker users, optional for business users.
+          type:
+          - integer
+          - 'null'
+        force_refresh:
+          title: Force refresh
+          description: If True, clears all cached financial risk data for this business and triggers fresh calculations
+          type: boolean
+          default: false
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     Risk:
       type: object
       properties:
@@ -682,6 +656,32 @@ components:
           - string
           - 'null'
           format: date-time
+    PremiumRange:
+      description: Estimated annual premium range in dollars based on recommended limit
+      required:
+      - min
+      - max
+      type:
+      - object
+      - 'null'
+      properties:
+        min:
+          title: Min
+          type: integer
+          minimum: 1000
+        max:
+          title: Max
+          type: integer
+          minimum: 1000
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

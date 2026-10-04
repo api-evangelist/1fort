@@ -284,14 +284,19 @@ paths:
       - 'broker: user-ai-customizations'
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
+    ValidationError:
+      title: Validation Error
       type: object
       properties:
-        detail:
-          description: Error details
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
           type: string
     UserAICustomizationCreateUpdate:
       required:
@@ -302,6 +307,20 @@ components:
           title: Customization type
           type: string
           format: uuid
+        value:
+          title: Value
+          description: Custom value for this type
+          type: string
+    UserAICustomization:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        customization_type:
+          $ref: '#/components/schemas/AICustomizationType'
         value:
           title: Value
           description: Custom value for this type
@@ -335,33 +354,14 @@ components:
         detail:
           description: Error details
           type: string
-    UserAICustomization:
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
       type: object
       properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        customization_type:
-          $ref: '#/components/schemas/AICustomizationType'
-        value:
-          title: Value
-          description: Custom value for this type
-          type: string
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
+        detail:
+          description: Error details
           type: string
   securitySchemes:
     Bearer:

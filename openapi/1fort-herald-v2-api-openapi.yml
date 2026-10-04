@@ -543,24 +543,58 @@ components:
           - string
           - 'null'
           maxLength: 255
-    GenericError:
-      title: Generic API Error
+    ProductLine:
       required:
-      - detail
+      - code
       type: object
       properties:
-        detail:
-          description: Error details
+        id:
+          title: Id
           type: string
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
+          format: uuid
+          readOnly: true
+        code:
+          title: Code
           type: string
+          maxLength: 150
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        name:
+          title: Name
+          type: string
+          readOnly: true
+        is_core:
+          title: Is core
+          type: boolean
+          readOnly: true
+        sub_product_lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubProductLine'
+          readOnly: true
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        category:
+          title: Category
+          type:
+          - string
+          - 'null'
+          enum:
+          - Property
+          - Casualty
+          - Both
+          - Property only
+        canonical_product_line:
+          $ref: '#/components/schemas/CanonicalProductLineRef'
     SubProductLine:
       type: object
       properties:
@@ -625,58 +659,24 @@ components:
           type: string
           readOnly: true
           minLength: 1
-    ProductLine:
+    APIException:
+      title: Generic API Error
       required:
-      - code
+      - detail
       type: object
       properties:
-        id:
-          title: Id
+        detail:
+          description: Error details
           type: string
-          format: uuid
-          readOnly: true
-        code:
-          title: Code
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
           type: string
-          maxLength: 150
-          minLength: 1
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        name:
-          title: Name
-          type: string
-          readOnly: true
-        is_core:
-          title: Is core
-          type: boolean
-          readOnly: true
-        sub_product_lines:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubProductLine'
-          readOnly: true
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        category:
-          title: Category
-          type:
-          - string
-          - 'null'
-          enum:
-          - Property
-          - Casualty
-          - Both
-          - Property only
-        canonical_product_line:
-          $ref: '#/components/schemas/CanonicalProductLineRef'
   securitySchemes:
     Bearer:
       type: apiKey

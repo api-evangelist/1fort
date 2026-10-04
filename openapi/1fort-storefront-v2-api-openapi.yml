@@ -1466,7 +1466,37 @@ paths:
       security: []
 components:
   schemas:
-    StoreFrontAgencyPublic:
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    SupplementaryQuestionsUpdate:
+      type: object
+      properties:
+        user_answers:
+          title: User Answers
+          description: User-provided answers to supplementary questions keyed by question id
+          type: object
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    StoreFrontBroker:
       required:
       - name
       - domain_name
@@ -1496,105 +1526,12 @@ components:
           type: string
           maxLength: 500
           minLength: 1
-        slug:
-          title: Slug
-          description: URL-safe identifier derived from domain_name (second-level label). Populated automatically when empty.
-          type:
-          - string
-          - 'null'
-          format: slug
-          pattern: ^[-a-zA-Z0-9_]+$
-          maxLength: 255
         phone_number:
           title: Phone number
           type:
           - string
           - 'null'
           maxLength: 255
-        default_broker_url_slug:
-          title: Default broker url slug
-          type: string
-          readOnly: true
-        default_broker_user_slug:
-          title: Default broker user slug
-          type: string
-          readOnly: true
-        default_broker_user_card:
-          title: Default broker user card
-          type: string
-          readOnly: true
-    CanonicalProductLineRef:
-      required:
-      - code
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        code:
-          title: Code
-          type: string
-          maxLength: 150
-          minLength: 1
-        display_name:
-          title: Display name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-    SupplementaryQuestionsUpdate:
-      type: object
-      properties:
-        user_answers:
-          title: User Answers
-          description: User-provided answers to supplementary questions keyed by question id
-          type: object
-    StoreFrontBrokerUserPublic:
-      type: object
-      properties:
-        slug:
-          title: Slug
-          description: URL-safe identifier per agency from the user's name (e.g. ernesto-freyre). Populated automatically when empty.
-          type:
-          - string
-          - 'null'
-          format: slug
-          pattern: ^[-a-zA-Z0-9_]+$
-          maxLength: 255
-        first_name:
-          title: First name
-          type: string
-          readOnly: true
-          minLength: 1
-        last_name:
-          title: Last name
-          type: string
-          readOnly: true
-          minLength: 1
-        email:
-          title: Email
-          type: string
-          format: email
-          readOnly: true
-          minLength: 1
-        phone_number:
-          title: Phone number
-          type: string
-          readOnly: true
-        type:
-          title: Type
-          description: Specifies the insurance-related role type of the user within the agency.
-          type:
-          - string
-          - 'null'
-          enum:
-          - LEADERSHIP
-          - SALES
-          - SERVICE
-          - MARKETS
-          - OPERATIONS
     SupplementaryQuestionsRequest:
       required:
       - coverage_application
@@ -1659,76 +1596,50 @@ components:
           description: The coverage application to generate supplementary questions for
           type: string
           format: uuid
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
+    StoreFrontBrokerUserPublic:
       type: object
       properties:
-        detail:
-          description: Error details
-          type: string
-    StoreFrontApplicationSupplementaryDocument:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
+        slug:
+          title: Slug
+          description: URL-safe identifier per agency from the user's name (e.g. ernesto-freyre). Populated automatically when empty.
           type:
           - string
           - 'null'
+          format: slug
+          pattern: ^[-a-zA-Z0-9_]+$
           maxLength: 255
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        question_elabel_id:
-          title: Question elabel id
-          description: Links this document to a specific file_upload question by elabel_id
-          type:
-          - string
-          - 'null'
-          maxLength: 100
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          title: Updated at
-          type: string
-          format: date-time
-          readOnly: true
-        download_url:
-          title: Download url
-          type: string
-          readOnly: true
-    StoreFrontPublic:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        broker_user:
-          $ref: '#/components/schemas/StoreFrontBrokerUserPublic'
-        url_slug:
-          title: Url slug
+        first_name:
+          title: First name
           type: string
           readOnly: true
           minLength: 1
-        broker:
-          $ref: '#/components/schemas/StoreFrontBroker'
-        broker_group:
-          title: Broker group
+        last_name:
+          title: Last name
           type: string
           readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        phone_number:
+          title: Phone number
+          type: string
+          readOnly: true
+        type:
+          title: Type
+          description: Specifies the insurance-related role type of the user within the agency.
+          type:
+          - string
+          - 'null'
+          enum:
+          - LEADERSHIP
+          - SALES
+          - SERVICE
+          - MARKETS
+          - OPERATIONS
     SanityCheckUpdate:
       type: object
       properties:
@@ -1736,48 +1647,6 @@ components:
           title: Hidden Fields
           description: Dismissed or no longer relevant fields that should be removed from the ai_response.
           type: object
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    SubProductLine:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        display_name:
-          title: Display name
-          description: Name used on the Frontend.
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
     SanityCheckRequest:
       required:
       - coverage_application
@@ -1843,52 +1712,63 @@ components:
           type:
           - string
           - 'null'
-    ValidationError:
-      title: Validation Error
+    StoreFrontApplicationSupplementaryDocument:
       type: object
       properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
+        id:
+          title: Id
           type: string
-    StoreFrontBroker:
-      required:
-      - name
-      - domain_name
-      type: object
-      properties:
+          format: uuid
+          readOnly: true
         name:
           title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        question_elabel_id:
+          title: Question elabel id
+          description: Links this document to a specific file_upload question by elabel_id
+          type:
+          - string
+          - 'null'
+          maxLength: 100
+        created_at:
+          title: Created at
           type: string
-          maxLength: 255
-          minLength: 1
-        dba:
-          title: Dba
-          description: Doing Business As (DBA) name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
+          format: date-time
           readOnly: true
-          format: uri
-        domain_name:
-          title: Domain name
+        updated_at:
+          title: Updated at
           type: string
-          maxLength: 500
+          format: date-time
+          readOnly: true
+        download_url:
+          title: Download url
+          type: string
+          readOnly: true
+    CanonicalProductLineRef:
+      required:
+      - code
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        code:
+          title: Code
+          type: string
+          maxLength: 150
           minLength: 1
-        phone_number:
-          title: Phone number
+        display_name:
+          title: Display name
           type:
           - string
           - 'null'
@@ -1945,6 +1825,39 @@ components:
           - Property only
         canonical_product_line:
           $ref: '#/components/schemas/CanonicalProductLineRef'
+    SubProductLine:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        display_name:
+          title: Display name
+          description: Name used on the Frontend.
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
     StoreFrontBrokerUserCard:
       type: object
       properties:
@@ -1991,6 +1904,93 @@ components:
           - OPERATIONS
         storefront_url_slug:
           title: Storefront url slug
+          type: string
+          readOnly: true
+    StoreFrontAgencyPublic:
+      required:
+      - name
+      - domain_name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        dba:
+          title: Dba
+          description: Doing Business As (DBA) name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        domain_name:
+          title: Domain name
+          type: string
+          maxLength: 500
+          minLength: 1
+        slug:
+          title: Slug
+          description: URL-safe identifier derived from domain_name (second-level label). Populated automatically when empty.
+          type:
+          - string
+          - 'null'
+          format: slug
+          pattern: ^[-a-zA-Z0-9_]+$
+          maxLength: 255
+        phone_number:
+          title: Phone number
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        default_broker_url_slug:
+          title: Default broker url slug
+          type: string
+          readOnly: true
+        default_broker_user_slug:
+          title: Default broker user slug
+          type: string
+          readOnly: true
+        default_broker_user_card:
+          title: Default broker user card
+          type: string
+          readOnly: true
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    StoreFrontPublic:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        broker_user:
+          $ref: '#/components/schemas/StoreFrontBrokerUserPublic'
+        url_slug:
+          title: Url slug
+          type: string
+          readOnly: true
+          minLength: 1
+        broker:
+          $ref: '#/components/schemas/StoreFrontBroker'
+        broker_group:
+          title: Broker group
           type: string
           readOnly: true
   securitySchemes:

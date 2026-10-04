@@ -88,15 +88,6 @@ paths:
       - business-broker-users
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     BrokerUser:
       required:
       - first_name
@@ -229,6 +220,15 @@ components:
           type: integer
           maximum: 30
           minimum: 15
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

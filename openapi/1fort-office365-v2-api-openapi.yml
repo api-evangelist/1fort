@@ -393,85 +393,6 @@ paths:
       - office365 (v2)
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    BrokerOffice365Integration:
-      required:
-      - broker
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        integration_status:
-          title: Integration status
-          type: string
-          enum:
-          - PENDING
-          - CONNECTED
-          - DISCONNECTED
-          readOnly: true
-        error_message:
-          title: Error message
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          title: Updated at
-          type: string
-          format: date-time
-          readOnly: true
-        broker:
-          title: Broker
-          type: integer
-        integrated_by:
-          title: Integrated by
-          type:
-          - integer
-          - 'null'
-        connection_link:
-          title: Connection link
-          type: string
-          readOnly: true
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
     IndividualOffice365Integration:
       type: object
       properties:
@@ -545,6 +466,85 @@ components:
           title: Authorization url
           type: string
           readOnly: true
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    BrokerOffice365Integration:
+      required:
+      - broker
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        integration_status:
+          title: Integration status
+          type: string
+          enum:
+          - PENDING
+          - CONNECTED
+          - DISCONNECTED
+          readOnly: true
+        error_message:
+          title: Error message
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+        broker:
+          title: Broker
+          type: integer
+        integrated_by:
+          title: Integrated by
+          type:
+          - integer
+          - 'null'
+        connection_link:
+          title: Connection link
+          type: string
+          readOnly: true
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

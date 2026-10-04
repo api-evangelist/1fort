@@ -156,15 +156,6 @@ paths:
       summary: Leaderboard
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     Reward:
       type: object
       properties:
@@ -182,6 +173,15 @@ components:
           type: string
           format: date-time
           readOnly: true
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

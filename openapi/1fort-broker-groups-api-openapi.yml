@@ -421,6 +421,68 @@ paths:
       - broker_groups
 components:
   schemas:
+    BrokerUserGroupMembershipList:
+      required:
+      - broker_user
+      - group
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        broker_user:
+          title: Broker user
+          description: The broker user who is a member of the group
+          type: integer
+        broker_user_email:
+          title: Broker user email
+          type: string
+          readOnly: true
+          minLength: 1
+        broker_user_name:
+          title: Broker user name
+          type: string
+          readOnly: true
+        group:
+          title: Group
+          description: The group the broker user belongs to
+          type: string
+          format: uuid
+        group_name:
+          title: Group name
+          type: string
+          readOnly: true
+          minLength: 1
+        is_active:
+          title: Is active
+          description: Whether this membership is currently active
+          type: boolean
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
     BrokerUserGroupDetail:
       required:
       - name
@@ -516,15 +578,6 @@ components:
           type: string
           format: date-time
           readOnly: true
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     BrokerUserGroupMembershipCreate:
       required:
       - broker_user
@@ -602,77 +655,6 @@ components:
           - 'null'
           readOnly: true
           format: uri
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    BrokerUserGroupMembershipList:
-      required:
-      - broker_user
-      - group
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        broker_user:
-          title: Broker user
-          description: The broker user who is a member of the group
-          type: integer
-        broker_user_email:
-          title: Broker user email
-          type: string
-          readOnly: true
-          minLength: 1
-        broker_user_name:
-          title: Broker user name
-          type: string
-          readOnly: true
-        group:
-          title: Group
-          description: The group the broker user belongs to
-          type: string
-          format: uuid
-        group_name:
-          title: Group name
-          type: string
-          readOnly: true
-          minLength: 1
-        is_active:
-          title: Is active
-          description: Whether this membership is currently active
-          type: boolean
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          title: Updated at
-          type: string
-          format: date-time
-          readOnly: true
     BrokerUserGroupList:
       required:
       - name
@@ -768,6 +750,24 @@ components:
           type: string
           format: date-time
           readOnly: true
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey

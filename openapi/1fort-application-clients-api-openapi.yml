@@ -364,15 +364,50 @@ paths:
       summary: Get report
 components:
   schemas:
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
+    ValidationError:
+      title: Validation Error
       type: object
       properties:
-        detail:
-          description: Error details
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
           type: string
+    BusinessSubsidiary:
+      required:
+      - name
+      - business
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        ownership:
+          title: Ownership
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        business:
+          title: Business
+          type: integer
     BrokerUserList:
       type: object
       properties:
@@ -419,6 +454,15 @@ components:
           pattern: ^[-a-zA-Z0-9_]+$
           readOnly: true
           minLength: 1
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     BusinessList:
       required:
       - name
@@ -472,145 +516,7 @@ components:
           - 'null'
           maximum: 9223372036854775807
           minimum: -9223372036854775808
-    ApplicationV2List:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        coverage_types:
-          type: array
-          items:
-            type: string
-          readOnly: true
-          uniqueItems: true
-        has_coverages:
-          title: Has coverages
-          type: string
-          readOnly: true
-        coverage_applications:
-          type: array
-          items:
-            type: string
-            format: uuid
-          readOnly: true
-          uniqueItems: true
-        markets:
-          title: Markets
-          type: string
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        is_active:
-          title: Is active
-          type: boolean
-        effective_date:
-          title: Effective date
-          type:
-          - string
-          - 'null'
-          format: date
-        due_date:
-          title: Due date
-          type:
-          - string
-          - 'null'
-          format: date
-        policy_type:
-          title: Policy type
-          type: string
-          enum:
-          - ADMITTED
-          - SURPLUS_LINES
-          - ADMITTED_AND_SURPLUS_LINES
-        year:
-          title: Year
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        additional_documents:
-          title: Additional documents
-          type:
-          - string
-          - 'null'
-        status:
-          title: Status
-          type: string
-          enum:
-          - draft
-          - in_progress
-          - needs_review
-          - submitted
-          - archived
-        email_type:
-          title: Email type
-          type: string
-          enum:
-          - default
-          - conversation
-        submission_type:
-          title: Submission type
-          type: string
-          enum:
-          - NEW
-          - RENEWAL
-          - OTHER
-        submitted_by_business_at:
-          title: Submitted by business at
-          type:
-          - string
-          - 'null'
-          format: date-time
-        brokerage_wants_place_directly:
-          title: Brokerage wants place directly
-          type: boolean
-        brokerage_wants_wholesale_with_1fort:
-          title: Brokerage wants wholesale with 1fort
-          type: boolean
-        can_1fort_approach_any_market_wholesale:
-          title: Can 1fort approach any market wholesale
-          type: boolean
-        quote_version:
-          title: Quote version
-          type: string
-          enum:
-          - MANUAL
-          - API
-        copy_src:
-          title: Copy src
-          description: Source action that triggered application copy (e.g., 'new_limit')
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        source:
-          title: Source
-          description: Where the application submission originated
-          type:
-          - string
-          - 'null'
-          enum:
-          - storefront
-          - broker_in_portal
-          - email_ai
-          - renewal
-    APIException:
+    GenericError:
       title: Generic API Error
       required:
       - detail
@@ -619,50 +525,6 @@ components:
         detail:
           description: Error details
           type: string
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    BusinessSubsidiary:
-      required:
-      - name
-      - business
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        ownership:
-          title: Ownership
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        business:
-          title: Business
-          type: integer
     Application:
       type: object
       properties:
@@ -829,6 +691,144 @@ components:
             type: string
             format: uuid
           uniqueItems: true
+    ApplicationV2List:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        coverage_types:
+          type: array
+          items:
+            type: string
+          readOnly: true
+          uniqueItems: true
+        has_coverages:
+          title: Has coverages
+          type: string
+          readOnly: true
+        coverage_applications:
+          type: array
+          items:
+            type: string
+            format: uuid
+          readOnly: true
+          uniqueItems: true
+        markets:
+          title: Markets
+          type: string
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        is_active:
+          title: Is active
+          type: boolean
+        effective_date:
+          title: Effective date
+          type:
+          - string
+          - 'null'
+          format: date
+        due_date:
+          title: Due date
+          type:
+          - string
+          - 'null'
+          format: date
+        policy_type:
+          title: Policy type
+          type: string
+          enum:
+          - ADMITTED
+          - SURPLUS_LINES
+          - ADMITTED_AND_SURPLUS_LINES
+        year:
+          title: Year
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        additional_documents:
+          title: Additional documents
+          type:
+          - string
+          - 'null'
+        status:
+          title: Status
+          type: string
+          enum:
+          - draft
+          - in_progress
+          - needs_review
+          - submitted
+          - archived
+        email_type:
+          title: Email type
+          type: string
+          enum:
+          - default
+          - conversation
+        submission_type:
+          title: Submission type
+          type: string
+          enum:
+          - NEW
+          - RENEWAL
+          - OTHER
+        submitted_by_business_at:
+          title: Submitted by business at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        brokerage_wants_place_directly:
+          title: Brokerage wants place directly
+          type: boolean
+        brokerage_wants_wholesale_with_1fort:
+          title: Brokerage wants wholesale with 1fort
+          type: boolean
+        can_1fort_approach_any_market_wholesale:
+          title: Can 1fort approach any market wholesale
+          type: boolean
+        quote_version:
+          title: Quote version
+          type: string
+          enum:
+          - MANUAL
+          - API
+        copy_src:
+          title: Copy src
+          description: Source action that triggered application copy (e.g., 'new_limit')
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        source:
+          title: Source
+          description: Where the application submission originated
+          type:
+          - string
+          - 'null'
+          enum:
+          - storefront
+          - broker_in_portal
+          - email_ai
+          - renewal
   securitySchemes:
     Bearer:
       type: apiKey

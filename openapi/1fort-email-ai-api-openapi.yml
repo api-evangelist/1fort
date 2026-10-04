@@ -264,43 +264,6 @@ paths:
       - email_ai
 components:
   schemas:
-    EmailList:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        subject:
-          title: Subject
-          type:
-          - string
-          - 'null'
-        received_at:
-          title: Received at
-          type:
-          - string
-          - 'null'
-          format: date-time
-        sender:
-          title: Sender
-          type: object
-          readOnly: true
-        classification:
-          title: Classification
-          description: High-level classification of the email's business relevance.
-          type: string
-          enum:
-          - UNKNOWN
-          - INSURANCE_UNKNOWN
-          - COMMERCIAL_INSURANCE
-          - PERSONAL_INSURANCE
-          - NON_INSURANCE
-        attachment_count:
-          title: Attachment count
-          type: string
-          readOnly: true
     EmailUser:
       type: object
       properties:
@@ -353,6 +316,43 @@ components:
           title: Updated at
           type: string
           format: date-time
+          readOnly: true
+    EmailList:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        subject:
+          title: Subject
+          type:
+          - string
+          - 'null'
+        received_at:
+          title: Received at
+          type:
+          - string
+          - 'null'
+          format: date-time
+        sender:
+          title: Sender
+          type: object
+          readOnly: true
+        classification:
+          title: Classification
+          description: High-level classification of the email's business relevance.
+          type: string
+          enum:
+          - UNKNOWN
+          - INSURANCE_UNKNOWN
+          - COMMERCIAL_INSURANCE
+          - PERSONAL_INSURANCE
+          - NON_INSURANCE
+        attachment_count:
+          title: Attachment count
+          type: string
           readOnly: true
   securitySchemes:
     Bearer:
