@@ -340,51 +340,105 @@ paths:
       summary: Get surplus file
 components:
   schemas:
-    CarrierProduct:
+    CarrierList:
+      required:
+      - name
       type: object
       properties:
-        code:
-          title: Code
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
           type:
           - string
           - 'null'
-          minLength: 1
-        product_line:
-          title: Product line
+          readOnly: true
+          format: uri
+        am_best_rating:
+          title: Am best rating
+          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
           type:
           - string
           - 'null'
+          maxLength: 255
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+    Wholesaler:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
           minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
         is_active:
           title: Is active
           type: boolean
-        policy_type:
-          title: Policy type
-          type: string
-          enum:
-          - ADMITTED
-          - SURPLUS_LINES
-        name:
-          title: Name
+        is_owned_by_1fort:
+          title: Is owned by 1fort
+          description: Indicates if this wholesaler is owned by 1Fort
+          type: boolean
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+    PriceDetail:
+      type: object
+      properties:
+        amount:
+          title: Amount
+          type:
+          - string
+          - 'null'
+          format: decimal
+        type:
+          title: Type
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        text:
+          title: Text
           type:
           - string
           - 'null'
           maxLength: 255
-        am_best_rating:
-          title: Am best rating
-          description: Carrier AM Best Rating.
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        eta_hours:
-          title: Eta hours
-          description: Estimated turnaround time in hours for this carrier product.
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: -2147483648
     BrokerQuoteCreate:
       required:
       - type
@@ -461,6 +515,69 @@ components:
           description: 'Optional: Policy expiration date. If not provided but effective date exists, defaults to 1 year after effective date.'
           type: string
           format: date
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    CarrierProduct:
+      type: object
+      properties:
+        code:
+          title: Code
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        product_line:
+          title: Product line
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        is_active:
+          title: Is active
+          type: boolean
+        policy_type:
+          title: Policy type
+          type: string
+          enum:
+          - ADMITTED
+          - SURPLUS_LINES
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        am_best_rating:
+          title: Am best rating
+          description: Carrier AM Best Rating.
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        eta_hours:
+          title: Eta hours
+          description: Estimated turnaround time in hours for this carrier product.
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: -2147483648
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     QuoteWithAggregates:
       type: object
       properties:
@@ -691,123 +808,6 @@ components:
           description: This quote's latest completed AI analysis, or null when it has none - the same record the coverage's analyze-quotes endpoint returns for it, including `recommended` and `comparison_status`. Embedded here so clients listing quotes don't need a second request to render the analysis.
           type: string
           readOnly: true
-    PriceDetail:
-      type: object
-      properties:
-        amount:
-          title: Amount
-          type:
-          - string
-          - 'null'
-          format: decimal
-        type:
-          title: Type
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        text:
-          title: Text
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-    Wholesaler:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        is_active:
-          title: Is active
-          type: boolean
-        is_owned_by_1fort:
-          title: Is owned by 1fort
-          description: Indicates if this wholesaler is owned by 1Fort
-          type: boolean
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    CarrierList:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        am_best_rating:
-          title: Am best rating
-          description: AM Best financial strength rating (e.g., A++, A+, A, A-, B++, B+)
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
-          type:
-          - array
-          - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
   securitySchemes:
     Bearer:
       type: apiKey

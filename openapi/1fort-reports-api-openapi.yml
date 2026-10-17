@@ -104,15 +104,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ChartDataItem'
-    ChartDataItem:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          title: Name
-          type: string
-          minLength: 1
     GenericError:
       title: Generic API Error
       required:
@@ -131,6 +122,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Chart'
+    ChartDataItem:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          minLength: 1
   securitySchemes:
     Bearer:
       type: apiKey

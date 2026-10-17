@@ -180,6 +180,15 @@ paths:
       summary: Get document
 components:
   schemas:
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     Invoice:
       type: object
       properties:
@@ -221,6 +230,15 @@ components:
           title: Download url
           type: string
           readOnly: true
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     BinderFlexFields:
       type: object
       properties:
@@ -269,24 +287,6 @@ components:
           title: Documents
           type: string
           readOnly: true
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
   securitySchemes:
     Bearer:
       type: apiKey

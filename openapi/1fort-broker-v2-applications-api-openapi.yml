@@ -291,6 +291,15 @@ paths:
       - 'broker (v2): applications'
 components:
   schemas:
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     BrokerApplicationV2:
       required:
       - binder_count
@@ -379,15 +388,6 @@ components:
           type: string
           readOnly: true
           minLength: 1
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     APIException:
       title: Generic API Error
       required:

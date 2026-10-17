@@ -284,6 +284,20 @@ paths:
       - 'broker: user-ai-customizations'
 components:
   schemas:
+    UserAICustomization:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        customization_type:
+          $ref: '#/components/schemas/AICustomizationType'
+        value:
+          title: Value
+          description: Custom value for this type
+          type: string
     ValidationError:
       title: Validation Error
       type: object
@@ -298,6 +312,24 @@ components:
         type: array
         items:
           type: string
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     UserAICustomizationCreateUpdate:
       required:
       - customization_type
@@ -307,20 +339,6 @@ components:
           title: Customization type
           type: string
           format: uuid
-        value:
-          title: Value
-          description: Custom value for this type
-          type: string
-    UserAICustomization:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        customization_type:
-          $ref: '#/components/schemas/AICustomizationType'
         value:
           title: Value
           description: Custom value for this type
@@ -345,24 +363,6 @@ components:
           type: string
           readOnly: true
           minLength: 1
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
   securitySchemes:
     Bearer:
       type: apiKey

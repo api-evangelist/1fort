@@ -1195,53 +1195,6 @@ paths:
       summary: Uploaded files
 components:
   schemas:
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    QuoteChatMessage:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        message:
-          title: Message
-          type: string
-          readOnly: true
-        role:
-          title: Role
-          type: string
-          enum:
-          - assistant
-          - user
-          readOnly: true
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     QuoteAnalysisFlex:
       required:
       - quote
@@ -1279,6 +1232,53 @@ components:
           type:
           - integer
           - 'null'
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
+          type: string
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    QuoteChatMessage:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        message:
+          title: Message
+          type: string
+          readOnly: true
+        role:
+          title: Role
+          type: string
+          enum:
+          - assistant
+          - user
+          readOnly: true
     GenericError:
       title: Generic API Error
       required:

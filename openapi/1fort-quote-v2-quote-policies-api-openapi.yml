@@ -262,6 +262,15 @@ components:
         detail:
           description: Error details
           type: string
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     QuotePolicyFlexFields:
       type: object
       properties:
@@ -445,15 +454,6 @@ components:
           title: Documents
           type: string
           readOnly: true
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
   securitySchemes:
     Bearer:
       type: apiKey

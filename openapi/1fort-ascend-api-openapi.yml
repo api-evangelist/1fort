@@ -531,6 +531,15 @@ components:
         type: array
         items:
           type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     Payout:
       required:
       - status
@@ -661,15 +670,6 @@ components:
           title: Can dispatch
           type: string
           readOnly: true
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     APIException:
       title: Generic API Error
       required:

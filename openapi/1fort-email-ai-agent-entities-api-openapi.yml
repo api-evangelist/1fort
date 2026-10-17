@@ -164,28 +164,15 @@ components:
           items:
             type: string
             minLength: 1
-    ErrorResponse:
+    APIException:
+      title: Generic API Error
       required:
-      - error
+      - detail
       type: object
       properties:
-        error:
-          title: Error
-          description: Error details with code and message.
-          type: object
-          additionalProperties:
-            type: string
-            minLength: 1
-        request_id:
-          title: Request id
-          description: Request ID for debugging.
+        detail:
+          description: Error details
           type: string
-          minLength: 1
-        timestamp:
-          title: Timestamp
-          description: When the error occurred.
-          type: string
-          format: date-time
     EntitySearchResponse:
       required:
       - profile_id
@@ -258,15 +245,28 @@ components:
               type:
               - string
               - 'null'
-    APIException:
-      title: Generic API Error
+    ErrorResponse:
       required:
-      - detail
+      - error
       type: object
       properties:
-        detail:
-          description: Error details
+        error:
+          title: Error
+          description: Error details with code and message.
+          type: object
+          additionalProperties:
+            type: string
+            minLength: 1
+        request_id:
+          title: Request id
+          description: Request ID for debugging.
           type: string
+          minLength: 1
+        timestamp:
+          title: Timestamp
+          description: When the error occurred.
+          type: string
+          format: date-time
   securitySchemes:
     Bearer:
       type: apiKey

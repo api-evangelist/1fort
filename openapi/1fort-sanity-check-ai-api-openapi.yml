@@ -241,6 +241,13 @@ paths:
         required: true
 components:
   schemas:
+    SanityCheckUpdate:
+      type: object
+      properties:
+        hidden_fields:
+          title: Hidden Fields
+          description: Dismissed or no longer relevant fields that should be removed from the ai_response.
+          type: object
     ValidationError:
       title: Validation Error
       type: object
@@ -255,13 +262,15 @@ components:
         type: array
         items:
           type: string
-    SanityCheckUpdate:
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
       type: object
       properties:
-        hidden_fields:
-          title: Hidden Fields
-          description: Dismissed or no longer relevant fields that should be removed from the ai_response.
-          type: object
+        detail:
+          description: Error details
+          type: string
     SanityCheckRequest:
       required:
       - coverage_application
@@ -327,15 +336,6 @@ components:
           type:
           - string
           - 'null'
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
     GenericError:
       title: Generic API Error
       required:

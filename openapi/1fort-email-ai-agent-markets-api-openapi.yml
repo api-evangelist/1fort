@@ -208,6 +208,15 @@ components:
           type: string
           format: date-time
           readOnly: true
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     MarketAgentUpsert:
       required:
       - product_lines
@@ -343,15 +352,6 @@ components:
           description: When the error occurred.
           type: string
           format: date-time
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
   securitySchemes:
     Bearer:
       type: apiKey

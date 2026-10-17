@@ -98,49 +98,6 @@ paths:
       summary: Retrieve Email
 components:
   schemas:
-    EmailAttachment:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-        mime_type:
-          title: Mime type
-          type:
-          - string
-          - 'null'
-          maxLength: 1000
-        size:
-          title: Size
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        document_type:
-          title: Document type
-          type: string
-          readOnly: true
-        document_year:
-          title: Document year
-          type: string
-          readOnly: true
-        download_url:
-          title: Download url
-          type: string
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
     EmailDetail:
       type: object
       properties:
@@ -218,6 +175,49 @@ components:
         detail:
           description: Error details
           type: string
+    EmailAttachment:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+        mime_type:
+          title: Mime type
+          type:
+          - string
+          - 'null'
+          maxLength: 1000
+        size:
+          title: Size
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        document_type:
+          title: Document type
+          type: string
+          readOnly: true
+        document_year:
+          title: Document year
+          type: string
+          readOnly: true
+        download_url:
+          title: Download url
+          type: string
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

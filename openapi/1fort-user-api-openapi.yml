@@ -175,50 +175,6 @@ paths:
         required: true
 components:
   schemas:
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    BusinessSubsidiary:
-      required:
-      - name
-      - business
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        ownership:
-          title: Ownership
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        business:
-          title: Business
-          type: integer
     UserList:
       type: object
       properties:
@@ -259,59 +215,49 @@ components:
           - Broker
           - Underwriter
           readOnly: true
-    UserDetail:
+    BusinessSubsidiary:
+      required:
+      - name
+      - business
       type: object
       properties:
         id:
           title: ID
           type: integer
           readOnly: true
-        email:
-          title: Email address
+        name:
+          title: Name
           type: string
-          format: email
-          readOnly: true
+          maxLength: 255
           minLength: 1
-        first_name:
-          title: First name
-          type: string
-          maxLength: 150
-        last_name:
-          title: Last name
-          type: string
-          maxLength: 150
-        title:
-          title: Title
+        description:
+          title: Description
           type:
           - string
           - 'null'
-          maxLength: 50
+        ownership:
+          title: Ownership
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
         business:
-          $ref: '#/components/schemas/BusinessList'
-        role:
-          title: Role
-          description: Role is for determining the access level control of the user.
-          type:
-          - string
-          - 'null'
-          enum:
-          - Owner
-          - Admin
-          - User
-          - Broker
-          - Underwriter
-        date_joined:
-          title: Date joined
-          type: string
-          format: date-time
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
+          title: Business
+          type: integer
+    ValidationError:
+      title: Validation Error
       type: object
       properties:
-        detail:
-          description: Error details
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
           type: string
     BusinessList:
       required:
@@ -366,6 +312,15 @@ components:
           - 'null'
           maximum: 9223372036854775807
           minimum: -9223372036854775808
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     GenericError:
       title: Generic API Error
       required:
@@ -375,6 +330,51 @@ components:
         detail:
           description: Error details
           type: string
+    UserDetail:
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        email:
+          title: Email address
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        first_name:
+          title: First name
+          type: string
+          maxLength: 150
+        last_name:
+          title: Last name
+          type: string
+          maxLength: 150
+        title:
+          title: Title
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        business:
+          $ref: '#/components/schemas/BusinessList'
+        role:
+          title: Role
+          description: Role is for determining the access level control of the user.
+          type:
+          - string
+          - 'null'
+          enum:
+          - Owner
+          - Admin
+          - User
+          - Broker
+          - Underwriter
+        date_joined:
+          title: Date joined
+          type: string
+          format: date-time
   securitySchemes:
     Bearer:
       type: apiKey

@@ -320,6 +320,113 @@ paths:
         required: true
 components:
   schemas:
+    BrokerUserBusiness:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+          readOnly: true
+        first_name:
+          title: First name
+          type: string
+          readOnly: true
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          readOnly: true
+          minLength: 1
+        phone_number:
+          title: Phone number
+          type: string
+          readOnly: true
+          minLength: 1
+        email:
+          title: Email
+          type: string
+          readOnly: true
+          minLength: 1
+        type:
+          title: Type
+          type: string
+          readOnly: true
+          minLength: 1
+        is_primary:
+          title: Is primary
+          type: boolean
+          readOnly: true
+          default: false
+    ApplicationPrefilledForm:
+      required:
+      - business
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        document_content:
+          title: Document content
+          type:
+          - string
+          - 'null'
+        form:
+          title: Form
+          type: string
+          readOnly: true
+          format: uri
+        application:
+          title: Application
+          type:
+          - string
+          - 'null'
+          format: uuid
+        created_by:
+          title: Created by
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        business:
+          title: Business
+          type: integer
+    BusinessSubsidiary:
+      required:
+      - name
+      - business
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        ownership:
+          title: Ownership
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        business:
+          title: Business
+          type: integer
     ValidationError:
       title: Validation Error
       type: object
@@ -1363,113 +1470,24 @@ components:
           type:
           - integer
           - 'null'
-    ApplicationPrefilledForm:
+    APIException:
+      title: Generic API Error
       required:
-      - business
+      - detail
       type: object
       properties:
-        id:
-          title: Id
+        detail:
+          description: Error details
           type: string
-          format: uuid
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        document_content:
-          title: Document content
-          type:
-          - string
-          - 'null'
-        form:
-          title: Form
-          type: string
-          readOnly: true
-          format: uri
-        application:
-          title: Application
-          type:
-          - string
-          - 'null'
-          format: uuid
-        created_by:
-          title: Created by
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        business:
-          title: Business
-          type: integer
-    BusinessSubsidiary:
+    GenericError:
+      title: Generic API Error
       required:
-      - name
-      - business
+      - detail
       type: object
       properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        name:
-          title: Name
+        detail:
+          description: Error details
           type: string
-          maxLength: 255
-          minLength: 1
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        ownership:
-          title: Ownership
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        business:
-          title: Business
-          type: integer
-    BrokerUserBusiness:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: integer
-          readOnly: true
-        first_name:
-          title: First name
-          type: string
-          readOnly: true
-          minLength: 1
-        last_name:
-          title: Last name
-          type: string
-          readOnly: true
-          minLength: 1
-        phone_number:
-          title: Phone number
-          type: string
-          readOnly: true
-          minLength: 1
-        email:
-          title: Email
-          type: string
-          readOnly: true
-          minLength: 1
-        type:
-          title: Type
-          type: string
-          readOnly: true
-          minLength: 1
-        is_primary:
-          title: Is primary
-          type: boolean
-          readOnly: true
-          default: false
     BusinessUser:
       required:
       - first_name
@@ -1586,24 +1604,6 @@ components:
           type:
           - integer
           - 'null'
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
   securitySchemes:
     Bearer:
       type: apiKey

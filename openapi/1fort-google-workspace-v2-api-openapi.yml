@@ -511,6 +511,15 @@ components:
         type: array
         items:
           type: string
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     BrokerGoogleOAuthIntegration:
       type: object
       properties:
@@ -557,7 +566,7 @@ components:
           title: Connection link
           type: string
           readOnly: true
-    APIException:
+    GenericError:
       title: Generic API Error
       required:
       - detail
@@ -630,15 +639,6 @@ components:
           title: Scopes
           type: string
           readOnly: true
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
   securitySchemes:
     Bearer:
       type: apiKey

@@ -296,20 +296,6 @@ paths:
         required: true
 components:
   schemas:
-    TokenRefresh:
-      required:
-      - refresh
-      type: object
-      properties:
-        refresh:
-          title: Refresh
-          type: string
-          minLength: 1
-        access:
-          title: Access
-          type: string
-          readOnly: true
-          minLength: 1
     ValidationError:
       title: Validation Error
       type: object
@@ -333,6 +319,20 @@ components:
         detail:
           description: Error details
           type: string
+    TokenRefresh:
+      required:
+      - refresh
+      type: object
+      properties:
+        refresh:
+          title: Refresh
+          type: string
+          minLength: 1
+        access:
+          title: Access
+          type: string
+          readOnly: true
+          minLength: 1
     APIException:
       title: Generic API Error
       required:

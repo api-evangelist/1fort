@@ -523,29 +523,6 @@ paths:
       x-operation-id-original: v2_broker_tasks_read
 components:
   schemas:
-    ValidationError:
-      title: Validation Error
-      type: object
-      properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
-          type: string
-    QuoteTaskBulkResolve:
-      required:
-      - tasks
-      type: object
-      properties:
-        tasks:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteTaskResolve'
     QuoteTaskFlexFields:
       required:
       - title
@@ -665,27 +642,29 @@ components:
           type:
           - integer
           - 'null'
-    QuoteTaskDocument:
+    QuoteTaskBulkResolve:
+      required:
+      - tasks
       type: object
       properties:
-        id:
-          title: Id
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteTaskResolve'
+    ValidationError:
+      title: Validation Error
+      type: object
+      properties:
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
           type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        document:
-          title: Document
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
     QuoteTaskResolve:
       required:
       - id
@@ -745,6 +724,27 @@ components:
         detail:
           description: Error details
           type: string
+    QuoteTaskDocument:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        document:
+          title: Document
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
   securitySchemes:
     Bearer:
       type: apiKey

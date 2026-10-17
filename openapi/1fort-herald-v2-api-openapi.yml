@@ -522,9 +522,25 @@ paths:
       summary: Retrieve Industry classification
 components:
   schemas:
-    CanonicalProductLineRef:
+    APIException:
+      title: Generic API Error
       required:
-      - code
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    SubProductLine:
       type: object
       properties:
         id:
@@ -532,17 +548,31 @@ components:
           type: string
           format: uuid
           readOnly: true
-        code:
-          title: Code
-          type: string
-          maxLength: 150
-          minLength: 1
-        display_name:
-          title: Display name
+        name:
+          title: Name
           type:
           - string
           - 'null'
           maxLength: 255
+        display_name:
+          title: Display name
+          description: Name used on the Frontend.
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
     ProductLine:
       required:
       - code
@@ -595,39 +625,6 @@ components:
           - Property only
         canonical_product_line:
           $ref: '#/components/schemas/CanonicalProductLineRef'
-    SubProductLine:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        display_name:
-          title: Display name
-          description: Name used on the Frontend.
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        logo:
-          title: Logo
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
     IndustryClassification:
       required:
       - herald_id
@@ -659,24 +656,27 @@ components:
           type: string
           readOnly: true
           minLength: 1
-    APIException:
-      title: Generic API Error
+    CanonicalProductLineRef:
       required:
-      - detail
+      - code
       type: object
       properties:
-        detail:
-          description: Error details
+        id:
+          title: Id
           type: string
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
+          format: uuid
+          readOnly: true
+        code:
+          title: Code
           type: string
+          maxLength: 150
+          minLength: 1
+        display_name:
+          title: Display name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
   securitySchemes:
     Bearer:
       type: apiKey

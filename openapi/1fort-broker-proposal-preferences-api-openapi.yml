@@ -112,22 +112,6 @@ components:
         type: array
         items:
           type: string
-    BrokerAgencyProposalPreferences:
-      type: object
-      properties:
-        proposal_design_style:
-          title: Proposal design style
-          type: string
-          enum:
-          - editorial-executive
-          - swiss-minimal
-          - soft-modern
-          - bold-corporate
-        proposal_design_colors:
-          title: Proposal design colors
-          type:
-          - object
-          - 'null'
     GenericError:
       title: Generic API Error
       required:
@@ -146,6 +130,22 @@ components:
         detail:
           description: Error details
           type: string
+    BrokerAgencyProposalPreferences:
+      type: object
+      properties:
+        proposal_design_style:
+          title: Proposal design style
+          type: string
+          enum:
+          - editorial-executive
+          - swiss-minimal
+          - soft-modern
+          - bold-corporate
+        proposal_design_colors:
+          title: Proposal design colors
+          type:
+          - object
+          - 'null'
   securitySchemes:
     Bearer:
       type: apiKey

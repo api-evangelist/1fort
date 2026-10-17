@@ -454,7 +454,7 @@ paths:
       - Email AI Agent
 components:
   schemas:
-    AgentEmailUser:
+    AgentEmailContent:
       type: object
       properties:
         id:
@@ -462,21 +462,13 @@ components:
           type: string
           format: uuid
           readOnly: true
-        email:
-          title: Email
-          type: string
-          format: email
+        body:
+          title: Body
+          type:
+          - string
+          - 'null'
           readOnly: true
           minLength: 1
-        display_name:
-          title: Display name
-          type: string
-          readOnly: true
-          minLength: 1
-        broker_id:
-          title: Broker id
-          type: string
-          readOnly: true
     ErrorResponse:
       required:
       - error
@@ -499,173 +491,6 @@ components:
           description: When the error occurred.
           type: string
           format: date-time
-    AgentAttachment:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        mime_type:
-          title: Mime type
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        size:
-          title: Size
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        document_type:
-          title: Document type
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        processing_status:
-          title: Processing status
-          description: Current processing status for quick filtering
-          type: string
-          enum:
-          - UNPROCESSED
-          - QUEUED
-          - PROCESSING
-          - COMPLETED
-          - FAILED
-          - SKIPPED
-          readOnly: true
-        metadata:
-          title: Metadata
-          type: object
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-    AgentEmailUpdateResponse:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        classification:
-          title: Classification
-          type: string
-          readOnly: true
-          minLength: 1
-        processing_status:
-          title: Processing status
-          type: string
-          readOnly: true
-          minLength: 1
-        updated_at:
-          title: Updated at
-          type: string
-          format: date-time
-          readOnly: true
-    AgentAttachmentDetail:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        email_id:
-          title: Email id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        mime_type:
-          title: Mime type
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          minLength: 1
-        size:
-          title: Size
-          type:
-          - integer
-          - 'null'
-          readOnly: true
-        document_type:
-          title: Document type
-          type: string
-          readOnly: true
-        processing_status:
-          title: Processing status
-          description: Current processing status for quick filtering
-          type: string
-          enum:
-          - UNPROCESSED
-          - QUEUED
-          - PROCESSING
-          - COMPLETED
-          - FAILED
-          - SKIPPED
-          readOnly: true
-        metadata:
-          title: Metadata
-          type: object
-          readOnly: true
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-    AgentEmailUpdate:
-      type: object
-      properties:
-        classification:
-          title: Classification
-          description: New classification value for the email.
-          type: string
-          enum:
-          - UNKNOWN
-          - INSURANCE_UNKNOWN
-          - COMMERCIAL_INSURANCE
-          - PERSONAL_INSURANCE
-          - NON_INSURANCE
-        processing_status:
-          title: Processing status
-          description: New processing status for the email.
-          type: string
-          enum:
-          - SYNCING
-          - READY
-          - PROCESSING
-          - COMPLETED
-          - FAILED
-          - SKIPPED
-          - LINKED
-        classification_details:
-          title: Classification details
-          description: Metadata about the classification decision (method, confidence, reasoning, etc.).
-          type: object
-          default: {}
     AgentEmailDetail:
       type: object
       properties:
@@ -770,7 +595,7 @@ components:
           items:
             $ref: '#/components/schemas/AgentAttachment'
           readOnly: true
-    AgentEmailContent:
+    AgentAttachmentDetail:
       type: object
       properties:
         id:
@@ -778,13 +603,188 @@ components:
           type: string
           format: uuid
           readOnly: true
-        body:
-          title: Body
+        email_id:
+          title: Email id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
           type:
           - string
           - 'null'
           readOnly: true
           minLength: 1
+        mime_type:
+          title: Mime type
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        size:
+          title: Size
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        document_type:
+          title: Document type
+          type: string
+          readOnly: true
+        processing_status:
+          title: Processing status
+          description: Current processing status for quick filtering
+          type: string
+          enum:
+          - UNPROCESSED
+          - QUEUED
+          - PROCESSING
+          - COMPLETED
+          - FAILED
+          - SKIPPED
+          readOnly: true
+        metadata:
+          title: Metadata
+          type: object
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+    AgentEmailUser:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        email:
+          title: Email
+          type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        display_name:
+          title: Display name
+          type: string
+          readOnly: true
+          minLength: 1
+        broker_id:
+          title: Broker id
+          type: string
+          readOnly: true
+    AgentEmailUpdate:
+      type: object
+      properties:
+        classification:
+          title: Classification
+          description: New classification value for the email.
+          type: string
+          enum:
+          - UNKNOWN
+          - INSURANCE_UNKNOWN
+          - COMMERCIAL_INSURANCE
+          - PERSONAL_INSURANCE
+          - NON_INSURANCE
+        processing_status:
+          title: Processing status
+          description: New processing status for the email.
+          type: string
+          enum:
+          - SYNCING
+          - READY
+          - PROCESSING
+          - COMPLETED
+          - FAILED
+          - SKIPPED
+          - LINKED
+        classification_details:
+          title: Classification details
+          description: Metadata about the classification decision (method, confidence, reasoning, etc.).
+          type: object
+          default: {}
+    AgentEmailUpdateResponse:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        classification:
+          title: Classification
+          type: string
+          readOnly: true
+          minLength: 1
+        processing_status:
+          title: Processing status
+          type: string
+          readOnly: true
+          minLength: 1
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+          readOnly: true
+    AgentAttachment:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        mime_type:
+          title: Mime type
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        size:
+          title: Size
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        document_type:
+          title: Document type
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          minLength: 1
+        processing_status:
+          title: Processing status
+          description: Current processing status for quick filtering
+          type: string
+          enum:
+          - UNPROCESSED
+          - QUEUED
+          - PROCESSING
+          - COMPLETED
+          - FAILED
+          - SKIPPED
+          readOnly: true
+        metadata:
+          title: Metadata
+          type: object
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

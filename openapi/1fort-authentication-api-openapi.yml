@@ -77,20 +77,46 @@ paths:
         required: true
 components:
   schemas:
-    ValidationError:
-      title: Validation Error
+    UserList:
       type: object
       properties:
-        non_field_errors:
-          description: List of validation errors not related to any field
-          type: array
-          items:
-            type: string
-      additionalProperties:
-        description: A list of error messages for each field that triggered a validation error
-        type: array
-        items:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        email:
+          title: Email address
           type: string
+          format: email
+          readOnly: true
+          minLength: 1
+        first_name:
+          title: First name
+          type: string
+          maxLength: 150
+        last_name:
+          title: Last name
+          type: string
+          maxLength: 150
+        title:
+          title: Title
+          type:
+          - string
+          - 'null'
+          maxLength: 50
+        role:
+          title: Role
+          description: Role is for determining the access level control of the user.
+          type:
+          - string
+          - 'null'
+          enum:
+          - Owner
+          - Admin
+          - User
+          - Broker
+          - Underwriter
+          readOnly: true
     OTPEmail:
       required:
       - email
@@ -149,46 +175,20 @@ components:
           title: Access expires in seconds
           type: integer
           readOnly: true
-    UserList:
+    ValidationError:
+      title: Validation Error
       type: object
       properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        email:
-          title: Email address
+        non_field_errors:
+          description: List of validation errors not related to any field
+          type: array
+          items:
+            type: string
+      additionalProperties:
+        description: A list of error messages for each field that triggered a validation error
+        type: array
+        items:
           type: string
-          format: email
-          readOnly: true
-          minLength: 1
-        first_name:
-          title: First name
-          type: string
-          maxLength: 150
-        last_name:
-          title: Last name
-          type: string
-          maxLength: 150
-        title:
-          title: Title
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        role:
-          title: Role
-          description: Role is for determining the access level control of the user.
-          type:
-          - string
-          - 'null'
-          enum:
-          - Owner
-          - Admin
-          - User
-          - Broker
-          - Underwriter
-          readOnly: true
   securitySchemes:
     Bearer:
       type: apiKey

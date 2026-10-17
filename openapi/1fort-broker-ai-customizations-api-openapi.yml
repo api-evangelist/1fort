@@ -274,39 +274,6 @@ components:
         type: array
         items:
           type: string
-    AICustomizationCreateUpdate:
-      required:
-      - customization_type
-      type: object
-      properties:
-        customization_type:
-          title: Customization type
-          type: string
-          format: uuid
-        value:
-          title: Value
-          description: Custom value for this type
-          type: string
-    AICustomizationType:
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        type:
-          title: Type
-          description: Kebab-case identifier for the customization type (e.g. cross-sell, quote-analysis)
-          type: string
-          readOnly: true
-          minLength: 1
-        name:
-          title: Name
-          description: Display name for the UI
-          type: string
-          readOnly: true
-          minLength: 1
     APIException:
       title: Generic API Error
       required:
@@ -338,6 +305,39 @@ components:
       properties:
         detail:
           description: Error details
+          type: string
+    AICustomizationType:
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        type:
+          title: Type
+          description: Kebab-case identifier for the customization type (e.g. cross-sell, quote-analysis)
+          type: string
+          readOnly: true
+          minLength: 1
+        name:
+          title: Name
+          description: Display name for the UI
+          type: string
+          readOnly: true
+          minLength: 1
+    AICustomizationCreateUpdate:
+      required:
+      - customization_type
+      type: object
+      properties:
+        customization_type:
+          title: Customization type
+          type: string
+          format: uuid
+        value:
+          title: Value
+          description: Custom value for this type
           type: string
   securitySchemes:
     Bearer:

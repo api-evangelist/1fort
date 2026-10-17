@@ -385,7 +385,7 @@ paths:
         required: true
 components:
   schemas:
-    QuoteReadOnly:
+    ApplicationList:
       type: object
       properties:
         id:
@@ -393,123 +393,366 @@ components:
           type: string
           format: uuid
           readOnly: true
-        business:
-          $ref: '#/components/schemas/BusinessList'
-        broker:
-          $ref: '#/components/schemas/BrokerAgency'
-        application:
-          $ref: '#/components/schemas/ApplicationList'
-        carrier:
-          $ref: '#/components/schemas/Carrier'
-        mga:
-          $ref: '#/components/schemas/Wholesaler'
-        download_pdf:
-          title: Download pdf
-          type: string
-          readOnly: true
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteFile'
-          readOnly: true
-        has_bind_request:
-          title: Has bind request
-          type: string
-          readOnly: true
-        version:
-          title: Version
-          type: string
+        is_active:
+          title: Is active
+          type: boolean
           readOnly: true
         created_at:
           title: Created at
           type: string
           format: date-time
           readOnly: true
+        name:
+          title: Name
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        effective_date:
+          title: Effective date
+          type:
+          - string
+          - 'null'
+          format: date
+        due_date:
+          title: Due date
+          type:
+          - string
+          - 'null'
+          format: date
+        policy_type:
+          title: Policy type
+          type: string
+          enum:
+          - ADMITTED
+          - SURPLUS_LINES
+          - ADMITTED_AND_SURPLUS_LINES
+        year:
+          title: Year
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        prefilled_application:
+          title: Prefilled application
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        additional_documents:
+          title: Additional documents
+          type:
+          - string
+          - 'null'
         status:
           title: Status
           type: string
           enum:
           - draft
-          - issued
-          - declined
-          - expired
-          - selected_for_binding
-          - awaiting_payment
-          - bound
-          - cancelled
-        quote_type:
-          title: Quote type
+          - in_progress
+          - needs_review
+          - submitted
+          - archived
+        email_type:
+          title: Email type
           type: string
           enum:
-          - excess
-          - ADMITTED
-          - SURPLUS_LINES
-          - ADMITTED_AND_SURPLUS_LINES
-        quote_number:
-          title: Quote number
+          - default
+          - conversation
+        submission_type:
+          title: Submission type
+          type: string
+          enum:
+          - NEW
+          - RENEWAL
+          - OTHER
+        form_override:
+          title: Form override
           type:
           - string
           - 'null'
-          maxLength: 255
-        policy_number:
-          title: Policy number
+          readOnly: true
+          format: uri
+        submitted_by_business_at:
+          title: Submitted by business at
           type:
           - string
           - 'null'
-          maxLength: 255
-        limit:
-          title: Limit
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-        retention:
-          title: Retention
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-        premium:
-          title: Premium
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-        policy_term_months:
-          title: Policy term months
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        issue_date:
-          title: Issue date
+          format: date-time
+        brokerage_wants_place_directly:
+          title: Brokerage wants place directly
+          type: boolean
+        brokerage_wants_wholesale_with_1fort:
+          title: Brokerage wants wholesale with 1fort
+          type: boolean
+        can_1fort_approach_any_market_wholesale:
+          title: Can 1fort approach any market wholesale
+          type: boolean
+        quote_version:
+          title: Quote version
+          type: string
+          enum:
+          - MANUAL
+          - API
+        copy_src:
+          title: Copy src
+          description: Source action that triggered application copy (e.g., 'new_limit')
           type:
           - string
           - 'null'
-          format: date
-        minimum_days_to_cancel:
-          title: Minimum days to cancel
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        additional_notes:
-          title: Additional notes
-          type:
-          - string
-          - 'null'
-        type:
-          title: Type
+          maxLength: 50
+        source:
+          title: Source
+          description: Where the application submission originated
           type:
           - string
           - 'null'
           enum:
-          - BUSINESS_OWNERS_POLICY
-          - WORKERS_COMPENSATION
-          - GENERAL_LIABILITY
-          - MISCELLANEOUS_PROFESSIONAL_LIABILITY
-          - CYBER
-          - PROFESSIONAL_LIABILITY
-          - TECHNOLOGY_ERRORS_AND_OMISSIONS
-          - DIRECTORS_AND_OFFICERS
-          - EMPLOYMENT_PRACTICES_LIABILITY
-          - FIDUCIARY_LIABILITY
-          - KIDNAP_AND_RANSOM
+          - storefront
+          - broker_in_portal
+          - email_ai
+          - renewal
+        business:
+          title: Business
+          type:
+          - integer
+          - 'null'
+        brokerage_direct_placement_carriers:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        carriers_1fort_should_not_approach:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+        coverage_types:
+          type: array
+          items:
+            type: string
+            format: uuid
+          uniqueItems: true
+    Wholesaler:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        logo:
+          title: Logo
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          format: uri
+        is_active:
+          title: Is active
+          type: boolean
+        is_owned_by_1fort:
+          title: Is owned by 1fort
+          description: Indicates if this wholesaler is owned by 1Fort
+          type: boolean
+        domains:
+          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          type:
+          - array
+          - 'null'
+          items:
+            title: Domains
+            type: string
+            maxLength: 255
+            minLength: 1
+    BusinessSubsidiary:
+      required:
+      - name
+      - business
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        description:
+          title: Description
+          type:
+          - string
+          - 'null'
+        ownership:
+          title: Ownership
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        business:
+          title: Business
+          type: integer
+    QuoteFile:
+      required:
+      - quote
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+          format: uuid
+          readOnly: true
+        download_file:
+          title: Download file
+          type: string
+          readOnly: true
+        file:
+          title: File
+          type: string
+          readOnly: true
+          format: uri
+        quote:
+          title: Quote
+          type: string
+          format: uuid
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        file_type:
+          title: File type
+          type: string
+          enum:
+          - quote
+          - binder
+          - invoice
+          - unspecified
+    UserForBrokerAgency:
+      type: object
+      properties:
+        first_name:
+          title: First name
+          type: string
+          maxLength: 255
+          minLength: 1
+        last_name:
+          title: Last name
+          type: string
+          maxLength: 255
+          minLength: 1
+        user_defined_role:
+          title: User defined role
+          type: string
+          maxLength: 255
+          minLength: 1
+    BusinessList:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+          maxLength: 255
+          minLength: 1
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+          readOnly: true
+        industry:
+          title: Industry
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        number_of_employees:
+          title: Number of employees
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        active:
+          title: Active
+          type: boolean
+        domain_name:
+          title: Domain name
+          type:
+          - string
+          - 'null'
+          maxLength: 500
+        subsidiaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessSubsidiary'
+          readOnly: true
+        revenue:
+          title: Revenue
+          type:
+          - integer
+          - 'null'
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
+    QuoteRequestWrite:
+      required:
+      - herald_quote
+      - changes
+      type: object
+      properties:
+        herald_quote:
+          type: array
+          items:
+            type: string
+            minLength: 1
+        changes:
+          title: Changes
+          description: Type of changes requested (e.g. App info, Sub-limits, Retentions, Retroactive date, Other)
+          type: string
+          maxLength: 255
+          minLength: 1
+        notes:
+          title: Notes
+          description: Additional notes regarding the change request
+          type:
+          - string
+          - 'null'
+        files:
+          type: array
+          items:
+            type: string
+            readOnly: true
     CarrierProduct:
       type: object
       properties:
@@ -569,119 +812,15 @@ components:
         type: array
         items:
           type: string
-    QuoteRequestWrite:
+    GenericError:
+      title: Generic API Error
       required:
-      - herald_quote
-      - changes
+      - detail
       type: object
       properties:
-        herald_quote:
-          type: array
-          items:
-            type: string
-            minLength: 1
-        changes:
-          title: Changes
-          description: Type of changes requested (e.g. App info, Sub-limits, Retentions, Retroactive date, Other)
+        detail:
+          description: Error details
           type: string
-          maxLength: 255
-          minLength: 1
-        notes:
-          title: Notes
-          description: Additional notes regarding the change request
-          type:
-          - string
-          - 'null'
-        files:
-          type: array
-          items:
-            type: string
-            readOnly: true
-    AgencySubscription:
-      type: object
-      properties:
-        name:
-          title: Name
-          description: Display name for the plan (e.g. "Pro plan").
-          type: string
-          readOnly: true
-          minLength: 1
-        price:
-          title: Price
-          description: Plan price in dollars for the selected billing frequency.
-          type: string
-          format: decimal
-          readOnly: true
-        billing_frequency:
-          title: Billing frequency
-          description: How often the plan is billed.
-          type: string
-          enum:
-          - MONTHLY
-          - QUARTERLY
-          - ANNUALLY
-          readOnly: true
-        billing_frequency_display:
-          title: Billing frequency display
-          type: string
-          readOnly: true
-          minLength: 1
-        payment_status:
-          title: Payment status
-          description: Whether the agency has paid for the current billing period.
-          type: string
-          enum:
-          - PAID
-          - UNPAID
-          readOnly: true
-        payment_status_display:
-          title: Payment status display
-          type: string
-          readOnly: true
-          minLength: 1
-        manage_plan_url:
-          title: Manage plan url
-          description: External URL for the Manage plan button in broker settings.
-          type: string
-          format: uri
-          readOnly: true
-          minLength: 1
-    QuoteFile:
-      required:
-      - quote
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        download_file:
-          title: Download file
-          type: string
-          readOnly: true
-        file:
-          title: File
-          type: string
-          readOnly: true
-          format: uri
-        quote:
-          title: Quote
-          type: string
-          format: uuid
-        created_at:
-          title: Created at
-          type: string
-          format: date-time
-          readOnly: true
-        file_type:
-          title: File type
-          type: string
-          enum:
-          - quote
-          - binder
-          - invoice
-          - unspecified
     BrokerAgency:
       required:
       - name
@@ -1052,55 +1191,7 @@ components:
           type:
           - integer
           - 'null'
-    UserForBrokerAgency:
-      type: object
-      properties:
-        first_name:
-          title: First name
-          type: string
-          maxLength: 255
-          minLength: 1
-        last_name:
-          title: Last name
-          type: string
-          maxLength: 255
-          minLength: 1
-        user_defined_role:
-          title: User defined role
-          type: string
-          maxLength: 255
-          minLength: 1
-    BusinessSubsidiary:
-      required:
-      - name
-      - business
-      type: object
-      properties:
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        name:
-          title: Name
-          type: string
-          maxLength: 255
-          minLength: 1
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        ownership:
-          title: Ownership
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        business:
-          title: Business
-          type: integer
-    ApplicationList:
+    QuoteReadOnly:
       type: object
       properties:
         id:
@@ -1108,201 +1199,123 @@ components:
           type: string
           format: uuid
           readOnly: true
-        is_active:
-          title: Is active
-          type: boolean
+        business:
+          $ref: '#/components/schemas/BusinessList'
+        broker:
+          $ref: '#/components/schemas/BrokerAgency'
+        application:
+          $ref: '#/components/schemas/ApplicationList'
+        carrier:
+          $ref: '#/components/schemas/Carrier'
+        mga:
+          $ref: '#/components/schemas/Wholesaler'
+        download_pdf:
+          title: Download pdf
+          type: string
+          readOnly: true
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteFile'
+          readOnly: true
+        has_bind_request:
+          title: Has bind request
+          type: string
+          readOnly: true
+        version:
+          title: Version
+          type: string
           readOnly: true
         created_at:
           title: Created at
           type: string
           format: date-time
           readOnly: true
-        name:
-          title: Name
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        description:
-          title: Description
-          type:
-          - string
-          - 'null'
-        effective_date:
-          title: Effective date
-          type:
-          - string
-          - 'null'
-          format: date
-        due_date:
-          title: Due date
-          type:
-          - string
-          - 'null'
-          format: date
-        policy_type:
-          title: Policy type
-          type: string
-          enum:
-          - ADMITTED
-          - SURPLUS_LINES
-          - ADMITTED_AND_SURPLUS_LINES
-        year:
-          title: Year
-          type: integer
-          maximum: 2147483647
-          minimum: -2147483648
-        prefilled_application:
-          title: Prefilled application
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          format: uri
-        additional_documents:
-          title: Additional documents
-          type:
-          - string
-          - 'null'
         status:
           title: Status
           type: string
           enum:
           - draft
-          - in_progress
-          - needs_review
-          - submitted
-          - archived
-        email_type:
-          title: Email type
+          - issued
+          - declined
+          - expired
+          - selected_for_binding
+          - awaiting_payment
+          - bound
+          - cancelled
+        quote_type:
+          title: Quote type
           type: string
           enum:
-          - default
-          - conversation
-        submission_type:
-          title: Submission type
-          type: string
-          enum:
-          - NEW
-          - RENEWAL
-          - OTHER
-        form_override:
-          title: Form override
+          - excess
+          - ADMITTED
+          - SURPLUS_LINES
+          - ADMITTED_AND_SURPLUS_LINES
+        quote_number:
+          title: Quote number
           type:
           - string
           - 'null'
-          readOnly: true
-          format: uri
-        submitted_by_business_at:
-          title: Submitted by business at
-          type:
-          - string
-          - 'null'
-          format: date-time
-        brokerage_wants_place_directly:
-          title: Brokerage wants place directly
-          type: boolean
-        brokerage_wants_wholesale_with_1fort:
-          title: Brokerage wants wholesale with 1fort
-          type: boolean
-        can_1fort_approach_any_market_wholesale:
-          title: Can 1fort approach any market wholesale
-          type: boolean
-        quote_version:
-          title: Quote version
-          type: string
-          enum:
-          - MANUAL
-          - API
-        copy_src:
-          title: Copy src
-          description: Source action that triggered application copy (e.g., 'new_limit')
-          type:
-          - string
-          - 'null'
-          maxLength: 50
-        source:
-          title: Source
-          description: Where the application submission originated
-          type:
-          - string
-          - 'null'
-          enum:
-          - storefront
-          - broker_in_portal
-          - email_ai
-          - renewal
-        business:
-          title: Business
-          type:
-          - integer
-          - 'null'
-        brokerage_direct_placement_carriers:
-          type: array
-          items:
-            type: string
-            format: uuid
-          uniqueItems: true
-        carriers_1fort_should_not_approach:
-          type: array
-          items:
-            type: string
-            format: uuid
-          uniqueItems: true
-        coverage_types:
-          type: array
-          items:
-            type: string
-            format: uuid
-          uniqueItems: true
-    Wholesaler:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          title: Id
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          title: Name
-          type: string
           maxLength: 255
-          minLength: 1
-        logo:
-          title: Logo
+        policy_number:
+          title: Policy number
           type:
           - string
           - 'null'
-          readOnly: true
-          format: uri
-        is_active:
-          title: Is active
-          type: boolean
-        is_owned_by_1fort:
-          title: Is owned by 1fort
-          description: Indicates if this wholesaler is owned by 1Fort
-          type: boolean
-        domains:
-          description: Comma-separated list of domain names (e.g., example.com, example.org)
+          maxLength: 255
+        limit:
+          title: Limit
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        retention:
+          title: Retention
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        premium:
+          title: Premium
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+        policy_term_months:
+          title: Policy term months
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        issue_date:
+          title: Issue date
           type:
-          - array
+          - string
           - 'null'
-          items:
-            title: Domains
-            type: string
-            maxLength: 255
-            minLength: 1
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
+          format: date
+        minimum_days_to_cancel:
+          title: Minimum days to cancel
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        additional_notes:
+          title: Additional notes
+          type:
+          - string
+          - 'null'
+        type:
+          title: Type
+          type:
+          - string
+          - 'null'
+          enum:
+          - BUSINESS_OWNERS_POLICY
+          - WORKERS_COMPENSATION
+          - GENERAL_LIABILITY
+          - MISCELLANEOUS_PROFESSIONAL_LIABILITY
+          - CYBER
+          - PROFESSIONAL_LIABILITY
+          - TECHNOLOGY_ERRORS_AND_OMISSIONS
+          - DIRECTORS_AND_OFFICERS
+          - EMPLOYMENT_PRACTICES_LIABILITY
+          - FIDUCIARY_LIABILITY
+          - KIDNAP_AND_RANSOM
     Carrier:
       required:
       - name
@@ -1347,68 +1360,55 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CarrierProduct'
-    BusinessList:
-      required:
-      - name
+    AgencySubscription:
       type: object
       properties:
         name:
           title: Name
+          description: Display name for the plan (e.g. "Pro plan").
           type: string
-          maxLength: 255
+          readOnly: true
           minLength: 1
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        created_at:
-          title: Created at
+        price:
+          title: Price
+          description: Plan price in dollars for the selected billing frequency.
           type: string
-          format: date-time
+          format: decimal
           readOnly: true
-        industry:
-          title: Industry
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-        number_of_employees:
-          title: Number of employees
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        active:
-          title: Active
-          type: boolean
-        domain_name:
-          title: Domain name
-          type:
-          - string
-          - 'null'
-          maxLength: 500
-        subsidiaries:
-          type: array
-          items:
-            $ref: '#/components/schemas/BusinessSubsidiary'
-          readOnly: true
-        revenue:
-          title: Revenue
-          type:
-          - integer
-          - 'null'
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
+        billing_frequency:
+          title: Billing frequency
+          description: How often the plan is billed.
           type: string
+          enum:
+          - MONTHLY
+          - QUARTERLY
+          - ANNUALLY
+          readOnly: true
+        billing_frequency_display:
+          title: Billing frequency display
+          type: string
+          readOnly: true
+          minLength: 1
+        payment_status:
+          title: Payment status
+          description: Whether the agency has paid for the current billing period.
+          type: string
+          enum:
+          - PAID
+          - UNPAID
+          readOnly: true
+        payment_status_display:
+          title: Payment status display
+          type: string
+          readOnly: true
+          minLength: 1
+        manage_plan_url:
+          title: Manage plan url
+          description: External URL for the Manage plan button in broker settings.
+          type: string
+          format: uri
+          readOnly: true
+          minLength: 1
   securitySchemes:
     Bearer:
       type: apiKey

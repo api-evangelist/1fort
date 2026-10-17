@@ -210,33 +210,24 @@ components:
         type: array
         items:
           type: string
-    TakeRateUpdate:
+    APIException:
+      title: Generic API Error
+      required:
+      - detail
       type: object
       properties:
-        financing_take_rate:
-          title: Financing take rate
-          type:
-          - string
-          - 'null'
-          format: decimal
-        credit_card_take_rate:
-          title: Credit card take rate
-          type:
-          - string
-          - 'null'
-          format: decimal
-        ach_take_rate:
-          title: Ach take rate
-          type:
-          - string
-          - 'null'
-          format: decimal
-        wire_take_rate:
-          title: Wire take rate
-          type:
-          - string
-          - 'null'
-          format: decimal
+        detail:
+          description: Error details
+          type: string
+    GenericError:
+      title: Generic API Error
+      required:
+      - detail
+      type: object
+      properties:
+        detail:
+          description: Error details
+          type: string
     TakeRateList:
       type: object
       properties:
@@ -303,24 +294,33 @@ components:
           - 'null'
           format: decimal
           readOnly: true
-    APIException:
-      title: Generic API Error
-      required:
-      - detail
+    TakeRateUpdate:
       type: object
       properties:
-        detail:
-          description: Error details
-          type: string
-    GenericError:
-      title: Generic API Error
-      required:
-      - detail
-      type: object
-      properties:
-        detail:
-          description: Error details
-          type: string
+        financing_take_rate:
+          title: Financing take rate
+          type:
+          - string
+          - 'null'
+          format: decimal
+        credit_card_take_rate:
+          title: Credit card take rate
+          type:
+          - string
+          - 'null'
+          format: decimal
+        ach_take_rate:
+          title: Ach take rate
+          type:
+          - string
+          - 'null'
+          format: decimal
+        wire_take_rate:
+          title: Wire take rate
+          type:
+          - string
+          - 'null'
+          format: decimal
   securitySchemes:
     Bearer:
       type: apiKey
