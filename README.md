@@ -66,7 +66,7 @@
 
 1Fort is a New York City based insurtech platform that automates the commercial insurance workflow for brokers and agencies. Its AI "copilot" autofills submissions across 300+ coverages, quotes direct and wholesale markets, generates white-labeled proposals with side-by-side coverage comparisons and cross-sell recommendations, then processes binders, invoicing, premium finance, payments and payables through to ongoing policy servicing. Coverage lines span cyber, technology errors and omissions, professional liability, management liability, general liability and workers compensation. The platform runs on AWS, holds SOC 2 Type II, HIPAA and CCPA attestations, and exposes a large REST API at api.1fort.com whose Swagger 2.0 definition is published publicly at /api-docs — 574 operations across broker, application, quote, market, billing, checkout, storefront and Email AI Agent surfaces, plus inbound webhook receivers for Stripe, Ascend, Herald, Gmail and Office 365.
 
-**Areas:** Insurance · Insurtech · Commercial Insurance · Cyber Insurance · Insurance Broker · Quoting · Policy Management · premium-finance · Payments · Workflow Automation · Artificial Intelligence · AI Agents
+**Areas:** Insurance · Insurtech · Commercial Insurance · Cyber Insurance · Insurance Broker · Quoting · Policy Management · Premium Finance · Payments · Workflow Automation · Artificial Intelligence · AI Agents
 
 ## 1Fort on APIs.io
 
@@ -223,6 +223,12 @@ OpenAPI overlays, including conversational phrasing for each operation.
 
 - [1Fort Openapi Overlay](https://apis.io/overlays/1fort/1fort-openapi-overlay/)
 
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [1Fort API Rules](https://apis.io/rules/1fort/1fort-rules/)
+
 #### Security (4)
 
 Authentication, trust centre, and vulnerability disclosure.
@@ -232,17 +238,24 @@ Authentication, trust centre, and vulnerability disclosure.
 - [1Fort Trust Center](https://apis.io/security/1fort/1fort-trust-center/)
 - [1Fort Vulnerability Disclosure](https://apis.io/security/1fort/1fort-vulnerability-disclosure/)
 
-#### Plans and pricing (1)
+#### Plans and pricing (2)
 
 Published plans, tiers and prices.
 
 - [1Fort Plans Pricing](https://apis.io/plans/1fort/1fort-plans-pricing/)
+- [1Fort Price Estimates](https://apis.io/plans/1fort/1fort-price-estimates/)
 
 #### Rate limits (1)
 
 Published request limits.
 
 - [1Fort Rate Limits](https://apis.io/rate-limits/1fort/1fort-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [1Fort Finops](https://apis.io/finops/1fort/1fort-finops/)
 
 ## Where to find this API
 
@@ -263,18 +276,18 @@ Links to the company's own pages. This repository publishes no copy of their spe
 
 ## API Evangelist rating
 
-**Kin Score 64.5** — strong · rubric 0.25.0 · scored 2026-10-23
+**Kin Score 66.3** — strong · rubric 0.28.1 · scored 2026-11-21
 
 | Facet | Score |
 |---|---|
 | Discoverability | 73.2 |
 | Contract quality | 56.7 |
-| Contract governance | 18.2 |
-| Operational transparency | 50.0 |
+| Contract governance | 31.8 |
+| Operational transparency | 45.2 |
 | Developer ergonomics | 37.5 |
-| Access clarity | 92.1 |
+| Access clarity | 95.7 |
 
-**Agent readiness 31.6** — agent-ready
+**Agent readiness 31.0** — agent-ready
 
 | Agent-readiness dimension | Result |
 |---|---|
@@ -299,6 +312,10 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | Agentic Commerce | — |
 | Pagination Ratio | paginated |
 | Operation Distinctiveness | — |
+| MCP Tool Quality | na |
+| Onboarding Descriptor | — |
+| Dns Aid Index | na |
+| Markdown Negotiation | na |
 
 **Regulatory alignment 29.5** — Insurance
 
